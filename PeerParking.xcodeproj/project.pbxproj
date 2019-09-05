@@ -7,13 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9D762387663A23BCCC8DF20 /* Pods_PeerParkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */; };
+		E2616B4D5E0A2ED92F2CAAF3 /* Pods_PeerParking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */; };
 		FA1150C52316838400D0B1FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1150C42316838400D0B1FE /* AppDelegate.swift */; };
-		FA1150C72316838400D0B1FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1150C62316838400D0B1FE /* ViewController.swift */; };
 		FA1150CA2316838400D0B1FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1150C82316838400D0B1FE /* Main.storyboard */; };
 		FA1150CC2316838500D0B1FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA1150CB2316838500D0B1FE /* Assets.xcassets */; };
 		FA1150CF2316838500D0B1FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1150CD2316838500D0B1FE /* LaunchScreen.storyboard */; };
 		FA1150DA2316838500D0B1FE /* PeerParkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1150D92316838500D0B1FE /* PeerParkingTests.swift */; };
 		FA1150E52316838500D0B1FE /* PeerParkingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1150E42316838500D0B1FE /* PeerParkingUITests.swift */; };
+		FA2815AB231E3F92008AF3F5 /* CustomSideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2815A6231E3F92008AF3F5 /* CustomSideMenuController.swift */; };
+		FA2815AC231E3F92008AF3F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2815A7231E3F92008AF3F5 /* ViewController.swift */; };
+		FA2815AD231E3F92008AF3F5 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2815A8231E3F92008AF3F5 /* ContentViewController.swift */; };
+		FA2815AE231E3F92008AF3F5 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2815A9231E3F92008AF3F5 /* RootViewController.swift */; };
+		FA2815AF231E3F92008AF3F5 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2815AA231E3F92008AF3F5 /* MenuController.swift */; };
+		FA2815B6231E6602008AF3F5 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA2815B1231E6602008AF3F5 /* Poppins-Bold.ttf */; };
+		FA2815B7231E6602008AF3F5 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA2815B2231E6602008AF3F5 /* Poppins-Black.ttf */; };
+		FA2815B8231E6602008AF3F5 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA2815B3231E6602008AF3F5 /* Poppins-Medium.ttf */; };
+		FA2815B9231E6602008AF3F5 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA2815B4231E6602008AF3F5 /* Poppins-Regular.ttf */; };
+		FA2815BA231E6602008AF3F5 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA2815B5231E6602008AF3F5 /* Poppins-Light.ttf */; };
+		FA2815C0231E7058008AF3F5 /* menuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2815BE231E7058008AF3F5 /* menuCell.swift */; };
+		FA2815C1231E7058008AF3F5 /* menuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA2815BF231E7058008AF3F5 /* menuCell.xib */; };
+		FA2815C3231E806D008AF3F5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2815C2231E806D008AF3F5 /* HomeViewController.swift */; };
+		FA57EBA42320EB2E000646B7 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA57EBA32320EB2E000646B7 /* ViewHelper.swift */; };
+		FA57EBA7232142AC000646B7 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA57EBA6232142AC000646B7 /* ProfileViewController.swift */; };
+		FAAF86115DC5EAB5FC146A2E /* Pods_PeerParkingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0509213210B40E0E0C84432C /* Pods_PeerParkingUITests.framework */; };
+		FAEDCF15231F988D0063EFC0 /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEDCF14231F988D0063EFC0 /* TabbarViewController.swift */; };
+		FAEDCF1A231F9EFB0063EFC0 /* FindParkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEDCF19231F9EFB0063EFC0 /* FindParkingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +53,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0509213210B40E0E0C84432C /* Pods_PeerParkingUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParkingUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73A78F4BB9C4B538C3541C56 /* Pods-PeerParkingUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingUITests.debug.xcconfig"; path = "Target Support Files/Pods-PeerParkingUITests/Pods-PeerParkingUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		8B0459CE46FCE0435C2CC795 /* Pods-PeerParking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParking.debug.xcconfig"; path = "Target Support Files/Pods-PeerParking/Pods-PeerParking.debug.xcconfig"; sourceTree = "<group>"; };
+		A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParkingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BACE3107569777F337087DF8 /* Pods-PeerParkingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingUITests.release.xcconfig"; path = "Target Support Files/Pods-PeerParkingUITests/Pods-PeerParkingUITests.release.xcconfig"; sourceTree = "<group>"; };
+		BF58D38B340DB6271FACD986 /* Pods-PeerParkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingTests.release.xcconfig"; path = "Target Support Files/Pods-PeerParkingTests/Pods-PeerParkingTests.release.xcconfig"; sourceTree = "<group>"; };
+		C53DD1F3CFB8035A3E4024F2 /* Pods-PeerParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParking.release.xcconfig"; path = "Target Support Files/Pods-PeerParking/Pods-PeerParking.release.xcconfig"; sourceTree = "<group>"; };
+		E8DB06BFD47AAB708811B861 /* Pods-PeerParkingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingTests.debug.xcconfig"; path = "Target Support Files/Pods-PeerParkingTests/Pods-PeerParkingTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FA1150C12316838400D0B1FE /* PeerParking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeerParking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA1150C42316838400D0B1FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FA1150C62316838400D0B1FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FA1150C92316838400D0B1FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FA1150CB2316838500D0B1FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA1150CE2316838500D0B1FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +74,23 @@
 		FA1150E02316838500D0B1FE /* PeerParkingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeerParkingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA1150E42316838500D0B1FE /* PeerParkingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerParkingUITests.swift; sourceTree = "<group>"; };
 		FA1150E62316838500D0B1FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA2815A6231E3F92008AF3F5 /* CustomSideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSideMenuController.swift; sourceTree = "<group>"; };
+		FA2815A7231E3F92008AF3F5 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FA2815A8231E3F92008AF3F5 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		FA2815A9231E3F92008AF3F5 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		FA2815AA231E3F92008AF3F5 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		FA2815B1231E6602008AF3F5 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		FA2815B2231E6602008AF3F5 /* Poppins-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Black.ttf"; sourceTree = "<group>"; };
+		FA2815B3231E6602008AF3F5 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		FA2815B4231E6602008AF3F5 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		FA2815B5231E6602008AF3F5 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
+		FA2815BE231E7058008AF3F5 /* menuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = menuCell.swift; sourceTree = "<group>"; };
+		FA2815BF231E7058008AF3F5 /* menuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = menuCell.xib; sourceTree = "<group>"; };
+		FA2815C2231E806D008AF3F5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		FA57EBA32320EB2E000646B7 /* ViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewHelper.swift; sourceTree = "<group>"; };
+		FA57EBA6232142AC000646B7 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		FAEDCF14231F988D0063EFC0 /* TabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
+		FAEDCF19231F9EFB0063EFC0 /* FindParkingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindParkingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2616B4D5E0A2ED92F2CAAF3 /* Pods_PeerParking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9D762387663A23BCCC8DF20 /* Pods_PeerParkingTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,12 +114,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAAF86115DC5EAB5FC146A2E /* Pods_PeerParkingUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2EEB6BD6F5BBF17D05AEE169 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8B0459CE46FCE0435C2CC795 /* Pods-PeerParking.debug.xcconfig */,
+				C53DD1F3CFB8035A3E4024F2 /* Pods-PeerParking.release.xcconfig */,
+				E8DB06BFD47AAB708811B861 /* Pods-PeerParkingTests.debug.xcconfig */,
+				BF58D38B340DB6271FACD986 /* Pods-PeerParkingTests.release.xcconfig */,
+				73A78F4BB9C4B538C3541C56 /* Pods-PeerParkingUITests.debug.xcconfig */,
+				BACE3107569777F337087DF8 /* Pods-PeerParkingUITests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DA2D335CC57FF81A4BC8D086 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */,
+				A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */,
+				0509213210B40E0E0C84432C /* Pods_PeerParkingUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FA1150B82316838400D0B1FE = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +151,8 @@
 				FA1150D82316838500D0B1FE /* PeerParkingTests */,
 				FA1150E32316838500D0B1FE /* PeerParkingUITests */,
 				FA1150C22316838400D0B1FE /* Products */,
+				2EEB6BD6F5BBF17D05AEE169 /* Pods */,
+				DA2D335CC57FF81A4BC8D086 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,8 +169,14 @@
 		FA1150C32316838400D0B1FE /* PeerParking */ = {
 			isa = PBXGroup;
 			children = (
+				FA57EBA22320EB1E000646B7 /* Extension */,
+				FAEDCF13231F98760063EFC0 /* Tabbar */,
+				FA2815BD231E666E008AF3F5 /* Helper */,
+				FA2815BC231E6669008AF3F5 /* Controllers */,
+				FA2815BB231E6663008AF3F5 /* Cell */,
+				FA2815B0231E65E3008AF3F5 /* Fonts */,
+				FA2815A5231E3F84008AF3F5 /* MenuSide */,
 				FA1150C42316838400D0B1FE /* AppDelegate.swift */,
-				FA1150C62316838400D0B1FE /* ViewController.swift */,
 				FA1150C82316838400D0B1FE /* Main.storyboard */,
 				FA1150CB2316838500D0B1FE /* Assets.xcassets */,
 				FA1150CD2316838500D0B1FE /* LaunchScreen.storyboard */,
@@ -125,6 +203,104 @@
 			path = PeerParkingUITests;
 			sourceTree = "<group>";
 		};
+		FA2815A5231E3F84008AF3F5 /* MenuSide */ = {
+			isa = PBXGroup;
+			children = (
+				FA2815A8231E3F92008AF3F5 /* ContentViewController.swift */,
+				FA2815A6231E3F92008AF3F5 /* CustomSideMenuController.swift */,
+				FA2815AA231E3F92008AF3F5 /* MenuController.swift */,
+				FA2815A9231E3F92008AF3F5 /* RootViewController.swift */,
+				FA2815A7231E3F92008AF3F5 /* ViewController.swift */,
+			);
+			path = MenuSide;
+			sourceTree = "<group>";
+		};
+		FA2815B0231E65E3008AF3F5 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FA2815B2231E6602008AF3F5 /* Poppins-Black.ttf */,
+				FA2815B1231E6602008AF3F5 /* Poppins-Bold.ttf */,
+				FA2815B5231E6602008AF3F5 /* Poppins-Light.ttf */,
+				FA2815B3231E6602008AF3F5 /* Poppins-Medium.ttf */,
+				FA2815B4231E6602008AF3F5 /* Poppins-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		FA2815BB231E6663008AF3F5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FA2815BE231E7058008AF3F5 /* menuCell.swift */,
+				FA2815BF231E7058008AF3F5 /* menuCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		FA2815BC231E6669008AF3F5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FA57EBA52321429C000646B7 /* Profile */,
+				FAEDCF18231F9EDE0063EFC0 /* SellParking */,
+				FAEDCF17231F9EDA0063EFC0 /* Home */,
+				FAEDCF16231F9ED20063EFC0 /* FindParking */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FA2815BD231E666E008AF3F5 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		FA57EBA22320EB1E000646B7 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				FA57EBA32320EB2E000646B7 /* ViewHelper.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		FA57EBA52321429C000646B7 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FA57EBA6232142AC000646B7 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		FAEDCF13231F98760063EFC0 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				FAEDCF14231F988D0063EFC0 /* TabbarViewController.swift */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		FAEDCF16231F9ED20063EFC0 /* FindParking */ = {
+			isa = PBXGroup;
+			children = (
+				FAEDCF19231F9EFB0063EFC0 /* FindParkingViewController.swift */,
+			);
+			path = FindParking;
+			sourceTree = "<group>";
+		};
+		FAEDCF17231F9EDA0063EFC0 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FA2815C2231E806D008AF3F5 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		FAEDCF18231F9EDE0063EFC0 /* SellParking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SellParking;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +308,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA1150E92316838500D0B1FE /* Build configuration list for PBXNativeTarget "PeerParking" */;
 			buildPhases = (
+				F2AE16E63A3C91CDCC38B9CD /* [CP] Check Pods Manifest.lock */,
 				FA1150BD2316838400D0B1FE /* Sources */,
 				FA1150BE2316838400D0B1FE /* Frameworks */,
 				FA1150BF2316838400D0B1FE /* Resources */,
+				5EA083E6BA19CFFFCF0BD170 /* [CP] Embed Pods Frameworks */,
+				82AF9BE47E118179A76A5FBC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,6 +328,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA1150EC2316838500D0B1FE /* Build configuration list for PBXNativeTarget "PeerParkingTests" */;
 			buildPhases = (
+				FC31D793DBF18D72E687DFB8 /* [CP] Check Pods Manifest.lock */,
 				FA1150D12316838500D0B1FE /* Sources */,
 				FA1150D22316838500D0B1FE /* Frameworks */,
 				FA1150D32316838500D0B1FE /* Resources */,
@@ -167,6 +347,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA1150EF2316838500D0B1FE /* Build configuration list for PBXNativeTarget "PeerParkingUITests" */;
 			buildPhases = (
+				B208AE8EA86B59CF1DC33AD8 /* [CP] Check Pods Manifest.lock */,
 				FA1150DC2316838500D0B1FE /* Sources */,
 				FA1150DD2316838500D0B1FE /* Frameworks */,
 				FA1150DE2316838500D0B1FE /* Resources */,
@@ -231,7 +412,13 @@
 			files = (
 				FA1150CF2316838500D0B1FE /* LaunchScreen.storyboard in Resources */,
 				FA1150CC2316838500D0B1FE /* Assets.xcassets in Resources */,
+				FA2815B9231E6602008AF3F5 /* Poppins-Regular.ttf in Resources */,
+				FA2815BA231E6602008AF3F5 /* Poppins-Light.ttf in Resources */,
 				FA1150CA2316838400D0B1FE /* Main.storyboard in Resources */,
+				FA2815B8231E6602008AF3F5 /* Poppins-Medium.ttf in Resources */,
+				FA2815B6231E6602008AF3F5 /* Poppins-Bold.ttf in Resources */,
+				FA2815C1231E7058008AF3F5 /* menuCell.xib in Resources */,
+				FA2815B7231E6602008AF3F5 /* Poppins-Black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,13 +438,138 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5EA083E6BA19CFFFCF0BD170 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PeerParking/Pods-PeerParking-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SideMenuController/SideMenuController.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuController.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PeerParking/Pods-PeerParking-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		82AF9BE47E118179A76A5FBC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PeerParking/Pods-PeerParking-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PeerParking/Pods-PeerParking-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B208AE8EA86B59CF1DC33AD8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PeerParkingUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F2AE16E63A3C91CDCC38B9CD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PeerParking-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC31D793DBF18D72E687DFB8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PeerParkingTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FA1150BD2316838400D0B1FE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA1150C72316838400D0B1FE /* ViewController.swift in Sources */,
+				FA2815AD231E3F92008AF3F5 /* ContentViewController.swift in Sources */,
+				FA2815C0231E7058008AF3F5 /* menuCell.swift in Sources */,
+				FA2815AF231E3F92008AF3F5 /* MenuController.swift in Sources */,
+				FA2815C3231E806D008AF3F5 /* HomeViewController.swift in Sources */,
+				FA2815AB231E3F92008AF3F5 /* CustomSideMenuController.swift in Sources */,
+				FA2815AE231E3F92008AF3F5 /* RootViewController.swift in Sources */,
+				FA57EBA7232142AC000646B7 /* ProfileViewController.swift in Sources */,
+				FA57EBA42320EB2E000646B7 /* ViewHelper.swift in Sources */,
+				FA2815AC231E3F92008AF3F5 /* ViewController.swift in Sources */,
 				FA1150C52316838400D0B1FE /* AppDelegate.swift in Sources */,
+				FAEDCF1A231F9EFB0063EFC0 /* FindParkingViewController.swift in Sources */,
+				FAEDCF15231F988D0063EFC0 /* TabbarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,9 +742,11 @@
 		};
 		FA1150EA2316838500D0B1FE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B0459CE46FCE0435C2CC795 /* Pods-PeerParking.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T286PM5P72;
 				INFOPLIST_FILE = PeerParking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -447,9 +761,11 @@
 		};
 		FA1150EB2316838500D0B1FE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C53DD1F3CFB8035A3E4024F2 /* Pods-PeerParking.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T286PM5P72;
 				INFOPLIST_FILE = PeerParking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -464,6 +780,7 @@
 		};
 		FA1150ED2316838500D0B1FE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E8DB06BFD47AAB708811B861 /* Pods-PeerParkingTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -484,6 +801,7 @@
 		};
 		FA1150EE2316838500D0B1FE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF58D38B340DB6271FACD986 /* Pods-PeerParkingTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -504,6 +822,7 @@
 		};
 		FA1150F02316838500D0B1FE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73A78F4BB9C4B538C3541C56 /* Pods-PeerParkingUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -523,6 +842,7 @@
 		};
 		FA1150F12316838500D0B1FE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BACE3107569777F337087DF8 /* Pods-PeerParkingUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

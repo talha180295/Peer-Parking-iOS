@@ -1,0 +1,29 @@
+PODS:
+  - GoogleMaps (3.3.0):
+    - GoogleMaps/Maps (= 3.3.0)
+  - GoogleMaps/Base (3.3.0)
+  - GoogleMaps/Maps (3.3.0):
+    - GoogleMaps/Base
+  - GooglePlaces (3.3.0):
+    - GoogleMaps/Base (= 3.3.0)
+  - SideMenuController (0.2.4)
+
+DEPENDENCIES:
+  - GoogleMaps
+  - GooglePlaces
+  - SideMenuController
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - GoogleMaps
+    - GooglePlaces
+    - SideMenuController
+
+SPEC CHECKSUMS:
+  GoogleMaps: cfee83da305b9aaeccf92c24ac79df11c3003492
+  GooglePlaces: 1e2a87bd9efee9623ee65d44ecc35ebfecd7b13c
+  SideMenuController: b463d2b3aa58e2afe57f57a07938fa9a647894ca
+
+PODFILE CHECKSUM: 736dec1f3b2eb52322e3211270eccfaeca5cd6b7
+
+COCOAPODS: 1.6.1

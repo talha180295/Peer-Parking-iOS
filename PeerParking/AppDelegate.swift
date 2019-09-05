@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SideMenuController
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,10 +17,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        setSideMenu()
+        
+        
+        GMSServices.provideAPIKey("AIzaSyAdxovNnHIWKOKQcgn6H0PhwZsFCMfXjnQ")
+       
         // Override point for customization after application launch.
         return true
     }
 
+    func setSideMenu()
+    {
+        SideMenuController.preferences.drawing.menuButtonImage = UIImage(named: "icon_menu")
+        SideMenuController.preferences.drawing.sidePanelPosition = .underCenterPanelLeft
+        SideMenuController.preferences.drawing.sidePanelWidth = 100
+        SideMenuController.preferences.drawing.centerPanelShadow = true
+        SideMenuController.preferences.animating.statusBarBehaviour = .horizontalPan
+        SideMenuController.preferences.animating.transitionAnimator = FadeAnimator.self
+    }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
