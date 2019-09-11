@@ -10,7 +10,8 @@ import UIKit
 
 class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSource{
 
-    let dict = [["name" : "Home","segue":"HomeVC"],["name" : "Profile","segue":"ProfileVC"],["name" : "Wallet","segue":""],["name" : "My Vehicles","segue":"VehicleVC"],["name" : "Parkings","segue":""],["name" : "","segue":""],["name" : "Settings","segue":""],["name" : "Help","segue":""],["name" : "","segue":""],["name" : "Logout","segue":""]]
+    let dict = [["name" : "Home","segue":"HomeVC"],["name" : "Profile","segue":"ProfileVC"],["name" : "Wallet","segue":"WalletVC"],["name" : "My Vehicles","segue":"VehicleVC"],["name" : "Parkings","segue":"parkingVC"],
+                ["name" : "Notifications","segue":"notificationVC"],["name" : "","segue":""],["name" : "Settings","segue":"SettingVC"],["name" : "Help","segue":""],["name" : "","segue":""],["name" : "Logout","segue":""]]
     let segues = ["showCenterController1", "showCenterController2", "showCenterController3"]
     private var previousIndex: NSIndexPath?
     

@@ -9,16 +9,45 @@
 import UIKit
 import SideMenuController
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController ,UITableViewDataSource, UITableViewDelegate{
 
     
+    @IBOutlet weak var tblLocation: UITableView!
+    @IBOutlet weak var txtSearch: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
       //  loadView()
         
+        tblLocation.dataSource = self
+        tblLocation.delegate = self
+        
+        tblLocation.register(UINib(nibName: "LoacationCell", bundle: nil), forCellReuseIdentifier: "locationCell")
+        // Do any additional setup after loading the view.
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //        return transactionArr.count
+        return 10;
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tblLocation.dequeueReusableCell(withIdentifier: "locationCell") as! LoacationCell
+        
+        
+        cell.selectionStyle = .none
+        return  cell;
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+    }
+    
+    @IBAction func btnSearch(_ sender: Any) {
+    }
+    
     
 //    override func loadView() {
 //        // Create a GMSCameraPosition that tells the map to display the
