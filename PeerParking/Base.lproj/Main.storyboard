@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cf1-ok-L1V">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -689,7 +689,7 @@
                                 </constraints>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="zzt-0z-bbh" firstAttribute="top" secondItem="x6B-rt-s5G" secondAttribute="top" constant="5" id="9ru-ha-5Rr"/>
                             <constraint firstItem="bzb-xU-oZS" firstAttribute="trailing" secondItem="x6B-rt-s5G" secondAttribute="trailing" id="9uO-Jn-8fX"/>
@@ -784,7 +784,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="C5Q-57-EWt" firstAttribute="top" secondItem="5lm-qD-YZT" secondAttribute="top" id="MPq-3p-gNy"/>
                             <constraint firstItem="5lm-qD-YZT" firstAttribute="trailing" secondItem="5PJ-aK-S1q" secondAttribute="trailing" constant="10" id="T23-4e-V7I"/>
@@ -815,7 +815,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="9Hh-eP-VBf" firstAttribute="leading" secondItem="M65-cx-Xf1" secondAttribute="leading" id="2sr-aw-siw"/>
                             <constraint firstItem="M65-cx-Xf1" firstAttribute="trailing" secondItem="9Hh-eP-VBf" secondAttribute="trailing" id="4yh-Yg-9aK"/>
@@ -854,36 +854,61 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v3A-U1-7a7">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Parked in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPH-ux-lmm">
-                                                <rect key="frame" x="105" y="52" width="61" height="23"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="13"/>
-                                                <color key="textColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Monta Loma" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptF-GV-L4z">
-                                                <rect key="frame" x="170" y="52" width="107" height="24"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="17"/>
-                                                <color key="textColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZGQ-tv-tUL">
-                                                <rect key="frame" x="20" y="52" width="36" height="36"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0nS-Gs-M9i">
+                                                <rect key="frame" x="68.666666666666686" y="32" width="238" height="66"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parked in" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPH-ux-lmm">
+                                                        <rect key="frame" x="0.0" y="15.666666666666663" width="92" height="18.333333333333329"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="92" id="e0R-tf-aHm"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="13"/>
+                                                        <color key="textColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monta Loma" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptF-GV-L4z">
+                                                        <rect key="frame" x="96" y="13" width="142" height="24"/>
+                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="17"/>
+                                                        <color key="textColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Today 13:40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3N-Is-BqP">
+                                                        <rect key="frame" x="67.999999999999986" y="42" width="102.00000000000001" height="19"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="19" id="u4l-s5-EoT"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="13"/>
+                                                        <color key="textColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="l3N-Is-BqP" firstAttribute="top" secondItem="ptF-GV-L4z" secondAttribute="bottom" constant="5" id="1uy-6p-9mC"/>
+                                                    <constraint firstAttribute="bottom" secondItem="l3N-Is-BqP" secondAttribute="bottom" constant="5" id="3XU-rq-uax"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ptF-GV-L4z" secondAttribute="trailing" id="96Q-vF-2F8"/>
+                                                    <constraint firstItem="tPH-ux-lmm" firstAttribute="leading" secondItem="0nS-Gs-M9i" secondAttribute="leading" id="FvQ-bj-dNO"/>
+                                                    <constraint firstAttribute="width" constant="238" id="NTC-Zp-6Fh"/>
+                                                    <constraint firstItem="l3N-Is-BqP" firstAttribute="centerX" secondItem="0nS-Gs-M9i" secondAttribute="centerX" id="RbR-hf-KhS"/>
+                                                    <constraint firstItem="l3N-Is-BqP" firstAttribute="top" secondItem="tPH-ux-lmm" secondAttribute="bottom" constant="8" id="TME-pM-hVB"/>
+                                                    <constraint firstAttribute="height" constant="66" id="UIA-N5-e2r"/>
+                                                    <constraint firstItem="ptF-GV-L4z" firstAttribute="leading" secondItem="tPH-ux-lmm" secondAttribute="trailing" constant="4" id="Xn5-fd-54h"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZGQ-tv-tUL">
+                                                <rect key="frame" x="8" y="52" width="48" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="bCP-7u-XCx"/>
+                                                    <constraint firstAttribute="width" constant="48" id="wbL-FP-clU"/>
+                                                </constraints>
                                                 <state key="normal" image="icon_backArrow"/>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="End Today 13:40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3N-Is-BqP">
-                                                <rect key="frame" x="137" y="79" width="102" height="19"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="13"/>
-                                                <color key="textColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="ZGQ-tv-tUL" secondAttribute="bottom" constant="12" id="APD-ob-zPS"/>
+                                            <constraint firstAttribute="bottom" secondItem="0nS-Gs-M9i" secondAttribute="bottom" constant="2" id="AdR-le-czB"/>
                                             <constraint firstAttribute="height" constant="100" id="BNb-aT-dGK"/>
+                                            <constraint firstItem="ZGQ-tv-tUL" firstAttribute="leading" secondItem="v3A-U1-7a7" secondAttribute="leading" constant="8" id="mvk-kT-puq"/>
+                                            <constraint firstItem="0nS-Gs-M9i" firstAttribute="centerX" secondItem="v3A-U1-7a7" secondAttribute="centerX" id="oFn-1a-zAj"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8qI-mT-JLZ">
@@ -899,7 +924,6 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="359" id="0ht-7I-Xge"/>
                                             <constraint firstAttribute="bottom" secondItem="b3C-Xh-eqG" secondAttribute="bottom" id="40t-9U-jVa"/>
@@ -1028,7 +1052,6 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="rUj-iR-pAx" secondAttribute="trailing" constant="8" id="46G-X5-h6S"/>
                                             <constraint firstItem="rUj-iR-pAx" firstAttribute="top" secondItem="EVy-MS-f4j" secondAttribute="top" constant="8" id="53c-0o-Ixt"/>
@@ -1062,7 +1085,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="PIL-R6-36G" firstAttribute="top" secondItem="b2z-yJ-CKb" secondAttribute="top" id="5GR-aJ-7XB"/>
                             <constraint firstAttribute="bottom" secondItem="PIL-R6-36G" secondAttribute="bottom" id="6Kl-xv-DNQ"/>
@@ -2415,6 +2438,539 @@
             </objects>
             <point key="canvasLocation" x="-98" y="3709"/>
         </scene>
+        <!--Parking Detail View Controller-->
+        <scene sceneID="p8I-4r-47n">
+            <objects>
+                <viewController id="cf1-ok-L1V" customClass="ParkingDetailViewController" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YJ7-e4-wbN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="940"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwo-eZ-hPA">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="940"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbf-vq-HOD">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DMV-sB-ev9">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUa-3O-hua">
+                                                        <rect key="frame" x="329" y="42" width="43" height="36"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="43" id="3Kk-dF-nfA"/>
+                                                            <constraint firstAttribute="height" constant="36" id="XTt-WS-Sib"/>
+                                                        </constraints>
+                                                        <state key="normal" image="icon_close"/>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="80" id="Gz1-nx-lf8"/>
+                                                    <constraint firstAttribute="bottom" secondItem="yUa-3O-hua" secondAttribute="bottom" constant="2" id="Jbw-eb-rZe"/>
+                                                    <constraint firstAttribute="trailing" secondItem="yUa-3O-hua" secondAttribute="trailing" constant="3" id="JyF-7U-o5F"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="DMV-sB-ev9" firstAttribute="leading" secondItem="Kbf-vq-HOD" secondAttribute="leading" id="Zk3-sa-aRH"/>
+                                            <constraint firstAttribute="height" constant="140" id="pjP-1o-LeG"/>
+                                            <constraint firstItem="DMV-sB-ev9" firstAttribute="top" secondItem="Kbf-vq-HOD" secondAttribute="top" id="zPG-YJ-vHj"/>
+                                            <constraint firstAttribute="trailing" secondItem="DMV-sB-ev9" secondAttribute="trailing" id="zpA-0H-AZa"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6oi-Yw-yZX" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="160" width="375" height="779"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WHB-2a-k5U">
+                                                <rect key="frame" x="0.0" y="20" width="375" height="182"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Uf-PM-YG8">
+                                                        <rect key="frame" x="8" y="29" width="359" height="145"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Su1-t9-nYp">
+                                                                <rect key="frame" x="10" y="100" width="339" height="45"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FzN-IW-TCr">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="45"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Distance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kp3-fE-ukI">
+                                                                                <rect key="frame" x="8" y="0.0" width="105" height="19"/>
+                                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
+                                                                                <color key="textColor" red="0.35384014250000001" green="0.64737921949999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="120 km" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xur-Fz-l4r">
+                                                                                <rect key="frame" x="8" y="19" width="105" height="19"/>
+                                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="Xur-Fz-l4r" firstAttribute="top" secondItem="kp3-fE-ukI" secondAttribute="bottom" id="MyM-Lz-Sc7"/>
+                                                                            <constraint firstItem="Xur-Fz-l4r" firstAttribute="leading" secondItem="FzN-IW-TCr" secondAttribute="leading" constant="8" id="RVk-cw-oHC"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="Xur-Fz-l4r" secondAttribute="trailing" id="YxC-NR-0Sb"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="Xur-Fz-l4r" secondAttribute="bottom" constant="7" id="btx-5u-ezd"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="kp3-fE-ukI" secondAttribute="trailing" id="eeJ-vA-zn1"/>
+                                                                            <constraint firstItem="kp3-fE-ukI" firstAttribute="top" secondItem="FzN-IW-TCr" secondAttribute="top" id="exK-3G-Ado"/>
+                                                                            <constraint firstItem="kp3-fE-ukI" firstAttribute="leading" secondItem="FzN-IW-TCr" secondAttribute="leading" constant="8" id="wji-Hk-99d"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wrc-oV-AfM">
+                                                                        <rect key="frame" x="113" y="0.0" width="113" height="45"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Arrival" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uq7-xS-1k2">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="113" height="19"/>
+                                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
+                                                                                <color key="textColor" red="0.35384014250000001" green="0.64737921949999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="7:30 pm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ux0-Dm-UIO">
+                                                                                <rect key="frame" x="0.0" y="19" width="113" height="19"/>
+                                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="trailing" secondItem="Ux0-Dm-UIO" secondAttribute="trailing" id="Bob-0K-AKI"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="uq7-xS-1k2" secondAttribute="trailing" id="Cbl-RC-n27"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="Ux0-Dm-UIO" secondAttribute="bottom" constant="7" id="Lem-mb-4HF"/>
+                                                                            <constraint firstItem="Ux0-Dm-UIO" firstAttribute="top" secondItem="uq7-xS-1k2" secondAttribute="bottom" id="ZNb-JH-M48"/>
+                                                                            <constraint firstItem="uq7-xS-1k2" firstAttribute="top" secondItem="Wrc-oV-AfM" secondAttribute="top" id="fWf-b9-F7V"/>
+                                                                            <constraint firstItem="Ux0-Dm-UIO" firstAttribute="leading" secondItem="Wrc-oV-AfM" secondAttribute="leading" id="mF4-LY-QXx"/>
+                                                                            <constraint firstItem="uq7-xS-1k2" firstAttribute="leading" secondItem="Wrc-oV-AfM" secondAttribute="leading" id="z5n-Sy-xkf"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmN-ek-zc8">
+                                                                        <rect key="frame" x="226" y="0.0" width="113" height="45"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Duration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G3G-9g-9SM">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="113" height="19"/>
+                                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
+                                                                                <color key="textColor" red="0.35384014250000001" green="0.64737921949999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="30 mins" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuC-fx-S4A">
+                                                                                <rect key="frame" x="0.0" y="19" width="113" height="19"/>
+                                                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="G3G-9g-9SM" firstAttribute="top" secondItem="kmN-ek-zc8" secondAttribute="top" id="6Q5-cC-cnU"/>
+                                                                            <constraint firstItem="G3G-9g-9SM" firstAttribute="leading" secondItem="kmN-ek-zc8" secondAttribute="leading" id="IIu-r3-xG8"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="WuC-fx-S4A" secondAttribute="trailing" id="Nm0-06-Gho"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="WuC-fx-S4A" secondAttribute="bottom" constant="7" id="aN1-Ar-CIy"/>
+                                                                            <constraint firstItem="WuC-fx-S4A" firstAttribute="leading" secondItem="kmN-ek-zc8" secondAttribute="leading" id="h6F-zs-bHZ"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="G3G-9g-9SM" secondAttribute="trailing" id="tqA-JB-mNf"/>
+                                                                            <constraint firstItem="WuC-fx-S4A" firstAttribute="top" secondItem="G3G-9g-9SM" secondAttribute="bottom" id="z9f-Md-2lc"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="kmN-ek-zc8" firstAttribute="width" secondItem="FzN-IW-TCr" secondAttribute="width" id="1fp-qM-aqQ"/>
+                                                                    <constraint firstItem="kmN-ek-zc8" firstAttribute="leading" secondItem="Wrc-oV-AfM" secondAttribute="trailing" id="9XB-Bc-cAV"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="kmN-ek-zc8" secondAttribute="trailing" id="AMA-de-Psl"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="FzN-IW-TCr" secondAttribute="bottom" id="FX5-N2-jqT"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="kmN-ek-zc8" secondAttribute="bottom" id="IqD-3L-QGK"/>
+                                                                    <constraint firstItem="Wrc-oV-AfM" firstAttribute="leading" secondItem="FzN-IW-TCr" secondAttribute="trailing" id="Pi0-KP-MkX"/>
+                                                                    <constraint firstItem="FzN-IW-TCr" firstAttribute="leading" secondItem="Su1-t9-nYp" secondAttribute="leading" id="b97-3Q-Ftf"/>
+                                                                    <constraint firstItem="Wrc-oV-AfM" firstAttribute="top" secondItem="Su1-t9-nYp" secondAttribute="top" id="dhW-nK-gbF"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Wrc-oV-AfM" secondAttribute="bottom" id="iI5-ss-6Dc"/>
+                                                                    <constraint firstItem="Wrc-oV-AfM" firstAttribute="width" secondItem="FzN-IW-TCr" secondAttribute="width" id="oTf-5V-UN7"/>
+                                                                    <constraint firstItem="FzN-IW-TCr" firstAttribute="top" secondItem="Su1-t9-nYp" secondAttribute="top" id="rDH-Gh-qlw"/>
+                                                                    <constraint firstItem="kmN-ek-zc8" firstAttribute="top" secondItem="Su1-t9-nYp" secondAttribute="top" id="xrY-8f-fff"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J4Y-lv-Cdv">
+                                                                <rect key="frame" x="10" y="0.0" width="339" height="100"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGk-1n-y6A">
+                                                                        <rect key="frame" x="8" y="41" width="291" height="51"/>
+                                                                        <string key="text">60 E Broadway, Bloomington,
+MN 55425, USA.</string>
+                                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                                                        <color key="textColor" red="0.37452399730000002" green="0.43006563190000002" blue="0.50908255579999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5O8-9C-Ak9">
+                                                                        <rect key="frame" x="307" y="48.666666666666686" width="30" height="36"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="30" id="H9j-FV-A6t"/>
+                                                                            <constraint firstAttribute="height" constant="36" id="tc1-sl-Vzv"/>
+                                                                        </constraints>
+                                                                        <state key="normal" image="icon_route"/>
+                                                                    </button>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monta Loma, USA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcw-wv-ikc">
+                                                                        <rect key="frame" x="8" y="2" width="323" height="31"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="31" id="GKI-VL-f1R"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="lGk-1n-y6A" secondAttribute="bottom" constant="8" id="210-3f-NYK"/>
+                                                                    <constraint firstAttribute="height" constant="100" id="9Kw-3p-VnG"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="pcw-wv-ikc" secondAttribute="trailing" constant="8" id="9ii-8i-tbs"/>
+                                                                    <constraint firstItem="pcw-wv-ikc" firstAttribute="leading" secondItem="J4Y-lv-Cdv" secondAttribute="leading" constant="8" id="BCb-If-DdD"/>
+                                                                    <constraint firstItem="5O8-9C-Ak9" firstAttribute="leading" secondItem="lGk-1n-y6A" secondAttribute="trailing" constant="8" id="WFp-h4-JcC"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="5O8-9C-Ak9" secondAttribute="trailing" constant="2" id="WeP-Xh-usg"/>
+                                                                    <constraint firstItem="lGk-1n-y6A" firstAttribute="leading" secondItem="J4Y-lv-Cdv" secondAttribute="leading" constant="8" id="dya-m9-vTo"/>
+                                                                    <constraint firstItem="5O8-9C-Ak9" firstAttribute="centerY" secondItem="lGk-1n-y6A" secondAttribute="centerY" id="fmb-4m-axU"/>
+                                                                    <constraint firstItem="lGk-1n-y6A" firstAttribute="top" secondItem="pcw-wv-ikc" secondAttribute="bottom" constant="8" id="hED-fg-aaj"/>
+                                                                    <constraint firstItem="pcw-wv-ikc" firstAttribute="top" secondItem="J4Y-lv-Cdv" secondAttribute="top" constant="2" id="xw2-1T-FcC"/>
+                                                                </constraints>
+                                                            </view>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="Su1-t9-nYp" firstAttribute="top" secondItem="J4Y-lv-Cdv" secondAttribute="bottom" id="26y-mb-UQF"/>
+                                                            <constraint firstItem="J4Y-lv-Cdv" firstAttribute="top" secondItem="4Uf-PM-YG8" secondAttribute="top" id="L37-8K-LQ3"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Su1-t9-nYp" secondAttribute="trailing" constant="10" id="Xms-AQ-tdK"/>
+                                                            <constraint firstAttribute="trailing" secondItem="J4Y-lv-Cdv" secondAttribute="trailing" constant="10" id="ivh-g2-jKO"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Su1-t9-nYp" secondAttribute="bottom" id="lKW-NE-bFy"/>
+                                                            <constraint firstAttribute="height" constant="145" id="qyu-14-rgu"/>
+                                                            <constraint firstItem="J4Y-lv-Cdv" firstAttribute="leading" secondItem="4Uf-PM-YG8" secondAttribute="leading" constant="10" id="uD1-s6-EiZ"/>
+                                                            <constraint firstItem="Su1-t9-nYp" firstAttribute="leading" secondItem="4Uf-PM-YG8" secondAttribute="leading" constant="10" id="wvV-XQ-wvd"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y82-bb-oYN">
+                                                        <rect key="frame" x="16" y="181" width="343" height="1"/>
+                                                        <color key="backgroundColor" red="0.91362601519999997" green="0.91378277539999997" blue="0.91361618040000003" alpha="0.93348371480000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1" id="bsF-pI-hYw"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="4Uf-PM-YG8" firstAttribute="leading" secondItem="WHB-2a-k5U" secondAttribute="leading" constant="8" id="1DX-vr-UwI"/>
+                                                    <constraint firstAttribute="height" constant="182" id="Mr3-DO-btp"/>
+                                                    <constraint firstItem="y82-bb-oYN" firstAttribute="leading" secondItem="WHB-2a-k5U" secondAttribute="leading" constant="16" id="fgg-ml-e6t"/>
+                                                    <constraint firstAttribute="bottom" secondItem="y82-bb-oYN" secondAttribute="bottom" id="nFd-kW-P4G"/>
+                                                    <constraint firstAttribute="trailing" secondItem="y82-bb-oYN" secondAttribute="trailing" constant="16" id="rJN-aj-LQd"/>
+                                                    <constraint firstAttribute="trailing" secondItem="4Uf-PM-YG8" secondAttribute="trailing" constant="8" id="t3h-ba-3Zf"/>
+                                                    <constraint firstAttribute="bottom" secondItem="4Uf-PM-YG8" secondAttribute="bottom" constant="8" id="uUE-N1-Iiy"/>
+                                                </constraints>
+                                            </view>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkd-AL-mDf" userLabel="changeVehicle">
+                                                <rect key="frame" x="8" y="205" width="359" height="100"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vehicle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtT-X4-iBh">
+                                                        <rect key="frame" x="18" y="8" width="51" height="25"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="rbl-Of-wD1"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-qv-nJP">
+                                                        <rect key="frame" x="243" y="12" width="108" height="27"/>
+                                                        <color key="backgroundColor" red="0.031372549020000001" green="0.4549019608" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="27" id="Xsf-nk-9ST"/>
+                                                            <constraint firstAttribute="width" constant="108" id="mt8-bm-h22"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="12"/>
+                                                        <state key="normal" title="Save">
+                                                            <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="25"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sST-bT-teH">
+                                                        <rect key="frame" x="18" y="41" width="323" height="59"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="59" id="vBl-79-3dK"/>
+                                                        </constraints>
+                                                    </tableView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="vtT-X4-iBh" firstAttribute="top" secondItem="dkd-AL-mDf" secondAttribute="top" constant="8" id="5M7-5Q-upE"/>
+                                                    <constraint firstItem="vtT-X4-iBh" firstAttribute="leading" secondItem="dkd-AL-mDf" secondAttribute="leading" constant="18" id="FeM-ic-YKE"/>
+                                                    <constraint firstAttribute="bottom" secondItem="sST-bT-teH" secondAttribute="bottom" id="Flt-rV-fSp"/>
+                                                    <constraint firstAttribute="trailing" secondItem="sST-bT-teH" secondAttribute="trailing" constant="18" id="Jwp-9m-pp1"/>
+                                                    <constraint firstItem="ceK-qv-nJP" firstAttribute="top" secondItem="dkd-AL-mDf" secondAttribute="top" constant="12" id="YTa-AU-NB8"/>
+                                                    <constraint firstAttribute="height" constant="100" id="eP4-hb-ObP"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ceK-qv-nJP" secondAttribute="trailing" constant="8" id="g6c-Jd-avk"/>
+                                                    <constraint firstItem="sST-bT-teH" firstAttribute="leading" secondItem="dkd-AL-mDf" secondAttribute="leading" constant="18" id="iRq-sI-9DM"/>
+                                                    <constraint firstItem="sST-bT-teH" firstAttribute="top" secondItem="vtT-X4-iBh" secondAttribute="bottom" constant="8" id="mLO-Ik-bBs"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOS-C9-BuB" userLabel="viewVehicle">
+                                                <rect key="frame" x="8" y="205" width="359" height="100"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vehicle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zsg-hQ-zdf">
+                                                        <rect key="frame" x="18" y="10" width="51" height="24"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="24" id="Y7s-U2-5IT"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8lV-Dt-l4S">
+                                                        <rect key="frame" x="240" y="0.0" width="119" height="51"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="119" id="2nW-iz-TwU"/>
+                                                            <constraint firstAttribute="height" constant="51" id="ZGS-dK-9eD"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="10"/>
+                                                        <state key="normal" title="Change" backgroundImage="white_btn_bg">
+                                                            <color key="titleColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="25"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audi: Q3 2019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Jq-ql-blF">
+                                                        <rect key="frame" x="18" y="39.666666666666686" width="323" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="21" id="RYp-Rz-und"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                        <color key="textColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g2j-b8-bvd">
+                                                        <rect key="frame" x="8" y="91" width="343" height="1"/>
+                                                        <color key="backgroundColor" red="0.91362601519999997" green="0.91378277539999997" blue="0.91361618040000003" alpha="0.93348371480000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1" id="Ag9-hW-lsQ"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="9Jq-ql-blF" secondAttribute="trailing" constant="18" id="3Fv-S3-aOs"/>
+                                                    <constraint firstItem="8lV-Dt-l4S" firstAttribute="top" secondItem="gOS-C9-BuB" secondAttribute="top" id="7j0-SH-8ei"/>
+                                                    <constraint firstItem="9Jq-ql-blF" firstAttribute="leading" secondItem="gOS-C9-BuB" secondAttribute="leading" constant="18" id="BZD-Na-VYE"/>
+                                                    <constraint firstItem="Zsg-hQ-zdf" firstAttribute="top" secondItem="gOS-C9-BuB" secondAttribute="top" constant="10" id="CzW-3l-nFr"/>
+                                                    <constraint firstItem="g2j-b8-bvd" firstAttribute="leading" secondItem="gOS-C9-BuB" secondAttribute="leading" constant="8" id="OhL-aO-OEa"/>
+                                                    <constraint firstAttribute="trailing" secondItem="8lV-Dt-l4S" secondAttribute="trailing" id="ae9-Kt-2VE"/>
+                                                    <constraint firstAttribute="height" constant="100" id="eq7-Q6-IBy"/>
+                                                    <constraint firstItem="9Jq-ql-blF" firstAttribute="centerY" secondItem="gOS-C9-BuB" secondAttribute="centerY" id="f3K-aC-C6U"/>
+                                                    <constraint firstItem="Zsg-hQ-zdf" firstAttribute="leading" secondItem="gOS-C9-BuB" secondAttribute="leading" constant="18" id="fPf-ou-kSE"/>
+                                                    <constraint firstAttribute="bottom" secondItem="g2j-b8-bvd" secondAttribute="bottom" constant="8" id="lfA-6M-oZV"/>
+                                                    <constraint firstAttribute="trailing" secondItem="g2j-b8-bvd" secondAttribute="trailing" constant="8" id="sxW-m5-Xgx"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k24-FV-uQF">
+                                                <rect key="frame" x="8" y="313" width="359" height="320"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MrB-vr-FoS">
+                                                        <rect key="frame" x="0.0" y="10" width="359" height="51"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parkings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qua-ag-Wcv">
+                                                                <rect key="frame" x="18" y="13.666666666666686" width="66.333333333333329" height="24"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="24" id="iTj-2e-QaW"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="17"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VyH-LT-6A2">
+                                                                <rect key="frame" x="240" y="0.0" width="119" height="48"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="119" id="81Y-4a-Wjm"/>
+                                                                    <constraint firstAttribute="height" constant="48" id="8gK-Zu-4S7"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="10"/>
+                                                                <state key="normal" title="Change" backgroundImage="white_btn_bg">
+                                                                    <color key="titleColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="25"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </button>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="Qua-ag-Wcv" firstAttribute="leading" secondItem="MrB-vr-FoS" secondAttribute="leading" constant="18" id="50M-kH-zQF"/>
+                                                            <constraint firstAttribute="bottom" secondItem="VyH-LT-6A2" secondAttribute="bottom" constant="3" id="Ljc-Mh-mAX"/>
+                                                            <constraint firstItem="Qua-ag-Wcv" firstAttribute="centerY" secondItem="MrB-vr-FoS" secondAttribute="centerY" id="aP6-QO-r19"/>
+                                                            <constraint firstItem="VyH-LT-6A2" firstAttribute="top" secondItem="MrB-vr-FoS" secondAttribute="top" id="gW4-hZ-C9D"/>
+                                                            <constraint firstAttribute="trailing" secondItem="VyH-LT-6A2" secondAttribute="trailing" id="gv5-6W-K0Z"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZUG-aj-oJn">
+                                                        <rect key="frame" x="4" y="74" width="351" height="204"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="204" id="gM7-z4-I4h"/>
+                                                        </constraints>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="o6t-ix-OjN">
+                                                            <size key="itemSize" width="50" height="50"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells>
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Uz1-2W-Dbq">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                </view>
+                                                            </collectionViewCell>
+                                                        </cells>
+                                                    </collectionView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aT0-Qt-fHR">
+                                                        <rect key="frame" x="18" y="282" width="323" height="35"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="35" id="Cd2-PN-2ao"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
+                                                        <state key="normal" title="View all Offers">
+                                                            <color key="titleColor" red="0.18744784589999999" green="0.61218529939999999" blue="0.82450407739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="titleShadowColor" red="0.91362601519999997" green="0.91378277539999997" blue="0.91361618040000003" alpha="0.93348371480000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="18"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="MrB-vr-FoS" firstAttribute="leading" secondItem="k24-FV-uQF" secondAttribute="leading" id="8Zk-EM-zfJ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="MrB-vr-FoS" secondAttribute="trailing" id="9oE-xw-6Ys"/>
+                                                    <constraint firstItem="aT0-Qt-fHR" firstAttribute="top" secondItem="ZUG-aj-oJn" secondAttribute="bottom" constant="4" id="Et3-sw-R9U"/>
+                                                    <constraint firstAttribute="trailing" secondItem="aT0-Qt-fHR" secondAttribute="trailing" constant="18" id="Lw2-fN-3Oj"/>
+                                                    <constraint firstItem="aT0-Qt-fHR" firstAttribute="leading" secondItem="k24-FV-uQF" secondAttribute="leading" constant="18" id="MsO-le-5Ch"/>
+                                                    <constraint firstAttribute="height" constant="320" id="Tpd-YR-uWO"/>
+                                                    <constraint firstItem="ZUG-aj-oJn" firstAttribute="top" secondItem="MrB-vr-FoS" secondAttribute="bottom" constant="13" id="XhA-27-J6m"/>
+                                                    <constraint firstItem="ZUG-aj-oJn" firstAttribute="leading" secondItem="k24-FV-uQF" secondAttribute="leading" constant="4" id="lhv-qM-ie8"/>
+                                                    <constraint firstItem="MrB-vr-FoS" firstAttribute="top" secondItem="k24-FV-uQF" secondAttribute="top" constant="10" id="pza-eM-GGS"/>
+                                                    <constraint firstAttribute="bottom" secondItem="aT0-Qt-fHR" secondAttribute="bottom" constant="3" id="uLa-Ou-GYN"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ZUG-aj-oJn" secondAttribute="trailing" constant="4" id="xps-Ii-d91"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IBN-Yn-23z">
+                                                <rect key="frame" x="0.0" y="633" width="375" height="146"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INL-e9-0x8" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="28" width="375" height="118"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ql8-if-xFL">
+                                                                <rect key="frame" x="23" y="33.666666666666629" width="329" height="51"/>
+                                                                <color key="backgroundColor" red="0.031372549020000001" green="0.4549019608" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="51" id="j0c-7J-rf1"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
+                                                                <state key="normal" title="Navigate">
+                                                                    <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="25"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="Ql8-if-xFL" secondAttribute="trailing" constant="23" id="5eO-tZ-ciu"/>
+                                                            <constraint firstAttribute="height" constant="118" id="B6P-ts-cEg"/>
+                                                            <constraint firstItem="Ql8-if-xFL" firstAttribute="centerY" secondItem="INL-e9-0x8" secondAttribute="centerY" id="HE7-hL-TZB"/>
+                                                            <constraint firstItem="Ql8-if-xFL" firstAttribute="leading" secondItem="INL-e9-0x8" secondAttribute="leading" constant="23" id="Nva-am-Bag"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="INL-e9-0x8" secondAttribute="bottom" id="2q5-EN-2fY"/>
+                                                    <constraint firstItem="INL-e9-0x8" firstAttribute="leading" secondItem="IBN-Yn-23z" secondAttribute="leading" id="BbU-4Q-Enz"/>
+                                                    <constraint firstAttribute="trailing" secondItem="INL-e9-0x8" secondAttribute="trailing" id="KbI-O6-u6N"/>
+                                                    <constraint firstAttribute="height" constant="146" id="bpA-op-hH9"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetWidth">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="IBN-Yn-23z" secondAttribute="trailing" id="5IF-Pm-Kk7"/>
+                                            <constraint firstAttribute="height" constant="779" id="8Z5-UT-kLk"/>
+                                            <constraint firstItem="IBN-Yn-23z" firstAttribute="leading" secondItem="6oi-Yw-yZX" secondAttribute="leading" id="FT3-Ox-zi6"/>
+                                            <constraint firstItem="WHB-2a-k5U" firstAttribute="leading" secondItem="6oi-Yw-yZX" secondAttribute="leading" id="HAW-dY-wwU"/>
+                                            <constraint firstAttribute="trailing" secondItem="gOS-C9-BuB" secondAttribute="trailing" constant="8" id="KeI-5I-ARv"/>
+                                            <constraint firstItem="gOS-C9-BuB" firstAttribute="leading" secondItem="6oi-Yw-yZX" secondAttribute="leading" constant="8" id="KyO-xb-T4O"/>
+                                            <constraint firstAttribute="bottom" secondItem="IBN-Yn-23z" secondAttribute="bottom" id="O7o-ua-DT6"/>
+                                            <constraint firstItem="k24-FV-uQF" firstAttribute="top" secondItem="gOS-C9-BuB" secondAttribute="bottom" constant="8" id="OcR-7u-NFh"/>
+                                            <constraint firstItem="dkd-AL-mDf" firstAttribute="leading" secondItem="6oi-Yw-yZX" secondAttribute="leading" constant="8" id="P8r-kz-5dJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="dkd-AL-mDf" secondAttribute="trailing" constant="8" id="STn-U3-4yK"/>
+                                            <constraint firstAttribute="trailing" secondItem="k24-FV-uQF" secondAttribute="trailing" constant="8" id="VcK-cd-9Of"/>
+                                            <constraint firstItem="IBN-Yn-23z" firstAttribute="top" secondItem="k24-FV-uQF" secondAttribute="bottom" id="dqQ-Xv-Lcf"/>
+                                            <constraint firstItem="gOS-C9-BuB" firstAttribute="top" secondItem="WHB-2a-k5U" secondAttribute="bottom" constant="3" id="ohk-EJ-vrg"/>
+                                            <constraint firstItem="k24-FV-uQF" firstAttribute="top" secondItem="dkd-AL-mDf" secondAttribute="bottom" constant="8" id="qt5-rv-LAF"/>
+                                            <constraint firstAttribute="trailing" secondItem="WHB-2a-k5U" secondAttribute="trailing" id="sBm-Wv-FRn"/>
+                                            <constraint firstItem="k24-FV-uQF" firstAttribute="leading" secondItem="6oi-Yw-yZX" secondAttribute="leading" constant="8" id="v6o-sG-jvJ"/>
+                                            <constraint firstItem="WHB-2a-k5U" firstAttribute="top" secondItem="6oi-Yw-yZX" secondAttribute="top" constant="20" id="wwz-aC-NC9"/>
+                                            <constraint firstItem="dkd-AL-mDf" firstAttribute="top" secondItem="WHB-2a-k5U" secondAttribute="bottom" constant="3" id="y7g-5P-otN"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="corner_Radius">
+                                                <real key="value" value="35"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_parking_pin" translatesAutoresizingMaskIntoConstraints="NO" id="r0o-aw-crF">
+                                        <rect key="frame" x="153.66666666666666" y="96" width="68" height="99"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="99" id="ChD-n1-fnG"/>
+                                            <constraint firstAttribute="width" constant="68" id="g1q-ge-WoV"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Kbf-vq-HOD" secondAttribute="trailing" id="JKr-Be-Byh"/>
+                                    <constraint firstItem="Kbf-vq-HOD" firstAttribute="top" secondItem="rwo-eZ-hPA" secondAttribute="top" id="KQC-fI-B6d"/>
+                                    <constraint firstItem="r0o-aw-crF" firstAttribute="centerX" secondItem="rwo-eZ-hPA" secondAttribute="centerX" id="W5E-Ru-f9D"/>
+                                    <constraint firstItem="Kbf-vq-HOD" firstAttribute="centerX" secondItem="rwo-eZ-hPA" secondAttribute="centerX" id="ZVQ-hd-ij2"/>
+                                    <constraint firstItem="Kbf-vq-HOD" firstAttribute="leading" secondItem="rwo-eZ-hPA" secondAttribute="leading" id="b6N-FD-rPk"/>
+                                    <constraint firstItem="6oi-Yw-yZX" firstAttribute="leading" secondItem="rwo-eZ-hPA" secondAttribute="leading" id="mOa-tR-EE0"/>
+                                    <constraint firstItem="6oi-Yw-yZX" firstAttribute="top" secondItem="Kbf-vq-HOD" secondAttribute="bottom" constant="20" id="mtl-wr-BEt"/>
+                                    <constraint firstAttribute="bottom" secondItem="6oi-Yw-yZX" secondAttribute="bottom" id="nyY-hP-WO6"/>
+                                    <constraint firstItem="r0o-aw-crF" firstAttribute="top" secondItem="rwo-eZ-hPA" secondAttribute="top" constant="96" id="o9d-pN-924"/>
+                                    <constraint firstAttribute="trailing" secondItem="6oi-Yw-yZX" secondAttribute="trailing" id="wjt-zN-FY8"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.98039215686274506" blue="0.98039215686274506" alpha="0.5" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="rwo-eZ-hPA" firstAttribute="leading" secondItem="533-Fi-D4M" secondAttribute="leading" id="6UQ-g3-jFh"/>
+                            <constraint firstAttribute="bottom" secondItem="rwo-eZ-hPA" secondAttribute="bottom" id="NNv-cg-dIc"/>
+                            <constraint firstItem="rwo-eZ-hPA" firstAttribute="trailing" secondItem="533-Fi-D4M" secondAttribute="trailing" id="VaJ-HC-rts"/>
+                            <constraint firstItem="rwo-eZ-hPA" firstAttribute="top" secondItem="YJ7-e4-wbN" secondAttribute="top" id="kIS-Ga-Uvf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="533-Fi-D4M"/>
+                    </view>
+                    <size key="freeformSize" width="375" height="940"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dSF-4A-yDJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1328.8" y="-2053.4482758620688"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="rbn-oS-mec">
             <objects>
@@ -2447,27 +3003,39 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMA-9x-RTX">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gn-Gk-VuV">
-                                                <rect key="frame" x="134" y="58" width="84" height="24"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gn-Gk-VuV">
+                                                <rect key="frame" x="145.66666666666666" y="58" width="84" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="24" id="LEx-Os-bAv"/>
+                                                    <constraint firstAttribute="width" constant="84" id="mxq-zL-m1w"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="17"/>
                                                 <color key="textColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhR-te-WJL">
-                                                <rect key="frame" x="20" y="52" width="36" height="36"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UqD-L2-7th">
+                                                <rect key="frame" x="8" y="52" width="48" height="36"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="48" id="MZ2-R6-1dB"/>
+                                                    <constraint firstAttribute="height" constant="36" id="rju-D7-glr"/>
+                                                </constraints>
                                                 <state key="normal" image="icon_backArrow"/>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstItem="4gn-Gk-VuV" firstAttribute="centerX" secondItem="jMA-9x-RTX" secondAttribute="centerX" id="92Q-vj-OKn"/>
+                                            <constraint firstItem="UqD-L2-7th" firstAttribute="leading" secondItem="jMA-9x-RTX" secondAttribute="leading" constant="8" id="Fz6-AT-nPA"/>
+                                            <constraint firstAttribute="bottom" secondItem="UqD-L2-7th" secondAttribute="bottom" constant="12" id="M7i-I9-bhG"/>
+                                            <constraint firstItem="4gn-Gk-VuV" firstAttribute="centerY" secondItem="UqD-L2-7th" secondAttribute="centerY" id="ecB-LD-GaO"/>
                                             <constraint firstAttribute="height" constant="100" id="gAr-hD-Wvb"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="How was your experience?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lfo-dW-edo">
-                                        <rect key="frame" x="31" y="124" width="315" height="105"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How was your experience?" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lfo-dW-edo">
+                                        <rect key="frame" x="20" y="120" width="345" height="105"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="105" id="lJC-Fo-eeB"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="32"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2475,45 +3043,67 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="review_img" translatesAutoresizingMaskIntoConstraints="NO" id="qEN-o2-8Za">
                                         <rect key="frame" x="101.66666666666669" y="304" width="172" height="170.33333333333337"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img_rate" translatesAutoresizingMaskIntoConstraints="NO" id="33B-7b-2XR">
-                                        <rect key="frame" x="51" y="512" width="273" height="80"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_rate" translatesAutoresizingMaskIntoConstraints="NO" id="33B-7b-2XR">
+                                        <rect key="frame" x="43.333333333333343" y="489.33333333333326" width="288.66666666666663" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="WvF-fB-VpS"/>
+                                        </constraints>
                                     </imageView>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fhN-Ai-MdP">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhN-Ai-MdP">
                                         <rect key="frame" x="0.0" y="703" width="375" height="75"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92X-Q6-th6">
-                                                <rect key="frame" x="31" y="27" width="36" height="38"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92X-Q6-th6">
+                                                <rect key="frame" x="20" y="0.0" width="50" height="75"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="Ur8-xP-osO"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="18"/>
                                                 <state key="normal" title="Skip">
                                                     <color key="titleColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tv1-G8-WyD">
-                                                <rect key="frame" x="303" y="27" width="45" height="38"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tv1-G8-WyD">
+                                                <rect key="frame" x="300" y="0.0" width="55" height="75"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="55" id="NhU-Ag-na9"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="18"/>
                                                 <state key="normal" title="Later">
                                                     <color key="titleColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="tv1-G8-WyD" firstAttribute="top" secondItem="fhN-Ai-MdP" secondAttribute="top" id="GAf-N6-Tap"/>
+                                            <constraint firstAttribute="height" constant="75" id="RsJ-Pd-uFq"/>
+                                            <constraint firstAttribute="trailing" secondItem="tv1-G8-WyD" secondAttribute="trailing" constant="20" id="SJN-R4-6Ea"/>
+                                            <constraint firstItem="92X-Q6-th6" firstAttribute="top" secondItem="fhN-Ai-MdP" secondAttribute="top" id="Xa5-Oh-rpI"/>
+                                            <constraint firstItem="92X-Q6-th6" firstAttribute="leading" secondItem="fhN-Ai-MdP" secondAttribute="leading" constant="20" id="bvG-2k-5N8"/>
+                                            <constraint firstAttribute="bottom" secondItem="tv1-G8-WyD" secondAttribute="bottom" id="kxE-RW-z5f"/>
+                                            <constraint firstAttribute="bottom" secondItem="92X-Q6-th6" secondAttribute="bottom" id="mYY-Zq-nju"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="33B-7b-2XR" firstAttribute="centerX" secondItem="cbE-wQ-IbI" secondAttribute="centerX" id="5rv-Ua-QcB"/>
+                                    <constraint firstItem="Lfo-dW-edo" firstAttribute="top" secondItem="jMA-9x-RTX" secondAttribute="bottom" constant="20" id="6o6-yN-DMu"/>
                                     <constraint firstItem="qEN-o2-8Za" firstAttribute="centerX" secondItem="cbE-wQ-IbI" secondAttribute="centerX" id="7uJ-HF-jDS"/>
                                     <constraint firstItem="jMA-9x-RTX" firstAttribute="top" secondItem="cbE-wQ-IbI" secondAttribute="top" id="Cqb-Kw-Hz3"/>
+                                    <constraint firstItem="33B-7b-2XR" firstAttribute="top" secondItem="qEN-o2-8Za" secondAttribute="bottom" constant="15" id="VH6-OT-Slm"/>
+                                    <constraint firstItem="Lfo-dW-edo" firstAttribute="leading" secondItem="cbE-wQ-IbI" secondAttribute="leading" constant="20" id="WDM-oy-b4h"/>
+                                    <constraint firstAttribute="bottom" secondItem="fhN-Ai-MdP" secondAttribute="bottom" id="cSA-IG-HBt"/>
+                                    <constraint firstItem="fhN-Ai-MdP" firstAttribute="leading" secondItem="cbE-wQ-IbI" secondAttribute="leading" id="dyv-Sb-hcr"/>
+                                    <constraint firstAttribute="trailing" secondItem="Lfo-dW-edo" secondAttribute="trailing" constant="10" id="hiI-c3-7Rt"/>
                                     <constraint firstItem="qEN-o2-8Za" firstAttribute="centerY" secondItem="cbE-wQ-IbI" secondAttribute="centerY" id="mBG-PE-M21"/>
                                     <constraint firstItem="jMA-9x-RTX" firstAttribute="leading" secondItem="cbE-wQ-IbI" secondAttribute="leading" id="mBt-t1-obJ"/>
                                     <constraint firstAttribute="trailing" secondItem="jMA-9x-RTX" secondAttribute="trailing" id="n40-dl-iGD"/>
+                                    <constraint firstAttribute="trailing" secondItem="fhN-Ai-MdP" secondAttribute="trailing" id="u8H-B5-Khs"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="CHP-Hc-BSE" firstAttribute="trailing" secondItem="cbE-wQ-IbI" secondAttribute="trailing" id="KDf-TE-rrW"/>
                             <constraint firstItem="CHP-Hc-BSE" firstAttribute="bottom" secondItem="cbE-wQ-IbI" secondAttribute="bottom" id="YBn-Dl-uH5"/>
@@ -2534,10 +3124,13 @@
         <image name="icon_add" width="21.333333969116211" height="21.333333969116211"/>
         <image name="icon_backArrow" width="12" height="20.666666030883789"/>
         <image name="icon_camera" width="28.333333969116211" height="28.333333969116211"/>
+        <image name="icon_close" width="27" height="27"/>
         <image name="icon_loaction" width="15.666666984558105" height="15.666666984558105"/>
         <image name="icon_location_black" width="15.666666984558105" height="15.666666984558105"/>
         <image name="icon_menu" width="18" height="15"/>
+        <image name="icon_parking_pin" width="60.666667938232422" height="77"/>
         <image name="icon_pinGrey" width="18.333333969116211" height="23"/>
+        <image name="icon_route" width="19.666666030883789" height="14.333333015441895"/>
         <image name="icon_schedule" width="22" height="22"/>
         <image name="icon_search" width="15.666666984558105" height="15.666666984558105"/>
         <image name="icon_up" width="20.666666030883789" height="12"/>
@@ -2554,5 +3147,6 @@
         <image name="tab_selected_navigate" width="47.666667938232422" height="47.666667938232422"/>
         <image name="tab_selected_sellParking" width="28" height="28"/>
         <image name="tab_sellParking" width="28" height="28"/>
+        <image name="white_btn_bg" width="138.33332824707031" height="62.666667938232422"/>
     </resources>
 </document>

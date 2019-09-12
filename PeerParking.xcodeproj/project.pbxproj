@@ -22,6 +22,9 @@
 		FA1150CF2316838500D0B1FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA1150CD2316838500D0B1FE /* LaunchScreen.storyboard */; };
 		FA1150DA2316838500D0B1FE /* PeerParkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1150D92316838500D0B1FE /* PeerParkingTests.swift */; };
 		FA1150E52316838500D0B1FE /* PeerParkingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1150E42316838500D0B1FE /* PeerParkingUITests.swift */; };
+		FA122146232A3068002720BE /* ParkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA122144232A3068002720BE /* ParkingCell.swift */; };
+		FA122147232A3068002720BE /* ParkingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA122145232A3068002720BE /* ParkingCell.xib */; };
+		FA122149232A4366002720BE /* ParkingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA122148232A4366002720BE /* ParkingDetailViewController.swift */; };
 		FA25B601232686B6007C3697 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA25B600232686B6007C3697 /* SplashViewController.swift */; };
 		FA2815AB231E3F92008AF3F5 /* CustomSideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2815A6231E3F92008AF3F5 /* CustomSideMenuController.swift */; };
 		FA2815AC231E3F92008AF3F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2815A7231E3F92008AF3F5 /* ViewController.swift */; };
@@ -104,6 +107,9 @@
 		FA1150E02316838500D0B1FE /* PeerParkingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeerParkingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA1150E42316838500D0B1FE /* PeerParkingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerParkingUITests.swift; sourceTree = "<group>"; };
 		FA1150E62316838500D0B1FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA122144232A3068002720BE /* ParkingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingCell.swift; sourceTree = "<group>"; };
+		FA122145232A3068002720BE /* ParkingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParkingCell.xib; sourceTree = "<group>"; };
+		FA122148232A4366002720BE /* ParkingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingDetailViewController.swift; sourceTree = "<group>"; };
 		FA25B600232686B6007C3697 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		FA2815A6231E3F92008AF3F5 /* CustomSideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSideMenuController.swift; sourceTree = "<group>"; };
 		FA2815A7231E3F92008AF3F5 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -325,6 +331,8 @@
 				FA6CD3782328FFE600E18CF2 /* LoacationCell.xib */,
 				FA6CD37B23290DF100E18CF2 /* RoutesCell.swift */,
 				FA6CD37C23290DF100E18CF2 /* RoutesCell.xib */,
+				FA122144232A3068002720BE /* ParkingCell.swift */,
+				FA122145232A3068002720BE /* ParkingCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -407,6 +415,7 @@
 			children = (
 				FA2815C2231E806D008AF3F5 /* HomeViewController.swift */,
 				FA6CD37F2329122E00E18CF2 /* AlternateRouteViewController.swift */,
+				FA122148232A4366002720BE /* ParkingDetailViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -541,6 +550,7 @@
 				FA2815B6231E6602008AF3F5 /* Poppins-Bold.ttf in Resources */,
 				FA2815C1231E7058008AF3F5 /* menuCell.xib in Resources */,
 				FA6CD3682328C00900E18CF2 /* HistoryCell.xib in Resources */,
+				FA122147232A3068002720BE /* ParkingCell.xib in Resources */,
 				FA2815B7231E6602008AF3F5 /* Poppins-Black.ttf in Resources */,
 				FA6CD37A2328FFE600E18CF2 /* LoacationCell.xib in Resources */,
 			);
@@ -693,10 +703,12 @@
 				FA2815AB231E3F92008AF3F5 /* CustomSideMenuController.swift in Sources */,
 				FA2815AE231E3F92008AF3F5 /* RootViewController.swift in Sources */,
 				FA6CD3732328F1C900E18CF2 /* ListParkingViewController.swift in Sources */,
+				FA122146232A3068002720BE /* ParkingCell.swift in Sources */,
 				FA6CD3762328F76B00E18CF2 /* NotificationViewController.swift in Sources */,
 				FA57EBA7232142AC000646B7 /* ProfileViewController.swift in Sources */,
 				FA6CD37D23290DF100E18CF2 /* RoutesCell.swift in Sources */,
 				FA0FCC56232229F9000FF52C /* vehicleCell.swift in Sources */,
+				FA122149232A4366002720BE /* ParkingDetailViewController.swift in Sources */,
 				FA0FCC6323229FB9000FF52C /* CardView.swift in Sources */,
 				FAF807B023263644004DB3B1 /* transactionCell.swift in Sources */,
 				FA57EBA42320EB2E000646B7 /* ViewHelper.swift in Sources */,

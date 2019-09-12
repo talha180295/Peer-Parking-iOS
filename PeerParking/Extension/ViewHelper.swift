@@ -19,21 +19,12 @@ enum VerticalLocation: String {
    
     
     
-    func addShadow(location: VerticalLocation, color: UIColor = .black, opacity: Float = 0.5, radius: CGFloat = 5.0) {
-        switch location {
-        case .bottom:
-            addShadow(offset: CGSize(width: 0, height: 10), color: color, opacity: opacity, radius: radius)
-        case .top:
-            addShadow(offset: CGSize(width: 0, height: -10), color: color, opacity: opacity, radius: radius)
-        }
-    }
-    
-    func addShadow(offset: CGSize, color: UIColor = .black, opacity: Float = 0.5, radius: CGFloat = 5.0) {
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = color.cgColor
-        self.layer.shadowOffset = offset
-       // self.layer.shadowOpacity = opacity
+    func addShadowView(width:CGFloat=0.2, height:CGFloat=0.2, Opacidade:Float=0.7, maskToBounds:Bool=false, radius:CGFloat=0.5){
+        self.layer.shadowColor = (UIColor.black as! CGColor)
+        self.layer.shadowOffset = CGSize(width: width, height: height)
         self.layer.shadowRadius = radius
+        self.layer.shadowOpacity = Opacidade
+        self.layer.masksToBounds = maskToBounds
     }
     func roundCorners(corners: UIRectCorner, radius: CGFloat) {
         let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
