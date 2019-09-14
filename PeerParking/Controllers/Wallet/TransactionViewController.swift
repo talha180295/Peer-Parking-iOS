@@ -37,26 +37,59 @@ class TransactionViewController: UIViewController , UIGestureRecognizerDelegate,
         
                 tblTransaction.register(UINib(nibName: "transactionCell", bundle: nil), forCellReuseIdentifier: "transactionCell")
                 // Do any additional setup after loading the view.
-            }
+      
+        self.tblTransaction.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: "headerCell")
 
-            func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-                //        return transactionArr.count
-                return 3;
-            }
-
-            func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-                let cell = tblTransaction.dequeueReusableCell(withIdentifier: "transactionCell") as! transactionCell
-                
-                cell.selectionStyle = .none
-                return  cell;
-            }
-
-            func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                
-                
-                
-            }
     
+    
+    }
+
+     func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    // return the number of rows in the specified section
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var rowCount = 0
+        switch (section) {
+        case 0:
+            rowCount = 2
+        case 1:
+            rowCount = 2
+        case 2:
+            rowCount = 2
+        default:
+            rowCount = 0
+        }
+        
+        return rowCount
+    }
+    
+   
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 70.0
+    }
+    // Header Cell
+     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let  headerCell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! HeaderCell
+       
+        
+        
+        
+        return headerCell
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tblTransaction.dequeueReusableCell(withIdentifier: "transactionCell") as! transactionCell
+        
+        cell.selectionStyle = .none
+        return  cell;
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        
+    }
+
     func gotPanned(_ percentage: Int) {
         if animator == nil {
             animator = UIViewPropertyAnimator(duration: 1, curve: .linear, animations: {

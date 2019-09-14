@@ -1,16 +1,15 @@
 //
-//  vehicleCell.swift
+//  HeaderCell.swift
 //  PeerParking
 //
-//  Created by Munzareen Atique on 06/09/2019.
+//  Created by Munzareen Atique on 14/09/2019.
 //  Copyright © 2019 Munzareen Atique. All rights reserved.
 //
 
 import UIKit
 
-class vehicleCell: UITableViewCell {
+class HeaderCell: UITableViewCell {
 
-    @IBOutlet weak var btnCheck: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

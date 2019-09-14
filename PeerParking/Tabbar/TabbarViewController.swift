@@ -16,6 +16,23 @@ class TabbarViewController: UITabBarController ,SideMenuControllerDelegate {
        SideMenuController.preferences.drawing.menuButtonImage = UIImage(named: "icon_menu")
         sideMenuController?.delegate = self
         
+        
+//        UITabBar.appearance().isTranslucent = false
+//        UITabBar.appearance().backgroundColor = UIColor.clear
+//        UITabBar.appearance().backgroundImage = UIImage(named: "tab_bar_bg")
+//        UITabBar.appearance().contentMode = .scaleToFill
+        
+        
+        
+        self.tabBar.items?[0].image = UIImage(named: "tab_findParking")!.withRenderingMode(.alwaysOriginal);
+        
+        
+        
+        
+        self.tabBar.items?[1].image = UIImage(named: "tab_N")!.withRenderingMode(.alwaysOriginal);
+        self.tabBar.items?[2].image = UIImage(named: "tab_sellParking")!.withRenderingMode(.alwaysOriginal);
+
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

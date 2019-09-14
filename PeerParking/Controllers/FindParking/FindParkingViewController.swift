@@ -9,18 +9,129 @@
 import UIKit
 import SideMenuController
 
-class FindParkingViewController: UIViewController ,SideMenuControllerDelegate {
+class FindParkingViewController: UIViewController ,SideMenuControllerDelegate,UITableViewDelegate,UITableViewDataSource {
 
+    @IBOutlet weak var mainSchedule: CardView!
+    @IBOutlet weak var mainPicker: CardView!
+    @IBOutlet weak var btnCancel: UIButton!
+    @IBOutlet weak var btnConfirm: UIButton!
+    @IBOutlet weak var btnSave: UIButton!
+    
+ 
+    
+    @IBOutlet weak var tblLocation: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
      
+      
+        
+        self.tabBarController?.tabBar.items?[0].image = UIImage(named: "tab_findParking")!.withRenderingMode(.alwaysOriginal);
+        self.tabBarController?.tabBar.items?[1].image = UIImage(named: "tab_N")!.withRenderingMode(.alwaysOriginal);
+        self.tabBarController?.tabBar.items?[2].image = UIImage(named: "tab_sellParking")!.withRenderingMode(.alwaysOriginal);
+        
+        
+         tabBarItem.selectedImage = UIImage(named: "tab_selected_findParking")?.withRenderingMode(.alwaysOriginal);
+        
+        mainPicker.isHidden = true
+        mainSchedule.isHidden = true
+         tblLocation.isHidden = true
+        
+        btnSave.addShadowView(color: btnSave.backgroundColor!)
+        
+        btnConfirm.addShadowView(color: btnSave.backgroundColor!)
+        btnCancel.addShadowView(color: UIColor.lightGray)
+   
+       
       //  loadView()
+        
+        tblLocation.dataSource = self
+        tblLocation.delegate = self
+        
+        tblLocation.register(UINib(nibName: "LoacationCell", bundle: nil), forCellReuseIdentifier: "locationCell")
+        // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func locationBtn(_ sender: Any) {
+        
+        tblLocation.isHidden = false
+        
+        mainPicker.isHidden = true
+        mainSchedule.isHidden = true
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //        return transactionArr.count
+        return 10;
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tblLocation.dequeueReusableCell(withIdentifier: "locationCell") as! LoacationCell
+        
+        
+        cell.selectionStyle = .none
+        return  cell;
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "parkDetailVC") as! ParkingDetailViewController
+         vc.strVC = "find"
+        self.addChild(vc)
+        view.addSubview(vc.view)
+         tblLocation.isHidden = true
         
     }
     
+  
     
+    
+    @IBAction func CancelClick(_ sender: Any) {
+         tblLocation.isHidden = true
+         mainPicker.isHidden = true
+        mainSchedule.isHidden = false
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    @IBAction func SaveClick(_ sender: Any) {
+        tblLocation.isHidden = true
+        mainPicker.isHidden = true
+        mainSchedule.isHidden = false
+        self.tabBarController?.tabBar.isHidden = true
         
-        override func viewWillAppear(_ animated: Bool) {
+    }
+    @IBAction func btnSchedule(_ sender: Any) {
+         tblLocation.isHidden = true
+        mainSchedule.isHidden = false
+        mainPicker.isHidden = true;
+        self.tabBarController?.tabBar.isHidden = true
+//        self.menuButton.isHidden = true
+    }
+    
+    @IBAction func btnClickDate(_ sender: Any) {
+         tblLocation.isHidden = true
+        mainPicker.isHidden = false
+        mainSchedule.isHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+        
+       
+        
+    }
+    
+ 
+    
+    @IBAction func btnConfirmClick(_ sender: Any) {
+        tblLocation.isHidden = false
+        
+        mainPicker.isHidden = true
+        mainSchedule.isHidden = true
+        
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "parkDetailVC") as! ParkingDetailViewController
+        vc.strVC = "find"
+        self.addChild(vc)
+        view.addSubview(vc.view)
+       
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
             print("\(#function) -- \(self)")
         }

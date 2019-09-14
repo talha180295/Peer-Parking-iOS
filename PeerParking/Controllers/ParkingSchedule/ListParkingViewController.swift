@@ -28,11 +28,44 @@ class ListParkingViewController: UIViewController, UITableViewDataSource, UITabl
         
         tblParking.register(UINib(nibName: "ScheduledCell", bundle: nil), forCellReuseIdentifier: "ScheduledCell")
         // Do any additional setup after loading the view.
+        self.tblParking.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: "headerCell")
+        
+            self.tblHistory.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: "headerCell")
+        
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
+    // return the number of rows in the specified section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        return transactionArr.count
-        return 10;
+        var rowCount = 0
+        switch (section) {
+        case 0:
+            rowCount = 2
+        case 1:
+            rowCount = 2
+        case 2:
+            rowCount = 2
+        default:
+            rowCount = 0
+        }
+        
+        return rowCount
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40.0
+    }
+    // Header Cell
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let  headerCell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! HeaderCell
+        
+        
+        
+        
+        return headerCell
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -45,7 +78,7 @@ class ListParkingViewController: UIViewController, UITableViewDataSource, UITabl
         }
         else if(tableView == tblParking)
         {
-             let cell = tblHistory.dequeueReusableCell(withIdentifier: "ScheduledCell") as! ScheduledCell
+             let cell = tblParking.dequeueReusableCell(withIdentifier: "ScheduledCell") as! ScheduledCell
             cell.selectionStyle = .none
             return  cell;
         }

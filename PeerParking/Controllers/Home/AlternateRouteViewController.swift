@@ -35,6 +35,9 @@ class AlternateRouteViewController: UIViewController ,UITableViewDataSource, UIT
         cell.selectionStyle = .none
         return  cell;
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     
 

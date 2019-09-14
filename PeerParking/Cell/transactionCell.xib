@@ -17,36 +17,36 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="transactionCell" rowHeight="133" id="KGk-i7-Jjw" customClass="transactionCell" customModule="PeerParking" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="440" height="133"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="transactionCell" rowHeight="109" id="KGk-i7-Jjw" customClass="transactionCell" customModule="PeerParking" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="440" height="109"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="440" height="132.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="440" height="108.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cBj-VT-Z2h">
-                        <rect key="frame" x="0.0" y="0.0" width="440" height="132.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="440" height="108.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tuesday, 16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFF-oM-WqZ">
-                                <rect key="frame" x="8" y="2" width="424" height="34"/>
+                                <rect key="frame" x="8" y="2" width="424" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="AaP-I7-rmN"/>
+                                    <constraint firstAttribute="height" constant="21" id="AaP-I7-rmN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="17"/>
                                 <color key="textColor" red="0.37452399730000002" green="0.43006563190000002" blue="0.50908255579999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ESh-yD-6gk">
-                                <rect key="frame" x="8" y="42" width="424" height="82.5"/>
+                                <rect key="frame" x="8" y="29" width="424" height="71.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_soldParking" translatesAutoresizingMaskIntoConstraints="NO" id="l6P-Kw-usr">
-                                        <rect key="frame" x="7" y="5" width="75" height="72.5"/>
+                                        <rect key="frame" x="7" y="5" width="75" height="61.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="o10-Wz-kx7"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgU-aL-NQk">
-                                        <rect key="frame" x="92" y="8" width="240" height="66.5"/>
+                                        <rect key="frame" x="92" y="8" width="240" height="55.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parking Sold" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6E-IT-8nb">
                                                 <rect key="frame" x="8" y="8" width="224" height="24"/>
@@ -58,7 +58,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zen-BA-YBU">
-                                                <rect key="frame" x="8" y="40" width="224" height="24.5"/>
+                                                <rect key="frame" x="8" y="40" width="224" height="13.5"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -75,10 +75,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="djZ-HD-qed">
-                                        <rect key="frame" x="340" y="8" width="76" height="66.5"/>
+                                        <rect key="frame" x="340" y="8" width="76" height="55.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$224" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1az-3R-YJN">
-                                                <rect key="frame" x="8" y="40" width="60" height="24.5"/>
+                                                <rect key="frame" x="8" y="40" width="60" height="13.5"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
                                                 <color key="textColor" red="0.37452399730000002" green="0.43006563190000002" blue="0.50908255579999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -115,7 +115,7 @@
                                     <constraint firstItem="l6P-Kw-usr" firstAttribute="top" secondItem="ESh-yD-6gk" secondAttribute="top" constant="5" id="oG8-u6-BmL"/>
                                     <constraint firstItem="VgU-aL-NQk" firstAttribute="top" secondItem="ESh-yD-6gk" secondAttribute="top" constant="8" id="oMq-oy-Fi3"/>
                                     <constraint firstItem="djZ-HD-qed" firstAttribute="top" secondItem="ESh-yD-6gk" secondAttribute="top" constant="8" id="oxc-mE-vdQ"/>
-                                    <constraint firstAttribute="height" constant="82.5" id="ptg-vv-5Hx"/>
+                                    <constraint firstAttribute="height" constant="71.5" id="qL7-WP-vmd"/>
                                     <constraint firstAttribute="trailing" secondItem="djZ-HD-qed" secondAttribute="trailing" constant="8" id="t6i-CO-P5V"/>
                                 </constraints>
                             </view>
@@ -141,7 +141,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.97626000639999999" green="0.98046904800000001" blue="0.98032146689999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <point key="canvasLocation" x="-68.115942028985515" y="-35.825892857142854"/>
+            <point key="canvasLocation" x="-68.115942028985515" y="-43.861607142857139"/>
         </tableViewCell>
     </objects>
     <resources>
