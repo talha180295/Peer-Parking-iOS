@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ParkingDetailViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
+class ParkingDetailViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource{
 
+     var indexRow = 0
     var strVC : String!
     var isNavigate = false
     var isAccept = false
@@ -17,6 +18,15 @@ class ParkingDetailViewController: UIViewController,UICollectionViewDelegate,UIC
     @IBOutlet weak var btnViewOffer: UIButton!
     @IBOutlet weak var btnLast: UIButton!
     @IBOutlet weak var parkingCollection: UICollectionView!
+    @IBOutlet weak var viewChangeVehicle: UIView!
+    @IBOutlet weak var tblHeight: NSLayoutConstraint! //59
+    
+    @IBOutlet weak var mainHeight: NSLayoutConstraint! //750
+    @IBOutlet weak var viewVehicle: UIView!//100
+    @IBOutlet weak var changeHeight: NSLayoutConstraint!//100
+    
+    @IBOutlet weak var tblVehicle: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -55,6 +65,37 @@ class ParkingDetailViewController: UIViewController,UICollectionViewDelegate,UIC
 
         
         // Do any additional setup after loading the view.
+        tblVehicle.dataSource =  self
+        tblVehicle.delegate = self
+        
+        tblVehicle.register(UINib(nibName: "vehicleCell", bundle: nil), forCellReuseIdentifier: "vehicleCell")
+        // Do any additional setup after loading the view.
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //        return transactionArr.count
+        return 3;
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tblVehicle.dequeueReusableCell(withIdentifier: "vehicleCell") as! vehicleCell
+        if(indexPath.row == indexRow)
+        {
+            cell.btnCheck.setImage(UIImage.init(named: "btn_radioSelected"), for: .normal)
+        }
+        else{
+            cell.btnCheck.setImage(UIImage.init(named: "btn_radio"), for: .normal)
+        }
+        
+        cell.selectionStyle = .none
+        return  cell;
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        indexRow = indexPath.row
+        tblVehicle.reloadData()
+        
     }
     @objc func setOfferVC(notfication: NSNotification) {
        
@@ -65,6 +106,29 @@ class ParkingDetailViewController: UIViewController,UICollectionViewDelegate,UIC
         btnLast.backgroundColor = #colorLiteral(red: 0.2591760755, green: 0.6798272133, blue: 0.8513383865, alpha: 1)
         btnLast.addShadowView(color: btnLast.backgroundColor!)
     }
+    
+    @IBAction func btnChangeVehicle(_ sender: Any) {
+        
+        viewChangeVehicle.isHidden = false
+        viewVehicle.isHidden = true
+        let tbl = 97*3
+        tblHeight.constant = CGFloat(tbl)
+        mainHeight.constant = CGFloat(750 + tbl)
+        changeHeight.constant = CGFloat(100 + tbl)
+    }
+    
+    @IBAction func btnSaveVehicle(_ sender: Any) {
+        
+        viewChangeVehicle.isHidden = true
+        viewVehicle.isHidden = false
+        
+        tblHeight.constant = 59
+        mainHeight.constant = 750
+        changeHeight.constant = 100
+        
+    
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
         //        [collectionView.collectionViewLayout invalidateLayout];

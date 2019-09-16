@@ -25,16 +25,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cgp-Lf-oLZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="71.5"/>
+                        <rect key="frame" x="10" y="0.0" width="300" height="71.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oez-88-a5y">
-                                <rect key="frame" x="6" y="8.5" width="275" height="35"/>
+                                <rect key="frame" x="6" y="8.5" width="255" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="p75-L8-0JU"/>
                                 </constraints>
                                 <string key="text">Via 60 E Broadway, Bloomington,
 MN 55425, USA.</string>
-                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                 <color key="textColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -43,24 +43,25 @@ MN 55425, USA.</string>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="63" id="vf8-TU-JsD"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30 mins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bza-DU-1k0">
-                                <rect key="frame" x="77" y="46.5" width="47" height="17"/>
-                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="12"/>
+                                <rect key="frame" x="77" y="46.5" width="49.5" height="17"/>
+                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_route" translatesAutoresizingMaskIntoConstraints="NO" id="aPH-1c-LSl">
-                                <rect key="frame" x="285" y="19" width="29" height="34"/>
+                                <rect key="frame" x="265" y="19" width="29" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="29" id="VUH-wE-oqR"/>
                                     <constraint firstAttribute="height" constant="34" id="sD8-ti-GQB"/>
                                 </constraints>
                             </imageView>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="rxW-EH-a4P" firstAttribute="top" secondItem="Oez-88-a5y" secondAttribute="bottom" constant="3" id="0zQ-7d-JYt"/>
                             <constraint firstItem="bza-DU-1k0" firstAttribute="leading" secondItem="rxW-EH-a4P" secondAttribute="trailing" constant="8" id="52e-EB-OAF"/>
@@ -77,13 +78,15 @@ MN 55425, USA.</string>
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="cgp-Lf-oLZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="HIQ-f2-3Oe"/>
                     <constraint firstAttribute="bottom" secondItem="cgp-Lf-oLZ" secondAttribute="bottom" id="Kbu-W1-kUL"/>
-                    <constraint firstItem="cgp-Lf-oLZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Qjv-ru-xfW"/>
-                    <constraint firstAttribute="trailing" secondItem="cgp-Lf-oLZ" secondAttribute="trailing" id="xmI-SV-n2W"/>
+                    <constraint firstItem="cgp-Lf-oLZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Qjv-ru-xfW"/>
+                    <constraint firstAttribute="trailing" secondItem="cgp-Lf-oLZ" secondAttribute="trailing" constant="10" id="xmI-SV-n2W"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <point key="canvasLocation" x="276.81159420289856" y="167.07589285714286"/>
         </tableViewCell>

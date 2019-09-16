@@ -16,6 +16,10 @@ class RateViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func btnBack(_ sender: Any) {
+        
+        self.navigationController?.popViewController(animated: true)
+    }
     @IBAction func btnLater(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "parkedVC") as! ParkedViewController
         //

@@ -7,19 +7,62 @@
 //
 
 import UIKit
+import MBCircularProgressBar
 
 class ParkedViewController: UIViewController {
+    @IBOutlet weak var progressBar: MBCircularProgressBarView!
 
+    @IBOutlet weak var btnT: UIButton!
+    var strTime = "set"
+    @IBOutlet weak var timerView: Knob!
     override func viewDidLoad() {
         super.viewDidLoad()
 self.navigationController?.navigationBar.isHidden = true
+        
+        timerView.addTarget(self, action: #selector(ParkedViewController.handleValueChanged(_:)), for: .valueChanged)
+        
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func btnChange(_ sender: Any) {
+        strTime = "set"
+        btnT.setTitle("Set Time", for: .normal)
+        
+    }
     @IBAction func btnBack(_ sender: Any) {
         self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.popViewController(animated: true)
     }
+    @IBAction func handleValueChanged(_ sender: Any) {
+       
+//        let timeV = timerView.value * 100
+//        print(timerView.value)
+//             progressBar.value = CGFloat(timeV)
+//
+       
+       
+    }
+    @IBAction func btnStart(_ sender: UIButton) {
+        
+        if(strTime.elementsEqual("set"))
+        {
+            strTime = "start"
+            sender.setTitle("Start", for: .normal)
+        }
+        else  if(strTime.elementsEqual("start"))
+        {
+            sender.setTitle("Stop", for: .normal)
+            strTime = "stop"
+        }
+        else  if(strTime.elementsEqual("stop"))
+        {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
+            //
+            self.present(vc, animated: true, completion: nil)
+        }
+        
+    }
+    
     
     /*
     // MARK: - Navigation

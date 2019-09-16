@@ -4,7 +4,8 @@
 target 'PeerParking' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-
+  pod 'IQKeyboardManagerSwift'
+  pod 'MBCircularProgressBar'
 pod 'SideMenuController'
 pod 'GoogleMaps'
 pod 'GooglePlaces'

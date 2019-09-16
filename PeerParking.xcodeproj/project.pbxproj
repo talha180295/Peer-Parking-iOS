@@ -64,6 +64,7 @@
 		FA6CD37D23290DF100E18CF2 /* RoutesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CD37B23290DF100E18CF2 /* RoutesCell.swift */; };
 		FA6CD37E23290DF100E18CF2 /* RoutesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA6CD37C23290DF100E18CF2 /* RoutesCell.xib */; };
 		FA6CD3802329122E00E18CF2 /* AlternateRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6CD37F2329122E00E18CF2 /* AlternateRouteViewController.swift */; };
+		FA82B500232F66A6002675AC /* Knob.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82B4FF232F66A6002675AC /* Knob.swift */; };
 		FAAF86115DC5EAB5FC146A2E /* Pods_PeerParkingUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0509213210B40E0E0C84432C /* Pods_PeerParkingUITests.framework */; };
 		FAEDCF15231F988D0063EFC0 /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEDCF14231F988D0063EFC0 /* TabbarViewController.swift */; };
 		FAEDCF1A231F9EFB0063EFC0 /* FindParkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEDCF19231F9EFB0063EFC0 /* FindParkingViewController.swift */; };
@@ -159,6 +160,7 @@
 		FA6CD37B23290DF100E18CF2 /* RoutesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesCell.swift; sourceTree = "<group>"; };
 		FA6CD37C23290DF100E18CF2 /* RoutesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoutesCell.xib; sourceTree = "<group>"; };
 		FA6CD37F2329122E00E18CF2 /* AlternateRouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateRouteViewController.swift; sourceTree = "<group>"; };
+		FA82B4FF232F66A6002675AC /* Knob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Knob.swift; sourceTree = "<group>"; };
 		FAEDCF14231F988D0063EFC0 /* TabbarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
 		FAEDCF19231F9EFB0063EFC0 /* FindParkingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindParkingViewController.swift; sourceTree = "<group>"; };
 		FAF807AE23263644004DB3B1 /* transactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transactionCell.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 		FA2815BD231E666E008AF3F5 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				FA82B4FF232F66A6002675AC /* Knob.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -614,12 +617,16 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PeerParking/Pods-PeerParking-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/MBCircularProgressBar/MBCircularProgressBar.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenuController/SideMenuController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBCircularProgressBar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -728,6 +735,7 @@
 				FA0FCC5923222D7F000FF52C /* VehicleViewController.swift in Sources */,
 				FA6CD36F2328CB7D00E18CF2 /* NotificationCell.swift in Sources */,
 				FA2815C0231E7058008AF3F5 /* menuCell.swift in Sources */,
+				FA82B500232F66A6002675AC /* Knob.swift in Sources */,
 				FA526EF5232CF7570014517B /* HeaderCell.swift in Sources */,
 				FA2815AF231E3F92008AF3F5 /* MenuController.swift in Sources */,
 				FA2815C3231E806D008AF3F5 /* HomeViewController.swift in Sources */,
