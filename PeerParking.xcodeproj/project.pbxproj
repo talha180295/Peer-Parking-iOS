@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A9D762387663A23BCCC8DF20 /* Pods_PeerParkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */; };
 		E2616B4D5E0A2ED92F2CAAF3 /* Pods_PeerParking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */; };
+		FA0E9F6F2330FE7E0005A54C /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E9F6E2330FE7E0005A54C /* PlaceViewController.swift */; };
 		FA0FCC56232229F9000FF52C /* vehicleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0FCC54232229F9000FF52C /* vehicleCell.swift */; };
 		FA0FCC57232229F9000FF52C /* vehicleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0FCC55232229F9000FF52C /* vehicleCell.xib */; };
 		FA0FCC5923222D7F000FF52C /* VehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0FCC5823222D7F000FF52C /* VehicleViewController.swift */; };
@@ -99,6 +100,7 @@
 		BF58D38B340DB6271FACD986 /* Pods-PeerParkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingTests.release.xcconfig"; path = "Target Support Files/Pods-PeerParkingTests/Pods-PeerParkingTests.release.xcconfig"; sourceTree = "<group>"; };
 		C53DD1F3CFB8035A3E4024F2 /* Pods-PeerParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParking.release.xcconfig"; path = "Target Support Files/Pods-PeerParking/Pods-PeerParking.release.xcconfig"; sourceTree = "<group>"; };
 		E8DB06BFD47AAB708811B861 /* Pods-PeerParkingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingTests.debug.xcconfig"; path = "Target Support Files/Pods-PeerParkingTests/Pods-PeerParkingTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FA0E9F6E2330FE7E0005A54C /* PlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewController.swift; sourceTree = "<group>"; };
 		FA0FCC54232229F9000FF52C /* vehicleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vehicleCell.swift; sourceTree = "<group>"; };
 		FA0FCC55232229F9000FF52C /* vehicleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = vehicleCell.xib; sourceTree = "<group>"; };
 		FA0FCC5823222D7F000FF52C /* VehicleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleViewController.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 				FA10FF25232BC10E0023C31C /* NavigateViewController.swift */,
 				FA10FF27232BCD620023C31C /* ParkedViewController.swift */,
 				FA2F9F39232CB35E0025BF11 /* OfferViewController.swift */,
+				FA0E9F6E2330FE7E0005A54C /* PlaceViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -739,6 +742,7 @@
 				FA526EF5232CF7570014517B /* HeaderCell.swift in Sources */,
 				FA2815AF231E3F92008AF3F5 /* MenuController.swift in Sources */,
 				FA2815C3231E806D008AF3F5 /* HomeViewController.swift in Sources */,
+				FA0E9F6F2330FE7E0005A54C /* PlaceViewController.swift in Sources */,
 				FA6CD3792328FFE600E18CF2 /* LoacationCell.swift in Sources */,
 				FA0FCC5C232250DD000FF52C /* SettingViewController.swift in Sources */,
 				FA2815AB231E3F92008AF3F5 /* CustomSideMenuController.swift in Sources */,

@@ -13,7 +13,11 @@ class TabbarViewController: UITabBarController ,SideMenuControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       SideMenuController.preferences.drawing.menuButtonImage = UIImage(named: "icon_menu")
+      
+        
+       
+        
+ SideMenuController.preferences.drawing.menuButtonImage = UIImage(named: "icon_menu")
         sideMenuController?.delegate = self
         
         
@@ -34,11 +38,13 @@ class TabbarViewController: UITabBarController ,SideMenuControllerDelegate {
 
         
     }
-    
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("\(#function) -- \(self)")
+        
+        
+        self.selectedIndex = 1
+//        self.tabBarController?.selectedIndex = 1
     }
+   
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

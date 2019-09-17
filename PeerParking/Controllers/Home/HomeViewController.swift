@@ -11,7 +11,7 @@ import SideMenuController
 
 class HomeViewController: UIViewController ,UITableViewDataSource, UITableViewDelegate{
 
-  
+   @IBOutlet weak var placeView: UIView!
     @IBOutlet weak var tblLocation: UITableView!
     @IBOutlet weak var txtSearch: UITextField!
     
@@ -27,7 +27,8 @@ class HomeViewController: UIViewController ,UITableViewDataSource, UITableViewDe
        
         tblLocation.dataSource = self
         tblLocation.delegate = self
-        tblLocation.isHidden = true
+//        tblLocation.isHidden = true
+         placeView.isHidden = true
         tblLocation.register(UINib(nibName: "LoacationCell", bundle: nil), forCellReuseIdentifier: "locationCell")
         
      
@@ -39,6 +40,11 @@ class HomeViewController: UIViewController ,UITableViewDataSource, UITableViewDe
         return 10;
     }
     
+    @IBAction func btnPlaceBack(_ sender: Any) {
+        placeView.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tblLocation.dequeueReusableCell(withIdentifier: "locationCell") as! LoacationCell
         
@@ -48,18 +54,23 @@ class HomeViewController: UIViewController ,UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+         placeView.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "parkDetailVC") as! ParkingDetailViewController
         vc.strVC = "navigate"
         self.addChild(vc)
         view.addSubview(vc.view)
-        tblLocation.isHidden = true
+      //  tblLocation.isHidden = true
     }
     
  
     
     @IBAction func btnLocation(_ sender: Any) {
-          tblLocation.isHidden = false
+        //  tblLocation.isHidden = false
+         placeView.isHidden = false
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = true
     }
     @IBAction func btnSearch(_ sender: Any) {
     }

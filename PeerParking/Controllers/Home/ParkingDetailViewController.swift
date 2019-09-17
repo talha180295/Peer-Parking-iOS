@@ -230,6 +230,12 @@ class ParkingDetailViewController: UIViewController,UICollectionViewDelegate,UIC
          self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.navigationBar.isHidden = false
     }
+    @IBAction func btnShowMap(_ sender: Any) {
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "placeVC") as! PlaceViewController;
+        
+        self.present(vc, animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

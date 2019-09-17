@@ -24,9 +24,9 @@ enum VerticalLocation: String {
         
         let corner_Radius: CGFloat = layer.cornerRadius
         let shadowOffsetWidth: Int = 0
-        let shadowOffsetHeight: Int = 4
+        let shadowOffsetHeight: Int = 1
         let shadowColor: UIColor? = color
-        let shadowOpacity: Float = 0.7
+        let shadowOpacity: Float = 0.1
         
         layer.cornerRadius = corner_Radius
         let shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: corner_Radius)

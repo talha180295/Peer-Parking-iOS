@@ -16,8 +16,9 @@ class FindParkingViewController: UIViewController ,SideMenuControllerDelegate,UI
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnConfirm: UIButton!
     @IBOutlet weak var btnSave: UIButton!
+   
+    @IBOutlet weak var placeView: UIView!
     
- 
     
     @IBOutlet weak var tblLocation: UITableView!
     
@@ -35,8 +36,8 @@ class FindParkingViewController: UIViewController ,SideMenuControllerDelegate,UI
         
         mainPicker.isHidden = true
         mainSchedule.isHidden = true
-         tblLocation.isHidden = true
-        
+        // tblLocation.isHidden = true
+        placeView.isHidden = true
         btnSave.addShadowView(color: btnSave.backgroundColor!)
         
         btnConfirm.addShadowView(color: btnSave.backgroundColor!)
@@ -54,10 +55,12 @@ class FindParkingViewController: UIViewController ,SideMenuControllerDelegate,UI
     
     @IBAction func locationBtn(_ sender: Any) {
         
-        tblLocation.isHidden = false
-        
+       // tblLocation.isHidden = false
+        placeView.isHidden = false
         mainPicker.isHidden = true
         mainSchedule.isHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = true
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //        return transactionArr.count
@@ -76,7 +79,10 @@ class FindParkingViewController: UIViewController ,SideMenuControllerDelegate,UI
          vc.strVC = "find"
         self.addChild(vc)
         view.addSubview(vc.view)
-         tblLocation.isHidden = true
+        // tblLocation.isHidden = true
+        placeView.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
         
     }
     
@@ -84,21 +90,25 @@ class FindParkingViewController: UIViewController ,SideMenuControllerDelegate,UI
     
     
     @IBAction func CancelClick(_ sender: Any) {
-         tblLocation.isHidden = true
+        // tblLocation.isHidden = true
+        placeView.isHidden = true
+        
          mainPicker.isHidden = true
         mainSchedule.isHidden = false
         self.tabBarController?.tabBar.isHidden = true
     }
     
     @IBAction func SaveClick(_ sender: Any) {
-        tblLocation.isHidden = true
+       // tblLocation.isHidden = true
+        placeView.isHidden = true
         mainPicker.isHidden = true
         mainSchedule.isHidden = false
         self.tabBarController?.tabBar.isHidden = true
         
     }
     @IBAction func btnSchedule(_ sender: Any) {
-         tblLocation.isHidden = true
+        // tblLocation.isHidden = true
+        placeView.isHidden = true
         mainSchedule.isHidden = false
         mainPicker.isHidden = true;
         self.tabBarController?.tabBar.isHidden = true
@@ -106,7 +116,8 @@ class FindParkingViewController: UIViewController ,SideMenuControllerDelegate,UI
     }
     
     @IBAction func btnClickDate(_ sender: Any) {
-         tblLocation.isHidden = true
+//         tblLocation.isHidden = true
+        placeView.isHidden = true
         mainPicker.isHidden = false
         mainSchedule.isHidden = true
         self.tabBarController?.tabBar.isHidden = true
@@ -116,10 +127,15 @@ class FindParkingViewController: UIViewController ,SideMenuControllerDelegate,UI
     }
     
  
+    @IBAction func btnPlaceBack(_ sender: Any) {
+        placeView.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
+    }
     
     @IBAction func btnConfirmClick(_ sender: Any) {
-        tblLocation.isHidden = false
-        
+        //tblLocation.isHidden = false
+        placeView.isHidden = false
         mainPicker.isHidden = true
         mainSchedule.isHidden = true
         

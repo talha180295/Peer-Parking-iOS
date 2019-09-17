@@ -75,7 +75,7 @@ public extension UINavigationController {
         item.customView = button
         
         let spacer = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: nil, action: nil)
-        spacer.width = -10
+       // spacer.width = -10
         
         items.append(contentsOf: positionLeft ? [spacer, item] : [item, spacer])
         return items
