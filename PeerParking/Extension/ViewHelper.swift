@@ -21,7 +21,7 @@ enum VerticalLocation: String {
     
     func addShadowView(color : UIColor){
 
-        
+        print("test")
         let corner_Radius: CGFloat = layer.cornerRadius
         let shadowOffsetWidth: Int = 0
         let shadowOffsetHeight: Int = 1
