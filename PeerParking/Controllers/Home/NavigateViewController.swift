@@ -29,19 +29,26 @@ class NavigateViewController: UIViewController {
         btnParked.addShadowView(color: UIColor.lightGray)
         //routeHeight.constant = 50
         
-        if(strVC.elementsEqual("navigate"))
-        {
-            buttonView.isHidden = true
-            btnHeight.constant = 0
-            routeHeight.constant = 190
-            
-        }
-        else
-        {
-             buttonView.isHidden = false
-            btnHeight.constant = 87
-            routeHeight.constant = 250
-        }
+        
+        isMax = false
+        routeHeight.constant = 120
+        btnHeight.constant = 0
+        btnnavigateHeight.constant = 0
+        buttonView.isHidden = true
+        
+//        if(strVC.elementsEqual("navigate"))
+//        {
+//            buttonView.isHidden = true
+//            btnHeight.constant = 0
+//            routeHeight.constant = 190
+//            
+//        }
+//        else
+//        {
+//             buttonView.isHidden = false
+//            btnHeight.constant = 87
+//            routeHeight.constant = 250
+//        }
 //        viewRoute.isHidden = true
         // Do any additional setup after loading the view.
     }
@@ -58,25 +65,15 @@ class NavigateViewController: UIViewController {
 //        self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func btnCancel(_ sender: Any) {
-        self.tabBarController?.tabBar.isHidden = false
-        self.navigationController?.navigationBar.isHidden = false
-        
-        self.navigationController?.popViewController(animated: true)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
+        //
+        self.present(vc, animated: true, completion: nil)
     }
     @IBAction func btnBack(_ sender: Any) {
        
-        self.tabBarController?.tabBar.isHidden = false
-        self.navigationController?.navigationBar.isHidden = false
-        if(strVC.elementsEqual("navigate"))
-        { self.tabBarController?.tabBar.isHidden = false
-        self.navigationController?.navigationBar.isHidden = false
-        }
-        else
-        {
-//            self.tabBarController?.tabBar.isHidden = true
-//            self.navigationController?.navigationBar.isHidden = true
-        }
-        self.navigationController?.popViewController(animated: true)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
+        //
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func btnAlternate(_ sender: Any) {

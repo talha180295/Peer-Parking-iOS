@@ -62,6 +62,7 @@ class ListParkingViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let  headerCell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! HeaderCell
         
+        headerCell.backgroundColor = #colorLiteral(red: 0.9764705882, green: 0.9803921569, blue: 0.9803921569, alpha: 1)
         
         
         

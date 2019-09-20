@@ -17,13 +17,13 @@ class ParkingDetailViewController: UIViewController,UICollectionViewDelegate,UIC
     var isOffer = false
     @IBOutlet weak var btnViewOffer: UIButton!
     @IBOutlet weak var btnLast: UIButton!
+     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var parkingCollection: UICollectionView!
     @IBOutlet weak var viewChangeVehicle: UIView!
-    @IBOutlet weak var tblHeight: NSLayoutConstraint! //59
-    
-    @IBOutlet weak var mainHeight: NSLayoutConstraint! //750
+   
+  
     @IBOutlet weak var viewVehicle: UIView!//100
-    @IBOutlet weak var changeHeight: NSLayoutConstraint!//100
+  
     
     @IBOutlet weak var tblVehicle: UITableView!
     
@@ -41,22 +41,24 @@ class ParkingDetailViewController: UIViewController,UICollectionViewDelegate,UIC
         
         if(strVC.elementsEqual("find"))
         {
-            btnLast.setTitle("Cancel", for: .normal)
-            btnLast.backgroundColor = #colorLiteral(red: 0.943634212, green: 0.191254735, blue: 0.2677332461, alpha: 1)
-            btnLast.addShadowView(color: btnLast.backgroundColor!)
-            
+            btnLast.isUserInteractionEnabled = false
+            btnLast.setTitle("Go", for: .normal)
+//            btnLast.backgroundColor = #colorLiteral(red: 0.943634212, green: 0.191254735, blue: 0.2677332461, alpha: 1)
+//            btnLast.addShadowView(color: btnLast.backgroundColor!)
+//
         }
-        else  if(strVC.elementsEqual("navigate"))
+        if(strVC.elementsEqual("navigate"))
         {
             isNavigate = true
-            btnLast.setTitle("Navigate", for: .normal)
-            btnLast.backgroundColor = #colorLiteral(red: 0.2591760755, green: 0.6798272133, blue: 0.8513383865, alpha: 1)
-            btnLast.addShadowView(color: btnLast.backgroundColor!)
-            
         }
+//            btnLast.setTitle("Navigate", for: .normal)
+//            btnLast.backgroundColor = #colorLiteral(red: 0.2591760755, green: 0.6798272133, blue: 0.8513383865, alpha: 1)
+//            btnLast.addShadowView(color: btnLast.backgroundColor!)
+//
+//        }
         btnViewOffer.addShadowView(color: UIColor.lightGray)
         btnLast.addShadowView(color: btnLast.backgroundColor!)
-        
+         btnCancel.addShadowView(color: UIColor.lightGray)
         
         NotificationCenter.default.addObserver(self, selector: #selector(ParkingDetailViewController.setOfferVC(notfication:)), name: Notification.Name("offerNotification"), object: nil)
         
@@ -102,6 +104,8 @@ class ParkingDetailViewController: UIViewController,UICollectionViewDelegate,UIC
         
         
         isAccept = true
+        btnLast.isUserInteractionEnabled = true
+
         btnLast.setTitle("Go", for: .normal)
         btnLast.backgroundColor = #colorLiteral(red: 0.2591760755, green: 0.6798272133, blue: 0.8513383865, alpha: 1)
         btnLast.addShadowView(color: btnLast.backgroundColor!)
@@ -111,24 +115,38 @@ class ParkingDetailViewController: UIViewController,UICollectionViewDelegate,UIC
         
         viewChangeVehicle.isHidden = false
         viewVehicle.isHidden = true
-        let tbl = 97*3
-        tblHeight.constant = CGFloat(tbl)
-        mainHeight.constant = CGFloat(750 + tbl)
-        changeHeight.constant = CGFloat(100 + tbl)
+       
     }
     
     @IBAction func btnSaveVehicle(_ sender: Any) {
         
         viewChangeVehicle.isHidden = true
         viewVehicle.isHidden = false
-        
-        tblHeight.constant = 59
-        mainHeight.constant = 750
-        changeHeight.constant = 100
+     
         
     
     }
     
+    @IBAction func btnCancel(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Cancel", message: "Are you sure, you want to cancel this parking?", preferredStyle: UIAlertController.Style.alert)
+        
+        // add the actions (buttons)
+        alert.addAction(UIAlertAction(title: "YES", style: UIAlertAction.Style.default, handler:{ action in
+            self.navigationController?.popViewController(animated: true)
+            self.tabBarController?.tabBar.isHidden = false
+            self.navigationController?.navigationBar.isHidden = false
+        }))
+        alert.addAction(UIAlertAction(title: "NO", style: UIAlertAction.Style.cancel, handler: nil))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+        
+        
+        
+        
+        //alert and close
+    }
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         
         //        [collectionView.collectionViewLayout invalidateLayout];
@@ -155,7 +173,9 @@ class ParkingDetailViewController: UIViewController,UICollectionViewDelegate,UIC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "placeVC") as! PlaceViewController;
         
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -203,12 +223,13 @@ class ParkingDetailViewController: UIViewController,UICollectionViewDelegate,UIC
             
             //self.tabBarController?.tabBar.isHidden = false
            // self.navigationController?.navigationBar.isHidden = false
-             self.view.removeFromSuperview()
+            // self.view.removeFromSuperview()
             
         }
         else
         {
-            self.view.removeFromSuperview()
+            self.navigationController?.popViewController(animated: true)
+           // self.view.removeFromSuperview()
             self.tabBarController?.tabBar.isHidden = false
             self.navigationController?.navigationBar.isHidden = false
         }
@@ -222,11 +243,12 @@ class ParkingDetailViewController: UIViewController,UICollectionViewDelegate,UIC
             
             //self.tabBarController?.tabBar.isHidden = false
             // self.navigationController?.navigationBar.isHidden = false
-            self.view.removeFromSuperview()
+            //self.view.removeFromSuperview()
         }
     }
     @IBAction func btnClose(_ sender: Any) {
-        self.view.removeFromSuperview()
+       // self.view.removeFromSuperview()
+          self.navigationController?.popViewController(animated: true)
          self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.navigationBar.isHidden = false
     }
@@ -234,7 +256,7 @@ class ParkingDetailViewController: UIViewController,UICollectionViewDelegate,UIC
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "placeVC") as! PlaceViewController;
         
-        self.present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     /*
     // MARK: - Navigation

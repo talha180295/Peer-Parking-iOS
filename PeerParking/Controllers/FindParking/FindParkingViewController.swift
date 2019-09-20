@@ -26,7 +26,7 @@ class FindParkingViewController: UIViewController ,SideMenuControllerDelegate,UI
         super.viewDidLoad()
      
       
-        
+//        self.tabBarController!.navigationItem.title = "Find Parking"
         self.tabBarController?.tabBar.items?[0].image = UIImage(named: "tab_findParking")!.withRenderingMode(.alwaysOriginal);
         self.tabBarController?.tabBar.items?[1].image = UIImage(named: "tab_N")!.withRenderingMode(.alwaysOriginal);
         self.tabBarController?.tabBar.items?[2].image = UIImage(named: "tab_sellParking")!.withRenderingMode(.alwaysOriginal);
@@ -52,6 +52,12 @@ class FindParkingViewController: UIViewController ,SideMenuControllerDelegate,UI
         tblLocation.register(UINib(nibName: "LoacationCell", bundle: nil), forCellReuseIdentifier: "locationCell")
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController!.navigationItem.title = "Find Parking"
+        
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
+    }
     
     @IBAction func locationBtn(_ sender: Any) {
         
@@ -75,14 +81,25 @@ class FindParkingViewController: UIViewController ,SideMenuControllerDelegate,UI
         return  cell;
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "parkDetailVC") as! ParkingDetailViewController
-         vc.strVC = "find"
-        self.addChild(vc)
-        view.addSubview(vc.view)
-        // tblLocation.isHidden = true
+       
         placeView.isHidden = true
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.navigationBar.isHidden = false
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "parkDetailVC") as! ParkingDetailViewController
+        vc.strVC = "find"
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+//        self.addChild(vc)
+        
+//        view.addSubview(vc.view)
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: "parkDetailVC") as! ParkingDetailViewController
+//         vc.strVC = "find"
+//        self.addChild(vc)
+//        view.addSubview(vc.view)
+//      //   placeView.isHidden = true
+//        placeView.isHidden = true
+//        self.tabBarController?.tabBar.isHidden = true
+//        self.navigationController?.navigationBar.isHidden = true
         
     }
     
@@ -138,20 +155,15 @@ class FindParkingViewController: UIViewController ,SideMenuControllerDelegate,UI
         placeView.isHidden = false
         mainPicker.isHidden = true
         mainSchedule.isHidden = true
-        
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "parkDetailVC") as! ParkingDetailViewController
         vc.strVC = "find"
-        self.addChild(vc)
-        view.addSubview(vc.view)
+         self.navigationController?.pushViewController(vc, animated: true)
        
         
     }
-    override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            print("\(#function) -- \(self)")
-        }
-        
         override func viewWillDisappear(_ animated: Bool) {
             super.viewWillDisappear(animated)
             print("\(#function) -- \(self)")

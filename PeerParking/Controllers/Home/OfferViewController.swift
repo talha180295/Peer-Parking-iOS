@@ -22,6 +22,10 @@ class OfferViewController: UIViewController ,UITableViewDataSource, UITableViewD
         
         // Do any additional setup after loading the view.
         
+        
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = true
+        
         tblOffer.dataSource = self
         tblOffer.delegate = self
         
@@ -85,6 +89,28 @@ class OfferViewController: UIViewController ,UITableViewDataSource, UITableViewD
         self.view.removeFromSuperview()
     }
     @IBAction func btnNewOffer(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Offer", message: "Send your offer", preferredStyle: .alert)
+        
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextField(configurationHandler: { (textField) -> Void in
+            textField.placeholder = "Enter offer"
+        })
+        
+        //3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "Send", style: .default, handler: { (action) -> Void in
+            //let textField = alert?.textFields![0] as! UITextField
+          //  print("Text field: \(textField.text)")
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {(action) -> Void in
+            
+            
+        }))
+        
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
+        
     }
     @IBAction func btnCancel(_ sender: Any) {
          viewOffer.isHidden = true

@@ -19,7 +19,6 @@ class HomeViewController: UIViewController ,UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
          tabBarItem.image = UIImage(named: "tab_N")?.withRenderingMode(.alwaysOriginal);
         
       //  loadView()
@@ -34,7 +33,9 @@ class HomeViewController: UIViewController ,UITableViewDataSource, UITableViewDe
      
         // Do any additional setup after loading the view.
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController!.navigationItem.title = "Navigate"
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //        return transactionArr.count
         return 10;
@@ -59,8 +60,7 @@ class HomeViewController: UIViewController ,UITableViewDataSource, UITableViewDe
         self.navigationController?.navigationBar.isHidden = false
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "parkDetailVC") as! ParkingDetailViewController
         vc.strVC = "navigate"
-        self.addChild(vc)
-        view.addSubview(vc.view)
+        self.navigationController?.pushViewController(vc, animated: true)
       //  tblLocation.isHidden = true
     }
     

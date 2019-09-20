@@ -13,7 +13,7 @@ class SellParkingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+       
         
         tabBarItem.image = UIImage(named: "tab_sellParking")?.withRenderingMode(.alwaysOriginal);
         
@@ -22,8 +22,16 @@ class SellParkingViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+         self.tabBarController!.navigationItem.title = "Sell Parking"
+    }
+    @IBAction func btnSave(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "parkedVC") as! ParkedViewController
+        //
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
     
-
     /*
     // MARK: - Navigation
 

@@ -17,23 +17,45 @@ class PlaceViewController: UIViewController {
         super.viewDidLoad()
 
         
-        let camera = GMSCameraPosition.camera(withLatitude: -33.8683,
+        let camera = GMSCameraPosition.camera(withLatitude: -33.8713,
                                               longitude: 151.2086,
                                               zoom: 16.0)
         let mapView = GMSMapView.map(withFrame: self.view.bounds, camera: camera)
         
-        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: -33.8683, longitude: 151.2086))
+        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: -33.8685, longitude: 151.2086))
         marker.icon = UIImage.init(named: "pin_radius")
         
         marker.map = mapView
+        
+        
+        let marker1 = GMSMarker(position: CLLocationCoordinate2D(latitude: -33.8757, longitude: 151.2086))
+        marker1.icon = UIImage.init(named: "pin_radius")
+        
+        marker1.map = mapView
+        
+        
+        
+        let marker2 = GMSMarker(position: CLLocationCoordinate2D(latitude: -33.8809, longitude: 151.2086))
+        marker2.icon = UIImage.init(named: "pin_radius")
+        
+        marker2.map = mapView
+        
+        
+        
+        let marker3 = GMSMarker(position: CLLocationCoordinate2D(latitude: -33.8713, longitude: 151.2086))
+        marker3.icon = UIImage.init(named: "pin_radius")
+        
+        marker3.map = mapView
+        
+        
         self.viewM.addSubview(mapView)
       
         // Do any additional setup after loading the view.
     }
     
     @IBAction func btnBack(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
-
+       // self.dismiss(animated: false, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
   
