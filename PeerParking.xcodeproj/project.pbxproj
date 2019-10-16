@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18010AAB23549C7F008412C0 /* GoogleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18010AAA23549C7F008412C0 /* GoogleMapView.swift */; };
+		18010AAD2354C463008412C0 /* FindParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18010AAC2354C463008412C0 /* FindParkingVC.swift */; };
+		1889AE07235738330081608E /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889AE06235738330081608E /* BottomSheetVC.swift */; };
 		A9D762387663A23BCCC8DF20 /* Pods_PeerParkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */; };
 		E2616B4D5E0A2ED92F2CAAF3 /* Pods_PeerParking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */; };
 		FA0E9F6F2330FE7E0005A54C /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E9F6E2330FE7E0005A54C /* PlaceViewController.swift */; };
@@ -28,6 +31,8 @@
 		FA122146232A3068002720BE /* ParkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA122144232A3068002720BE /* ParkingCell.swift */; };
 		FA122147232A3068002720BE /* ParkingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA122145232A3068002720BE /* ParkingCell.xib */; };
 		FA122149232A4366002720BE /* ParkingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA122148232A4366002720BE /* ParkingDetailViewController.swift */; };
+		FA1C6124234F0A8400EF0F3D /* homeParkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1C6122234F0A8400EF0F3D /* homeParkingCell.swift */; };
+		FA1C6125234F0A8400EF0F3D /* homeParkingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA1C6123234F0A8400EF0F3D /* homeParkingCell.xib */; };
 		FA25B601232686B6007C3697 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA25B600232686B6007C3697 /* SplashViewController.swift */; };
 		FA2815AB231E3F92008AF3F5 /* CustomSideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2815A6231E3F92008AF3F5 /* CustomSideMenuController.swift */; };
 		FA2815AC231E3F92008AF3F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2815A7231E3F92008AF3F5 /* ViewController.swift */; };
@@ -92,6 +97,9 @@
 
 /* Begin PBXFileReference section */
 		0509213210B40E0E0C84432C /* Pods_PeerParkingUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParkingUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		18010AAA23549C7F008412C0 /* GoogleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapView.swift; sourceTree = "<group>"; };
+		18010AAC2354C463008412C0 /* FindParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindParkingVC.swift; sourceTree = "<group>"; };
+		1889AE06235738330081608E /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
 		33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73A78F4BB9C4B538C3541C56 /* Pods-PeerParkingUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingUITests.debug.xcconfig"; path = "Target Support Files/Pods-PeerParkingUITests/Pods-PeerParkingUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8B0459CE46FCE0435C2CC795 /* Pods-PeerParking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParking.debug.xcconfig"; path = "Target Support Files/Pods-PeerParking/Pods-PeerParking.debug.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +133,8 @@
 		FA122144232A3068002720BE /* ParkingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingCell.swift; sourceTree = "<group>"; };
 		FA122145232A3068002720BE /* ParkingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParkingCell.xib; sourceTree = "<group>"; };
 		FA122148232A4366002720BE /* ParkingDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingDetailViewController.swift; sourceTree = "<group>"; };
+		FA1C6122234F0A8400EF0F3D /* homeParkingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeParkingCell.swift; sourceTree = "<group>"; };
+		FA1C6123234F0A8400EF0F3D /* homeParkingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = homeParkingCell.xib; sourceTree = "<group>"; };
 		FA25B600232686B6007C3697 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		FA2815A6231E3F92008AF3F5 /* CustomSideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSideMenuController.swift; sourceTree = "<group>"; };
 		FA2815A7231E3F92008AF3F5 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +207,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1889AE052357381C0081608E /* BottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				1889AE06235738330081608E /* BottomSheetVC.swift */,
+			);
+			path = BottomSheet;
+			sourceTree = "<group>";
+		};
 		2EEB6BD6F5BBF17D05AEE169 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -283,6 +301,7 @@
 				FA1150CB2316838500D0B1FE /* Assets.xcassets */,
 				FA1150CD2316838500D0B1FE /* LaunchScreen.storyboard */,
 				FA1150D02316838500D0B1FE /* Info.plist */,
+				18010AAA23549C7F008412C0 /* GoogleMapView.swift */,
 			);
 			path = PeerParking;
 			sourceTree = "<group>";
@@ -362,6 +381,8 @@
 				FA2F9F36232CA7E30025BF11 /* offerCell.xib */,
 				FA526EF3232CF7570014517B /* HeaderCell.swift */,
 				FA526EF4232CF7570014517B /* HeaderCell.xib */,
+				FA1C6122234F0A8400EF0F3D /* homeParkingCell.swift */,
+				FA1C6123234F0A8400EF0F3D /* homeParkingCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -369,6 +390,7 @@
 		FA2815BC231E6669008AF3F5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1889AE052357381C0081608E /* BottomSheet */,
 				FA6CD3742328F75D00E18CF2 /* Notification */,
 				FA6CD3712328F18500E18CF2 /* ParkingSchedule */,
 				FA25B5FF232686A1007C3697 /* Basic */,
@@ -437,6 +459,7 @@
 			children = (
 				FAEDCF19231F9EFB0063EFC0 /* FindParkingViewController.swift */,
 				FA526EF9232D28C80014517B /* RateViewController.swift */,
+				18010AAC2354C463008412C0 /* FindParkingVC.swift */,
 			);
 			path = FindParking;
 			sourceTree = "<group>";
@@ -581,6 +604,7 @@
 				FA6CD3702328CB7D00E18CF2 /* NotificationCell.xib in Resources */,
 				FA2F9F38232CA7E30025BF11 /* offerCell.xib in Resources */,
 				FA1150CC2316838500D0B1FE /* Assets.xcassets in Resources */,
+				FA1C6125234F0A8400EF0F3D /* homeParkingCell.xib in Resources */,
 				FA2815B9231E6602008AF3F5 /* Poppins-Regular.ttf in Resources */,
 				FA2815BA231E6602008AF3F5 /* Poppins-Light.ttf in Resources */,
 				FA1150CA2316838400D0B1FE /* Main.storyboard in Resources */,
@@ -617,20 +641,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PeerParking/Pods-PeerParking-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/MBCircularProgressBar/MBCircularProgressBar.framework",
-				"${BUILT_PRODUCTS_DIR}/SideMenuController/SideMenuController.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-PeerParking/Pods-PeerParking-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBCircularProgressBar.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuController.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-PeerParking/Pods-PeerParking-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -643,18 +658,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-PeerParking/Pods-PeerParking-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-PeerParking/Pods-PeerParking-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-PeerParking/Pods-PeerParking-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -747,16 +755,19 @@
 				FA0FCC5C232250DD000FF52C /* SettingViewController.swift in Sources */,
 				FA2815AB231E3F92008AF3F5 /* CustomSideMenuController.swift in Sources */,
 				FA2F9F37232CA7E30025BF11 /* offerCell.swift in Sources */,
+				18010AAD2354C463008412C0 /* FindParkingVC.swift in Sources */,
 				FA2815AE231E3F92008AF3F5 /* RootViewController.swift in Sources */,
 				FA6CD3732328F1C900E18CF2 /* ListParkingViewController.swift in Sources */,
 				FA10FF28232BCD620023C31C /* ParkedViewController.swift in Sources */,
 				FA122146232A3068002720BE /* ParkingCell.swift in Sources */,
 				FA6CD3762328F76B00E18CF2 /* NotificationViewController.swift in Sources */,
+				18010AAB23549C7F008412C0 /* GoogleMapView.swift in Sources */,
 				FA57EBA7232142AC000646B7 /* ProfileViewController.swift in Sources */,
 				FA6CD37D23290DF100E18CF2 /* RoutesCell.swift in Sources */,
 				FA0FCC56232229F9000FF52C /* vehicleCell.swift in Sources */,
 				FA122149232A4366002720BE /* ParkingDetailViewController.swift in Sources */,
 				FA0FCC6323229FB9000FF52C /* CardView.swift in Sources */,
+				FA1C6124234F0A8400EF0F3D /* homeParkingCell.swift in Sources */,
 				FAF807B023263644004DB3B1 /* transactionCell.swift in Sources */,
 				FA57EBA42320EB2E000646B7 /* ViewHelper.swift in Sources */,
 				FA10FF26232BC10E0023C31C /* NavigateViewController.swift in Sources */,
@@ -772,6 +783,7 @@
 				FA526EF2232CF4270014517B /* AddVehicleViewController.swift in Sources */,
 				FA526EFA232D28C80014517B /* RateViewController.swift in Sources */,
 				FAEDCF15231F988D0063EFC0 /* TabbarViewController.swift in Sources */,
+				1889AE07235738330081608E /* BottomSheetVC.swift in Sources */,
 				FA25B601232686B6007C3697 /* SplashViewController.swift in Sources */,
 				FA2F9F3A232CB35E0025BF11 /* OfferViewController.swift in Sources */,
 			);
@@ -950,7 +962,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T286PM5P72;
+				DEVELOPMENT_TEAM = ZVKP25V7G3;
 				INFOPLIST_FILE = PeerParking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -969,7 +981,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T286PM5P72;
+				DEVELOPMENT_TEAM = ZVKP25V7G3;
 				INFOPLIST_FILE = PeerParking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

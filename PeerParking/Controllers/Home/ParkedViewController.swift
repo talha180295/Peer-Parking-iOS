@@ -58,7 +58,7 @@ class ParkedViewController: UIViewController {
         {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
             //
-            self.present(vc, animated: true, completion: nil)
+           self.navigationController?.pushViewController(vc, animated: true)
         }
         
     }

@@ -19,12 +19,14 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         
        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             
             
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
             //
-            self.present(vc, animated: true, completion: nil)
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+          //  self.present(vc, animated: true, completion: nil)
 //            self.img.image =  UIImage.init(named: "mainLogo")
 //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
 //                if ((UserDefaults.standard.object(forKey: "login")) == nil) {

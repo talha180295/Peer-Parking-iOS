@@ -67,13 +67,13 @@ class NavigateViewController: UIViewController {
     @IBAction func btnCancel(_ sender: Any) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
         //
-        self.present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func btnBack(_ sender: Any) {
        
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
         //
-        self.present(vc, animated: true, completion: nil)
+         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func btnAlternate(_ sender: Any) {

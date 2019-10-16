@@ -6,9 +6,13 @@ target 'PeerParking' do
   use_frameworks!
   pod 'IQKeyboardManagerSwift'
   pod 'MBCircularProgressBar'
-pod 'SideMenuController'
-pod 'GoogleMaps'
-pod 'GooglePlaces'
+  pod 'SideMenuController'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+
+  pod 'GooglePlacesSearchController'
+  pod 'Cosmos'
+  pod 'FittedSheets'
   # Pods for PeerParking
 
   target 'PeerParkingTests' do
