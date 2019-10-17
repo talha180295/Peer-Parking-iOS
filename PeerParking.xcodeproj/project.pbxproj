@@ -11,6 +11,8 @@
 		18010AAD2354C463008412C0 /* FindParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18010AAC2354C463008412C0 /* FindParkingVC.swift */; };
 		185FCF712358C10E0025DB5E /* FilterBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185FCF702358C10E0025DB5E /* FilterBottomSheetVC.swift */; };
 		1889AE07235738330081608E /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889AE06235738330081608E /* BottomSheetVC.swift */; };
+		18E099D02358F27E00B43A4B /* DGRunkeeperSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E099CE2358F27E00B43A4B /* DGRunkeeperSwitch.swift */; };
+		18E099D22358FB6500B43A4B /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E099D12358FB6500B43A4B /* NavigationVC.swift */; };
 		A9D762387663A23BCCC8DF20 /* Pods_PeerParkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */; };
 		E2616B4D5E0A2ED92F2CAAF3 /* Pods_PeerParking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */; };
 		FA0E9F6F2330FE7E0005A54C /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E9F6E2330FE7E0005A54C /* PlaceViewController.swift */; };
@@ -102,6 +104,9 @@
 		18010AAC2354C463008412C0 /* FindParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindParkingVC.swift; sourceTree = "<group>"; };
 		185FCF702358C10E0025DB5E /* FilterBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBottomSheetVC.swift; sourceTree = "<group>"; };
 		1889AE06235738330081608E /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
+		18E099CC2358F27E00B43A4B /* DGRunkeeperSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGRunkeeperSwitch.h; sourceTree = "<group>"; };
+		18E099CE2358F27E00B43A4B /* DGRunkeeperSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGRunkeeperSwitch.swift; sourceTree = "<group>"; };
+		18E099D12358FB6500B43A4B /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
 		33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73A78F4BB9C4B538C3541C56 /* Pods-PeerParkingUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingUITests.debug.xcconfig"; path = "Target Support Files/Pods-PeerParkingUITests/Pods-PeerParkingUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8B0459CE46FCE0435C2CC795 /* Pods-PeerParking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParking.debug.xcconfig"; path = "Target Support Files/Pods-PeerParking/Pods-PeerParking.debug.xcconfig"; sourceTree = "<group>"; };
@@ -216,6 +221,15 @@
 				185FCF702358C10E0025DB5E /* FilterBottomSheetVC.swift */,
 			);
 			path = BottomSheet;
+			sourceTree = "<group>";
+		};
+		18E099CB2358F27E00B43A4B /* DGRunkeeperSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				18E099CC2358F27E00B43A4B /* DGRunkeeperSwitch.h */,
+				18E099CE2358F27E00B43A4B /* DGRunkeeperSwitch.swift */,
+			);
+			path = DGRunkeeperSwitch;
 			sourceTree = "<group>";
 		};
 		2EEB6BD6F5BBF17D05AEE169 /* Pods */ = {
@@ -404,6 +418,7 @@
 				FAEDCF18231F9EDE0063EFC0 /* SellParking */,
 				FAEDCF17231F9EDA0063EFC0 /* Home */,
 				FAEDCF16231F9ED20063EFC0 /* FindParking */,
+				18E099D12358FB6500B43A4B /* NavigationVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -419,6 +434,7 @@
 		FA57EBA22320EB1E000646B7 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				18E099CB2358F27E00B43A4B /* DGRunkeeperSwitch */,
 				FA57EBA32320EB2E000646B7 /* ViewHelper.swift */,
 				FA0FCC6223229FB9000FF52C /* CardView.swift */,
 			);
@@ -783,8 +799,10 @@
 				FA0FCC612322510F000FF52C /* TransactionViewController.swift in Sources */,
 				FA6CD3802329122E00E18CF2 /* AlternateRouteViewController.swift in Sources */,
 				FAEDCF1A231F9EFB0063EFC0 /* FindParkingViewController.swift in Sources */,
+				18E099D02358F27E00B43A4B /* DGRunkeeperSwitch.swift in Sources */,
 				FA6CD36B2328C67900E18CF2 /* ScheduledCell.swift in Sources */,
 				FA526EF2232CF4270014517B /* AddVehicleViewController.swift in Sources */,
+				18E099D22358FB6500B43A4B /* NavigationVC.swift in Sources */,
 				FA526EFA232D28C80014517B /* RateViewController.swift in Sources */,
 				FAEDCF15231F988D0063EFC0 /* TabbarViewController.swift in Sources */,
 				1889AE07235738330081608E /* BottomSheetVC.swift in Sources */,

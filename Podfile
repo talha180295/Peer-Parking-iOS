@@ -4,6 +4,8 @@
 target 'PeerParking' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
+  
+  # Pods for PeerParking
   pod 'IQKeyboardManagerSwift'
   pod 'MBCircularProgressBar'
   pod 'SideMenuController'
@@ -13,7 +15,8 @@ target 'PeerParking' do
   pod 'GooglePlacesSearchController'
   pod 'Cosmos'
   pod 'FittedSheets'
-  # Pods for PeerParking
+#  pod 'DGRunkeeperSwitch' , '~> 1.1.4'
+
 
   target 'PeerParkingTests' do
     inherit! :search_paths

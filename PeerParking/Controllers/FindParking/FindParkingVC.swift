@@ -133,7 +133,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
        
        
-        let sheetController = SheetViewController(controller: controller, sizes: [.fixed(500)])
+        let sheetController = SheetViewController(controller: controller, sizes: [.fixed(500),.fullScreen])
 //        // Turn off Handle
         sheetController.handleColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         // Turn off rounded corners
