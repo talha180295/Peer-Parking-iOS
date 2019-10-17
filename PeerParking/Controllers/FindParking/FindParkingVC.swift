@@ -61,7 +61,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         print("::=willapear")
         loadMapView()
-//        self.tabBarController!.navigationItem.title = "Find Parking2"
+        self.tabBarController!.navigationItem.title = "Find Parking"
 //
 //        self.tabBarController?.tabBar.isHidden = false
 //        self.navigationController?.navigationBar.isHidden = false
@@ -88,11 +88,16 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         print("::=hello")
         self.navigationController?.present(placesSearchController, animated: true, completion: nil)
     }
-    @IBAction func btn(_ sender: Any) {
+    @IBAction func calender_btn(_ sender: Any) {
       
         
     }
     
+    @IBAction func filter_btn(_ sender: Any) {
+        
+        
+        bottomSheet(storyBoard: "Main",identifier: "FilterBottomSheetVC")
+    }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -111,7 +116,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.calculateWidth()
         print("width=\(width-100)")
-        return CGSize(width: width-100, height: 80)
+        return CGSize(width: width-100, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -124,16 +129,13 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     func bottomSheet(storyBoard:String,identifier:String){
         
-        let controller = UIStoryboard(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: identifier) as! BottomSheetVC
+        let controller = UIStoryboard(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: identifier)
         
-        if let h = controller.mainView?.frame.height {
-             print("controller.mainView.frame.height=\(h)")
-            
-        }
        
-        let sheetController = SheetViewController(controller: controller, sizes: [.fixed(500),.fullScreen])
-        // Turn off Handle
-        sheetController.handleColor = UIColor.clear
+       
+        let sheetController = SheetViewController(controller: controller, sizes: [.fixed(500)])
+//        // Turn off Handle
+        sheetController.handleColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         // Turn off rounded corners
         sheetController.topCornersRadius = 0
         
