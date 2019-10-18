@@ -96,7 +96,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     @IBAction func filter_btn(_ sender: Any) {
         
         
-        bottomSheet(storyBoard: "Main",identifier: "FilterBottomSheetVC")
+        bottomSheet(storyBoard: "Main",identifier: "FilterBottomSheetVC",sizes: [.fixed(500)])
     }
     
     
@@ -124,16 +124,16 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         //let controller = BottomSheetVC()
 //        let controller = SheetViewController(controller: UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC"), sizes: [.fixed(450), .fixed(300), .fixed(600), .fullScreen])
         
-        bottomSheet(storyBoard: "Main",identifier: "BottomSheetVC")
+        bottomSheet(storyBoard: "Main",identifier: "BottomSheetVC", sizes: [.fixed(500),.fullScreen])
     }
     
-    func bottomSheet(storyBoard:String,identifier:String){
+    func bottomSheet(storyBoard:String,identifier:String,sizes:[SheetSize]){
         
         let controller = UIStoryboard(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: identifier)
         
        
        
-        let sheetController = SheetViewController(controller: controller, sizes: [.fixed(500),.fullScreen])
+        let sheetController = SheetViewController(controller: controller, sizes: sizes)
 //        // Turn off Handle
         sheetController.handleColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         // Turn off rounded corners
