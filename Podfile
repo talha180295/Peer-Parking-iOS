@@ -15,6 +15,7 @@ target 'PeerParking' do
   pod 'GooglePlacesSearchController'
   pod 'Cosmos'
   pod 'FittedSheets'
+  pod 'R.swift'
 #  pod 'DGRunkeeperSwitch' , '~> 1.1.4'
 
 

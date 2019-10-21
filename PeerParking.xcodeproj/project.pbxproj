@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		18010AAB23549C7F008412C0 /* GoogleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18010AAA23549C7F008412C0 /* GoogleMapView.swift */; };
 		18010AAD2354C463008412C0 /* FindParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18010AAC2354C463008412C0 /* FindParkingVC.swift */; };
+		18451971235E08C700F3AF5A /* OfferBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18451970235E08C700F3AF5A /* OfferBottomSheetVC.swift */; };
 		185FCF712358C10E0025DB5E /* FilterBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185FCF702358C10E0025DB5E /* FilterBottomSheetVC.swift */; };
 		1889AE07235738330081608E /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889AE06235738330081608E /* BottomSheetVC.swift */; };
 		18E099D02358F27E00B43A4B /* DGRunkeeperSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E099CE2358F27E00B43A4B /* DGRunkeeperSwitch.swift */; };
@@ -102,6 +103,7 @@
 		0509213210B40E0E0C84432C /* Pods_PeerParkingUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParkingUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18010AAA23549C7F008412C0 /* GoogleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapView.swift; sourceTree = "<group>"; };
 		18010AAC2354C463008412C0 /* FindParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindParkingVC.swift; sourceTree = "<group>"; };
+		18451970235E08C700F3AF5A /* OfferBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferBottomSheetVC.swift; sourceTree = "<group>"; };
 		185FCF702358C10E0025DB5E /* FilterBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBottomSheetVC.swift; sourceTree = "<group>"; };
 		1889AE06235738330081608E /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
 		18E099CC2358F27E00B43A4B /* DGRunkeeperSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGRunkeeperSwitch.h; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			children = (
 				1889AE06235738330081608E /* BottomSheetVC.swift */,
 				185FCF702358C10E0025DB5E /* FilterBottomSheetVC.swift */,
+				18451970235E08C700F3AF5A /* OfferBottomSheetVC.swift */,
 			);
 			path = BottomSheet;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 			buildConfigurationList = FA1150E92316838500D0B1FE /* Build configuration list for PBXNativeTarget "PeerParking" */;
 			buildPhases = (
 				F2AE16E63A3C91CDCC38B9CD /* [CP] Check Pods Manifest.lock */,
+				1845196D235DDBF400F3AF5A /* ShellScript */,
 				FA1150BD2316838400D0B1FE /* Sources */,
 				FA1150BE2316838400D0B1FE /* Frameworks */,
 				FA1150BF2316838400D0B1FE /* Resources */,
@@ -654,6 +658,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1845196D235DDBF400F3AF5A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+		};
 		5EA083E6BA19CFFFCF0BD170 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -805,6 +828,7 @@
 				18E099D22358FB6500B43A4B /* NavigationVC.swift in Sources */,
 				FA526EFA232D28C80014517B /* RateViewController.swift in Sources */,
 				FAEDCF15231F988D0063EFC0 /* TabbarViewController.swift in Sources */,
+				18451971235E08C700F3AF5A /* OfferBottomSheetVC.swift in Sources */,
 				1889AE07235738330081608E /* BottomSheetVC.swift in Sources */,
 				FA25B601232686B6007C3697 /* SplashViewController.swift in Sources */,
 				FA2F9F3A232CB35E0025BF11 /* OfferViewController.swift in Sources */,
