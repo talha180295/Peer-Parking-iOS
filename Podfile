@@ -16,6 +16,8 @@ target 'PeerParking' do
   pod 'Cosmos'
   pod 'FittedSheets'
   pod 'R.swift'
+  pod 'EzPopup'
+  
 #  pod 'DGRunkeeperSwitch' , '~> 1.1.4'
 
 

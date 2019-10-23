@@ -8,21 +8,74 @@
 
 import UIKit
 import FittedSheets
+import EzPopup
 
 
 class BottomSheetVC: UIViewController {
 
     @IBOutlet weak var offer_btn: UIButton!
     @IBOutlet weak var mainView: UIView!
+    
+    let story = UIStoryboard(name: "Main", bundle: nil)
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+      
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.accept_offer_tap(notification:)), name: NSNotification.Name(rawValue: "accept_offer"), object: nil)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    @objc func accept_offer_tap(notification: NSNotification) {
+        
+        self.offer_btn.setTitle("Go", for: .normal)
+        
     }
     
     @IBAction func take_btn_click(_ sender: UIButton) {
         
-        bottomSheet(storyBoard: "Main", identifier: "OfferBottomSheetVC", sizes: [.fixed(350)], cornerRadius: 10)
+        if(offer_btn.titleLabel?.text == "Go"){
+            
+            let vc = self.story.instantiateViewController(withIdentifier: "FBPopup")
+            
+            
+            let popupVC = PopupViewController(contentController: vc, popupWidth: 100, popupHeight: 200)
+            
+            
+            //properties
+//            popupVC.backgroundAlpha = 1
+//            popupVC.backgroundColor = .black
+//            popupVC.canTapOutsideToDismiss = true
+//            popupVC.cornerRadius = 10
+//            popupVC.shadowEnabled = true
+            
+            // show it by call present(_ , animated:) method from a current UIViewController
+            present(popupVC, animated: true)
+            
+//            self.addChild(vc)
+//            self.view.addSubview(vc.view)
+//            vc.didMove(toParent: self)
+//
+//
+//            vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+//
+//            self.present(vc, animated: true)
+            
+        }
+        else{
+            
+            bottomSheet(storyBoard: "Main", identifier: "OfferBottomSheetVC", sizes: [.fixed(350)], cornerRadius: 10)
+        }
     }
     
     func bottomSheet(storyBoard:String,identifier:String,sizes:[SheetSize], cornerRadius:CGFloat){

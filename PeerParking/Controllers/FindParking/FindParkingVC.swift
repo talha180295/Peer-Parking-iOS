@@ -24,7 +24,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     var estimateWidth=130
     var cellMarginSize=1
     
-    let GoogleMapsAPIServerKey = "AIzaSyCkoOvnd1_eougL23wAx7DP65C_duaJRjQ"
+    let GoogleMapsAPIServerKey = Key.Google.placesKey
     lazy var placesSearchController: GooglePlacesSearchController = {
         let controller = GooglePlacesSearchController(delegate: self,
                                                       apiKey: GoogleMapsAPIServerKey,

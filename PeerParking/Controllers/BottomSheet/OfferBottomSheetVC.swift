@@ -24,7 +24,9 @@ class OfferBottomSheetVC: UIViewController {
 //        let destinationVC = storyboard.instantiateViewController(withIdentifier: "BottomSheetVC") as! BottomSheetVC
 //        var destinationDS = destinationVC.offer_btn.setTitle("GO", for: .normal)
         
-        self.dismiss(animated: true, completion: nil)
+        NotificationCenter.default.post(name: Notification.Name("accept_offer"), object: nil)
+            
+        self.dismiss(animated: false, completion: nil)
     }
     
     
