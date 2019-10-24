@@ -49,6 +49,12 @@ class FilterBottomSheetVC: UIViewController {
     
     @IBAction func apply_btn_click(_ sender: UIButton) {
         
+//        let transition: CATransition = CATransition()
+//        transition.duration = 3.4
+//        transition.type = CATransitionType.moveIn
+//        transition.subtype = CATransitionSubtype.fromBottom
+//        self.view.window?.layer.add(transition, forKey: nil)
+        
         self.dismiss(animated: true, completion: nil)
     }
     

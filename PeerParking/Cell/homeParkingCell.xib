@@ -84,6 +84,12 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="58" id="8BT-Yn-pN6"/>
                                                 </constraints>
+                                                <color key="progressTintColor" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </progressView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bargain Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KTm-eF-ljm">
                                                 <rect key="frame" x="0.0" y="-1" width="67" height="10"/>
@@ -118,17 +124,38 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gK1-aa-QPS">
                                         <rect key="frame" x="5" y="22.5" width="126" height="14"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bEn-SL-ABR">
-                                                <rect key="frame" x="0.0" y="2" width="79" height="11"/>
-                                                <color key="backgroundColor" red="0.39248247079999998" green="0.83005145069999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEn-SL-ABR" customClass="CosmosView" customModule="Cosmos">
+                                                <rect key="frame" x="0.0" y="2" width="80" height="11"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                         <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                                                        <real key="value" value="3"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                                        <real key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                                        <color key="value" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
+                                                        <color key="value" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
+                                                        <color key="value" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
+                                                        <color key="value" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="(100)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3M-ri-uXr">
-                                                <rect key="frame" x="82" y="2" width="25" height="11"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(100)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3M-ri-uXr">
+                                                <rect key="frame" x="86.5" y="2" width="23.5" height="11"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -137,10 +164,10 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="bEn-SL-ABR" firstAttribute="top" secondItem="gK1-aa-QPS" secondAttribute="top" constant="2" id="4Hc-vL-7Zi"/>
+                                            <constraint firstAttribute="trailing" secondItem="B3M-ri-uXr" secondAttribute="trailing" constant="16" id="9j6-Di-AR2"/>
                                             <constraint firstItem="B3M-ri-uXr" firstAttribute="top" secondItem="gK1-aa-QPS" secondAttribute="top" constant="2" id="DLQ-tg-s37"/>
-                                            <constraint firstAttribute="trailing" secondItem="B3M-ri-uXr" secondAttribute="trailing" constant="19" id="DqU-kk-xrC"/>
                                             <constraint firstItem="bEn-SL-ABR" firstAttribute="leading" secondItem="gK1-aa-QPS" secondAttribute="leading" id="OxD-fO-t2r"/>
-                                            <constraint firstItem="B3M-ri-uXr" firstAttribute="leading" secondItem="bEn-SL-ABR" secondAttribute="trailing" constant="3" id="YHN-ad-krP"/>
+                                            <constraint firstItem="B3M-ri-uXr" firstAttribute="leading" secondItem="bEn-SL-ABR" secondAttribute="trailing" constant="6.5" id="YHN-ad-krP"/>
                                             <constraint firstAttribute="bottom" secondItem="B3M-ri-uXr" secondAttribute="bottom" constant="1" id="oAy-2m-bYq"/>
                                             <constraint firstAttribute="height" constant="14" id="uJx-zY-Jf9"/>
                                             <constraint firstAttribute="bottom" secondItem="bEn-SL-ABR" secondAttribute="bottom" constant="1" id="yEP-I9-qyY"/>

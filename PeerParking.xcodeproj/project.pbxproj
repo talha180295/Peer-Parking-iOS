@@ -17,6 +17,7 @@
 		185DE7A62360E2B300FC0E25 /* FeedbackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185DE7A52360E2B300FC0E25 /* FeedbackVC.swift */; };
 		185FCF712358C10E0025DB5E /* FilterBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185FCF702358C10E0025DB5E /* FilterBottomSheetVC.swift */; };
 		1889AE07235738330081608E /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889AE06235738330081608E /* BottomSheetVC.swift */; };
+		18D1B63A2362024E002C875D /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1B6392362024E002C875D /* ScheduleVC.swift */; };
 		18E099D02358F27E00B43A4B /* DGRunkeeperSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E099CE2358F27E00B43A4B /* DGRunkeeperSwitch.swift */; };
 		18E099D22358FB6500B43A4B /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E099D12358FB6500B43A4B /* NavigationVC.swift */; };
 		A9D762387663A23BCCC8DF20 /* Pods_PeerParkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */; };
@@ -116,6 +117,7 @@
 		185DE7A52360E2B300FC0E25 /* FeedbackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackVC.swift; sourceTree = "<group>"; };
 		185FCF702358C10E0025DB5E /* FilterBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBottomSheetVC.swift; sourceTree = "<group>"; };
 		1889AE06235738330081608E /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
+		18D1B6392362024E002C875D /* ScheduleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
 		18E099CC2358F27E00B43A4B /* DGRunkeeperSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGRunkeeperSwitch.h; sourceTree = "<group>"; };
 		18E099CE2358F27E00B43A4B /* DGRunkeeperSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGRunkeeperSwitch.swift; sourceTree = "<group>"; };
 		18E099D12358FB6500B43A4B /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
@@ -266,6 +268,14 @@
 				18451970235E08C700F3AF5A /* OfferBottomSheetVC.swift */,
 			);
 			path = BottomSheet;
+			sourceTree = "<group>";
+		};
+		18D1B6382362023C002C875D /* ScheduleVC */ = {
+			isa = PBXGroup;
+			children = (
+				18D1B6392362024E002C875D /* ScheduleVC.swift */,
+			);
+			path = ScheduleVC;
 			sourceTree = "<group>";
 		};
 		18E099CB2358F27E00B43A4B /* DGRunkeeperSwitch */ = {
@@ -452,6 +462,7 @@
 		FA2815BC231E6669008AF3F5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				18D1B6382362023C002C875D /* ScheduleVC */,
 				185DE7A22360E13500FC0E25 /* FeedbackVC */,
 				185DE79F2360BCD800FC0E25 /* AlternateRouteVC */,
 				185DE79C2360A82D00FC0E25 /* ParkingNavVC */,
@@ -854,6 +865,7 @@
 				FA6CD3762328F76B00E18CF2 /* NotificationViewController.swift in Sources */,
 				18010AAB23549C7F008412C0 /* GoogleMapView.swift in Sources */,
 				FA57EBA7232142AC000646B7 /* ProfileViewController.swift in Sources */,
+				18D1B63A2362024E002C875D /* ScheduleVC.swift in Sources */,
 				FA6CD37D23290DF100E18CF2 /* RoutesCell.swift in Sources */,
 				FA0FCC56232229F9000FF52C /* vehicleCell.swift in Sources */,
 				185DE79B2360A59900FC0E25 /* Constants.swift in Sources */,
