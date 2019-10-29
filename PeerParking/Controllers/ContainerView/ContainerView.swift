@@ -56,24 +56,45 @@ class ContainerView: UIViewController {
         
         if(counter == 0){
             
-            
-           // let controller = storyboard!.instantiateViewController(withIdentifier: "one")
-            addChild(controller1)
-            controller1.view.frame = view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
-            view.addSubview(controller1.view)
-            controller1.didMove(toParent: self)
+            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+
+                // let controller = storyboard!.instantiateViewController(withIdentifier: "one")
+                self.addChild(self.controller1)
+                self.controller1.view.frame = self.view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+                self.view.addSubview(self.controller1.view)
+                self.controller1.didMove(toParent: self)
+                
+            })
+          
+//
+//            UIView.animate(withDuration: 0.5, delay: 1.25, options: UIView.AnimationOptions(), animations: { () -> Void in
+//
+//
+//
+//            },
+//            completion: nil)
+        
             
             
             
         }
         else if(counter == 1){
             
+            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+                
+                // let controller = storyboard!.instantiateViewController(withIdentifier: "one")
+                self.addChild(self.controller2)
+                self.controller2.view.frame = self.view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+                self.view.addSubview(self.controller2.view)
+                self.controller2.didMove(toParent: self)
+            })
             
-            //let controller = storyboard!.instantiateViewController(withIdentifier: "two")
-            addChild(controller2)
-            controller2.view.frame = view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
-            view.addSubview(controller2.view)
-            controller2.didMove(toParent: self)
+//            UIView.animate(withDuration: 0.5, delay: 1.25, options: UIView.AnimationOptions(), animations: { () -> Void in
+//                
+//               
+//                
+//            },
+//            completion: nil)
             
             
             

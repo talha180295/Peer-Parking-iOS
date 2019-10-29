@@ -38,6 +38,13 @@ class FeedbackVC: UIViewController {
     }
     
     @IBAction func share_btn(_ sender: UIButton) {
+        
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC")
+        
+        self.show(vc, sender: sender)
+        
+        
     }
     
    

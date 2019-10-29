@@ -14,12 +14,12 @@ class ParkedViewController: UIViewController {
 
     @IBOutlet weak var btnT: UIButton!
     var strTime = "set"
-    @IBOutlet weak var timerView: Knob!
+   // @IBOutlet weak var timerView: Knob!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
         
-        timerView.addTarget(self, action: #selector(ParkedViewController.handleValueChanged(_:)), for: .valueChanged)
+        //timerView.addTarget(self, action: #selector(ParkedViewController.handleValueChanged(_:)), for: .valueChanged)
         
         // Do any additional setup after loading the view.
     }
@@ -51,7 +51,18 @@ class ParkedViewController: UIViewController {
         }
         else  if(strTime.elementsEqual("start"))
         {
+            //self.progressBar.progressRotationAngle.addProduct(0, 100)
             sender.setTitle("Stop", for: .normal)
+            UIView.animate(withDuration: 10, delay: 0.1
+                , options: [], animations: {
+
+                    self.progressBar.value =  0
+            }, completion:{
+                [weak self] finished in
+                self?.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+            }
+            )
+            
             strTime = "stop"
         }
         else  if(strTime.elementsEqual("stop"))
@@ -64,14 +75,6 @@ class ParkedViewController: UIViewController {
     }
     
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+  
 
 }

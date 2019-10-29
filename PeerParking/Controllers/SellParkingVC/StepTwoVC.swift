@@ -27,89 +27,59 @@ class StepTwoVC: UIViewController {
     }
     
 
-    @IBAction func mini_btn_click(_ sender: UIButton) {
+    @IBAction func car_size_btn_click(_ sender: UIButton) {
         
-        if(!sender.isSelected){
+        if(sender.tag == 1){
             
-            print("::=unselected")
             
-            sender.setImage(UIImage(named: "mini_selected"), for: .normal)
-            sender.isSelected = true
+            mini_btn.setImage(UIImage(named: "mini_selected"), for: .normal)
+            
+            family_btn.setImage(UIImage(named: "family_unselected"), for: .normal)
+            
+            suv_btn.setImage(UIImage(named: "suv_unselected"), for: .normal)
+            
+            bus_btn.setImage(UIImage(named: "bus_unselected"), for: .normal)
         }
-        else{
-            
-            print("::=selected")
+        else if(sender.tag == 2){
             
             
-            sender.setImage(UIImage(named: "mini_unselected"), for: .normal)
-            sender.isSelected = false
+            mini_btn.setImage(UIImage(named: "mini_unselected"), for: .normal)
+            
+            family_btn.setImage(UIImage(named: "family_selected"), for: .normal)
+            
+            suv_btn.setImage(UIImage(named: "suv_unselected"), for: .normal)
+            
+            bus_btn.setImage(UIImage(named: "bus_unselected"), for: .normal)
         }
+        else if(sender.tag == 3){
+            
+            
+            mini_btn.setImage(UIImage(named: "mini_unselected"), for: .normal)
+            
+            family_btn.setImage(UIImage(named: "family_unselected"), for: .normal)
+            
+            suv_btn.setImage(UIImage(named: "suv_selected"), for: .normal)
+            
+            bus_btn.setImage(UIImage(named: "bus_unselected"), for: .normal)
+        }
+        else if(sender.tag == 4){
+            
+            
+            mini_btn.setImage(UIImage(named: "mini_unselected"), for: .normal)
+            
+            family_btn.setImage(UIImage(named: "family_unselected"), for: .normal)
+            
+            suv_btn.setImage(UIImage(named: "suv_unselected"), for: .normal)
+            
+            bus_btn.setImage(UIImage(named: "bus_selected"), for: .normal)
+        }
+        
     }
     
     
-    @IBAction func family_btn_click(_ sender: UIButton) {
-        
-        
-        if(!sender.isSelected){
-            
-            print("::=unselected")
-            
-            sender.setImage(UIImage(named: "family_selected"), for: .normal)
-            sender.isSelected = true
-        }
-        else{
-            
-            print("::=selected")
-            
-            
-            sender.setImage(UIImage(named: "family_unselected"), for: .normal)
-            sender.isSelected = false
-        }
-    }
+   
     
-    @IBAction func suv_bnt_click(_ sender: UIButton) {
-        
-        if(!sender.isSelected){
-            
-            print("::=unselected")
-            
-            sender.setImage(UIImage(named: "suv_selected"), for: .normal)
-            sender.isSelected = true
-        }
-        else{
-            
-            print("::=selected")
-            
-            
-            sender.setImage(UIImage(named: "suv_unselected"), for: .normal)
-            sender.isSelected = false
-        }
-    }
-    
-    
-    @IBAction func bus_btn_click(_ sender: UIButton) {
-        
-        
-        
-        if(!sender.isSelected){
-            
-            print("::=unselected")
-            
-            sender.setImage(UIImage(named: "bus_selected"), for: .normal)
-            sender.isSelected = true
-        }
-        else{
-            
-            print("::=selected")
-            
-            
-            sender.setImage(UIImage(named: "bus_unselected"), for: .normal)
-            sender.isSelected = false
-        }
-        //        else{
-        //            sender.imageView?.tintColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
-        //        }
-    }
+  
     
     
     @IBAction func lot_click(_ sender: UIButton) {

@@ -8,6 +8,7 @@
 
 import UIKit
 import StepIndicator
+import EzPopup
 
 class SellParkingVC: UIViewController {
 
@@ -38,6 +39,27 @@ class SellParkingVC: UIViewController {
             step_progress.currentStep = counter
             let data = ["counter":counter]
             NotificationCenter.default.post(name: Notification.Name("btn_tap"), object: nil,userInfo: data)
+        }
+        if(counter == 5){
+            
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FinishPopup")
+            
+            
+            let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
+            popupVC.canTapOutsideToDismiss = true
+            
+            //properties
+            //            popupVC.backgroundAlpha = 1
+            //            popupVC.backgroundColor = .black
+            //            popupVC.canTapOutsideToDismiss = true
+            //            popupVC.cornerRadius = 10
+            //            popupVC.shadowEnabled = true
+            
+            // show it by call present(_ , animated:) method from a current UIViewController
+            present(popupVC, animated: true)
+            
+            
+            
         }
         
     }

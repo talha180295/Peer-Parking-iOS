@@ -49,8 +49,8 @@ class BottomSheetVC: UIViewController {
             let vc = self.story.instantiateViewController(withIdentifier: "FBPopup")
             
             
-            let popupVC = PopupViewController(contentController: vc, popupWidth: 100, popupHeight: 200)
-            
+            let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
+            popupVC.canTapOutsideToDismiss = true
             
             //properties
 //            popupVC.backgroundAlpha = 1
