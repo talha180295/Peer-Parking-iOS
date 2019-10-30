@@ -1596,7 +1596,7 @@
         <!--Tabbar View Controller-->
         <scene sceneID="0M3-fQ-6Fx">
             <objects>
-                <tabBarController id="ejO-vQ-58B" customClass="TabbarViewController" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabbarViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ejO-vQ-58B" customClass="TabbarViewController" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="nD6-pf-hnk"/>
                     <tabBar key="tabBar" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="centered" id="MNy-Q3-auW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -1673,9 +1673,9 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vNR-FK-0Ph">
-                                <rect key="frame" x="30" y="753" width="93" height="43"/>
+                                <rect key="frame" x="30" y="753" width="93" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="orx-BZ-TUX"/>
+                                    <constraint firstAttribute="height" constant="36" id="orx-BZ-TUX"/>
                                 </constraints>
                                 <state key="normal" image="pre_btn"/>
                                 <connections>
@@ -1692,9 +1692,9 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htS-Tu-ti9">
-                                <rect key="frame" x="244" y="753" width="150" height="43"/>
+                                <rect key="frame" x="244" y="753" width="150" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="DjY-3u-oOK"/>
+                                    <constraint firstAttribute="height" constant="36" id="DjY-3u-oOK"/>
                                 </constraints>
                                 <state key="normal" image="next_btn"/>
                                 <connections>
@@ -1704,7 +1704,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="lE3-U8-SXg" firstAttribute="bottom" secondItem="htS-Tu-ti9" secondAttribute="bottom" constant="17" id="2PU-Rb-Fe7"/>
+                            <constraint firstItem="lE3-U8-SXg" firstAttribute="bottom" secondItem="htS-Tu-ti9" secondAttribute="bottom" constant="24" id="2PU-Rb-Fe7"/>
                             <constraint firstItem="lE3-U8-SXg" firstAttribute="trailing" secondItem="1mG-Cd-Lh7" secondAttribute="trailing" constant="20" id="8Bb-Yc-Y1B"/>
                             <constraint firstItem="1mG-Cd-Lh7" firstAttribute="leading" secondItem="lE3-U8-SXg" secondAttribute="leading" constant="20" id="9ga-aJ-udF"/>
                             <constraint firstItem="vNR-FK-0Ph" firstAttribute="top" secondItem="txS-Pm-LZx" secondAttribute="bottom" constant="22" id="J9o-Po-X9U"/>
@@ -1714,7 +1714,7 @@
                             <constraint firstItem="txS-Pm-LZx" firstAttribute="leading" secondItem="lE3-U8-SXg" secondAttribute="leading" id="dlF-An-jca"/>
                             <constraint firstItem="htS-Tu-ti9" firstAttribute="top" secondItem="txS-Pm-LZx" secondAttribute="bottom" constant="22" id="jbM-im-t91"/>
                             <constraint firstItem="lE3-U8-SXg" firstAttribute="trailing" secondItem="htS-Tu-ti9" secondAttribute="trailing" constant="20" id="p7e-br-O9p"/>
-                            <constraint firstItem="lE3-U8-SXg" firstAttribute="bottom" secondItem="vNR-FK-0Ph" secondAttribute="bottom" constant="17" id="u30-jx-tau"/>
+                            <constraint firstItem="lE3-U8-SXg" firstAttribute="bottom" secondItem="vNR-FK-0Ph" secondAttribute="bottom" constant="24" id="u30-jx-tau"/>
                             <constraint firstItem="vNR-FK-0Ph" firstAttribute="leading" secondItem="lE3-U8-SXg" secondAttribute="leading" constant="30" id="wUu-De-Z3k"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lE3-U8-SXg"/>
@@ -3758,7 +3758,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
         <!--Item-->
         <scene sceneID="vg4-al-zL2">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7Kk-uJ-H2D" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="nav" automaticallyAdjustsScrollViewInsets="NO" id="7Kk-uJ-H2D" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="wuw-o6-ca2"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="GiC-6c-jzW">
@@ -7346,7 +7346,7 @@ typeset text.</string>
                                                             <constraint firstAttribute="height" constant="36" id="Vxz-BJ-d9h"/>
                                                             <constraint firstAttribute="width" constant="98" id="eVH-v1-Shh"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                         <state key="normal" title="Per hour" backgroundImage="round_rect_blue">
                                                             <color key="titleColor" red="0.96460121870000004" green="0.96476620440000005" blue="0.96459084750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
@@ -7740,10 +7740,10 @@ order to cover PeerParking expenses.</string>
             </objects>
             <point key="canvasLocation" x="4221.739130434783" y="778.79464285714278"/>
         </scene>
-        <!--View Controller-->
+        <!--Step FiveVC-->
         <scene sceneID="l2n-5l-YXo">
             <objects>
-                <viewController storyboardIdentifier="five" id="MEX-dG-7Iy" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="five" id="MEX-dG-7Iy" customClass="StepFiveVC" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Abf-Zr-rFV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="558"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -7754,19 +7754,8 @@ order to cover PeerParking expenses.</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sfa-5z-Vrb">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="558"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_img" translatesAutoresizingMaskIntoConstraints="NO" id="Cg7-Rj-PCE">
-                                                <rect key="frame" x="48" y="193" width="319" height="141"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="141" id="GT9-Oj-xyM"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <integer key="value" value="15"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You may add some more info you think will be useful to other drivers." textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSp-9h-WMd">
-                                                <rect key="frame" x="22" y="365" width="370" height="31"/>
+                                                <rect key="frame" x="22" y="342" width="370" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="LTF-9v-hhJ"/>
                                                 </constraints>
@@ -7775,7 +7764,7 @@ order to cover PeerParking expenses.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOy-Us-Uw1">
-                                                <rect key="frame" x="20" y="412" width="374" height="119"/>
+                                                <rect key="frame" x="20" y="393" width="374" height="119"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Add some useful information" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hW6-Rl-MAy">
                                                         <rect key="frame" x="9" y="8" width="357" height="28"/>
@@ -7810,39 +7799,53 @@ order to cover PeerParking expenses.</string>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="bottom" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nbf-hh-YIc">
+                                                <rect key="frame" x="28" y="110" width="359" height="51"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="51" id="pC7-4h-LVJ"/>
+                                                </constraints>
+                                                <state key="normal" backgroundImage="open_cam_btn"/>
+                                                <connections>
+                                                    <action selector="open_cam_btn:" destination="MEX-dG-7Iy" eventType="touchUpInside" id="OYX-du-mz0"/>
+                                                </connections>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make sure that the amount you are asking for is competitive, or other drivers won't take your offer." textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="riM-1f-k12">
-                                                <rect key="frame" x="22" y="62" width="370" height="29"/>
+                                                <rect key="frame" x="22" y="61" width="370" height="29"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nbf-hh-YIc">
-                                                <rect key="frame" x="48" y="110" width="319" height="48"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_img" translatesAutoresizingMaskIntoConstraints="NO" id="Cg7-Rj-PCE">
+                                                <rect key="frame" x="28" y="181" width="359" height="141"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="pC7-4h-LVJ"/>
+                                                    <constraint firstAttribute="height" constant="141" id="GT9-Oj-xyM"/>
                                                 </constraints>
-                                                <state key="normal" image="open_cam_btn"/>
-                                            </button>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="Cg7-Rj-PCE" firstAttribute="leading" secondItem="Sfa-5z-Vrb" secondAttribute="leading" constant="48" id="3zR-Wm-uLb"/>
+                                            <constraint firstItem="Cg7-Rj-PCE" firstAttribute="leading" secondItem="Sfa-5z-Vrb" secondAttribute="leading" constant="28" id="3zR-Wm-uLb"/>
                                             <constraint firstAttribute="trailing" secondItem="riM-1f-k12" secondAttribute="trailing" constant="22" id="8Dn-yb-5ad"/>
                                             <constraint firstAttribute="trailing" secondItem="vsa-sA-mpX" secondAttribute="trailing" constant="22" id="ApL-IQ-DXW"/>
-                                            <constraint firstAttribute="trailing" secondItem="Nbf-hh-YIc" secondAttribute="trailing" constant="47" id="D4G-zO-Mle"/>
+                                            <constraint firstAttribute="trailing" secondItem="Nbf-hh-YIc" secondAttribute="trailing" constant="27" id="D4G-zO-Mle"/>
+                                            <constraint firstItem="Cg7-Rj-PCE" firstAttribute="top" secondItem="Nbf-hh-YIc" secondAttribute="bottom" constant="20" id="Ewr-6s-vdC"/>
                                             <constraint firstItem="BOy-Us-Uw1" firstAttribute="leading" secondItem="Sfa-5z-Vrb" secondAttribute="leading" constant="20" id="FI5-I2-jRy"/>
+                                            <constraint firstItem="riM-1f-k12" firstAttribute="top" secondItem="vsa-sA-mpX" secondAttribute="bottom" constant="20" id="GTb-zS-MKx"/>
                                             <constraint firstAttribute="trailing" secondItem="BOy-Us-Uw1" secondAttribute="trailing" constant="20" id="Ju0-8f-KL7"/>
                                             <constraint firstAttribute="height" constant="558" id="Psr-pK-wNM"/>
-                                            <constraint firstItem="Cg7-Rj-PCE" firstAttribute="top" secondItem="Nbf-hh-YIc" secondAttribute="bottom" constant="35" id="Tkd-bc-n6l"/>
+                                            <constraint firstItem="KSp-9h-WMd" firstAttribute="top" secondItem="Cg7-Rj-PCE" secondAttribute="bottom" constant="20" id="XDa-Bh-JZJ"/>
+                                            <constraint firstItem="Nbf-hh-YIc" firstAttribute="top" secondItem="riM-1f-k12" secondAttribute="bottom" constant="20" id="YeD-3c-eZt"/>
                                             <constraint firstAttribute="trailing" secondItem="KSp-9h-WMd" secondAttribute="trailing" constant="22" id="dtz-50-BkJ"/>
-                                            <constraint firstAttribute="bottom" secondItem="BOy-Us-Uw1" secondAttribute="bottom" constant="27" id="fU3-TI-4k5"/>
-                                            <constraint firstItem="KSp-9h-WMd" firstAttribute="top" secondItem="Cg7-Rj-PCE" secondAttribute="bottom" constant="31" id="glf-rD-p9x"/>
-                                            <constraint firstItem="Nbf-hh-YIc" firstAttribute="leading" secondItem="Sfa-5z-Vrb" secondAttribute="leading" constant="48" id="isS-BX-Dzt"/>
+                                            <constraint firstItem="Nbf-hh-YIc" firstAttribute="leading" secondItem="Sfa-5z-Vrb" secondAttribute="leading" constant="28" id="isS-BX-Dzt"/>
                                             <constraint firstItem="vsa-sA-mpX" firstAttribute="leading" secondItem="Sfa-5z-Vrb" secondAttribute="leading" constant="22" id="miH-m1-BJm"/>
-                                            <constraint firstAttribute="trailing" secondItem="Cg7-Rj-PCE" secondAttribute="trailing" constant="47" id="oqc-cx-t7D"/>
-                                            <constraint firstItem="Nbf-hh-YIc" firstAttribute="top" secondItem="riM-1f-k12" secondAttribute="bottom" constant="19" id="qBU-1z-jWs"/>
-                                            <constraint firstItem="riM-1f-k12" firstAttribute="top" secondItem="vsa-sA-mpX" secondAttribute="bottom" constant="21" id="qII-le-cRY"/>
-                                            <constraint firstItem="BOy-Us-Uw1" firstAttribute="top" secondItem="KSp-9h-WMd" secondAttribute="bottom" constant="16" id="xbP-vi-lDj"/>
+                                            <constraint firstItem="BOy-Us-Uw1" firstAttribute="top" secondItem="KSp-9h-WMd" secondAttribute="bottom" constant="20" id="mpN-BK-2dA"/>
+                                            <constraint firstAttribute="trailing" secondItem="Cg7-Rj-PCE" secondAttribute="trailing" constant="27" id="oqc-cx-t7D"/>
+                                            <constraint firstAttribute="bottom" secondItem="BOy-Us-Uw1" secondAttribute="bottom" constant="46" id="ptI-de-VGo"/>
                                             <constraint firstItem="KSp-9h-WMd" firstAttribute="leading" secondItem="Sfa-5z-Vrb" secondAttribute="leading" constant="22" id="yrt-H1-SjZ"/>
                                             <constraint firstItem="riM-1f-k12" firstAttribute="leading" secondItem="Sfa-5z-Vrb" secondAttribute="leading" constant="22" id="zDU-gr-a3v"/>
                                             <constraint firstItem="vsa-sA-mpX" firstAttribute="top" secondItem="Sfa-5z-Vrb" secondAttribute="top" constant="20" id="zTr-8c-pMz"/>
@@ -7869,6 +7872,9 @@ order to cover PeerParking expenses.</string>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="414" height="558"/>
+                    <connections>
+                        <outlet property="img" destination="Cg7-Rj-PCE" id="PWy-ZC-VsH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uKr-oS-DiB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

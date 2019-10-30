@@ -17,8 +17,14 @@ class FinishPopup: UIViewController {
     }
     
     @IBAction func finish_btn(_ sender: UIButton) {
+
+        print("DIS__")
+ 
         
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
+        self.present(vc, animated: true, completion: nil)
+
+        
     }
     
    
