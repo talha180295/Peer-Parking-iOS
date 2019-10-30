@@ -1692,9 +1692,9 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htS-Tu-ti9">
-                                <rect key="frame" x="244" y="753" width="150" height="36"/>
+                                <rect key="frame" x="244" y="753" width="150" height="42"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="DjY-3u-oOK"/>
+                                    <constraint firstAttribute="height" constant="42" id="DjY-3u-oOK"/>
                                 </constraints>
                                 <state key="normal" image="next_btn"/>
                                 <connections>
@@ -1704,7 +1704,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="lE3-U8-SXg" firstAttribute="bottom" secondItem="htS-Tu-ti9" secondAttribute="bottom" constant="24" id="2PU-Rb-Fe7"/>
+                            <constraint firstItem="lE3-U8-SXg" firstAttribute="bottom" secondItem="htS-Tu-ti9" secondAttribute="bottom" constant="18" id="2PU-Rb-Fe7"/>
                             <constraint firstItem="lE3-U8-SXg" firstAttribute="trailing" secondItem="1mG-Cd-Lh7" secondAttribute="trailing" constant="20" id="8Bb-Yc-Y1B"/>
                             <constraint firstItem="1mG-Cd-Lh7" firstAttribute="leading" secondItem="lE3-U8-SXg" secondAttribute="leading" constant="20" id="9ga-aJ-udF"/>
                             <constraint firstItem="vNR-FK-0Ph" firstAttribute="top" secondItem="txS-Pm-LZx" secondAttribute="bottom" constant="22" id="J9o-Po-X9U"/>
@@ -7261,7 +7261,7 @@ typeset text.</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X0u-aF-veH">
                                                 <rect key="frame" x="0.0" y="100" width="414" height="50"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PArking allowed timings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAk-3l-Pys">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parking allowed timings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAk-3l-Pys">
                                                         <rect key="frame" x="20" y="15" width="225" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
