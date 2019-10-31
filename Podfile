@@ -17,8 +17,6 @@ target 'PeerParking' do
   pod 'FittedSheets'
   pod 'EzPopup'
   pod 'StepIndicator'
-  pod 'UIAlertDateTimePicker'
-  
   pod 'DatePickerDialog'
 #  pod 'DGRunkeeperSwitch' , '~> 1.1.4'
 

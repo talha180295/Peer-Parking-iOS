@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import UIAlertDateTimePicker
 import DatePickerDialog
 
-class StepOneVC: UIViewController, UIAlertDateTimePickerDelegate {
+class StepOneVC: UIViewController {
     
     
-    @IBOutlet weak var timePicker: UIDatePicker!
+    
     @IBOutlet weak var price_switch: DGRunkeeperSwitch!
     
     @IBOutlet weak var time_field: UITextField!
@@ -23,7 +22,7 @@ class StepOneVC: UIViewController, UIAlertDateTimePickerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.timePicker.datePickerMode = .time
+        
         if let multi_switch = price_switch {
             //
             multi_switch.titles = ["Now", "At"]
@@ -44,12 +43,7 @@ class StepOneVC: UIViewController, UIAlertDateTimePickerDelegate {
         
 
         datePickerTapped()
-//        let datePicker = UIAlertDateTimePicker(withPickerMode: .time, pickerTitle: "Select Time", showPickerOn: (self.view.superview?.superview?.superview)!)
-//
-//        datePicker.delegate = self
-//
-//
-//        datePicker.showAlert()
+  
         
     }
     
@@ -76,8 +70,6 @@ class StepOneVC: UIViewController, UIAlertDateTimePickerDelegate {
             time_field.isHidden = true
         }
     }
-    func positiveButtonClicked(withDate date: Date) {
-        print("positve")
-    }
+   
     
 }

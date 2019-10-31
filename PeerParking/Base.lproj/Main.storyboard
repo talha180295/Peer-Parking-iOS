@@ -7203,7 +7203,7 @@ typeset text.</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="558"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kp4-83-9ds">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kp4-83-9ds">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="558"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ejw-Ch-WI4">
@@ -7340,7 +7340,7 @@ typeset text.</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I9o-Wy-llH">
                                                 <rect key="frame" x="0.0" y="250" width="414" height="94"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTt-Um-xIn">
+                                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTt-Um-xIn">
                                                         <rect key="frame" x="19" y="48" width="98" height="36"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="36" id="Vxz-BJ-d9h"/>
@@ -7351,7 +7351,7 @@ typeset text.</string>
                                                             <color key="titleColor" red="0.96460121870000004" green="0.96476620440000005" blue="0.96459084750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="per_hour_btn:" destination="u5v-Bi-vcx" eventType="touchUpInside" id="RTG-YG-Wrl"/>
+                                                            <action selector="extra_fees_switch:" destination="u5v-Bi-vcx" eventType="touchUpInside" id="CcY-uH-oet"/>
                                                         </connections>
                                                     </button>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="$5" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H0V-3W-yYI">
@@ -7360,15 +7360,19 @@ typeset text.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Kd-dU-kwD">
+                                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Kd-dU-kwD">
                                                         <rect key="frame" x="125" y="48" width="134" height="36"/>
                                                         <constraints>
+                                                            <constraint firstAttribute="width" constant="134" id="blc-9W-KO2"/>
                                                             <constraint firstAttribute="height" constant="36" id="m08-Qz-nGW"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                         <state key="normal" title="Entire Parking Time" backgroundImage="round_rect_white">
                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="extra_fees_switch:" destination="u5v-Bi-vcx" eventType="touchUpInside" id="0Mm-Qz-b2a"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -7445,7 +7449,7 @@ typeset text.</string>
                                 <constraints>
                                     <constraint firstItem="ejw-Ch-WI4" firstAttribute="leading" secondItem="Kp4-83-9ds" secondAttribute="leading" id="d7m-t6-Spb"/>
                                     <constraint firstAttribute="trailing" secondItem="ejw-Ch-WI4" secondAttribute="trailing" id="fgj-zn-tgB"/>
-                                    <constraint firstAttribute="bottom" secondItem="ejw-Ch-WI4" secondAttribute="bottom" constant="128" id="iFW-y8-TG1"/>
+                                    <constraint firstAttribute="bottom" secondItem="ejw-Ch-WI4" secondAttribute="bottom" constant="5" id="iFW-y8-TG1"/>
                                     <constraint firstItem="ejw-Ch-WI4" firstAttribute="centerX" secondItem="Kp4-83-9ds" secondAttribute="centerX" id="lSh-EG-CS1"/>
                                     <constraint firstItem="ejw-Ch-WI4" firstAttribute="top" secondItem="Kp4-83-9ds" secondAttribute="top" constant="20" id="nfI-fh-6rC"/>
                                 </constraints>
@@ -7679,37 +7683,34 @@ typeset text.</string>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="7Nb-NQ-EqX">
                                         <rect key="frame" x="20" y="47" width="373" height="35.5"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Rc-68-pyl">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Rc-68-pyl">
                                                 <rect key="frame" x="0.0" y="0.0" width="123" height="35.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <state key="normal" title="Parking Lot" backgroundImage="round_rect_blue">
-                                                    <color key="titleColor" red="0.96460121870000004" green="0.96476620440000005" blue="0.96459084750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Parking Lot" backgroundImage="round_rect_white">
+                                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="lot_click:" destination="R6J-oV-2PH" eventType="touchUpInside" id="aRC-8K-cmw"/>
-                                                    <action selector="lot_click:" destination="Q0b-1J-wFr" eventType="touchUpInside" id="iHR-wj-bjm"/>
+                                                    <action selector="parking_type_btn_click:" destination="Q0b-1J-wFr" eventType="touchUpInside" id="8TG-je-1f8"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mz2-rE-FP0">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mz2-rE-FP0">
                                                 <rect key="frame" x="125" y="0.0" width="123" height="35.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <state key="normal" title="Street Parking" backgroundImage="round_rect_white">
                                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="street_bbtn_click:" destination="R6J-oV-2PH" eventType="touchUpInside" id="I3e-EF-ZaB"/>
-                                                    <action selector="street_bbtn_click:" destination="Q0b-1J-wFr" eventType="touchUpInside" id="JJh-qD-ssF"/>
+                                                    <action selector="parking_type_btn_click:" destination="Q0b-1J-wFr" eventType="touchUpInside" id="usg-SU-INc"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpt-R1-TTX">
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpt-R1-TTX">
                                                 <rect key="frame" x="250" y="0.0" width="123" height="35.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                 <state key="normal" title="   Private Parking   " backgroundImage="round_rect_white">
                                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="private_btn_click:" destination="Q0b-1J-wFr" eventType="touchUpInside" id="7yn-36-87A"/>
-                                                    <action selector="private_btn_click:" destination="R6J-oV-2PH" eventType="touchUpInside" id="CDY-jJ-Xer"/>
+                                                    <action selector="parking_type_btn_click:" destination="Q0b-1J-wFr" eventType="touchUpInside" id="b0F-mB-pCD"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -7766,7 +7767,7 @@ typeset text.</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="558"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xhw-6I-iDW">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhw-6I-iDW">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="558"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sfa-5z-Vrb">

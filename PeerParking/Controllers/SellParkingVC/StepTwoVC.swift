@@ -23,7 +23,7 @@ class StepTwoVC: UIViewController {
         super.viewDidLoad()
 
         mini_btn.isSelected = true
-        lot_btn.isSelected = true
+        //lot_btn.isSelected = true
     }
     
 
@@ -81,48 +81,122 @@ class StepTwoVC: UIViewController {
     
   
     
-    
-    @IBAction func lot_click(_ sender: UIButton) {
-        
-        button_click(sender: sender)
-        
-    }
-    
-    @IBAction func street_bbtn_click(_ sender: UIButton) {
-        
-        button_click(sender: sender)
-        
-    }
-    
-    
+
     @IBAction func private_btn_click(_ sender: UIButton) {
         
         button_click(sender: sender)
         
     }
     
+    @IBAction func parking_type_btn_click(_ sender: UIButton) {
+        
+        button_click(sender: sender)
+        
+    }
     
     func button_click(sender: UIButton){
         
-        if(!sender.isSelected){
+       
+        if(sender.tag == 1){
             
-            print("::=unselected")
             
-            sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
-            sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-            
-            sender.isSelected = true
+            if(!sender.isSelected){
+                
+                print("::=unselected")
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                
+                sender.isSelected = true
+                
+                street_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                street_btn.isSelected = false
+                street_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                
+                private_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                private_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                private_btn.isSelected = false
+                
+                
+            }
+            else{
+                
+                print("::=selected")
+                
+                
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                
+                sender.isSelected = false
+            }
         }
-        else{
+        else if(sender.tag == 2){
             
-            print("::=selected")
+            if(!sender.isSelected){
+                
+                print("::=unselected")
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                
+                sender.isSelected = true
+                
+                lot_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                lot_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                lot_btn.isSelected = false
+                
+                private_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                private_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                private_btn.isSelected = false
+                
+                
+            }
+            else{
+                
+                print("::=selected")
+                
+                
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                
+                sender.isSelected = false
+            }
+        }
+        else if(sender.tag == 3){
             
             
-            
-            sender.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
-            sender.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
-            
-            sender.isSelected = false
+            if(!sender.isSelected){
+                
+                print("::=unselected")
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                
+                sender.isSelected = true
+                
+                street_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                street_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                street_btn.isSelected = false
+                
+                lot_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                lot_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                lot_btn.isSelected = false
+                
+                
+            }
+            else{
+                
+                print("::=selected")
+                
+                
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                
+                sender.isSelected = false
+            }
         }
         
     }

@@ -26,7 +26,29 @@ class StepThreeVC: UIViewController {
     }
     
 
-    @IBAction func per_hour_btn(_ sender: UIButton) {
+    @IBAction func extra_fees_switch(_ sender: UIButton) {
+
+        if(sender.tag == 1){
+            
+            sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+            sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+            
+            entire_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+            entire_btn.isSelected = false
+            entire_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+            
+           
+        }
+        else if(sender.tag == 2){
+            
+            
+            sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+            sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+            
+            per_hour_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+            per_hour_btn.isSelected = false
+            per_hour_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+        }
     }
     
     @IBAction func s1(_ sender: UISwitch) {
