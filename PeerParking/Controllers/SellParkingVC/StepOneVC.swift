@@ -8,10 +8,12 @@
 
 import UIKit
 import UIAlertDateTimePicker
+import DatePickerDialog
 
 class StepOneVC: UIViewController, UIAlertDateTimePickerDelegate {
     
     
+    @IBOutlet weak var timePicker: UIDatePicker!
     @IBOutlet weak var price_switch: DGRunkeeperSwitch!
     
     @IBOutlet weak var time_field: UITextField!
@@ -21,7 +23,7 @@ class StepOneVC: UIViewController, UIAlertDateTimePickerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.timePicker.datePickerMode = .time
         if let multi_switch = price_switch {
             //
             multi_switch.titles = ["Now", "At"]
@@ -40,13 +42,28 @@ class StepOneVC: UIViewController, UIAlertDateTimePickerDelegate {
 
     @IBAction func tap_field(_ sender: UITextField) {
         
-        let datePicker = UIAlertDateTimePicker(withPickerMode: .dateAndTime, pickerTitle: "Select Date & Time", showPickerOn: (self.view.superview?.superview!)!)
+
+        datePickerTapped()
+//        let datePicker = UIAlertDateTimePicker(withPickerMode: .time, pickerTitle: "Select Time", showPickerOn: (self.view.superview?.superview?.superview)!)
+//
+//        datePicker.delegate = self
+//
+//
+//        datePicker.showAlert()
         
-        datePicker.delegate = self
-        
-        
-        datePicker.showAlert()
-        
+    }
+    
+    
+    
+    func datePickerTapped() {
+        DatePickerDialog().show("Select Time", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .time) {
+            (date) -> Void in
+            if let time = date {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "hh:mm a"
+                self.time_field.text = formatter.string(from: time)
+            }
+        }
     }
     
     @IBAction func switchValueDidChange(sender: DGRunkeeperSwitch!) {

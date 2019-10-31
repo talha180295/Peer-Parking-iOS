@@ -19,14 +19,14 @@ public class UIAlertDateTimePicker: NSObject, UIAlertDateTimePickerDelegate, UIT
     public init(withPickerMode pickerMode: UIDatePicker.Mode, pickerTitle: String?, showPickerOn view: UIView) {
         
         super.init()
-        
+        print("=====init=\(pickerMode)")
         self.setup(withPickerMode: pickerMode, pickerTitle: pickerTitle, showPickerOn: view)
     }
     
     public init(withPickerMode pickerMode: UIDatePicker.Mode, pickerTitle: String?, minDate: Date?, maxDate: Date?, showPickerOn view: UIView) {
         
         super.init()
-        
+        print("=====init=\(pickerMode)")
         self.dataStruct.maxDate = maxDate
         self.dataStruct.minDate = minDate
         self.setup(withPickerMode: pickerMode, pickerTitle: pickerTitle, showPickerOn: view)
@@ -34,7 +34,9 @@ public class UIAlertDateTimePicker: NSObject, UIAlertDateTimePickerDelegate, UIT
     
     func setup(withPickerMode pickerMode: UIDatePicker.Mode, pickerTitle: String?, showPickerOn view: UIView) {
         self.dataStruct.datePickerMode = pickerMode;
+         print("=====pickerMode=\(pickerMode)")
         if (pickerTitle == nil) || (pickerTitle == "") {
+            
             
             switch pickerMode {
             case .date:
@@ -44,7 +46,7 @@ public class UIAlertDateTimePicker: NSObject, UIAlertDateTimePickerDelegate, UIT
                 self.dataStruct.pickerTitle = "Select Time"
                 break
             case .dateAndTime:
-                self.dataStruct.pickerTitle = "Select Date & Time"
+                self.dataStruct.pickerTitle = "Select Date & Times"
                 break
             case .countDownTimer:
                 fatalError("UIAlertDateTimePicker: Count Down Timer is not supported in this version")

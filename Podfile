@@ -19,6 +19,7 @@ target 'PeerParking' do
   pod 'StepIndicator'
   pod 'UIAlertDateTimePicker'
   
+  pod 'DatePickerDialog'
 #  pod 'DGRunkeeperSwitch' , '~> 1.1.4'
 
 
