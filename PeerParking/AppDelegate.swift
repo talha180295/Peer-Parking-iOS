@@ -9,6 +9,7 @@
 import UIKit
 import SideMenuController
 import GoogleMaps
+import GooglePlaces
 import IQKeyboardManagerSwift
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,9 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.shared.enable = true
         setSideMenu()
+  
+        GMSServices.provideAPIKey(Key.Google.placesKey)
         
-        
-        GMSServices.provideAPIKey("AIzaSyAdxovNnHIWKOKQcgn6H0PhwZsFCMfXjnQ")
+        GMSPlacesClient.provideAPIKey(Key.Google.placesKey)
        
         // Override point for customization after application launch.
         return true

@@ -11,36 +11,26 @@ import CoreLocation
 import MapKit
 import GooglePlacesSearchController
 import GoogleMaps
+import GooglePlaces
 import FittedSheets
 
-class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
    
     
     //IBOutlets
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var myCollectionView: UICollectionView!
+    @IBOutlet weak var parkings_cells: UIView!
+    @IBOutlet weak var search_tf: UITextField!
     
     //Variables
     var estimateWidth=130
     var cellMarginSize=1
     
+    var locationManager = CLLocationManager()
+    var map = GMSMapView()
+    
     let GoogleMapsAPIServerKey = Key.Google.placesKey
-    lazy var placesSearchController: GooglePlacesSearchController = {
-        let controller = GooglePlacesSearchController(delegate: self,
-                                                      apiKey: GoogleMapsAPIServerKey,
-                                                      placeType: .address,
-                                                      strictBounds: true
-            // Optional: coordinate: CLLocationCoordinate2D(latitude: 55.751244, longitude: 37.618423),
-            // Optional: radius: 10,
-            // Optional: strictBounds: true,
-            // Optional: searchBarPlaceholder: "Start typing..."
-        )
-        //Optional: controller.searchBar.isTranslucent = false
-        //Optional: controller.searchBar.barStyle = .black
-        //Optional: controller.searchBar.tintColor = .white
-        //Optional: controller.searchBar.barTintColor = .black
-        return controller
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +39,15 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         //Register
         self.myCollectionView.register(UINib(nibName: "homeParkingCell", bundle: nil), forCellWithReuseIdentifier: "homeParkingCell")
+        
+        
+        tab_index = 0
+        
+        parkings_cells.isHidden = true
+        
+        
+        search_tf.setLeftPaddingPoints(30)
+        
         
         //Setup GridView
         //self.setupGridView()
@@ -67,6 +66,23 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 //        self.navigationController?.navigationBar.isHidden = false
     }
     
+    func autocompleteClicked() {
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+        
+        // Specify the place data types to return.
+        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+            UInt(GMSPlaceField.placeID.rawValue))!
+        autocompleteController.placeFields = fields
+        
+        // Specify a filter.
+        let filter = GMSAutocompleteFilter()
+        filter.type = .address
+        autocompleteController.autocompleteFilter = filter
+        
+        // Display the autocomplete view controller.
+        present(autocompleteController, animated: true, completion: nil)
+    }
     
     func loadMapView(){
         
@@ -75,21 +91,46 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                                               longitude: 103.848,
                                               zoom: 12)
         
-        let mapView = GMSMapView.map(withFrame: self.mapView.bounds, camera: camera)
-        mapView.settings.scrollGestures = true
-        mapView.settings.zoomGestures = true
-        mapView.settings.myLocationButton = false
+        map = GMSMapView.map(withFrame: self.mapView.bounds, camera: camera)
+        map.settings.scrollGestures = true
+        map.settings.zoomGestures = true
+        map.settings.myLocationButton = false
        // self.mapView = mapView
-        self.mapView.addSubview(mapView)
+        self.mapView.addSubview(map)
+        
+        map.isMyLocationEnabled = true
+        
+        //Location Manager code to fetch current location
+        self.locationManager.delegate = self
+        self.locationManager.startUpdatingLocation()
     }
     
+    //Location Manager delegates
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let location = locations.last
+        
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 12.0)
+        
+        self.map.animate(to: camera)
+        
+        //Finally stop updating location otherwise it will come again and again in this delegate
+        self.locationManager.stopUpdatingLocation()
+        
+    }
 
     @IBAction func textfield_tap(_ sender: Any) {
         print("::=hello")
-        self.navigationController?.present(placesSearchController, animated: true, completion: nil)
+        
+        self.autocompleteClicked()
+       // self.navigationController?.present(placesSearchController, animated: true, completion: nil)
     }
-    @IBAction func calender_btn(_ sender: Any) {
-      
+ 
+    @IBAction func re_center_btn(_ sender: UIButton) {
+        
+        //Location Manager code to fetch current location
+        self.locationManager.delegate = self
+        self.locationManager.startUpdatingLocation()
         
     }
     
@@ -105,6 +146,11 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
          bottomSheet(storyBoard: "Main",identifier: "ScheduleVC",sizes: [.fixed(360)],cornerRadius: 20)
         
     }
+    
+    @IBAction func arrow_btn(_ sender: UIButton) {
+        
+    }
+    
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -166,11 +212,65 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 }
 
 
-extension FindParkingVC: GooglePlacesAutocompleteViewControllerDelegate {
-    func viewController(didAutocompleteWith place: PlaceDetails) {
-        print("::=place.description=\(place.description)")
-        placesSearchController.isActive = false
+//extension FindParkingVC: GooglePlacesAutocompleteViewControllerDelegate {
+//    func viewController(didAutocompleteWith place: PlaceDetails) {
+//        print("::=place.description=\(place.description)")
+//        placesSearchController.isActive = false
+//
+//        let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate?.latitude)!, longitude: (place.coordinate?.longitude)!, zoom: 17.0)
+//
+//        self.map.animate(to: camera)
+//    }
+//
+//}
+
+
+extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
+    
+    // Handle the user's selection.
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        print("Place name: \(place.name)")
+        print("Place ID: \(place.placeID)")
+        print("Place attributions: \(place.attributions)")
+        self.search_tf.text = place.name!
+        dismiss(animated: true){
+            self.parkings_cells.isHidden = false
+        }
+        
+        
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // User canceled the operation.
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
 }
 
+extension UITextField {
+    func setLeftPaddingPoints(_ amount:CGFloat){
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+        self.leftView = paddingView
+        self.leftViewMode = .always
+    }
+    func setRightPaddingPoints(_ amount:CGFloat) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+        self.rightView = paddingView
+        self.rightViewMode = .always
+    }
+}

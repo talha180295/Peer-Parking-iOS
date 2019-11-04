@@ -19,7 +19,19 @@ class SellParkingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        step_progress.titles = ["  When", "Details", "Limitations", "Price", "Image   "]
+//        step_progress.images = [
+//            UIImage(named: "btn_radioSelected")!,
+//            UIImage(named: "btn_radioSelected")!,
+//            UIImage(named: "btn_radioSelected")!,
+//            UIImage(named: "btn_radioSelected")!,
+//            UIImage(named: "btn_radioSelected")!
+//        ]
+    }
+   
+    override func viewWillAppear(_ animated: Bool) {
         
+         self.tabBarController!.navigationItem.title = "Sell Parking"
     }
     
     @IBAction func pre_btn(_ sender: UIButton) {

@@ -16,6 +16,11 @@ class NavigationVC: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.tabBarController!.navigationItem.title = "Navigation"
+    }
+    
 
     /*
     // MARK: - Navigation

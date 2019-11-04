@@ -16,13 +16,14 @@ class StepOneVC: UIViewController {
     @IBOutlet weak var price_switch: DGRunkeeperSwitch!
     
     @IBOutlet weak var time_field: UITextField!
+  
     
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        time_field.resignFirstResponder()
         if let multi_switch = price_switch {
             //
             multi_switch.titles = ["Now", "At"]
@@ -50,11 +51,11 @@ class StepOneVC: UIViewController {
     
     
     func datePickerTapped() {
-        DatePickerDialog().show("Select Time", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .time) {
+        DatePickerDialog().show("Select Time", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .dateAndTime) {
             (date) -> Void in
             if let time = date {
                 let formatter = DateFormatter()
-                formatter.dateFormat = "hh:mm a"
+                formatter.dateFormat = "MMM d, hh:mm a"
                 self.time_field.text = formatter.string(from: time)
             }
         }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		18010AAB23549C7F008412C0 /* GoogleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18010AAA23549C7F008412C0 /* GoogleMapView.swift */; };
 		18010AAD2354C463008412C0 /* FindParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18010AAC2354C463008412C0 /* FindParkingVC.swift */; };
+		18392E792370487A007FB161 /* PricePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18392E782370487A007FB161 /* PricePicker.swift */; };
+		18392E7B23707220007FB161 /* StepFourVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18392E7A23707220007FB161 /* StepFourVC.swift */; };
 		18451971235E08C700F3AF5A /* OfferBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18451970235E08C700F3AF5A /* OfferBottomSheetVC.swift */; };
 		185DE799236094DE00FC0E25 /* FBPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185DE798236094DE00FC0E25 /* FBPopup.swift */; };
 		185DE79B2360A59900FC0E25 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185DE79A2360A59900FC0E25 /* Constants.swift */; };
@@ -116,6 +118,8 @@
 		0509213210B40E0E0C84432C /* Pods_PeerParkingUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParkingUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18010AAA23549C7F008412C0 /* GoogleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapView.swift; sourceTree = "<group>"; };
 		18010AAC2354C463008412C0 /* FindParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindParkingVC.swift; sourceTree = "<group>"; };
+		18392E782370487A007FB161 /* PricePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricePicker.swift; sourceTree = "<group>"; };
+		18392E7A23707220007FB161 /* StepFourVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFourVC.swift; sourceTree = "<group>"; };
 		18451970235E08C700F3AF5A /* OfferBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferBottomSheetVC.swift; sourceTree = "<group>"; };
 		185DE798236094DE00FC0E25 /* FBPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPopup.swift; sourceTree = "<group>"; };
 		185DE79A2360A59900FC0E25 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				185DE798236094DE00FC0E25 /* FBPopup.swift */,
+				18392E782370487A007FB161 /* PricePicker.swift */,
 			);
 			path = "Pop Up";
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				18924C3223672C6F00C0E94F /* StepThreeVC.swift */,
 				18CAA57E2368B6BA001B5503 /* FinishPopup.swift */,
 				18CAA58023695B62001B5503 /* StepFiveVC.swift */,
+				18392E7A23707220007FB161 /* StepFourVC.swift */,
 			);
 			path = SellParkingVC;
 			sourceTree = "<group>";
@@ -891,6 +897,7 @@
 				FA2815C3231E806D008AF3F5 /* HomeViewController.swift in Sources */,
 				FA0E9F6F2330FE7E0005A54C /* PlaceViewController.swift in Sources */,
 				FA6CD3792328FFE600E18CF2 /* LoacationCell.swift in Sources */,
+				18392E7B23707220007FB161 /* StepFourVC.swift in Sources */,
 				18924C272365B84D00C0E94F /* ContainerView.swift in Sources */,
 				FA0FCC5C232250DD000FF52C /* SettingViewController.swift in Sources */,
 				FA2815AB231E3F92008AF3F5 /* CustomSideMenuController.swift in Sources */,
@@ -924,6 +931,7 @@
 				FA1150C52316838400D0B1FE /* AppDelegate.swift in Sources */,
 				185DE7A62360E2B300FC0E25 /* FeedbackVC.swift in Sources */,
 				FA6CD3672328C00900E18CF2 /* HistoryCell.swift in Sources */,
+				18392E792370487A007FB161 /* PricePicker.swift in Sources */,
 				185DE7A12360BCEA00FC0E25 /* AlternateRouteVC.swift in Sources */,
 				18CAA57F2368B6BB001B5503 /* FinishPopup.swift in Sources */,
 				FA0FCC5F232250FE000FF52C /* WalletViewController.swift in Sources */,

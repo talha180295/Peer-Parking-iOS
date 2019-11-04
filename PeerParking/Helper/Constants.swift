@@ -14,6 +14,9 @@ struct Key{
     
     struct Google{
         static let placesKey = "AIzaSyCkoOvnd1_eougL23wAx7DP65C_duaJRjQ"//for photos
+        
+        static let placesKey2 = "AIzaSyAdxovNnHIWKOKQcgn6H0PhwZsFCMfXjnQ"
+        
         static let serverKey = "some key here"
     }
 

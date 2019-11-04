@@ -8,6 +8,10 @@
 
 import UIKit
 import SideMenuController
+
+//Global Variable
+var tab_index = 1
+
 class TabbarViewController: UITabBarController ,SideMenuControllerDelegate {
     
     
@@ -40,8 +44,7 @@ class TabbarViewController: UITabBarController ,SideMenuControllerDelegate {
     }
     override func viewWillAppear(_ animated: Bool) {
         
-        
-        self.selectedIndex = 1
+       self.selectedIndex = tab_index
 //        self.tabBarController?.selectedIndex = 1
     }
    

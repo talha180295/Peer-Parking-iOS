@@ -15,6 +15,7 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tab_index = 2
         // Do any additional setup after loading the view.
     }
     
@@ -27,7 +28,9 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
 //        imagePickerController.sourceType = .photoLibrary
 //        imagePickerController.mediaTypes = ["public.image"]
 //        present(imagePickerController, animated: true, completion: nil)
-        showAlert()
+//        showAlert()
+        
+        self.getImage(fromSourceType: .camera)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -75,7 +78,7 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             self.getImage(fromSourceType: .photoLibrary)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     //get image from source type

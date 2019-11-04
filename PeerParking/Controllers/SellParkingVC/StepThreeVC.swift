@@ -7,12 +7,18 @@
 //
 
 import UIKit
+import DatePickerDialog
+import EzPopup
 
 class StepThreeVC: UIViewController {
 
     @IBOutlet weak var stackview: UIStackView!
     @IBOutlet weak var per_hour_btn: UIButton!
     @IBOutlet weak var entire_btn: UIButton!
+    
+    @IBOutlet weak var allowed_timing_tf: UITextField!
+    @IBOutlet weak var extra_fee_tf: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,16 +77,6 @@ class StepThreeVC: UIViewController {
     
     func deleteViewsFromStack(index : Int)
     {
-//        UIView.animate(withDuration: 0.25) { () -> Void in
-//            let firstView = self.stackview.arrangedSubviews[index]
-//            firstView.isHidden = !firstView.isHidden
-//
-//            if(index == 5){
-//                self.per_hour_btn.isHidden = !self.per_hour_btn.isHidden
-//                self.entire_btn.isHidden = !self.entire_btn.isHidden
-//
-//            }
-//        }
         let firstView = self.stackview.arrangedSubviews[index]
         
         UIView.animate(withDuration: 0.25, animations: {
@@ -105,6 +101,60 @@ class StepThreeVC: UIViewController {
             }
         }
     }
+    
+    
+    
+    @IBAction func parking_time_btn(_ sender: UITextField) {
+        sender.resignFirstResponder()
+        datePickerTapped(sender:sender)
+    }
+    
+    @IBAction func extra_fees_btn(_ sender: UITextField) {
+         sender.resignFirstResponder()
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PricePicker") as! PricePicker
+        
+        vc.completionBlock = {(dataReturned) -> ()in
+            //Data is returned **Do anything with it **
+            print(dataReturned)
+            self.extra_fee_tf.text = dataReturned
+        }
+        let popupVC = PopupViewController(contentController: vc, popupWidth: 300, popupHeight: 300)
+        popupVC.canTapOutsideToDismiss = true
+        
+        //properties
+        //            popupVC.backgroundAlpha = 1
+        //            popupVC.backgroundColor = .black
+        //            popupVC.canTapOutsideToDismiss = true
+        //            popupVC.cornerRadius = 10
+        //            popupVC.shadowEnabled = true
+        
+        // show it by call present(_ , animated:) method from a current UIViewController
+       
+        present(popupVC, animated: true)
+    }
+    func datePickerTapped(sender:UITextField) {
+        DatePickerDialog().show(sender.placeholder!, doneButtonTitle: "DONE", cancelButtonTitle: "Cancel", datePickerMode: .time) {
+            (date) -> Void in
+            if let time = date {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "hh:mm a"
+                //self.datePickerTapped2(sender: sender,from: formatter.string(from: time))
+                sender.text = formatter.string(from: time)
+            }
+        }
+    }
+    
+//    func datePickerTapped2(sender:UITextField, from:String) {
+//        DatePickerDialog().show("To", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .time) {
+//            (date) -> Void in
+//            if let time = date {
+//                let formatter = DateFormatter()
+//                formatter.dateFormat = "hh:mm a"
+//                sender.text = "From: \(from) - \(formatter.string(from: time))"
+//            }
+//        }
+//    }
 //    if(self.watchArray.count == 0)
 //    {
 //    self.deleteViewsFromStack(index: 3)
