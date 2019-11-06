@@ -213,7 +213,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="75"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your default vehicle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ag4-wQ-GRd">
-                                        <rect key="frame" x="25" y="24" width="267" height="27"/>
+                                        <rect key="frame" x="25" y="24" width="236.5" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="27" id="C23-Q8-iAu"/>
                                         </constraints>
@@ -267,7 +267,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="912"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3d-GY-jzk">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3d-GY-jzk">
                                 <rect key="frame" x="0.0" y="88" width="375" height="790"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c68-jJ-uJz">
@@ -1271,7 +1271,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIL-R6-36G">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIL-R6-36G">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v3A-U1-7a7">
@@ -1591,7 +1591,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tO6-pq-MRe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9167" y="-3652"/>
+            <point key="canvasLocation" x="3330" y="-1727"/>
         </scene>
         <!--Tabbar View Controller-->
         <scene sceneID="0M3-fQ-6Fx">
@@ -1602,8 +1602,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="tintColor" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="selectedImageTintColor" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                 <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1635,6 +1635,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mYM-L4-Ukl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1853.6231884057972" y="455.35714285714283"/>
+        </scene>
+        <!--View AllVC-->
+        <scene sceneID="CVj-dy-Tyo">
+            <objects>
+                <viewController storyboardIdentifier="ViewAllVC" id="h2w-1F-d7L" customClass="ViewAllVC" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WyE-ef-4c8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fwx-xs-IwI">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="h2w-1F-d7L" id="vYI-Pr-SgX"/>
+                                    <outlet property="delegate" destination="h2w-1F-d7L" id="R36-gH-Y92"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fwx-xs-IwI" firstAttribute="leading" secondItem="ACo-O2-fnf" secondAttribute="leading" id="1TU-Rq-nYc"/>
+                            <constraint firstItem="fwx-xs-IwI" firstAttribute="trailing" secondItem="ACo-O2-fnf" secondAttribute="trailing" id="E9a-bE-edA"/>
+                            <constraint firstItem="fwx-xs-IwI" firstAttribute="top" secondItem="ACo-O2-fnf" secondAttribute="top" id="NEO-Pf-3w6"/>
+                            <constraint firstItem="fwx-xs-IwI" firstAttribute="bottom" secondItem="ACo-O2-fnf" secondAttribute="bottom" id="VrG-wP-HDy"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ACo-O2-fnf"/>
+                    </view>
+                    <connections>
+                        <outlet property="my_table_view" destination="fwx-xs-IwI" id="Y2S-Dt-SrV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dNB-F3-hcY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2708.6956521739135" y="455.35714285714283"/>
         </scene>
         <!--Sell Parking-->
         <scene sceneID="qno-w4-Jq2">
@@ -1673,7 +1707,7 @@
                                     <action selector="pre_btn:" destination="bxe-9D-0f5" eventType="touchUpInside" id="MJk-FA-VdG"/>
                                 </connections>
                             </button>
-                            <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="1mG-Cd-Lh7" customClass="StepIndicatorView" customModule="StepIndicator">
+                            <view userInteractionEnabled="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="1mG-Cd-Lh7" customClass="StepIndicatorView" customModule="StepIndicator">
                                 <rect key="frame" x="20" y="92" width="374" height="61"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1o-vq-fIM">
@@ -1760,7 +1794,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FjY-nF-6st">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FjY-nF-6st">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jV1-5O-p5d">
@@ -2357,16 +2391,17 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                             <constraint firstAttribute="height" constant="39" id="tkN-2Z-bxf"/>
                                         </constraints>
                                         <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="textfield_tap:" destination="ehp-Md-551" eventType="editingDidBegin" id="poM-SS-LFE"/>
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hW-if-WIy">
-                                        <rect key="frame" x="324" y="22" width="28" height="28"/>
+                                        <rect key="frame" x="319" y="17" width="33" height="39"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="28" id="A6j-3M-GK7"/>
-                                            <constraint firstAttribute="width" constant="28" id="OU5-xt-geL"/>
+                                            <constraint firstAttribute="height" constant="39" id="A6j-3M-GK7"/>
+                                            <constraint firstAttribute="width" constant="33" id="OU5-xt-geL"/>
                                         </constraints>
                                         <state key="normal" image="calender_btn"/>
                                         <connections>
@@ -2388,11 +2423,11 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                         </constraints>
                                         <state key="normal" image="search_img"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sd-tW-XR4">
-                                        <rect key="frame" x="360" y="24" width="25" height="25"/>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sd-tW-XR4">
+                                        <rect key="frame" x="360" y="17" width="27" height="39"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="5tq-ME-rIO"/>
-                                            <constraint firstAttribute="height" constant="25" id="A4m-E3-0i6"/>
+                                            <constraint firstAttribute="width" constant="27" id="5tq-ME-rIO"/>
+                                            <constraint firstAttribute="height" constant="39" id="A4m-E3-0i6"/>
                                         </constraints>
                                         <state key="normal" image="tab_selected_navigate"/>
                                         <connections>
@@ -2402,7 +2437,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="4sd-tW-XR4" secondAttribute="bottom" constant="15" id="EIo-Vi-6OH"/>
+                                    <constraint firstAttribute="bottom" secondItem="4sd-tW-XR4" secondAttribute="bottom" constant="8" id="EIo-Vi-6OH"/>
                                     <constraint firstAttribute="height" constant="64" id="JkC-lC-J1n"/>
                                     <constraint firstItem="6FG-WR-SaY" firstAttribute="top" secondItem="WQ1-fl-cEy" secondAttribute="top" constant="28" id="NDB-WH-bTC"/>
                                     <constraint firstItem="PKs-in-mpb" firstAttribute="top" secondItem="WQ1-fl-cEy" secondAttribute="top" constant="28" id="NKX-lF-56w"/>
@@ -2412,10 +2447,10 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                     <constraint firstItem="4sd-tW-XR4" firstAttribute="leading" secondItem="PKs-in-mpb" secondAttribute="trailing" constant="3" id="Urj-l9-cS0"/>
                                     <constraint firstItem="8q3-dH-JpM" firstAttribute="leading" secondItem="WQ1-fl-cEy" secondAttribute="leading" constant="22.5" id="eMW-vf-DfP"/>
                                     <constraint firstItem="8q3-dH-JpM" firstAttribute="top" secondItem="WQ1-fl-cEy" secondAttribute="top" constant="17" id="hcj-ge-eho"/>
-                                    <constraint firstAttribute="trailing" secondItem="4sd-tW-XR4" secondAttribute="trailing" constant="29" id="ipe-JQ-Qee"/>
-                                    <constraint firstAttribute="bottom" secondItem="5hW-if-WIy" secondAttribute="bottom" constant="14" id="irJ-0j-RQp"/>
-                                    <constraint firstItem="4sd-tW-XR4" firstAttribute="top" secondItem="WQ1-fl-cEy" secondAttribute="top" constant="24" id="lIx-Lj-uAL"/>
-                                    <constraint firstItem="5hW-if-WIy" firstAttribute="top" secondItem="WQ1-fl-cEy" secondAttribute="top" constant="22" id="ocF-dm-cu8"/>
+                                    <constraint firstAttribute="trailing" secondItem="4sd-tW-XR4" secondAttribute="trailing" constant="27" id="ipe-JQ-Qee"/>
+                                    <constraint firstAttribute="bottom" secondItem="5hW-if-WIy" secondAttribute="bottom" constant="8" id="irJ-0j-RQp"/>
+                                    <constraint firstItem="4sd-tW-XR4" firstAttribute="top" secondItem="WQ1-fl-cEy" secondAttribute="top" constant="17" id="lIx-Lj-uAL"/>
+                                    <constraint firstItem="5hW-if-WIy" firstAttribute="top" secondItem="WQ1-fl-cEy" secondAttribute="top" constant="17" id="ocF-dm-cu8"/>
                                     <constraint firstItem="PKs-in-mpb" firstAttribute="leading" secondItem="5hW-if-WIy" secondAttribute="trailing" constant="4" id="pRO-oV-Jkp"/>
                                     <constraint firstAttribute="trailing" secondItem="8q3-dH-JpM" secondAttribute="trailing" constant="22.5" id="uKR-Bs-y7T"/>
                                     <constraint firstAttribute="bottom" secondItem="6FG-WR-SaY" secondAttribute="bottom" constant="19" id="yG3-o2-R2a"/>
@@ -2466,8 +2501,11 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                                     <constraint firstAttribute="width" constant="78" id="g7B-p7-0vZ"/>
                                                 </constraints>
                                                 <state key="normal" image="view_all_btn"/>
+                                                <connections>
+                                                    <action selector="view_all_btn:" destination="ehp-Md-551" eventType="touchUpInside" id="tBo-Bv-wRe"/>
+                                                </connections>
                                             </button>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gx7-Vp-8c7">
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gx7-Vp-8c7">
                                                 <rect key="frame" x="11" y="53" width="403" height="107"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -2851,7 +2889,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S9a-7B-UKC" userLabel="PickerView" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="414" height="340"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="kaH-PP-yXe">
                                         <rect key="frame" x="0.0" y="63" width="414" height="216"/>
@@ -2911,10 +2949,8 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                     <constraint firstItem="kaH-PP-yXe" firstAttribute="top" secondItem="WAT-JY-cx0" secondAttribute="bottom" constant="10" id="8Ew-QT-mZo"/>
                                     <constraint firstAttribute="trailing" secondItem="kaH-PP-yXe" secondAttribute="trailing" id="AiQ-Qx-R09"/>
                                     <constraint firstItem="nJD-Gj-IAC" firstAttribute="top" secondItem="kaH-PP-yXe" secondAttribute="bottom" constant="6" id="Gl9-zC-SgJ"/>
-                                    <constraint firstAttribute="bottom" secondItem="nJD-Gj-IAC" secondAttribute="bottom" id="IuM-27-PIv"/>
                                     <constraint firstAttribute="trailing" secondItem="WAT-JY-cx0" secondAttribute="trailing" id="Lm8-vY-M5B"/>
                                     <constraint firstItem="WAT-JY-cx0" firstAttribute="top" secondItem="S9a-7B-UKC" secondAttribute="top" constant="15" id="Qiu-V8-Ihi"/>
-                                    <constraint firstAttribute="height" constant="340" id="VHC-GF-Jcf"/>
                                     <constraint firstItem="kaH-PP-yXe" firstAttribute="leading" secondItem="S9a-7B-UKC" secondAttribute="leading" id="VOh-63-nb0"/>
                                     <constraint firstItem="WAT-JY-cx0" firstAttribute="leading" secondItem="S9a-7B-UKC" secondAttribute="leading" id="ZqV-mY-nHF"/>
                                     <constraint firstAttribute="trailing" secondItem="nJD-Gj-IAC" secondAttribute="trailing" id="k9H-QE-v7z"/>
@@ -3504,7 +3540,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1i-Wz-Ce9">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1i-Wz-Ce9">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T1F-Zt-Hjj">
@@ -3727,7 +3763,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="25"/>
+                                                        <integer key="value" value="0"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </button>
@@ -3883,7 +3919,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nBL-wQ-8gi">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBL-wQ-8gi">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Wy-AH-TLI">
@@ -4185,7 +4221,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monta Loma, USA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7o-eR-jeQ">
-                                        <rect key="frame" x="134" y="28" width="146.5" height="42"/>
+                                        <rect key="frame" x="137" y="28" width="140" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="c0s-rP-RfB"/>
                                         </constraints>
@@ -4243,7 +4279,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                         <rect key="frame" x="8" y="16" width="378" height="338"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jex-AS-A3Z">
-                                                <rect key="frame" x="8" y="8" width="55" height="26"/>
+                                                <rect key="frame" x="8" y="8" width="48.5" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="26" id="sV9-LZ-U3z"/>
                                                 </constraints>
@@ -4411,13 +4447,13 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                                 <rect key="frame" x="79" y="10" width="200" height="151"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 150" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ic-ud-ecq">
-                                                        <rect key="frame" x="38" y="40.5" width="124" height="70"/>
+                                                        <rect key="frame" x="37.5" y="46.5" width="125.5" height="58.5"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="50"/>
                                                         <color key="textColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Credit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="is4-hl-Ztt">
-                                                        <rect key="frame" x="33" y="115.5" width="134.5" height="24"/>
+                                                        <rect key="frame" x="40.5" y="110" width="119" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="24" id="fIt-fb-hxR"/>
                                                         </constraints>
@@ -4495,7 +4531,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                         <rect key="frame" x="23" y="271" width="328" height="80"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Method" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qAG-VE-hEN">
-                                                <rect key="frame" x="13" y="6" width="147" height="24"/>
+                                                <rect key="frame" x="13" y="6" width="130.5" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="Phh-Aw-McQ"/>
                                                 </constraints>
@@ -4922,7 +4958,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                     <constraint firstItem="dkd-AL-mDf" firstAttribute="centerX" secondItem="ZiT-CR-2XO" secondAttribute="centerX" id="ZS5-nm-lca"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwo-eZ-hPA">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwo-eZ-hPA">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="782"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbf-vq-HOD">
@@ -5890,7 +5926,7 @@ MN 55425, USA.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monta Loma, USA -Offers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eCD-Oi-cNT">
-                                        <rect key="frame" x="101.5" y="46" width="211" height="24"/>
+                                        <rect key="frame" x="108.5" y="46" width="197.5" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="aBJ-Zc-bMK"/>
                                         </constraints>
@@ -6165,7 +6201,7 @@ MN 55425, USA.</string>
                                                         <rect key="frame" x="4" y="8" width="240" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$40 offered" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTo-eg-Hpb">
-                                                                <rect key="frame" x="10" y="19.5" width="92" height="21"/>
+                                                                <rect key="frame" x="10" y="19.5" width="81.5" height="21"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="21" id="7xV-81-LrJ"/>
                                                                 </constraints>
@@ -7859,7 +7895,7 @@ typeset text.</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="558"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhw-6I-iDW">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xhw-6I-iDW">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="558"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sfa-5z-Vrb">
@@ -7883,6 +7919,7 @@ typeset text.</string>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="Lu5-1f-oS2"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                 </subviews>

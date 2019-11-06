@@ -26,6 +26,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     //Variables
     var estimateWidth=130
     var cellMarginSize=1
+    var address = ""
     
     var locationManager = CLLocationManager()
     var map = GMSMapView()
@@ -41,7 +42,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         self.myCollectionView.register(UINib(nibName: "homeParkingCell", bundle: nil), forCellWithReuseIdentifier: "homeParkingCell")
         
         
-        tab_index = 0
+        
         
         parkings_cells.isHidden = true
         
@@ -58,6 +59,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 
     override func viewWillAppear(_ animated: Bool) {
         
+        tab_index = 0
         print("::=willapear")
         loadMapView()
         self.tabBarController!.navigationItem.title = "Find Parking"
@@ -110,10 +112,35 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         let location = locations.last
         
+        print("lat==\(location?.coordinate.latitude)")
+        print("long==\(location?.coordinate.longitude)")
         let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 12.0)
         
         self.map.animate(to: camera)
         
+        //location.
+        
+        let geoCoder = CLGeocoder()
+ 
+        geoCoder.reverseGeocodeLocation(location!, completionHandler:
+            {
+                placemarks, error in
+                
+                guard let placemark = placemarks?.first else {
+                    let errorString = error?.localizedDescription ?? "Unexpected Error"
+                    print("Unable to reverse geocode the given location. Error: \(errorString)")
+                    return
+                }
+                
+                let reversedGeoLocation = ReversedGeoLocation(with: placemark)
+                print("LOC=:\(reversedGeoLocation.formattedAddress)")
+                self.address = reversedGeoLocation.formattedAddress
+                // Apple Inc.,
+                // 1 Infinite Loop,
+                // Cupertino, CA 95014
+                // United States
+        })
+    
         //Finally stop updating location otherwise it will come again and again in this delegate
         self.locationManager.stopUpdatingLocation()
         
@@ -137,20 +164,27 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     @IBAction func filter_btn(_ sender: Any) {
         
         
-        bottomSheet(storyBoard: "Main",identifier: "FilterBottomSheetVC",sizes: [.fixed(500)],cornerRadius: 0)
+        bottomSheet(storyBoard: "Main",identifier: "FilterBottomSheetVC",sizes: [.fixed(500)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
     }
     
     @IBAction func cal_btn(_ sender: UIButton) {
         
         
-         bottomSheet(storyBoard: "Main",identifier: "ScheduleVC",sizes: [.fixed(360)],cornerRadius: 20)
+         bottomSheet(storyBoard: "Main",identifier: "ScheduleVC",sizes: [.fixed(360)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
         
     }
     
     @IBAction func arrow_btn(_ sender: UIButton) {
         
+        //self.search_tf.text = self.address
+        self.parkings_cells.isHidden = false
     }
     
+    @IBAction func view_all_btn(_ sender: UIButton) {
+        
+       // let vc = storyboard?.instantiateViewController(withIdentifier: "ViewAllVC")
+        bottomSheet(storyBoard: "Main",identifier: "ViewAllVC",sizes: [.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
+    }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -177,10 +211,10 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         //let controller = BottomSheetVC()
 //        let controller = SheetViewController(controller: UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC"), sizes: [.fixed(450), .fixed(300), .fixed(600), .fullScreen])
         
-        bottomSheet(storyBoard: "Main",identifier: "BottomSheetVC", sizes: [.fixed(500),.fullScreen],cornerRadius: 0)
+        bottomSheet(storyBoard: "Main",identifier: "BottomSheetVC", sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
     }
     
-    func bottomSheet(storyBoard:String,identifier:String,sizes:[SheetSize], cornerRadius:CGFloat){
+    func bottomSheet(storyBoard:String,identifier:String,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor){
         
         let controller = UIStoryboard(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: identifier)
         
@@ -188,7 +222,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
        
         let sheetController = SheetViewController(controller: controller, sizes: sizes)
 //        // Turn off Handle
-        sheetController.handleColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        sheetController.handleColor = handleColor
         // Turn off rounded corners
         sheetController.topCornersRadius = cornerRadius
         
@@ -272,5 +306,39 @@ extension UITextField {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
         self.rightView = paddingView
         self.rightViewMode = .always
+    }
+}
+
+
+
+struct ReversedGeoLocation {
+    let name: String            // eg. Apple Inc.
+    let streetName: String      // eg. Infinite Loop
+    let streetNumber: String    // eg. 1
+    let city: String            // eg. Cupertino
+    let state: String           // eg. CA
+    let zipCode: String         // eg. 95014
+    let country: String         // eg. United States
+    let isoCountryCode: String  // eg. US
+    
+    var formattedAddress: String {
+        return """
+        \(name),
+        \(streetNumber) \(streetName),
+        \(city), \(state) \(zipCode)
+        \(country)
+        """
+    }
+    
+    // Handle optionals as needed
+    init(with placemark: CLPlacemark) {
+        self.name           = placemark.name ?? ""
+        self.streetName     = placemark.thoroughfare ?? ""
+        self.streetNumber   = placemark.subThoroughfare ?? ""
+        self.city           = placemark.locality ?? ""
+        self.state          = placemark.administrativeArea ?? ""
+        self.zipCode        = placemark.postalCode ?? ""
+        self.country        = placemark.country ?? ""
+        self.isoCountryCode = placemark.isoCountryCode ?? ""
     }
 }

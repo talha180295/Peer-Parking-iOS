@@ -8,9 +8,14 @@
 
 import UIKit
 
+
+var cam = false
+
 class ContainerView: UIViewController {
 
     var counter = 0
+    
+   
     
     var controller1:UIViewController!
     var controller2:UIViewController!
@@ -40,13 +45,22 @@ class ContainerView: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         
+        print("::--=viewWillAppear|Container")
         NotificationCenter.default.addObserver(self, selector: #selector(self.btn_tap(notification:)), name: NSNotification.Name(rawValue: "btn_tap"), object: nil)
         
        
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        print("::--=viewDidAppear|Container")
+        NotificationCenter.default.addObserver(self, selector: #selector(self.btn_tap(notification:)), name: NSNotification.Name(rawValue: "btn_tap"), object: nil)
+        
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
+        
+        print("::--=viewWillDisappear|Container")
         
         NotificationCenter.default.removeObserver(self)
     }
@@ -155,3 +169,4 @@ class ContainerView: UIViewController {
         }
     }
 }
+

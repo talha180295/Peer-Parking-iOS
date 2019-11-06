@@ -15,10 +15,20 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tab_index = 2
+       
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        tab_index = 2
+        print("::--=viewWillAppear|Five")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        print("::--=viewWillDisappear|Five")
+    }
 
     @IBAction func open_cam_btn(_ sender: UIButton) {
         print("cam")
@@ -90,10 +100,18 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             let imagePickerController = UIImagePickerController()
             imagePickerController.delegate = self
             imagePickerController.sourceType = sourceType
+            imagePickerController.modalPresentationStyle = .fullScreen
 //            addChild(imagePickerController)
 //            view.addSubview(imagePickerController.view)
-            self.present(imagePickerController, animated: true, completion: nil)
+            self.navigationController? .present(imagePickerController, animated: true, completion: nil)
         }
     }
+    
+//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
+//
+//        print("::--=cancel")
+//        self.dismiss(animated: true, completion: nil)
+//
+//    }
 
 }
