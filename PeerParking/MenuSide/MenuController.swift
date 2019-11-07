@@ -10,8 +10,8 @@ import UIKit
 
 class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSource{
 
-    let dict = [["name" : "Home","segue":"HomeVC"],["name" : "Profile","segue":"ProfileVC"],["name" : "Wallet","segue":"WalletVC"],["name" : "My Vehicles","segue":"VehicleVC"],["name" : "Parkings","segue":"parkingVC"],
-                ["name" : "Notifications","segue":"notificationVC"],["name" : "","segue":""],["name" : "Settings","segue":"SettingVC"],["name" : "Help","segue":"helpVC"],["name" : "","segue":""]]
+    let dict = [["name" : "Home","segue":"HomeVC"],["name" : "Profile","segue":"ProfileVC"],["name" : "Wallet","segue":"WalletVC"],["name" : "Parkings","segue":"parkingVC"],
+                ["name" : "Requests","segue":"notificationVC"],["name" : "Notifications","segue":"notificationVC"],["name" : "","segue":""],["name" : "Settings","segue":"SettingVC"],["name" : "Help","segue":"helpVC"],["name" : "","segue":""],["name" : "Logout","segue":""]]
     let segues = ["showCenterController1", "showCenterController2", "showCenterController3"]
     private var previousIndex: NSIndexPath?
     
@@ -62,7 +62,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
             let segue = (dictInner["segue"] as! String)
             if(segue.count>0)
             {
-        sideMenuController?.performSegue(withIdentifier: segue, sender: nil)
+                sideMenuController?.performSegue(withIdentifier: segue, sender: nil)
             }
         previousIndex = indexPath as NSIndexPath?
     }

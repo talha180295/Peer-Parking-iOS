@@ -62,7 +62,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         tab_index = 0
         print("::=willapear")
         loadMapView()
-        self.tabBarController!.navigationItem.title = "Find Parking"
+        self.tabBarController!.navigationItem.title = "Navigate"
         //
         //        self.tabBarController?.tabBar.isHidden = false
         //        self.navigationController?.navigationBar.isHidden = false
@@ -168,10 +168,10 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     }
     
 //    @IBAction func cal_btn(_ sender: UIButton) {
-//        
-//        
+//
+//
 //        bottomSheet(storyBoard: "Main",identifier: "ScheduleVC",sizes: [.fixed(360)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
-//        
+//
 //    }
     
     @IBAction func arrow_btn(_ sender: UIButton) {
@@ -307,7 +307,7 @@ extension NavigationVC: GMSAutocompleteViewControllerDelegate {
 //    let zipCode: String         // eg. 95014
 //    let country: String         // eg. United States
 //    let isoCountryCode: String  // eg. US
-//    
+//
 //    var formattedAddress: String {
 //        return """
 //        \(name),
@@ -316,7 +316,7 @@ extension NavigationVC: GMSAutocompleteViewControllerDelegate {
 //        \(country)
 //        """
 //    }
-//    
+//
 //    // Handle optionals as needed
 //    init(with placemark: CLPlacemark) {
 //        self.name           = placemark.name ?? ""
