@@ -89,18 +89,18 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     func loadMapView(){
         
         print("::=loadMap")
-        let camera = GMSCameraPosition.camera(withLatitude: 1.285,
-                                              longitude: 103.848,
-                                              zoom: 12)
+       // let camera = GMSCameraPosition.camera(withLatitude: 1.285,
+//                                              longitude: 103.848,
+//                                              zoom: 12)
         
-        map = GMSMapView.map(withFrame: self.mapView.bounds, camera: camera)
-        map.settings.scrollGestures = true
-        map.settings.zoomGestures = true
-        map.settings.myLocationButton = false
-       // self.mapView = mapView
-        self.mapView.addSubview(map)
-        
-        map.isMyLocationEnabled = true
+//        map = GMSMapView.map(withFrame: self.mapView.bounds, camera: camera)
+//        map.settings.scrollGestures = true
+//        map.settings.zoomGestures = true
+//        map.settings.myLocationButton = false
+//       // self.mapView = mapView
+//        self.mapView.addSubview(map)
+//
+//        map.isMyLocationEnabled = true
         
         //Location Manager code to fetch current location
         self.locationManager.delegate = self
@@ -115,6 +115,15 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         print("lat==\(location?.coordinate.latitude)")
         print("long==\(location?.coordinate.longitude)")
         let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 12.0)
+        
+        map = GMSMapView.map(withFrame: self.mapView.bounds, camera: camera)
+        map.settings.scrollGestures = true
+        map.settings.zoomGestures = true
+        map.settings.myLocationButton = false
+        // self.mapView = mapView
+        self.mapView.addSubview(map)
+        
+        map.isMyLocationEnabled = true
         
         self.map.animate(to: camera)
         
