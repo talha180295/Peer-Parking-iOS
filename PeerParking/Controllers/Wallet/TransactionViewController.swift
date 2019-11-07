@@ -16,7 +16,7 @@ class TransactionViewController: UIViewController , UIGestureRecognizerDelegate,
     @IBOutlet weak var btnBack: UIButton!
     let closeThresholdHeight: CGFloat = 150
     let openThreshold: CGFloat = UIScreen.main.bounds.height - 200
-    let closeThreshold = UIScreen.main.bounds.height - 120 // same value as closeThresholdHeight
+    let closeThreshold = UIScreen.main.bounds.height - 90 // same value as closeThresholdHeight
     var panGestureRecognizer: UIPanGestureRecognizer?
     var animator: UIViewPropertyAnimator?
     
@@ -134,12 +134,16 @@ class TransactionViewController: UIViewController , UIGestureRecognizerDelegate,
     @objc func respondToPanGesture(recognizer: UIPanGestureRecognizer) {
         guard !lockPan else { return }
         if recognizer.state == .ended {
+            
             let maxY = UIScreen.main.bounds.height - CGFloat(openThreshold)
+            
             lockPan = true
             if maxY > self.view.frame.minY {
                 maximize { self.lockPan = false }
+                print("::=maxY=\(maxY)")
             } else {
                 minimize { self.lockPan = false }
+                print("::=minY=\(maxY)")
             }
             return
         }
@@ -174,6 +178,7 @@ class TransactionViewController: UIViewController , UIGestureRecognizerDelegate,
         let maxHeight = view.frame.height - closeThresholdHeight
         let percentage = Int(100 - ((position * 100) / maxHeight))
         
+        print("percentage=\(percentage)")
         gotPanned(percentage)
         
         let name = NSNotification.Name(rawValue: "BottomViewMoved")

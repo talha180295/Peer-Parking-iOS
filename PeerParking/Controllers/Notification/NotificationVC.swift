@@ -1,25 +1,25 @@
 //
-//  NotificationViewController.swift
+//  NotificationVC.swift
 //  PeerParking
 //
-//  Created by Munzareen Atique on 11/09/2019.
+//  Created by Apple on 07/11/2019.
 //  Copyright © 2019 Munzareen Atique. All rights reserved.
 //
 
 import UIKit
 
-class NotificationViewController: UIViewController ,UITableViewDataSource,UITableViewDelegate {
+class NotificationVC: UIViewController ,UITableViewDataSource,UITableViewDelegate {
 
-    @IBOutlet weak var tblNotification: UITableView!
+    @IBOutlet weak var table_view: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tblNotification.dataSource = self
-        tblNotification.delegate = self
-        
-        tblNotification.register(UINib(nibName: "NotificationCell", bundle: nil), forCellReuseIdentifier: "NotificationCell")
+        table_view.dataSource = self
+        table_view.delegate = self
+        table_view.register(UINib(nibName: "NotificationCell", bundle: nil), forCellReuseIdentifier: "NotificationCell")
         // Do any additional setup after loading the view.
-        self.tblNotification.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: "headerCell")
+        self.table_view.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: "headerCell")
         
     }
     
@@ -57,22 +57,11 @@ class NotificationViewController: UIViewController ,UITableViewDataSource,UITabl
         return headerCell
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tblNotification.dequeueReusableCell(withIdentifier: "NotificationCell") as! NotificationCell
+        let cell = table_view.dequeueReusableCell(withIdentifier: "NotificationCell") as! NotificationCell
         
-       
+        
         cell.selectionStyle = .none
         return  cell;
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

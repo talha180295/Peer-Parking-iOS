@@ -70,8 +70,9 @@
                         <segue destination="SGY-NZ-FNa" kind="custom" identifier="SettingVC" customClass="CenterContainmentSegue" customModule="SideMenuController" id="84B-JI-EBv"/>
                         <segue destination="jW6-n6-Xiw" kind="custom" identifier="WalletVC" customClass="CenterContainmentSegue" customModule="SideMenuController" id="Cpw-FH-fNm"/>
                         <segue destination="zHi-1B-Skk" kind="custom" identifier="parkingVC" customClass="CenterContainmentSegue" customModule="SideMenuController" id="fJ8-IN-Lf8"/>
-                        <segue destination="fto-Vz-q3M" kind="custom" identifier="notificationVC" customClass="CenterContainmentSegue" customModule="SideMenuController" id="WPF-5e-Uh9"/>
+                        <segue destination="fto-Vz-q3M" kind="custom" identifier="requestVC" customClass="CenterContainmentSegue" customModule="SideMenuController" id="WPF-5e-Uh9"/>
                         <segue destination="piM-96-rBr" kind="custom" identifier="helpVC" customClass="CenterContainmentSegue" customModule="SideMenuController" id="oea-R4-ERK"/>
+                        <segue destination="GZk-bn-OCd" kind="custom" identifier="NotificationVC" customClass="CenterContainmentSegue" customModule="SideMenuController" id="y0x-Ah-CA4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sI2-eG-gI5" sceneMemberID="firstResponder"/>
@@ -1732,7 +1733,7 @@
                                                     <action selector="view_all_btn:" destination="Inz-Lf-iUt" eventType="touchUpInside" id="o6t-ZJ-I7Q"/>
                                                 </connections>
                                             </button>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pOa-6h-aGT">
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pOa-6h-aGT">
                                                 <rect key="frame" x="11" y="53" width="403" height="107"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -2675,7 +2676,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                                     <action selector="view_all_btn:" destination="ehp-Md-551" eventType="touchUpInside" id="tBo-Bv-wRe"/>
                                                 </connections>
                                             </button>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gx7-Vp-8c7">
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gx7-Vp-8c7">
                                                 <rect key="frame" x="11" y="53" width="403" height="107"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -5001,10 +5002,10 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
             </objects>
             <point key="canvasLocation" x="610" y="3046"/>
         </scene>
-        <!--Notifications-->
+        <!--Requests-->
         <scene sceneID="g3y-CD-yI0">
             <objects>
-                <viewController id="jCM-bC-daU" customClass="NotificationViewController" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RequestVC" id="jCM-bC-daU" customClass="RequestVC" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VNm-MK-gri"/>
                         <viewControllerLayoutGuide type="bottom" id="Q53-zm-dn5"/>
@@ -5028,14 +5029,14 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pKM-38-08o"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Notifications" id="gNR-Ra-rst"/>
+                    <navigationItem key="navigationItem" title="Requests" id="gNR-Ra-rst"/>
                     <connections>
-                        <outlet property="tblNotification" destination="ksf-Oy-NBt" id="iRN-T1-djK"/>
+                        <outlet property="tblNotification" destination="ksf-Oy-NBt" id="1oD-Yn-pnu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yg6-t3-fFm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1476.8115942028987" y="3709.8214285714284"/>
+            <point key="canvasLocation" x="565" y="3908"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uSK-91-8ex">
@@ -5053,7 +5054,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D7K-OJ-24V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-98" y="3709"/>
+            <point key="canvasLocation" x="-259" y="3907"/>
         </scene>
         <!--Parking Detail View Controller-->
         <scene sceneID="p8I-4r-47n">
@@ -6581,7 +6582,7 @@ typeset text.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUR-s6-2vG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="570" y="4377"/>
+            <point key="canvasLocation" x="-1796" y="5023"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IPR-LG-osm">
@@ -6599,7 +6600,7 @@ typeset text.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Ra-bG-73g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1007" y="4375"/>
+            <point key="canvasLocation" x="-2638" y="5023"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3Ll-9c-ocE">
@@ -8365,6 +8366,60 @@ Click Finish to publish your offer</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o3x-Ts-crS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5708.6956521739139" y="592.63392857142856"/>
+        </scene>
+        <!--Notifications-->
+        <scene sceneID="su1-RX-DDy">
+            <objects>
+                <viewController storyboardIdentifier="NotificationVC" id="rim-41-go6" customClass="NotificationVC" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hfV-eS-xwv"/>
+                        <viewControllerLayoutGuide type="bottom" id="BKJ-Vd-D9G"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SKM-Db-NRy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hC6-0B-Hm4">
+                                <rect key="frame" x="20" y="108" width="374" height="754"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="hC6-0B-Hm4" firstAttribute="leading" secondItem="2wv-8q-vTO" secondAttribute="leading" constant="20" id="P1i-qL-wgm"/>
+                            <constraint firstItem="hC6-0B-Hm4" firstAttribute="centerX" secondItem="SKM-Db-NRy" secondAttribute="centerX" id="Qz4-SA-je1"/>
+                            <constraint firstItem="2wv-8q-vTO" firstAttribute="trailing" secondItem="hC6-0B-Hm4" secondAttribute="trailing" constant="20" id="dq8-sA-UJx"/>
+                            <constraint firstItem="BKJ-Vd-D9G" firstAttribute="top" secondItem="hC6-0B-Hm4" secondAttribute="bottom" id="fJe-KL-doB"/>
+                            <constraint firstItem="hC6-0B-Hm4" firstAttribute="top" secondItem="hfV-eS-xwv" secondAttribute="bottom" constant="20" id="qCE-cv-8CU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2wv-8q-vTO"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Notifications" id="U3O-tg-FCl"/>
+                    <connections>
+                        <outlet property="table_view" destination="hC6-0B-Hm4" id="73C-RS-WJy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EJb-zd-SJg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="650.72463768115949" y="4701.5625"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5n3-zc-2j0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GZk-bn-OCd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lDV-xu-iyU">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rim-41-go6" kind="relationship" relationship="rootViewController" id="LHL-n8-SmH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g4b-cX-JRb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-259.4202898550725" y="4701.5625"/>
         </scene>
     </scenes>
     <resources>
