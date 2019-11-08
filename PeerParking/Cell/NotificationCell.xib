@@ -17,9 +17,60 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9g6-aG-XUb" id="LMX-kH-C33">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="84.5"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <color key="backgroundColor" red="0.93725490199999995" green="0.20392156859999999" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bus_selected" translatesAutoresizingMaskIntoConstraints="NO" id="spG-Cq-501">
+                        <rect key="frame" x="14" y="12" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="YCv-Ie-2Fl"/>
+                            <constraint firstAttribute="width" constant="60" id="kA8-p6-7Lq"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4W9-8W-5nl">
+                        <rect key="frame" x="103" y="12" width="77" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="77" id="E8H-tN-7oo"/>
+                            <constraint firstAttribute="height" constant="21" id="R5H-7Q-FzJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <color key="textColor" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPF-qw-8xh">
+                        <rect key="frame" x="103" y="51" width="69" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 seconds ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fnV-Gb-YLB">
+                        <rect key="frame" x="259" y="12" width="145" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="FHA-ef-Eb2"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="fnV-Gb-YLB" secondAttribute="trailing" constant="10" id="IzQ-2E-3sE"/>
+                    <constraint firstItem="spG-Cq-501" firstAttribute="leading" secondItem="LMX-kH-C33" secondAttribute="leading" constant="14" id="MYi-iu-b3T"/>
+                    <constraint firstItem="4W9-8W-5nl" firstAttribute="leading" secondItem="spG-Cq-501" secondAttribute="trailing" constant="29" id="RyC-s0-Iti"/>
+                    <constraint firstItem="fnV-Gb-YLB" firstAttribute="leading" secondItem="4W9-8W-5nl" secondAttribute="trailing" constant="79" id="Vd1-cJ-P2S"/>
+                    <constraint firstItem="fnV-Gb-YLB" firstAttribute="top" secondItem="LMX-kH-C33" secondAttribute="top" constant="12" id="WVp-DZ-hAF"/>
+                    <constraint firstItem="rPF-qw-8xh" firstAttribute="top" secondItem="4W9-8W-5nl" secondAttribute="bottom" constant="18" id="cMy-ys-fwB"/>
+                    <constraint firstItem="rPF-qw-8xh" firstAttribute="leading" secondItem="spG-Cq-501" secondAttribute="trailing" constant="29" id="gcW-AX-nBm"/>
+                    <constraint firstAttribute="bottom" secondItem="spG-Cq-501" secondAttribute="bottom" constant="12.5" id="jN1-60-mAE"/>
+                    <constraint firstItem="spG-Cq-501" firstAttribute="top" secondItem="LMX-kH-C33" secondAttribute="top" constant="12" id="kjQ-c6-t3b"/>
+                    <constraint firstItem="4W9-8W-5nl" firstAttribute="top" secondItem="LMX-kH-C33" secondAttribute="top" constant="12" id="sod-Xt-Vy0"/>
+                    <constraint firstAttribute="bottom" secondItem="rPF-qw-8xh" secondAttribute="bottom" constant="12.5" id="xiR-gT-3Ql"/>
+                </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <point key="canvasLocation" x="-101.44927536231884" y="53.236607142857139"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="bus_selected" width="67" height="67"/>
+    </resources>
 </document>

@@ -14,12 +14,23 @@ class SplashViewController: UIViewController {
     
     /// @abstract Viewdidload method
     
+    @IBOutlet weak var app_version: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        let app_build_Version = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+        
+        print("appVersion=\(appVersion!)(\(app_build_Version!))")
+        
+        self.app_version.text = "v \(appVersion!)(\(app_build_Version!))"
+        
        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            
             
             
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
