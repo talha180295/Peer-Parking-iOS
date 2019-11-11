@@ -18,8 +18,7 @@ target 'PeerParking' do
   pod 'EzPopup'
   pod 'StepIndicator'
   pod 'DatePickerDialog'
-  pod 'FlexibleSteppedProgressBar'
-  pod 'JKSteppedProgressBar'
+
 
 #  pod 'DGRunkeeperSwitch' , '~> 1.1.4'
 
