@@ -63,9 +63,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         print("::=willapear")
         loadMapView()
         self.tabBarController!.navigationItem.title = "Find Parking"
-//
-//        self.tabBarController?.tabBar.isHidden = false
-//        self.navigationController?.navigationBar.isHidden = false
+        
     }
     
     func autocompleteClicked() {
@@ -89,18 +87,17 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     func loadMapView(){
         
         print("::=loadMap")
-       // let camera = GMSCameraPosition.camera(withLatitude: 1.285,
-//                                              longitude: 103.848,
-//                                              zoom: 12)
         
-//        map = GMSMapView.map(withFrame: self.mapView.bounds, camera: camera)
-//        map.settings.scrollGestures = true
-//        map.settings.zoomGestures = true
-//        map.settings.myLocationButton = false
-//       // self.mapView = mapView
-//        self.mapView.addSubview(map)
-//
-//        map.isMyLocationEnabled = true
+        let camera = GMSCameraPosition.init()
+        
+        map = GMSMapView.map(withFrame: self.mapView.bounds, camera: camera)
+        map.settings.scrollGestures = true
+        map.settings.zoomGestures = true
+        map.settings.myLocationButton = false
+       // self.mapView = mapView
+        self.mapView.addSubview(map)
+
+        map.isMyLocationEnabled = true
         
         //Location Manager code to fetch current location
         self.locationManager.delegate = self
@@ -116,21 +113,12 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         print("long==\(location?.coordinate.longitude)")
         let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 12.0)
         
-        map = GMSMapView.map(withFrame: self.mapView.bounds, camera: camera)
-        map.settings.scrollGestures = true
-        map.settings.zoomGestures = true
-        map.settings.myLocationButton = false
-        // self.mapView = mapView
-        self.mapView.addSubview(map)
-        
-        map.isMyLocationEnabled = true
-        
         self.map.animate(to: camera)
         
         //location.
         
         let geoCoder = CLGeocoder()
- 
+        
         geoCoder.reverseGeocodeLocation(location!, completionHandler:
             {
                 placemarks, error in
@@ -149,12 +137,12 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                 // Cupertino, CA 95014
                 // United States
         })
-    
+        
         //Finally stop updating location otherwise it will come again and again in this delegate
         self.locationManager.stopUpdatingLocation()
         
     }
-
+    
     @IBAction func textfield_tap(_ sender: Any) {
         print("::=hello")
         
@@ -173,7 +161,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     @IBAction func filter_btn(_ sender: Any) {
         
         
-        bottomSheet(storyBoard: "Main",identifier: "FilterBottomSheetVC",sizes: [.fixed(500)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
+        bottomSheet(storyBoard: "Main",identifier: "FilterBottomSheetVC",sizes: [.fixed(550)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
     }
     
     @IBAction func cal_btn(_ sender: UIButton) {
@@ -191,8 +179,9 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     @IBAction func view_all_btn(_ sender: UIButton) {
         
-       // let vc = storyboard?.instantiateViewController(withIdentifier: "ViewAllVC")
-        bottomSheet(storyBoard: "Main",identifier: "ViewAllVC",sizes: [.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ViewAllVCNav")
+        present(vc!, animated: true, completion: nil)
+        //bottomSheet(storyBoard: "Main",identifier: "ViewAllVC",sizes: [.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
     }
     
     

@@ -59,10 +59,14 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     
     override func viewWillAppear(_ animated: Bool) {
         
-        tab_index = 0
+        tab_index = 1
+        
+        
         print("::=willapear")
         loadMapView()
         self.tabBarController!.navigationItem.title = "Navigate"
+        
+        parkings_cells.isHidden = true
         //
         //        self.tabBarController?.tabBar.isHidden = false
         //        self.navigationController?.navigationBar.isHidden = false
@@ -89,9 +93,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     func loadMapView(){
         
         print("::=loadMap")
-        let camera = GMSCameraPosition.camera(withLatitude: 1.285,
-                                              longitude: 103.848,
-                                              zoom: 12)
+       let camera = GMSCameraPosition.init()
         
         map = GMSMapView.map(withFrame: self.mapView.bounds, camera: camera)
         map.settings.scrollGestures = true
@@ -182,8 +184,10 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     
     @IBAction func view_all_btn(_ sender: UIButton) {
         
-        // let vc = storyboard?.instantiateViewController(withIdentifier: "ViewAllVC")
-        bottomSheet(storyBoard: "Main",identifier: "ViewAllVC",sizes: [.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ViewAllVC")
+        present(vc!, animated: true, completion: nil)
+       
+        //bottomSheet(storyBoard: "Main",identifier: "ViewAllVC",sizes: [.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
     }
     
     

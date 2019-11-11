@@ -37,5 +37,9 @@ class ViewAllVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         self.navigationController?.popViewController(animated: true)
     }
   
-
+    @IBAction func back_btn(_ sender: UIBarButtonItem) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }

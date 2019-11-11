@@ -21,6 +21,9 @@ class FilterBottomSheetVC: UIViewController {
     @IBOutlet weak var street_btn: UIButton!
     @IBOutlet weak var private_btn: UIButton!
 
+    @IBOutlet weak var m_10: UIButton!
+    @IBOutlet weak var m_20: UIButton!
+    @IBOutlet weak var m_30: UIButton!
     
     @IBOutlet weak var price_switch: DGRunkeeperSwitch!
     
@@ -154,4 +157,115 @@ class FilterBottomSheetVC: UIViewController {
         
     }
     
+    @IBAction func available_in_btn_click(_ sender: UIButton) {
+        
+        avail_button_click(sender: sender)
+        
+    }
+    func avail_button_click(sender: UIButton){
+        
+        
+        if(sender.tag == 1){
+            
+            
+            if(!sender.isSelected){
+                
+                print("::=unselected")
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                
+                sender.isSelected = true
+                
+                m_20.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                m_20.isSelected = false
+                m_20.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                
+                m_30.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                m_30.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                m_30.isSelected = false
+                
+                
+            }
+            else{
+                
+                print("::=selected")
+                
+                
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                
+                sender.isSelected = false
+            }
+        }
+        else if(sender.tag == 2){
+            
+            if(!sender.isSelected){
+                
+                print("::=unselected")
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                
+                sender.isSelected = true
+                
+                m_10.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                m_10.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                m_10.isSelected = false
+                
+                m_30.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                m_30.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                m_30.isSelected = false
+                
+                
+            }
+            else{
+                
+                print("::=selected")
+                
+                
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                
+                sender.isSelected = false
+            }
+        }
+        else if(sender.tag == 3){
+            
+            
+            if(!sender.isSelected){
+                
+                print("::=unselected")
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                
+                sender.isSelected = true
+                
+                m_10.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                m_10.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                m_10.isSelected = false
+                
+                m_20.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                m_20.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                m_20.isSelected = false
+                
+                
+            }
+            else{
+                
+                print("::=selected")
+                
+                
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                
+                sender.isSelected = false
+            }
+        }
+        
+    }
 }

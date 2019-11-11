@@ -30,6 +30,10 @@ class OfferBottomSheetVC: UIViewController {
     }
     
     
+    @IBAction func send_offer(_ sender: UIButton) {
+        
+        self.dismiss(animated: false, completion: nil)
+    }
     
    
 

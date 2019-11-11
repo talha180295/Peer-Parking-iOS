@@ -118,7 +118,8 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2660 LKE Extension, Suite 237" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="5O6-OR-usS">
                                         <rect key="frame" x="5" y="38" width="145" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gK1-aa-QPS">
@@ -154,21 +155,11 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(100)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B3M-ri-uXr">
-                                                <rect key="frame" x="86.5" y="2" width="23.5" height="11"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="bEn-SL-ABR" firstAttribute="top" secondItem="gK1-aa-QPS" secondAttribute="top" constant="2" id="4Hc-vL-7Zi"/>
-                                            <constraint firstAttribute="trailing" secondItem="B3M-ri-uXr" secondAttribute="trailing" constant="16" id="9j6-Di-AR2"/>
-                                            <constraint firstItem="B3M-ri-uXr" firstAttribute="top" secondItem="gK1-aa-QPS" secondAttribute="top" constant="2" id="DLQ-tg-s37"/>
                                             <constraint firstItem="bEn-SL-ABR" firstAttribute="leading" secondItem="gK1-aa-QPS" secondAttribute="leading" id="OxD-fO-t2r"/>
-                                            <constraint firstItem="B3M-ri-uXr" firstAttribute="leading" secondItem="bEn-SL-ABR" secondAttribute="trailing" constant="6.5" id="YHN-ad-krP"/>
-                                            <constraint firstAttribute="bottom" secondItem="B3M-ri-uXr" secondAttribute="bottom" constant="1" id="oAy-2m-bYq"/>
                                             <constraint firstAttribute="height" constant="14" id="uJx-zY-Jf9"/>
                                             <constraint firstAttribute="bottom" secondItem="bEn-SL-ABR" secondAttribute="bottom" constant="1" id="yEP-I9-qyY"/>
                                         </constraints>
@@ -200,14 +191,14 @@
                                 <rect key="frame" x="220" y="0.0" width="43" height="87"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$9.56" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="GCb-n1-Nwt">
-                                        <rect key="frame" x="0.0" y="58" width="43" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <rect key="frame" x="0.0" y="43" width="43" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Per hour" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="m79-YI-C4P">
-                                        <rect key="frame" x="0.0" y="48" width="43" height="12"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
+                                        <rect key="frame" x="0.0" y="30" width="43" height="10"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="8"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -215,11 +206,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="m79-YI-C4P" secondAttribute="trailing" id="0mC-s8-o5z"/>
-                                    <constraint firstAttribute="bottom" secondItem="GCb-n1-Nwt" secondAttribute="bottom" constant="8" id="4Zz-x4-0We"/>
+                                    <constraint firstAttribute="bottom" secondItem="GCb-n1-Nwt" secondAttribute="bottom" constant="32" id="4Zz-x4-0We"/>
                                     <constraint firstItem="m79-YI-C4P" firstAttribute="leading" secondItem="lGw-jN-Wcu" secondAttribute="leading" id="Vs6-b7-rF9"/>
                                     <constraint firstItem="GCb-n1-Nwt" firstAttribute="leading" secondItem="lGw-jN-Wcu" secondAttribute="leading" id="Xiz-La-EcI"/>
                                     <constraint firstAttribute="trailing" secondItem="GCb-n1-Nwt" secondAttribute="trailing" id="ffX-7g-7gw"/>
-                                    <constraint firstItem="GCb-n1-Nwt" firstAttribute="top" secondItem="m79-YI-C4P" secondAttribute="bottom" constant="-2" id="ugx-Vf-61k"/>
+                                    <constraint firstItem="GCb-n1-Nwt" firstAttribute="top" secondItem="m79-YI-C4P" secondAttribute="bottom" constant="3" id="ugx-Vf-61k"/>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_img" translatesAutoresizingMaskIntoConstraints="NO" id="eCT-uJ-bJb">
@@ -270,7 +261,7 @@
     </objects>
     <resources>
         <image name="bg_img" width="213" height="213"/>
-        <image name="s_marker" width="4" height="5"/>
-        <image name="timer" width="5.5" height="5.5"/>
+        <image name="s_marker" width="15" height="20"/>
+        <image name="timer" width="20.5" height="20.5"/>
     </resources>
 </document>
