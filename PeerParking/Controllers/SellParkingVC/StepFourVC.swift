@@ -12,6 +12,9 @@ import EzPopup
 class StepFourVC: UIViewController {
 
     @IBOutlet weak var amount_tf: UITextField!
+    @IBOutlet weak var is_negotiable: UISwitch!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,6 +30,8 @@ class StepFourVC: UIViewController {
             //Data is returned **Do anything with it **
             print(dataReturned)
             self.amount_tf.text = dataReturned
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "initial_price")
+            
         }
         let popupVC = PopupViewController(contentController: vc, popupWidth: 300, popupHeight: 300)
         popupVC.canTapOutsideToDismiss = true
@@ -44,6 +49,14 @@ class StepFourVC: UIViewController {
         
     }
     
-   
+    @IBAction func is_neg_switch(_ sender: UISwitch) {
+        
+        if(sender.isOn){
+            is_negotiable.isOn = true
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(true, forKey: "is_negotiable")
+        }
+       
+    }
+    
 
 }

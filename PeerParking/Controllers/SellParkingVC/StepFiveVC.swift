@@ -8,17 +8,42 @@
 
 import UIKit
 
-class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextViewDelegate {
 
     @IBOutlet weak var img: UIImageView!
+    @IBOutlet weak var text_view: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
+        text_view.delegate = self
+        text_view.text = "Add some usefull information"
+        text_view.textColor = UIColor.lightGray
         // Do any additional setup after loading the view.
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if(textView.text.isEmpty){
+            textView.text = "Add some usefull information"
+            textView.textColor = UIColor.lightGray
+             GLOBAL_VAR.PARKING_POST_DETAILS.updateValue("", forKey: "note")
+        }
+        else{
+            
+             GLOBAL_VAR.PARKING_POST_DETAILS.updateValue((textView.text)!, forKey: "note")
+        }
+        
+        print("heee=\(textView.text)")
+        
+       
+    }
     override func viewWillAppear(_ animated: Bool) {
         
         tab_index = 2

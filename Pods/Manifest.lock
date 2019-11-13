@@ -1,7 +1,32 @@
 PODS:
+  - Alamofire (4.9.1)
   - Cosmos (20.0.1)
   - DatePickerDialog (3.0)
   - EzPopup (1.1)
+  - FacebookCore (0.9.0):
+    - FBSDKCoreKit (~> 5.0)
+  - FacebookLogin (0.9.0):
+    - FacebookCore (~> 0.9.0)
+    - FBSDKCoreKit (~> 5.0)
+    - FBSDKLoginKit (~> 5.0)
+  - FacebookShare (0.9.0):
+    - FacebookCore (~> 0.9.0)
+    - FBSDKCoreKit (~> 5.0)
+    - FBSDKShareKit (~> 5.0)
+  - FBSDKCoreKit (5.10.0):
+    - FBSDKCoreKit/Basics (= 5.10.0)
+    - FBSDKCoreKit/Core (= 5.10.0)
+  - FBSDKCoreKit/Basics (5.10.0)
+  - FBSDKCoreKit/Core (5.10.0):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (5.10.0):
+    - FBSDKLoginKit/Login (= 5.10.0)
+  - FBSDKLoginKit/Login (5.10.0):
+    - FBSDKCoreKit (~> 5.0)
+  - FBSDKShareKit (5.10.0):
+    - FBSDKShareKit/Share (= 5.10.0)
+  - FBSDKShareKit/Share (5.10.0):
+    - FBSDKCoreKit (~> 5.0)
   - FittedSheets (1.4.5)
   - GoogleMaps (3.3.0):
     - GoogleMaps/Maps (= 3.3.0)
@@ -11,51 +36,85 @@ PODS:
   - GooglePlaces (3.3.0):
     - GoogleMaps/Base (= 3.3.0)
   - GooglePlacesSearchController (0.2.1)
+  - HelperClassPod (1.0.1):
+    - Alamofire
+    - ObjectMapper
+    - SwiftGifOrigin
   - IQKeyboardManagerSwift (6.4.1)
   - MBCircularProgressBar (0.3.5)
+  - MBRadioCheckboxButton (2.0)
+  - ObjectMapper (3.5.1)
   - SideMenuController (0.2.4)
   - StepIndicator (1.0.8)
+  - SwiftGifOrigin (1.7.0)
 
 DEPENDENCIES:
   - Cosmos
   - DatePickerDialog
   - EzPopup
+  - FacebookCore
+  - FacebookLogin
+  - FacebookShare
   - FittedSheets
   - GoogleMaps
   - GooglePlaces
   - GooglePlacesSearchController
+  - HelperClassPod
   - IQKeyboardManagerSwift
   - MBCircularProgressBar
+  - MBRadioCheckboxButton
   - SideMenuController
   - StepIndicator
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Alamofire
     - Cosmos
     - DatePickerDialog
     - EzPopup
+    - FacebookCore
+    - FacebookLogin
+    - FacebookShare
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
     - FittedSheets
     - GoogleMaps
     - GooglePlaces
     - GooglePlacesSearchController
+    - HelperClassPod
     - IQKeyboardManagerSwift
     - MBCircularProgressBar
+    - MBRadioCheckboxButton
+    - ObjectMapper
     - SideMenuController
     - StepIndicator
+    - SwiftGifOrigin
 
 SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   Cosmos: b47fddf2102bb48580cd3025d9ce0a5c658a65da
   DatePickerDialog: 03dbb8350bfa80302ab2a8c83cee1fec70184444
   EzPopup: b959cfb0d70d782a28e770a96c454df0401467c7
+  FacebookCore: ba86524b66cfa86d0f8e65d08faa8504a9f732dd
+  FacebookLogin: 6cee9fd6e1fe976fe8f7eec199e27b28b14f5d63
+  FacebookShare: 85968ad1b1606c4944fb154924e425fd29184ea5
+  FBSDKCoreKit: f9bae468a078f20c05c73450825ccd54cfafbbb7
+  FBSDKLoginKit: 4ece964272a52c4e1363d5c048a545e33761491b
+  FBSDKShareKit: 09c3b7166802a3629970fa00d45d59cf6942df37
   FittedSheets: 7f754c9f6fb4ea330cbc57c652b594255f2a6819
   GoogleMaps: cfee83da305b9aaeccf92c24ac79df11c3003492
   GooglePlaces: 1e2a87bd9efee9623ee65d44ecc35ebfecd7b13c
   GooglePlacesSearchController: e53b61b7497cf40cb18ec296b1d3314c11c0a1c0
+  HelperClassPod: bb76030247217e6fc69ce1eb6aa8c2b1daa55ae7
   IQKeyboardManagerSwift: d2df660d0b8d64a15cb2537c9ff303213fa515b2
   MBCircularProgressBar: 0b795b722a5eb5b0923822f90474e2576a1a7855
+  MBRadioCheckboxButton: 6e2a2cdc441e292e45b64c4e65eb8fc1fc05eef2
+  ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   SideMenuController: b463d2b3aa58e2afe57f57a07938fa9a647894ca
   StepIndicator: 748b293f671355b021253f82031ac002f153dc81
+  SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
 
-PODFILE CHECKSUM: da39c0d396d83c2e8ab1a4cd1abd56f703fb362f
+PODFILE CHECKSUM: 95e6fc082ea6b285aa8d03f5df054962fb5bb664
 
 COCOAPODS: 1.7.5

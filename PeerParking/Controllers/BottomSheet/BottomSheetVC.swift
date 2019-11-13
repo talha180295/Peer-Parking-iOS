@@ -9,6 +9,9 @@
 import UIKit
 import FittedSheets
 import EzPopup
+import FacebookLogin
+import FacebookCore
+import HelperClassPod
 
 
 class BottomSheetVC: UIViewController {
@@ -46,30 +49,35 @@ class BottomSheetVC: UIViewController {
         
         if(offer_btn.titleLabel?.text == "Go"){
             
-            let vc = self.story.instantiateViewController(withIdentifier: "FBPopup")
             
+            if Helper().IsUserLogin(){
+                
+            //SharedHelper().showToast(message: "Login", controller: self)
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVCNav")
+                //
+                self.present(vc, animated: false, completion: nil)
+               
+            }
+            else{
+                
+                let vc = self.story.instantiateViewController(withIdentifier: "FBPopup")
+                
+                
+                let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
+                popupVC.canTapOutsideToDismiss = true
+                
+                //properties
+                //            popupVC.backgroundAlpha = 1
+                //            popupVC.backgroundColor = .black
+                //            popupVC.canTapOutsideToDismiss = true
+                //            popupVC.cornerRadius = 10
+                //            popupVC.shadowEnabled = true
+                
+                // show it by call present(_ , animated:) method from a current UIViewController
+                present(popupVC, animated: true)
+                
+            }
             
-            let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
-            popupVC.canTapOutsideToDismiss = true
-            
-            //properties
-//            popupVC.backgroundAlpha = 1
-//            popupVC.backgroundColor = .black
-//            popupVC.canTapOutsideToDismiss = true
-//            popupVC.cornerRadius = 10
-//            popupVC.shadowEnabled = true
-            
-            // show it by call present(_ , animated:) method from a current UIViewController
-            present(popupVC, animated: true)
-            
-//            self.addChild(vc)
-//            self.view.addSubview(vc.view)
-//            vc.didMove(toParent: self)
-//
-//
-//            vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-//
-//            self.present(vc, animated: true)
             
         }
         else{
@@ -92,4 +100,7 @@ class BottomSheetVC: UIViewController {
         
         self.present(sheetController, animated: false, completion: nil)
     }
+    
+    
+  
 }

@@ -18,8 +18,11 @@ target 'PeerParking' do
   pod 'EzPopup'
   pod 'StepIndicator'
   pod 'DatePickerDialog'
-
-
+  pod 'MBRadioCheckboxButton'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'FacebookShare'
+  pod 'HelperClassPod'
 #  pod 'DGRunkeeperSwitch' , '~> 1.1.4'
 
 

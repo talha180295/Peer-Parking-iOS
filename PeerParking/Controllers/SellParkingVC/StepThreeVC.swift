@@ -16,6 +16,7 @@ class StepThreeVC: UIViewController {
     @IBOutlet weak var per_hour_btn: UIButton!
     @IBOutlet weak var entire_btn: UIButton!
     
+    @IBOutlet weak var hours_limit: UITextField!
     @IBOutlet weak var allowed_timing_tf: UITextField!
     @IBOutlet weak var extra_fee_tf: UITextField!
     
@@ -61,19 +62,36 @@ class StepThreeVC: UIViewController {
        
         self.deleteViewsFromStack(index: 1)
         
+//        if(sender.isOn){
+//            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(hours_limit.text!, forKey: "parking_hours_limit")
+//        }
     }
     
     @IBAction func s2(_ sender: UISwitch) {
         
         self.deleteViewsFromStack(index: 3)
         
+//        if(sender.isOn){
+//            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(allowed_timing_tf.text!, forKey: "parking_allowed_until")
+//        }
+        
     }
     @IBAction func s3(_ sender: UISwitch) {
         
         self.deleteViewsFromStack(index: 5)
+       
+//        if(sender.isOn){
+//            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Int(extra_fee_tf.text!)!, forKey: "parking_extra_fee_unit")
+//        }
         
     }
     
+    @IBAction func s4(_ sender: UISwitch) {
+        
+        if(sender.isOn){
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(true, forKey: "is_resident_free")
+        }
+    }
     
     func deleteViewsFromStack(index : Int)
     {
@@ -117,7 +135,9 @@ class StepThreeVC: UIViewController {
         vc.completionBlock = {(dataReturned) -> ()in
             //Data is returned **Do anything with it **
             print(dataReturned)
-            self.extra_fee_tf.text = dataReturned
+            self.extra_fee_tf.text = "$\(dataReturned)"
+            
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "parking_extra_fee_unit")
         }
         let popupVC = PopupViewController(contentController: vc, popupWidth: 300, popupHeight: 300)
         popupVC.canTapOutsideToDismiss = true
@@ -141,8 +161,13 @@ class StepThreeVC: UIViewController {
                 formatter.dateFormat = "hh:mm a"
                 //self.datePickerTapped2(sender: sender,from: formatter.string(from: time))
                 sender.text = formatter.string(from: time)
+                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(sender.text!, forKey: "parking_allowed_until")
             }
         }
+    }
+    @IBAction func hour_limit(_ sender: UITextField) {
+        
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(sender.text!)!, forKey: "parking_hours_limit")
     }
     
 //    func datePickerTapped2(sender:UITextField, from:String) {

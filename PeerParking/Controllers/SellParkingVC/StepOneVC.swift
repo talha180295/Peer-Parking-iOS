@@ -37,6 +37,14 @@ class StepOneVC: UIViewController {
             //multi_switch.titleFont = UIFont(name: "Poppins-Bold", size: 17.0)
         }
         
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, hh:mm a"
+        let result = formatter.string(from: date)
+        self.time_field.text = result
+        
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(self.time_field.text!, forKey: "start_at")
+        
     }
     
 
@@ -57,6 +65,11 @@ class StepOneVC: UIViewController {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "MMM d, hh:mm a"
                 self.time_field.text = formatter.string(from: time)
+                
+//                parking_post_details["start_at"] =  self.time_field.text!
+//                parking_post_details.setValue(self.time_field.text!, forKey: "start_at")
+                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(self.time_field.text!, forKey: "start_at")
+                
             }
         }
     }

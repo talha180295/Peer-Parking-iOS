@@ -70,15 +70,15 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
         
-        // Specify the place data types to return.
-        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-            UInt(GMSPlaceField.placeID.rawValue))!
-        autocompleteController.placeFields = fields
-        
-        // Specify a filter.
-        let filter = GMSAutocompleteFilter()
-        filter.type = .address
-        autocompleteController.autocompleteFilter = filter
+//        // Specify the place data types to return.
+//        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+//            UInt(GMSPlaceField.placeID.rawValue))!
+//        autocompleteController.placeFields = fields
+//
+//        // Specify a filter.
+//        let filter = GMSAutocompleteFilter()
+//        filter.type = .address
+//        autocompleteController.autocompleteFilter = filter
         
         // Display the autocomplete view controller.
         present(autocompleteController, animated: true, completion: nil)
@@ -240,6 +240,14 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         return width
     }
     
+    func map_marker(lat:Double,longg:Double){
+        
+        let position = CLLocationCoordinate2D(latitude: lat, longitude: longg)
+        let marker = GMSMarker(position: position)
+        marker.title = "marker"
+        marker.map = map
+    }
+    
  
 }
 
@@ -261,12 +269,25 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
     
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        
+        print("formattedAddress=\(place.formattedAddress) long=\(place.coordinate.longitude)")
+        
         print("Place name: \(place.name)")
         print("Place ID: \(place.placeID)")
         print("Place attributions: \(place.attributions)")
         self.search_tf.text = place.name!
         dismiss(animated: true){
             self.parkings_cells.isHidden = false
+            
+            let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 17.0)
+            
+            print("lat=\(place.coordinate.latitude) long=\(place.coordinate.longitude)")
+            
+            
+            self.map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude)
+            self.map.animate(to: camera)
+            
+            
         }
         
         

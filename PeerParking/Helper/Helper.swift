@@ -25,4 +25,24 @@ class Helper{
         
         view_controller.present(sheetController, animated: false, completion: nil)
     }
+    
+    
+    func IsUserLogin() -> Bool {
+        if ((UserDefaults.standard.object(forKey: "login")) == nil) {
+            return false
+        }
+        else
+        {
+            let isLogin = UserDefaults.standard.string(forKey: "login")!
+            if(isLogin.elementsEqual("yes"))
+            {
+                return true
+            }
+            else
+            {
+                return false
+            }
+        }
+    }
+    
 }

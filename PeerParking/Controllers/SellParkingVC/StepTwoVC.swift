@@ -22,7 +22,9 @@ class StepTwoVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        mini_btn.isSelected = true
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.MINI, forKey: "vehicle_type")
+        
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.PAR_LOT, forKey: "parking_type")
         //lot_btn.isSelected = true
     }
     
@@ -39,6 +41,11 @@ class StepTwoVC: UIViewController {
             suv_btn.setImage(UIImage(named: "suv_unselected"), for: .normal)
             
             bus_btn.setImage(UIImage(named: "bus_unselected"), for: .normal)
+            
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.MINI, forKey: "vehicle_type")
+            
+            
+            
         }
         else if(sender.tag == 2){
             
@@ -50,6 +57,8 @@ class StepTwoVC: UIViewController {
             suv_btn.setImage(UIImage(named: "suv_unselected"), for: .normal)
             
             bus_btn.setImage(UIImage(named: "bus_unselected"), for: .normal)
+            
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.FAMILY, forKey: "vehicle_type")
         }
         else if(sender.tag == 3){
             
@@ -61,6 +70,8 @@ class StepTwoVC: UIViewController {
             suv_btn.setImage(UIImage(named: "suv_selected"), for: .normal)
             
             bus_btn.setImage(UIImage(named: "bus_unselected"), for: .normal)
+            
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.SUV, forKey: "vehicle_type")
         }
         else if(sender.tag == 4){
             
@@ -72,6 +83,8 @@ class StepTwoVC: UIViewController {
             suv_btn.setImage(UIImage(named: "suv_unselected"), for: .normal)
             
             bus_btn.setImage(UIImage(named: "bus_selected"), for: .normal)
+            
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.BUS, forKey: "vehicle_type")
         }
         
     }
@@ -100,104 +113,45 @@ class StepTwoVC: UIViewController {
         if(sender.tag == 1){
             
             
-            if(!sender.isSelected){
-                
-                print("::=unselected")
-                
-                sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
-                sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-                
-                sender.isSelected = true
-                
-                street_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
-                street_btn.isSelected = false
-                street_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
-                
-                private_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
-                private_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
-                private_btn.isSelected = false
-                
-                
-            }
-            else{
-                
-                print("::=selected")
-                
-                
-                
-                sender.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
-                sender.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
-                
-                sender.isSelected = false
-            }
+            sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+            sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+            
+            street_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+            street_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+            private_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+            private_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.PAR_LOT, forKey: "parking_type")
         }
         else if(sender.tag == 2){
             
-            if(!sender.isSelected){
-                
-                print("::=unselected")
-                
-                sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
-                sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-                
-                sender.isSelected = true
-                
-                lot_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
-                lot_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
-                lot_btn.isSelected = false
-                
-                private_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
-                private_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
-                private_btn.isSelected = false
-                
-                
-            }
-            else{
-                
-                print("::=selected")
-                
-                
-                
-                sender.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
-                sender.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
-                
-                sender.isSelected = false
-            }
+            sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+            sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+            
+            
+            lot_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+            lot_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+            private_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+            private_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+            
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.ST_PARKING, forKey: "parking_type")
+            
         }
         else if(sender.tag == 3){
             
             
-            if(!sender.isSelected){
-                
-                print("::=unselected")
-                
-                sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
-                sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-                
-                sender.isSelected = true
-                
-                street_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
-                street_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
-                street_btn.isSelected = false
-                
-                lot_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
-                lot_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
-                lot_btn.isSelected = false
-                
-                
-            }
-            else{
-                
-                print("::=selected")
-                
-                
-                
-                sender.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
-                sender.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
-                
-                sender.isSelected = false
-            }
+            sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+            sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+            
+            street_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+            street_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+            lot_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+            lot_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+            
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.PVT_PARKING, forKey: "parking_type")
+            
+            
         }
+        
         
     }
 
