@@ -39,7 +39,7 @@ class StepOneVC: UIViewController {
         
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d, hh:mm a"
+        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         let result = formatter.string(from: date)
         self.time_field.text = result
         

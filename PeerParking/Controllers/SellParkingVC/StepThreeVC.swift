@@ -158,7 +158,7 @@ class StepThreeVC: UIViewController {
             (date) -> Void in
             if let time = date {
                 let formatter = DateFormatter()
-                formatter.dateFormat = "hh:mm a"
+                formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
                 //self.datePickerTapped2(sender: sender,from: formatter.string(from: time))
                 sender.text = formatter.string(from: time)
                 GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(sender.text!, forKey: "parking_allowed_until")

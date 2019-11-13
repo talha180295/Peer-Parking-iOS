@@ -76,15 +76,15 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
         
-        // Specify the place data types to return.
-        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-            UInt(GMSPlaceField.placeID.rawValue))!
-        autocompleteController.placeFields = fields
-        
-        // Specify a filter.
-        let filter = GMSAutocompleteFilter()
-        filter.type = .address
-        autocompleteController.autocompleteFilter = filter
+//        // Specify the place data types to return.
+//        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+//            UInt(GMSPlaceField.placeID.rawValue))!
+//        autocompleteController.placeFields = fields
+//
+//        // Specify a filter.
+//        let filter = GMSAutocompleteFilter()
+//        filter.type = .address
+//        autocompleteController.autocompleteFilter = filter
         
         // Display the autocomplete view controller.
         present(autocompleteController, animated: true, completion: nil)
@@ -246,7 +246,26 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         return width
     }
     
-    
+    func map_marker(lat:Double,longg:Double){
+        
+        // I have taken a pin image which is a custom image
+        let markerImage = UIImage(named: "radius_blue")!.withRenderingMode(.alwaysOriginal)
+        
+        //creating a marker view
+        let markerView = UIImageView(image: markerImage)
+        
+        //        //changing the tint color of the image
+        //        markerView.tintColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 0.4467572774)
+        
+        
+        let position = CLLocationCoordinate2D(latitude: lat, longitude: longg)
+        let marker = GMSMarker(position: position)
+        marker.title = "marker"
+        marker.iconView = markerView
+        marker.map = map
+        
+        
+    }
 }
 
 
@@ -272,8 +291,18 @@ extension NavigationVC: GMSAutocompleteViewControllerDelegate {
         print("Place attributions: \(place.attributions)")
         self.search_tf.text = place.name!
         dismiss(animated: true){
+            
             self.parkings_cells.isHidden = false
+            
+            let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 17.0)
+            
+            print("lat=\(place.coordinate.latitude) long=\(place.coordinate.longitude)")
+            
+            
+            self.map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude)
+            self.map.animate(to: camera)
         }
+        
         
         
     }

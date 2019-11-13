@@ -33,11 +33,11 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         if(textView.text.isEmpty){
             textView.text = "Add some usefull information"
             textView.textColor = UIColor.lightGray
-             GLOBAL_VAR.PARKING_POST_DETAILS.updateValue("", forKey: "note")
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue("", forKey: "note")
         }
         else{
             
-             GLOBAL_VAR.PARKING_POST_DETAILS.updateValue((textView.text)!, forKey: "note")
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue((textView.text)!, forKey: "note")
         }
         
         print("heee=\(textView.text)")
@@ -86,6 +86,11 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         picker.self.dismiss(animated: true){
             self.img.image = img
         }
+        
+        //let imgData =  img!.jpegData(compressionQuality: 1.0)
+
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(img, forKey: "image")
+        
 //        picker.dismiss(animated: true){
 //            self.img.image = img
 //        }

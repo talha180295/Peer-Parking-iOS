@@ -242,10 +242,22 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     func map_marker(lat:Double,longg:Double){
         
+        // I have taken a pin image which is a custom image
+        let markerImage = UIImage(named: "radius_blue")!.withRenderingMode(.alwaysOriginal)
+        
+        //creating a marker view
+        let markerView = UIImageView(image: markerImage)
+        
+//        //changing the tint color of the image
+//        markerView.tintColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 0.4467572774)
+        
+        
         let position = CLLocationCoordinate2D(latitude: lat, longitude: longg)
         let marker = GMSMarker(position: position)
         marker.title = "marker"
+        marker.iconView = markerView
         marker.map = map
+        
     }
     
  
