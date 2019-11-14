@@ -46,8 +46,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         parkings_cells.isHidden = true
         
-        
-        search_tf.setLeftPaddingPoints(30)
+        loadMapView()
+       // search_tf.setLeftPaddingPoints(30)
         
         
         //Setup GridView
@@ -61,7 +61,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         tab_index = 0
         print("::=willapear")
-        loadMapView()
+        
         self.tabBarController!.navigationItem.title = "Find Parking"
         
     }
@@ -143,9 +143,10 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
     }
     
-    @IBAction func textfield_tap(_ sender: Any) {
+    @IBAction func textfield_tap(_ sender: UITextField) {
         print("::=hello")
         
+        sender.resignFirstResponder()
         self.autocompleteClicked()
        // self.navigationController?.present(placesSearchController, animated: true, completion: nil)
     }
@@ -173,7 +174,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     @IBAction func arrow_btn(_ sender: UIButton) {
         
-        //self.search_tf.text = self.address
+        print("self.address=\(self.address)")
+        self.search_tf.text = self.address
         self.parkings_cells.isHidden = false
     }
     
@@ -258,6 +260,20 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         marker.iconView = markerView
         marker.map = map
         
+        
+    }
+    
+    func map_circle(lat:Double,longg:Double){
+        
+        let position = CLLocationCoordinate2D(latitude: lat, longitude: longg)
+        
+        let circle = GMSCircle()
+        circle.radius = 130 // Meters
+        circle.fillColor = #colorLiteral(red: 0.2591760755, green: 0.6798272133, blue: 0.8513383865, alpha: 1)
+        circle.position = position // Your CLLocationCoordinate2D  position
+        circle.strokeWidth = 5;
+        circle.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        circle.map = map; // Add it to the map
     }
     
  
@@ -296,7 +312,7 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
             print("lat=\(place.coordinate.latitude) long=\(place.coordinate.longitude)")
             
             
-            self.map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude)
+            self.map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude)
             self.map.animate(to: camera)
             
             

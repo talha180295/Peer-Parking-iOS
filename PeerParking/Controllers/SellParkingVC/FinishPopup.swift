@@ -20,27 +20,29 @@ class FinishPopup: UIViewController {
     
     @IBAction func finish_btn(_ sender: UIButton) {
 
-        let vehicle_type = GLOBAL_VAR.PARKING_POST_DETAILS["vehicle_type"] as! Int
-        let parking_type = GLOBAL_VAR.PARKING_POST_DETAILS["parking_type"] as! Int
-        let status = GLOBAL_VAR.PARKING_POST_DETAILS["status"] as! Int
-        let initial_price = GLOBAL_VAR.PARKING_POST_DETAILS["initial_price"] as! Double
-        let final_price = GLOBAL_VAR.PARKING_POST_DETAILS["final_price"] as! Double
-        let start_at = GLOBAL_VAR.PARKING_POST_DETAILS["start_at"] as! String
-        let end_at = GLOBAL_VAR.PARKING_POST_DETAILS["end_at"] as! String
-        let address = GLOBAL_VAR.PARKING_POST_DETAILS["address"] as! String
-        let longitude = GLOBAL_VAR.PARKING_POST_DETAILS["longitude"] as! String
-        let latitude = GLOBAL_VAR.PARKING_POST_DETAILS["latitude"] as! String
-        let is_negotiable = GLOBAL_VAR.PARKING_POST_DETAILS["is_negotiable"] as! Bool
-        let image = GLOBAL_VAR.PARKING_POST_DETAILS["image"] as! UIImage
-        let note = GLOBAL_VAR.PARKING_POST_DETAILS["note"] as! String
-        let parking_hours_limit = GLOBAL_VAR.PARKING_POST_DETAILS["parking_hours_limit"] as! Double
-        let parking_allowed_until = GLOBAL_VAR.PARKING_POST_DETAILS["parking_allowed_until"] as! String
-        let parking_extra_fee_unit = GLOBAL_VAR.PARKING_POST_DETAILS["parking_extra_fee_unit"] as! Double
-        let is_resident_free = GLOBAL_VAR.PARKING_POST_DETAILS["is_resident_free"] as! Bool
+        let vehicle_type = GLOBAL_VAR.PARKING_POST_DETAILS["vehicle_type"]
+        let parking_type = GLOBAL_VAR.PARKING_POST_DETAILS["parking_type"]
+        let status = GLOBAL_VAR.PARKING_POST_DETAILS["status"]
+        let initial_price = GLOBAL_VAR.PARKING_POST_DETAILS["initial_price"]
+        let final_price = GLOBAL_VAR.PARKING_POST_DETAILS["final_price"]
+        let start_at = GLOBAL_VAR.PARKING_POST_DETAILS["start_at"]
+        let end_at = GLOBAL_VAR.PARKING_POST_DETAILS["end_at"]
+        let address = GLOBAL_VAR.PARKING_POST_DETAILS["address"]
+        let longitude = GLOBAL_VAR.PARKING_POST_DETAILS["longitude"]
+        let latitude = GLOBAL_VAR.PARKING_POST_DETAILS["latitude"]
+        let is_negotiable = GLOBAL_VAR.PARKING_POST_DETAILS["is_negotiable"]
+        let image = GLOBAL_VAR.PARKING_POST_DETAILS["image"]
+        let note = GLOBAL_VAR.PARKING_POST_DETAILS["note"]
+        let parking_hours_limit = GLOBAL_VAR.PARKING_POST_DETAILS["parking_hours_limit"]
+        let parking_allowed_until = GLOBAL_VAR.PARKING_POST_DETAILS["parking_allowed_until"]
+        let parking_extra_fee = GLOBAL_VAR.PARKING_POST_DETAILS["parking_extra_fee"]
+        let parking_extra_fee_unit = GLOBAL_VAR.PARKING_POST_DETAILS["parking_extra_fee_unit"]
+        let is_resident_free = GLOBAL_VAR.PARKING_POST_DETAILS["is_resident_free"]
         
-        print("abcdef=\(vehicle_type)")
+        print("abcdef=\(type(of: parking_extra_fee_unit))")
+        print(parking_extra_fee_unit)
  
-        let params:[String:Any] = [
+        var params:[String:Any] = [
             "vehicle_type": vehicle_type,
             "parking_type": parking_type,
             "status": status,
@@ -54,11 +56,18 @@ class FinishPopup: UIViewController {
             "is_negotiable": is_negotiable,
             "note": note,
             "parking_hours_limit": parking_hours_limit,
+            "parking_extra_fee": parking_extra_fee,
             "parking_allowed_until": parking_allowed_until,
-            "parking_extra_fee_unit": parking_extra_fee_unit,
+//            "parking_extra_fee_unit": parking_extra_fee_unit,
             "is_resident_free": is_resident_free
         ]
+        if(parking_extra_fee_unit != nil){
+            params.updateValue(parking_extra_fee_unit!, forKey: "parking_extra_fee_unit")
+        }
         
+        //var params:[String:Any] = GLOBAL_VAR.PARKING_POST_DETAILS
+        
+        params.updateValue("hello", forKey: "new_val")
         let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: "auth_token")!)"
         let headers: HTTPHeaders = [
             "Authorization" : auth_value
@@ -112,11 +121,44 @@ class FinishPopup: UIViewController {
 //            }
 //        }
         
-        uploadImage(urlString: url, imageParamKey: "image", image: image, param: params, headers: headers){
-            response in
-            
-            print("response>>>\(response)")
-        }
+//        uploadImage(urlString: url, imageParamKey: "image", imageData: image, param: params, headers: headers){
+//            response in
+//            print("response>>>\(response)")
+//
+//            if response.result.value == nil {
+//                print("No response")
+//
+//                SharedHelper().showToast(message: "Internal Server Error", controller: self)
+//                return
+//            }
+//            else {
+//                let responseData = response.result.value as! NSDictionary
+//                let status = responseData["success"] as! Bool
+//                if(status)
+//                {
+//                    let message = responseData["message"] as! String
+//                    //let uData = responseData["data"] as! NSDictionary
+//                    //let userData = uData["user"] as! NSDictionary
+//                    //self.saveData(userData: userData)
+//                    //                    SharedHelper().hideSpinner(view: self.view)
+//                    //                     UserDefaults.standard.set("yes", forKey: "login")
+//                    //                    UserDefaults.standard.synchronize()
+//                    SharedHelper().showToast(message: message, controller: self)
+//
+//                    //self.after_signin()
+//                }
+//                else
+//                {
+//                    let message = responseData["message"] as! String
+//                    SharedHelper().showToast(message: message, controller: self)
+//                    //   SharedHelper().hideSpinner(view: self.view)
+//                }
+//            }
+//        }
+        
+        
+        
+        
 //        SharedHelper().RequestApiSingleImage(url: url, imageParamKey: "image", imageData: image, parameters: params, isHeaderIncluded: true, headers: headers) { response in
 //
 //            print("response>>>\(response)")
@@ -151,17 +193,17 @@ class FinishPopup: UIViewController {
 //                }
 //            }
 //        }
-//
+
     }
     
     
-    func uploadImage(urlString : String ,imageParamKey:String, image : UIImage, param : [String : Any],headers:HTTPHeaders, completionHandler : @escaping ( _ result : Any?) -> ())  {
+    func uploadImage(urlString : String ,imageParamKey:String, imageData : Data, param : [String : Any],headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void){
         
         
-        guard let imageData = image.jpegData(compressionQuality: 1.0) else {
-            print("Could not get JPEG representation of UIImage")
-            return
-        }
+//        guard let imageData = image.jpegData(compressionQuality: 1.0) else {
+//            print("Could not get JPEG representation of UIImage")
+//            return
+//        }
         
         Alamofire.upload(multipartFormData: { multipartFormData in
             for (key, value) in param {
@@ -183,12 +225,21 @@ class FinishPopup: UIViewController {
                                 }
                                 upload.validate()
                                 upload.responseJSON { response in
-                                    print("succccc")
-                                    completionHandler(response.result)
+                                    
+                                    switch response.result {
+                                    case .success:
+                                        print(response)
+                                        completion(response)
+                                        break
+                                    case .failure(let error):
+                                        print(error)
+                                        completion(response)
+                                    }
                                 }
-                            case .failure(let encodingError):
-                                print(encodingError)
-                                completionHandler("er")
+                            case .failure(_):
+                                print(encodingResult)
+//                                completion(encodingResult)
+                            
                             }
         })
     }

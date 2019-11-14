@@ -56,9 +56,9 @@ struct GLOBAL_VAR {
     
   
     static  let imgData : Data = (UIImage.init(named: "bg_img")?.pngData())!
-    static var  PARKING_POST_DETAILS:[String : Any] = ["vehicle_type": 0, "parking_type": 0, "status": 10, "initial_price": 0.0, "final_price": 0.0, "start_at": "string", "end_at": "string", "address": "string", "longitude": "string", "latitude": "string", "is_negotiable": false, "image": imgData, "note": "string", "parking_hours_limit": 0.0, "parking_allowed_until": "string", "parking_extra_fee_unit": 0.0, "is_resident_free": false]
+   // static var  PARKING_POST_DETAILS:[String : Any] = ["vehicle_type": 0, "parking_type": 0, "status": 10, "initial_price": 0.0, "final_price": 0.0, "start_at": "string", "end_at": "string", "address": "string", "longitude": "string", "latitude": "string", "is_negotiable": false, "image": imgData, "note": "string", "parking_hours_limit": 0.0, "parking_allowed_until": "string", "parking_extra_fee" : 0.0,"parking_extra_fee_unit": NSNull(), "is_resident_free": false]
     
-    
+    static var  PARKING_POST_DETAILS:[String : Any] = [:]
 }
 
 

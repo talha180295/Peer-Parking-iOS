@@ -126,7 +126,7 @@
                                         <rect key="frame" x="5" y="22.5" width="126" height="14"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEn-SL-ABR" customClass="CosmosView" customModule="Cosmos">
-                                                <rect key="frame" x="0.0" y="2" width="80" height="11"/>
+                                                <rect key="frame" x="0.0" y="2" width="126" height="11"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -158,6 +158,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="bEn-SL-ABR" firstAttribute="centerX" secondItem="gK1-aa-QPS" secondAttribute="centerX" id="0bT-64-Z5g"/>
                                             <constraint firstItem="bEn-SL-ABR" firstAttribute="top" secondItem="gK1-aa-QPS" secondAttribute="top" constant="2" id="4Hc-vL-7Zi"/>
                                             <constraint firstItem="bEn-SL-ABR" firstAttribute="leading" secondItem="gK1-aa-QPS" secondAttribute="leading" id="OxD-fO-t2r"/>
                                             <constraint firstAttribute="height" constant="14" id="uJx-zY-Jf9"/>
@@ -256,6 +257,10 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="623" height="132"/>
+            <connections>
+                <outlet property="parking_title" destination="hjW-5e-6j9" id="KMx-yB-0Re"/>
+                <outlet property="rating_view" destination="bEn-SL-ABR" id="jKk-gU-dFf"/>
+            </connections>
             <point key="canvasLocation" x="290.57971014492756" y="145.98214285714286"/>
         </collectionViewCell>
     </objects>

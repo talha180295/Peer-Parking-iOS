@@ -88,8 +88,13 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         }
         
         //let imgData =  img!.jpegData(compressionQuality: 1.0)
+        
+        guard let imageData = img?.jpegData(compressionQuality: 1.0) else {
+            print("Could not get JPEG representation of UIImage")
+            return
+        }
 
-        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(img, forKey: "image")
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(imageData, forKey: "image")
         
 //        picker.dismiss(animated: true){
 //            self.img.image = img

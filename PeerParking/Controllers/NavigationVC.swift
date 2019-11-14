@@ -22,6 +22,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     @IBOutlet weak var myCollectionView: UICollectionView!
     @IBOutlet weak var parkings_cells: UIView!
     @IBOutlet weak var search_tf: UITextField!
+    @IBOutlet weak var stack_view: UIStackView!
     
     //Variables
     var estimateWidth=130
@@ -46,9 +47,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         
         parkings_cells.isHidden = true
         
-        
-        search_tf.setLeftPaddingPoints(30)
-        
+       //stack_view.inpu
         
         //Setup GridView
         //self.setupGridView()
@@ -148,9 +147,9 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         
     }
     
-    @IBAction func textfield_tap(_ sender: Any) {
+    @IBAction func textfield_tap(_ sender: UITextField) {
         print("::=hello")
-        
+        sender.resignFirstResponder()
         self.autocompleteClicked()
         // self.navigationController?.present(placesSearchController, animated: true, completion: nil)
     }
@@ -217,6 +216,8 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         
         bottomSheet(storyBoard: "Main",identifier: "BottomSheetVC", sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
     }
+    
+    
     
     func bottomSheet(storyBoard:String,identifier:String,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor){
         

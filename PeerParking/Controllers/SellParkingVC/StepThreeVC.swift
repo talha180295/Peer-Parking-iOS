@@ -30,6 +30,8 @@ class StepThreeVC: UIViewController {
         
         self.per_hour_btn.isHidden = true
         self.entire_btn.isHidden = true
+        
+        //GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(10, forKey: "parking_extra_fee_unit")
     }
     
 
@@ -43,7 +45,7 @@ class StepThreeVC: UIViewController {
             entire_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
             entire_btn.isSelected = false
             entire_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
-            
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(10, forKey: "parking_extra_fee_unit")
            
         }
         else if(sender.tag == 2){
@@ -55,6 +57,7 @@ class StepThreeVC: UIViewController {
             per_hour_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
             per_hour_btn.isSelected = false
             per_hour_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(20, forKey: "parking_extra_fee_unit")
         }
     }
     
@@ -79,9 +82,10 @@ class StepThreeVC: UIViewController {
     @IBAction func s3(_ sender: UISwitch) {
         
         self.deleteViewsFromStack(index: 5)
-       
+//       
 //        if(sender.isOn){
-//            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Int(extra_fee_tf.text!)!, forKey: "parking_extra_fee_unit")
+//            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(10, forKey: "parking_extra_fee_unit")
+//            
 //        }
         
     }
@@ -137,7 +141,7 @@ class StepThreeVC: UIViewController {
             print(dataReturned)
             self.extra_fee_tf.text = "$\(dataReturned)"
             
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "parking_extra_fee_unit")
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "parking_extra_fee")
         }
         let popupVC = PopupViewController(contentController: vc, popupWidth: 300, popupHeight: 300)
         popupVC.canTapOutsideToDismiss = true
