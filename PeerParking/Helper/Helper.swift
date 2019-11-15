@@ -48,18 +48,36 @@ class Helper{
         }
     }
     
-    func map_circle(lat:Double,longg:Double, map_view:GMSMapView){
+    func map_circle(data:[Any], map_view:GMSMapView){
         
-        let position = CLLocationCoordinate2D(latitude: lat, longitude: longg)
         
-        let circle = GMSCircle()
-        circle.radius = 250 // Meters
-        circle.fillColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 0.4467572774)
-        circle.position = position // Your CLLocationCoordinate2D  position
-        circle.strokeWidth = 5;
-        circle.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        circle.title = "$15"
-        circle.map = map_view; // Add it to the map
+        for n in 0..<data.count {
+            
+            let dict = data[n] as! NSDictionary
+            
+            
+            
+            let lat = Double(dict["latitude"] as! String)
+            let long = Double(dict["longitude"] as! String)
+            print("dictABC=\(lat!)")
+            print("dictABC=\(long!)")
+            //        print("dictABC=\(type(of: lat) )")
+            
+            
+            
+            let position = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+            
+            //        let position = CLLocationCoordinate2D(latitude: 24.9280107, longitude: 67.0957389)
+            
+            let circle = GMSCircle()
+            circle.radius = 500 // Meters
+            circle.fillColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 0.7752568493)
+            circle.position = position // Your CLLocationCoordinate2D  position
+            circle.strokeWidth = 5;
+            circle.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+            circle.title = "$15"
+            circle.map = map_view; // Add it to the map
+        }
     }
     
     func map_marker(lat:Double,longg:Double, map_view:GMSMapView){

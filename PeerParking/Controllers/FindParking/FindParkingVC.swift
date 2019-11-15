@@ -139,7 +139,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         self.longg = (location?.coordinate.longitude)!
 //        print("lat==\(location?.coordinate.latitude)")
 //        print("long==\(location?.coordinate.longitude)")
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 13.0)
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 14.0)
         
         self.map.animate(to: camera)
         
@@ -242,7 +242,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.calculateWidth()
-        print("width=\(width-100)")
+        print("width=\(myCollectionView.frame.width)")
         return CGSize(width: myCollectionView.frame.width, height: 100)
     }
     
@@ -252,6 +252,23 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 //        let controller = SheetViewController(controller: UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC"), sizes: [.fixed(450), .fixed(300), .fixed(600), .fullScreen])
         
         bottomSheet(storyBoard: "Main",identifier: "BottomSheetVC", sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
+    }
+    
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        for cell in myCollectionView.visibleCells {
+            let indexPath = myCollectionView.indexPath(for: cell)
+            print("indexPath=\(indexPath?.row)")
+            
+            
+            let dict = parkings[(indexPath?.row)!] as! NSDictionary
+            
+            let lat = Double(dict["latitude"] as! String)
+            let long = Double(dict["longitude"] as! String)
+            
+            let camera = GMSCameraPosition.camera(withLatitude: lat!, longitude: long!, zoom: 15.0)
+            self.map.animate(to: camera)
+        }
     }
     
     func bottomSheet(storyBoard:String,identifier:String,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor){
@@ -362,6 +379,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                     let message = responseData["message"] as! String
                     let uData = responseData["data"] as! [Any]
                    
+                    Helper().map_circle(data: uData, map_view: self.map)
+                    //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
                     self.parkings = uData
                     print("parkings.count=\(self.parkings.count)")
                     self.myCollectionView.reloadData()
@@ -420,7 +439,7 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
             
             
             
-            Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
+//            Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
             //Helper().map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
             self.map.animate(to: camera)
             
