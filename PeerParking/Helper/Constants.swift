@@ -26,10 +26,28 @@ struct Key{
 struct APP_CONSTANT {
     
     
-    static let BASE_URL = "http://peer-parking.apps.fomarkmedia.com/api/v1/"
-    static let SOCIAL_LOGIN = "social_login"
-    static let POST_PARKING = "parkings"
+    struct API {
+       
+        //BASE URL FOR PEER PARKING
+        static let BASE_URL = "http://peer-parking.apps.fomarkmedia.com/api/v1/"
+        
+        
+        //STAGING_BASE_URL
+        static let STAGING_BASE_URL = "http://peer-parking.servstaging.com/api/v1/"
+        //SOCIAL LOGIN API
+        static let SOCIAL_LOGIN = "social_login"
+        //GET /parkings API
+        static let POST_PARKING = "parkings"
+        
+        
+        
+        //GET /parkings-without-token
+        static let GET_PARKING_WITHOUT_TOKEN = "parkings-without-token"
+    }
+   
     
+    
+    static let DATE_TIME_FORMAT = "yyyy-MM-dd hh:mm:ss"
     
     // VEHICLE_TYPES
     
@@ -50,6 +68,7 @@ struct APP_CONSTANT {
         
     }
 }
+
 
 
 struct GLOBAL_VAR {

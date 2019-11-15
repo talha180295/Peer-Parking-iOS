@@ -39,7 +39,7 @@ class StepOneVC: UIViewController {
         
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
         let result = formatter.string(from: date)
         self.time_field.text = result
         
@@ -63,11 +63,9 @@ class StepOneVC: UIViewController {
             (date) -> Void in
             if let time = date {
                 let formatter = DateFormatter()
-                formatter.dateFormat = "MMM d, hh:mm a"
+                formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
                 self.time_field.text = formatter.string(from: time)
                 
-//                parking_post_details["start_at"] =  self.time_field.text!
-//                parking_post_details.setValue(self.time_field.text!, forKey: "start_at")
                 GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(self.time_field.text!, forKey: "start_at")
                 
             }

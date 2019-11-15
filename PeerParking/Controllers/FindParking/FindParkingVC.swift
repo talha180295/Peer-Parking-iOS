@@ -13,6 +13,10 @@ import GooglePlacesSearchController
 import GoogleMaps
 import GooglePlaces
 import FittedSheets
+import HelperClassPod
+import SwiftyJSON
+import Alamofire
+
 
 class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
    
@@ -27,6 +31,11 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     var estimateWidth=130
     var cellMarginSize=1
     var address = ""
+    
+    var lat = 0.0
+    var longg = 0.0
+    
+    var parkings:[Any] = []
     
     var locationManager = CLLocationManager()
     var map = GMSMapView()
@@ -47,12 +56,28 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         parkings_cells.isHidden = true
         
         loadMapView()
+        
+       
        // search_tf.setLeftPaddingPoints(30)
         
         
         //Setup GridView
         //self.setupGridView()
         
+        //get all parking without token
+//        get_all_parkings(withToken: false){
+//            json in
+//
+//            self.parkings = [json]
+////
+////            self.parkings
+//            print("JSON=\(json[0]["image_url"].stringValue)")
+//            print("JSONCount=\(json.count)")
+//            print("JSONtype=\(type(of: json))")
+//
+//            self.myCollectionView.reloadData()
+//        }
+//
 
     }
     
@@ -63,6 +88,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         print("::=willapear")
         
         self.tabBarController!.navigationItem.title = "Find Parking"
+        
         
     }
     
@@ -109,9 +135,11 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         let location = locations.last
         
-        print("lat==\(location?.coordinate.latitude)")
-        print("long==\(location?.coordinate.longitude)")
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 12.0)
+        self.lat = (location?.coordinate.latitude)!
+        self.longg = (location?.coordinate.longitude)!
+//        print("lat==\(location?.coordinate.latitude)")
+//        print("long==\(location?.coordinate.longitude)")
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 13.0)
         
         self.map.animate(to: camera)
         
@@ -131,7 +159,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                 
                 let reversedGeoLocation = ReversedGeoLocation(with: placemark)
                 print("LOC=:\(reversedGeoLocation.formattedAddress)")
-                self.address = reversedGeoLocation.formattedAddress
+                self.address = reversedGeoLocation.formattedAddressName
                 // Apple Inc.,
                 // 1 Infinite Loop,
                 // Cupertino, CA 95014
@@ -173,10 +201,11 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     }
     
     @IBAction func arrow_btn(_ sender: UIButton) {
-        
+        get_all_parkings()
         print("self.address=\(self.address)")
         self.search_tf.text = self.address
         self.parkings_cells.isHidden = false
+        
     }
     
     @IBAction func view_all_btn(_ sender: UIButton) {
@@ -188,14 +217,25 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return parkings.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeParkingCell", for: indexPath)as!homeParkingCell
-        
+        if(parkings.count>0){
+            let dict = parkings[indexPath.row] as! NSDictionary
+            print(dict)
+            if(dict["address"] is NSNull)
+            {
+                
+            }
+            else
+            {
+            cell.parking_title.text = (dict["address"] as! String)
+            }
         //cell.setData(empReqObj: arrModel[indexPath.row])
+        }
         
         return cell
     }
@@ -203,7 +243,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = self.calculateWidth()
         print("width=\(width-100)")
-        return CGSize(width: width-100, height: 100)
+        return CGSize(width: myCollectionView.frame.width, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -242,39 +282,106 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         return width
     }
     
-    func map_marker(lat:Double,longg:Double){
+    
+    
+    func get_all_parkings(){//(withToken:Bool,completion: @escaping (JSON) -> Void){
         
-        // I have taken a pin image which is a custom image
-        let markerImage = UIImage(named: "radius_blue")!.withRenderingMode(.alwaysOriginal)
+//        var params:[String:Any]!
+//
+//
+//
+//
+//        if(withToken){
+//
+////             Helper().alamofireApiWithParams(url: url, method: .get, parameters: params, headers: <#T##HTTPHeaders#>, completion: <#T##(JSON) -> Void#>)
+//
+//        }
+//        else{
+//
+//            let headers: HTTPHeaders = [
+//                "Authorization" : ""
+//            ]
+//            params = [:]
+//
+//            let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
+//            print("withoutToken_url=\(url)")
+//
+//            Helper().alamofireApiWithParams(url: url, method: .get, withHeader: withToken,parameters: params, headers: headers) {
+//                json in
+//
+//                if(json["success"].boolValue){
+//
+//                    completion(json["data"])
+//                    let msg = json["message"].stringValue
+//                    SharedHelper().showToast(message: msg, controller: self)
+//                }
+//                else{
+//
+//                    let msg = json["message"].stringValue
+//                    SharedHelper().showToast(message: msg, controller: self)
+//                }
+//
+//
+//
+//            }
+//        }
+
         
-        //creating a marker view
-        let markerView = UIImageView(image: markerImage)
+        //var params:[String:Any]!
+        let params = [
+           
+            "latitude": String(self.lat),
+            "longitude": String(self.longg)
         
-//        //changing the tint color of the image
-//        markerView.tintColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 0.4467572774)
-        
-        
-        let position = CLLocationCoordinate2D(latitude: lat, longitude: longg)
-        let marker = GMSMarker(position: position)
-        marker.title = "marker"
-        marker.iconView = markerView
-        marker.map = map
-        
+        ]
+     //   print(param)
+        let headers: HTTPHeaders = [
+            "Authorization" : ""
+        ]
+        let url = APP_CONSTANT.API.STAGING_BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
+        print("staging_url=\(url)")
+        SharedHelper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: false, headers: headers){
+            response in
+            print("response=\(response)")
+            if response.result.value == nil {
+                print("No response")
+                
+                SharedHelper().showToast(message: "Internal Server Error", controller: self)
+                return
+            }
+            else {
+                let responseData = response.result.value as! NSDictionary
+                let status = responseData["success"] as! Bool
+                if(status)
+                {
+                    //                    UserDefaults.standard.set("isSocial", forKey: "yes")
+                    //                    UserDefaults.standard.synchronize()
+                    
+                    
+                    
+                    let message = responseData["message"] as! String
+                    let uData = responseData["data"] as! [Any]
+                   
+                    self.parkings = uData
+                    print("parkings.count=\(self.parkings.count)")
+                    self.myCollectionView.reloadData()
+                    SharedHelper().showToast(message: message, controller: self)
+                    self.myCollectionView.isHidden = false
+                    
+                   
+                }
+                else
+                {
+                    let message = responseData["message"] as! String
+                    SharedHelper().showToast(message: message, controller: self)
+                    //   SharedHelper().hideSpinner(view: self.view)
+                }
+            }
+        }
         
     }
     
-    func map_circle(lat:Double,longg:Double){
-        
-        let position = CLLocationCoordinate2D(latitude: lat, longitude: longg)
-        
-        let circle = GMSCircle()
-        circle.radius = 130 // Meters
-        circle.fillColor = #colorLiteral(red: 0.2591760755, green: 0.6798272133, blue: 0.8513383865, alpha: 1)
-        circle.position = position // Your CLLocationCoordinate2D  position
-        circle.strokeWidth = 5;
-        circle.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        circle.map = map; // Add it to the map
-    }
+    
     
  
 }
@@ -307,12 +414,14 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
         dismiss(animated: true){
             self.parkings_cells.isHidden = false
             
-            let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 17.0)
+            let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 13.0)
             
             print("lat=\(place.coordinate.latitude) long=\(place.coordinate.longitude)")
             
             
-            self.map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude)
+            
+            Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
+            //Helper().map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
             self.map.animate(to: camera)
             
             
@@ -369,12 +478,10 @@ struct ReversedGeoLocation {
     let isoCountryCode: String  // eg. US
     
     var formattedAddress: String {
-        return """
-        \(name),
-        \(streetNumber) \(streetName),
-        \(city), \(state) \(zipCode)
-        \(country)
-        """
+        return "\(name) \(streetNumber),\(city), \(state) \(zipCode)\(country)"
+    }
+    var formattedAddressName: String {
+        return "\(name)"
     }
     
     // Handle optionals as needed

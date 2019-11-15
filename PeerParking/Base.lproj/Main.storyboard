@@ -2586,7 +2586,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                                 </connections>
                                             </button>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gx7-Vp-8c7">
-                                                <rect key="frame" x="11" y="53" width="403" height="107"/>
+                                                <rect key="frame" x="11" y="53" width="392" height="107"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="107" id="4RZ-h8-MuT"/>
@@ -2624,7 +2624,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                             <constraint firstItem="gx7-Vp-8c7" firstAttribute="top" secondItem="oEc-hi-nDJ" secondAttribute="bottom" constant="10" id="oTP-wp-SUd"/>
                                             <constraint firstItem="vTz-o0-Tfc" firstAttribute="leading" secondItem="kkm-Nu-vTJ" secondAttribute="leading" constant="11" id="rNk-B7-YwO"/>
                                             <constraint firstAttribute="height" constant="160" id="ulh-X3-ZD3"/>
-                                            <constraint firstAttribute="trailing" secondItem="gx7-Vp-8c7" secondAttribute="trailing" id="vdb-CA-Nfs"/>
+                                            <constraint firstAttribute="trailing" secondItem="gx7-Vp-8c7" secondAttribute="trailing" constant="11" id="vdb-CA-Nfs"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -8191,7 +8191,7 @@ typeset text.</string>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_img" translatesAutoresizingMaskIntoConstraints="NO" id="Cg7-Rj-PCE">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-img" translatesAutoresizingMaskIntoConstraints="NO" id="Cg7-Rj-PCE">
                                                 <rect key="frame" x="28" y="176" width="359" height="141"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="141" id="GT9-Oj-xyM"/>
@@ -8601,6 +8601,7 @@ Click Finish to publish your offer</string>
         <image name="mini_selected" width="67" height="67"/>
         <image name="next_btn" width="150" height="46"/>
         <image name="open_cam_btn" width="319" height="48"/>
+        <image name="placeholder-img" width="800" height="600"/>
         <image name="pre_btn" width="150" height="46"/>
         <image name="radius_dp" width="153.5" height="153.5"/>
         <image name="review_img" width="172" height="170.5"/>

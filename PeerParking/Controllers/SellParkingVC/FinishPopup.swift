@@ -42,32 +42,32 @@ class FinishPopup: UIViewController {
         print("abcdef=\(type(of: parking_extra_fee_unit))")
         print(parking_extra_fee_unit)
  
-        var params:[String:Any] = [
-            "vehicle_type": vehicle_type,
-            "parking_type": parking_type,
-            "status": status,
-            "initial_price": initial_price,
-            "final_price": final_price,
-            "start_at": start_at,
-            "end_at": end_at,
-            "address": address,
-            "longitude": longitude,
-            "latitude": latitude,
-            "is_negotiable": is_negotiable,
-            "note": note,
-            "parking_hours_limit": parking_hours_limit,
-            "parking_extra_fee": parking_extra_fee,
-            "parking_allowed_until": parking_allowed_until,
-//            "parking_extra_fee_unit": parking_extra_fee_unit,
-            "is_resident_free": is_resident_free
-        ]
-        if(parking_extra_fee_unit != nil){
-            params.updateValue(parking_extra_fee_unit!, forKey: "parking_extra_fee_unit")
-        }
+//        var params:[String:Any] = [
+//            "vehicle_type": vehicle_type,
+//            "parking_type": parking_type,
+//            "status": status,
+//            "initial_price": initial_price,
+//            "final_price": final_price,
+//            "start_at": start_at,
+//            "end_at": end_at,
+//            "address": address,
+//            "longitude": longitude,
+//            "latitude": latitude,
+//            "is_negotiable": is_negotiable,
+//            "note": note,
+//            "parking_hours_limit": parking_hours_limit,
+//            "parking_extra_fee": parking_extra_fee,
+//            "parking_allowed_until": parking_allowed_until,
+////            "parking_extra_fee_unit": parking_extra_fee_unit,
+//            "is_resident_free": is_resident_free
+//        ]
+//        if(parking_extra_fee_unit != nil){
+//            params.updateValue(parking_extra_fee_unit!, forKey: "parking_extra_fee_unit")
+//        }
         
-        //var params:[String:Any] = GLOBAL_VAR.PARKING_POST_DETAILS
+        var params:[String:Any] = GLOBAL_VAR.PARKING_POST_DETAILS
         
-        params.updateValue("hello", forKey: "new_val")
+        //params.updateValue("hello", forKey: "new_val")
         let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: "auth_token")!)"
         let headers: HTTPHeaders = [
             "Authorization" : auth_value
@@ -80,7 +80,7 @@ class FinishPopup: UIViewController {
 
         
         
-        let url = APP_CONSTANT.BASE_URL + APP_CONSTANT.POST_PARKING
+        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.POST_PARKING
         
         print("url--\(url)")
         
@@ -159,7 +159,7 @@ class FinishPopup: UIViewController {
         
         
         
-//        SharedHelper().RequestApiSingleImage(url: url, imageParamKey: "image", imageData: image, parameters: params, isHeaderIncluded: true, headers: headers) { response in
+//        SharedHelper().RequestApiSingleImage(url: url, imageParamKey: "image", imageData: image as! Data, parameters: params, isHeaderIncluded: true, headers: headers) { response in
 //
 //            print("response>>>\(response)")
 //

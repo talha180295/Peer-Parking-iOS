@@ -11,6 +11,7 @@ import Foundation
 import SystemConfiguration
 import Alamofire
 
+
 public class SharedHelper: UIViewController {
 
     var isLogin :String!
@@ -250,7 +251,7 @@ public class SharedHelper: UIViewController {
      * @return completion block which return data dictionary
      **/
     
-    public func Request_Api(url:String, methodType : HTTPMethod,parameters:Parameters,isHeaderIncluded:Bool, headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
+    public func Request_Api(url:String, methodType : HTTPMethod,parameters:[String:Any],isHeaderIncluded:Bool, headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
         
         
         if(isHeaderIncluded)
@@ -300,6 +301,7 @@ public class SharedHelper: UIViewController {
         }
         }
     }
+    
     
     
     
@@ -380,7 +382,7 @@ public class SharedHelper: UIViewController {
      **/
     
     
-    public func RequestApiSingleImage(url:String, imageParamKey:String,imageData:Data, parameters:Parameters,isHeaderIncluded:Bool, headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
+    public func RequestApiSingleImage(url:String, imageParamKey:String,imageData:Data, parameters:[String:Any],isHeaderIncluded:Bool, headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
         
         if(isHeaderIncluded)
         {
@@ -411,10 +413,10 @@ public class SharedHelper: UIViewController {
                         
                     })
                     //To check and verify server error
-                    /*upload.responseString(completionHandler: { (response) in
+                    upload.responseString(completionHandler: { (response) in
                      print(response)
                      print (response.result)
-                     })*/
+                     })
                     upload.responseJSON
                         { response in
                             

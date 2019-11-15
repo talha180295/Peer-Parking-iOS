@@ -23,6 +23,7 @@ target 'PeerParking' do
   pod 'FacebookLogin'
   pod 'FacebookShare'
   pod 'HelperClassPod'
+  pod 'SwiftyJSON'
 #  pod 'DGRunkeeperSwitch' , '~> 1.1.4'
 
 

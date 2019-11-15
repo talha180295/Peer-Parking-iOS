@@ -35,7 +35,7 @@
                                                     <constraint firstAttribute="width" constant="10" id="wZd-PE-6h3"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 Km away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mvC-bq-FkW">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 Miles away" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mvC-bq-FkW">
                                                 <rect key="frame" x="11" y="2" width="57" height="10"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="57" id="Klr-Zc-7cy"/>
@@ -110,7 +110,7 @@
                                             <constraint firstItem="KTm-eF-ljm" firstAttribute="leading" secondItem="TaL-jo-GBc" secondAttribute="leading" id="y6u-Gh-Xaq"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pedro Garage Parking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="hjW-5e-6j9">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pedro Garage Parking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjW-5e-6j9">
                                         <rect key="frame" x="5" y="4" width="145" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                         <nil key="textColor"/>
@@ -258,8 +258,13 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="623" height="132"/>
             <connections>
+                <outlet property="address" destination="5O6-OR-usS" id="wWy-Os-9cE"/>
+                <outlet property="barg_count" destination="zD7-7M-kxg" id="IEh-Uv-OZe"/>
+                <outlet property="distance" destination="mvC-bq-FkW" id="en6-IF-PHI"/>
                 <outlet property="parking_title" destination="hjW-5e-6j9" id="KMx-yB-0Re"/>
+                <outlet property="price" destination="GCb-n1-Nwt" id="z8p-KR-dp1"/>
                 <outlet property="rating_view" destination="bEn-SL-ABR" id="jKk-gU-dFf"/>
+                <outlet property="time" destination="yBj-zE-h3O" id="snz-zA-tcx"/>
             </connections>
             <point key="canvasLocation" x="290.57971014492756" y="145.98214285714286"/>
         </collectionViewCell>

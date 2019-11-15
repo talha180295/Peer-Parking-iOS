@@ -142,9 +142,9 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
                 }
                 
                 let reversedGeoLocation = ReversedGeoLocation(with: placemark)
-                print("LOC=:\(reversedGeoLocation.formattedAddress)")
+                print("LOC=:\(reversedGeoLocation.formattedAddressName)")
                 
-                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(reversedGeoLocation.formattedAddress, forKey: "address")
+                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(reversedGeoLocation.formattedAddressName, forKey: "address")
                 //self.address = reversedGeoLocation.formattedAddress
                 // Apple Inc.,
                 // 1 Infinite Loop,
