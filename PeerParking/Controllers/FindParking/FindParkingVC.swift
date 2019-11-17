@@ -135,6 +135,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         let location = locations.last
         
+        
         self.lat = (location?.coordinate.latitude)!
         self.longg = (location?.coordinate.longitude)!
 //        print("lat==\(location?.coordinate.latitude)")
@@ -201,10 +202,13 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     }
     
     @IBAction func arrow_btn(_ sender: UIButton) {
-        get_all_parkings()
-        print("self.address=\(self.address)")
-        self.search_tf.text = self.address
-        self.parkings_cells.isHidden = false
+
+        sender.isHidden = true
+        
+        get_all_parkings(lat: self.lat, long: self.longg){
+            
+            sender.isHidden = false
+        }
         
     }
     
@@ -301,54 +305,12 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     
     
-    func get_all_parkings(){//(withToken:Bool,completion: @escaping (JSON) -> Void){
+    func get_all_parkings(lat:Double,long:Double,completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
         
-//        var params:[String:Any]!
-//
-//
-//
-//
-//        if(withToken){
-//
-////             Helper().alamofireApiWithParams(url: url, method: .get, parameters: params, headers: <#T##HTTPHeaders#>, completion: <#T##(JSON) -> Void#>)
-//
-//        }
-//        else{
-//
-//            let headers: HTTPHeaders = [
-//                "Authorization" : ""
-//            ]
-//            params = [:]
-//
-//            let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
-//            print("withoutToken_url=\(url)")
-//
-//            Helper().alamofireApiWithParams(url: url, method: .get, withHeader: withToken,parameters: params, headers: headers) {
-//                json in
-//
-//                if(json["success"].boolValue){
-//
-//                    completion(json["data"])
-//                    let msg = json["message"].stringValue
-//                    SharedHelper().showToast(message: msg, controller: self)
-//                }
-//                else{
-//
-//                    let msg = json["message"].stringValue
-//                    SharedHelper().showToast(message: msg, controller: self)
-//                }
-//
-//
-//
-//            }
-//        }
-
-        
-        //var params:[String:Any]!
         let params = [
            
-            "latitude": String(self.lat),
-            "longitude": String(self.longg)
+            "latitude": String(lat),
+            "longitude": String(long)
         
         ]
      //   print(param)
@@ -359,7 +321,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         print("staging_url=\(url)")
         SharedHelper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: false, headers: headers){
             response in
-            print("response=\(response)")
+            //print("response=\(response)")
             if response.result.value == nil {
                 print("No response")
                 
@@ -383,9 +345,17 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                     //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
                     self.parkings = uData
                     print("parkings.count=\(self.parkings.count)")
+                   
                     self.myCollectionView.reloadData()
                     SharedHelper().showToast(message: message, controller: self)
-                    self.myCollectionView.isHidden = false
+                    
+                    print("self.address=\(self.address)")
+                    self.search_tf.text = self.address
+                    self.parkings_cells.isHidden = false
+                    
+                    
+                    completion()
+                   
                     
                    
                 }
@@ -433,15 +403,20 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
         dismiss(animated: true){
             self.parkings_cells.isHidden = false
             
-            let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 13.0)
+            let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 13.7)
             
             print("lat=\(place.coordinate.latitude) long=\(place.coordinate.longitude)")
             
             
+            self.get_all_parkings(lat: place.coordinate.latitude, long: place.coordinate.longitude){
+                
+                 self.map.animate(to: camera)
+            }
             
 //            Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
             //Helper().map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
-            self.map.animate(to: camera)
+           
+            
             
             
         }
