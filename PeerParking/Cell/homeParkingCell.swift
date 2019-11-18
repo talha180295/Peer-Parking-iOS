@@ -15,13 +15,13 @@ class homeParkingCell: UICollectionViewCell {
     
     @IBOutlet weak var rating_view: CosmosView!
     
-    @IBOutlet weak var address: UILabel!
+    @IBOutlet weak var vehicle_type: UILabel!
     
     @IBOutlet weak var distance: UILabel!
     
     @IBOutlet weak var time: UILabel!
     
-    @IBOutlet weak var barg_count: UIProgressView!
+    @IBOutlet weak var barg_count: UILabel!
     
     @IBOutlet weak var price: UILabel!
     

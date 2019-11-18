@@ -190,14 +190,17 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     @IBAction func filter_btn(_ sender: Any) {
         
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FilterBottomSheetVC")
         
-        bottomSheet(storyBoard: "Main",identifier: "FilterBottomSheetVC",sizes: [.fixed(550)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
+        bottomSheet(controller: controller, sizes: [.fixed(550)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
     }
     
     @IBAction func cal_btn(_ sender: UIButton) {
         
         
-         bottomSheet(storyBoard: "Main",identifier: "ScheduleVC",sizes: [.fixed(360)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScheduleVC")
+        
+        bottomSheet(controller: controller, sizes: [.fixed(360)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
         
     }
     
@@ -205,17 +208,26 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 
         sender.isHidden = true
         
+        //Location Manager code to fetch current location
+        self.locationManager.delegate = self
+        self.locationManager.startUpdatingLocation()
+        
         get_all_parkings(lat: self.lat, long: self.longg){
             
             sender.isHidden = false
+            self.search_tf.text = self.address
         }
         
     }
     
     @IBAction func view_all_btn(_ sender: UIButton) {
         
-        let vc = storyboard?.instantiateViewController(withIdentifier: "ViewAllVCNav")
-        present(vc!, animated: true, completion: nil)
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ViewAllVC") as! ViewAllVC
+        vc.parkings = self.parkings
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+//        self.navigationController?.present(vc, animated: true, completion: nil)
+        //present(vc, animated: true, completion: nil)
         //bottomSheet(storyBoard: "Main",identifier: "ViewAllVC",sizes: [.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
     }
     
@@ -228,8 +240,21 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeParkingCell", for: indexPath)as!homeParkingCell
         if(parkings.count>0){
+            
+            
             let dict = parkings[indexPath.row] as! NSDictionary
             print(dict)
+            
+          
+            let lat = dict["latitude"] as! String
+            let long = dict["longitude"] as! String
+           
+            
+            let priceStr = dict["initial_price"] as! Double
+            
+            let distanceStr = cal_distance(lat: lat, long: long)
+            
+            
             if(dict["address"] is NSNull)
             {
                 
@@ -238,24 +263,43 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             {
             cell.parking_title.text = (dict["address"] as! String)
             }
-        //cell.setData(empReqObj: arrModel[indexPath.row])
+            
+            cell.vehicle_type.text = (dict["vehicle_type_text"] as? String)
+           
+
+            cell.price.text = "$" + String(priceStr)
+            
+            
+            cell.distance.text = String(format: "%.02f miles away", distanceStr)
+        
+            //cell.barg_count.text = dict["vehicle_type_text"] as? String
         }
         
         return cell
     }
     
+   
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = self.calculateWidth()
-        print("width=\(myCollectionView.frame.width)")
+       
         return CGSize(width: myCollectionView.frame.width, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        //let controller = BottomSheetVC()
-//        let controller = SheetViewController(controller: UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC"), sizes: [.fixed(450), .fixed(300), .fixed(600), .fullScreen])
+        let dict = (self.parkings[indexPath.row]  as! NSDictionary)
+       
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC") as! BottomSheetVC
+        controller.parking_details = dict
         
-        bottomSheet(storyBoard: "Main",identifier: "BottomSheetVC", sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
+        
+        let lat = dict["latitude"] as! String
+        let long = dict["longitude"] as! String
+        let distanceStr = cal_distance(lat: lat, long: long)
+        
+        
+        controller.distanceInMiles = String(distanceStr)
+        bottomSheet(controller: controller, sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
     }
     
     
@@ -275,10 +319,11 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         }
     }
     
-    func bottomSheet(storyBoard:String,identifier:String,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor){
+    func bottomSheet(controller : UIViewController,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor){
         
-        let controller = UIStoryboard(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: identifier)
         
+      //  let controller = UIStoryboard(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: identifier) as!  UIViewController
+    
        
        
         let sheetController = SheetViewController(controller: controller, sizes: sizes)
@@ -326,6 +371,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                 print("No response")
                 
                 SharedHelper().showToast(message: "Internal Server Error", controller: self)
+                completion()
                 return
             }
             else {
@@ -350,7 +396,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                     SharedHelper().showToast(message: message, controller: self)
                     
                     print("self.address=\(self.address)")
-                    self.search_tf.text = self.address
+                    
                     self.parkings_cells.isHidden = false
                     
                     
@@ -371,6 +417,39 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     }
     
     
+    
+    func cal_distance(lat:String,long:String)  -> Double{
+//
+//        print("coordinate1==\(coordinate1)")
+//        print("coordinate1==\(coordinate2)")
+        
+        let current_coordinate =  CLLocation(latitude: self.lat, longitude: self.longg)
+        let lat = Double(lat)
+        let long = Double(long)
+        let coordinate2 = CLLocation(latitude: lat!, longitude: long!)
+
+        let distanceInMiles = current_coordinate.distance(from: coordinate2)/1609.344 // result is in meters
+        
+        
+        print("distanceInMiles=\(distanceInMiles)")
+        
+        return distanceInMiles
+        
+    }
+    
+    func cal_distance2() -> Double{
+        
+        
+                let coordinate1 = CLLocation(latitude: 5.0, longitude: 5.0)
+                let coordinate2 = CLLocation(latitude: 5.0, longitude: 3.0)
+        
+        let distanceInMeters = coordinate1.distance(from: coordinate2) // result is in meters
+        
+        print("distanceInMeters=\(distanceInMeters)")
+        
+        return distanceInMeters
+        
+    }
     
  
 }

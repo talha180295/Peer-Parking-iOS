@@ -11,7 +11,7 @@ target 'PeerParking' do
   pod 'SideMenuController'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
-
+  pod 'SDWebImage'
   pod 'GooglePlacesSearchController'
   pod 'Cosmos'
   pod 'FittedSheets'
