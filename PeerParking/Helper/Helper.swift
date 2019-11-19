@@ -14,9 +14,25 @@ import Alamofire
 
 class Helper{
     
-    func bottomSheet(storyBoard:String,identifier:String,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor,view_controller:UIViewController){
+//    func bottomSheet(storyBoard:String,identifier:String,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor,view_controller:UIViewController){
+//
+//        let controller = UIStoryboard(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: identifier)
+//
+//
+//
+//        let sheetController = SheetViewController(controller: controller, sizes: sizes)
+//        //        // Turn off Handle
+//        sheetController.handleColor = handleColor
+//        // Turn off rounded corners
+//        sheetController.topCornersRadius = cornerRadius
+//
+//        view_controller.present(sheetController, animated: false, completion: nil)
+//    }
+    
+    func bottomSheet(controller : UIViewController,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor,view_controller:UIViewController){
         
-        let controller = UIStoryboard(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: identifier)
+        
+        //  let controller = UIStoryboard(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: identifier) as!  UIViewController
         
         
         
@@ -102,13 +118,13 @@ class Helper{
         let marker = GMSMarker()
         
         // I have taken a pin image which is a custom image
-        let markerImage = UIImage(named: "icon_pinGrey")!.withRenderingMode(.alwaysTemplate)
+        let markerImage = UIImage(named: "s_marker")!.withRenderingMode(.alwaysTemplate)
         
         //creating a marker view
         let markerView = UIImageView(image: markerImage)
         
         //changing the tint color of the image
-        markerView.tintColor = #colorLiteral(red: 0.2591760755, green: 0.6798272133, blue: 0.8513383865, alpha: 1)
+        markerView.tintColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
         
         marker.position = CLLocationCoordinate2D(latitude: lat, longitude: longg)
         

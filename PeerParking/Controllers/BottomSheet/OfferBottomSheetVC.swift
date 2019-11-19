@@ -10,10 +10,13 @@ import UIKit
 
 class OfferBottomSheetVC: UIViewController {
 
+    @IBOutlet weak var parking_title: UILabel!
+    
+    var p_title = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        parking_title.text = p_title
     }
     
     @IBAction func accept_btn_click(_ sender: UIButton) {

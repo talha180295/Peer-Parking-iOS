@@ -11,7 +11,7 @@ import UIKit
 class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, ViewOfferProtocol {
   
     
-    let helper = Helper()
+    
     
     
     
@@ -75,8 +75,13 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
     //protocol function
     func ViewOfferButtonDidSelect() {
         
+//        
+//        helper.bottomSheet(storyBoard: "Main",identifier: "OfferBottomSheetVC", sizes: [.fixed(420)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0), view_controller: self)
+//        
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OfferBottomSheetVC")
         
-           helper.bottomSheet(storyBoard: "Main",identifier: "OfferBottomSheetVC", sizes: [.fixed(350)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0), view_controller: self)
+        
+        Helper().bottomSheet(controller: controller, sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0), view_controller: self)
     }
     
 }

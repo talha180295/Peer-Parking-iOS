@@ -19,6 +19,8 @@ import SDWebImage
 class BottomSheetVC: UIViewController {
 
     @IBOutlet weak var offer_btn: UIButton!
+    @IBOutlet weak var counter_btn: UIButton!
+    
     @IBOutlet weak var mainView: UIView!
     
     @IBOutlet weak var parking_titile: UILabel!
@@ -55,13 +57,14 @@ class BottomSheetVC: UIViewController {
     
     func setData(){
         
+        self.parking_titile.text = parking_details["address"] as? String
         
         let dicInner = parking_details["seller"] as! NSDictionary
         let dicInnerDetail = dicInner["details"] as! NSDictionary
         let rating  = dicInnerDetail["average_rating"] as! Int
         trust_score.rating = Double(rating)
         let priceStr = parking_details["initial_price"] as! Double
-        if parking_details["image"] is NSNull
+        if parking_details["image_url"] is NSNull
         {
             photo.image = UIImage.init(named: "placeholder")
         }
@@ -69,12 +72,26 @@ class BottomSheetVC: UIViewController {
         {
         
             let imgUrl = parking_details["image_url"] as! String
-            photo.sd_setImage(with: URL(string: imgUrl),placeholderImage: UIImage.init(named: "placeholder_user") )
+            photo.sd_setImage(with: URL(string: imgUrl),placeholderImage: UIImage.init(named: "placeholder-img") )
         }
         
         
         self.price.text = "$" + String(priceStr)
-        self.distance.text = self.distanceInMiles
+        self.distance.text = String(format: "%.02f miles away", self.distanceInMiles)
+        
+        if parking_details["note"] is NSNull
+        {
+            self.note.text = ""
+        }
+        else
+        {
+            
+            self.note.text = parking_details["note"] as? String
+        }
+        
+      
+        self.parking_type.text = parking_details["parking_type_text"] as? String
+        self.time_limit.text = parking_details["parking_allowed_until"] as? String
         
         
 //        {
@@ -130,7 +147,7 @@ class BottomSheetVC: UIViewController {
 //            "buyer": null
 //        }
         
-          self.parking_titile.text = parking_details["address"] as? String
+        
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -147,66 +164,79 @@ class BottomSheetVC: UIViewController {
     
     @objc func accept_offer_tap(notification: NSNotification) {
         
-        self.offer_btn.setTitle("Go", for: .normal)
+       // self.offer_btn.setTitle("Go", for: .normal)
         
     }
     
     @IBAction func take_btn_click(_ sender: UIButton) {
         
-        if(offer_btn.titleLabel?.text == "Go"){
+        
+        
+        if Helper().IsUserLogin(){
             
-            
-            if Helper().IsUserLogin(){
-                
             //SharedHelper().showToast(message: "Login", controller: self)
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVCNav")
-                //
-                self.present(vc, animated: false, completion: nil)
-               
-            }
-            else{
-                
-                let vc = self.story.instantiateViewController(withIdentifier: "FBPopup")
-                
-                
-                let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
-                popupVC.canTapOutsideToDismiss = true
-                
-                //properties
-                //            popupVC.backgroundAlpha = 1
-                //            popupVC.backgroundColor = .black
-                //            popupVC.canTapOutsideToDismiss = true
-                //            popupVC.cornerRadius = 10
-                //            popupVC.shadowEnabled = true
-                
-                // show it by call present(_ , animated:) method from a current UIViewController
-                present(popupVC, animated: true)
-                
-            }
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
+            //
+            vc.p_title = self.parking_titile.text!
             
+            vc.p_lat = Double(self.parking_details["latitude"] as! String)!
+            vc.p_longg = Double(self.parking_details["longitude"] as! String)!
+            
+            
+            
+//            self.navigationController?.pushViewController(vc, animated: true)
+//            self.navigationController?.pushViewController(vc, animated: true)
+            self.present(vc, animated: false, completion: nil)
             
         }
         else{
             
-            bottomSheet(storyBoard: "Main", identifier: "OfferBottomSheetVC", sizes: [.fixed(350)], cornerRadius: 10)
+            let vc = self.story.instantiateViewController(withIdentifier: "FBPopup")
+            
+            
+            let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
+            popupVC.canTapOutsideToDismiss = true
+            
+            
+            present(popupVC, animated: true)
+            
         }
+//
+//        if(offer_btn.titleLabel?.text == "Go"){
+//
+//
+//
+//
+//        }
+//        else{
+//
+//            bottomSheet(storyBoard: "Main", identifier: "OfferBottomSheetVC", sizes: [.fixed(350)], cornerRadius: 10)
+//        }
     }
     
-    func bottomSheet(storyBoard:String,identifier:String,sizes:[SheetSize], cornerRadius:CGFloat){
+    
+    @IBAction func counter_btn(_ sender: UIButton) {
         
-        let controller = UIStoryboard(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: identifier)
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OfferBottomSheetVC") as? OfferBottomSheetVC
+        controller?.p_title = self.parking_titile.text!
+        bottomSheet(controller: controller!, sizes: [.fixed(360)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
+    }
+    
+    func bottomSheet(controller : UIViewController,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor){
+        
+        
+        //  let controller = UIStoryboard(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: identifier) as!  UIViewController
         
         
         
         let sheetController = SheetViewController(controller: controller, sizes: sizes)
         //        // Turn off Handle
-        sheetController.handleColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+        sheetController.handleColor = handleColor
         // Turn off rounded corners
         sheetController.topCornersRadius = cornerRadius
         
         self.present(sheetController, animated: false, completion: nil)
     }
-    
     
   
 }

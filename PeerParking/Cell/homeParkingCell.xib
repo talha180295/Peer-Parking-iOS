@@ -214,6 +214,11 @@
                                     <constraint firstAttribute="width" constant="70" id="4et-kF-6Qf"/>
                                     <constraint firstAttribute="height" constant="88" id="yTz-jx-0Vm"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -254,6 +259,7 @@
             <connections>
                 <outlet property="barg_count" destination="88C-oD-H9g" id="zXb-dI-ocD"/>
                 <outlet property="distance" destination="mvC-bq-FkW" id="en6-IF-PHI"/>
+                <outlet property="image" destination="eCT-uJ-bJb" id="uNa-Gb-cat"/>
                 <outlet property="parking_title" destination="hjW-5e-6j9" id="KMx-yB-0Re"/>
                 <outlet property="price" destination="GCb-n1-Nwt" id="z8p-KR-dp1"/>
                 <outlet property="rating_view" destination="bEn-SL-ABR" id="jKk-gU-dFf"/>

@@ -11,6 +11,8 @@ import Cosmos
 
 class homeParkingCell: UICollectionViewCell {
 
+    @IBOutlet weak var image: UIImageView!
+    
     @IBOutlet weak var parking_title: UILabel!
     
     @IBOutlet weak var rating_view: CosmosView!

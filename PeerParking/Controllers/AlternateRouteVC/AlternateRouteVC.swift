@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class AlternateRouteVC: UIViewController ,UITableViewDataSource, UITableViewDelegate {
 
 
     @IBOutlet weak var tblRoute: UITableView!
+    
+    var alternateRoutes:[JSON]!
     
     override func viewDidLoad() {
         super.viewDidLoad()

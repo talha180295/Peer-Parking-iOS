@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewAllVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
     var parkings:[Any] = []
+    
+    var lat = 0.0
+    var longg = 0.0
     
     @IBOutlet weak var my_table_view: UITableView!
     
@@ -21,8 +25,8 @@ class ViewAllVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
         my_table_view.register(UINib(nibName: "Parking_table_cell", bundle: nil), forCellReuseIdentifier: "Parking_table_cell")
         
-        let dict = parkings[0] as! NSDictionary
-        print("viewall=\(dict)")
+//        let dict = parkings[0] as! NSDictionary
+//        print("viewall=\(dict)")
         
     }
     
@@ -52,7 +56,47 @@ class ViewAllVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        // self.navigationController?.popViewController(animated: true)
+        
+        parkingDetails(indexPath: indexPath)
+        
     }
+    
+    func parkingDetails(indexPath: IndexPath){
+        
+        let dict = (self.parkings[indexPath.row]  as! NSDictionary)
+        
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC") as! BottomSheetVC
+        controller.parking_details = dict
+        
+        
+        let lat = dict["latitude"] as! String
+        let long = dict["longitude"] as! String
+        let distanceStr = cal_distance(lat: lat, long: long)
+        
+        
+        controller.distanceInMiles = String(distanceStr)
+        Helper().bottomSheet(controller: controller, sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0), view_controller: self)
+    }
+    
+    func cal_distance(lat:String,long:String)  -> Double{
+        //
+        //        print("coordinate1==\(coordinate1)")
+        //        print("coordinate1==\(coordinate2)")
+        
+        let current_coordinate =  CLLocation(latitude: self.lat, longitude: self.longg)
+        let lat = Double(lat)
+        let long = Double(long)
+        let coordinate2 = CLLocation(latitude: lat!, longitude: long!)
+        
+        let distanceInMiles = current_coordinate.distance(from: coordinate2)/1609.344 // result is in meters
+        
+        
+        print("distanceInMiles=\(distanceInMiles)")
+        
+        return distanceInMiles
+        
+    }
+    
   
     @IBAction func back_btn(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: true)

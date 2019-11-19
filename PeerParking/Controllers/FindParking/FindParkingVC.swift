@@ -18,7 +18,9 @@ import SwiftyJSON
 import Alamofire
 
 
-class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
+class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate{
+    
+    
    
     
     //IBOutlets
@@ -34,6 +36,9 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     var lat = 0.0
     var longg = 0.0
+    
+    var filterLat = 0.0
+    var filterLong = 0.0
     
     var parkings:[Any] = []
     
@@ -140,6 +145,10 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         self.longg = (location?.coordinate.longitude)!
 //        print("lat==\(location?.coordinate.latitude)")
 //        print("long==\(location?.coordinate.longitude)")
+        
+        self.filterLat = (location?.coordinate.latitude)!
+        self.filterLong = (location?.coordinate.longitude)!
+        
         let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 14.0)
         
         self.map.animate(to: camera)
@@ -190,9 +199,9 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     @IBAction func filter_btn(_ sender: Any) {
         
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FilterBottomSheetVC")
-        
-        bottomSheet(controller: controller, sizes: [.fixed(550)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FilterBottomSheetVC") as? FilterBottomSheetVC
+        controller?.delegate = self
+        bottomSheet(controller: controller!, sizes: [.fixed(550)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
     }
     
     @IBAction func cal_btn(_ sender: UIButton) {
@@ -212,7 +221,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
         
-        get_all_parkings(lat: self.lat, long: self.longg){
+        get_all_parkings(lat: self.lat, long: self.longg, filters: [:]){
             
             sender.isHidden = false
             self.search_tf.text = self.address
@@ -224,7 +233,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         let vc = storyboard?.instantiateViewController(withIdentifier: "ViewAllVC") as! ViewAllVC
         vc.parkings = self.parkings
-        
+        vc.lat = self.lat
+        vc.longg = self.longg
         self.navigationController?.pushViewController(vc, animated: true)
 //        self.navigationController?.present(vc, animated: true, completion: nil)
         //present(vc, animated: true, completion: nil)
@@ -254,7 +264,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             
             let distanceStr = cal_distance(lat: lat, long: long)
             
-            
+            let imgUrl = dict["image_url"] as? String
+            cell.image.sd_setImage(with: URL(string: imgUrl!),placeholderImage: UIImage.init(named: "placeholder-img") )
             if(dict["address"] is NSNull)
             {
                 
@@ -350,15 +361,18 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     
     
-    func get_all_parkings(lat:Double,long:Double,completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
+    func get_all_parkings(lat:Double,long:Double,filters:[String:String],completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
         
-        let params = [
+        var params = [
            
             "latitude": String(lat),
             "longitude": String(long)
         
         ]
-     //   print(param)
+        if(filters.keys.contains("vehicle_type")){
+            params.updateValue(filters["vehicle_type"]!, forKey: "vehicle_type")
+        }
+        print("param123=\(params)")
         let headers: HTTPHeaders = [
             "Authorization" : ""
         ]
@@ -392,12 +406,22 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                     self.parkings = uData
                     print("parkings.count=\(self.parkings.count)")
                    
+                  
                     self.myCollectionView.reloadData()
                     SharedHelper().showToast(message: message, controller: self)
                     
                     print("self.address=\(self.address)")
                     
+                    
+//                    if(self.parkings.count == 0){
+//                        self.parkings_cells.isHidden = true
+//                    }
+//                    else{
+//                        self.parkings_cells.isHidden = false
+//                    }
+                    
                     self.parkings_cells.isHidden = false
+                    
                     
                     
                     completion()
@@ -451,6 +475,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
     }
     
+   
  
 }
 
@@ -466,7 +491,22 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 //    }
 //
 //}
-
+extension FindParkingVC:FiltersProtocol{
+    
+    func applyFilters(filters: [String : String]) {
+        print("filters2=\(filters)")
+        //Location Manager code to fetch current location
+        self.locationManager.delegate = self
+        self.locationManager.startUpdatingLocation()
+        
+        self.get_all_parkings(lat: self.filterLat, long: self.filterLong, filters: filters){
+            
+           
+        }
+       
+    }
+    
+}
 
 extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
     
@@ -487,7 +527,10 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
             print("lat=\(place.coordinate.latitude) long=\(place.coordinate.longitude)")
             
             
-            self.get_all_parkings(lat: place.coordinate.latitude, long: place.coordinate.longitude){
+            self.filterLat = place.coordinate.latitude
+            self.filterLong = place.coordinate.longitude
+            
+            self.get_all_parkings(lat: place.coordinate.latitude, long: place.coordinate.longitude, filters: [:]){
                 
                  self.map.animate(to: camera)
             }
