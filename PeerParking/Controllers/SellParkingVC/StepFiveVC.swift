@@ -73,8 +73,8 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
 //        imagePickerController.mediaTypes = ["public.image"]
 //        present(imagePickerController, animated: true, completion: nil)
 //        showAlert()
-        showAlert()
-        //self.getImage(fromSourceType: .camera)
+//        showAlert()
+        self.getImage(fromSourceType: .camera)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
