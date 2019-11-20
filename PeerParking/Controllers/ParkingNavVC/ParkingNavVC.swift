@@ -134,8 +134,9 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         Helper().map_marker(lat: p_lat, longg: p_longg, map_view: self.map)
         
         
-        let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=\(Key.Google.placesKey)"
+        let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&alternatives=true&key=\(Key.Google.placesKey)"
         
+        print("alter_url=\(url)")
         Alamofire.request(url).responseJSON { response in
             
             do {
@@ -145,19 +146,32 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
                 
                 self.alternateRoutes = routes
                 
-                print("routes=\(routes)")
-                for route in routes
-                {
-                    let routeOverviewPolyline = route["overview_polyline"].dictionary
-                    let points = routeOverviewPolyline?["points"]?.stringValue
-                    let path = GMSPath.init(fromEncodedPath: points!)
-                    
-                    let polyline = GMSPolyline(path: path)
-                    polyline.strokeColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
-                    polyline.strokeWidth = 4.0
-                    polyline.map = self.map
-                    
-                }
+                print("routes=\(routes.count)")
+                
+                
+                let route  = routes[0]
+                
+//                let route = dict as! NSDictionary
+                let routeOverviewPolyline = route["overview_polyline"].dictionary
+                let points = routeOverviewPolyline?["points"]?.stringValue
+                let path = GMSPath.init(fromEncodedPath: points!)
+                let polyline = GMSPolyline.init(path: path)
+                polyline.strokeWidth = 4
+                polyline.strokeColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
+                polyline.map = self.map
+                
+//                for route in routes
+//                {
+//                    let routeOverviewPolyline = route["overview_polyline"].dictionary
+//                    let points = routeOverviewPolyline?["points"]?.stringValue
+//                    let path = GMSPath.init(fromEncodedPath: points!)
+//
+//                    let polyline = GMSPolyline(path: path)
+//                    polyline.strokeColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
+//                    polyline.strokeWidth = 4.0
+//                    polyline.map = self.map
+//
+//                }
                 
             } catch { print(error) }
             

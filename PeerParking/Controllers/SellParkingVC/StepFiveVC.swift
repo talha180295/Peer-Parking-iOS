@@ -20,6 +20,15 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         text_view.text = "Add some usefull information"
         text_view.textColor = UIColor.lightGray
         // Do any additional setup after loading the view.
+        let placeHolderImage = UIImage(named: "placeholder-img")
+        
+        guard let imageData = placeHolderImage?.jpegData(compressionQuality: 1.0) else {
+            print("Could not get JPEG representation of UIImage")
+            return
+        }
+        
+        
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(imageData, forKey: "image")
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -64,8 +73,8 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
 //        imagePickerController.mediaTypes = ["public.image"]
 //        present(imagePickerController, animated: true, completion: nil)
 //        showAlert()
-        
-        self.getImage(fromSourceType: .camera)
+        showAlert()
+        //self.getImage(fromSourceType: .camera)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

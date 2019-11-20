@@ -18,7 +18,7 @@ class StepFourVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(5.0, forKey: "initial_price")
     }
     
     @IBAction func amount_tf(_ sender: UITextField) {

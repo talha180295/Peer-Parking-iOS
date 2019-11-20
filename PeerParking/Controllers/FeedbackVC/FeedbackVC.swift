@@ -8,6 +8,7 @@
 
 import UIKit
 import Cosmos
+import EzPopup
 
 class FeedbackVC: UIViewController {
 
@@ -40,11 +41,20 @@ class FeedbackVC: UIViewController {
     @IBAction func share_btn(_ sender: UIButton) {
         
         
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC")
+//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC")
+//
+//        self.show(vc, sender: sender)
         
-        self.show(vc, sender: sender)
+        wantToSellParking()
         
         
+    }
+    
+    func wantToSellParking(){
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Sell_parking_popup")
+        
+        Helper().popUp(controller: vc, view_controller: self)
     }
     
    

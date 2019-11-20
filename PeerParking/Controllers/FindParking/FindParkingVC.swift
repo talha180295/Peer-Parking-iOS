@@ -376,7 +376,12 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         let headers: HTTPHeaders = [
             "Authorization" : ""
         ]
-        let url = APP_CONSTANT.API.STAGING_BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
+        //Staging server
+        //let url = APP_CONSTANT.API.STAGING_BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
+        
+        
+        //Local server
+        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
         print("staging_url=\(url)")
         SharedHelper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: false, headers: headers){
             response in
@@ -402,6 +407,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                     let uData = responseData["data"] as! [Any]
                    
                     Helper().map_circle(data: uData, map_view: self.map)
+                    Helper().map_custom_marker(data: uData, map_view: self.map)
                     //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
                     self.parkings = uData
                     print("parkings.count=\(self.parkings.count)")

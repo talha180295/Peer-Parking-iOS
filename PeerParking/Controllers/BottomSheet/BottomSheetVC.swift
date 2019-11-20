@@ -177,7 +177,7 @@ class BottomSheetVC: UIViewController {
             //SharedHelper().showToast(message: "Login", controller: self)
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
             //
-            vc.p_title = self.parking_titile.text!
+            vc.p_title = self.parking_titile.text ?? ""
             
             vc.p_lat = Double(self.parking_details["latitude"] as! String)!
             vc.p_longg = Double(self.parking_details["longitude"] as! String)!

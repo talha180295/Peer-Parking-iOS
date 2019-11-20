@@ -159,40 +159,40 @@ class FinishPopup: UIViewController {
         
         
         
-//        SharedHelper().RequestApiSingleImage(url: url, imageParamKey: "image", imageData: image as! Data, parameters: params, isHeaderIncluded: true, headers: headers) { response in
-//
-//            print("response>>>\(response)")
-//
-//            if response.result.value == nil {
-//                print("No response")
-//
-//                SharedHelper().showToast(message: "Internal Server Error", controller: self)
-//                return
-//            }
-//            else {
-//                let responseData = response.result.value as! NSDictionary
-//                let status = responseData["success"] as! Bool
-//                if(status)
-//                {
-//                    let message = responseData["message"] as! String
-//                    //let uData = responseData["data"] as! NSDictionary
-//                    //let userData = uData["user"] as! NSDictionary
-//                    //self.saveData(userData: userData)
-//                    //                    SharedHelper().hideSpinner(view: self.view)
-//                    //                     UserDefaults.standard.set("yes", forKey: "login")
-//                    //                    UserDefaults.standard.synchronize()
-//                    SharedHelper().showToast(message: message, controller: self)
-//
-//                    //self.after_signin()
-//                }
-//                else
-//                {
-//                    let message = responseData["message"] as! String
-//                    SharedHelper().showToast(message: message, controller: self)
-//                    //   SharedHelper().hideSpinner(view: self.view)
-//                }
-//            }
-//        }
+        SharedHelper().RequestApiSingleImage(url: url, imageParamKey: "image", imageData: image as! Data, parameters: params, isHeaderIncluded: true, headers: headers) { response in
+
+            print("response>>>\(response)")
+
+            if response.result.value == nil {
+                print("No response")
+
+                SharedHelper().showToast(message: "Internal Server Error", controller: self)
+                return
+            }
+            else {
+                let responseData = response.result.value as! NSDictionary
+                let status = responseData["success"] as! Bool
+                if(status)
+                {
+                    let message = responseData["message"] as! String
+                    //let uData = responseData["data"] as! NSDictionary
+                    //let userData = uData["user"] as! NSDictionary
+                    //self.saveData(userData: userData)
+                    //                    SharedHelper().hideSpinner(view: self.view)
+                    //                     UserDefaults.standard.set("yes", forKey: "login")
+                    //                    UserDefaults.standard.synchronize()
+                    SharedHelper().showToast(message: message, controller: self)
+
+                    //self.after_signin()
+                }
+                else
+                {
+                    let message = responseData["message"] as! String
+                    SharedHelper().showToast(message: message, controller: self)
+                    //   SharedHelper().hideSpinner(view: self.view)
+                }
+            }
+        }
 
     }
     
