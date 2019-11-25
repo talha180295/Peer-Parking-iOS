@@ -28,6 +28,10 @@ class FilterBottomSheetVC: UIViewController {
     @IBOutlet weak var m_20: UIButton!
     @IBOutlet weak var m_30: UIButton!
     
+    @IBOutlet weak var price: UIButton!
+    @IBOutlet weak var distance: UIButton!
+    
+    
     @IBOutlet weak var price_switch: DGRunkeeperSwitch!
     
     var filters:[String:String] = [:]
@@ -36,6 +40,14 @@ class FilterBottomSheetVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+        let result = formatter.string(from: date)
+       
+        
+        filters.updateValue(String(result), forKey: "date_time")
 //        mini_btn.isSelected = true
 //        lot_btn.isSelected = true
         
@@ -466,6 +478,11 @@ class FilterBottomSheetVC: UIViewController {
     func avail_button_click(sender: UIButton){
         
         
+        
+        if filters.keys.contains("time_margin") {
+            filters.removeValue(forKey: "time_margin")
+        }
+        
         if(sender.tag == 1){
             
             
@@ -568,5 +585,113 @@ class FilterBottomSheetVC: UIViewController {
             }
         }
         
+        if(sender.isSelected){
+            
+            let val = sender.tag * 10
+            //            filters.updateValue("hey", forKey: "parking_type")
+            filters.updateValue(String(val), forKey: "time_margin")
+        }
+        
     }
+    
+    @IBAction func sort_buy(_ sender: UIButton) {
+        
+        sort_by(sender: sender)
+    }
+    
+    func sort_by(sender: UIButton){
+        
+    
+        
+        if(sender.tag == 1){
+            
+            
+            if(!sender.isSelected){
+                
+                print("::=unselected")
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                
+                sender.isSelected = true
+                
+                distance.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                distance.isSelected = false
+                distance.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                
+               
+                
+                
+            }
+            else{
+                
+                print("::=selected")
+                
+                
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                
+                sender.isSelected = false
+            }
+        }
+        else if(sender.tag == 2){
+            
+            if(!sender.isSelected){
+                
+                print("::=unselected")
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                
+                sender.isSelected = true
+                
+                
+                price.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                price.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                price.isSelected = false
+                
+                
+            }
+            else{
+                
+                print("::=selected")
+                
+                
+                
+                sender.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+                sender.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+                
+                sender.isSelected = false
+            }
+        }
+        
+        
+        
+        
+        
+        
+        if(sender.isSelected){
+            
+            let val = sender.tag * 10
+            //            filters.updateValue("hey", forKey: "parking_type")
+            filters.updateValue(String(val), forKey: "orderBy")
+        }
+        
+        
+    }
+    
 }
+
+
+//if filters.keys.contains("vehicle_type") {
+//    filters.removeValue(forKey: "vehicle_type")
+//}
+//
+//vehicle_type_select(sender: sender)
+//if(sender.isSelected){
+//
+//    let val = sender.tag * 10
+//    //            filters.updateValue("hey", forKey: "parking_type")
+//    filters.updateValue(String(val), forKey: "vehicle_type")
+//}

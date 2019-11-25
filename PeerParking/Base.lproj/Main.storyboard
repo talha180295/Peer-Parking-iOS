@@ -1871,7 +1871,7 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htS-Tu-ti9">
-                                <rect key="frame" x="244" y="753" width="150" height="42"/>
+                                <rect key="frame" x="378" y="753" width="16" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="DjY-3u-oOK"/>
                                 </constraints>
@@ -1881,7 +1881,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vNR-FK-0Ph">
-                                <rect key="frame" x="20" y="753" width="150" height="42"/>
+                                <rect key="frame" x="20" y="753" width="16" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="orx-BZ-TUX"/>
                                 </constraints>
@@ -2876,6 +2876,9 @@
                                                         <state key="normal" title="Price" backgroundImage="round_rect_white">
                                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="sort_buy:" destination="R6J-oV-2PH" eventType="touchUpInside" id="1l2-Tg-h6H"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0PM-dS-HD2">
                                                         <rect key="frame" x="112" y="0.0" width="110" height="30"/>
@@ -2883,6 +2886,9 @@
                                                         <state key="normal" title="Distance" backgroundImage="round_rect_white">
                                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="sort_buy:" destination="R6J-oV-2PH" eventType="touchUpInside" id="Ima-XA-qkD"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROi-36-g9x">
                                                         <rect key="frame" x="224" y="0.0" width="110" height="34.5"/>
@@ -3083,12 +3089,14 @@
                     <size key="freeformSize" width="414" height="550"/>
                     <connections>
                         <outlet property="bus_btn" destination="9hj-T0-9qs" id="zuO-nJ-bcS"/>
+                        <outlet property="distance" destination="0PM-dS-HD2" id="0Lo-pf-hSk"/>
                         <outlet property="family_btn" destination="dta-l4-YXf" id="aIU-Vu-Rsl"/>
                         <outlet property="lot_btn" destination="qH4-od-Pbk" id="dO7-RI-vpC"/>
                         <outlet property="m_10" destination="aaH-dM-m6b" id="JeV-Pf-huD"/>
                         <outlet property="m_20" destination="7FQ-Mg-oPK" id="PA8-wN-occ"/>
                         <outlet property="m_30" destination="izd-y3-Daq" id="GZ7-Ly-e3x"/>
                         <outlet property="mini_btn" destination="k8H-Nc-q9e" id="zkT-nv-i46"/>
+                        <outlet property="price" destination="zX8-E5-JWu" id="IvK-e4-fBN"/>
                         <outlet property="private_btn" destination="CrO-eB-CPU" id="11B-XC-edL"/>
                         <outlet property="street_btn" destination="1Ir-tu-YW6" id="nFO-jN-eet"/>
                         <outlet property="suv_btn" destination="JKc-I1-f5G" id="5ur-ug-ZLc"/>
