@@ -29,7 +29,8 @@ struct APP_CONSTANT {
     struct API {
        
         //BASE URL FOR PEER PARKING
-        static let BASE_URL = "http://peer-parking.apps.fomarkmedia.com/api/v1/"
+//        static let BASE_URL = "http://peer-parking.apps.fomarkmedia.com/api/v1/"
+        static let BASE_URL = "http://peer-parking.servstaging.com/api/v1/"
         
         
         //STAGING_BASE_URL
@@ -43,6 +44,9 @@ struct APP_CONSTANT {
         
         //GET /parkings-without-token
         static let GET_PARKING_WITHOUT_TOKEN = "parkings-without-token"
+        
+        static let ASSIGN_BUYER = "assign-buyer"
+        
     }
    
     

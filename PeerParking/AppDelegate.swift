@@ -11,6 +11,9 @@ import SideMenuController
 import GoogleMaps
 import GooglePlaces
 import IQKeyboardManagerSwift
+import Fabric
+import Crashlytics
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -26,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey(Key.Google.placesKey)
         
         GMSPlacesClient.provideAPIKey(Key.Google.placesKey)
+        
+        Fabric.with([Crashlytics.self])
        
         // Override point for customization after application launch.
         return true

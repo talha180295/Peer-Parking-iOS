@@ -27,6 +27,9 @@
 		1866BF642374617B008EE650 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1866BF632374617B008EE650 /* RequestCell.swift */; };
 		1866BF6623746402008EE650 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1866BF6523746402008EE650 /* Helper.swift */; };
 		1866BF68237468A8008EE650 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1866BF67237468A8008EE650 /* NotificationCell.xib */; };
+		188888A7238EBEEB0008BC88 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188888A5238EBEEA0008BC88 /* Crashlytics.framework */; };
+		188888A8238EBEEB0008BC88 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188888A6238EBEEA0008BC88 /* Fabric.framework */; };
+		188888AA238EF3C50008BC88 /* AlamofireApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188888A9238EF3C50008BC88 /* AlamofireApi.swift */; };
 		1889AE07235738330081608E /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889AE06235738330081608E /* BottomSheetVC.swift */; };
 		18924C242363544800C0E94F /* SellParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18924C232363544800C0E94F /* SellParkingVC.swift */; };
 		18924C272365B84D00C0E94F /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18924C262365B84D00C0E94F /* ContainerView.swift */; };
@@ -144,6 +147,9 @@
 		1866BF632374617B008EE650 /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
 		1866BF6523746402008EE650 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		1866BF67237468A8008EE650 /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
+		188888A5238EBEEA0008BC88 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
+		188888A6238EBEEA0008BC88 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
+		188888A9238EF3C50008BC88 /* AlamofireApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireApi.swift; sourceTree = "<group>"; };
 		1889AE06235738330081608E /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
 		18924C232363544800C0E94F /* SellParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellParkingVC.swift; sourceTree = "<group>"; };
 		18924C262365B84D00C0E94F /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
@@ -239,7 +245,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				188888A7238EBEEB0008BC88 /* Crashlytics.framework in Frameworks */,
 				E2616B4D5E0A2ED92F2CAAF3 /* Pods_PeerParking.framework in Frameworks */,
+				188888A8238EBEEB0008BC88 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +444,8 @@
 		FA1150C32316838400D0B1FE /* PeerParking */ = {
 			isa = PBXGroup;
 			children = (
+				188888A5238EBEEA0008BC88 /* Crashlytics.framework */,
+				188888A6238EBEEA0008BC88 /* Fabric.framework */,
 				FA57EBA22320EB1E000646B7 /* Extension */,
 				FAEDCF13231F98760063EFC0 /* Tabbar */,
 				FA2815BD231E666E008AF3F5 /* Helper */,
@@ -570,6 +580,7 @@
 				FA82B4FF232F66A6002675AC /* Knob.swift */,
 				185DE79A2360A59900FC0E25 /* Constants.swift */,
 				1866BF6523746402008EE650 /* Helper.swift */,
+				188888A9238EF3C50008BC88 /* AlamofireApi.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -662,6 +673,7 @@
 				FA1150BF2316838400D0B1FE /* Resources */,
 				5EA083E6BA19CFFFCF0BD170 /* [CP] Embed Pods Frameworks */,
 				82AF9BE47E118179A76A5FBC /* [CP] Copy Pods Resources */,
+				188888A4238EBEC40008BC88 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -800,6 +812,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		188888A4238EBEC40008BC88 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 3e20cd58531084d89edf0e73416cf3a58a4ab284 3ccb1ee5a90f60653f638fd8ca6044e89275ff6fec68a59c30de2c957ec7084e\n\n";
+		};
 		5EA083E6BA19CFFFCF0BD170 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -958,6 +987,7 @@
 				18392E792370487A007FB161 /* PricePicker.swift in Sources */,
 				185DE7A12360BCEA00FC0E25 /* AlternateRouteVC.swift in Sources */,
 				18CAA57F2368B6BB001B5503 /* FinishPopup.swift in Sources */,
+				188888AA238EF3C50008BC88 /* AlamofireApi.swift in Sources */,
 				FA0FCC5F232250FE000FF52C /* WalletViewController.swift in Sources */,
 				FA0FCC612322510F000FF52C /* TransactionViewController.swift in Sources */,
 				FA6CD3802329122E00E18CF2 /* AlternateRouteViewController.swift in Sources */,
@@ -1153,6 +1183,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T286PM5P72;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PeerParking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1172,6 +1206,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T286PM5P72;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = PeerParking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

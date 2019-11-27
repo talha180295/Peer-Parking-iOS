@@ -24,7 +24,7 @@ class AnnularLayer: CAShapeLayer {
     // MARK: - Properties
     var tintColor:UIColor?
     var displayNumber = false
-    var step:Int = 0
+    var step:String = ""
     var annularDefaultColor: UIColor?
     
     var isCurrent:Bool = false {
@@ -70,7 +70,7 @@ class AnnularLayer: CAShapeLayer {
             }
             AnnularLayer.flagCGImage = flagImage?.cgImage
         }
-
+        
         self.flagLayer.contents = AnnularLayer.flagCGImage
         self.fullCircleLayer.addSublayer(self.flagLayer)
     }
@@ -78,7 +78,7 @@ class AnnularLayer: CAShapeLayer {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
     override init(layer: Any) {
         super.init(layer: layer)
     }
@@ -93,7 +93,7 @@ class AnnularLayer: CAShapeLayer {
             fullCircleLayer.removeFromSuperlayer()
             
             self.drawAnnularPath()
-
+            
             if self.displayNumber {
                 self.centerCircleLayer.removeFromSuperlayer()
                 
@@ -151,16 +151,16 @@ class AnnularLayer: CAShapeLayer {
     }
     
     private func drawText() {
-        let sideLength = fmin(self.frame.width, self.frame.height)
+        let sideLength = fmin(70, self.frame.height)
         
         self.centerTextLayer.string = "\(self.step)"
-        self.centerTextLayer.frame = self.bounds
-        self.centerTextLayer.position = CGPoint(x: self.bounds.midX, y: self.bounds.midY * 1.2)
+        self.centerTextLayer.frame = CGRect(x: self.bounds.midX, y: self.bounds.midY * 1.2 + 30, width: 70, height: 30)
+        self.centerTextLayer.position = CGPoint(x: self.bounds.midX, y: self.bounds.midY * 1.2 + 30)
         self.centerTextLayer.contentsScale = UIScreen.main.scale
-        self.centerTextLayer.foregroundColor = self.strokeColor
+        self.centerTextLayer.foregroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
         self.centerTextLayer.alignmentMode = CATextLayerAlignmentMode.center
-        let fontSize = sideLength * 0.65
-        self.centerTextLayer.font = UIFont.boldSystemFont(ofSize: fontSize) as CFTypeRef
+        let fontSize = sideLength * 0.55
+        self.centerTextLayer.font = UIFont.systemFont(ofSize: fontSize) as CFTypeRef
         self.centerTextLayer.fontSize = fontSize
         
         self.addSublayer(self.centerTextLayer)

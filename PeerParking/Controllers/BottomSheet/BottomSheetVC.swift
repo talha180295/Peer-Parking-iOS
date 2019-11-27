@@ -61,8 +61,8 @@ class BottomSheetVC: UIViewController {
         
         let dicInner = parking_details["seller"] as! NSDictionary
         let dicInnerDetail = dicInner["details"] as! NSDictionary
-        let rating  = dicInnerDetail["average_rating"] as! Int
-        trust_score.rating = Double(rating)
+        let rating  = dicInnerDetail["average_rating"] as? Double
+        trust_score.rating = Double(rating ?? 0)
         let priceStr = parking_details["initial_price"] as! Double
         if parking_details["image_url"] is NSNull
         {
@@ -177,6 +177,7 @@ class BottomSheetVC: UIViewController {
             //SharedHelper().showToast(message: "Login", controller: self)
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
             //
+            vc.p_id = Int(self.parking_details["id"] as! Int)
             vc.p_title = self.parking_titile.text ?? ""
             
             vc.p_lat = Double(self.parking_details["latitude"] as! String)!

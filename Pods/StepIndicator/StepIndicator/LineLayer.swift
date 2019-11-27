@@ -37,7 +37,7 @@ class LineLayer: CAShapeLayer {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
     override init(layer: Any) {
         super.init(layer: layer)
     }
@@ -66,7 +66,7 @@ class LineLayer: CAShapeLayer {
             linePath.move(to: CGPoint(x: centerX, y: 0))
             linePath.addLine(to: CGPoint(x:centerX , y: self.frame.height))
         }
-
+        
         self.path = linePath.cgPath
     }
     
@@ -83,7 +83,7 @@ class LineLayer: CAShapeLayer {
             tintLinePath.move(to: CGPoint(x: centerX, y: 0))
             tintLinePath.addLine(to: CGPoint(x: centerX, y: self.frame.height))
         }
-
+        
         self.tintLineLayer.path = tintLinePath.cgPath
         self.tintLineLayer.frame = self.bounds
         self.tintLineLayer.strokeColor = self.tintColor?.cgColor
