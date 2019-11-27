@@ -47,7 +47,7 @@ class BottomSheetVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print("parking_details=\(parking_details!)")
+        //print("parking_details=\(parking_details!)")
       
       
         setData()
@@ -181,7 +181,7 @@ class BottomSheetVC: UIViewController {
             
             vc.p_lat = Double(self.parking_details["latitude"] as! String)!
             vc.p_longg = Double(self.parking_details["longitude"] as! String)!
-            
+            vc.vcName = ""
             
             
 //            self.navigationController?.pushViewController(vc, animated: true)

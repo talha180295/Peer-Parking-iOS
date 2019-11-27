@@ -77,7 +77,7 @@ class NavigateViewController: UIViewController {
     }
     
     @IBAction func btnAlternate(_ sender: Any) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "alternateRouteVC") as! AlternateRouteViewController
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "alternateRouteVC") as! AlternateRouteVC
         //
         self.navigationController?.pushViewController(vc, animated: true)
     }

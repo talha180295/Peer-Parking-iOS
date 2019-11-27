@@ -141,7 +141,7 @@ extension SideMenuController {
             self.centerPanelOverlay.alpha = alpha
             self.set(statusUnderlayAlpha: alpha)
             self.sidePanel.frame = destinationFrame
-            }, completion: { 
+            }, completion: {
                 completion?(updated)
         })
     }

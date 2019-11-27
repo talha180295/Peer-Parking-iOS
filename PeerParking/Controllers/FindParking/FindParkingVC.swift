@@ -63,25 +63,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         loadMapView()
         
        
-       // search_tf.setLeftPaddingPoints(30)
-        
-        
-        //Setup GridView
-        //self.setupGridView()
-        
-        //get all parking without token
-//        get_all_parkings(withToken: false){
-//            json in
-//
-//            self.parkings = [json]
-////
-////            self.parkings
-//            print("JSON=\(json[0]["image_url"].stringValue)")
-//            print("JSONCount=\(json.count)")
-//            print("JSONtype=\(type(of: json))")
-//
-//            self.myCollectionView.reloadData()
-//        }
+
 //
 
     }

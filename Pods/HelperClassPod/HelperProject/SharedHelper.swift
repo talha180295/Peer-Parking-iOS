@@ -11,7 +11,6 @@ import Foundation
 import SystemConfiguration
 import Alamofire
 
-
 public class SharedHelper: UIViewController {
 
     var isLogin :String!
@@ -251,7 +250,7 @@ public class SharedHelper: UIViewController {
      * @return completion block which return data dictionary
      **/
     
-    public func Request_Api(url:String, methodType : HTTPMethod,parameters:[String:Any],isHeaderIncluded:Bool, headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
+    public func Request_Api(url:String, methodType : HTTPMethod,parameters:Parameters,isHeaderIncluded:Bool, headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
         
         
         if(isHeaderIncluded)
@@ -301,7 +300,6 @@ public class SharedHelper: UIViewController {
         }
         }
     }
-    
     
     
     
@@ -382,7 +380,7 @@ public class SharedHelper: UIViewController {
      **/
     
     
-    public func RequestApiSingleImage(url:String, imageParamKey:String,imageData:Data, parameters:[String:Any],isHeaderIncluded:Bool, headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
+    public func RequestApiSingleImage(url:String, imageParamKey:String,imageData:Data, parameters:Parameters,isHeaderIncluded:Bool, headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
         
         if(isHeaderIncluded)
         {
@@ -397,8 +395,7 @@ public class SharedHelper: UIViewController {
                     
                     for (key, value) in parameters
                     {
-                        //multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
-                         multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+                        multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
                     }
                     //}, to:url!,headers:nil)
             }, to:url , headers : headers)
@@ -413,10 +410,10 @@ public class SharedHelper: UIViewController {
                         
                     })
                     //To check and verify server error
-                    upload.responseString(completionHandler: { (response) in
+                    /*upload.responseString(completionHandler: { (response) in
                      print(response)
                      print (response.result)
-                     })
+                     })*/
                     upload.responseJSON
                         { response in
                             

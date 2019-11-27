@@ -7,7 +7,7 @@ target 'PeerParking' do
   
   # Pods for PeerParking
   pod 'IQKeyboardManagerSwift'
-  pod 'MBCircularProgressBar'
+  #pod 'MBCircularProgressBar'
   pod 'SideMenuController'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
@@ -24,7 +24,8 @@ target 'PeerParking' do
   pod 'FacebookShare'
   pod 'HelperClassPod'
   pod 'SwiftyJSON'
-  pod 'UICircularProgressRing'
+ # pod 'UICircularProgressRing'
+  pod 'CircleProgressView'
 #  pod 'DGRunkeeperSwitch' , '~> 1.1.4'
 
 

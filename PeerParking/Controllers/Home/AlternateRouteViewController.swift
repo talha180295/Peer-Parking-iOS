@@ -7,43 +7,73 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class AlternateRouteViewController: UIViewController ,UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tblRoute: UITableView!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        
-        tblRoute.dataSource = self
-        tblRoute.delegate = self
-        
-        tblRoute.register(UINib(nibName: "RoutesCell", bundle: nil), forCellReuseIdentifier: "routeCell")
-        // Do any additional setup after loading the view.
-    }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        return transactionArr.count
-        return 10;
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tblRoute.dequeueReusableCell(withIdentifier: "routeCell") as! RoutesCell
+        var alternateRoutes:[JSON]!
+        var arrAlternate : [Any] = []
         
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            
+            // Do any additional setup after loading the view.
+           
+            
+            tblRoute.dataSource = self
+            tblRoute.delegate = self
+            
+            tblRoute.register(UINib(nibName: "RoutesCell", bundle: nil), forCellReuseIdentifier: "RoutesCell")
+            // Do any additional setup after loading the view.
+        }
         
-        cell.selectionStyle = .none
-        return  cell;
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    
-
-    @IBAction func btnBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            //        return transactionArr.count
+            return alternateRoutes.count;
+        }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tblRoute.dequeueReusableCell(withIdentifier: "RoutesCell") as! RoutesCell
+            if(alternateRoutes.count>0)
+            {
+                let dict = alternateRoutes[indexPath.row].dictionary
+                
+                
+                let leg = dict!["legs"]?.arrayValue
+               let legDict = leg![0].dictionary
+               let dictanceDict = legDict!["distance"]?.dictionary
+               let distance = dictanceDict?["text"]?.stringValue
+                cell.lblDistance.text = distance! + "Away"
+               let durationDict = legDict!["duration"]?.dictionary
+               let duration = durationDict?["text"]?.stringValue
+                cell.lblTime.text = duration
+                
+                 let end_address = legDict!["end_address"]?.stringValue
+                cell.lblName.text = end_address
+                
+                
+            }
+            
+            cell.selectionStyle = .none
+            return  cell;
+        }
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let dict = alternateRoutes[indexPath.row].dictionary
+           
+           
+           NotificationCenter.default.post(name: Notification.Name(rawValue: "NotificationName"), object: nil , userInfo: dict)
+            self.dismiss(animated: true, completion: nil)
+            
+            
+        }
+        
+        @IBAction func back_btn(_ sender: UIButton) {
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+        
     /*
     // MARK: - Navigation
 

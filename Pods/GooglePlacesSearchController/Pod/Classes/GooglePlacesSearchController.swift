@@ -22,21 +22,21 @@ public enum PlaceType: String {
 }
 
 open class Place: NSObject {
-    open let id: String
-    open let mainAddress: String
-    open let secondaryAddress: String
+    public let id: String
+    public let mainAddress: String
+    public let secondaryAddress: String
     
     override open var description: String {
         get { return "\(mainAddress), \(secondaryAddress)" }
     }
     
-    init(id: String, mainAddress: String, secondaryAddress: String) {
+    public init(id: String, mainAddress: String, secondaryAddress: String) {
         self.id = id
         self.mainAddress = mainAddress
         self.secondaryAddress = secondaryAddress
     }
     
-    convenience init(prediction: [String: Any]) {
+    convenience public init(prediction: [String: Any]) {
         let structuredFormatting = prediction["structured_formatting"] as? [String: Any]
         
         self.init(
@@ -48,7 +48,7 @@ open class Place: NSObject {
 }
 
 open class PlaceDetails: CustomStringConvertible {
-    open let formattedAddress: String
+    public let formattedAddress: String
     open var name: String? = nil
 
     open var streetNumber: String? = nil
@@ -139,8 +139,6 @@ open class GooglePlacesSearchController: UISearchController, UISearchBarDelegate
         self.hidesNavigationBarDuringPresentation = false
         self.definesPresentationContext = true
         self.searchBar.placeholder = searchBarPlaceholder
-        
-        print("::=GooglePlacesSearchController")
     }
 }
 
@@ -207,8 +205,6 @@ extension GooglePlacesAutocompleteContainer {
 extension GooglePlacesAutocompleteContainer: UISearchBarDelegate, UISearchResultsUpdating {
     
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        print("::=textDidChange")
         guard !searchText.isEmpty else { places = []; return }
         let parameters = getParameters(for: searchText)
         
@@ -217,14 +213,7 @@ extension GooglePlacesAutocompleteContainer: UISearchBarDelegate, UISearchResult
         }
     }
     
-    public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("::=cancel")
-    }
-    
-    
-    
     public func updateSearchResults(for searchController: UISearchController) {
-        print("::=updateSearchResults")
         guard let searchText = searchController.searchBar.text, !searchText.isEmpty else { places = []; return }
         let parameters = getParameters(for: searchText)
         
@@ -234,7 +223,6 @@ extension GooglePlacesAutocompleteContainer: UISearchBarDelegate, UISearchResult
     }
     
     private func getParameters(for text: String) -> [String: String] {
-        print("::=getParameters")
         var params = [
             "input": text,
             "types": placeType.rawValue,
@@ -311,6 +299,10 @@ private class GooglePlacesRequestHelpers {
     }
     
     static func getPlaces(with parameters: [String: String], completion: @escaping ([Place]) -> Void) {
+        var parameters = parameters
+        if let deviceLanguage = deviceLanguage {
+            parameters["language"] = deviceLanguage
+        }
         doRequest(
             "https://maps.googleapis.com/maps/api/place/autocomplete/json",
             params: parameters,
@@ -322,10 +314,18 @@ private class GooglePlacesRequestHelpers {
     }
     
     static func getPlaceDetails(id: String, apiKey: String, completion: @escaping (PlaceDetails?) -> Void) {
+        var parameters = [ "placeid": id, "key": apiKey ]
+        if let deviceLanguage = deviceLanguage {
+            parameters["language"] = deviceLanguage
+        }
         doRequest(
             "https://maps.googleapis.com/maps/api/place/details/json",
-            params: [ "placeid": id, "key": apiKey ],
+            params: parameters,
             completion: { completion(PlaceDetails(json: $0 as? [String: Any] ?? [:])) }
         )
+    }
+    
+    private static var deviceLanguage: String? {
+        return (Locale.current as NSLocale).object(forKey: NSLocale.Key.languageCode) as? String
     }
 }

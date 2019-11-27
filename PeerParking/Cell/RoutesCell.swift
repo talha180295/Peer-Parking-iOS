@@ -10,6 +10,9 @@ import UIKit
 
 class RoutesCell: UITableViewCell {
 
+    @IBOutlet weak var lblTime: UILabel!
+    @IBOutlet weak var lblDistance: UILabel!
+    @IBOutlet weak var lblName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

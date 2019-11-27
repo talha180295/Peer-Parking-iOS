@@ -8,7 +8,7 @@
 
 // MARK: - Extension for implementing the custom nested types
 public extension SideMenuController {
-     enum SidePanelPosition {
+    public enum SidePanelPosition {
         case underCenterPanelLeft
         case underCenterPanelRight
         case overCenterPanelLeft
@@ -23,7 +23,7 @@ public extension SideMenuController {
         }
     }
     
-     enum StatusBarBehaviour {
+    public enum StatusBarBehaviour {
         case slideAnimation
         case fadeAnimation
         case horizontalPan
@@ -41,7 +41,7 @@ public extension SideMenuController {
         }
     }
     
-    struct Preferences {
+    public struct Preferences {
         public struct Drawing {
             public var menuButtonImage: UIImage?
             public var sidePanelPosition = SidePanelPosition.underCenterPanelLeft

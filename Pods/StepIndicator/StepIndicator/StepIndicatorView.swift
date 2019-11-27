@@ -23,7 +23,6 @@ public class StepIndicatorView: UIView {
     private var annularLayers = [AnnularLayer]()
     private var horizontalLineLayers = [LineLayer]()
     private let containerLayer = CALayer()
-    let step_text = ["When","Details","Limitations","Price","Image",""]
     
     
     // MARK: - Overrided properties and methods
@@ -188,7 +187,7 @@ public class StepIndicatorView: UIView {
             let x = self.numberOfSteps == 1 ? self.containerLayer.frame.width / 2.0 - self.circleRadius : self.lineMargin + CGFloat(i) * stepWidth
             annularLayer.frame = CGRect(x: x, y: y - self.circleRadius, width: diameter, height: diameter)
             self.applyAnnularStyle(annularLayer: annularLayer)
-            annularLayer.step = step_text[i]
+            annularLayer.step = i + 1
             annularLayer.updateStatus()
             
             if (i < self.numberOfSteps - 1) {
@@ -210,7 +209,7 @@ public class StepIndicatorView: UIView {
             let y = self.numberOfSteps == 1 ? self.containerLayer.frame.height / 2.0 - self.circleRadius : self.lineMargin + CGFloat(i) * stepWidth
             annularLayer.frame = CGRect(x: x - self.circleRadius, y: y, width: diameter, height: diameter)
             self.applyAnnularStyle(annularLayer: annularLayer)
-            annularLayer.step = step_text[i]
+            annularLayer.step = i + 1
             annularLayer.updateStatus()
             
             if (i < self.numberOfSteps - 1) {

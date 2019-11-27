@@ -156,8 +156,9 @@ class FBPopup: UIViewController {
         }
         else{
             
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVCNav")
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
             //
+            vc.vcName = ""
             self.present(vc, animated: false, completion: nil)
             
         }
@@ -176,7 +177,8 @@ class FBPopup: UIViewController {
     
     @IBAction func twitter_btn(_ sender: UIButton) {
         
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVCNav")
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
+        vc.vcName = ""
         self.present(vc, animated: false, completion: nil)
     }
     

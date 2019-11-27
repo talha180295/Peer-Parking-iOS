@@ -35,7 +35,7 @@ open class DatePickerDialog: UIView {
 
     // MARK: - Dialog initialization
     @objc public init(textColor: UIColor = UIColor.black,
-                buttonColor: UIColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1),
+                buttonColor: UIColor = UIColor.blue,
                 font: UIFont = .boldSystemFont(ofSize: 15),
                 locale: Locale? = nil,
                 showCancelButton: Bool = true) {

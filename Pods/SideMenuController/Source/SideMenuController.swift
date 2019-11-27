@@ -184,7 +184,7 @@ open class SideMenuController: UIViewController, UIGestureRecognizerDelegate {
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(SideMenuController.repositionViews), name:UIApplication.willChangeStatusBarFrameNotification, object: UIApplication.shared)
+        NotificationCenter.default.addObserver(self, selector: #selector(SideMenuController.repositionViews), name:NSNotification.Name(rawValue: "Test"), object: UIApplication.shared)
     }
     
     override open func viewWillDisappear(_ animated: Bool) {
@@ -244,17 +244,16 @@ open class SideMenuController: UIViewController, UIGestureRecognizerDelegate {
         sidePanel.clipsToBounds = true
         
         if sidePanelPosition.isPositionedUnder {
-            view.sendSubviewToBack(sidePanel)
-           
+//            viesendSubviewToBacke: sidePanel)
+//           view(
         } else {
             centerPanelOverlay = UIView(frame: centerPanel.frame)
             centerPanelOverlay.backgroundColor = _preferences.drawing.centerPanelOverlayColor
-            view.bringSubviewToFront(sidePanel)
-            
+//            viebringSubviewToFronte: sidePanel)
         }
         
         configureGestureRecognizers()
-        view.bringSubviewToFront(statusBarUnderlay)
+//        viebringSubviewToFronte: statusBarUnderlay)
     }
     
     func configureGestureRecognizers() {
@@ -276,7 +275,7 @@ open class SideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return
         }
         
-       // sbw?.set(hidden, withBehaviour: _preferences.animating.statusBarBehaviour)
+        sbw?.set(hidden, withBehaviour: _preferences.animating.statusBarBehaviour)
         
         if _preferences.animating.statusBarBehaviour == StatusBarBehaviour.horizontalPan {
             if !hidden {
@@ -350,11 +349,11 @@ open class SideMenuController: UIViewController, UIGestureRecognizerDelegate {
         statusBarUnderlay.alpha = alpha
     }
     
-    @objc   func handleTap() {
+      @objc func handleTap() {
         animate(toReveal: false)
     }
     
-    // MARK:@objc - UIGestureRecognizerDelegate -
+    // MARK:- UIGestureRecognizerDelegate -
     
     open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         
@@ -386,14 +385,14 @@ open class SideMenuController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - Computed variables -
     
-//    fileprivate var sbw: UIWindow? {
-//        
-//        let s = "status"
-//        let b = "Bar"
-//        let w = "Window"
-//        
-//        return UIApplication.shared.value(forKey: s+b+w) as? UIWindow
-//    }
+    fileprivate var sbw: UIWindow? {
+        
+        let s = "status"
+        let b = "Bar"
+        let w = "Window"
+        
+        return UIApplication.shared.value(forKey: s+b+w) as? UIWindow
+    }
     
     fileprivate var showsStatusUnderlay: Bool {
         

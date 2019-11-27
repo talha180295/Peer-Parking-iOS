@@ -9,19 +9,25 @@
 import UIKit
 
 import CoreMedia
-import MBCircularProgressBar
-import UICircularProgressRing
+import CircleProgressView
 
 class ParkedViewController: UIViewController {
     
     @IBOutlet weak var time_left: UILabel!
     
-    @IBOutlet weak var progressBar: UICircularTimerRing!
+
+   @IBOutlet weak var lblTimer: UILabel!
+   
+   @IBOutlet weak var progressView: CircleProgressView!
+   var seconds = 60 //This variable will hold a starting value of seconds. It could be any amount above 0.
+   var MainSeconds = 60
+   var timer = Timer()
+   var isTimerRunning = false
 
     @IBOutlet weak var btnT: UIButton!
     
     
-    var timer = Timer()
+  
     
     
    // var strTime = "set"
@@ -58,66 +64,38 @@ class ParkedViewController: UIViewController {
     }
     @IBAction func btnStart(_ sender: UIButton) {
         
-        
-        progressBar.startTimer(to: 10) { state in
-            switch state {
-            case .finished:
-                print("finished")
-            case .continued(let time):
-                print("continued: \(time)")
-            case .paused(let time):
-                print("paused: \(time)")
-            }
+    lblTimer.text = timeString(time: TimeInterval(seconds))
+    runTimer()
+   }
+    func runTimer() {
+         timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(ParkedViewController.updateTimer)), userInfo: nil, repeats: true)
+    }
+
+    @objc func updateTimer() {
+        seconds -= 1     //This will decrement(count down)the seconds.
+         //This will update the label.
+        if(seconds>0)
+        {
+        lblTimer.text = timeString(time: TimeInterval(seconds))
+        progressView.progress = Double(seconds)/Double(MainSeconds)
+        }
+        else
+        {
+            timer.invalidate()
         }
         
-//        self.progressBar.value =  self.progressBar.maxValue
-//
-//
-//        UIView.animate(withDuration: 20, delay: 0
-//            , options: [], animations: {
-//
-//                self.progressBar.value =  0
-//                self.progressBar.showValueString = true
-//        },  completion:{
-//            [weak self] finished in
-//
-//            self!.progressBar.value =  self!.progressBar.maxValue
-//            //self?.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-//            }
-//        )
-        
-        
-       
-        
-//        if(strTime.elementsEqual("set"))
-//        {
-//            strTime = "start"
-//            sender.setTitle("Start", for: .normal)
-//        }
-//        else  if(strTime.elementsEqual("start"))
-//        {
-//            //self.progressBar.progressRotationAngle.addProduct(0, 100)
-//            sender.setTitle("Stop", for: .normal)
-//            UIView.animate(withDuration: 10, delay: 0.1
-//                , options: [], animations: {
-//
-//                    self.progressBar.value =  0
-//            }, completion:{
-//                [weak self] finished in
-//                //self?.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-//            }
-//            )
-//
-//            strTime = "stop"
-//        }
-//        else  if(strTime.elementsEqual("stop"))
-//        {
-//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
-//            //
-//           self.navigationController?.pushViewController(vc, animated: true)
-//        }
-        
     }
+
+    func timeString(time:TimeInterval) -> String {
+    let hours = Int(time) / 3600
+    let minutes = Int(time) / 60 % 60
+    let seconds = Int(time) % 60
+    return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+    }
+        
+
+        
+    
     
     
   

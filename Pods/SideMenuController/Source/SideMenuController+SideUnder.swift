@@ -92,7 +92,7 @@ extension SideMenuController {
         
         let updated = centerPanel.frame != centerPanelFrame
         
-        UIView.panelAnimation( duration, animations: {
+        UIView.panelAnimation( duration, animations: { 
             self.centerPanel.frame = centerPanelFrame
             self.set(statusUnderlayAlpha: hidden ? 0 : 1)
         }) { 
@@ -157,8 +157,8 @@ extension SideMenuController {
                 let centerFrame = centerPanel.frame
                 let sideFrame = sidePanel.frame
                 
-                let shouldOpenPercentage = CGFloat(0.8)
-                let shouldHidePercentage = CGFloat(0.2)
+                let shouldOpenPercentage = CGFloat(0.2)
+                let shouldHidePercentage = CGFloat(0.8)
                 
                 if sidePanelPosition.isPositionedLeft {
                     if leftToRight {
