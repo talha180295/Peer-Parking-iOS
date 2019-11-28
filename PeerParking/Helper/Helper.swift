@@ -327,6 +327,33 @@ class Helper{
         view_controller.present(popupVC, animated: true)
     }
     
+    func RefreshToken(completion: @escaping (_ result: DataResponse<Any>) -> Void) {
+        
+        var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
+        auth_value = "bearer " + auth_value
+        
+        
+        let headers: HTTPHeaders = [
+            "Authorization" : auth_value
+        ]
+        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.REFRESH_TOKEN
+        Alamofire.request(url, method: .post, parameters: nil, headers:headers).validate(contentType: ["application/json","text/html"]).responseJSON
+            { response in
+                
+                switch response.result {
+                case .success:
+                    print(response)
+                    
+                    completion(response)
+                    break
+                case .failure(let error):
+                    print(error)
+                    completion(response)
+                }
+                
+        }
+    }
+    
     
     
 }
@@ -376,4 +403,6 @@ extension CLLocationCoordinate2D {
         let lon2 = lon1 + atan2(sin(bearing) * sin(distRadians) * cos(lat1), cos(distRadians) - sin(lat1) * sin(lat2))
         return CLLocationCoordinate2D(latitude: lat2 * 180 / Double.pi, longitude: lon2 * 180 / Double.pi)
     }
+    
+    
 }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import HelperClassPod
+import Alamofire
 
 class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSource{
 
@@ -57,6 +59,14 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
         }
 
             let dictInner = dict[indexPath.row] as NSDictionary
+            let nameStr = dictInner["name"] as! String
+            if(nameStr.elementsEqual("Logout"))
+            {
+                //
+                logOut()
+            }
+            else
+            {
             
            
             let segue = (dictInner["segue"] as! String)
@@ -64,7 +74,99 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
             {
                 sideMenuController?.performSegue(withIdentifier: segue, sender: nil)
             }
+                
+            }
         previousIndex = indexPath as NSIndexPath?
     }
     
+    
+    func logOut() {
+        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.LOGOUT
+        
+        let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: "auth_token")!)"
+        let headers: HTTPHeaders = [
+            "Authorization" : auth_value
+        ]
+        
+        SharedHelper().Request_Api(url: url, methodType: .post, parameters: [:], isHeaderIncluded: true, headers: headers){
+            response in
+            
+            if response.result.value == nil {
+                print("No response")
+               // SharedHelper().hideSpinner(view: self.view)
+                return
+            }
+            else {
+                let responseData = response.result.value as! NSDictionary
+                let status = responseData["success"] as! Bool
+                if(status)
+                    //                {  let fcmToken :String = UserDefaults.standard.string(forKey: "FCMToken")!
+                {
+                    //                    let user_id : String = UserDefaults.standard.string(forKey: "id")!
+                    self.resetDefaults()
+                    // UserDefaults.standard.set(fcmToken, forKey: "FCMToken")
+                    UserDefaults.standard.set("no", forKey: "login")
+                    UserDefaults.standard.synchronize()
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
+                    //
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    // UserDefaults.standard.set(fcmToken, forKey: "FCMToken")
+                }
+                else
+                {
+                    let messageDict = responseData["meta"] as! NSDictionary
+                    //                    let msg = messageDict["message" ] as! String
+                   // SharedHelper().hideSpinner(view: self.view)
+                    UserDefaults.standard.set("no", forKey: "login")
+                    UserDefaults.standard.synchronize()
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
+                    //
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+            
+        }
+//        SharedHelper().dynamicPostRequestWithoutParam(url: url)    {
+//            response in
+//            print(response)
+//            if response.result.value == nil {
+//                print("No response")
+//                SharedHelper().hideSpinner(view: self.view)
+//                return
+//            }
+//            else {
+//                let responseData = response.result.value as! NSDictionary
+//                let status = responseData["success"] as! Bool
+//                if(status)
+//                    //                {  let fcmToken :String = UserDefaults.standard.string(forKey: "FCMToken")!
+//                {
+//                    //                    let user_id : String = UserDefaults.standard.string(forKey: "id")!
+//                    self.resetDefaults()
+//                    // UserDefaults.standard.set(fcmToken, forKey: "FCMToken")
+//                    UserDefaults.standard.set("no", forKey: "login")
+//                    UserDefaults.standard.synchronize()
+//                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
+//                    self.navigationController?.pushViewController(vc, animated: true)
+//                    // UserDefaults.standard.set(fcmToken, forKey: "FCMToken")
+//                }
+//                else
+//                {
+//                    let messageDict = responseData["meta"] as! NSDictionary
+//                    //                    let msg = messageDict["message" ] as! String
+//                    SharedHelper().hideSpinner(view: self.view)
+//                    UserDefaults.standard.set("no", forKey: "login")
+//                    UserDefaults.standard.synchronize()
+//                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
+//                    self.navigationController?.pushViewController(vc, animated: true)
+//                }
+//            }
+//        }
+    }
+    func resetDefaults() {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            defaults.removeObject(forKey: key)
+        }
+    }
 }

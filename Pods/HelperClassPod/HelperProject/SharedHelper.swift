@@ -11,6 +11,7 @@ import Foundation
 import SystemConfiguration
 import Alamofire
 
+
 public class SharedHelper: UIViewController {
 
     var isLogin :String!
@@ -240,6 +241,39 @@ public class SharedHelper: UIViewController {
     
     
     
+    /** @brief this is a generic method to Refresh access token
+     * @return completion block which return data dictionary
+     **/
+    func RefreshToken(completion: @escaping (_ result: DataResponse<Any>) -> Void) {
+        
+        var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
+        auth_value = "bearer " + auth_value
+        
+        
+        let headers: HTTPHeaders = [
+            "Authorization" : auth_value
+        ]
+        let url = "http://peer-parking.servstaging.com/api/v1/refresh"
+        
+        Alamofire.request(url, method: .post, parameters: nil, headers:headers).validate(contentType: ["application/json","text/html"]).responseJSON
+            { response in
+                
+                switch response.result {
+                case .success:
+                    print(response)
+                    
+                    completion(response)
+                    break
+                case .failure(let error):
+                    print(error)
+                    completion(response)
+                }
+                
+        }
+    }
+    
+    
+    
     /**
      * @brief this is a generic method use to hit API call
      * @param url : String
@@ -255,32 +289,66 @@ public class SharedHelper: UIViewController {
         
         if(isHeaderIncluded)
         {
-            Alamofire.request(url, method: methodType, parameters: parameters, headers:headers).validate(contentType: ["application/json","text/html"]).responseJSON
-                { response in
-                    
-                    switch response.result {
-                    case .success:
-                        print(response)
-                        completion(response)
-                        break
-                    case .failure(let error):
-                        print(error)
-                        completion(response)
-                    }
-                    
-                }.responseString { response in
-                    print(response.result.value as Any)
-                    switch(response.result) {
-                    case .success(_):
-                        if let data = response.result.value{
-                            print(data)
-                        }
+            RefreshToken(completion:{
+                response in
+                print(response)
+                if response.result.value == nil {
+                    print("No response")
+                   
+                    return
+                }
+                else {
+                    let responseData = response.result.value as! NSDictionary
+                    let status = responseData["success"] as! Bool
+                    if(status)
+                    {
+                        let uData = responseData["data"] as! NSDictionary
                         
-                    case .failure(_):
-                        print(response.result.error as Any)
-                        break
+                        let userData = uData["user"] as! NSDictionary
+                        
+                        let auth_token = userData["access_token"] as! String
+                        UserDefaults.standard.set(auth_token, forKey: "auth_token")
+                        UserDefaults.standard.synchronize()
+                        
+                        var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
+                        auth_value = "bearer " + auth_value
+                        
+                        let headers1: HTTPHeaders = [
+                            "Authorization" : auth_value,
+                            "Accept" : "application/json"
+                        ]
+            
+                        Alamofire.request(url, method: methodType, parameters: parameters, headers:headers1).validate(contentType: ["application/json","text/html"]).responseJSON
+                            { response in
+                                
+                                switch response.result {
+                                case .success:
+                                    print(response)
+                                    completion(response)
+                                    break
+                                case .failure(let error):
+                                    print(error)
+                                    completion(response)
+                                }
+                                
+                            }.responseString { response in
+                                print(response.result.value as Any)
+                                switch(response.result) {
+                                case .success(_):
+                                    if let data = response.result.value{
+                                        print(data)
+                                    }
+                                    
+                                case .failure(_):
+                                    print(response.result.error as Any)
+                                    break
+                                }
+                        }
                     }
-            }
+                }
+                
+                
+                });
         }
         else
         {

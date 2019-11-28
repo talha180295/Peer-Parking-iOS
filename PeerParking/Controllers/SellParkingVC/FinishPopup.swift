@@ -199,7 +199,7 @@ class FinishPopup: UIViewController {
 
     }
     
-    
+   
     func uploadImage(urlString : String ,imageParamKey:String, imageData : Data, param : [String : Any],headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void){
         
         
@@ -207,45 +207,96 @@ class FinishPopup: UIViewController {
 //            print("Could not get JPEG representation of UIImage")
 //            return
 //        }
+
         
-        Alamofire.upload(multipartFormData: { multipartFormData in
-            for (key, value) in param {
-                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+        
+        Helper().RefreshToken(completion:{
+            response in
+            print(response)
+            if response.result.value == nil {
+                print("No response")
+                
+                return
+            }
+            else {
+                let responseData = response.result.value as! NSDictionary
+                let status = responseData["success"] as! Bool
+                if(status)
+                {
+                    let uData = responseData["data"] as! NSDictionary
+                    
+                    let userData = uData["user"] as! NSDictionary
+                    
+                    let auth_token = userData["access_token"] as! String
+                    UserDefaults.standard.set(auth_token, forKey: "auth_token")
+                    UserDefaults.standard.synchronize()
+                    
+                    var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
+                    auth_value = "bearer " + auth_value
+                    
+                    let headers1: HTTPHeaders = [
+                        "Authorization" : auth_value,
+                        "Accept" : "application/json"
+                    ]
+                    
+                    Alamofire.upload(multipartFormData: { multipartFormData in
+                        for (key, value) in param {
+                            multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+                        }
+                        
+                        multipartFormData.append(imageData,
+                                                 withName: imageParamKey,
+                                                 fileName: "image.jpg",
+                                                 mimeType: "image/jpeg")
+                    },
+                                     to: urlString,
+                                     headers: headers1,
+                                     encodingCompletion: { encodingResult in
+                                        
+                                        switch encodingResult {
+                                        case .success(let upload, _, _):
+                                            upload.uploadProgress { progress in
+                                            }
+                                            upload.validate()
+                                            upload.responseJSON { response in
+                                                
+                                                switch response.result {
+                                                case .success:
+                                                    print(response)
+                                                    completion(response)
+                                                    break
+                                                case .failure(let error):
+                                                    print(error)
+                                                    completion(response)
+                                                }
+                                            }
+                                        case .failure(_):
+                                            print(encodingResult)
+                                            //                                completion(encodingResult)
+                                            
+                                        }
+                    })
+                    
+                }
             }
             
-            multipartFormData.append(imageData,
-                                     withName: imageParamKey,
-                                     fileName: "image.jpg",
-                                     mimeType: "image/jpeg")
-        },
-                         to: urlString,
-                         headers: headers,
-                         encodingCompletion: { encodingResult in
-                            
-                            switch encodingResult {
-                            case .success(let upload, _, _):
-                                upload.uploadProgress { progress in
-                                }
-                                upload.validate()
-                                upload.responseJSON { response in
-                                    
-                                    switch response.result {
-                                    case .success:
-                                        print(response)
-                                        completion(response)
-                                        break
-                                    case .failure(let error):
-                                        print(error)
-                                        completion(response)
-                                    }
-                                }
-                            case .failure(_):
-                                print(encodingResult)
-//                                completion(encodingResult)
-                            
-                            }
-        })
+            
+        });
+        
+        
+        
+        
+        
+        
+        
+        
     }
    
 
+    
+    
+    
+    
+    
+    
 }

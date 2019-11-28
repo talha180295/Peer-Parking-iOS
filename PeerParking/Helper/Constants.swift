@@ -47,6 +47,15 @@ struct APP_CONSTANT {
         
         static let ASSIGN_BUYER = "assign-buyer"
         
+        static let REFRESH_TOKEN = "refresh"
+        
+        static let LOGOUT = "logout"
+        
+        
+        
+        
+        
+        
     }
    
     

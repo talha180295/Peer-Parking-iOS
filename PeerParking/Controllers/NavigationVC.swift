@@ -83,13 +83,16 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         
         
         print("::=willapear")
-        loadMapView()
+        //loadMapView()
         self.tabBarController!.navigationItem.title = "Navigate"
         
         parkings_cells.isHidden = true
         //
         //        self.tabBarController?.tabBar.isHidden = false
         //        self.navigationController?.navigationBar.isHidden = false
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        loadMapView()
     }
     
     func autocompleteClicked() {
@@ -128,8 +131,8 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         map.isMyLocationEnabled = true
         
         //Location Manager code to fetch current location
-        self.locationManager.delegate = self
-        self.locationManager.startUpdatingLocation()
+//        self.locationManager.delegate = self
+//        self.locationManager.startUpdatingLocation()
     }
     
     //Location Manager delegates

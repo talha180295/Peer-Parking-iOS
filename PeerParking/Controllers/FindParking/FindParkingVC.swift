@@ -60,12 +60,18 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         parkings_cells.isHidden = true
         
-        loadMapView()
+       
         
        
 
 //
 
+    }
+    
+    func  setMapButton()  {
+        map.isMyLocationEnabled = true
+        map.settings.myLocationButton = true
+        map.padding = UIEdgeInsets(top: 0, left: 0, bottom: 190, right: 20)
     }
     
 
@@ -74,9 +80,13 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         tab_index = 0
         print("::=willapear")
         
+        
         self.tabBarController!.navigationItem.title = "Find Parking"
         
         
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        loadMapView()
     }
     
     func autocompleteClicked() {
@@ -115,6 +125,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         //Location Manager code to fetch current location
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
+        
+//        setMapButton()
     }
     
     //Location Manager delegates
@@ -351,6 +363,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             "longitude": String(long)
         
         ]
+        
         if(filters.keys.contains("vehicle_type")){
             params.updateValue(filters["vehicle_type"]!, forKey: "vehicle_type")
         }

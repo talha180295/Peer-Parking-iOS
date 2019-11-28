@@ -79,6 +79,10 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
                 self.drawRoute()
             }
             
+            let camera = GMSCameraPosition.camera(withLatitude: (self.c_lat), longitude: (self.c_longg), zoom: 18.0)
+            
+            self.map.animate(to: camera)
+            
         }
         
     }
@@ -121,24 +125,24 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         
         print("origin1=\(origin)")
         
-        //         if(vcName.elementsEqual("nav"))
-        //         {
-        //              drawRouteOnly()
-        //         }
-        //        else
-        //           {
-        //               drawRoute()
+//                 if(vcName.elementsEqual("nav"))
+//                 {
+//                      drawRouteOnly()
+//                 }
+//        //        else
+//        //           {
+                       drawRoute()
         //           }
         //        print("lat==\(location?.coordinate.latitude)")
         //        print("long==\(location?.coordinate.longitude)")
         
         //        self.filterLat = (location?.coordinate.latitude)!
         //        self.filterLong = (location?.coordinate.longitude)!
-        
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 18.0)
-        
-        self.map.animate(to: camera)
-        Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map)
+//
+//        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 18.0)
+//
+//        self.map.animate(to: camera)
+      //  Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map)
         
         // self.locationManager.stopUpdatingLocation()
         
@@ -146,6 +150,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
     
     func drawRouteOnly(){
         
+        map.clear()
         let origin = "\(c_lat),\(c_longg)"
         let destination = "\(p_lat),\(p_longg)"
         
@@ -155,6 +160,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map)
         
         Helper().map_marker(lat: p_lat, longg: p_longg, map_view: self.map)
+        
         
         
         //            let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&alternatives=true&key=\(Key.Google.placesKey)"
@@ -216,15 +222,13 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
     
     func drawRoute(){
         
+       // map.clear()
         let origin = "\(c_lat),\(c_longg)"
         let destination = "\(p_lat),\(p_longg)"
         
         
         print("origin2=\(origin)")
         print("destination=\(destination)")
-        Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map)
-        
-        Helper().map_marker(lat: p_lat, longg: p_longg, map_view: self.map)
         
         
         let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&alternatives=true&key=\(Key.Google.placesKey)"
@@ -259,6 +263,14 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
                     let polyline = GMSPolyline.init(path: path)
                     polyline.strokeWidth = 4
                     polyline.strokeColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
+                    
+                    
+                    self.map.clear()
+                    
+                    Helper().map_marker(lat: self.c_lat, longg: self.c_longg, map_view: self.map)
+                    
+                    Helper().map_marker(lat: self.p_lat, longg: self.p_longg, map_view: self.map)
+
                     polyline.map = self.map
                 }
                 //                for route in routes
