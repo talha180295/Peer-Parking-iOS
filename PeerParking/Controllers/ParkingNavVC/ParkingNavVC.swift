@@ -23,11 +23,17 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var cancelHeight: NSLayoutConstraint! ///55
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var lblDistance: UILabel!
+  
+    @IBOutlet weak var parkView: UIView!
+    
+    
     var map = GMSMapView()
     var vcName : String!
-    @IBOutlet weak var parkView: UIView!
     var locationManager = CLLocationManager()
     
+    
+    
+    var parking_details:NSDictionary!
     var p_title:String = ""
     var p_lat:Double = 0.0
     var p_longg:Double = 0.0
@@ -468,6 +474,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
 
                     
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedbackVC") as! FeedbackVC
+                    vc.parking_details = self.parking_details
                     vc.p_id = p_id
                     self.present(vc, animated: true, completion: nil)
                     //self.after_signin()

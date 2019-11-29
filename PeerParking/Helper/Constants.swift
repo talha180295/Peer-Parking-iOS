@@ -52,6 +52,10 @@ struct APP_CONSTANT {
         static let LOGOUT = "logout"
         
         
+        static let REVIEWS = "reviews"
+        
+        
+        
         
         
         

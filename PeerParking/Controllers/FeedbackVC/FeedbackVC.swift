@@ -18,7 +18,7 @@ class FeedbackVC: UIViewController {
     @IBOutlet weak var rating_bar: CosmosView!
     @IBOutlet weak var label: UILabel!
     
-    
+    var parking_details:NSDictionary!
     var p_id:Int!
     
     override func viewDidLoad() {
@@ -65,8 +65,8 @@ class FeedbackVC: UIViewController {
     
     func wantToSellParking(){
         
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Sell_parking_popup")
-        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Sell_parking_popup") as! Sell_parking_popup
+        vc.parking_details = self.parking_details
         Helper().popUp(controller: vc, view_controller: self)
     }
     
@@ -94,14 +94,14 @@ class FeedbackVC: UIViewController {
         //        self.present(vc, animated: true, completion: nil)
         
         
-        let url = "\(APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.ASSIGN_BUYER)/\(p_id)"
+        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.REVIEWS
         
         print("url--\(url)")
         
         
         SharedHelper().Request_Api(url: url, methodType: .post, parameters: params, isHeaderIncluded: true, headers: headers){ response in
             
-            print("response>>>\(response)")
+            print("response>>>123\(response)")
             
             if response.result.value == nil {
                 print("No response")

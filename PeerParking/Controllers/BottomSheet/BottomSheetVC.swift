@@ -85,14 +85,13 @@ class BottomSheetVC: UIViewController {
         }
         else
         {
-            
             self.note.text = parking_details["note"] as? String
         }
         
       
         self.parking_type.text = parking_details["parking_type_text"] as? String
         self.time_limit.text = parking_details["parking_allowed_until"] as? String
-        
+//        self.viheicle_type.text = parking_details["viheicle_type"] as? String
         
 //        {
 //            "id": 16,
@@ -177,6 +176,7 @@ class BottomSheetVC: UIViewController {
             //SharedHelper().showToast(message: "Login", controller: self)
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
             //
+            vc.parking_details = self.parking_details
             vc.p_id = Int(self.parking_details["id"] as! Int)
             vc.p_title = self.parking_titile.text ?? ""
             
