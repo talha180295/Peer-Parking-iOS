@@ -11,6 +11,8 @@ import Cosmos
 
 class Parking_table_cell: UITableViewCell {
 
+    @IBOutlet weak var img: UIImageView!
+    
     @IBOutlet weak var parking_title: UILabel!
     
     @IBOutlet weak var rating_view: CosmosView!

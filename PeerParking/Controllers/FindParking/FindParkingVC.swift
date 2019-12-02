@@ -268,6 +268,9 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             let dict = parkings[indexPath.row] as! NSDictionary
             print(dict)
             
+            
+            let seller = dict["seller"] as! NSDictionary
+            let seller_details = seller["details"] as! NSDictionary
           
             let lat = dict["latitude"] as! String
             let long = dict["longitude"] as! String
@@ -287,6 +290,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             {
             cell.parking_title.text = (dict["address"] as! String)
             }
+            
+            cell.rating_view.rating = ((seller_details["average_rating"] as? Double)!)
             
             cell.vehicle_type.text = (dict["vehicle_type_text"] as? String)
            
@@ -322,7 +327,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         let distanceStr = cal_distance(lat: lat, long: long)
         
         
-        controller.distanceInMiles = String(distanceStr)
+        
+        controller.distanceInMiles = String(format: "%.03f miles from destination", distanceStr)
         bottomSheet(controller: controller, sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
     }
     

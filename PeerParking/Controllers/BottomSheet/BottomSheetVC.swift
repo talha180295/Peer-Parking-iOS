@@ -50,6 +50,7 @@ class BottomSheetVC: UIViewController {
         //print("parking_details=\(parking_details!)")
       
       
+        
         setData()
     }
     
@@ -77,7 +78,8 @@ class BottomSheetVC: UIViewController {
         
         
         self.price.text = "$" + String(priceStr)
-        self.distance.text = String(format: "%.02f miles away", self.distanceInMiles)
+        print("adfsdf=\(distanceInMiles)")
+        self.distance.text = distanceInMiles
         
         if parking_details["note"] is NSNull
         {
@@ -90,8 +92,21 @@ class BottomSheetVC: UIViewController {
         
       
         self.parking_type.text = parking_details["parking_type_text"] as? String
-        self.time_limit.text = parking_details["parking_allowed_until"] as? String
-//        self.viheicle_type.text = parking_details["viheicle_type"] as? String
+        
+        self.viheicle_type.text = parking_details["vehicle_type_text"] as? String
+        
+        
+        if let time_limit = parking_details["parking_allowed_until"] as? String{
+            
+            self.time_limit.text = "UNTIL \(time_limit)"
+        }
+        if let ext_fee = parking_details["parking_extra_fee"] as? Double{
+            
+            self.extra_charges.text = "\(ext_fee)"
+        }
+        
+        
+        
         
 //        {
 //            "id": 16,

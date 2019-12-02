@@ -38,9 +38,40 @@ class ViewAllVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = my_table_view.dequeueReusableCell(withIdentifier: "Parking_table_cell") as! Parking_table_cell
        
+//        if(parkings.count>0){
+//            let dict = parkings[indexPath.row] as! NSDictionary
+//            print(dict)
+//            if(dict["address"] is NSNull)
+//            {
+//
+//            }
+//            else
+//            {
+//                cell.parking_title.text = (dict["address"] as! String)
+//            }
+//            //cell.setData(empReqObj: arrModel[indexPath.row])
+//        }
+        
         if(parkings.count>0){
+            
+            
             let dict = parkings[indexPath.row] as! NSDictionary
             print(dict)
+            
+            
+            let seller = dict["seller"] as! NSDictionary
+            let seller_details = seller["details"] as! NSDictionary
+            
+            let lat = dict["latitude"] as! String
+            let long = dict["longitude"] as! String
+            
+            
+            let priceStr = dict["initial_price"] as! Double
+            
+            let distanceStr = cal_distance(lat: lat, long: long)
+            
+            let imgUrl = dict["image_url"] as? String
+            cell.img.sd_setImage(with: URL(string: imgUrl!),placeholderImage: UIImage.init(named: "placeholder-img") )
             if(dict["address"] is NSNull)
             {
                 
@@ -49,7 +80,17 @@ class ViewAllVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             {
                 cell.parking_title.text = (dict["address"] as! String)
             }
-            //cell.setData(empReqObj: arrModel[indexPath.row])
+            
+            cell.vehicle_type.text = (dict["vehicle_type_text"] as? String)
+            
+            cell.rating_view.rating = ((seller_details["average_rating"] as? Double)!)
+            
+            cell.price.text = "$" + String(priceStr)
+            
+            
+            cell.distance.text = String(format: "%.02f miles away", distanceStr)
+            
+            //cell.barg_count.text = dict["vehicle_type_text"] as? String
         }
         
         return cell
@@ -74,7 +115,7 @@ class ViewAllVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let distanceStr = cal_distance(lat: lat, long: long)
         
         
-        controller.distanceInMiles = String(distanceStr)
+        controller.distanceInMiles = String(format: "%.03f miles away", distanceStr)
         Helper().bottomSheet(controller: controller, sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0), view_controller: self)
     }
     
