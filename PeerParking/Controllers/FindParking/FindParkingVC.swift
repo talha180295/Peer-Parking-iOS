@@ -26,8 +26,12 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     //IBOutlets
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var myCollectionView: UICollectionView!
-    @IBOutlet weak var parkings_cells: UIView!
     @IBOutlet weak var search_tf: UITextField!
+    @IBOutlet weak var filter_btn: UIButton!
+    @IBOutlet weak var view_all_btn: UIButton!
+    @IBOutlet weak var re_center_btn: UIButton!
+    
+    @IBOutlet weak var re_center_bottom_cont: NSLayoutConstraint!
     
     //Variables
     var estimateWidth=130
@@ -58,9 +62,9 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         
         
-        parkings_cells.isHidden = true
-        
-       
+        myCollectionView.isHidden = true
+        filter_btn.isHidden = true
+        view_all_btn.isHidden = true
         
        
 
@@ -69,9 +73,11 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     }
     
     func  setMapButton()  {
+        let bottomPadding = UIScreen.main.bounds.height-view_all_btn.frame.origin.y
+        print("bottomPadding=\(bottomPadding)")
         map.isMyLocationEnabled = true
         map.settings.myLocationButton = true
-        map.padding = UIEdgeInsets(top: 0, left: 0, bottom: 190, right: 20)
+        map.padding = UIEdgeInsets(top: 0, left: 0, bottom: bottomPadding, right: 20)
     }
     
 
@@ -215,10 +221,23 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
         
+        print(" view_all_btn=\(self.view_all_btn.frame)")
         get_all_parkings(lat: self.lat, long: self.longg, filters: [:]){
             
             sender.isHidden = false
+            self.myCollectionView.isHidden = false
+            self.filter_btn.isHidden = false
+            self.view_all_btn.isHidden = false
             self.search_tf.text = self.address
+            print(" self.re_center_btn.frame=\(self.view_all_btn.frame)")
+            
+           // let pos = UIScreen.main.bounds.height -  self.view_all_btn.frame.origin.y - 45
+            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+                self.re_center_bottom_cont.constant = 40
+            })
+            
+            print(" self.re_center_btn.frame=\(self.re_center_btn.frame)")
+//            self.setMapButton()
         }
         
     }
@@ -414,14 +433,10 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                     print("self.address=\(self.address)")
                     
                     
-//                    if(self.parkings.count == 0){
-//                        self.parkings_cells.isHidden = true
-//                    }
-//                    else{
-//                        self.parkings_cells.isHidden = false
-//                    }
                     
-                    self.parkings_cells.isHidden = false
+                    self.myCollectionView.isHidden = false
+                    self.filter_btn.isHidden = false
+                    self.view_all_btn.isHidden = false
                     
                     
                     
@@ -521,7 +536,10 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
         print("Place attributions: \(place.attributions)")
         self.search_tf.text = place.name!
         dismiss(animated: true){
-            self.parkings_cells.isHidden = false
+            self.myCollectionView.isHidden = false
+            self.filter_btn.isHidden = false
+            self.view_all_btn.isHidden = false
+            
             
             let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 13.7)
             
