@@ -27,18 +27,8 @@ class ContainerView: UIViewController {
         super.viewDidLoad()
 
        
-        // Do any additional setup after loading the view.
-        controller1 = storyboard!.instantiateViewController(withIdentifier: "one")
-        controller2 = storyboard!.instantiateViewController(withIdentifier: "two")
-        controller3 = storyboard!.instantiateViewController(withIdentifier: "three")
-        controller4 = storyboard!.instantiateViewController(withIdentifier: "four")
-        controller5 = storyboard!.instantiateViewController(withIdentifier: "five")
         
-        addChild(controller1)
-        controller1.view.frame = view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
-        view.addSubview(controller1.view)
-        controller1.didMove(toParent: self)
-        
+        init_controllers()
         
         
        
@@ -47,6 +37,10 @@ class ContainerView: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         
+//        if(){
+//            init_controllers()
+//        }
+//        
         print("::--=viewWillAppear|Container")
         NotificationCenter.default.addObserver(self, selector: #selector(self.btn_tap(notification:)), name: NSNotification.Name(rawValue: "btn_tap"), object: nil)
         
@@ -67,6 +61,20 @@ class ContainerView: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
+    func init_controllers(){
+        
+        // Do any additional setup after loading the view.
+        controller1 = storyboard!.instantiateViewController(withIdentifier: "one")
+        controller2 = storyboard!.instantiateViewController(withIdentifier: "two")
+        controller3 = storyboard!.instantiateViewController(withIdentifier: "three")
+        controller4 = storyboard!.instantiateViewController(withIdentifier: "four")
+        controller5 = storyboard!.instantiateViewController(withIdentifier: "five")
+        
+        addChild(controller1)
+        controller1.view.frame = view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+        view.addSubview(controller1.view)
+        controller1.didMove(toParent: self)
+    }
     
     func change_page(){
         

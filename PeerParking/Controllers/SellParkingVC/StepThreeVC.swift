@@ -128,11 +128,13 @@ class StepThreeVC: UIViewController {
     
     @IBAction func parking_time_btn(_ sender: UITextField) {
         sender.resignFirstResponder()
+        hours_limit.resignFirstResponder()
         datePickerTapped(sender:sender)
     }
     
     @IBAction func extra_fees_btn(_ sender: UITextField) {
-         sender.resignFirstResponder()
+        sender.resignFirstResponder()
+        hours_limit.resignFirstResponder()
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PricePicker") as! PricePicker
         
@@ -171,7 +173,15 @@ class StepThreeVC: UIViewController {
     }
     @IBAction func hour_limit(_ sender: UITextField) {
         
-        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(sender.text!)!, forKey: "parking_hours_limit")
+        let a:String = "1"
+        
+        let hours = sender.text
+        
+        if(sender.hasText){
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(hours!)!, forKey: "parking_hours_limit")
+        }
+       
+        
     }
     
 //    func datePickerTapped2(sender:UITextField, from:String) {
