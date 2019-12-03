@@ -392,6 +392,17 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         if(filters.keys.contains("vehicle_type")){
             params.updateValue(filters["vehicle_type"]!, forKey: "vehicle_type")
         }
+        if(filters.keys.contains("parking_type")){
+            params.updateValue(filters["parking_type"]!, forKey: "parking_type")
+        }
+        if(filters.keys.contains("orderBy_column")){
+            params.updateValue(filters["orderBy_column"]!, forKey: "orderBy_column")
+        }
+        if(filters.keys.contains("time_margin")){
+            params.updateValue(filters["time_margin"]!, forKey: "time_margin")
+        }
+        
+        
         print("param123=\(params)")
         let headers: HTTPHeaders = [
             "Authorization" : ""

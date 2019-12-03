@@ -17,6 +17,8 @@ class FBPopup: UIViewController {
 
     var key = ""
     
+    var parking_details:NSDictionary!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -156,9 +158,25 @@ class FBPopup: UIViewController {
         }
         else{
             
+//            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
+//            //
+//            vc.vcName = ""
+//            self.present(vc, animated: false, completion: nil)
+            
+            //SharedHelper().showToast(message: "Login", controller: self)
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
             //
+            vc.parking_details = self.parking_details
+            vc.p_id = Int(self.parking_details["id"] as! Int)
+            vc.p_title =  parking_details["address"] as? String ?? ""
+            
+            vc.p_lat = Double(self.parking_details["latitude"] as! String)!
+            vc.p_longg = Double(self.parking_details["longitude"] as! String)!
             vc.vcName = ""
+            
+            
+            //            self.navigationController?.pushViewController(vc, animated: true)
+            //            self.navigationController?.pushViewController(vc, animated: true)
             self.present(vc, animated: false, completion: nil)
             
         }

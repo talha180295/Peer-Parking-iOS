@@ -207,10 +207,12 @@ class BottomSheetVC: UIViewController {
         }
         else{
             
-            let vc = self.story.instantiateViewController(withIdentifier: "FBPopup")
+            let vc = self.story.instantiateViewController(withIdentifier: "FBPopup") as? FBPopup
+            
+            vc?.parking_details = self.parking_details
             
             
-            let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
+            let popupVC = PopupViewController(contentController: vc!, popupWidth: 320, popupHeight: 365)
             popupVC.canTapOutsideToDismiss = true
             
             

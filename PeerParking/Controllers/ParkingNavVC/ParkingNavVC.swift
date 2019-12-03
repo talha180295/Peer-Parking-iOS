@@ -51,7 +51,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
     }
     override func viewWillAppear(_ animated: Bool) {
         
-        loadMapView()
+//        loadMapView()
         
         
         if(vcName.elementsEqual("nav"))
@@ -94,7 +94,9 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
     }
     
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        loadMapView()
+    }
     
     func loadMapView(){
         
@@ -110,6 +112,8 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         self.mapView.addSubview(map)
         
         map.isMyLocationEnabled = true
+        map.settings.myLocationButton = true
+        map.padding = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 15)
         
         //Location Manager code to fetch current location
         self.locationManager.delegate = self
@@ -163,9 +167,9 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         
         print("origin2=\(origin)")
         print("destination=\(destination)")
-        Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map)
+        Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map, title: "This is you")
         
-        Helper().map_marker(lat: p_lat, longg: p_longg, map_view: self.map)
+        Helper().map_marker(lat: p_lat, longg: p_longg, map_view: self.map, title: "This is parking")
         
         
         
@@ -273,9 +277,9 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
                     
                     self.map.clear()
                     
-                    Helper().map_marker(lat: self.c_lat, longg: self.c_longg, map_view: self.map)
+                    Helper().map_marker(lat: self.c_lat, longg: self.c_longg, map_view: self.map, title: "This is you")
                     
-                    Helper().map_marker(lat: self.p_lat, longg: self.p_longg, map_view: self.map)
+                    Helper().map_marker(lat: self.p_lat, longg: self.p_longg, map_view: self.map, title: "This is parking")
 
                     polyline.map = self.map
                 }
@@ -381,9 +385,9 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         
         print("origin2=\(origin)")
         print("destination=\(destination)")
-        Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map)
+        Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map, title: "This is you")
         
-        Helper().map_marker(lat: p_lat, longg: p_longg, map_view: self.map)
+        Helper().map_marker(lat: p_lat, longg: p_longg, map_view: self.map, title: "This is parking")
         
         
         

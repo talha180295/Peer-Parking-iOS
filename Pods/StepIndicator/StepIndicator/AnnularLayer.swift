@@ -95,13 +95,14 @@ class AnnularLayer: CAShapeLayer {
             self.drawAnnularPath()
             
             if self.displayNumber {
-                self.centerCircleLayer.removeFromSuperlayer()
+                self.centerTextLayer.removeFromSuperlayer()
+                self.strokeColor = self.annularDefaultColor?.cgColor
                 
                 if isCurrent {
-                    self.strokeColor = self.tintColor?.cgColor
+                    self.drawCenterCircleAnimated()
                 }
                 else{
-                    self.strokeColor = self.annularDefaultColor?.cgColor
+                    self.centerCircleLayer.removeFromSuperlayer()
                 }
                 
                 self.drawText()

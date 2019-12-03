@@ -675,7 +675,7 @@ class FilterBottomSheetVC: UIViewController {
             
             let val = sender.tag * 10
             //            filters.updateValue("hey", forKey: "parking_type")
-            filters.updateValue(String(val), forKey: "orderBy")
+            filters.updateValue(String(val), forKey: "orderBy_column")
         }
         
         

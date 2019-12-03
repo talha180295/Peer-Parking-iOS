@@ -12,6 +12,7 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
 
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var text_view: UITextView!
+    @IBOutlet weak var img_height_constr: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,8 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         text_view.textColor = UIColor.lightGray
         // Do any additional setup after loading the view.
         let placeHolderImage = UIImage(named: "placeholder-img")
+        
+        img_height_constr.constant = 0
         
         guard let imageData = placeHolderImage?.jpegData(compressionQuality: 1.0) else {
             print("Could not get JPEG representation of UIImage")
@@ -93,6 +96,7 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
 
        // dismissPicker(picker: picker, img:img!)
         picker.self.dismiss(animated: true){
+            self.img_height_constr.constant = 141
             self.img.image = img
         }
         

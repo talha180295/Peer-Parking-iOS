@@ -13,7 +13,7 @@ class StepOneVC: UIViewController {
     
     
     
-    @IBOutlet weak var price_switch: DGRunkeeperSwitch!
+    //@IBOutlet weak var price_switch: DGRunkeeperSwitch!
     
     @IBOutlet weak var time_field: UITextField!
   
@@ -24,18 +24,18 @@ class StepOneVC: UIViewController {
         super.viewDidLoad()
         
         time_field.resignFirstResponder()
-        if let multi_switch = price_switch {
-            //
-            multi_switch.titles = ["Now", "At"]
-            multi_switch.borderWidth = 0.3
-            multi_switch.borderColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
-            multi_switch.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            multi_switch.selectedBackgroundColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
-            multi_switch.titleColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
-            multi_switch.selectedTitleColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            
-            //multi_switch.titleFont = UIFont(name: "Poppins-Bold", size: 17.0)
-        }
+//        if let multi_switch = price_switch {
+//            //
+//            multi_switch.titles = ["Now", "At"]
+//            multi_switch.borderWidth = 0.3
+//            multi_switch.borderColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+//            multi_switch.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+//            multi_switch.selectedBackgroundColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
+//            multi_switch.titleColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+//            multi_switch.selectedTitleColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+//
+//            //multi_switch.titleFont = UIFont(name: "Poppins-Bold", size: 17.0)
+//        }
         
         let date = Date()
         let formatter = DateFormatter()
@@ -72,16 +72,16 @@ class StepOneVC: UIViewController {
         }
     }
     
-    @IBAction func switchValueDidChange(sender: DGRunkeeperSwitch!) {
-        print("valueChanged: \(sender.selectedIndex)")
-        
-        if(sender.selectedIndex == 1){
-                time_field.isHidden = false
-        }
-        else{
-            time_field.isHidden = true
-        }
-    }
+//    @IBAction func switchValueDidChange(sender: DGRunkeeperSwitch!) {
+//        print("valueChanged: \(sender.selectedIndex)")
+//        
+//        if(sender.selectedIndex == 1){
+//                time_field.isHidden = false
+//        }
+//        else{
+//            time_field.isHidden = true
+//        }
+//    }
    
     
 }

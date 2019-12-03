@@ -100,7 +100,7 @@ class Helper{
         }
     }
     
-    func map_marker(lat:Double,longg:Double, map_view:GMSMapView){
+    func map_marker(lat:Double,longg:Double, map_view:GMSMapView, title:String){
         
 //        // I have taken a pin image which is a custom image
 //        let markerImage = UIImage(named: "radius_blue")!.withRenderingMode(.alwaysOriginal)
@@ -133,7 +133,7 @@ class Helper{
         marker.position = CLLocationCoordinate2D(latitude: lat, longitude: longg)
         
         marker.iconView = markerView
-        marker.title = "10$"
+        marker.title = title
         //marker.snippet = "price"
         marker.map = map_view
         
