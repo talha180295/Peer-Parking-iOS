@@ -24,6 +24,8 @@ class FinishPopup: UIViewController {
         tab_index = 1
         self.present(vc, animated: true, completion: nil)
         
+        GLOBAL_VAR.PARKING_POST_DONE = true
+        
         sender.isHidden = true
 //        let vehicle_type = GLOBAL_VAR.PARKING_POST_DETAILS["vehicle_type"]
 //        let parking_type = GLOBAL_VAR.PARKING_POST_DETAILS["parking_type"]

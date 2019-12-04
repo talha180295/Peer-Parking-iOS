@@ -470,6 +470,13 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         
     }
     
+    func add_marker(lat:Double,longg:Double){
+        let position = CLLocationCoordinate2D(latitude: lat, longitude: longg)
+        let marker = GMSMarker(position: position)
+//        marker.title = "Hello World"
+        marker.map = map
+    }
+    
     
     func cal_distance(lat:String,long:String)  -> Double{
         //
@@ -615,8 +622,8 @@ extension NavigationVC: GMSAutocompleteViewControllerDelegate {
             print("lat=\(place.coordinate.latitude) long=\(place.coordinate.longitude)")
             
             
-            
-            Helper().map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude, map_view: self.map, title: "")
+            self.add_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude)
+//            Helper().map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude, map_view: self.map, title: "")
             self.map.animate(to: camera)
             
             //new view

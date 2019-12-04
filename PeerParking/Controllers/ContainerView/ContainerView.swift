@@ -30,17 +30,19 @@ class ContainerView: UIViewController {
         
         init_controllers()
         
-        
+       
        
     }
     
 
     override func viewWillAppear(_ animated: Bool) {
         
-//        if(){
-//            init_controllers()
-//        }
-//        
+        if(GLOBAL_VAR.PARKING_POST_DONE){
+            init_controllers()
+            counter = 0
+            GLOBAL_VAR.PARKING_POST_DONE = false
+        }
+//
         print("::--=viewWillAppear|Container")
         NotificationCenter.default.addObserver(self, selector: #selector(self.btn_tap(notification:)), name: NSNotification.Name(rawValue: "btn_tap"), object: nil)
         

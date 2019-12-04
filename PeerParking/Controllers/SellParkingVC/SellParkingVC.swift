@@ -53,7 +53,6 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
             let data = ["counter":counter]
             NotificationCenter.default.post(name: Notification.Name("btn_tap"), object: nil,userInfo: data)
         }
-        
        
     }
     
@@ -66,7 +65,8 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
         }
         if(counter == 5){
             
-            
+            counter-=1
+            step_progress.currentStep = counter
             print("parking_post_details=\(GLOBAL_VAR.PARKING_POST_DETAILS)")
             if Helper().IsUserLogin(){
                 

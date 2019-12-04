@@ -502,8 +502,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     func cal_distance2() -> Double{
         
         
-                let coordinate1 = CLLocation(latitude: 5.0, longitude: 5.0)
-                let coordinate2 = CLLocation(latitude: 5.0, longitude: 3.0)
+        let coordinate1 = CLLocation(latitude: 5.0, longitude: 5.0)
+        let coordinate2 = CLLocation(latitude: 5.0, longitude: 3.0)
         
         let distanceInMeters = coordinate1.distance(from: coordinate2) // result is in meters
         
@@ -511,6 +511,13 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         return distanceInMeters
         
+    }
+    
+    func add_marker(lat:Double,longg:Double){
+        let position = CLLocationCoordinate2D(latitude: lat, longitude: longg)
+        let marker = GMSMarker(position: position)
+        //        marker.title = "Hello World"
+        marker.map = map
     }
     
    
@@ -567,6 +574,7 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
             
             print("lat=\(place.coordinate.latitude) long=\(place.coordinate.longitude)")
             
+            self.add_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude)
             
             self.filterLat = place.coordinate.latitude
             self.filterLong = place.coordinate.longitude
