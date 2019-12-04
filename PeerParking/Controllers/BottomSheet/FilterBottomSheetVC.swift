@@ -40,14 +40,8 @@ class FilterBottomSheetVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
-        let result = formatter.string(from: date)
-       
-        
-        filters.updateValue(String(result), forKey: "date_time")
+        print("viewDidLoad:f")
+
 //        mini_btn.isSelected = true
 //        lot_btn.isSelected = true
         
@@ -65,6 +59,44 @@ class FilterBottomSheetVC: UIViewController {
 //            //multi_switch.titleFont = UIFont(name: "Poppins-Bold", size: 17.0)
 //        }
        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear:f")
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+        let result = formatter.string(from: date)
+        filters.updateValue(String(result), forKey: "date_time")
+        
+        let vehicle_type_f = UserDefaults.standard.string(forKey: "vehicle_type_f")
+        print(vehicle_type_f)
+        if(vehicle_type_f == "10")&&(vehicle_type_f != ""){
+            mini_btn.setImage(UIImage(named: "mini_selected"), for: .normal)
+            mini_btn.isSelected = true
+        }
+        else if(vehicle_type_f == "20")&&(vehicle_type_f != ""){
+            family_btn.setImage(UIImage(named: "family_selected"), for: .normal)
+            family_btn.isSelected = true
+        }
+        else if(vehicle_type_f == "30")&&(vehicle_type_f != ""){
+            suv_btn.setImage(UIImage(named: "suv_selected"), for: .normal)
+            suv_btn.isSelected = true
+        }
+        else if(vehicle_type_f == "40")&&(vehicle_type_f != ""){
+            bus_btn.setImage(UIImage(named: "bus_selected"), for: .normal)
+            bus_btn.isSelected = true
+        }
+        
+        
+//        if let vehicle_type_f = UserDefaults.standard.string(forKey: "vehicle_type_f"){
+//
+//            if(vehicle_type_f == "20"){
+//                family_btn.setImage(UIImage(named: "family_selected"), for: .normal)
+//                family_btn.isSelected = true
+//            }
+//
+//        }
+        
     }
     
     
@@ -102,6 +134,14 @@ class FilterBottomSheetVC: UIViewController {
             let val = sender.tag * 10
 //            filters.updateValue("hey", forKey: "parking_type")
             filters.updateValue(String(val), forKey: "vehicle_type")
+            UserDefaults.standard.set(String(val), forKey: "vehicle_type_f")
+            UserDefaults.standard.synchronize()
+            print("user_def=\(UserDefaults.standard.string(forKey: "vehicle_type_f"))")
+        }
+        else{
+            
+            UserDefaults.standard.set("", forKey: "vehicle_type_f")
+            UserDefaults.standard.synchronize()
         }
 //
 //        if(sender.tag == 1){

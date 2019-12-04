@@ -7851,7 +7851,7 @@ typeset text.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
-                                                            <action selector="hour_limit:" destination="u5v-Bi-vcx" eventType="editingDidEnd" id="Xhe-oQ-0xf"/>
+                                                            <action selector="hour_limit:" destination="u5v-Bi-vcx" eventType="editingDidBegin" id="Ukx-xK-trX"/>
                                                         </connections>
                                                     </textField>
                                                 </subviews>
@@ -8660,33 +8660,26 @@ Click Finish to publish your offer</string>
             <objects>
                 <viewController storyboardIdentifier="PricePicker" id="PtI-ou-KFD" customClass="PricePicker" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="B6N-We-uuu">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="270" height="270"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2dt-l9-0JW">
-                                <rect key="frame" x="0.0" y="66" width="300" height="155"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="155" id="AMu-c6-X5N"/>
-                                    <constraint firstAttribute="width" constant="300" id="l06-gx-toc"/>
-                                </constraints>
-                            </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dollar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0p-Ww-Uio">
-                                <rect key="frame" x="76" y="30" width="45" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DOLLARS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0p-Ww-Uio">
+                                <rect key="frame" x="60" y="27" width="75.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cents" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqn-P6-dpL">
-                                <rect key="frame" x="181" y="30" width="45" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CENTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqn-P6-dpL">
+                                <rect key="frame" x="157" y="27" width="55" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6U-Yu-KGH">
-                                <rect key="frame" x="129" y="229" width="42" height="30"/>
+                                <rect key="frame" x="114" y="223" width="42" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="0y5-zM-V1R"/>
-                                    <constraint firstAttribute="width" constant="42" id="U1k-AZ-35a"/>
+                                    <constraint firstAttribute="width" constant="42" id="93D-6i-mMR"/>
+                                    <constraint firstAttribute="height" constant="30" id="I3F-2R-Cgb"/>
                                 </constraints>
                                 <state key="normal" title="DONE">
                                     <color key="titleColor" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -8695,19 +8688,27 @@ Click Finish to publish your offer</string>
                                     <action selector="done_btn:" destination="PtI-ou-KFD" eventType="touchUpInside" id="GD8-Uh-V6f"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2dt-l9-0JW">
+                                <rect key="frame" x="34.5" y="64" width="201" height="137"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="137" id="AMu-c6-X5N"/>
+                                    <constraint firstAttribute="width" constant="201" id="l06-gx-toc"/>
+                                </constraints>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="c6U-Yu-KGH" firstAttribute="top" secondItem="2dt-l9-0JW" secondAttribute="bottom" constant="8" id="D5M-Cy-5Rj"/>
-                            <constraint firstItem="s0p-Ww-Uio" firstAttribute="top" secondItem="B6N-We-uuu" secondAttribute="top" constant="30" id="b4c-qg-8p8"/>
-                            <constraint firstItem="11O-r7-9oJ" firstAttribute="bottom" secondItem="c6U-Yu-KGH" secondAttribute="bottom" constant="7" id="dCl-5f-AB5"/>
+                            <constraint firstItem="11O-r7-9oJ" firstAttribute="trailing" secondItem="c6U-Yu-KGH" secondAttribute="trailing" constant="114" id="2Sn-SL-cQW"/>
+                            <constraint firstItem="c6U-Yu-KGH" firstAttribute="centerX" secondItem="B6N-We-uuu" secondAttribute="centerX" id="2dA-yV-kaa"/>
+                            <constraint firstItem="c6U-Yu-KGH" firstAttribute="top" secondItem="2dt-l9-0JW" secondAttribute="bottom" constant="22" id="Ei7-w8-ruI"/>
+                            <constraint firstAttribute="bottom" secondItem="c6U-Yu-KGH" secondAttribute="bottom" constant="17" id="ZqW-Bi-Ghh"/>
+                            <constraint firstItem="s0p-Ww-Uio" firstAttribute="top" secondItem="B6N-We-uuu" secondAttribute="top" constant="27" id="b4c-qg-8p8"/>
                             <constraint firstItem="2dt-l9-0JW" firstAttribute="centerX" secondItem="B6N-We-uuu" secondAttribute="centerX" id="iXo-EX-fTW"/>
-                            <constraint firstItem="2dt-l9-0JW" firstAttribute="top" secondItem="s0p-Ww-Uio" secondAttribute="bottom" constant="15" id="mP0-mQ-heD"/>
-                            <constraint firstItem="2dt-l9-0JW" firstAttribute="top" secondItem="fqn-P6-dpL" secondAttribute="bottom" constant="15" id="nDk-d0-lew"/>
-                            <constraint firstItem="s0p-Ww-Uio" firstAttribute="leading" secondItem="11O-r7-9oJ" secondAttribute="leading" constant="76" id="o9s-Tk-2u3"/>
-                            <constraint firstItem="fqn-P6-dpL" firstAttribute="top" secondItem="B6N-We-uuu" secondAttribute="top" constant="30" id="qZ7-K3-wct"/>
-                            <constraint firstItem="11O-r7-9oJ" firstAttribute="trailing" secondItem="fqn-P6-dpL" secondAttribute="trailing" constant="74" id="sRe-te-Jio"/>
-                            <constraint firstItem="c6U-Yu-KGH" firstAttribute="centerX" secondItem="B6N-We-uuu" secondAttribute="centerX" id="us5-Di-ruJ"/>
+                            <constraint firstItem="2dt-l9-0JW" firstAttribute="top" secondItem="s0p-Ww-Uio" secondAttribute="bottom" constant="17" id="mP0-mQ-heD"/>
+                            <constraint firstItem="2dt-l9-0JW" firstAttribute="top" secondItem="fqn-P6-dpL" secondAttribute="bottom" constant="17" id="nDk-d0-lew"/>
+                            <constraint firstItem="s0p-Ww-Uio" firstAttribute="leading" secondItem="11O-r7-9oJ" secondAttribute="leading" constant="60" id="o9s-Tk-2u3"/>
+                            <constraint firstItem="fqn-P6-dpL" firstAttribute="top" secondItem="B6N-We-uuu" secondAttribute="top" constant="27" id="qZ7-K3-wct"/>
+                            <constraint firstItem="11O-r7-9oJ" firstAttribute="trailing" secondItem="fqn-P6-dpL" secondAttribute="trailing" constant="58" id="sRe-te-Jio"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="11O-r7-9oJ"/>
                         <userDefinedRuntimeAttributes>
@@ -8716,7 +8717,7 @@ Click Finish to publish your offer</string>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <size key="freeformSize" width="300" height="300"/>
+                    <size key="freeformSize" width="270" height="270"/>
                     <connections>
                         <outlet property="picker" destination="2dt-l9-0JW" id="tVp-m1-XTG"/>
                     </connections>
@@ -8948,6 +8949,72 @@ Click Finish to publish your offer</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aqi-7v-9fJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3127.536231884058" y="-1738.0580357142856"/>
+        </scene>
+        <!--Hours picker-->
+        <scene sceneID="CGv-8y-A2D">
+            <objects>
+                <viewController storyboardIdentifier="Hours_picker" id="A7V-Gs-sol" customClass="Hours_picker" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gBg-ls-ZJQ">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ubH-Os-bJh">
+                                <rect key="frame" x="104" y="199" width="42" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="AIf-4K-EiI"/>
+                                    <constraint firstAttribute="width" constant="42" id="ypi-1M-1LG"/>
+                                </constraints>
+                                <state key="normal" title="DONE">
+                                    <color key="titleColor" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="done_btn:" destination="A7V-Gs-sol" eventType="touchUpInside" id="N0n-Vq-h6r"/>
+                                </connections>
+                            </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8sn-kJ-lFf">
+                                <rect key="frame" x="78" y="54" width="94" height="127"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="94" id="ejP-JY-oeM"/>
+                                    <constraint firstAttribute="height" constant="127" id="oal-EG-Tcy"/>
+                                </constraints>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOURS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQD-cm-hBF">
+                                <rect key="frame" x="93" y="25" width="64" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="N3p-zh-F0y"/>
+                                    <constraint firstAttribute="height" constant="21" id="qtz-AS-CVM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="KQD-cm-hBF" secondAttribute="trailing" constant="93" id="7Nc-rR-3YC"/>
+                            <constraint firstItem="KQD-cm-hBF" firstAttribute="leading" secondItem="gBg-ls-ZJQ" secondAttribute="leading" constant="93" id="KyN-C4-fF9"/>
+                            <constraint firstItem="8sn-kJ-lFf" firstAttribute="centerX" secondItem="gBg-ls-ZJQ" secondAttribute="centerX" id="XCX-KA-fgT"/>
+                            <constraint firstItem="ubH-Os-bJh" firstAttribute="top" secondItem="8sn-kJ-lFf" secondAttribute="bottom" constant="18" id="ePv-rw-eyA"/>
+                            <constraint firstItem="ubH-Os-bJh" firstAttribute="centerX" secondItem="gBg-ls-ZJQ" secondAttribute="centerX" id="jfT-20-1HI"/>
+                            <constraint firstItem="8sn-kJ-lFf" firstAttribute="top" secondItem="KQD-cm-hBF" secondAttribute="bottom" constant="8" id="ypU-3f-sSi"/>
+                            <constraint firstItem="KQD-cm-hBF" firstAttribute="top" secondItem="gBg-ls-ZJQ" secondAttribute="top" constant="25" id="zNV-dj-NpM"/>
+                            <constraint firstAttribute="bottom" secondItem="ubH-Os-bJh" secondAttribute="bottom" constant="21" id="zYM-Jp-2lp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OwD-aN-sov"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <size key="freeformSize" width="250" height="250"/>
+                    <connections>
+                        <outlet property="picker" destination="8sn-kJ-lFf" id="P5K-fj-aZQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N8J-SP-zde" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7076.811594202899" y="592.63392857142856"/>
         </scene>
     </scenes>
     <resources>

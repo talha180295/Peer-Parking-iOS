@@ -173,14 +173,39 @@ class StepThreeVC: UIViewController {
     }
     @IBAction func hour_limit(_ sender: UITextField) {
         
-        let a:String = "1"
-        
-        let hours = sender.text
-        
-        if(sender.hasText){
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(hours!)!, forKey: "parking_hours_limit")
-        }
+//        let a:String = "1"
+//
+//        let hours = sender.text
+//
+//        if(sender.hasText){
+//            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(hours!)!, forKey: "parking_hours_limit")
+//        }
        
+        sender.resignFirstResponder()
+       
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Hours_picker") as! Hours_picker
+        
+        vc.completionBlock = {(dataReturned) -> ()in
+            //Data is returned **Do anything with it **
+            print(dataReturned)
+            self.hours_limit.text = "\(dataReturned)"
+            
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "parking_hours_limit")
+        }
+        let popupVC = PopupViewController(contentController: vc, popupWidth: 250, popupHeight: 250)
+        popupVC.canTapOutsideToDismiss = true
+        
+        //properties
+        //            popupVC.backgroundAlpha = 1
+        //            popupVC.backgroundColor = .black
+        //            popupVC.canTapOutsideToDismiss = true
+        //            popupVC.cornerRadius = 10
+        //            popupVC.shadowEnabled = true
+        
+        // show it by call present(_ , animated:) method from a current UIViewController
+        
+        present(popupVC, animated: true)
         
     }
     
