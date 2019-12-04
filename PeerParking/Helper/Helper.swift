@@ -82,7 +82,7 @@ class Helper{
             
             
             
-            let position = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+            let position = CLLocationCoordinate2D(latitude: lat!-0.001, longitude: long!-0.001)
             
             //        let position = CLLocationCoordinate2D(latitude: 24.9280107, longitude: 67.0957389)
             
@@ -139,7 +139,7 @@ class Helper{
         
         
         //comment this line if you don't wish to put a callout bubble
-        map_view.selectedMarker = marker
+//        map_view.selectedMarker = marker
         
         
     }
@@ -183,9 +183,9 @@ class Helper{
             let markerView = UIImageView(image: markerImage)
         
             //changing the tint color of the image
-            markerView.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+//            markerView.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         
-            let pos = CLLocationCoordinate2D(latitude: lat!, longitude: longg!)
+            let pos = CLLocationCoordinate2D(latitude: lat!-0.001, longitude: longg!-0.001)
         
         
 //            let loc = CLLocationCoordinate2D(latitude: lat!, longitude: longg!)
@@ -203,7 +203,7 @@ class Helper{
         
         
             //comment this line if you don't wish to put a callout bubble
-            map_view.selectedMarker = marker
+//            map_view.selectedMarker = marker
         }
         
         
@@ -353,6 +353,8 @@ class Helper{
                 
         }
     }
+    
+    
     
     
     

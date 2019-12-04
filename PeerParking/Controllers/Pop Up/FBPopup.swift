@@ -136,6 +136,8 @@ class FBPopup: UIViewController {
     
     func after_signin(){
         
+        NotificationCenter.default.post(name: Notification.Name("reload_table"), object: nil)
+        
         if(tab_index==2){
             
             

@@ -12,12 +12,19 @@ import Alamofire
 
 class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSource{
 
-    let dict = [["name" : "Home","segue":"HomeVC"],["name" : "Profile","segue":"ProfileVC"],["name" : "Wallet","segue":"WalletVC"],["name" : "Parkings","segue":"parkingVC"],
+    let dict1 = [["name" : "Home","segue":"HomeVC"],["name" : "Profile","segue":"ProfileVC"],["name" : "Wallet","segue":"WalletVC"],["name" : "Parkings","segue":"parkingVC"],
                 ["name" : "Requests","segue":"requestVC"],["name" : "Notifications","segue":"NotificationVC"],["name" : "","segue":""],["name" : "Settings","segue":"SettingVC"],["name" : "Help","segue":"helpVC"],["name" : "","segue":""],["name" : "Logout","segue":""]]
+    
+    
+    let dict2 = [["name" : "Settings","segue":""],["name" : "Help","segue":""],["name" : "","segue":""], ["name" : "Login","segue":""]]
+    
+    
+    
     let segues = ["showCenterController1", "showCenterController2", "showCenterController3"]
     private var previousIndex: NSIndexPath?
     
     @IBOutlet weak var tblMenu: UITableView!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,14 +34,56 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
         tblMenu.register(UINib(nibName: "menuCell", bundle: nil), forCellReuseIdentifier: "cellItem")
     }
     
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dict.count
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(reload_table(notification:)), name: NSNotification.Name(rawValue: "reload_table"), object: nil)
+    }
+//    override func viewDidAppear(_ animated: Bool) {
+//
+//        print("tblMenu.reloadData()")
+//        tblMenu.reloadData()
+//    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        NotificationCenter.default.removeObserver(self)
     }
 
-         func tableView(_ tableView: UITableView,
-                                cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    @objc func reload_table(notification: NSNotification) {
+        
+        print("tblMenu.reloadData()")
+        tblMenu.reloadData()
+    }
     
-            let dictInner = dict[indexPath.row] as NSDictionary
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        let isLogin = UserDefaults.standard.string(forKey: "login")!
+        if(isLogin.elementsEqual("yes"))
+        {
+            return dict1.count
+        }
+        else
+        {
+            return dict2.count
+        }
+        
+        
+    }
+
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+            let dictInner:NSDictionary!
+            
+            let isLogin = UserDefaults.standard.string(forKey: "login")!
+            if(isLogin.elementsEqual("yes"))
+            {
+                dictInner = dict1[indexPath.row] as NSDictionary
+            }
+            else
+            {
+                dictInner = dict2[indexPath.row] as NSDictionary
+            }
             
             let cell = tblMenu.dequeueReusableCell(withIdentifier: "cellItem") as! menuCell
             let nameStr = (dictInner["name"] as! String)
@@ -48,22 +97,43 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
             }
             
 
-        return cell
-    }
-
-         func tableView(_ tableView: UITableView,
-                                didSelectRowAt indexPath: IndexPath)  {
-
-        if let index = previousIndex {
-            tableView.deselectRow(at: index as IndexPath, animated: true)
+            return cell
         }
 
-            let dictInner = dict[indexPath.row] as NSDictionary
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)  {
+
+            if let index = previousIndex {
+                tableView.deselectRow(at: index as IndexPath, animated: true)
+            }
+
+            let dictInner:NSDictionary!
+            
+            let isLogin = UserDefaults.standard.string(forKey: "login")!
+            if(isLogin.elementsEqual("yes"))
+            {
+                dictInner = dict1[indexPath.row] as NSDictionary
+            }
+            else
+            {
+                dictInner = dict2[indexPath.row] as NSDictionary
+            }
+            
+            
             let nameStr = dictInner["name"] as! String
             if(nameStr.elementsEqual("Logout"))
             {
                 //
-                logOut()
+                let isLogin = UserDefaults.standard.string(forKey: "login")!
+                if(isLogin.elementsEqual("yes"))
+                {
+                    tblMenu.reloadData()
+                    logOut()
+                }
+                else
+                {
+                   
+                }
+                
             }
             else
             {

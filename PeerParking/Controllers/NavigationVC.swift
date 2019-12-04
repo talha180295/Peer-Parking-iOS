@@ -19,13 +19,14 @@ import Alamofire
 
 class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
     
+    var isMapLoaded = false
     
     //IBOutlets
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var myCollectionView: UICollectionView!
-    @IBOutlet weak var parkings_cells: UIView!
+//    @IBOutlet weak var parkings_cells: UIView!
     @IBOutlet weak var search_tf: UITextField!
-    @IBOutlet weak var stack_view: UIStackView!
+//    @IBOutlet weak var stack_view: UIStackView!
     @IBOutlet weak var bottonView: UIView!
     @IBOutlet weak var bottomHeight: NSLayoutConstraint!
     
@@ -36,15 +37,25 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var lblDistance: UILabel!
     
+    @IBOutlet weak var view_all_btn: UIButton!
+    @IBOutlet weak var filter_btn: UIButton!
+    
+    @IBOutlet weak var re_center_bottom_cont: NSLayoutConstraint!
+    
+    
     
     //Variables
-     var alternateRoutes:[JSON]!
+    var alternateRoutes:[JSON]!
     var parkings:[Any] = []
     var estimateWidth=130
     var cellMarginSize=1
     var address = ""
     var lat = 0.0
     var longg = 0.0
+    
+    var filterLat = 0.0
+    var filterLong = 0.0
+    
     
     var d_lat = 0.0
     var d_longg = 0.0
@@ -56,8 +67,10 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.bottomHeight.constant =  0
+       // self.bottomHeight.constant =  0
         self.bottonView.isHidden = true
+        self.view_all_btn.isHidden = true
+        self.filter_btn.isHidden = true
         // Do any additional setup after loading the view.
         
         //Register
@@ -66,7 +79,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         
         
         
-        parkings_cells.isHidden = true
+//        parkings_cells.isHidden = true
         
        //stack_view.inpu
         
@@ -86,31 +99,33 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         //loadMapView()
         self.tabBarController!.navigationItem.title = "Navigate"
         
-        parkings_cells.isHidden = true
+//        parkings_cells.isHidden = true
         //
         //        self.tabBarController?.tabBar.isHidden = false
         //        self.navigationController?.navigationBar.isHidden = false
     }
     override func viewDidAppear(_ animated: Bool) {
-        loadMapView()
+        
+        if (!isMapLoaded){
+            isMapLoaded = true
+            loadMapView()
+        }
+        search_tf.isEnabled = true
     }
     
     func autocompleteClicked() {
-        self.bottomHeight.constant =  0
-        self.bottonView.isHidden = true
-        
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
         
-//        // Specify the place data types to return.
-//        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-//            UInt(GMSPlaceField.placeID.rawValue))!
-//        autocompleteController.placeFields = fields
-//
-//        // Specify a filter.
-//        let filter = GMSAutocompleteFilter()
-//        filter.type = .address
-//        autocompleteController.autocompleteFilter = filter
+        //        // Specify the place data types to return.
+        //        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+        //            UInt(GMSPlaceField.placeID.rawValue))!
+        //        autocompleteController.placeFields = fields
+        //
+        //        // Specify a filter.
+        //        let filter = GMSAutocompleteFilter()
+        //        filter.type = .address
+        //        autocompleteController.autocompleteFilter = filter
         
         // Display the autocomplete view controller.
         present(autocompleteController, animated: true, completion: nil)
@@ -119,7 +134,8 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     func loadMapView(){
         
         print("::=loadMap")
-       let camera = GMSCameraPosition.init()
+        
+        let camera = GMSCameraPosition.init()
         
         map = GMSMapView.map(withFrame: self.mapView.bounds, camera: camera)
         map.settings.scrollGestures = true
@@ -131,8 +147,10 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         map.isMyLocationEnabled = true
         
         //Location Manager code to fetch current location
-//        self.locationManager.delegate = self
-//        self.locationManager.startUpdatingLocation()
+        self.locationManager.delegate = self
+        self.locationManager.startUpdatingLocation()
+        
+        //        setMapButton()
     }
     
     //Location Manager delegates
@@ -141,9 +159,15 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         let location = locations.last
         
         
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 12.0)
         self.lat = (location?.coordinate.latitude)!
         self.longg = (location?.coordinate.longitude)!
+        //        print("lat==\(location?.coordinate.latitude)")
+        //        print("long==\(location?.coordinate.longitude)")
+        
+        self.filterLat = (location?.coordinate.latitude)!
+        self.filterLong = (location?.coordinate.longitude)!
+        
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 14.0)
         
         self.map.animate(to: camera)
         
@@ -163,7 +187,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
                 
                 let reversedGeoLocation = ReversedGeoLocation(with: placemark)
                 print("LOC=:\(reversedGeoLocation.formattedAddress)")
-                self.address = reversedGeoLocation.formattedAddress
+                self.address = reversedGeoLocation.formattedAddressName
                 // Apple Inc.,
                 // 1 Infinite Loop,
                 // Cupertino, CA 95014
@@ -221,7 +245,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     @IBAction func arrow_btn(_ sender: UIButton) {
         
         //self.search_tf.text = self.address
-        self.parkings_cells.isHidden = false
+//        self.parkings_cells.isHidden = false
     }
     
     @IBAction func view_all_btn(_ sender: UIButton) {
@@ -247,36 +271,41 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
           if(parkings.count>0){
               
               
-              let dict = parkings[indexPath.row] as! NSDictionary
-              print(dict)
-              
+            let dict = parkings[indexPath.row] as! NSDictionary
+            print(dict)
             
-              let lat = dict["latitude"] as! String
-              let long = dict["longitude"] as! String
-             
-              
-              let priceStr = dict["initial_price"] as! Double
-              
-              let distanceStr = cal_distance_Double(lat: lat, long: long)
-              
-              let imgUrl = dict["image_url"] as? String
-              cell.image.sd_setImage(with: URL(string: imgUrl!),placeholderImage: UIImage.init(named: "placeholder-img") )
-              if(dict["address"] is NSNull)
-              {
-                  
-              }
-              else
-              {
-              cell.parking_title.text = (dict["address"] as! String)
-              }
-              
-              cell.vehicle_type.text = (dict["vehicle_type_text"] as? String)
-             
-
-              cell.price.text = "$" + String(priceStr)
-              
-              
-              cell.distance.text = String(format: "%.02f miles away", distanceStr)
+            
+            let seller = dict["seller"] as! NSDictionary
+            let seller_details = seller["details"] as! NSDictionary
+            
+            let lat = dict["latitude"] as! String
+            let long = dict["longitude"] as! String
+            
+            
+            let priceStr = dict["initial_price"] as! Double
+            
+            let distanceStr = cal_distance(lat: lat, long: long)
+            
+            let imgUrl = dict["image_url"] as? String
+            cell.image.sd_setImage(with: URL(string: imgUrl!),placeholderImage: UIImage.init(named: "placeholder-img") )
+            if(dict["address"] is NSNull)
+            {
+                
+            }
+            else
+            {
+                cell.parking_title.text = (dict["address"] as! String)
+            }
+            
+            cell.rating_view.rating = ((seller_details["average_rating"] as? Double)!)
+            
+            cell.vehicle_type.text = (dict["vehicle_type_text"] as? String)
+            
+            
+            cell.price.text = "$" + String(priceStr)
+            
+            
+            cell.distance.text = String(format: "%.02f miles away", distanceStr)
           
               //cell.barg_count.text = dict["vehicle_type_text"] as? String
           }
@@ -293,19 +322,20 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
       
       func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
           
-          let dict = (self.parkings[indexPath.row]  as! NSDictionary)
-         
-          let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC") as! BottomSheetVC
-          controller.parking_details = dict
-          
-          
-          let lat = dict["latitude"] as! String
-          let long = dict["longitude"] as! String
-          let distanceStr = cal_distance_Double(lat: lat, long: long)
-          
-          
-          controller.distanceInMiles = String(distanceStr)
-          bottomSheet(controller: controller, sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
+        let dict = (self.parkings[indexPath.row]  as! NSDictionary)
+        
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC") as! BottomSheetVC
+        controller.parking_details = dict
+        
+        
+        let lat = dict["latitude"] as! String
+        let long = dict["longitude"] as! String
+        let distanceStr = cal_distance(lat: lat, long: long)
+        
+        
+        
+        controller.distanceInMiles = String(format: "%.03f miles from destination", distanceStr)
+        bottomSheet(controller: controller, sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
       }
       
       
@@ -441,27 +471,24 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     }
     
     
-     func cal_distance(lat:Double,long:Double)  {
-    //
-           
-            
+    func cal_distance(lat:String,long:String)  -> Double{
+        //
+        //        print("coordinate1==\(coordinate1)")
+        //        print("coordinate1==\(coordinate2)")
         
-      
-
+        let current_coordinate =  CLLocation(latitude: self.lat, longitude: self.longg)
+        let lat = Double(lat)
+        let long = Double(long)
+        let coordinate2 = CLLocation(latitude: lat!, longitude: long!)
+        
+        let distanceInMiles = current_coordinate.distance(from: coordinate2)/1609.344 // result is in meters
         
         
-            let current_coordinate =  CLLocation(latitude: self.lat, longitude: self.longg)
-            
-            let coordinate2 = CLLocation(latitude: lat, longitude: long)
-
-            let distanceInMiles = (current_coordinate.distance(from: coordinate2))/1609.344  // result is in meters
-           
-            
-            print("distanceInKm=\(distanceInMiles)")
-            
-        lblDistance.text = String(format: "%.02f m", distanceInMiles)
-            
-        }
+        print("distanceInMiles=\(distanceInMiles)")
+        
+        return distanceInMiles
+        
+    }
     
     
      func get_all_parkings(lat:Double,long:Double,filters:[String:String],completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
@@ -529,7 +556,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     //                        self.parkings_cells.isHidden = false
     //                    }
                         
-                        self.parkings_cells.isHidden = false
+//                        self.parkings_cells.isHidden = false
                         
                         
                         
@@ -558,10 +585,14 @@ extension NavigationVC: FiltersProtocol{
         //Location Manager code to fetch current location
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
+       
+        UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+            self.re_center_bottom_cont.constant = 40
+        })
         
         self.get_all_parkings(lat: self.d_lat, long: self.d_longg, filters: filters){
             
-           
+            
         }
        
     }
@@ -577,33 +608,38 @@ extension NavigationVC: GMSAutocompleteViewControllerDelegate {
         self.search_tf.text = place.name!
         dismiss(animated: true){
             
-            self.parkings_cells.isHidden = false
+//            self.parkings_cells.isHidden = false
             
-            let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 12.0)
+            let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 13.0)
             
             print("lat=\(place.coordinate.latitude) long=\(place.coordinate.longitude)")
             
             
             
-            
-            self.map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude)
-           // self.map.animate(to: camera)
+            Helper().map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude, map_view: self.map, title: "")
+            self.map.animate(to: camera)
             
             //new view
             self.d_longg = place.coordinate.longitude
             self.d_lat = place.coordinate.latitude
-            self.cal_distance(lat: place.coordinate.latitude, long: place.coordinate.longitude)
-            self.bottomHeight.constant =  155
+            //self.cal_distance(lat: place.coordinate.latitude, long: place.coordinate.longitude)
+            //self.bottomHeight.constant =  155
             self.bottonView.isHidden = false
+            self.view_all_btn.isHidden = false
+            self.filter_btn.isHidden = false
             self.lblPlaceName.text = place.name
             self.lblAddress.text = place.formattedAddress
             self.drawRoute()
             
+            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+                self.re_center_bottom_cont.constant = 40
+            })
+            
             //parkings
             self.get_all_parkings(lat: place.coordinate.latitude, long: place.coordinate.longitude, filters: [:]){
-                           
-                            self.map.animate(to: camera)
-                       }
+                
+//                self.map.animate(to: camera)
+            }
             
         }
         

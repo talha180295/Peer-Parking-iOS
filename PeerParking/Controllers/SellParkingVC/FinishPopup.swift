@@ -20,28 +20,34 @@ class FinishPopup: UIViewController {
     
     @IBAction func finish_btn(_ sender: UIButton) {
 
-        sender.isHidden = true
-        let vehicle_type = GLOBAL_VAR.PARKING_POST_DETAILS["vehicle_type"]
-        let parking_type = GLOBAL_VAR.PARKING_POST_DETAILS["parking_type"]
-        let status = GLOBAL_VAR.PARKING_POST_DETAILS["status"]
-        let initial_price = GLOBAL_VAR.PARKING_POST_DETAILS["initial_price"]
-        let final_price = GLOBAL_VAR.PARKING_POST_DETAILS["final_price"]
-        let start_at = GLOBAL_VAR.PARKING_POST_DETAILS["start_at"]
-        let end_at = GLOBAL_VAR.PARKING_POST_DETAILS["end_at"]
-        let address = GLOBAL_VAR.PARKING_POST_DETAILS["address"]
-        let longitude = GLOBAL_VAR.PARKING_POST_DETAILS["longitude"]
-        let latitude = GLOBAL_VAR.PARKING_POST_DETAILS["latitude"]
-        let is_negotiable = GLOBAL_VAR.PARKING_POST_DETAILS["is_negotiable"]
-        let image = GLOBAL_VAR.PARKING_POST_DETAILS["image"]
-        let note = GLOBAL_VAR.PARKING_POST_DETAILS["note"]
-        let parking_hours_limit = GLOBAL_VAR.PARKING_POST_DETAILS["parking_hours_limit"]
-        let parking_allowed_until = GLOBAL_VAR.PARKING_POST_DETAILS["parking_allowed_until"]
-        let parking_extra_fee = GLOBAL_VAR.PARKING_POST_DETAILS["parking_extra_fee"]
-        let parking_extra_fee_unit = GLOBAL_VAR.PARKING_POST_DETAILS["parking_extra_fee_unit"]
-        let is_resident_free = GLOBAL_VAR.PARKING_POST_DETAILS["is_resident_free"]
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
+        tab_index = 1
+        self.present(vc, animated: true, completion: nil)
         
-        print("abcdef=\(type(of: parking_extra_fee_unit))")
-        print(parking_extra_fee_unit)
+        sender.isHidden = true
+//        let vehicle_type = GLOBAL_VAR.PARKING_POST_DETAILS["vehicle_type"]
+//        let parking_type = GLOBAL_VAR.PARKING_POST_DETAILS["parking_type"]
+//        let status = GLOBAL_VAR.PARKING_POST_DETAILS["status"]
+//        let initial_price = GLOBAL_VAR.PARKING_POST_DETAILS["initial_price"]
+//        let final_price = GLOBAL_VAR.PARKING_POST_DETAILS["final_price"]
+//        let start_at = GLOBAL_VAR.PARKING_POST_DETAILS["start_at"]
+//        let end_at = GLOBAL_VAR.PARKING_POST_DETAILS["end_at"]
+//        let address = GLOBAL_VAR.PARKING_POST_DETAILS["address"]
+//        let longitude = GLOBAL_VAR.PARKING_POST_DETAILS["longitude"]
+//        let latitude = GLOBAL_VAR.PARKING_POST_DETAILS["latitude"]
+//        let is_negotiable = GLOBAL_VAR.PARKING_POST_DETAILS["is_negotiable"]
+//        let image = GLOBAL_VAR.PARKING_POST_DETAILS["image"]
+//        let note = GLOBAL_VAR.PARKING_POST_DETAILS["note"]
+//        let parking_hours_limit = GLOBAL_VAR.PARKING_POST_DETAILS["parking_hours_limit"]
+//        let parking_allowed_until = GLOBAL_VAR.PARKING_POST_DETAILS["parking_allowed_until"]
+//        let parking_extra_fee = GLOBAL_VAR.PARKING_POST_DETAILS["parking_extra_fee"]
+//        let parking_extra_fee_unit = GLOBAL_VAR.PARKING_POST_DETAILS["parking_extra_fee_unit"]
+//        let is_resident_free = GLOBAL_VAR.PARKING_POST_DETAILS["is_resident_free"]
+        
+        
+        let image = GLOBAL_VAR.PARKING_POST_DETAILS["image"]
+        
+   
  
 //        var params:[String:Any] = [
 //            "vehicle_type": vehicle_type,
@@ -129,7 +135,7 @@ class FinishPopup: UIViewController {
             if response.result.value == nil {
                 print("No response")
 
-                SharedHelper().showToast(message: "Internal Server Error", controller: self)
+                SharedHelper().showToast(message: "Internal Server Error", controller: vc)
                 return
             }
             else {
@@ -144,16 +150,17 @@ class FinishPopup: UIViewController {
                     //                    SharedHelper().hideSpinner(view: self.view)
                     //                     UserDefaults.standard.set("yes", forKey: "login")
                     //                    UserDefaults.standard.synchronize()
-                    SharedHelper().showToast(message: message, controller: self)
-                    tab_index = 1
-                    self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                    SharedHelper().showToast(message: message, controller: vc)
+//                    tab_index = 1
+//                    self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                    
 
                     //self.after_signin()
                 }
                 else
                 {
                     let message = responseData["message"] as! String
-                    SharedHelper().showToast(message: message, controller: self)
+                    SharedHelper().showToast(message: message, controller: vc)
                     //   SharedHelper().hideSpinner(view: self.view)
                 }
             }

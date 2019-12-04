@@ -20,7 +20,7 @@ import Alamofire
 
 class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate{
     
-    
+    var isMapLoaded = false
    
     
     //IBOutlets
@@ -91,8 +91,13 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         
     }
+    
     override func viewDidAppear(_ animated: Bool) {
-        loadMapView()
+        
+        if (!isMapLoaded){
+            isMapLoaded = true
+            loadMapView()
+        }
     }
     
     func autocompleteClicked() {
@@ -568,7 +573,10 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
             
             self.get_all_parkings(lat: place.coordinate.latitude, long: place.coordinate.longitude, filters: [:]){
                 
-                 self.map.animate(to: camera)
+                self.map.animate(to: camera)
+                UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+                    self.re_center_bottom_cont.constant = 40
+                })
             }
             
 //            Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
