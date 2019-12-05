@@ -54,12 +54,29 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
         print("tblMenu.reloadData()")
         tblMenu.reloadData()
     }
+    func IsUserLogin() -> Bool {
+        if ((UserDefaults.standard.object(forKey: "login")) == nil) {
+            return false
+        }
+        else
+        {
+            let isLogin = UserDefaults.standard.string(forKey: "login")!
+            if(isLogin.elementsEqual("yes"))
+            {
+                return true
+            }
+            else
+            {
+                return false
+            }
+        }
+    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let isLogin = UserDefaults.standard.string(forKey: "login")!
-        if(isLogin.elementsEqual("yes"))
+        let isLogin = IsUserLogin()
+        if(isLogin)
         {
             return dict1.count
         }
@@ -75,8 +92,8 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
     
             let dictInner:NSDictionary!
             
-            let isLogin = UserDefaults.standard.string(forKey: "login")!
-            if(isLogin.elementsEqual("yes"))
+            let isLogin = IsUserLogin()
+            if(isLogin)
             {
                 dictInner = dict1[indexPath.row] as NSDictionary
             }
@@ -108,8 +125,8 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
 
             let dictInner:NSDictionary!
             
-            let isLogin = UserDefaults.standard.string(forKey: "login")!
-            if(isLogin.elementsEqual("yes"))
+            let isLogin = IsUserLogin()
+            if(isLogin)
             {
                 dictInner = dict1[indexPath.row] as NSDictionary
             }
@@ -123,8 +140,8 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
             if(nameStr.elementsEqual("Logout"))
             {
                 //
-                let isLogin = UserDefaults.standard.string(forKey: "login")!
-                if(isLogin.elementsEqual("yes"))
+                let isLogin = IsUserLogin()
+                if(isLogin)
                 {
                     tblMenu.reloadData()
                     logOut()
