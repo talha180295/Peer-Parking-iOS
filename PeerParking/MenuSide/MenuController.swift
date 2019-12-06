@@ -10,6 +10,8 @@ import UIKit
 import HelperClassPod
 import Alamofire
 
+
+
 class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSource{
 
     let dict1 = [["name" : "Home","segue":"HomeVC"],["name" : "Profile","segue":"ProfileVC"],["name" : "Wallet","segue":"WalletVC"],["name" : "Parkings","segue":"parkingVC"],
@@ -159,6 +161,9 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
             let segue = (dictInner["segue"] as! String)
             if(segue.count>0)
             {
+                if(segue == "HomeVC"){
+                    tab_index = 1
+                }
                 sideMenuController?.performSegue(withIdentifier: segue, sender: nil)
             }
                 

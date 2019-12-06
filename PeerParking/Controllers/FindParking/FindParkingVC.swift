@@ -93,7 +93,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        self.view.layoutIfNeeded()
         if (!isMapLoaded){
             isMapLoaded = true
             loadMapView()

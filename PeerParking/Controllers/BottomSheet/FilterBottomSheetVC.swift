@@ -69,33 +69,175 @@ class FilterBottomSheetVC: UIViewController {
         filters.updateValue(String(result), forKey: "date_time")
         
         let vehicle_type_f = UserDefaults.standard.string(forKey: "vehicle_type_f")
-        print(vehicle_type_f)
-        if(vehicle_type_f == "10")&&(vehicle_type_f != ""){
-            mini_btn.setImage(UIImage(named: "mini_selected"), for: .normal)
-            mini_btn.isSelected = true
+       // print(vehicle_type_f)
+        
+        if(vehicle_type_f != ""){
+            switch vehicle_type_f{
+            case "10":
+                mini_btn.setImage(UIImage(named: "mini_selected"), for: .normal)
+                mini_btn.isSelected = true
+            case "20":
+                family_btn.setImage(UIImage(named: "family_selected"), for: .normal)
+                family_btn.isSelected = true
+            case "30":
+                suv_btn.setImage(UIImage(named: "suv_selected"), for: .normal)
+                suv_btn.isSelected = true
+            case "40":
+                bus_btn.setImage(UIImage(named: "bus_selected"), for: .normal)
+                bus_btn.isSelected = true
+                
+            default:
+                print()
+                
+            }
+            
+            filters.updateValue(String(vehicle_type_f ?? ""), forKey: "vehicle_type")
         }
-        else if(vehicle_type_f == "20")&&(vehicle_type_f != ""){
-            family_btn.setImage(UIImage(named: "family_selected"), for: .normal)
-            family_btn.isSelected = true
-        }
-        else if(vehicle_type_f == "30")&&(vehicle_type_f != ""){
-            suv_btn.setImage(UIImage(named: "suv_selected"), for: .normal)
-            suv_btn.isSelected = true
-        }
-        else if(vehicle_type_f == "40")&&(vehicle_type_f != ""){
-            bus_btn.setImage(UIImage(named: "bus_selected"), for: .normal)
-            bus_btn.isSelected = true
+       
+        
+        let time_margin_f = UserDefaults.standard.string(forKey: "time_margin_f")
+        //print("time_margin_f=\(time_margin_f)")
+        
+        if(time_margin_f != ""){
+            switch time_margin_f{
+            case "10":
+                m_10.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                m_10.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                m_10.isSelected = true
+            case "20":
+                m_20.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                m_20.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                m_20.isSelected = true
+            case "30":
+                m_30.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                m_30.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                m_30.isSelected = true
+                
+            default:
+                print()
+            
+            }
+            
+            filters.updateValue(String(time_margin_f ?? ""), forKey: "time_margin")
         }
         
         
-//        if let vehicle_type_f = UserDefaults.standard.string(forKey: "vehicle_type_f"){
-//
-//            if(vehicle_type_f == "20"){
-//                family_btn.setImage(UIImage(named: "family_selected"), for: .normal)
-//                family_btn.isSelected = true
-//            }
-//
-//        }
+        let orderBy_column_f = UserDefaults.standard.string(forKey: "orderBy_column_f")
+        //print("orderBy_column_f=\(orderBy_column_f)")
+        
+        if(orderBy_column_f != ""){
+            switch orderBy_column_f{
+            case "10":
+                price.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                price.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                price.isSelected = true
+                
+            case "20":
+                distance.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                distance.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                distance.isSelected = true
+            
+            default:
+                print()
+                
+            }
+            
+            filters.updateValue(String(orderBy_column_f ?? ""), forKey: "orderBy_column")
+        }
+        let parking_type_f = UserDefaults.standard.string(forKey: "parking_type_f")
+        //print("parking_type_f=\(parking_type_f)")
+        
+        if(parking_type_f != ""){
+            switch parking_type_f{
+            case "10":
+                
+                lot_btn.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                lot_btn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                lot_btn.isSelected = true
+                
+            case "20":
+                
+                street_btn.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                street_btn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                street_btn.isSelected = true
+                
+            case "30":
+                
+                private_btn.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
+                private_btn.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+                private_btn.isSelected = true
+                
+            default:
+                print()
+                
+            }
+            
+            filters.updateValue(String(parking_type_f ?? ""), forKey: "parking_type")
+            
+        }
+        
+        
+        
+        
+
+        
+    }
+    
+    func reset_filters(){
+        
+        
+        //Available button deselect
+        mini_btn.setImage(UIImage(named: "mini_unselected"), for: .normal)
+        mini_btn.isSelected = false
+        
+        family_btn.setImage(UIImage(named: "family_unselected"), for: .normal)
+        family_btn.isSelected = false
+        
+        suv_btn.setImage(UIImage(named: "suv_unselected"), for: .normal)
+        suv_btn.isSelected = false
+        
+        bus_btn.setImage(UIImage(named: "bus_unselected"), for: .normal)
+        bus_btn.isSelected = false
+        
+        //Available button deselect
+        m_10.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+        m_10.isSelected = false
+        m_10.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+        
+        m_20.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+        m_20.isSelected = false
+        m_20.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+        
+        m_30.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+        m_30.isSelected = false
+        m_30.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+        
+        
+        //Sort By button deselect
+        price.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+        price.isSelected = false
+        price.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+        
+        distance.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+        distance.isSelected = false
+        distance.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+        
+        
+        //Parking Types button deselect
+        lot_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+        lot_btn.isSelected = false
+        lot_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+        
+        street_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+        street_btn.isSelected = false
+        street_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+        
+        
+        private_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+        private_btn.isSelected = false
+        private_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+        
+        
         
     }
     
@@ -121,6 +263,18 @@ class FilterBottomSheetVC: UIViewController {
         delegate?.applyFilters(filters: filters)
         self.dismiss(animated: true, completion: nil)
     }
+    @IBAction func reset_filter(_ sender: UIButton) {
+        
+        UserDefaults.standard.removeObject(forKey: "vehicle_type_f")
+        UserDefaults.standard.removeObject(forKey: "time_margin_f")
+        UserDefaults.standard.removeObject(forKey: "orderBy_column_f")
+        UserDefaults.standard.removeObject(forKey: "parking_type_f")
+        
+        reset_filters()
+       
+    }
+    
+    
     
     @IBAction func car_size_btn_click(_ sender: UIButton) {
         
@@ -500,11 +654,21 @@ class FilterBottomSheetVC: UIViewController {
         
         
         
+
         if(sender.isSelected){
             
             let val = sender.tag * 10
             //            filters.updateValue("hey", forKey: "parking_type")
             filters.updateValue(String(val), forKey: "parking_type")
+            
+            UserDefaults.standard.set(String(val), forKey: "parking_type_f")
+            UserDefaults.standard.synchronize()
+            print("time_margin=\(UserDefaults.standard.string(forKey: "parking_type_f"))")
+        }
+        else{
+            
+            UserDefaults.standard.set("", forKey: "parking_type_f")
+            UserDefaults.standard.synchronize()
         }
         
         
@@ -627,9 +791,22 @@ class FilterBottomSheetVC: UIViewController {
         
         if(sender.isSelected){
             
+            
+        }
+        if(sender.isSelected){
+            
             let val = sender.tag * 10
             //            filters.updateValue("hey", forKey: "parking_type")
             filters.updateValue(String(val), forKey: "time_margin")
+           
+            UserDefaults.standard.set(String(val), forKey: "time_margin_f")
+            UserDefaults.standard.synchronize()
+            print("time_margin=\(UserDefaults.standard.string(forKey: "time_margin_f"))")
+        }
+        else{
+            
+            UserDefaults.standard.set("", forKey: "time_margin_f")
+            UserDefaults.standard.synchronize()
         }
         
     }
@@ -707,17 +884,23 @@ class FilterBottomSheetVC: UIViewController {
         }
         
         
-        
-        
-        
+
         
         if(sender.isSelected){
             
             let val = sender.tag * 10
             //            filters.updateValue("hey", forKey: "parking_type")
             filters.updateValue(String(val), forKey: "orderBy_column")
+            
+            UserDefaults.standard.set(String(val), forKey: "orderBy_column_f")
+            UserDefaults.standard.synchronize()
+            print("time_margin=\(UserDefaults.standard.string(forKey: "orderBy_column_f"))")
         }
-        
+        else{
+            
+            UserDefaults.standard.set("", forKey: "orderBy_column_f")
+            UserDefaults.standard.synchronize()
+        }
         
     }
     

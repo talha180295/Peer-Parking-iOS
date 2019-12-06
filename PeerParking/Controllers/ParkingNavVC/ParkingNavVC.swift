@@ -47,7 +47,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         super.viewDidLoad()
         
         print("ParkingNavVC")
-        loadMapView()
+//        loadMapView()
         self.parking_title.text = p_title
         // Do any additional setup after loading the view.
     }
@@ -97,6 +97,11 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
     
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        self.view.layoutIfNeeded()
+        
+        loadMapView()
+        
         
     }
     

@@ -2905,9 +2905,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G2x-Cf-4Oy">
-                                                <rect key="frame" x="285" y="16" width="109" height="21"/>
+                                                <rect key="frame" x="332" y="16" width="62" height="21"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="109" id="TtU-wW-skz"/>
+                                                    <constraint firstAttribute="width" constant="62" id="TtU-wW-skz"/>
                                                     <constraint firstAttribute="height" constant="21" id="hlT-pz-rZ4"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
@@ -2918,12 +2918,29 @@
                                                     <action selector="apply_btn_click:" destination="R6J-oV-2PH" eventType="touchUpInside" id="6xE-0W-2c5"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HAt-Mn-8Ua">
+                                                <rect key="frame" x="249" y="16" width="75" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="Dxh-YS-tMA"/>
+                                                    <constraint firstAttribute="width" constant="75" id="j35-b3-3fk"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <state key="normal" title="Reset">
+                                                    <color key="titleColor" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="reset_filter:" destination="R6J-oV-2PH" eventType="touchUpInside" id="ZEl-zO-U8R"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="G2x-Cf-4Oy" firstAttribute="top" secondItem="zt8-5i-4Ag" secondAttribute="top" constant="16" id="9le-EZ-5zs"/>
+                                            <constraint firstAttribute="bottom" secondItem="HAt-Mn-8Ua" secondAttribute="bottom" constant="16" id="JZn-Lk-6c9"/>
                                             <constraint firstAttribute="trailing" secondItem="G2x-Cf-4Oy" secondAttribute="trailing" constant="20" id="Uwk-F3-nBr"/>
+                                            <constraint firstItem="HAt-Mn-8Ua" firstAttribute="top" secondItem="zt8-5i-4Ag" secondAttribute="top" constant="16" id="VDJ-H7-CrH"/>
                                             <constraint firstItem="6Gn-bp-IGh" firstAttribute="top" secondItem="zt8-5i-4Ag" secondAttribute="top" constant="16" id="Zdg-Pm-zMT"/>
+                                            <constraint firstItem="G2x-Cf-4Oy" firstAttribute="leading" secondItem="HAt-Mn-8Ua" secondAttribute="trailing" constant="8" id="iEO-jf-25Z"/>
                                             <constraint firstItem="6Gn-bp-IGh" firstAttribute="leading" secondItem="zt8-5i-4Ag" secondAttribute="leading" constant="20" id="oQ9-db-dNr"/>
                                             <constraint firstAttribute="height" constant="53" id="qe4-9Y-yWc"/>
                                             <constraint firstAttribute="bottom" secondItem="6Gn-bp-IGh" secondAttribute="bottom" constant="16" id="vD3-dr-3BH"/>

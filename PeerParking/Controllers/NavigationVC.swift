@@ -105,7 +105,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         //        self.navigationController?.navigationBar.isHidden = false
     }
     override func viewDidAppear(_ animated: Bool) {
-        
+        self.view.layoutIfNeeded()
         if (!isMapLoaded){
             isMapLoaded = true
             loadMapView()
