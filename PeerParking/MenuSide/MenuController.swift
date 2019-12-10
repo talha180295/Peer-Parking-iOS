@@ -9,11 +9,18 @@
 import UIKit
 import HelperClassPod
 import Alamofire
+import EzPopup
 
 
 
 class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSource{
-
+    
+    @IBOutlet weak var img: UIImageView!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var top_view_height_contr: NSLayoutConstraint!
+    
+    let story = UIStoryboard(name: "Main", bundle: nil)
+    
     let dict1 = [["name" : "Home","segue":"HomeVC"],["name" : "Profile","segue":"ProfileVC"],["name" : "Wallet","segue":"WalletVC"],["name" : "Parkings","segue":"parkingVC"],
                 ["name" : "Requests","segue":"requestVC"],["name" : "Notifications","segue":"NotificationVC"],["name" : "","segue":""],["name" : "Settings","segue":"SettingVC"],["name" : "Help","segue":"helpVC"],["name" : "","segue":""],["name" : "Logout","segue":""]]
     
@@ -37,7 +44,17 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        if(!IsUserLogin()){
+            top_view_height_contr.constant = 0
+        }
+        else{
+            top_view_height_contr.constant = 210
+        }
         NotificationCenter.default.addObserver(self, selector: #selector(reload_table(notification:)), name: NSNotification.Name(rawValue: "reload_table"), object: nil)
+        
+        self.img.sd_setImage(with: URL(string: UserDefaults.standard.string(forKey: "image") ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
+        self.name.text = UserDefaults.standard.string(forKey: "full_name")
     }
 //    override func viewDidAppear(_ animated: Bool) {
 //
@@ -53,6 +70,14 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
 
     @objc func reload_table(notification: NSNotification) {
         
+        if(!IsUserLogin()){
+            top_view_height_contr.constant = 0
+        }
+        else{
+            top_view_height_contr.constant = 210
+        }
+        self.img.sd_setImage(with: URL(string: UserDefaults.standard.string(forKey: "image") ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
+        self.name.text = UserDefaults.standard.string(forKey: "full_name")
         print("tblMenu.reloadData()")
         tblMenu.reloadData()
     }
@@ -139,6 +164,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
             
             
             let nameStr = dictInner["name"] as! String
+            
             if(nameStr.elementsEqual("Logout"))
             {
                 //
@@ -154,18 +180,34 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
                 }
                 
             }
+            else if(nameStr.elementsEqual("Login"))
+            {
+                //
+                let isLogin = IsUserLogin()
+                if(isLogin)
+                {
+//                    tblMenu.reloadData()
+//                    logOut()
+                }
+                else
+                {
+                    tblMenu.reloadData()
+                    logIn()
+                }
+                
+            }
             else
             {
             
            
-            let segue = (dictInner["segue"] as! String)
-            if(segue.count>0)
-            {
-                if(segue == "HomeVC"){
-                    tab_index = 1
+                let segue = (dictInner["segue"] as! String)
+                if(segue.count>0)
+                {
+                    if(segue == "HomeVC"){
+                        tab_index = 1
+                    }
+                    sideMenuController?.performSegue(withIdentifier: segue, sender: nil)
                 }
-                sideMenuController?.performSegue(withIdentifier: segue, sender: nil)
-            }
                 
             }
         previousIndex = indexPath as NSIndexPath?
@@ -253,6 +295,25 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
 //                }
 //            }
 //        }
+    }
+    
+    func logIn(){
+        
+        let vc = self.story.instantiateViewController(withIdentifier: "FBPopup") as? FBPopup
+        
+        vc?.source = "sideMenu"
+        let popupVC = PopupViewController(contentController: vc!, popupWidth: 320, popupHeight: 365)
+        popupVC.canTapOutsideToDismiss = true
+        
+        //properties
+        //            popupVC.backgroundAlpha = 1
+        //            popupVC.backgroundColor = .black
+        //            popupVC.canTapOutsideToDismiss = true
+        //            popupVC.cornerRadius = 10
+        //            popupVC.shadowEnabled = true
+        
+        // show it by call present(_ , animated:) method from a current UIViewController
+        present(popupVC, animated: true)
     }
     func resetDefaults() {
         let defaults = UserDefaults.standard

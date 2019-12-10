@@ -253,7 +253,9 @@ public class SharedHelper: UIViewController {
         let headers: HTTPHeaders = [
             "Authorization" : auth_value
         ]
-        let url = "http://peer-parking.servstaging.com/api/v1/refresh"
+//        let url = "http://peer-parking.servstaging.com/api/v1/refresh"
+        
+        let url = "http://peer-parking.apps.fomarkmedia.com/api/v1/refresh"
         
         Alamofire.request(url, method: .post, parameters: nil, headers:headers).validate(contentType: ["application/json","text/html"]).responseJSON
             { response in

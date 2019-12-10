@@ -19,8 +19,8 @@ class ParkedViewController: UIViewController {
    @IBOutlet weak var lblTimer: UILabel!
    
    @IBOutlet weak var progressView: CircleProgressView!
-   var seconds = 60 //This variable will hold a starting value of seconds. It could be any amount above 0.
-   var MainSeconds = 60
+   var seconds = 120 //This variable will hold a starting value of seconds. It could be any amount above 0.
+   var MainSeconds = 120
    var timer = Timer()
    var isTimerRunning = false
 
@@ -74,9 +74,10 @@ class ParkedViewController: UIViewController {
     @objc func updateTimer() {
         seconds -= 1     //This will decrement(count down)the seconds.
          //This will update the label.
-        if(seconds>0)
+        if(seconds>=0)
         {
         lblTimer.text = timeString(time: TimeInterval(seconds))
+        time_left.text = timeString2(time: TimeInterval(seconds))
         progressView.progress = Double(seconds)/Double(MainSeconds)
         }
         else
@@ -87,10 +88,31 @@ class ParkedViewController: UIViewController {
     }
 
     func timeString(time:TimeInterval) -> String {
-    let hours = Int(time) / 3600
-    let minutes = Int(time) / 60 % 60
-    let seconds = Int(time) % 60
-    return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+        
+        let hours = Int(time) / 3600
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        
+        return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+    }
+    
+    func timeString2(time:TimeInterval) -> String {
+        
+        let hours = Int(time) / 3600
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        
+        if(hours==0)&&(minutes==0){
+             return String(format:"%02is",  seconds)
+        }
+        else if(hours==0){
+            return String(format:"%02im:%02is", minutes, seconds)
+        }
+        else {
+            String(format:"%02ih:%02im:%02is", hours, minutes, seconds)
+        }
+        
+        return ""
     }
         
 

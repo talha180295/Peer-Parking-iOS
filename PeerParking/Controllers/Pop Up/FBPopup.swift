@@ -16,7 +16,7 @@ import EzPopup
 class FBPopup: UIViewController {
 
     var key = ""
-    
+    var source = ""
     var parking_details:NSDictionary!
     
     override func viewDidLoad() {
@@ -138,49 +138,56 @@ class FBPopup: UIViewController {
         
         NotificationCenter.default.post(name: Notification.Name("reload_table"), object: nil)
         
-        if(tab_index==2){
-            
-            
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FinishPopup")
-            
-            
-            let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
-            popupVC.canTapOutsideToDismiss = true
-            
-            //properties
-            //            popupVC.backgroundAlpha = 1
-            //            popupVC.backgroundColor = .black
-            //            popupVC.canTapOutsideToDismiss = true
-            //            popupVC.cornerRadius = 10
-            //            popupVC.shadowEnabled = true
-            
-            // show it by call present(_ , animated:) method from a current UIViewController
-            present(popupVC, animated: true)
-            
+        if(source == "sideMenu"){
+           
+            self.dismiss(animated: true, completion: nil)
         }
         else{
             
-//            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
-//            //
-//            vc.vcName = ""
-//            self.present(vc, animated: false, completion: nil)
-            
-            //SharedHelper().showToast(message: "Login", controller: self)
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
-            //
-            vc.parking_details = self.parking_details
-            vc.p_id = Int(self.parking_details["id"] as! Int)
-            vc.p_title =  parking_details["address"] as? String ?? ""
-            
-            vc.p_lat = Double(self.parking_details["latitude"] as! String)!
-            vc.p_longg = Double(self.parking_details["longitude"] as! String)!
-            vc.vcName = ""
-            
-            
-            //            self.navigationController?.pushViewController(vc, animated: true)
-            //            self.navigationController?.pushViewController(vc, animated: true)
-            self.present(vc, animated: false, completion: nil)
-            
+            if(tab_index==2){
+                
+                
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FinishPopup")
+                
+                
+                let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
+                popupVC.canTapOutsideToDismiss = true
+                
+                //properties
+                //            popupVC.backgroundAlpha = 1
+                //            popupVC.backgroundColor = .black
+                //            popupVC.canTapOutsideToDismiss = true
+                //            popupVC.cornerRadius = 10
+                //            popupVC.shadowEnabled = true
+                
+                // show it by call present(_ , animated:) method from a current UIViewController
+                present(popupVC, animated: true)
+                
+            }
+            else{
+                
+                //            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
+                //            //
+                //            vc.vcName = ""
+                //            self.present(vc, animated: false, completion: nil)
+                
+                //SharedHelper().showToast(message: "Login", controller: self)
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
+                //
+                vc.parking_details = self.parking_details
+                vc.p_id = Int(self.parking_details["id"] as! Int)
+                vc.p_title =  parking_details["address"] as? String ?? ""
+                
+                vc.p_lat = Double(self.parking_details["latitude"] as! String)!
+                vc.p_longg = Double(self.parking_details["longitude"] as! String)!
+                vc.vcName = ""
+                
+                
+                //            self.navigationController?.pushViewController(vc, animated: true)
+                //            self.navigationController?.pushViewController(vc, animated: true)
+                self.present(vc, animated: false, completion: nil)
+                
+            }
         }
         
     }
@@ -242,7 +249,7 @@ class FBPopup: UIViewController {
         
       
         key = "auth_token"
-        if !auth_token.isEmpty && !(userDetails[key] is NSNull)
+        if !(auth_token.isEmpty)
         {
             UserDefaults.standard.set(auth_token, forKey: key)
         }
@@ -252,9 +259,9 @@ class FBPopup: UIViewController {
         }
         
         key = "created_at"
-        if !created_at.isEmpty && !(userDetails[key] is NSNull)
+        if !(created_at.isEmpty)
         {
-            UserDefaults.standard.set(auth_token, forKey: key)
+            UserDefaults.standard.set(created_at, forKey: key)
         }
         else
         {
@@ -264,9 +271,9 @@ class FBPopup: UIViewController {
         
         
         key = "email"
-        if !email.isEmpty && !(userDetails[key] is NSNull)
+        if !(email.isEmpty)
         {
-            UserDefaults.standard.set(auth_token, forKey: key)
+            UserDefaults.standard.set(email, forKey: key)
         }
         else
         {
@@ -274,9 +281,9 @@ class FBPopup: UIViewController {
         }
         
         key = "expires_in"
-        if expires_in > 0 && !(userDetails[key] is NSNull)
+        if (expires_in > 0)
         {
-            UserDefaults.standard.set(auth_token, forKey: key)
+            UserDefaults.standard.set(expires_in, forKey: key)
         }
         else
         {
@@ -284,9 +291,9 @@ class FBPopup: UIViewController {
         }
         
         key = "token_type"
-        if !token_type.isEmpty && !(userDetails[key] is NSNull)
+        if !(token_type.isEmpty)
         {
-            UserDefaults.standard.set(auth_token, forKey: key)
+            UserDefaults.standard.set(token_type, forKey: key)
         }
         else
         {
