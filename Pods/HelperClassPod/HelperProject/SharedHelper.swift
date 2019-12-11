@@ -286,90 +286,90 @@ public class SharedHelper: UIViewController {
      * @return completion block which return data dictionary
      **/
     
-    public func Request_Api(url:String, methodType : HTTPMethod,parameters:Parameters,isHeaderIncluded:Bool, headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
-        
-        
-        if(isHeaderIncluded)
-        {
-            RefreshToken(completion:{
-                response in
-                print(response)
-                if response.result.value == nil {
-                    print("No response")
-                   
-                    return
-                }
-                else {
-                    let responseData = response.result.value as! NSDictionary
-                    let status = responseData["success"] as! Bool
-                    if(status)
-                    {
-                        let uData = responseData["data"] as! NSDictionary
-                        
-                        let userData = uData["user"] as! NSDictionary
-                        
-                        let auth_token = userData["access_token"] as! String
-                        UserDefaults.standard.set(auth_token, forKey: "auth_token")
-                        UserDefaults.standard.synchronize()
-                        
-                        var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
-                        auth_value = "bearer " + auth_value
-                        
-                        let headers1: HTTPHeaders = [
-                            "Authorization" : auth_value,
-                            "Accept" : "application/json"
-                        ]
-            
-                        Alamofire.request(url, method: methodType, parameters: parameters, headers:headers1).validate(contentType: ["application/json","text/html"]).responseJSON
-                            { response in
-                                
-                                switch response.result {
-                                case .success:
-                                    print(response)
-                                    completion(response)
-                                    break
-                                case .failure(let error):
-                                    print(error)
-                                    completion(response)
-                                }
-                                
-                            }.responseString { response in
-                                print(response.result.value as Any)
-                                switch(response.result) {
-                                case .success(_):
-                                    if let data = response.result.value{
-                                        print(data)
-                                    }
-                                    
-                                case .failure(_):
-                                    print(response.result.error as Any)
-                                    break
-                                }
-                        }
-                    }
-                }
-                
-                
-                });
-        }
-        else
-        {
-        Alamofire.request(url, method: methodType, parameters: parameters).validate(contentType: ["application/json","text/html"]).responseJSON
-            { response in
-                
-                switch response.result {
-                case .success:
-                    print(response)
-                    completion(response)
-                    break
-                case .failure(let error):
-                    print(error)
-                    completion(response)
-                }
-                
-        }
-        }
-    }
+//    public func Request_Api(url:String, methodType : HTTPMethod,parameters:Parameters,isHeaderIncluded:Bool, headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
+//        
+//        
+//        if(isHeaderIncluded)
+//        {
+//            RefreshToken(completion:{
+//                response in
+//                print(response)
+//                if response.result.value == nil {
+//                    print("No response")
+//                   
+//                    return
+//                }
+//                else {
+//                    let responseData = response.result.value as! NSDictionary
+//                    let status = responseData["success"] as! Bool
+//                    if(status)
+//                    {
+//                        let uData = responseData["data"] as! NSDictionary
+//                        
+//                        let userData = uData["user"] as! NSDictionary
+//                        
+//                        let auth_token = userData["access_token"] as! String
+//                        UserDefaults.standard.set(auth_token, forKey: "auth_token")
+//                        UserDefaults.standard.synchronize()
+//                        
+//                        var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
+//                        auth_value = "bearer " + auth_value
+//                        
+//                        let headers1: HTTPHeaders = [
+//                            "Authorization" : auth_value,
+//                            "Accept" : "application/json"
+//                        ]
+//            
+//                        Alamofire.request(url, method: methodType, parameters: parameters, headers:headers1).validate(contentType: ["application/json","text/html"]).responseJSON
+//                            { response in
+//                                
+//                                switch response.result {
+//                                case .success:
+//                                    print(response)
+//                                    completion(response)
+//                                    break
+//                                case .failure(let error):
+//                                    print(error)
+//                                    completion(response)
+//                                }
+//                                
+//                            }.responseString { response in
+//                                print(response.result.value as Any)
+//                                switch(response.result) {
+//                                case .success(_):
+//                                    if let data = response.result.value{
+//                                        print(data)
+//                                    }
+//                                    
+//                                case .failure(_):
+//                                    print(response.result.error as Any)
+//                                    break
+//                                }
+//                        }
+//                    }
+//                }
+//                
+//                
+//                });
+//        }
+//        else
+//        {
+//        Alamofire.request(url, method: methodType, parameters: parameters).validate(contentType: ["application/json","text/html"]).responseJSON
+//            { response in
+//                
+//                switch response.result {
+//                case .success:
+//                    print(response)
+//                    completion(response)
+//                    break
+//                case .failure(let error):
+//                    print(error)
+//                    completion(response)
+//                }
+//                
+//        }
+//        }
+//    }
     
     
     

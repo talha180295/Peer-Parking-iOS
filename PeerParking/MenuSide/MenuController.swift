@@ -222,7 +222,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
             "Authorization" : auth_value
         ]
         
-        SharedHelper().Request_Api(url: url, methodType: .post, parameters: [:], isHeaderIncluded: true, headers: headers){
+        Helper().Request_Api(url: url, methodType: .post, parameters: [:], isHeaderIncluded: true, headers: headers){
             response in
             
             if response.result.value == nil {

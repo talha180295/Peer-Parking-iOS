@@ -520,7 +520,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
             //Local server
             let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
             print("staging_url=\(url)")
-            SharedHelper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: false, headers: headers){
+            Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: false, headers: headers){
                 response in
                 //print("response=\(response)")
                 if response.result.value == nil {

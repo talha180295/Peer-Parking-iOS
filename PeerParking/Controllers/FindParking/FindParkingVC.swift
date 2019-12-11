@@ -227,7 +227,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         self.locationManager.startUpdatingLocation()
         
         print(" view_all_btn=\(self.view_all_btn.frame)")
-        get_all_parkings(lat: self.lat, long: self.longg, filters: [:]){
+        get_all_parkings(lat: self.lat, long: self.longg, isHeaderIncluded: Helper().IsUserLogin(), filters: [:]){
             
             sender.isHidden = false
             self.myCollectionView.isHidden = false
@@ -385,7 +385,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     
     
-    func get_all_parkings(lat:Double,long:Double,filters:[String:String],completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
+    func get_all_parkings(lat:Double,long:Double,isHeaderIncluded:Bool,filters:[String:String],completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
         
         var params = [
            
@@ -409,17 +409,33 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         
         print("param123=\(params)")
+        
+        var auth_value = ""
+        
+        if let value : String = UserDefaults.standard.string(forKey: "auth_token"){
+            
+           auth_value = "bearer " + value
+        }
+        
+        
+        
+        
+        
         let headers: HTTPHeaders = [
-            "Authorization" : ""
+            "Authorization" : auth_value
         ]
-        //Staging server
-        //let url = APP_CONSTANT.API.STAGING_BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
         
+
+        var url = ""
         
-        //Local server
-        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
-        print("staging_url=\(url)")
-        SharedHelper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: false, headers: headers){
+        if(Helper().IsUserLogin()){
+            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITH_TOKEN
+        }
+        else{
+            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
+        }
+        print("staging_url123=\(url)")
+        Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: isHeaderIncluded, headers: headers){
             response in
             //print("response=\(response)")
             if response.result.value == nil {
@@ -544,7 +560,7 @@ extension FindParkingVC:FiltersProtocol{
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
         
-        self.get_all_parkings(lat: self.filterLat, long: self.filterLong, filters: filters){
+        self.get_all_parkings(lat: self.filterLat, long: self.filterLong, isHeaderIncluded: false, filters: filters){
             
            
         }
@@ -579,7 +595,7 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
             self.filterLat = place.coordinate.latitude
             self.filterLong = place.coordinate.longitude
             
-            self.get_all_parkings(lat: place.coordinate.latitude, long: place.coordinate.longitude, filters: [:]){
+            self.get_all_parkings(lat: place.coordinate.latitude, long: place.coordinate.longitude, isHeaderIncluded: false,filters: [:]){
                 
                 self.map.animate(to: camera)
                 UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {

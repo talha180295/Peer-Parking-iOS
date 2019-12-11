@@ -93,7 +93,7 @@ class FBPopup: UIViewController {
             "Authorization" : ""
         ]
         let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.SOCIAL_LOGIN
-        SharedHelper().Request_Api(url: url, methodType: .post, parameters: param, isHeaderIncluded: false, headers: headers){
+        Helper().Request_Api(url: url, methodType: .post, parameters: param, isHeaderIncluded: false, headers: headers){
             response in
             print("response=\(response)")
             if response.result.value == nil {

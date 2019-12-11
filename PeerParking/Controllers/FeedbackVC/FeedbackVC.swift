@@ -99,7 +99,7 @@ class FeedbackVC: UIViewController {
         print("url--\(url)")
         
         
-        SharedHelper().Request_Api(url: url, methodType: .post, parameters: params, isHeaderIncluded: true, headers: headers){ response in
+        Helper().Request_Api(url: url, methodType: .post, parameters: params, isHeaderIncluded: true, headers: headers){ response in
             
             print("response>>>123\(response)")
             
