@@ -34,7 +34,7 @@ class ParkedViewController: UIViewController {
    // @IBOutlet weak var timerView: Knob!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = true
+//        self.navigationController?.navigationBar.isHidden = true
         
         
        

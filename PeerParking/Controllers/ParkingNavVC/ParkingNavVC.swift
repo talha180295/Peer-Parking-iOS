@@ -350,7 +350,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         if let id = p_id {
             
             print("p_id==\(id)")
-            assign_buyer(p_id: id)
+            assign_buyer(p_id: id, status: 30)
             
         }
         
@@ -431,9 +431,9 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         
     }
     
-    func assign_buyer(p_id:Int){
+    func assign_buyer(p_id:Int,status:Int){
         
-        let status:Int = 30
+//        let status:Int = 30
         
         var params:[String:Any] = [
         

@@ -59,7 +59,7 @@ class StepOneVC: UIViewController {
     
     
     func datePickerTapped() {
-        DatePickerDialog().show("Select Time", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .dateAndTime) {
+        DatePickerDialog(buttonColor:#colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)).show("Select Time", doneButtonTitle: "DONE", cancelButtonTitle: "CANCEL", datePickerMode: .dateAndTime) {
             (date) -> Void in
             if let time = date {
                 let formatter = DateFormatter()

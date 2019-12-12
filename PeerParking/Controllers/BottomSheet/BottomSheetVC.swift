@@ -14,6 +14,7 @@ import FacebookCore
 import HelperClassPod
 import Cosmos
 import SDWebImage
+import Alamofire
 
 
 class BottomSheetVC: UIViewController {
@@ -185,9 +186,13 @@ class BottomSheetVC: UIViewController {
     @IBAction func take_btn_click(_ sender: UIButton) {
         
         
+        let id = Int(self.parking_details["id"] as! Int)
+        
+            
         
         if Helper().IsUserLogin(){
             
+            assign_buyer(p_id: id, status: 20)
             //SharedHelper().showToast(message: "Login", controller: self)
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
             //
@@ -257,5 +262,74 @@ class BottomSheetVC: UIViewController {
         self.present(sheetController, animated: false, completion: nil)
     }
     
+    
+    func assign_buyer(p_id:Int,status:Int){
+        
+       // let status:Int = 20
+        
+        var params:[String:Any] = [
+            
+            
+            "status" : status
+            
+        ]
+        
+        //params.updateValue("hello", forKey: "new_val")
+        let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: "auth_token")!)"
+        let headers: HTTPHeaders = [
+            "Authorization" : auth_value
+        ]
+        print("==0params=\(params)")
+        print("==0headers=\(headers)")
+        
+        //        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
+        //        self.present(vc, animated: true, completion: nil)
+        
+        
+        let url = "\(APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.ASSIGN_BUYER)/\(p_id)"
+        
+        print("url--\(url)")
+        
+        
+        Helper().Request_Api(url: url, methodType: .post, parameters: params, isHeaderIncluded: true, headers: headers){ response in
+            
+            print("response>>>\(response)")
+            
+            if response.result.value == nil {
+                print("No response")
+                
+                SharedHelper().showToast(message: "Internal Server Error", controller: self)
+                return
+            }
+            else {
+                let responseData = response.result.value as! NSDictionary
+                let status = responseData["success"] as! Bool
+                if(status)
+                {
+                    let message = responseData["message"] as! String
+                    //let uData = responseData["data"] as! NSDictionary
+                    //let userData = uData["user"] as! NSDictionary
+                    //self.saveData(userData: userData)
+                    //                    SharedHelper().hideSpinner(view: self.view)
+                    //                     UserDefaults.standard.set("yes", forKey: "login")
+                    //                    UserDefaults.standard.synchronize()
+                    SharedHelper().showToast(message: message, controller: self)
+                    
+                    
+                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedbackVC") as! FeedbackVC
+                    vc.parking_details = self.parking_details
+                    vc.p_id = p_id
+                    self.present(vc, animated: true, completion: nil)
+                    //self.after_signin()
+                }
+                else
+                {
+                    let message = responseData["message"] as! String
+                    SharedHelper().showToast(message: message, controller: self)
+                    //   SharedHelper().hideSpinner(view: self.view)
+                }
+            }
+        }
+    }
   
 }

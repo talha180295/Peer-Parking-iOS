@@ -10,7 +10,8 @@ import UIKit
 import StepIndicator
 import EzPopup
 import CoreLocation
-
+import Alamofire
+import HelperClassPod
 
 
 class SellParkingVC: UIViewController, CLLocationManagerDelegate {
@@ -22,10 +23,13 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
     let story = UIStoryboard(name: "Main", bundle: nil)
     
     @IBOutlet weak var step_progress: StepIndicatorView!
+    @IBOutlet var mainView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+//        self.mainView.isHidden = true
         //Location Manager code to fetch current location
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
@@ -34,15 +38,152 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
    
     override func viewWillAppear(_ animated: Bool) {
         
+        
+        if(Helper().IsUserLogin()){
+            checkStatus(){
+                p_status in
+                
+                //print("p_status234=\(p_status)")
+                SharedHelper().showToast(message: String(p_status), controller: self)
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
+                let vc1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC") as! ParkedViewController
+                
+
+             
+                
+                switch p_status {
+                    
+                    case 10:
+                        self.openTimerScreen(vc: vc1)
+                    case 20:
+                        self.openNavigationScreen(vc: vc)
+                    default:
+                        vc.remove()
+                }
+
+            }
+        }
+        else{
+//            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
+        }
+        
         tab_index = 2
-        print("parking_post_details=\(GLOBAL_VAR.PARKING_POST_DETAILS)")
-        print("::--=viewWillAppear|SellParking")
+//        print("parking_post_details=\(GLOBAL_VAR.PARKING_POST_DETAILS)")
+//        print("::--=viewWillAppear|SellParking")
         self.tabBarController!.navigationItem.title = "Sell Parking"
+    }
+    
+    
+    func openTimerScreen(vc:ParkedViewController){
+        
+        
+        //        configureChildViewController(childController: vc, onView: self.mainView)
+        add(vc)
+        
+    }
+    func openNavigationScreen(vc:ParkingNavVC){
+        
+        vc.parking_details = nil
+        vc.p_id = 0
+        vc.p_title =  ""
+
+        vc.p_lat = 0.0
+        vc.p_longg = 0.0
+        vc.vcName = ""
+//        configureChildViewController(childController: vc, onView: self.mainView)
+        add(vc)
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         
-        print("::--=viewWillDisappear|SellParking")
+//        print("::--=viewWillDisappear|SellParking")
+    }
+    
+    
+    func checkStatus(completion: @escaping (Int) -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
+        
+        var params = [
+            "is_schedule" : 1,
+            "mood" : 10
+//            "latitude": String(lat),
+//            "longitude": String(long)
+            
+        ]
+        
+       
+        
+        
+        print("param123=\(params)")
+        
+        var auth_value = ""
+        
+        if let value : String = UserDefaults.standard.string(forKey: "auth_token"){
+            
+            auth_value = "bearer " + value
+        }
+        
+        
+        
+        
+        
+        let headers: HTTPHeaders = [
+            "Authorization" : auth_value
+        ]
+        
+        
+        var url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITH_TOKEN
+        
+//        if(Helper().IsUserLogin()){
+//            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITH_TOKEN
+//        }
+//        else{
+//            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
+//        }
+        print("checkStatusurl=\(url)")
+        Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: true, headers: headers){
+            response in
+            //print("response=\(response)")
+            if response.result.value == nil {
+//                print("No response status")
+                
+                let responseData = response.result.value as! NSDictionary
+                let uData = responseData["data"] as! [Any]
+                
+                SharedHelper().showToast(message: "Internal Server Error", controller: self)
+                completion(0)
+                return
+            }
+            else {
+                let responseData = response.result.value as! NSDictionary
+                let status = responseData["success"] as! Bool
+                if(status)
+                {
+                    
+                    let message = responseData["message"] as! String
+                    let uData = responseData["data"] as! [Any]
+                    
+                    if(uData.count>0){
+                        
+                    
+                    let dict = uData[0] as! NSDictionary
+                    let p_status = dict["status"] as! Int
+                    
+                    completion(p_status)
+                    }
+                    
+                    
+                    
+                }
+                else
+                {
+                    let message = responseData["message"] as! String
+                    SharedHelper().showToast(message: message, controller: self)
+                    //   SharedHelper().hideSpinner(view: self.view)
+                }
+            }
+        }
+        
     }
     
     @IBAction func pre_btn(_ sender: UIButton) {
@@ -67,7 +208,7 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
             
             counter-=1
             step_progress.currentStep = counter
-            print("parking_post_details=\(GLOBAL_VAR.PARKING_POST_DETAILS)")
+//            print("parking_post_details=\(GLOBAL_VAR.PARKING_POST_DETAILS)")
             if Helper().IsUserLogin(){
                 
                
@@ -121,8 +262,8 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
         
         let location = locations.last
         
-        print(":=:lat==::\(location?.coordinate.latitude)")
-        print(":=:long==::\(location?.coordinate.longitude)")
+//        print(":=:lat==::\(location?.coordinate.latitude)")
+//        print(":=:long==::\(location?.coordinate.longitude)")
         
        
         GLOBAL_VAR.PARKING_POST_DETAILS.updateValue((location?.coordinate.latitude.description)!, forKey: "latitude")
@@ -142,7 +283,7 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
                 }
                 
                 let reversedGeoLocation = ReversedGeoLocation(with: placemark)
-                print("LOC=:\(reversedGeoLocation.formattedAddressName)")
+//                print("LOC=:\(reversedGeoLocation.formattedAddressName)")
                 
                 GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(reversedGeoLocation.formattedAddressName, forKey: "address")
                 //self.address = reversedGeoLocation.formattedAddress
@@ -155,5 +296,53 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
         //Finally stop updating location otherwise it will come again and again in this delegate
         self.locationManager.stopUpdatingLocation()
         
+    }
+}
+
+extension UIViewController {
+//    func configureChildViewController(childController: UIViewController, onView: UIView?) {
+//        var holderView = self.view
+//        if let onView = onView {
+//            holderView = onView
+//        }
+//        addChild(childController)
+//        holderView?.addSubview(childController.view)
+//        constrainViewEqual(holderView: holderView!, view: childController.view)
+//        childController.didMove(toParent: self)
+//    }
+//
+//
+//    func constrainViewEqual(holderView: UIView, view: UIView) {
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        //pin 100 points from the top of the super
+//        let pinTop = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal,
+//                                        toItem: holderView, attribute: .top, multiplier: 1.0, constant: 0)
+//        let pinBottom = NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal,
+//                                           toItem: holderView, attribute: .bottom, multiplier: 1.0, constant: 0)
+//        let pinLeft = NSLayoutConstraint(item: view, attribute: .left, relatedBy: .equal,
+//                                         toItem: holderView, attribute: .left, multiplier: 1.0, constant: 0)
+//        let pinRight = NSLayoutConstraint(item: view, attribute: .right, relatedBy: .equal,
+//                                          toItem: holderView, attribute: .right, multiplier: 1.0, constant: 0)
+//
+//        holderView.addConstraints([pinTop, pinBottom, pinLeft, pinRight])
+//    }
+    
+    /// Adds child view controller to the parent.
+    ///
+    /// - Parameter child: Child view controller.
+    func add(_ child: UIViewController) {
+        addChild(child)
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+    
+    /// It removes the child view controller from the parent.
+    func remove() {
+        guard parent != nil else {
+            return
+        }
+        willMove(toParent: nil)
+        removeFromParent()
+        view.removeFromSuperview()
     }
 }

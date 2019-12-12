@@ -29,8 +29,8 @@ struct APP_CONSTANT {
     struct API {
        
         //BASE URL FOR PEER PARKING
-//        static let BASE_URL = "http://peer-parking.apps.fomarkmedia.com/api/v1/"
-        static let BASE_URL = "http://peer-parking.servstaging.com/api/v1/"
+        static let BASE_URL = "http://peer-parking.apps.fomarkmedia.com/api/v1/"
+//        static let BASE_URL = "http://peer-parking.servstaging.com/api/v1/"
         
         
         //STAGING_BASE_URL
@@ -61,8 +61,8 @@ struct APP_CONSTANT {
     }
    
     
-    static let DATE_TIME_FORMAT = "yyyy-MM-dd hh:mm:ss"
-    
+    static let DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss"
+                                    
     // VEHICLE_TYPES
     
     struct VEHICLE_TYPES{

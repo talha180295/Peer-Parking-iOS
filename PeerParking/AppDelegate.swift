@@ -31,6 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSPlacesClient.provideAPIKey(Key.Google.placesKey)
         
         Fabric.with([Crashlytics.self])
+        
+        //Just add this line to get it done.
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15.0)], for: UIControl.State.normal)
+
        
         // Override point for customization after application launch.
         return true

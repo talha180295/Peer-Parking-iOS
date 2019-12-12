@@ -10,7 +10,8 @@ import UIKit
 import HelperClassPod
 import Alamofire
 import EzPopup
-
+import FacebookLogin
+import FacebookCore
 
 
 class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSource{
@@ -215,6 +216,15 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
     
     
     func logOut() {
+        
+//        let loginManager = LoginManager()
+//        if let accessToken = AccessToken.current{
+//            print(accessToken)
+//            loginManager.logOut()
+//        }
+        
+        loginManager.logOut()
+        
         let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.LOGOUT
         
         let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: "auth_token")!)"
