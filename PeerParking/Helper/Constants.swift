@@ -14,6 +14,7 @@ struct Key{
     static let DeviceType = "iOS"
     
     struct Google{
+        
         static let placesKey = "AIzaSyCkoOvnd1_eougL23wAx7DP65C_duaJRjQ"//for photos
         
         static let placesKey2 = "AIzaSyAdxovNnHIWKOKQcgn6H0PhwZsFCMfXjnQ"
@@ -21,8 +22,8 @@ struct Key{
         static let serverKey = "some key here"
     }
     
-    
 }
+
 struct APP_CONSTANT {
     
     
@@ -30,8 +31,7 @@ struct APP_CONSTANT {
        
         //BASE URL FOR PEER PARKING
         static let BASE_URL = "http://peer-parking.apps.fomarkmedia.com/api/v1/"
-//        static let BASE_URL = "http://peer-parking.servstaging.com/api/v1/"
-        
+//      static let BASE_URL = "http://peer-parking.servstaging.com/api/v1/"
         
         //STAGING_BASE_URL
         static let STAGING_BASE_URL = "http://peer-parking.servstaging.com/api/v1/"
@@ -39,8 +39,6 @@ struct APP_CONSTANT {
         static let SOCIAL_LOGIN = "social_login"
         //GET /parkings API
         static let POST_PARKING = "parkings"
-        
-        
         
         //GET /parkings-without-token
         static let GET_PARKING_WITHOUT_TOKEN = "parkings-without-token"
@@ -53,10 +51,8 @@ struct APP_CONSTANT {
         
         static let LOGOUT = "logout"
         
-        
         static let REVIEWS = "reviews"
         
- 
         
     }
    

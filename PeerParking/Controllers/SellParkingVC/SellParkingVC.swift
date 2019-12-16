@@ -25,6 +25,11 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var step_progress: StepIndicatorView!
     @IBOutlet var mainView: UIView!
     
+    
+    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
+    let vc1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC") as! ParkedViewController
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -41,24 +46,67 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
         
         if(Helper().IsUserLogin()){
             checkStatus(){
-                p_status in
+                response in
+                
+                var p_status = 0
+                
+                if let val = response["status"] as? Int{
+                    
+                    p_status = val
+                }
                 
                 //print("p_status234=\(p_status)")
-                SharedHelper().showToast(message: String(p_status), controller: self)
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
-                let vc1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC") as! ParkedViewController
+                Helper().showToast(message: String(p_status), controller: self)
+               
+                if let val = response["start_at"] as? String{
+                    
+                    let dateFormatterNow = DateFormatter()
+                    dateFormatterNow.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+                    //                dateFormatterNow.timeZone = TimeZone(abbreviation: "EST")
+                    
+                    let currentDate = Date()
+                    let currentDateStr = dateFormatterNow.string(from: currentDate)
+                    let oldDate = dateFormatterNow.date(from: currentDateStr)
+                    
+                    let newDateString = val
+                    let newDate = dateFormatterNow.date(from: newDateString)
+                    
+                    if let oldDate = oldDate, let newDate = newDate {
+                        let diffInMins = Calendar.current.dateComponents([.second], from: oldDate, to: newDate).second
+                        print("diffInMins=\(diffInMins)")
+                        self.vc1.seconds = diffInMins ?? 0
+                        self.vc1.MainSeconds = diffInMins ?? 0
+                    }
+                   
+                }
                 
-
+//                let dateFormatterNow = DateFormatter()
+//                dateFormatterNow.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+////                dateFormatterNow.timeZone = TimeZone(abbreviation: "EST")
+//
+//                let oldDateString = "2019-12-13 21:55:44"
+//                let oldDate = dateFormatterNow.date(from: oldDateString)
+//
+//                let newDateString = "22019-12-13 21:59:44"
+//                let newDate = dateFormatterNow.date(from: newDateString)
+//
+//                if let oldDate = oldDate, let newDate = newDate {
+//                    let diffInMins = Calendar.current.dateComponents([.minute], from: oldDate, to: newDate).minute
+//                    print("diffInMins=\(diffInMins)")
+//                }
              
+               
+                print("p_status===\(p_status)")
                 
                 switch p_status {
+
                     
                     case 10:
-                        self.openTimerScreen(vc: vc1)
+                        self.openTimerScreen(vc: self.vc1)
                     case 20:
-                        self.openNavigationScreen(vc: vc)
+                        self.openNavigationScreen(vc: self.vc)
                     default:
-                        vc.remove()
+                        self.vc.remove()
                 }
 
             }
@@ -73,7 +121,10 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
         self.tabBarController!.navigationItem.title = "Sell Parking"
     }
     
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        vc1.remove()
+    }
     func openTimerScreen(vc:ParkedViewController){
         
         
@@ -101,7 +152,7 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    func checkStatus(completion: @escaping (Int) -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
+    func checkStatus(completion: @escaping (NSDictionary) -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
         
         var params = [
             "is_schedule" : 1,
@@ -124,6 +175,7 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
         }
         
         
+        print("auth_value==\(auth_value)")
         
         
         
@@ -151,7 +203,7 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
                 let uData = responseData["data"] as! [Any]
                 
                 SharedHelper().showToast(message: "Internal Server Error", controller: self)
-                completion(0)
+                completion([:])
                 return
             }
             else {
@@ -169,7 +221,7 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
                     let dict = uData[0] as! NSDictionary
                     let p_status = dict["status"] as! Int
                     
-                    completion(p_status)
+                    completion(dict)
                     }
                     
                     

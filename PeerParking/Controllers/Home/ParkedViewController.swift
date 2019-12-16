@@ -19,8 +19,8 @@ class ParkedViewController: UIViewController {
    @IBOutlet weak var lblTimer: UILabel!
    
    @IBOutlet weak var progressView: CircleProgressView!
-   var seconds = 120 //This variable will hold a starting value of seconds. It could be any amount above 0.
-   var MainSeconds = 120
+   var seconds = 0 //This variable will hold a starting value of seconds. It could be any amount above 0.
+   var MainSeconds = 0
    var timer = Timer()
    var isTimerRunning = false
 
@@ -36,11 +36,17 @@ class ParkedViewController: UIViewController {
         super.viewDidLoad()
 //        self.navigationController?.navigationBar.isHidden = true
         
-        
+        lblTimer.text = timeString(time: TimeInterval(seconds))
+        runTimer()
        
         //timerView.addTarget(self, action: #selector(ParkedViewController.handleValueChanged(_:)), for: .valueChanged)
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+       
     }
     
     @IBAction func btnChange(_ sender: Any) {
@@ -62,11 +68,11 @@ class ParkedViewController: UIViewController {
        
        
     }
+    
     @IBAction func btnStart(_ sender: UIButton) {
         
-    lblTimer.text = timeString(time: TimeInterval(seconds))
-    runTimer()
-   }
+    
+    }
     func runTimer() {
          timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(ParkedViewController.updateTimer)), userInfo: nil, repeats: true)
     }

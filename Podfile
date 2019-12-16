@@ -25,7 +25,7 @@ target 'PeerParking' do
   pod 'HelperClassPod'
   pod 'SwiftyJSON'
  # pod 'UICircularProgressRing'
-  pod 'CircleProgressView'
+  pod 'CircleProgressView'	
 #  pod 'DGRunkeeperSwitch' , '~> 1.1.4'
 
 

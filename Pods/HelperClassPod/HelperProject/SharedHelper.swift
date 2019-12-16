@@ -69,7 +69,7 @@ public class SharedHelper: UIViewController {
     public func showToast(message: String, controller: UIViewController) {
         let toastContainer = UIView(frame: CGRect())
         toastContainer.backgroundColor = UIColor.black
-        toastContainer.alpha = 0.0
+        toastContainer.alpha = 0.5
         toastContainer.layer.cornerRadius = 10;
         toastContainer.clipsToBounds  =  true
         
