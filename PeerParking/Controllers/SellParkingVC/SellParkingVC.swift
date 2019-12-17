@@ -25,9 +25,10 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var step_progress: StepIndicatorView!
     @IBOutlet var mainView: UIView!
     
-    
-    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
-    let vc1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC") as! ParkedViewController
+    var vc:ParkingNavVC!
+    var vc1:ParkedViewController!
+//    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
+//    let vc1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC") as! ParkedViewController
     
     
     override func viewDidLoad() {
@@ -43,6 +44,8 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
    
     override func viewWillAppear(_ animated: Bool) {
         
+        vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as? ParkingNavVC
+        vc1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC") as? ParkedViewController
         
         if(Helper().IsUserLogin()){
             checkStatus(){

@@ -230,16 +230,16 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         get_all_parkings(lat: self.lat, long: self.longg, isHeaderIncluded: Helper().IsUserLogin(), filters: [:]){
             
             sender.isHidden = false
-            self.myCollectionView.isHidden = false
-            self.filter_btn.isHidden = false
-            self.view_all_btn.isHidden = false
+//            self.myCollectionView.isHidden = false
+//            self.filter_btn.isHidden = false
+//            self.view_all_btn.isHidden = false
             self.search_tf.text = self.address
             print(" self.re_center_btn.frame=\(self.view_all_btn.frame)")
             
-           // let pos = UIScreen.main.bounds.height -  self.view_all_btn.frame.origin.y - 45
-            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-                self.re_center_bottom_cont.constant = 40
-            })
+//           // let pos = UIScreen.main.bounds.height -  self.view_all_btn.frame.origin.y - 45
+//            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+//                self.re_center_bottom_cont.constant = 40
+//            })
             
             print(" self.re_center_btn.frame=\(self.re_center_btn.frame)")
 //            self.setMapButton()
@@ -387,6 +387,9 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     func get_all_parkings(lat:Double,long:Double,isHeaderIncluded:Bool,filters:[String:String],completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
         
+        
+        parkings = []
+        
         var params = [
            
             "latitude": String(lat),
@@ -466,17 +469,37 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                    
                   
                     self.myCollectionView.reloadData()
-                    SharedHelper().showToast(message: message, controller: self)
+//                    SharedHelper().showToast(message: message, controller: self)
                     
                     print("self.address=\(self.address)")
                     
                     
+                    if(self.parkings.count > 0){
+                        
+                        UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+                            self.re_center_bottom_cont.constant = 40
+                        })
+                        
+                        self.myCollectionView.isHidden = false
+                        self.filter_btn.isHidden = false
+                        self.view_all_btn.isHidden = false
+                        
                     
-                    self.myCollectionView.isHidden = false
-                    self.filter_btn.isHidden = false
-                    self.view_all_btn.isHidden = false
-                    
-                    
+                    }
+                    else{
+                        
+                        UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+                            self.re_center_bottom_cont.constant = -143
+                        })
+                        
+                        self.myCollectionView.isHidden = true
+                        self.filter_btn.isHidden = true
+                        self.view_all_btn.isHidden = true
+                        
+                         SharedHelper().showToast(message: "No Parkings Available", controller: self)
+                      
+                        
+                    }
                     
                     completion()
                    
@@ -488,6 +511,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                     let message = responseData["message"] as! String
                     SharedHelper().showToast(message: message, controller: self)
                     //   SharedHelper().hideSpinner(view: self.view)
+                    completion()
                 }
             }
         }
@@ -560,7 +584,7 @@ extension FindParkingVC:FiltersProtocol{
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
         
-        self.get_all_parkings(lat: self.filterLat, long: self.filterLong, isHeaderIncluded: false, filters: filters){
+        self.get_all_parkings(lat: self.filterLat, long: self.filterLong, isHeaderIncluded: Helper().IsUserLogin(), filters: filters){
             
            
         }
@@ -595,12 +619,12 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
             self.filterLat = place.coordinate.latitude
             self.filterLong = place.coordinate.longitude
             
-            self.get_all_parkings(lat: place.coordinate.latitude, long: place.coordinate.longitude, isHeaderIncluded: false,filters: [:]){
+            self.get_all_parkings(lat: place.coordinate.latitude, long: place.coordinate.longitude, isHeaderIncluded: Helper().IsUserLogin(),filters: [:]){
                 
                 self.map.animate(to: camera)
-                UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-                    self.re_center_bottom_cont.constant = 40
-                })
+//                UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+//                    self.re_center_bottom_cont.constant = 40
+//                })
             }
             
 //            Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)

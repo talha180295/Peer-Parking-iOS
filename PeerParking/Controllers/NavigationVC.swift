@@ -41,6 +41,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     @IBOutlet weak var filter_btn: UIButton!
     
     @IBOutlet weak var re_center_bottom_cont: NSLayoutConstraint!
+    @IBOutlet weak var parkingCellHeightConstr: NSLayoutConstraint!
     
     
     
@@ -498,90 +499,109 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     }
     
     
-     func get_all_parkings(lat:Double,long:Double,filters:[String:String],completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
-            
-            var params = [
-               
-                "latitude": String(lat),
-                "longitude": String(long)
-            
-            ]
-            if(filters.keys.contains("vehicle_type")){
-                params.updateValue(filters["vehicle_type"]!, forKey: "vehicle_type")
-            }
-            print("param123=\(params)")
-            let headers: HTTPHeaders = [
-                "Authorization" : ""
-            ]
-            //Staging server
-            //let url = APP_CONSTANT.API.STAGING_BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
-            
-            
-            //Local server
-            let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
-            print("staging_url=\(url)")
-            Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: false, headers: headers){
-                response in
-                //print("response=\(response)")
-                if response.result.value == nil {
-                    print("No response")
-                    
-                    SharedHelper().showToast(message: "Internal Server Error", controller: self)
-                    completion()
-                    return
-                }
-                else {
-                    let responseData = response.result.value as! NSDictionary
-                    let status = responseData["success"] as! Bool
-                    if(status)
-                    {
-                        //                    UserDefaults.standard.set("isSocial", forKey: "yes")
-                        //                    UserDefaults.standard.synchronize()
-                        
-                        
-                        
-                        let message = responseData["message"] as! String
-                        let uData = responseData["data"] as! [Any]
-                       
-                        Helper().map_circle(data: uData, map_view: self.map)
-                        Helper().map_custom_marker(data: uData, map_view: self.map)
-                        //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
-                        self.parkings = uData
-                        print("parkings.count=\(self.parkings.count)")
-                       
-                      
-                        self.myCollectionView.reloadData()
-                        SharedHelper().showToast(message: message, controller: self)
-                        
-                        print("self.address=\(self.address)")
-                        
-                        
-    //                    if(self.parkings.count == 0){
-    //                        self.parkings_cells.isHidden = true
-    //                    }
-    //                    else{
-    //                        self.parkings_cells.isHidden = false
-    //                    }
-                        
-//                        self.parkings_cells.isHidden = false
-                        
-                        
-                        
-                        completion()
-                       
-                        
-                       
-                    }
-                    else
-                    {
-                        let message = responseData["message"] as! String
-                        SharedHelper().showToast(message: message, controller: self)
-                        //   SharedHelper().hideSpinner(view: self.view)
-                    }
-                }
-            }
-            
+    func get_all_parkings(lat:Double,long:Double,filters:[String:String],completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
+        
+        
+        parkings = []
+        
+        var params = [
+           
+            "latitude": String(lat),
+            "longitude": String(long)
+        
+        ]
+        if(filters.keys.contains("vehicle_type")){
+            params.updateValue(filters["vehicle_type"]!, forKey: "vehicle_type")
         }
+        print("param123=\(params)")
+        let headers: HTTPHeaders = [
+            "Authorization" : ""
+        ]
+        //Staging server
+        //let url = APP_CONSTANT.API.STAGING_BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
+        
+        
+        //Local server
+        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
+        print("staging_url=\(url)")
+        Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: false, headers: headers){
+            response in
+            //print("response=\(response)")
+            if response.result.value == nil {
+                print("No response")
+                
+                SharedHelper().showToast(message: "Internal Server Error", controller: self)
+                completion()
+                return
+            }
+            else {
+                let responseData = response.result.value as! NSDictionary
+                let status = responseData["success"] as! Bool
+                if(status)
+                {
+                    //                    UserDefaults.standard.set("isSocial", forKey: "yes")
+                    //                    UserDefaults.standard.synchronize()
+                    
+                    
+                    
+                    let message = responseData["message"] as! String
+                    let uData = responseData["data"] as! [Any]
+                   
+                    Helper().map_circle(data: uData, map_view: self.map)
+                    Helper().map_custom_marker(data: uData, map_view: self.map)
+                    //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
+                    self.parkings = uData
+                    print("parkings.count=\(self.parkings.count)")
+                   
+                  
+                    
+                    
+                    print("self.address=\(self.address)")
+                    
+                    
+                    if(self.parkings.count > 0){
+                        
+                        self.parkingCellHeightConstr.constant = 104
+                        
+//                            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+//                                self.parkingCellHeightConstr.constant = 104
+//                            })
+                        
+                    }
+                    else{
+                        
+                        self.parkingCellHeightConstr.constant = 0
+                        
+//                            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+//                                self.parkingCellHeightConstr.constant = 0
+//                            })
+                    }
+                    
+                    self.myCollectionView.reloadData()
+                    SharedHelper().showToast(message: message, controller: self)
+                    
+//                        self.parkings_cells.isHidden = false
+                    
+                    
+                    
+                    completion()
+                   
+                    
+                   
+                }
+                else
+                {
+                    let message = responseData["message"] as! String
+                    SharedHelper().showToast(message: message, controller: self)
+                    //   SharedHelper().hideSpinner(view: self.view)
+                }
+            }
+        }
+            
+    }
+    
+    
+    
 }
 
 

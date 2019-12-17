@@ -90,9 +90,9 @@ class Helper{
             circle.radius = 500 // Meters
             circle.fillColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 0.7752568493)
             circle.position = position // Your CLLocationCoordinate2D  position
-            circle.strokeWidth = 5;
-            circle.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-            circle.title = "$15"
+            circle.strokeWidth = 0.5;
+            circle.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//            circle.title = "$15"
             circle.map = map_view; // Add it to the map
             
             
@@ -489,6 +489,13 @@ class Helper{
         })
     }
     
+    
+    func presentOnMainScreens(controller: UIViewController,index:Int){
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
+        tab_index = index
+        controller.present(vc, animated: true, completion: nil)
+    }
     
     
 }

@@ -187,12 +187,13 @@ class BottomSheetVC: UIViewController {
         
         
         let id = Int(self.parking_details["id"] as! Int)
+        let final_price = Double(self.parking_details["initial_price"] as! Double)
         
             
         
         if Helper().IsUserLogin(){
             
-            assign_buyer(p_id: id, status: 20)
+            assign_buyer(p_id: id, status: 20, final_price: final_price)
             //SharedHelper().showToast(message: "Login", controller: self)
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
             //
@@ -263,14 +264,15 @@ class BottomSheetVC: UIViewController {
     }
     
     
-    func assign_buyer(p_id:Int,status:Int){
+    func assign_buyer(p_id:Int,status:Int,final_price:Double){
         
        // let status:Int = 20
         
         var params:[String:Any] = [
             
             
-            "status" : status
+            "status" : status,
+            "final_price" : final_price
             
         ]
         

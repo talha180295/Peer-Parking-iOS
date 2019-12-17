@@ -36,8 +36,18 @@ class ParkedViewController: UIViewController {
         super.viewDidLoad()
 //        self.navigationController?.navigationBar.isHidden = true
         
-        lblTimer.text = timeString(time: TimeInterval(seconds))
-        runTimer()
+        print("secondssss=\(seconds)")
+        
+        if(seconds>0){
+            
+            lblTimer.text = timeString(time: TimeInterval(seconds))
+            runTimer()
+        }
+        else{
+            
+            
+            
+        }
        
         //timerView.addTarget(self, action: #selector(ParkedViewController.handleValueChanged(_:)), for: .valueChanged)
         
@@ -89,6 +99,7 @@ class ParkedViewController: UIViewController {
         else
         {
             timer.invalidate()
+            print("timer complete")
         }
         
     }

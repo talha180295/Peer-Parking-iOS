@@ -44,12 +44,14 @@ class Sell_parking_popup: UIViewController {
             self.priceView.isHidden = false
             
             
-//            self.show(vc, sender: sender)
-            
         }
         else if (sender.tag == 2){
             
-            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+            //index 1 for Navigate Screen
+            Helper().presentOnMainScreens(controller: self, index: 1)
+//            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FindParkingVC")
+//            self.navigationController?.pushViewController(vc, animated: true)
+//            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
         }
     }
     
