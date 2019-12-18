@@ -142,7 +142,8 @@ class FBPopup: UIViewController {
         
         if(source == "sideMenu"){
            
-            self.dismiss(animated: true, completion: nil)
+//            self.dismiss(animated: true, completion: nil)
+            Helper().presentOnMainScreens(controller: self, index: 1)
         }
         else{
             
@@ -199,6 +200,69 @@ class FBPopup: UIViewController {
         
     }
     
+    
+    func LoginApi(email : String,password : String,device_type:String) {
+        
+        //   let FCMToken :String = UserDefaults.standard.string(forKey: "FCMToken")!
+        //        var strRole="2"
+        //
+        // SharedHelper().showSpinner(view: self.view)
+        //let deviceToken = "ios"
+        //  SharedHelper().showSpinner(view: self.view)
+        // let deviceToken : String?
+        let param = [
+            
+            "email" : email,
+            "password" : password,
+            "device_type" : device_type,
+            
+        ]
+        print(param)
+        let headers: HTTPHeaders = [
+            "Authorization" : ""
+        ]
+        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.LOGIN
+        Helper().Request_Api(url: url, methodType: .post, parameters: param, isHeaderIncluded: false, headers: headers){
+            response in
+            print("response=\(response)")
+            if response.result.value == nil {
+                print("No response")
+                
+                SharedHelper().showToast(message: "Internal Server Error", controller: self)
+                return
+            }
+            else {
+                let responseData = response.result.value as! NSDictionary
+                let status = responseData["success"] as! Bool
+                if(status)
+                {
+                    //                    UserDefaults.standard.set("isSocial", forKey: "yes")
+                    //                    UserDefaults.standard.synchronize()
+                    
+                    
+                    
+                    let message = responseData["message"] as! String
+                    let uData = responseData["data"] as! NSDictionary
+                    let userData = uData["user"] as! NSDictionary
+                    self.saveData(userData: userData)
+                    //                    SharedHelper().hideSpinner(view: self.view)
+                    //                     UserDefaults.standard.set("yes", forKey: "login")
+                    //                    UserDefaults.standard.synchronize()
+                    SharedHelper().showToast(message: message, controller: self)
+                    
+                    self.after_signin()
+                }
+                else
+                {
+                    let message = responseData["message"] as! String
+                    SharedHelper().showToast(message: message, controller: self)
+                    //   SharedHelper().hideSpinner(view: self.view)
+                }
+            }
+        }
+    }
+
+    
     @IBAction func fb_btn(_ sender: UIButton) {
         
         
@@ -211,9 +275,7 @@ class FBPopup: UIViewController {
     
     @IBAction func twitter_btn(_ sender: UIButton) {
         
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
-        vc.vcName = ""
-        self.present(vc, animated: false, completion: nil)
+       LoginApi(email: "iosdev@gmail.com", password: "123456", device_type: "ios")
     }
     
     func saveData(userData : NSDictionary)  {

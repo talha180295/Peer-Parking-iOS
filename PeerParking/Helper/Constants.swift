@@ -37,6 +37,8 @@ struct APP_CONSTANT {
         static let STAGING_BASE_URL = "http://peer-parking.servstaging.com/api/v1/"
         //SOCIAL LOGIN API
         static let SOCIAL_LOGIN = "social_login"
+        //LOGIN API
+        static let LOGIN = "login"
         //GET /parkings API
         static let POST_PARKING = "parkings"
         
@@ -52,6 +54,8 @@ struct APP_CONSTANT {
         static let LOGOUT = "logout"
         
         static let REVIEWS = "reviews"
+        
+        static let BARGAININGS = "bargainings"
         
         
     }

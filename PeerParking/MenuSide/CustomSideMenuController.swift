@@ -16,7 +16,7 @@ class CustomSideMenuController: SideMenuController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.barTintColor = randomColor
+//        self.navigationController?.navigationBar.barTintColor = randomColor
         performSegue(withIdentifier: "HomeVC", sender: nil)
         performSegue(withIdentifier: "containSideMenu", sender: nil)
     }

@@ -110,6 +110,7 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
                         self.openNavigationScreen(vc: self.vc)
                     default:
                         self.vc.remove()
+                        self.vc1.remove()
                 }
 
             }
@@ -263,7 +264,7 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
             
             counter-=1
             step_progress.currentStep = counter
-//            print("parking_post_details=\(GLOBAL_VAR.PARKING_POST_DETAILS)")
+            print("parking_post_details=\(GLOBAL_VAR.PARKING_POST_DETAILS)")
             if Helper().IsUserLogin(){
                 
                

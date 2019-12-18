@@ -251,9 +251,9 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
                     // UserDefaults.standard.set(fcmToken, forKey: "FCMToken")
                     UserDefaults.standard.set("no", forKey: "login")
                     UserDefaults.standard.synchronize()
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
-                    //
-                    self.navigationController?.pushViewController(vc, animated: true)
+//                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
+//                    //
+//                    self.navigationController?.pushViewController(vc, animated: true)
                     // UserDefaults.standard.set(fcmToken, forKey: "FCMToken")
                 }
                 else
@@ -263,10 +263,12 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
                    // SharedHelper().hideSpinner(view: self.view)
                     UserDefaults.standard.set("no", forKey: "login")
                     UserDefaults.standard.synchronize()
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
-                    //
-                    self.navigationController?.pushViewController(vc, animated: true)
+//                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
+//                    //
+//                    self.navigationController?.pushViewController(vc, animated: true)
                 }
+                
+                Helper().presentOnMainScreens(controller: self, index: 1)
             }
             
         }

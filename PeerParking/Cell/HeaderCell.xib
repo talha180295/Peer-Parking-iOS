@@ -35,7 +35,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="July" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9b-ni-RE5">
-                                <rect key="frame" x="20" y="15.5" width="30" height="21"/>
+                                <rect key="frame" x="0.0" y="15.5" width="30" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="6YH-V6-HX2"/>
                                 </constraints>
@@ -48,7 +48,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="mvs-5P-OHx" secondAttribute="trailing" id="QnV-O3-30M"/>
                             <constraint firstItem="mvs-5P-OHx" firstAttribute="leading" secondItem="bU6-mO-zdV" secondAttribute="leading" id="WFl-9j-qiK"/>
-                            <constraint firstItem="C9b-ni-RE5" firstAttribute="leading" secondItem="bU6-mO-zdV" secondAttribute="leading" constant="20" id="YEl-QQ-anf"/>
+                            <constraint firstItem="C9b-ni-RE5" firstAttribute="leading" secondItem="bU6-mO-zdV" secondAttribute="leading" id="YEl-QQ-anf"/>
                             <constraint firstItem="C9b-ni-RE5" firstAttribute="centerY" secondItem="bU6-mO-zdV" secondAttribute="centerY" id="mxH-Xv-LvN"/>
                             <constraint firstAttribute="bottom" secondItem="mvs-5P-OHx" secondAttribute="bottom" id="osa-je-Zfc"/>
                         </constraints>
@@ -62,6 +62,9 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="month" destination="C9b-ni-RE5" id="hAy-qs-euN"/>
+            </connections>
             <point key="canvasLocation" x="149.27536231884059" y="127.23214285714285"/>
         </tableViewCell>
     </objects>
