@@ -243,7 +243,7 @@ class BottomSheetVC: UIViewController {
     @IBAction func counter_btn(_ sender: UIButton) {
         
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OfferBottomSheetVC") as? OfferBottomSheetVC
-        controller?.p_title = self.parking_titile.text!
+//        controller?.p_title = self.parking_titile.text!
         bottomSheet(controller: controller!, sizes: [.fixed(360)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
     }
     

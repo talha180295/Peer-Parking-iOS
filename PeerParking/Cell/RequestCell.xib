@@ -34,7 +34,7 @@
                                 <rect key="frame" x="67" y="7" width="271" height="107"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mall of America Mall of America g" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTD-fa-Gzb">
-                                        <rect key="frame" x="4" y="0.0" width="218" height="39.5"/>
+                                        <rect key="frame" x="4" y="0.0" width="218" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="CLl-aa-ecd"/>
                                         </constraints>
@@ -42,8 +42,8 @@
                                         <color key="textColor" red="0.18744784589999999" green="0.61218529939999999" blue="0.82450407739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="has sent you a new offer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKP-aa-LEh">
-                                        <rect key="frame" x="4" y="43.5" width="263" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKP-aa-LEh">
+                                        <rect key="frame" x="4" y="41" width="263" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="6F8-Aj-nvF"/>
                                         </constraints>
@@ -52,7 +52,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$15" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Cx-kp-EcA">
-                                        <rect key="frame" x="227" y="1" width="40" height="15.5"/>
+                                        <rect key="frame" x="227" y="1" width="40" height="13"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="cp8-Dy-g4M"/>
                                         </constraints>
@@ -61,17 +61,17 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1d-Fv-1ca">
-                                        <rect key="frame" x="0.0" y="69" width="271" height="39"/>
+                                        <rect key="frame" x="0.0" y="73" width="271" height="35"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="13"/>
                                         <state key="normal" title="View Offer">
                                             <color key="titleColor" red="0.18744784589999999" green="0.61218529939999999" blue="0.82450407739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
+                                                <real key="value" value="0.5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -111,7 +111,7 @@
                                     <constraint firstAttribute="trailing" secondItem="e1d-Fv-1ca" secondAttribute="trailing" id="Nub-2V-pWa"/>
                                     <constraint firstItem="Ngg-4S-Eac" firstAttribute="top" secondItem="aKP-aa-LEh" secondAttribute="bottom" constant="5" id="Nw1-mf-LlX"/>
                                     <constraint firstAttribute="trailing" secondItem="Ngg-4S-Eac" secondAttribute="trailing" id="P9B-R0-HrD"/>
-                                    <constraint firstItem="e1d-Fv-1ca" firstAttribute="top" secondItem="aKP-aa-LEh" secondAttribute="bottom" constant="8.5" id="Wlx-97-1jL"/>
+                                    <constraint firstItem="e1d-Fv-1ca" firstAttribute="top" secondItem="aKP-aa-LEh" secondAttribute="bottom" constant="15" id="Wlx-97-1jL"/>
                                     <constraint firstAttribute="bottom" secondItem="e1d-Fv-1ca" secondAttribute="bottom" constant="-1" id="exG-ay-VsA"/>
                                     <constraint firstItem="9Cx-kp-EcA" firstAttribute="top" secondItem="KfB-2I-AGX" secondAttribute="top" constant="1" id="f2t-jS-D6r"/>
                                     <constraint firstItem="Ngg-4S-Eac" firstAttribute="leading" secondItem="KfB-2I-AGX" secondAttribute="leading" id="mY5-6c-Mx3"/>
@@ -169,6 +169,12 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="address" destination="NTD-fa-Gzb" id="Q1c-g4-K5y"/>
+                <outlet property="date" destination="z0y-s8-iDz" id="ZpC-Og-5kR"/>
+                <outlet property="directionText" destination="aKP-aa-LEh" id="MfP-h2-ECX"/>
+                <outlet property="price" destination="9Cx-kp-EcA" id="LDh-WF-7hI"/>
+            </connections>
             <point key="canvasLocation" x="154.34782608695653" y="163.39285714285714"/>
         </tableViewCell>
     </objects>

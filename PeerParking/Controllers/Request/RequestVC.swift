@@ -86,14 +86,8 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
             let dict = requests[indexPath.row] as! NSDictionary
             print("bargaining=\(dict)")
             
-            
-            let parking = dict["parking"] as! NSDictionary
-            
-            
-            if let p_address = parking["address"] as? String{
-                
-                Helper().showToast(message: p_address, controller: self)
-            }
+            cell.setData(data: dict)
+            cell.index = indexPath.row
             
         }
           
@@ -103,14 +97,16 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
     }
     
     //protocol function
-    func ViewOfferButtonDidSelect() {
+    func ViewOfferButtonDidSelect(index:Int) {
         
 //        
 //        helper.bottomSheet(storyBoard: "Main",identifier: "OfferBottomSheetVC", sizes: [.fixed(420)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0), view_controller: self)
 //        
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OfferBottomSheetVC")
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OfferBottomSheetVC") as! OfferBottomSheetVC
         
-        
+        let dict = requests[index] as! NSDictionary
+        controller.parking_details = dict
+//        controller.setData(data: dict)
         Helper().bottomSheet(controller: controller, sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0), view_controller: self)
     }
     

@@ -36,6 +36,8 @@
 		18924C2F23662EEA00C0E94F /* StepOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18924C2E23662EEA00C0E94F /* StepOneVC.swift */; };
 		18924C312366F06600C0E94F /* StepTwoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18924C302366F06600C0E94F /* StepTwoVC.swift */; };
 		18924C3323672C6F00C0E94F /* StepThreeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18924C3223672C6F00C0E94F /* StepThreeVC.swift */; };
+		18C2195623ABB5F700BCCA75 /* BargainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C2195423ABB5F600BCCA75 /* BargainingCell.swift */; };
+		18C2195723ABB5F700BCCA75 /* BargainingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C2195523ABB5F600BCCA75 /* BargainingCell.xib */; };
 		18CAA57F2368B6BB001B5503 /* FinishPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAA57E2368B6BA001B5503 /* FinishPopup.swift */; };
 		18CAA58123695B62001B5503 /* StepFiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAA58023695B62001B5503 /* StepFiveVC.swift */; };
 		18D1B63A2362024E002C875D /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1B6392362024E002C875D /* ScheduleVC.swift */; };
@@ -157,6 +159,8 @@
 		18924C2E23662EEA00C0E94F /* StepOneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneVC.swift; sourceTree = "<group>"; };
 		18924C302366F06600C0E94F /* StepTwoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoVC.swift; sourceTree = "<group>"; };
 		18924C3223672C6F00C0E94F /* StepThreeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThreeVC.swift; sourceTree = "<group>"; };
+		18C2195423ABB5F600BCCA75 /* BargainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BargainingCell.swift; sourceTree = "<group>"; };
+		18C2195523ABB5F600BCCA75 /* BargainingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BargainingCell.xib; sourceTree = "<group>"; };
 		18CAA57E2368B6BA001B5503 /* FinishPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishPopup.swift; sourceTree = "<group>"; };
 		18CAA58023695B62001B5503 /* StepFiveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFiveVC.swift; sourceTree = "<group>"; };
 		18D1B6392362024E002C875D /* ScheduleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
@@ -277,6 +281,8 @@
 			children = (
 				180FD0DC237335BD0084230A /* Parking_table_cell.swift */,
 				180FD0DD237335BD0084230A /* Parking_table_cell.xib */,
+				18C2195423ABB5F600BCCA75 /* BargainingCell.swift */,
+				18C2195523ABB5F600BCCA75 /* BargainingCell.xib */,
 			);
 			path = "Table View Cell";
 			sourceTree = "<group>";
@@ -784,6 +790,7 @@
 				FA2F9F38232CA7E30025BF11 /* offerCell.xib in Resources */,
 				FA1150CC2316838500D0B1FE /* Assets.xcassets in Resources */,
 				FA1C6125234F0A8400EF0F3D /* homeParkingCell.xib in Resources */,
+				18C2195723ABB5F700BCCA75 /* BargainingCell.xib in Resources */,
 				FA2815B9231E6602008AF3F5 /* Poppins-Regular.ttf in Resources */,
 				FA2815BA231E6602008AF3F5 /* Poppins-Light.ttf in Resources */,
 				FA1150CA2316838400D0B1FE /* Main.storyboard in Resources */,
@@ -940,6 +947,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				185FCF712358C10E0025DB5E /* FilterBottomSheetVC.swift in Sources */,
+				18C2195623ABB5F700BCCA75 /* BargainingCell.swift in Sources */,
 				FA2815AD231E3F92008AF3F5 /* ContentViewController.swift in Sources */,
 				FA0FCC5923222D7F000FF52C /* VehicleViewController.swift in Sources */,
 				FA6CD36F2328CB7D00E18CF2 /* NotificationCell.swift in Sources */,

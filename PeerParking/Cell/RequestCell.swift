@@ -11,11 +11,20 @@ import FittedSheets
 
 
 protocol ViewOfferProtocol {
-    func ViewOfferButtonDidSelect()
+    func ViewOfferButtonDidSelect(index:Int)
 }
 
 class RequestCell: UITableViewCell {
 
+    var index:Int!
+    
+    @IBOutlet weak private var date: UILabel!
+    
+    @IBOutlet weak private var address: UILabel!
+    
+    @IBOutlet weak private var directionText: UILabel!
+    
+    @IBOutlet weak private var price: UILabel!
     
     var delegate: ViewOfferProtocol!
     
@@ -35,7 +44,51 @@ class RequestCell: UITableViewCell {
     @IBAction func view_offer_btn(_ sender: UIButton) {
      
         
-       self.delegate.ViewOfferButtonDidSelect()
+        self.delegate.ViewOfferButtonDidSelect(index: self.index)
+    }
+    
+    func setData(data:NSDictionary){
+        
+        
+        if let created_at = data["created_at"] as? String{
+            
+            let created_at = created_at.components(separatedBy: " ")
+            
+            let date = created_at[0]
+            self.date.text = date
+        }
+        
+        if let direction = data["direction"] as? Int{
+            
+            if(direction == 10){
+                self.directionText.text = "has sent you a new offer"
+            }
+        }
+        
+        if let offer = data["offer"] as? Double{
+            
+           self.price.text = "$ \(offer)"
+        }
+        
+        
+        
+        
+        
+        let parking = data["parking"] as! NSDictionary
+        
+        
+        if let p_address = parking["address"] as? String{
+            
+            self.address.text = p_address
+        }
+        
+        
+//        if let initial_price = parking["initial_price"] as? Double{
+//
+//            self.price.text = "$ \(initial_price)"
+//        }
+        
+        
     }
     
 }
