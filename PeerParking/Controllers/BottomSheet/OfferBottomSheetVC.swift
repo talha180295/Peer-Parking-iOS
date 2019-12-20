@@ -49,6 +49,8 @@ class OfferBottomSheetVC: UIViewController {
         offersTblView.register(UINib(nibName: "BargainingCell", bundle: nil), forCellReuseIdentifier: "BargainingCell")
         
         setData(data: parking_details)
+        
+        
 //        parking_title.text = p_title
     }
     
@@ -77,6 +79,7 @@ class OfferBottomSheetVC: UIViewController {
         
         let parking = data["parking"] as! NSDictionary
         
+        let id = data["id"] as! Int
         
         if let p_address = parking["address"] as? String{
 
@@ -94,7 +97,10 @@ class OfferBottomSheetVC: UIViewController {
             self.vehicle_type.text = vehicle_type_text
         }
         
-       
+        getAllBargainOffers(id: id, isHeaderIncluded: true){
+            
+            
+        }
         
         
     }
@@ -148,11 +154,11 @@ class OfferBottomSheetVC: UIViewController {
                     let data = responseData["data"] as! [Any]
                     
                     self.bargainOffers = data
-                    print("parkings.count=\(self.bargainOffers.count)")
+                    
                     
                     
                     self.offersTblView.reloadData()
-                    //SharedHelper().showToast(message: message, controller: self)
+//                    Helper().showToast(message: "\(self.bargainOffers.count)", controller: self)
                     
                     completion()
                     
@@ -180,7 +186,7 @@ extension OfferBottomSheetVC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 3
+        return bargainOffers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -189,16 +195,24 @@ extension OfferBottomSheetVC: UITableViewDelegate, UITableViewDataSource{
        
         cell.offer.textAlignment = .right
        
-        switch indexPath.row {
-        case 0:
+        
+        let dict = bargainOffers[indexPath.row] as! NSDictionary
+       
+        
+        let direction = dict["direction"] as? Int
+        
+        let offer = dict["offer"] as? Double
+        
+        switch direction {
+        case 20:
+            cell.leftOffer.text = "$ \(offer ?? 0.9)"
             cell.offer.isHidden = true
             cell.leftOffer.isHidden = false
-        case 1:
+        case 10:
+            cell.offer.text = "$ \(offer ?? 0.9)"
             cell.offer.isHidden = false
             cell.leftOffer.isHidden = true
-        case 2:
-            cell.offer.isHidden = true
-            cell.leftOffer.isHidden = false
+       
             
         default:
             cell.offer.isHidden = false

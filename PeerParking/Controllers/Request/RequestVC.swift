@@ -75,7 +75,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
 
         return headerCell
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
         let cell = tblNotification.dequeueReusableCell(withIdentifier: "RequestCell") as! RequestCell
         cell.delegate = self
