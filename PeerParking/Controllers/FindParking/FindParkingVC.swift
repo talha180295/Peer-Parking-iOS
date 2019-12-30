@@ -51,10 +51,18 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     let GoogleMapsAPIServerKey = Key.Google.placesKey
     
+    
+    override func loadView() {
+        super.loadView()
+        self.locationManager.delegate = self
+        self.locationManager.startUpdatingLocation()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+      
         
         //Register
         self.myCollectionView.register(UINib(nibName: "homeParkingCell", bundle: nil), forCellWithReuseIdentifier: "homeParkingCell")
@@ -98,6 +106,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             isMapLoaded = true
             loadMapView()
         }
+        
+        mapMoveToCurrentLoc()
     }
     
     func autocompleteClicked() {
@@ -133,9 +143,10 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 
         map.isMyLocationEnabled = true
         
+        
         //Location Manager code to fetch current location
-        self.locationManager.delegate = self
-        self.locationManager.startUpdatingLocation()
+//        self.locationManager.delegate = self
+//        self.locationManager.startUpdatingLocation()
         
 //        setMapButton()
     }
@@ -220,31 +231,63 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     @IBAction func arrow_btn(_ sender: UIButton) {
 
-        sender.isHidden = true
+       
         
+        mapMoveToCurrentLoc(sender)
+        
+    }
+    
+    func mapMoveToCurrentLoc(_ sender: UIButton){
+        
+        sender.isHidden = true
         //Location Manager code to fetch current location
-        self.locationManager.delegate = self
-        self.locationManager.startUpdatingLocation()
+//        self.locationManager.delegate = self
+//        self.locationManager.startUpdatingLocation()
         
         print(" view_all_btn=\(self.view_all_btn.frame)")
         get_all_parkings(lat: self.lat, long: self.longg, isHeaderIncluded: Helper().IsUserLogin(), filters: [:]){
             
             sender.isHidden = false
-//            self.myCollectionView.isHidden = false
-//            self.filter_btn.isHidden = false
-//            self.view_all_btn.isHidden = false
+            //            self.myCollectionView.isHidden = false
+            //            self.filter_btn.isHidden = false
+            //            self.view_all_btn.isHidden = false
             self.search_tf.text = self.address
             print(" self.re_center_btn.frame=\(self.view_all_btn.frame)")
             
-//           // let pos = UIScreen.main.bounds.height -  self.view_all_btn.frame.origin.y - 45
-//            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-//                self.re_center_bottom_cont.constant = 40
-//            })
+            //           // let pos = UIScreen.main.bounds.height -  self.view_all_btn.frame.origin.y - 45
+            //            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+            //                self.re_center_bottom_cont.constant = 40
+            //            })
             
             print(" self.re_center_btn.frame=\(self.re_center_btn.frame)")
-//            self.setMapButton()
+            //            self.setMapButton()
         }
+    }
+    func mapMoveToCurrentLoc(){
         
+//        sender.isHidden = true
+        //Location Manager code to fetch current location
+//        self.locationManager.delegate = self
+//        self.locationManager.startUpdatingLocation()
+        
+        print(" view_all_btn=\(self.view_all_btn.frame)")
+        get_all_parkings(lat: self.lat, long: self.longg, isHeaderIncluded: Helper().IsUserLogin(), filters: [:]){
+            
+//            sender.isHidden = false
+            //            self.myCollectionView.isHidden = false
+            //            self.filter_btn.isHidden = false
+            //            self.view_all_btn.isHidden = false
+            self.search_tf.text = self.address
+            print(" self.re_center_btn.frame=\(self.view_all_btn.frame)")
+            
+            //           // let pos = UIScreen.main.bounds.height -  self.view_all_btn.frame.origin.y - 45
+            //            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+            //                self.re_center_bottom_cont.constant = 40
+            //            })
+            
+            print(" self.re_center_btn.frame=\(self.re_center_btn.frame)")
+            //            self.setMapButton()
+        }
     }
     
     @IBAction func view_all_btn(_ sender: UIButton) {

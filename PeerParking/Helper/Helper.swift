@@ -365,7 +365,7 @@ class Helper{
                 print(response)
                 if response.result.value == nil {
                     print("No response")
-                    
+                    completion(response)
                     return
                 }
                 else {
