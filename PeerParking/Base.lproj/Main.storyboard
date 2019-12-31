@@ -2474,7 +2474,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parking Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="zE3-Jb-1Kr">
-                                                        <rect key="frame" x="21" y="4" width="78" height="33"/>
+                                                        <rect key="frame" x="21" y="4" width="87" height="33"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -2495,7 +2495,7 @@
                                                 <rect key="frame" x="0.0" y="373" width="414" height="117"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fb-HP-y5a">
-                                                        <rect key="frame" x="21" y="4" width="55" height="41"/>
+                                                        <rect key="frame" x="21" y="4" width="64.5" height="41"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="14"/>
                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -5105,13 +5105,13 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                                 <rect key="frame" x="79" y="10" width="200" height="151"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 150" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ic-ud-ecq">
-                                                        <rect key="frame" x="37.5" y="46.5" width="125.5" height="58.5"/>
+                                                        <rect key="frame" x="38" y="40.5" width="124" height="70"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="50"/>
                                                         <color key="textColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Credit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="is4-hl-Ztt">
-                                                        <rect key="frame" x="40.5" y="110" width="119" height="24"/>
+                                                        <rect key="frame" x="40.5" y="115.5" width="119" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="24" id="fIt-fb-hxR"/>
                                                         </constraints>
@@ -5501,16 +5501,30 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ksf-Oy-NBt">
-                                <rect key="frame" x="20" y="108" width="374" height="754"/>
+                                <rect key="frame" x="20" y="149" width="374" height="713"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1Cf-hG-SRR">
+                                <rect key="frame" x="74" y="103" width="266" height="29"/>
+                                <segments>
+                                    <segment title="As a Seller"/>
+                                    <segment title="As a Buyer"/>
+                                </segments>
+                                <color key="tintColor" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="tabBar:" destination="jCM-bC-daU" eventType="valueChanged" id="VnG-Y4-t1y"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Q53-zm-dn5" firstAttribute="top" secondItem="ksf-Oy-NBt" secondAttribute="bottom" id="0AD-4Q-WHW"/>
+                            <constraint firstItem="pKM-38-08o" firstAttribute="trailing" secondItem="1Cf-hG-SRR" secondAttribute="trailing" constant="74" id="545-Fb-1H2"/>
+                            <constraint firstItem="ksf-Oy-NBt" firstAttribute="top" secondItem="1Cf-hG-SRR" secondAttribute="bottom" constant="18" id="7nu-Ux-soL"/>
                             <constraint firstItem="ksf-Oy-NBt" firstAttribute="centerX" secondItem="WP3-gT-r3E" secondAttribute="centerX" id="Hmd-de-K9V"/>
+                            <constraint firstItem="1Cf-hG-SRR" firstAttribute="leading" secondItem="pKM-38-08o" secondAttribute="leading" constant="74" id="Xo6-n0-2WP"/>
                             <constraint firstItem="pKM-38-08o" firstAttribute="trailing" secondItem="ksf-Oy-NBt" secondAttribute="trailing" constant="20" id="ZOf-M7-99z"/>
-                            <constraint firstItem="ksf-Oy-NBt" firstAttribute="top" secondItem="VNm-MK-gri" secondAttribute="bottom" constant="20" id="wFq-3m-FdI"/>
+                            <constraint firstItem="1Cf-hG-SRR" firstAttribute="top" secondItem="VNm-MK-gri" secondAttribute="bottom" constant="15" id="cYp-ma-zPO"/>
                             <constraint firstItem="ksf-Oy-NBt" firstAttribute="leading" secondItem="pKM-38-08o" secondAttribute="leading" constant="20" id="z01-3l-obg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pKM-38-08o"/>
@@ -5522,7 +5536,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yg6-t3-fFm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="565" y="3908"/>
+            <point key="canvasLocation" x="563.768115942029" y="3907.3660714285711"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uSK-91-8ex">
@@ -7621,11 +7635,11 @@ typeset text.</string>
             <objects>
                 <viewController storyboardIdentifier="OfferBottomSheetVC" id="fyi-iW-fNb" customClass="OfferBottomSheetVC" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="deX-Df-Khh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="420"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="540"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bot-47-RSm">
-                                <rect key="frame" x="0.0" y="33" width="414" height="354"/>
+                                <rect key="frame" x="0.0" y="33" width="414" height="507"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CDS-EG-65q" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
                                         <rect key="frame" x="17" y="0.0" width="380" height="118"/>
@@ -7850,15 +7864,26 @@ typeset text.</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="$15" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8iG-Bh-54R">
-                                        <rect key="frame" x="17" y="248" width="380" height="30"/>
+                                        <rect key="frame" x="17" y="404" width="380" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="TmK-Z4-kzS"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0C2-n3-dwp">
+                                        <rect key="frame" x="362" y="409" width="21" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="iPK-PH-uWm"/>
+                                            <constraint firstAttribute="width" constant="21" id="ti8-L1-tcO"/>
+                                        </constraints>
+                                        <state key="normal" image="send-button"/>
+                                        <connections>
+                                            <action selector="send_offer:" destination="fyi-iW-fNb" eventType="touchUpInside" id="IuV-H4-KPD"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rjg-dn-IDA">
-                                        <rect key="frame" x="17" y="288" width="380" height="50"/>
+                                        <rect key="frame" x="17" y="442" width="380" height="50"/>
                                         <color key="backgroundColor" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="PL4-Qq-DrV"/>
@@ -7870,54 +7895,42 @@ typeset text.</string>
                                             <action selector="accept_btn_click:" destination="fyi-iW-fNb" eventType="touchUpInside" id="S1P-NY-aPk"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0C2-n3-dwp">
-                                        <rect key="frame" x="362" y="246" width="21" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="iPK-PH-uWm"/>
-                                            <constraint firstAttribute="width" constant="21" id="ti8-L1-tcO"/>
-                                        </constraints>
-                                        <state key="normal" image="send-button"/>
-                                        <connections>
-                                            <action selector="send_offer:" destination="fyi-iW-fNb" eventType="touchUpInside" id="IuV-H4-KPD"/>
-                                        </connections>
-                                    </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="srs-fa-ume">
-                                        <rect key="frame" x="17" y="131" width="380" height="107"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="srs-fa-ume">
+                                        <rect key="frame" x="17" y="128" width="380" height="268"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="0C2-n3-dwp" firstAttribute="top" secondItem="srs-fa-ume" secondAttribute="bottom" constant="8" id="0tO-u8-ibN"/>
-                                    <constraint firstItem="Rjg-dn-IDA" firstAttribute="top" secondItem="8iG-Bh-54R" secondAttribute="bottom" constant="10" id="80P-ya-qNP"/>
-                                    <constraint firstAttribute="height" constant="354" id="ASa-D3-l1S"/>
+                                    <constraint firstItem="0C2-n3-dwp" firstAttribute="top" secondItem="srs-fa-ume" secondAttribute="bottom" constant="13" id="0tO-u8-ibN"/>
+                                    <constraint firstItem="Rjg-dn-IDA" firstAttribute="top" secondItem="8iG-Bh-54R" secondAttribute="bottom" constant="8" id="80P-ya-qNP"/>
                                     <constraint firstItem="srs-fa-ume" firstAttribute="leading" secondItem="bot-47-RSm" secondAttribute="leading" constant="17" id="EJ4-WF-hmv"/>
                                     <constraint firstItem="CDS-EG-65q" firstAttribute="top" secondItem="bot-47-RSm" secondAttribute="top" id="SCb-9A-M5P"/>
                                     <constraint firstItem="CDS-EG-65q" firstAttribute="leading" secondItem="bot-47-RSm" secondAttribute="leading" constant="17" id="SwS-3I-GGg"/>
-                                    <constraint firstItem="0C2-n3-dwp" firstAttribute="bottom" secondItem="8iG-Bh-54R" secondAttribute="bottom" constant="-11" id="T8r-Un-cHH"/>
+                                    <constraint firstItem="0C2-n3-dwp" firstAttribute="bottom" secondItem="8iG-Bh-54R" secondAttribute="bottom" constant="-4" id="T8r-Un-cHH"/>
                                     <constraint firstItem="0C2-n3-dwp" firstAttribute="leading" secondItem="8iG-Bh-54R" secondAttribute="trailing" constant="-35" id="VB4-vW-hL6"/>
                                     <constraint firstAttribute="trailing" secondItem="CDS-EG-65q" secondAttribute="trailing" constant="17" id="VIw-TB-m33"/>
                                     <constraint firstItem="8iG-Bh-54R" firstAttribute="leading" secondItem="bot-47-RSm" secondAttribute="leading" constant="17" id="XFJ-1L-Rgs"/>
-                                    <constraint firstItem="srs-fa-ume" firstAttribute="top" secondItem="CDS-EG-65q" secondAttribute="bottom" constant="13" id="aep-rm-QYk"/>
+                                    <constraint firstItem="srs-fa-ume" firstAttribute="top" secondItem="CDS-EG-65q" secondAttribute="bottom" constant="10" id="aep-rm-QYk"/>
                                     <constraint firstItem="Rjg-dn-IDA" firstAttribute="leading" secondItem="bot-47-RSm" secondAttribute="leading" constant="17" id="av4-7p-apH"/>
                                     <constraint firstAttribute="trailing" secondItem="8iG-Bh-54R" secondAttribute="trailing" constant="17" id="cPy-QI-dFH"/>
                                     <constraint firstAttribute="trailing" secondItem="Rjg-dn-IDA" secondAttribute="trailing" constant="17" id="evS-KV-MbN"/>
                                     <constraint firstAttribute="trailing" secondItem="srs-fa-ume" secondAttribute="trailing" constant="17" id="osH-E7-uWp"/>
-                                    <constraint firstAttribute="bottom" secondItem="Rjg-dn-IDA" secondAttribute="bottom" constant="16" id="qrQ-QN-TYK"/>
-                                    <constraint firstItem="0C2-n3-dwp" firstAttribute="top" secondItem="8iG-Bh-54R" secondAttribute="top" constant="-2" id="xXJ-yT-dLf"/>
+                                    <constraint firstAttribute="bottom" secondItem="Rjg-dn-IDA" secondAttribute="bottom" constant="15" id="qrQ-QN-TYK"/>
+                                    <constraint firstItem="0C2-n3-dwp" firstAttribute="top" secondItem="8iG-Bh-54R" secondAttribute="top" constant="5" id="xXJ-yT-dLf"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="bot-47-RSm" secondAttribute="bottom" constant="33" id="a5f-8H-RG2"/>
+                            <constraint firstAttribute="bottom" secondItem="bot-47-RSm" secondAttribute="bottom" id="a5f-8H-RG2"/>
                             <constraint firstItem="bot-47-RSm" firstAttribute="trailing" secondItem="z67-a2-vZo" secondAttribute="trailing" id="aHQ-XJ-sck"/>
                             <constraint firstItem="bot-47-RSm" firstAttribute="top" secondItem="deX-Df-Khh" secondAttribute="top" constant="33" id="c0c-Zx-RcU"/>
                             <constraint firstItem="bot-47-RSm" firstAttribute="leading" secondItem="z67-a2-vZo" secondAttribute="leading" id="xC5-BQ-U0U"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="z67-a2-vZo"/>
                     </view>
-                    <size key="freeformSize" width="414" height="420"/>
+                    <size key="freeformSize" width="414" height="540"/>
                     <connections>
                         <outlet property="barg_count" destination="bwh-Dl-Yx2" id="fk3-eU-LwK"/>
                         <outlet property="distance" destination="xgo-8a-nxy" id="DRT-SZ-Ynn"/>

@@ -206,17 +206,17 @@ extension OfferBottomSheetVC: UITableViewDelegate, UITableViewDataSource{
         switch direction {
         case 20:
             cell.leftOffer.text = "$ \(offer ?? 0.9)"
-            cell.offer.isHidden = true
-            cell.leftOffer.isHidden = false
+            cell.offer.superview?.isHidden = true
+            cell.leftOffer.superview?.isHidden = false
         case 10:
             cell.offer.text = "$ \(offer ?? 0.9)"
-            cell.offer.isHidden = false
-            cell.leftOffer.isHidden = true
+            cell.offer.superview?.isHidden = false
+            cell.leftOffer.superview?.isHidden = true
        
             
         default:
-            cell.offer.isHidden = false
-            cell.leftOffer.isHidden = false
+            cell.offer.superview?.isHidden = false
+            cell.leftOffer.superview?.isHidden = false
         }
         
         return  cell

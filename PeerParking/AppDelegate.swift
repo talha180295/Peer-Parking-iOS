@@ -13,15 +13,19 @@ import GooglePlaces
 import IQKeyboardManagerSwift
 import Fabric
 import Crashlytics
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    var locationManager:CLLocationManager!
+    var currentLocation:CLLocation?
+    var currentLocationAddress:String!
+    var camera:GMSCameraPosition!
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        setupLocationManager()
         
         IQKeyboardManager.shared.enable = true
         setSideMenu()
@@ -72,5 +76,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+    
+
 }
 
+extension AppDelegate:CLLocationManagerDelegate{
+    
+    
+    func setupLocationManager(){
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
+        self.locationManager?.requestAlwaysAuthorization()
+        locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager?.startUpdatingLocation()
+        
+    }
+    
+    // Below method will provide you current location.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        if currentLocation == nil {
+            currentLocation = locations.last
+            locationManager?.stopMonitoringSignificantLocationChanges()
+            let locationValue:CLLocationCoordinate2D = manager.location!.coordinate
+            
+            print("locations = \(locationValue)")
+            
+            //location.
+            
+            self.camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!, longitude: (currentLocation?.coordinate.longitude)!, zoom: 14.0)
+            
+            let geoCoder = CLGeocoder()
+            
+            geoCoder.reverseGeocodeLocation(currentLocation!, completionHandler:
+                {
+                    placemarks, error in
+                    
+                    guard let placemark = placemarks?.first else {
+                        let errorString = error?.localizedDescription ?? "Unexpected Error"
+                        print("Unable to reverse geocode the given location. Error: \(errorString)")
+                        return
+                    }
+                    
+                    let reversedGeoLocation = ReversedGeoLocation(with: placemark)
+                    print("LOC=:\(reversedGeoLocation.formattedAddress)")
+                    self.currentLocationAddress = reversedGeoLocation.formattedAddressName
+                    // Apple Inc.,
+                    // 1 Infinite Loop,
+                    // Cupertino, CA 95014
+                    // United States
+            })
+            locationManager?.stopUpdatingLocation()
+        }
+    }
+    
+    // Below Mehtod will print error if not able to update location.
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error")
+    }
+}

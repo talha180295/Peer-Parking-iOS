@@ -15,6 +15,10 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
     
     
     var requests:[Any] = []
+    
+    var buyersRequest:[Any] = []
+    var sellerRequest:[Any] = []
+    
     var auth_value = ""
     
     @IBOutlet weak var tblNotification: UITableView!
@@ -35,7 +39,17 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
     override func viewWillAppear(_ animated: Bool) {
         
 
-        get_all_requests(isHeaderIncluded: true){
+        get_all_requests(isHeaderIncluded: true, mode: 10){
+            
+            self.requests = self.buyersRequest
+            self.tblNotification.reloadData()
+            
+
+        }
+        
+        get_all_requests(isHeaderIncluded: true, mode: 20){
+
+
 
         }
         
@@ -96,6 +110,24 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         return  cell;
     }
     
+    
+    @IBAction func tabBar(_ sender: UISegmentedControl) {
+        
+        
+        
+        switch sender.selectedSegmentIndex
+        {
+        case 0:
+            self.requests = self.buyersRequest
+            self.tblNotification.reloadData()
+        case 1:
+            self.requests = self.sellerRequest
+            self.tblNotification.reloadData()
+        default:
+            break
+        }
+    }
+    
     //protocol function
     func ViewOfferButtonDidSelect(index:Int) {
         
@@ -107,18 +139,19 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         let dict = requests[index] as! NSDictionary
         controller.parking_details = dict
 //        controller.setData(data: dict)
-        Helper().bottomSheet(controller: controller, sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0), view_controller: self)
+        Helper().bottomSheet(controller: controller, sizes: [.fixed(540)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0), view_controller: self)
     }
     
     
-    func get_all_requests(isHeaderIncluded:Bool,completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
+    func get_all_requests(isHeaderIncluded:Bool,mode:Int,completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
         
         
         requests = []
         
         let params = [
             
-            "is_mine": 1
+            "is_mine": 1,
+            "mode": mode
             
         ]
         
@@ -159,11 +192,23 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
 //                    let message = responseData["message"] as! String
                     let data = responseData["data"] as! [Any]
                    
-                    self.requests = data
+//                    self.requests = data
+                    
+                    if(mode == 10){
+                        
+                        self.buyersRequest = data
+                        
+                    }
+                    else if(mode == 20){
+                        
+                        self.sellerRequest = data
+                    }
+                    
+                    
                     print("parkings.count=\(self.requests.count)")
                     
                     
-                    self.tblNotification.reloadData()
+//                    self.tblNotification.reloadData()
                     //SharedHelper().showToast(message: message, controller: self)
                     
                     completion()
@@ -181,6 +226,8 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         }
         
     }
+    
+    
     
     
         

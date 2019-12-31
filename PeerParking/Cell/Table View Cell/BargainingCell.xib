@@ -19,51 +19,71 @@
                 <rect key="frame" x="0.0" y="0.0" width="356" height="39.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89S-17-FFA">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gn0-YS-Yov">
                         <rect key="frame" x="69" y="5" width="287" height="30"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$40 Offered  " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89S-17-FFA">
+                                <rect key="frame" x="0.0" y="0.0" width="274" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="wy6-YT-Z34"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="wy6-YT-Z34"/>
+                            <constraint firstItem="89S-17-FFA" firstAttribute="leading" secondItem="Gn0-YS-Yov" secondAttribute="leading" id="1KP-4f-b7T"/>
+                            <constraint firstAttribute="height" constant="30" id="5Qy-NZ-2lX"/>
+                            <constraint firstAttribute="bottom" secondItem="89S-17-FFA" secondAttribute="bottom" id="8qf-Eh-j7n"/>
+                            <constraint firstItem="89S-17-FFA" firstAttribute="top" secondItem="Gn0-YS-Yov" secondAttribute="top" id="R2I-te-CYn"/>
+                            <constraint firstAttribute="trailing" secondItem="89S-17-FFA" secondAttribute="trailing" constant="13" id="e6d-pP-aWH"/>
                         </constraints>
-                        <attributedString key="attributedText">
-                            <fragment content="$40 Offered  ">
-                                <attributes>
-                                    <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <font key="NSFont" size="17" name=".AppleSystemUIFont"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tailIndent="270" tighteningFactorForTruncation="0.0"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTs-Vu-bTO">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZSX-Ue-Gqx">
                         <rect key="frame" x="0.0" y="5" width="287" height="30"/>
-                        <color key="backgroundColor" red="0.7182098560223531" green="0.9172598016651089" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$40 Offered" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTs-Vu-bTO">
+                                <rect key="frame" x="13" y="0.0" width="274" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="efp-oS-AFu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.62399547970000002" green="0.9259102589" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="efp-oS-AFu"/>
+                            <constraint firstAttribute="trailing" secondItem="rTs-Vu-bTO" secondAttribute="trailing" id="AAX-F7-HAs"/>
+                            <constraint firstItem="rTs-Vu-bTO" firstAttribute="leading" secondItem="ZSX-Ue-Gqx" secondAttribute="leading" constant="13" id="Llw-mN-O13"/>
+                            <constraint firstItem="rTs-Vu-bTO" firstAttribute="top" secondItem="ZSX-Ue-Gqx" secondAttribute="top" id="OpN-F7-UOu"/>
+                            <constraint firstAttribute="bottom" secondItem="rTs-Vu-bTO" secondAttribute="bottom" id="bz4-ms-2m7"/>
+                            <constraint firstAttribute="height" constant="30" id="h7O-xr-aMM"/>
                         </constraints>
-                        <attributedString key="attributedText">
-                            <fragment content="$40 Offered">
-                                <attributes>
-                                    <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <font key="NSFont" size="17" name=".AppleSystemUIFont"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="5" tighteningFactorForTruncation="0.0"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="rTs-Vu-bTO" secondAttribute="trailing" constant="69" id="7xK-ri-CrC"/>
-                    <constraint firstItem="89S-17-FFA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="69" id="NEK-7u-ut4"/>
-                    <constraint firstAttribute="bottom" secondItem="rTs-Vu-bTO" secondAttribute="bottom" constant="4.5" id="OMm-P1-eYr"/>
-                    <constraint firstItem="89S-17-FFA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="QvG-xr-Dq1"/>
-                    <constraint firstAttribute="trailing" secondItem="89S-17-FFA" secondAttribute="trailing" id="l3e-S3-tIj"/>
-                    <constraint firstItem="rTs-Vu-bTO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="mtb-g9-XEo"/>
-                    <constraint firstAttribute="bottom" secondItem="89S-17-FFA" secondAttribute="bottom" constant="4.5" id="p5t-lK-zUE"/>
-                    <constraint firstItem="rTs-Vu-bTO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="svH-gQ-QND"/>
+                    <constraint firstItem="Gn0-YS-Yov" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="69" id="3V9-a3-WDU"/>
+                    <constraint firstItem="Gn0-YS-Yov" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="985-dA-Vdy"/>
+                    <constraint firstAttribute="bottom" secondItem="Gn0-YS-Yov" secondAttribute="bottom" constant="4.5" id="AHG-FK-2QL"/>
+                    <constraint firstAttribute="trailing" secondItem="ZSX-Ue-Gqx" secondAttribute="trailing" constant="69" id="Wzz-Dg-FHR"/>
+                    <constraint firstItem="ZSX-Ue-Gqx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="XOF-qN-8R9"/>
+                    <constraint firstAttribute="bottom" secondItem="ZSX-Ue-Gqx" secondAttribute="bottom" constant="4.5" id="bbL-al-i0T"/>
+                    <constraint firstAttribute="trailing" secondItem="Gn0-YS-Yov" secondAttribute="trailing" id="mW0-Vt-Yqh"/>
+                    <constraint firstItem="ZSX-Ue-Gqx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mhB-UR-Ns1"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

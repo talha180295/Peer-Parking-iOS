@@ -74,13 +74,17 @@ class RequestCell: UITableViewCell {
         
         
         
-        let parking = data["parking"] as! NSDictionary
-        
-        
-        if let p_address = parking["address"] as? String{
+        if let parking = data["parking"] as? NSDictionary{
             
-            self.address.text = p_address
+            if let p_address = parking["address"] as? String{
+                
+                self.address.text = p_address
+            }
+            
         }
+        
+        
+       
         
         
 //        if let initial_price = parking["initial_price"] as? Double{

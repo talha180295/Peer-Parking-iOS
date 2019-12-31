@@ -22,7 +22,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     var isMapLoaded = false
    
-    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     //IBOutlets
     @IBOutlet weak var mapView: UIView!
     @IBOutlet weak var myCollectionView: UICollectionView!
@@ -36,7 +36,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     //Variables
     var estimateWidth=130
     var cellMarginSize=1
-    var address = ""
+    var address = "abc"
     
     var lat = 0.0
     var longg = 0.0
@@ -49,11 +49,18 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     var locationManager = CLLocationManager()
     var map = GMSMapView()
     
+    var cameraView:GMSCameraPosition!
+    
     let GoogleMapsAPIServerKey = Key.Google.placesKey
     
     
     override func loadView() {
         super.loadView()
+        
+        self.lat = self.appDelegate.currentLocation?.coordinate.latitude ?? 0.0
+        self.longg = self.appDelegate.currentLocation?.coordinate.longitude ?? 0.0
+        self.address = self.appDelegate.currentLocationAddress
+        self.cameraView = self.appDelegate.camera
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
     }
@@ -61,7 +68,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+     
+
       
         
         //Register
@@ -143,7 +151,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 
         map.isMyLocationEnabled = true
         
-        
+        self.map.animate(to: cameraView)
         //Location Manager code to fetch current location
 //        self.locationManager.delegate = self
 //        self.locationManager.startUpdatingLocation()
@@ -270,6 +278,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 //        self.locationManager.delegate = self
 //        self.locationManager.startUpdatingLocation()
         
+        print("self.addressabc=\(self.address)")
         print(" view_all_btn=\(self.view_all_btn.frame)")
         get_all_parkings(lat: self.lat, long: self.longg, isHeaderIncluded: Helper().IsUserLogin(), filters: [:]){
             
