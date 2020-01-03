@@ -47,6 +47,7 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
         vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as? ParkingNavVC
         vc1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC") as? ParkedViewController
         
+        
         if(Helper().IsUserLogin()){
             checkStatus(){
                 response in
@@ -57,6 +58,10 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
                     
                     p_status = val
                 }
+                
+//                let data = response["data"] as! NSDictionary
+              
+                
                 
                 //print("p_status234=\(p_status)")
                 Helper().showToast(message: String(p_status), controller: self)
@@ -107,7 +112,7 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
                     case 10:
                         self.openTimerScreen(vc: self.vc1)
                     case 20:
-                        self.openNavigationScreen(vc: self.vc)
+                        self.openNavigationScreen(vc: self.vc, dict: response)
                     default:
                         self.vc.remove()
                         self.vc1.remove()
@@ -136,15 +141,37 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
         add(vc)
         
     }
-    func openNavigationScreen(vc:ParkingNavVC){
+    func openNavigationScreen(vc:ParkingNavVC, dict:NSDictionary){
         
         vc.parking_details = nil
-        vc.p_id = 0
-        vc.p_title =  ""
+        
 
-        vc.p_lat = 0.0
-        vc.p_longg = 0.0
-        vc.vcName = ""
+        
+        if let id = dict["id"] as? Int{
+            
+            vc.p_id = id
+            
+        }
+        
+        if let address = dict["address"] as? String{
+            
+            vc.p_title = address
+            
+        }
+        
+        if let latitude = dict["latitude"] as? Double{
+            
+            vc.p_lat = latitude
+            
+        }
+        
+        if let longitude = dict["longitude"] as? Double{
+            
+            vc.p_longg = longitude
+            
+        }
+        
+        vc.vcName = "nav"
 //        configureChildViewController(childController: vc, onView: self.mainView)
         add(vc)
 

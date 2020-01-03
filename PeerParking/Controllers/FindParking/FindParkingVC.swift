@@ -59,7 +59,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         self.lat = self.appDelegate.currentLocation?.coordinate.latitude ?? 0.0
         self.longg = self.appDelegate.currentLocation?.coordinate.longitude ?? 0.0
-        self.address = self.appDelegate.currentLocationAddress
+        self.address = self.appDelegate.currentLocationAddress ?? ""
         self.cameraView = self.appDelegate.camera
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()

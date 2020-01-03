@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var locationManager:CLLocationManager!
     var currentLocation:CLLocation?
-    var currentLocationAddress:String!
+    var currentLocationAddress:String?
     var camera:GMSCameraPosition!
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
