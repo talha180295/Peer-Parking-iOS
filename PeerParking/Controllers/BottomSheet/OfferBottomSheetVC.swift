@@ -33,6 +33,8 @@ class OfferBottomSheetVC: UIViewController {
     
     var parking_details:NSDictionary!
     
+    @IBOutlet weak var offerTF: UITextField!
+    
     var bargainOffers:[Any] = []
     var auth_value = ""
     var bargainingId:Int!
@@ -70,7 +72,19 @@ class OfferBottomSheetVC: UIViewController {
     
     @IBAction func send_offer(_ sender: UIButton) {
         
-        self.dismiss(animated: false, completion: nil)
+        if(offerTF.hasText){
+            let price:String = offerTF.text!
+            let offer = ["offer": Double(price), "direction": 20]
+            bargainOffers.append(offer)
+            
+            offersTblView.reloadData()
+            
+            offerTF.text = ""
+            offerTF.placeholder = "Enter Your Offer"
+        }
+        
+      
+//        self.dismiss(animated: false, completion: nil)
     }
     
     

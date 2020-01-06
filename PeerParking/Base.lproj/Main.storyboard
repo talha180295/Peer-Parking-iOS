@@ -7639,7 +7639,7 @@ typeset text.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bot-47-RSm">
-                                <rect key="frame" x="0.0" y="33" width="414" height="507"/>
+                                <rect key="frame" x="0.0" y="10" width="414" height="507"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CDS-EG-65q" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
                                         <rect key="frame" x="17" y="0.0" width="380" height="118"/>
@@ -7863,7 +7863,7 @@ typeset text.</string>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="$15" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8iG-Bh-54R">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Offer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8iG-Bh-54R">
                                         <rect key="frame" x="17" y="404" width="380" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="TmK-Z4-kzS"/>
@@ -7905,6 +7905,7 @@ typeset text.</string>
                                     <constraint firstItem="0C2-n3-dwp" firstAttribute="top" secondItem="srs-fa-ume" secondAttribute="bottom" constant="13" id="0tO-u8-ibN"/>
                                     <constraint firstItem="Rjg-dn-IDA" firstAttribute="top" secondItem="8iG-Bh-54R" secondAttribute="bottom" constant="8" id="80P-ya-qNP"/>
                                     <constraint firstItem="srs-fa-ume" firstAttribute="leading" secondItem="bot-47-RSm" secondAttribute="leading" constant="17" id="EJ4-WF-hmv"/>
+                                    <constraint firstAttribute="bottom" secondItem="Rjg-dn-IDA" secondAttribute="bottom" constant="15" id="G6S-UM-gy5"/>
                                     <constraint firstItem="CDS-EG-65q" firstAttribute="top" secondItem="bot-47-RSm" secondAttribute="top" id="SCb-9A-M5P"/>
                                     <constraint firstItem="CDS-EG-65q" firstAttribute="leading" secondItem="bot-47-RSm" secondAttribute="leading" constant="17" id="SwS-3I-GGg"/>
                                     <constraint firstItem="0C2-n3-dwp" firstAttribute="bottom" secondItem="8iG-Bh-54R" secondAttribute="bottom" constant="-4" id="T8r-Un-cHH"/>
@@ -7916,16 +7917,15 @@ typeset text.</string>
                                     <constraint firstAttribute="trailing" secondItem="8iG-Bh-54R" secondAttribute="trailing" constant="17" id="cPy-QI-dFH"/>
                                     <constraint firstAttribute="trailing" secondItem="Rjg-dn-IDA" secondAttribute="trailing" constant="17" id="evS-KV-MbN"/>
                                     <constraint firstAttribute="trailing" secondItem="srs-fa-ume" secondAttribute="trailing" constant="17" id="osH-E7-uWp"/>
-                                    <constraint firstAttribute="bottom" secondItem="Rjg-dn-IDA" secondAttribute="bottom" constant="15" id="qrQ-QN-TYK"/>
                                     <constraint firstItem="0C2-n3-dwp" firstAttribute="top" secondItem="8iG-Bh-54R" secondAttribute="top" constant="5" id="xXJ-yT-dLf"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="bot-47-RSm" secondAttribute="bottom" id="a5f-8H-RG2"/>
+                            <constraint firstAttribute="bottom" secondItem="bot-47-RSm" secondAttribute="bottom" constant="23" id="a5f-8H-RG2"/>
                             <constraint firstItem="bot-47-RSm" firstAttribute="trailing" secondItem="z67-a2-vZo" secondAttribute="trailing" id="aHQ-XJ-sck"/>
-                            <constraint firstItem="bot-47-RSm" firstAttribute="top" secondItem="deX-Df-Khh" secondAttribute="top" constant="33" id="c0c-Zx-RcU"/>
+                            <constraint firstItem="bot-47-RSm" firstAttribute="top" secondItem="deX-Df-Khh" secondAttribute="top" constant="10" id="c0c-Zx-RcU"/>
                             <constraint firstItem="bot-47-RSm" firstAttribute="leading" secondItem="z67-a2-vZo" secondAttribute="leading" id="xC5-BQ-U0U"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="z67-a2-vZo"/>
@@ -7935,6 +7935,7 @@ typeset text.</string>
                         <outlet property="barg_count" destination="bwh-Dl-Yx2" id="fk3-eU-LwK"/>
                         <outlet property="distance" destination="xgo-8a-nxy" id="DRT-SZ-Ynn"/>
                         <outlet property="image" destination="vh5-yd-jNS" id="xv3-hj-Lio"/>
+                        <outlet property="offerTF" destination="8iG-Bh-54R" id="g9O-0N-mDU"/>
                         <outlet property="offersTblView" destination="srs-fa-ume" id="L37-mv-eRP"/>
                         <outlet property="parking_title" destination="216-nS-4mh" id="2c6-gT-4YP"/>
                         <outlet property="price" destination="jWN-FK-kBL" id="gPd-Xk-D41"/>
