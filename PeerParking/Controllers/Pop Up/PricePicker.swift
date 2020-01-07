@@ -25,7 +25,7 @@ class PricePicker: UIViewController, UIPickerViewDataSource, UIPickerViewDelegat
         picker.dataSource = self
         
         picker.selectRow(14, inComponent: 0, animated: false)
-        picker.selectRow(49, inComponent: 1, animated: false)
+        picker.selectRow(1, inComponent: 1, animated: false)
     }
     
 
@@ -37,7 +37,7 @@ class PricePicker: UIViewController, UIPickerViewDataSource, UIPickerViewDelegat
  
     func returnFirstValue(sender: UIButton) {
         guard let cb = completionBlock else {return}
-        price = "\(picker.selectedRow(inComponent:0) + 1).\(picker.selectedRow(inComponent:1) + 1)"
+        price = "\(picker.selectedRow(inComponent:0) + 1).\((picker.selectedRow(inComponent:1) + 1)*25)"
         cb("\(price)")
     }
     
@@ -54,7 +54,7 @@ class PricePicker: UIViewController, UIPickerViewDataSource, UIPickerViewDelegat
         if component == 0 {
             return 100
         } else {
-            return 100
+            return 3
         }
     }
 
@@ -62,7 +62,7 @@ class PricePicker: UIViewController, UIPickerViewDataSource, UIPickerViewDelegat
         if component == 0 {
             return "\(row+1)"
         } else {
-            return "\(row+1)"
+            return "\((row+1)*25)"
         }
     }
     

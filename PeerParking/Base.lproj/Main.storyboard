@@ -7870,6 +7870,9 @@ typeset text.</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="editText:" destination="fyi-iW-fNb" eventType="editingDidBegin" id="tAH-dC-JJo"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0C2-n3-dwp">
                                         <rect key="frame" x="362" y="409" width="21" height="21"/>
