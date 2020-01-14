@@ -23,6 +23,61 @@ public class SharedHelper: UIViewController {
     }
     
     
+    func SignUpProfileRequest(url:String, profileImg:Data, parameters:Parameters, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
+        Alamofire.upload(multipartFormData:
+            {
+                (multipartFormData) in
+                
+                
+                multipartFormData.append(profileImg, withName: "image", fileName: "file.jpeg", mimeType: "image/jpeg")
+                for (key, value) in parameters
+                {
+                    multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
+                }
+                //}, to:url!,headers:nil)
+        }, to:url)
+            
+            
+        { (result) in
+            switch result {
+            case .success(let upload,_,_ ):
+                upload.uploadProgress(closure: { (progress) in
+                    //Print progress
+                    print(progress)
+                    
+                    
+                })
+                //To check and verify server error
+                upload.responseString(completionHandler: { (response) in
+                    print(response)
+                    print (response.result)
+                })
+                upload.responseJSON
+                    { response in
+                        
+                        switch response.result {
+                        case .success:
+                            print(response)
+                            completion(response)
+                            break
+                        case .failure(let error):
+                            print(error)
+                            completion(response)
+                        }
+                        
+                        
+                }
+                
+            case .failure(_):
+                print(result)
+                // completion(responds)
+            }
+            
+            
+            
+        }
+    }
+   
     /**
      * @brief this method is use to check internet availability
      *  @return Bool

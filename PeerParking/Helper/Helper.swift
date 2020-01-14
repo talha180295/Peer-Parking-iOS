@@ -12,6 +12,10 @@ import GoogleMaps
 import SwiftyJSON
 import Alamofire
 import EzPopup
+import UIKit
+import SystemConfiguration
+import Alamofire
+
 
 class Helper{
     
@@ -308,7 +312,41 @@ class Helper{
         
     }
     
+    /*! @discussion this method is use to check internet availability
+     *  @return Bool
+     */
+    func isInternetAvailable() -> Bool
+    {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
+                SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
+            }
+        }
+        
+        var flags = SCNetworkReachabilityFlags()
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
+            return false
+        }
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        return (isReachable && !needsConnection)
+    }
     
+    /** @brief this is a generic method use to validate email
+     * @param enteredEmail:String
+     * @return Bool
+     **/
+    func validateEmail(enteredEmail:String) -> Bool {
+        
+        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+        return emailPredicate.evaluate(with: enteredEmail)
+        
+    }
     func popUp(controller : UIViewController,view_controller:UIViewController){
         
         
@@ -355,7 +393,235 @@ class Helper{
     }
     
     
+    func SignUpProfileRequest(url:String, profileImg:Data, parameters:Parameters, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
+        Alamofire.upload(multipartFormData:
+            {
+                (multipartFormData) in
+                
+                
+                multipartFormData.append(profileImg, withName: "image", fileName: "file.jpeg", mimeType: "image/jpeg")
+                for (key, value) in parameters
+                {
+                    multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
+                }
+                //}, to:url!,headers:nil)
+        }, to:url)
+            
+            
+        { (result) in
+            switch result {
+            case .success(let upload,_,_ ):
+                upload.uploadProgress(closure: { (progress) in
+                    //Print progress
+                    print(progress)
+                    
+                    
+                })
+                //To check and verify server error
+                upload.responseString(completionHandler: { (response) in
+                    print(response)
+                    print (response.result)
+                })
+                upload.responseJSON
+                    { response in
+                        
+                        switch response.result {
+                        case .success:
+                            print(response)
+                            completion(response)
+                            break
+                        case .failure(let error):
+                            print(error)
+                            completion(response)
+                        }
+                        
+                        
+                }
+                
+            case .failure(_):
+                print(result)
+                // completion(responds)
+            }
+            
+            
+            
+        }
+    }
+    func UpateProfileRequestPut(url:String, profileImg:Data, parameters:Parameters, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
+        
+        RefreshToken( completion:{
+            response in
+            print(response)
+            if response.result.value == nil {
+                print("No response")
+                
+                return
+            }
+            else {
+                
+                let responseData = response.result.value as! NSDictionary
+                let status = responseData["success"] as! Bool
+                if(status)
+                {
+                    let uData = responseData["data"] as! NSDictionary
+                    let userData = uData["user"] as! NSDictionary
+                    
+                    let auth_token = userData["access_token"] as! String
+                    UserDefaults.standard.set(auth_token, forKey: "access_token")
+                    UserDefaults.standard.synchronize()
+                    
+                    var auth_value : String = UserDefaults.standard.string(forKey: "access_token")!
+                    auth_value = "bearer " + auth_value
+                    
+                    let headers: HTTPHeaders = [
+                        "Authorization" : auth_value,
+                        "Accept" : "application/json"
+                    ]
+                    
+                    print(headers)
+                    Alamofire.upload(multipartFormData:
+                        {
+                            (multipartFormData) in
+                            
+                            
+                            multipartFormData.append(profileImg, withName: "image", fileName: "file.jpeg", mimeType: "image/jpeg")
+                            for (key, value) in parameters
+                            {
+                                multipartFormData.append((value as AnyObject).data(using: String.Encoding.utf8.rawValue)!, withName: key)
+                            }
+                            //}, to:url!,headers:nil)
+                    }, to:url,headers:headers)
+                        
+                        
+                    { (result) in
+                        switch result {
+                        case .success(let upload,_,_ ):
+                            upload.uploadProgress(closure: { (progress) in
+                                //Print progress
+                                print(progress)
+                                
+                                
+                            })
+                            //To check and verify server error
+                            upload.responseString(completionHandler: { (response) in
+                                print(response)
+                                print (response.result)
+                            })
+                            upload.responseJSON
+                                { response in
+                                    
+                                    switch response.result {
+                                    case .success:
+                                        print(response)
+                                        completion(response)
+                                        break
+                                    case .failure(let error):
+                                        print(error)
+                                        completion(response)
+                                    }
+                                    
+                                    
+                            }
+                            
+                        case .failure(_):
+                            print(result)
+                            // completion(responds)
+                        }
+                    }
+                    
+                }
+                
+            }
+        });
+        
+    }
+    
+    
     public func Request_Api(url:String, methodType : HTTPMethod,parameters:Parameters,isHeaderIncluded:Bool, headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
+        
+        
+        if(isHeaderIncluded)
+        {
+            RefreshToken(completion:{
+                response in
+                print(response)
+                if response.result.value == nil {
+                    print("No response")
+                    completion(response)
+                    return
+                }
+                else {
+                    let responseData = response.result.value as! NSDictionary
+                    let status = responseData["success"] as! Bool
+                    if(status)
+                    {
+                        let uData = responseData["data"] as! NSDictionary
+                        
+                        let userData = uData["user"] as! NSDictionary
+                        
+                        let auth_token = userData["access_token"] as! String
+                        UserDefaults.standard.set(auth_token, forKey: "auth_token")
+                        UserDefaults.standard.synchronize()
+                        
+                        var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
+                        auth_value = "bearer " + auth_value
+                        
+                        let headers1: HTTPHeaders = [
+                            "Authorization" : auth_value,
+                            "Accept" : "application/json"
+                        ]
+                        
+                        Alamofire.request(url, method: methodType, parameters: parameters, headers:headers1).validate(contentType: ["application/json","text/html"]).responseJSON
+                            { response in
+                                
+                                switch response.result {
+                                case .success:
+                                    print(response)
+                                    completion(response)
+                                    break
+                                case .failure(let error):
+                                    print(error)
+                                    completion(response)
+                                }
+                                
+                            }.responseString { response in
+                                print(response.result.value as Any)
+                                switch(response.result) {
+                                case .success(_):
+                                    if let data = response.result.value{
+                                        print(data)
+                                    }
+                                    
+                                case .failure(_):
+                                    print(response.result.error as Any)
+                                    break
+                                }
+                        }
+                    }
+                }
+                
+                
+            });
+        }
+        else
+        {
+            Alamofire.request(url, method: methodType, parameters: parameters).validate(contentType: ["application/json","text/html"]).responseJSON
+                { response in
+                    
+                    switch response.result {
+                    case .success:
+                        print(response)
+                        completion(response)
+                        break
+                    case .failure(let error):
+                        print(error)
+                        completion(response)
+                    }
+                    
+            }
+        }
+    }
+    public func Request_Api_noHeaders(url:String, methodType : HTTPMethod,parameters:Parameters,isHeaderIncluded:Bool, headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void) {
         
         
         if(isHeaderIncluded)

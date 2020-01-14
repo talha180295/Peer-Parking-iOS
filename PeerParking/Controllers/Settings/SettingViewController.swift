@@ -9,22 +9,32 @@
 import UIKit
 
 class SettingViewController: UIViewController {
+    @IBOutlet weak var btnChange: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(UserDefaults.standard.string(forKey: "is_social_login"))
+        if UserDefaults.standard.integer(forKey: "is_social_login") == 1{
+            
+              self.btnChange.isHidden = true
+        }
+   
+        else
+        {
+            self.btnChange.isHidden = false
+        }
+        
 
+       
         // Do any additional setup after loading the view.
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func btnChange(_ sender: Any) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "changeVC") as! ChangePassViewController
+        self.present(vc, animated: true, completion: nil)
+        
     }
-    */
+    
 
 }

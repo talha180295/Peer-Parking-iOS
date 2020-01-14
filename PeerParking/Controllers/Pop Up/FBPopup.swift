@@ -239,7 +239,7 @@ class FBPopup: UIViewController {
                     //                    UserDefaults.standard.set("isSocial", forKey: "yes")
                     //                    UserDefaults.standard.synchronize()
                     
-                    
+                    isSocial = true
                     
                     let message = responseData["message"] as! String
                     let uData = responseData["data"] as! NSDictionary
@@ -510,6 +510,20 @@ class FBPopup: UIViewController {
             UserDefaults.standard.set(val, forKey: key)
         }
         
+        key = "is_social_login"
+        if userDetails[key] is NSNull {
+            
+            UserDefaults.standard.set("", forKey: key)
+            
+        }
+        else
+        {
+            
+            let val = userDetails[key] as? Int
+            UserDefaults.standard.set(val, forKey: key)
+        }
+        
+   print(userDetails)
         
         
         
@@ -587,5 +601,27 @@ class FBPopup: UIViewController {
             }
         }
     }
+    
+    
+    
+    @IBAction func btnLogin(_ sender: Any) {
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
+ 
+         self.present(vc, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    
+    
+    @IBAction func btnSignUp(_ sender: Any) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerVC") as! RegistrationViewController
+        
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
 }
 

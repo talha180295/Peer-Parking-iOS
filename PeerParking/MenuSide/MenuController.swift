@@ -37,8 +37,18 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        self.img.clipsToBounds = true
+        var imag:String!
+        if UserDefaults.standard.string(forKey: "image_url") == nil{
+            imag = ""
+        }
+        else{
+            imag =  UserDefaults.standard.string(forKey: "image_url")!
+            
+            
+                    img.sd_setImage(with: URL(string: imag),placeholderImage: UIImage.init(named: "placeholder_user") )
+        }
+
         tblMenu.delegate =  self
         tblMenu.dataSource = self
         tblMenu.register(UINib(nibName: "menuCell", bundle: nil), forCellReuseIdentifier: "cellItem")
@@ -54,7 +64,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
         }
         NotificationCenter.default.addObserver(self, selector: #selector(reload_table(notification:)), name: NSNotification.Name(rawValue: "reload_table"), object: nil)
         
-        self.img.sd_setImage(with: URL(string: UserDefaults.standard.string(forKey: "image") ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
+//        self.img.sd_setImage(with: URL(string: UserDefaults.standard.string(forKey: "image") ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
         self.name.text = UserDefaults.standard.string(forKey: "full_name")
     }
 //    override func viewDidAppear(_ animated: Bool) {
@@ -243,7 +253,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
             else {
                 let responseData = response.result.value as! NSDictionary
                 let status = responseData["success"] as! Bool
-                if(status)
+                 if(status)
                     //                {  let fcmToken :String = UserDefaults.standard.string(forKey: "FCMToken")!
                 {
                     //                    let user_id : String = UserDefaults.standard.string(forKey: "id")!

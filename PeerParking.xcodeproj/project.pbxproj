@@ -45,6 +45,11 @@
 		18DB9C492397FB3C00A6968F /* Hours_picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DB9C482397FB3C00A6968F /* Hours_picker.swift */; };
 		18E099D02358F27E00B43A4B /* DGRunkeeperSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E099CE2358F27E00B43A4B /* DGRunkeeperSwitch.swift */; };
 		18E099D22358FB6500B43A4B /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E099D12358FB6500B43A4B /* NavigationVC.swift */; };
+		67BC7B9623CC53B6001542D6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9523CC53B6001542D6 /* LoginViewController.swift */; };
+		67BC7B9823CC53CB001542D6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9723CC53CA001542D6 /* RegistrationViewController.swift */; };
+		67BC7B9A23CC5D64001542D6 /* ForgetPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9923CC5D64001542D6 /* ForgetPassViewController.swift */; };
+		67BC7B9C23CC64AD001542D6 /* ResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9B23CC64AD001542D6 /* ResetViewController.swift */; };
+		67BC7B9E23CCB886001542D6 /* ChangePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9D23CCB886001542D6 /* ChangePassViewController.swift */; };
 		A9D762387663A23BCCC8DF20 /* Pods_PeerParkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */; };
 		E2616B4D5E0A2ED92F2CAAF3 /* Pods_PeerParking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */; };
 		FA0E9F6F2330FE7E0005A54C /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E9F6E2330FE7E0005A54C /* PlaceViewController.swift */; };
@@ -171,6 +176,11 @@
 		18E099CE2358F27E00B43A4B /* DGRunkeeperSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGRunkeeperSwitch.swift; sourceTree = "<group>"; };
 		18E099D12358FB6500B43A4B /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
 		33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		67BC7B9523CC53B6001542D6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		67BC7B9723CC53CA001542D6 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		67BC7B9923CC5D64001542D6 /* ForgetPassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPassViewController.swift; sourceTree = "<group>"; };
+		67BC7B9B23CC64AD001542D6 /* ResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetViewController.swift; sourceTree = "<group>"; };
+		67BC7B9D23CCB886001542D6 /* ChangePassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePassViewController.swift; sourceTree = "<group>"; };
 		73A78F4BB9C4B538C3541C56 /* Pods-PeerParkingUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingUITests.debug.xcconfig"; path = "Target Support Files/Pods-PeerParkingUITests/Pods-PeerParkingUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8B0459CE46FCE0435C2CC795 /* Pods-PeerParking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParking.debug.xcconfig"; path = "Target Support Files/Pods-PeerParking/Pods-PeerParking.debug.xcconfig"; sourceTree = "<group>"; };
 		A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParkingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -394,6 +404,18 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		67BC7B9423CC5395001542D6 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				67BC7B9B23CC64AD001542D6 /* ResetViewController.swift */,
+				67BC7B9523CC53B6001542D6 /* LoginViewController.swift */,
+				67BC7B9723CC53CA001542D6 /* RegistrationViewController.swift */,
+				67BC7B9923CC5D64001542D6 /* ForgetPassViewController.swift */,
+				67BC7B9D23CCB886001542D6 /* ChangePassViewController.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
 		DA2D335CC57FF81A4BC8D086 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -561,6 +583,7 @@
 		FA2815BC231E6669008AF3F5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				67BC7B9423CC5395001542D6 /* Registration */,
 				1866BF622374519F008EE650 /* Request */,
 				18924C252365B83A00C0E94F /* ContainerView */,
 				18924C222363542E00C0E94F /* SellParkingVC */,
@@ -958,6 +981,7 @@
 				FA2815C0231E7058008AF3F5 /* menuCell.swift in Sources */,
 				FA82B500232F66A6002675AC /* Knob.swift in Sources */,
 				185DE799236094DE00FC0E25 /* FBPopup.swift in Sources */,
+				67BC7B9E23CCB886001542D6 /* ChangePassViewController.swift in Sources */,
 				FA526EF5232CF7570014517B /* HeaderCell.swift in Sources */,
 				FA2815AF231E3F92008AF3F5 /* MenuController.swift in Sources */,
 				FA2815C3231E806D008AF3F5 /* HomeViewController.swift in Sources */,
@@ -967,12 +991,14 @@
 				18924C272365B84D00C0E94F /* ContainerView.swift in Sources */,
 				FA0FCC5C232250DD000FF52C /* SettingViewController.swift in Sources */,
 				FA2815AB231E3F92008AF3F5 /* CustomSideMenuController.swift in Sources */,
+				67BC7B9A23CC5D64001542D6 /* ForgetPassViewController.swift in Sources */,
 				FA2F9F37232CA7E30025BF11 /* offerCell.swift in Sources */,
 				18010AAD2354C463008412C0 /* FindParkingVC.swift in Sources */,
 				FA2815AE231E3F92008AF3F5 /* RootViewController.swift in Sources */,
 				1866BF642374617B008EE650 /* RequestCell.swift in Sources */,
 				FA6CD3732328F1C900E18CF2 /* ListParkingViewController.swift in Sources */,
 				18CAA58123695B62001B5503 /* StepFiveVC.swift in Sources */,
+				67BC7B9623CC53B6001542D6 /* LoginViewController.swift in Sources */,
 				FA10FF28232BCD620023C31C /* ParkedViewController.swift in Sources */,
 				FA122146232A3068002720BE /* ParkingCell.swift in Sources */,
 				18010AAB23549C7F008412C0 /* GoogleMapView.swift in Sources */,
@@ -987,6 +1013,8 @@
 				18924C242363544800C0E94F /* SellParkingVC.swift in Sources */,
 				FA122149232A4366002720BE /* ParkingDetailViewController.swift in Sources */,
 				FA0FCC6323229FB9000FF52C /* CardView.swift in Sources */,
+				67BC7B9C23CC64AD001542D6 /* ResetViewController.swift in Sources */,
+				67BC7B9823CC53CB001542D6 /* RegistrationViewController.swift in Sources */,
 				181C8E352379ED42000B66C7 /* Sell_parking_popup.swift in Sources */,
 				FA1C6124234F0A8400EF0F3D /* homeParkingCell.swift in Sources */,
 				FAF807B023263644004DB3B1 /* transactionCell.swift in Sources */,

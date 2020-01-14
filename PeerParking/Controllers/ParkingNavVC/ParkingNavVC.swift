@@ -45,7 +45,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+         print(UserDefaults.standard.string(forKey: "image_url"))
         print("ParkingNavVC")
 //        loadMapView()
         self.parking_title.text = p_title
@@ -54,7 +54,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
     override func viewWillAppear(_ animated: Bool) {
         
 //        loadMapView()
-        
+       
         
         if(vcName.elementsEqual("nav"))
         {

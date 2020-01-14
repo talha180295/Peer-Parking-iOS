@@ -59,6 +59,14 @@ struct APP_CONSTANT {
         static let BARGAININGS = "bargainings"
         
         
+        static let SIGN_UP = "register"
+      static let FORGET_PASS = "forget-password?email="
+        static let VERIFY_CODE = "verify-reset-code?verification_code="
+ 
+        static let RESET_PASS = "reset-password?email="
+        static let CHANGE_PASS = "change-password?current_password="
+        static let ME = "me"
+        static let UPDATE = "profile"
     }
    
     

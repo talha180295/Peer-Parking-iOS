@@ -68,6 +68,8 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(UserDefaults.standard.string(forKey: "is_social_login"))
+
        // self.bottomHeight.constant =  0
         self.bottonView.isHidden = true
         self.view_all_btn.isHidden = true
