@@ -39,6 +39,10 @@ class OfferBottomSheetVC: UIViewController {
     var bargainOffers:[Any] = []
     var auth_value = ""
     var bargainingId:Int!
+    var parkingId:Int?
+    var buyerId:Int?
+    var offerPrice:Double?
+    var userType = 0  //20==seller
     
 //    var parking_id:Int!
 //    var p_title = ""
@@ -50,6 +54,30 @@ class OfferBottomSheetVC: UIViewController {
         offersTblView.dataSource = self
         offersTblView.delegate = self
         offersTblView.register(UINib(nibName: "BargainingCell", bundle: nil), forCellReuseIdentifier: "BargainingCell")
+        
+        let parking = parking_details["parking"] as! NSDictionary
+        
+        self.parkingId = parking["id"] as? Int
+        
+        
+        let buyer = parking_details["buyer"] as! NSDictionary
+        
+        self.buyerId = buyer["id"] as? Int
+        
+        
+        
+        let myId = UserDefaults.standard.integer(forKey: "id")
+        
+        if(myId == buyerId){
+            
+            userType = 10
+            
+        }
+        else{
+            
+            userType = 20
+            
+        }
         
         setData(data: parking_details)
         
@@ -73,19 +101,74 @@ class OfferBottomSheetVC: UIViewController {
     
     @IBAction func send_offer(_ sender: UIButton) {
         
+        let myId = UserDefaults.standard.integer(forKey: "id")
+        var direction = 0
+        if(myId == buyerId){
+            direction = 20
+        }
+        else{
+            direction = 10
+        }
         if(offerTF.hasText){
-            let price:String = offerTF.text!
-            let offer = ["offer": Double(price), "direction": 20]
+//            let price:String = offerTF.text!
+            let offer:[String:Any] = ["offer": self.offerPrice, "direction": direction]
             bargainOffers.append(offer)
             
             offersTblView.reloadData()
             
             offerTF.text = ""
             offerTF.placeholder = "Enter Your Offer"
+            
+            let params:[String:Any] = [
+                "parking_id": self.parkingId ?? 0,
+                "buyer_id": self.buyerId ?? 0,
+                "status": 30,
+                "offer": self.offerPrice ?? 0.0,
+                "direction": direction
+            ]
+            print(params)
+            postBargainingOffer(params: params)
+            
         }
         
       
 //        self.dismiss(animated: false, completion: nil)
+    }
+    
+    func postBargainingOffer(params:[String:Any]){
+        
+        Helper().RefreshToken { response in
+            
+            print(response)
+            if response.result.value == nil {
+                print("No response")
+                
+                return
+            }
+            else{
+                
+                Alamofire.request(APIRouter.postBargainingOffer(params)).responsePost{ response in
+                    
+                    switch response.result {
+                    case .success:
+                        if response.result.value?.success ?? false{
+                            
+                            print("val=\(response.result.value?.message ?? "-")")
+                            
+                        }
+                        else{
+                            print("Server Message=\(response.result.value?.message ?? "-" )")
+                            
+                        }
+                        
+                    case .failure(let error):
+                        print("ERROR==\(error)")
+                    }
+                }
+                
+            }
+        }
+        
     }
     
     
@@ -203,7 +286,7 @@ class OfferBottomSheetVC: UIViewController {
             //Data is returned **Do anything with it **
             print(dataReturned)
             sender.text = "$\(dataReturned)"
-            
+            self.offerPrice = Double(dataReturned)
 //            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "parking_extra_fee")
         }
         let popupVC = PopupViewController(contentController: vc, popupWidth: 300, popupHeight: 300)
@@ -247,21 +330,39 @@ extension OfferBottomSheetVC: UITableViewDelegate, UITableViewDataSource{
         
         let offer = dict["offer"] as? Double
         
-        switch direction {
-        case 20:
-            cell.leftOffer.text = "$ \(offer ?? 0.9)"
-            cell.offer.superview?.isHidden = true
-            cell.leftOffer.superview?.isHidden = false
+        switch self.userType {
         case 10:
-            cell.offer.text = "$ \(offer ?? 0.9)"
-            cell.offer.superview?.isHidden = false
-            cell.leftOffer.superview?.isHidden = true
-       
-            
+            switch direction {
+            case 10:
+                cell.leftOffer.text = "$ \(offer ?? 0.9)"
+                cell.offer.superview?.isHidden = true
+                cell.leftOffer.superview?.isHidden = false
+            case 20:
+                cell.offer.text = "$ \(offer ?? 0.9)"
+                cell.offer.superview?.isHidden = false
+                cell.leftOffer.superview?.isHidden = true
+                
+            default:
+                break
+            }
+        case 20:
+            switch direction {
+            case 20:
+                cell.leftOffer.text = "$ \(offer ?? 0.9)"
+                cell.offer.superview?.isHidden = true
+                cell.leftOffer.superview?.isHidden = false
+            case 10:
+                cell.offer.text = "$ \(offer ?? 0.9)"
+                cell.offer.superview?.isHidden = false
+                cell.leftOffer.superview?.isHidden = true
+                
+            default:
+                break
+            }
         default:
-            cell.offer.superview?.isHidden = false
-            cell.leftOffer.superview?.isHidden = false
+            break
         }
+        
         
         return  cell
     }

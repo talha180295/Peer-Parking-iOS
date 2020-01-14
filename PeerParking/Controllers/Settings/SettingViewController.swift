@@ -13,7 +13,7 @@ class SettingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(UserDefaults.standard.string(forKey: "is_social_login"))
+        
         if UserDefaults.standard.integer(forKey: "is_social_login") == 1{
             
               self.btnChange.isHidden = true

@@ -13,6 +13,18 @@
 		180FD0DE237335BD0084230A /* Parking_table_cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180FD0DC237335BD0084230A /* Parking_table_cell.swift */; };
 		180FD0DF237335BD0084230A /* Parking_table_cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180FD0DD237335BD0084230A /* Parking_table_cell.xib */; };
 		181C8E352379ED42000B66C7 /* Sell_parking_popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C8E342379ED42000B66C7 /* Sell_parking_popup.swift */; };
+		181E0D1123CDF954005D7248 /* Buyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0623CDF953005D7248 /* Buyer.swift */; };
+		181E0D1223CDF954005D7248 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0723CDF953005D7248 /* Details.swift */; };
+		181E0D1323CDF954005D7248 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0823CDF953005D7248 /* Card.swift */; };
+		181E0D1423CDF954005D7248 /* JSONSchemaSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0923CDF953005D7248 /* JSONSchemaSupport.swift */; };
+		181E0D1523CDF954005D7248 /* Bargaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0A23CDF953005D7248 /* Bargaining.swift */; };
+		181E0D1623CDF954005D7248 /* Parking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0B23CDF953005D7248 /* Parking.swift */; };
+		181E0D1723CDF954005D7248 /* MainStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0C23CDF953005D7248 /* MainStruct.swift */; };
+		181E0D1823CDF954005D7248 /* Seller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0D23CDF953005D7248 /* Seller.swift */; };
+		181E0D1A23CDF954005D7248 /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D1023CDF953005D7248 /* ApiRouter.swift */; };
+		181E0D1D23CDF995005D7248 /* DemoFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D1C23CDF994005D7248 /* DemoFunc.swift */; };
+		181E0D1F23CE0400005D7248 /* RefreshTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D1E23CE0400005D7248 /* RefreshTokenModel.swift */; };
+		181E0D2123CE22E3005D7248 /* PostBargainigOfferModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D2023CE22E3005D7248 /* PostBargainigOfferModel.swift */; };
 		18392E792370487A007FB161 /* PricePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18392E782370487A007FB161 /* PricePicker.swift */; };
 		18392E7B23707220007FB161 /* StepFourVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18392E7A23707220007FB161 /* StepFourVC.swift */; };
 		18451971235E08C700F3AF5A /* OfferBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18451970235E08C700F3AF5A /* OfferBottomSheetVC.swift */; };
@@ -142,6 +154,18 @@
 		180FD0DC237335BD0084230A /* Parking_table_cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parking_table_cell.swift; sourceTree = "<group>"; };
 		180FD0DD237335BD0084230A /* Parking_table_cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Parking_table_cell.xib; sourceTree = "<group>"; };
 		181C8E342379ED42000B66C7 /* Sell_parking_popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sell_parking_popup.swift; sourceTree = "<group>"; };
+		181E0D0623CDF953005D7248 /* Buyer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buyer.swift; sourceTree = "<group>"; };
+		181E0D0723CDF953005D7248 /* Details.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
+		181E0D0823CDF953005D7248 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		181E0D0923CDF953005D7248 /* JSONSchemaSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSchemaSupport.swift; sourceTree = "<group>"; };
+		181E0D0A23CDF953005D7248 /* Bargaining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bargaining.swift; sourceTree = "<group>"; };
+		181E0D0B23CDF953005D7248 /* Parking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parking.swift; sourceTree = "<group>"; };
+		181E0D0C23CDF953005D7248 /* MainStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStruct.swift; sourceTree = "<group>"; };
+		181E0D0D23CDF953005D7248 /* Seller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seller.swift; sourceTree = "<group>"; };
+		181E0D1023CDF953005D7248 /* ApiRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
+		181E0D1C23CDF994005D7248 /* DemoFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoFunc.swift; sourceTree = "<group>"; };
+		181E0D1E23CE0400005D7248 /* RefreshTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenModel.swift; sourceTree = "<group>"; };
+		181E0D2023CE22E3005D7248 /* PostBargainigOfferModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBargainigOfferModel.swift; sourceTree = "<group>"; };
 		18392E782370487A007FB161 /* PricePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricePicker.swift; sourceTree = "<group>"; };
 		18392E7A23707220007FB161 /* StepFourVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFourVC.swift; sourceTree = "<group>"; };
 		18451970235E08C700F3AF5A /* OfferBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferBottomSheetVC.swift; sourceTree = "<group>"; };
@@ -297,6 +321,40 @@
 				18C2195523ABB5F600BCCA75 /* BargainingCell.xib */,
 			);
 			path = "Table View Cell";
+			sourceTree = "<group>";
+		};
+		181E0D0523CDF953005D7248 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				181E0D0623CDF953005D7248 /* Buyer.swift */,
+				181E0D0723CDF953005D7248 /* Details.swift */,
+				181E0D0823CDF953005D7248 /* Card.swift */,
+				181E0D0923CDF953005D7248 /* JSONSchemaSupport.swift */,
+				181E0D0A23CDF953005D7248 /* Bargaining.swift */,
+				181E0D0B23CDF953005D7248 /* Parking.swift */,
+				181E0D0C23CDF953005D7248 /* MainStruct.swift */,
+				181E0D0D23CDF953005D7248 /* Seller.swift */,
+				181E0D1E23CE0400005D7248 /* RefreshTokenModel.swift */,
+				181E0D2023CE22E3005D7248 /* PostBargainigOfferModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		181E0D0E23CDF953005D7248 /* Api Client */ = {
+			isa = PBXGroup;
+			children = (
+				181E0D1B23CDF97D005D7248 /* Demo Function */,
+				181E0D1023CDF953005D7248 /* ApiRouter.swift */,
+			);
+			path = "Api Client";
+			sourceTree = "<group>";
+		};
+		181E0D1B23CDF97D005D7248 /* Demo Function */ = {
+			isa = PBXGroup;
+			children = (
+				181E0D1C23CDF994005D7248 /* DemoFunc.swift */,
+			);
+			path = "Demo Function";
 			sourceTree = "<group>";
 		};
 		185DE797236094BD00FC0E25 /* Pop Up */ = {
@@ -479,6 +537,8 @@
 			children = (
 				188888A5238EBEEA0008BC88 /* Crashlytics.framework */,
 				188888A6238EBEEA0008BC88 /* Fabric.framework */,
+				181E0D0E23CDF953005D7248 /* Api Client */,
+				181E0D0523CDF953005D7248 /* Models */,
 				FA57EBA22320EB1E000646B7 /* Extension */,
 				FAEDCF13231F98760063EFC0 /* Tabbar */,
 				FA2815BD231E666E008AF3F5 /* Helper */,
@@ -972,6 +1032,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181E0D1723CDF954005D7248 /* MainStruct.swift in Sources */,
 				185FCF712358C10E0025DB5E /* FilterBottomSheetVC.swift in Sources */,
 				18C2195623ABB5F700BCCA75 /* BargainingCell.swift in Sources */,
 				FA2815AD231E3F92008AF3F5 /* ContentViewController.swift in Sources */,
@@ -982,12 +1043,15 @@
 				FA82B500232F66A6002675AC /* Knob.swift in Sources */,
 				185DE799236094DE00FC0E25 /* FBPopup.swift in Sources */,
 				67BC7B9E23CCB886001542D6 /* ChangePassViewController.swift in Sources */,
+				181E0D2123CE22E3005D7248 /* PostBargainigOfferModel.swift in Sources */,
 				FA526EF5232CF7570014517B /* HeaderCell.swift in Sources */,
 				FA2815AF231E3F92008AF3F5 /* MenuController.swift in Sources */,
+				181E0D1A23CDF954005D7248 /* ApiRouter.swift in Sources */,
 				FA2815C3231E806D008AF3F5 /* HomeViewController.swift in Sources */,
 				FA0E9F6F2330FE7E0005A54C /* PlaceViewController.swift in Sources */,
 				FA6CD3792328FFE600E18CF2 /* LoacationCell.swift in Sources */,
 				18392E7B23707220007FB161 /* StepFourVC.swift in Sources */,
+				181E0D1623CDF954005D7248 /* Parking.swift in Sources */,
 				18924C272365B84D00C0E94F /* ContainerView.swift in Sources */,
 				FA0FCC5C232250DD000FF52C /* SettingViewController.swift in Sources */,
 				FA2815AB231E3F92008AF3F5 /* CustomSideMenuController.swift in Sources */,
@@ -998,6 +1062,7 @@
 				1866BF642374617B008EE650 /* RequestCell.swift in Sources */,
 				FA6CD3732328F1C900E18CF2 /* ListParkingViewController.swift in Sources */,
 				18CAA58123695B62001B5503 /* StepFiveVC.swift in Sources */,
+				181E0D1423CDF954005D7248 /* JSONSchemaSupport.swift in Sources */,
 				67BC7B9623CC53B6001542D6 /* LoginViewController.swift in Sources */,
 				FA10FF28232BCD620023C31C /* ParkedViewController.swift in Sources */,
 				FA122146232A3068002720BE /* ParkingCell.swift in Sources */,
@@ -1015,8 +1080,10 @@
 				FA0FCC6323229FB9000FF52C /* CardView.swift in Sources */,
 				67BC7B9C23CC64AD001542D6 /* ResetViewController.swift in Sources */,
 				67BC7B9823CC53CB001542D6 /* RegistrationViewController.swift in Sources */,
+				181E0D1123CDF954005D7248 /* Buyer.swift in Sources */,
 				181C8E352379ED42000B66C7 /* Sell_parking_popup.swift in Sources */,
 				FA1C6124234F0A8400EF0F3D /* homeParkingCell.swift in Sources */,
+				181E0D1223CDF954005D7248 /* Details.swift in Sources */,
 				FAF807B023263644004DB3B1 /* transactionCell.swift in Sources */,
 				FA57EBA42320EB2E000646B7 /* ViewHelper.swift in Sources */,
 				FA10FF26232BC10E0023C31C /* NavigateViewController.swift in Sources */,
@@ -1028,12 +1095,15 @@
 				FA1150C52316838400D0B1FE /* AppDelegate.swift in Sources */,
 				185DE7A62360E2B300FC0E25 /* FeedbackVC.swift in Sources */,
 				FA6CD3672328C00900E18CF2 /* HistoryCell.swift in Sources */,
+				181E0D1D23CDF995005D7248 /* DemoFunc.swift in Sources */,
 				18392E792370487A007FB161 /* PricePicker.swift in Sources */,
 				185DE7A12360BCEA00FC0E25 /* AlternateRouteVC.swift in Sources */,
 				18CAA57F2368B6BB001B5503 /* FinishPopup.swift in Sources */,
 				188888AA238EF3C50008BC88 /* AlamofireApi.swift in Sources */,
 				FA0FCC5F232250FE000FF52C /* WalletViewController.swift in Sources */,
 				FA0FCC612322510F000FF52C /* TransactionViewController.swift in Sources */,
+				181E0D1323CDF954005D7248 /* Card.swift in Sources */,
+				181E0D1523CDF954005D7248 /* Bargaining.swift in Sources */,
 				FA6CD3802329122E00E18CF2 /* AlternateRouteViewController.swift in Sources */,
 				FAEDCF1A231F9EFB0063EFC0 /* FindParkingViewController.swift in Sources */,
 				18E099D02358F27E00B43A4B /* DGRunkeeperSwitch.swift in Sources */,
@@ -1049,7 +1119,9 @@
 				1889AE07235738330081608E /* BottomSheetVC.swift in Sources */,
 				1866BF61237450C3008EE650 /* RequestVC.swift in Sources */,
 				FA25B601232686B6007C3697 /* SplashViewController.swift in Sources */,
+				181E0D1823CDF954005D7248 /* Seller.swift in Sources */,
 				FA2F9F3A232CB35E0025BF11 /* OfferViewController.swift in Sources */,
+				181E0D1F23CE0400005D7248 /* RefreshTokenModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

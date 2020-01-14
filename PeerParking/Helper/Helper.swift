@@ -381,7 +381,17 @@ class Helper{
                 switch response.result {
                 case .success:
                     print(response)
-                    
+                    let responseData = response.result.value as! NSDictionary
+                    let status = responseData["success"] as! Bool
+                    if(status)
+                    {
+                        let uData = responseData["data"] as! NSDictionary
+                        let userData = uData["user"] as! NSDictionary
+                        
+                        let auth_token = userData["access_token"] as! String
+                        UserDefaults.standard.set(auth_token, forKey: "access_token")
+                        UserDefaults.standard.synchronize()
+                    }
                     completion(response)
                     break
                 case .failure(let error):
@@ -391,6 +401,8 @@ class Helper{
                 
         }
     }
+    
+    
     
     
     func SignUpProfileRequest(url:String, profileImg:Data, parameters:Parameters, completion: @escaping (_ result: DataResponse<Any>) -> Void) {

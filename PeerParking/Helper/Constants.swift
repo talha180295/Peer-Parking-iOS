@@ -106,3 +106,22 @@ struct GLOBAL_VAR {
 }
 
 
+
+
+enum HTTPHeaderField: String {
+    case authentication = "Authorization"
+    case contentType = "Content-Type"
+    case acceptType = "Accept"
+    case acceptEncoding = "Accept-Encoding"
+}
+
+enum ContentType: String {
+    case json = "application/json"
+}
+
+
+struct Nulls {
+    static let nullInt:Int = 0
+    static let nullString = "-"
+    static let nullDouble:Double = 0.0
+}
