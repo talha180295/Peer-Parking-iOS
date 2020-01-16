@@ -45,11 +45,14 @@ class BottomSheetVC: UIViewController {
     var parking_details:NSDictionary!
     var distanceInMiles: String!
     
+    var parkingId:Int?
+    var buyerId:Int?
+    var offerPrice:Double?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //print("parking_details=\(parking_details!)")
-      
+       
       
         
         setData()
@@ -186,29 +189,39 @@ class BottomSheetVC: UIViewController {
     @IBAction func take_btn_click(_ sender: UIButton) {
         
         
-        let id = Int(self.parking_details["id"] as! Int)
+        let p_id = Int(self.parking_details["id"] as! Int)
         let final_price = Double(self.parking_details["initial_price"] as! Double)
-        
+        let myId = UserDefaults.standard.integer(forKey: "id")
             
         
         if Helper().IsUserLogin(){
             
-            assign_buyer(p_id: id, status: 20, final_price: final_price)
-            //SharedHelper().showToast(message: "Login", controller: self)
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
-            //
-            vc.parking_details = self.parking_details
-            vc.p_id = Int(self.parking_details["id"] as! Int)
-            vc.p_title = self.parking_titile.text ?? ""
+            let params:[String:Any] = [
+                "parking_id": p_id,
+                "buyer_id": myId,
+                "status": 10,
+                "offer": final_price,
+                "direction": 20
+            ]
+            print(params)
+            self.postBargainingOffer(params: params)
             
-            vc.p_lat = Double(self.parking_details["latitude"] as! String)!
-            vc.p_longg = Double(self.parking_details["longitude"] as! String)!
-            vc.vcName = ""
+            self.dismiss(animated: true, completion: nil)
             
             
-//            self.navigationController?.pushViewController(vc, animated: true)
-//            self.navigationController?.pushViewController(vc, animated: true)
-            self.present(vc, animated: false, completion: nil)
+//            assign_buyer(p_id: id, status: 20, final_price: final_price)
+//            //SharedHelper().showToast(message: "Login", controller: self)
+//            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
+//            //
+//            vc.parking_details = self.parking_details
+//            vc.p_id = Int(self.parking_details["id"] as! Int)
+//            vc.p_title = self.parking_titile.text ?? ""
+//
+//            vc.p_lat = Double(self.parking_details["latitude"] as! String)!
+//            vc.p_longg = Double(self.parking_details["longitude"] as! String)!
+//            vc.vcName = ""
+//
+//            self.present(vc, animated: false, completion: nil)
             
         }
         else{
@@ -225,19 +238,44 @@ class BottomSheetVC: UIViewController {
             present(popupVC, animated: true)
             
         }
-//
-//        if(offer_btn.titleLabel?.text == "Go"){
-//
-//
-//
-//
-//        }
-//        else{
-//
-//            bottomSheet(storyBoard: "Main", identifier: "OfferBottomSheetVC", sizes: [.fixed(350)], cornerRadius: 10)
-//        }
+
     }
     
+    func postBargainingOffer(params:[String:Any]){
+        
+        Helper().RefreshToken { response in
+            
+            print(response)
+            if response.result.value == nil {
+                print("No response")
+                
+                return
+            }
+            else{
+                
+                Alamofire.request(APIRouter.postBargainingOffer(params)).responsePost{ response in
+                    
+                    switch response.result {
+                    case .success:
+                        if response.result.value?.success ?? false{
+                            
+                            print("val=\(response.result.value?.message ?? "-")")
+                            
+                        }
+                        else{
+                            print("Server Message=\(response.result.value?.message ?? "-" )")
+                            
+                        }
+                        
+                    case .failure(let error):
+                        print("ERROR==\(error)")
+                    }
+                }
+                
+            }
+        }
+        
+    }
     
     
     @IBAction func counter_btn(_ sender: UIButton) {

@@ -275,7 +275,7 @@ class FBPopup: UIViewController {
     
     @IBAction func twitter_btn(_ sender: UIButton) {
         
-       LoginApi(email: "iosdev@gmail.com", password: "123456", device_type: "ios")
+       LoginApi(email: "iosdev@gmail.com", password: "112233", device_type: "ios")
     }
     
     func saveData(userData : NSDictionary)  {
