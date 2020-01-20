@@ -44,7 +44,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     var filterLat = 0.0
     var filterLong = 0.0
     
-    var parkings:[Any] = []
+    var parkings:[Parking] = []
     
     var locationManager = CLLocationManager()
     var map = GMSMapView()
@@ -322,38 +322,31 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         if(parkings.count>0){
             
             
-            let dict = parkings[indexPath.row] as! NSDictionary
+            let dict = parkings[indexPath.row]
             print(dict)
             
             
-            let seller = dict["seller"] as! NSDictionary
-            let seller_details = seller["details"] as! NSDictionary
+            let seller = dict.seller
+            let seller_details = seller?.details
           
-            let lat = dict["latitude"] as! String
-            let long = dict["longitude"] as! String
+            let lat = dict.latitude ?? ""
+            let long = dict.longitude ?? ""
            
             
-            let priceStr = dict["initial_price"] as! Double
+            let priceStr = dict.initialPrice ?? 0.0
             
             let distanceStr = cal_distance(lat: lat, long: long)
             
-            let imgUrl = dict["image_url"] as? String
+            let imgUrl = dict.imageURL
             cell.image.sd_setImage(with: URL(string: imgUrl!),placeholderImage: UIImage.init(named: "placeholder-img") )
-            if(dict["address"] is NSNull)
-            {
-                
-            }
-            else
-            {
-            cell.parking_title.text = (dict["address"] as! String)
-            }
             
-            cell.rating_view.rating = ((seller_details["average_rating"] as? Double)!)
+            cell.parking_title.text = dict.address
+            cell.rating_view.rating = seller_details?.averageRating ?? 0.0
             
-            cell.vehicle_type.text = (dict["vehicle_type_text"] as? String)
+            cell.vehicle_type.text = dict.vehicleTypeText
            
 
-            cell.price.text = "$" + String(priceStr)
+            cell.price.text = "$\(priceStr)"
             
             
             cell.distance.text = String(format: "%.02f miles away", distanceStr)
@@ -373,14 +366,14 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let dict = (self.parkings[indexPath.row]  as! NSDictionary)
+        let dict = self.parkings[indexPath.row]
        
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC") as! BottomSheetVC
         controller.parking_details = dict
         
         
-        let lat = dict["latitude"] as! String
-        let long = dict["longitude"] as! String
+        let lat = dict.latitude ?? ""
+        let long = dict.longitude ?? ""
         let distanceStr = cal_distance(lat: lat, long: long)
         
         
@@ -396,10 +389,10 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             print("indexPath=\(indexPath?.row)")
             
             
-            let dict = parkings[(indexPath?.row)!] as! NSDictionary
+            let dict = parkings[(indexPath?.row)!]
             
-            let lat = Double(dict["latitude"] as! String)
-            let long = Double(dict["longitude"] as! String)
+            let lat = Double(dict.latitude ?? "")
+            let long = Double(dict.longitude ?? "")
             
             let camera = GMSCameraPosition.camera(withLatitude: lat!, longitude: long!, zoom: 15.0)
             self.map.animate(to: camera)
@@ -435,18 +428,16 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         return width
     }
     
-    
-    
     func get_all_parkings(lat:Double,long:Double,isHeaderIncluded:Bool,filters:[String:String],completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
         
         
         parkings = []
         
         var params = [
-           
+            
             "latitude": String(lat),
             "longitude": String(long)
-        
+            
         ]
         
         if(filters.keys.contains("vehicle_type")){
@@ -469,7 +460,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         if let value : String = UserDefaults.standard.string(forKey: "auth_token"){
             
-           auth_value = "bearer " + value
+            auth_value = "bearer " + value
         }
         
         
@@ -480,7 +471,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             "Authorization" : auth_value
         ]
         
-
+        
         var url = ""
         
         if(Helper().IsUserLogin()){
@@ -501,75 +492,211 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                 return
             }
             else {
-                let responseData = response.result.value as! NSDictionary
-                let status = responseData["success"] as! Bool
-                if(status)
-                {
-                    //                    UserDefaults.standard.set("isSocial", forKey: "yes")
-                    //                    UserDefaults.standard.synchronize()
+                
+                if let jsonData = response.data{
                     
-                    
-                    
-                    let message = responseData["message"] as! String
-                    let uData = responseData["data"] as! [Any]
-                   
-                    Helper().map_circle(data: uData, map_view: self.map)
-                    Helper().map_custom_marker(data: uData, map_view: self.map)
-                    //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
-                    self.parkings = uData
-                    print("parkings.count=\(self.parkings.count)")
-                   
-                  
-                    self.myCollectionView.reloadData()
-//                    SharedHelper().showToast(message: message, controller: self)
-                    
-                    print("self.address=\(self.address)")
-                    
-                    
-                    if(self.parkings.count > 0){
+                    let response = try! JSONDecoder().decode(ResponseData<[Parking]>.self, from: jsonData)
+                    if response.success{
+                        //                    UserDefaults.standard.set("isSocial", forKey: "yes")
+                        //                    UserDefaults.standard.synchronize()
                         
-                        UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-                            self.re_center_bottom_cont.constant = 40
-                        })
                         
-                        self.myCollectionView.isHidden = false
-                        self.filter_btn.isHidden = false
-                        self.view_all_btn.isHidden = false
                         
-                    
+                        let message = response.message
+                        if let uData = response.data{
+                            
+                            Helper().map_circle(data: uData, map_view: self.map)
+                            Helper().map_custom_marker(data: uData, map_view: self.map)
+                            //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
+                            self.parkings = uData
+                            
+                        }
+                        
+                        print("parkings.count=\(self.parkings.count)")
+                        
+                        
+                        self.myCollectionView.reloadData()
+                        
+                        if(self.parkings.count > 0){
+                            
+                            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+                                self.re_center_bottom_cont.constant = 40
+                            })
+                            
+                            self.myCollectionView.isHidden = false
+                            self.filter_btn.isHidden = false
+                            self.view_all_btn.isHidden = false
+                            
+                            
+                        }
+                        else{
+                            
+                            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+                                self.re_center_bottom_cont.constant = -143
+                            })
+                            
+                            self.myCollectionView.isHidden = true
+                            self.filter_btn.isHidden = true
+                            self.view_all_btn.isHidden = true
+                            
+                            SharedHelper().showToast(message: "No Parkings Available", controller: self)
+                            
+                            
+                        }
+                        
+                        completion()
+                        
+                        
+                        
                     }
                     else{
-                        
-                        UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-                            self.re_center_bottom_cont.constant = -143
-                        })
-                        
-                        self.myCollectionView.isHidden = true
-                        self.filter_btn.isHidden = true
-                        self.view_all_btn.isHidden = true
-                        
-                         SharedHelper().showToast(message: "No Parkings Available", controller: self)
-                      
-                        
+                        print("Eroor=\(response.message)")
+                        SharedHelper().showToast(message: response.message, controller: self)
+                        //   SharedHelper().hideSpinner(view: self.view)
+                        completion()
                     }
-                    
-                    completion()
-                   
-                    
-                   
                 }
-                else
-                {
-                    let message = responseData["message"] as! String
-                    SharedHelper().showToast(message: message, controller: self)
-                    //   SharedHelper().hideSpinner(view: self.view)
-                    completion()
-                }
+                
             }
         }
         
     }
     
+    
+    
+//    func get_all_parkings2(lat:Double,long:Double,isHeaderIncluded:Bool,filters:[String:String],completion: @escaping () -> Void){
+//
+//
+//        parkings = []
+//
+//        var params = [
+//
+//            "latitude": String(lat),
+//            "longitude": String(long)
+//
+//        ]
+//
+//        if(filters.keys.contains("vehicle_type")){
+//            params.updateValue(filters["vehicle_type"]!, forKey: "vehicle_type")
+//        }
+//        if(filters.keys.contains("parking_type")){
+//            params.updateValue(filters["parking_type"]!, forKey: "parking_type")
+//        }
+//        if(filters.keys.contains("orderBy_column")){
+//            params.updateValue(filters["orderBy_column"]!, forKey: "orderBy_column")
+//        }
+//        if(filters.keys.contains("time_margin")){
+//            params.updateValue(filters["time_margin"]!, forKey: "time_margin")
+//        }
+//
+//
+//        print("param123=\(params)")
+//
+//        var auth_value = ""
+//
+//        if let value : String = UserDefaults.standard.string(forKey: "auth_token"){
+//
+//           auth_value = "bearer " + value
+//        }
+//
+//
+//
+//
+//
+//        let headers: HTTPHeaders = [
+//            "Authorization" : auth_value
+//        ]
+//
+//
+//        var url = ""
+//
+//        if(Helper().IsUserLogin()){
+//            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITH_TOKEN
+//        }
+//        else{
+//            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
+//        }
+//        print("staging_url123=\(url)")
+//        Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: isHeaderIncluded, headers: headers){
+//            response in
+//            //print("response=\(response)")
+//            if response.result.value == nil {
+//                print("No response")
+//
+//                SharedHelper().showToast(message: "Internal Server Error", controller: self)
+//                completion()
+//                return
+//            }
+//            else {
+//                let responseData = response.result.value as! NSDictionary
+//                let status = responseData["success"] as! Bool
+//                if(status)
+//                {
+//                    //                    UserDefaults.standard.set("isSocial", forKey: "yes")
+//                    //                    UserDefaults.standard.synchronize()
+//
+//
+//
+//                    let message = responseData["message"] as! String
+//                    let uData = responseData["data"] as! [Any]
+//
+//                    Helper().map_circle(data: uData, map_view: self.map)
+//                    Helper().map_custom_marker(data: uData, map_view: self.map)
+//                    //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
+//                    self.parkings = uData
+//                    print("parkings.count=\(self.parkings.count)")
+//
+//
+//                    self.myCollectionView.reloadData()
+////                    SharedHelper().showToast(message: message, controller: self)
+//
+//                    print("self.address=\(self.address)")
+//
+//
+//                    if(self.parkings.count > 0){
+//
+//                        UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+//                            self.re_center_bottom_cont.constant = 40
+//                        })
+//
+//                        self.myCollectionView.isHidden = false
+//                        self.filter_btn.isHidden = false
+//                        self.view_all_btn.isHidden = false
+//
+//
+//                    }
+//                    else{
+//
+//                        UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+//                            self.re_center_bottom_cont.constant = -143
+//                        })
+//
+//                        self.myCollectionView.isHidden = true
+//                        self.filter_btn.isHidden = true
+//                        self.view_all_btn.isHidden = true
+//
+//                         SharedHelper().showToast(message: "No Parkings Available", controller: self)
+//
+//
+//                    }
+//
+//                    completion()
+//
+//
+//
+//                }
+//                else
+//                {
+//                    let message = responseData["message"] as! String
+//                    SharedHelper().showToast(message: message, controller: self)
+//                    //   SharedHelper().hideSpinner(view: self.view)
+//                    completion()
+//                }
+//            }
+//        }
+//
+//    }
+//
     
     
     func cal_distance(lat:String,long:String)  -> Double{

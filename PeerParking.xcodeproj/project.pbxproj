@@ -767,8 +767,8 @@
 				FA1150BE2316838400D0B1FE /* Frameworks */,
 				FA1150BF2316838400D0B1FE /* Resources */,
 				5EA083E6BA19CFFFCF0BD170 /* [CP] Embed Pods Frameworks */,
-				82AF9BE47E118179A76A5FBC /* [CP] Copy Pods Resources */,
 				188888A4238EBEC40008BC88 /* ShellScript */,
+				925B2A910FD2F69CFB283655 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -942,7 +942,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PeerParking/Pods-PeerParking-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		82AF9BE47E118179A76A5FBC /* [CP] Copy Pods Resources */ = {
+		925B2A910FD2F69CFB283655 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1304,7 +1304,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = PeerParking/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1328,7 +1328,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = PeerParking/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

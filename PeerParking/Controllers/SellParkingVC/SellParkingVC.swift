@@ -226,6 +226,7 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
         print("checkStatusurl=\(url)")
         Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: true, headers: headers){
             response in
+            print(response.response?.statusCode)
             //print("response=\(response)")
             if response.result.value == nil {
 //                print("No response status")

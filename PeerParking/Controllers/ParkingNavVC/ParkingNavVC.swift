@@ -33,7 +33,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
     
     
     
-    var parking_details:NSDictionary!
+    var parking_details:Parking!
     var p_title:String = ""
     var p_lat:Double = 0.0
     var p_longg:Double = 0.0

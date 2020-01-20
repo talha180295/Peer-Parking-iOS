@@ -20,7 +20,7 @@ class Sell_parking_popup: UIViewController {
     @IBOutlet weak var time_tf: UITextField!
     
     @IBOutlet weak var submit_btn: UIButton!
-    var parking_details:NSDictionary!
+    var parking_details:Parking!
     
     var params:[String:Any] = [:]
     
@@ -126,11 +126,11 @@ class Sell_parking_popup: UIViewController {
         //            "is_resident_free": is_resident_free                  OP
         //        ]
         
-        if let vehicle_type = self.parking_details["vehicle_type"] as? Int{
+        if let vehicle_type = self.parking_details.vehicleType{
             params.updateValue(vehicle_type, forKey: "vehicle_type")
         }
         
-        if let parking_type = self.parking_details["parking_type"] as? Int{
+        if let parking_type = self.parking_details.parkingType{
             params.updateValue(parking_type, forKey: "parking_type")
         }
         
@@ -142,39 +142,39 @@ class Sell_parking_popup: UIViewController {
 //            params.updateValue(start_at, forKey: "start_at")
 //        }
         
-        if let longitude = self.parking_details["longitude"] as? String{
+        if let longitude = self.parking_details.longitude{
             params.updateValue(longitude, forKey: "longitude")
         }
         
-        if let latitude = self.parking_details["latitude"] as? String{
+        if let latitude = self.parking_details.latitude{
             params.updateValue(latitude, forKey: "latitude")
         }
         
-        if let is_negotiable = self.parking_details["is_negotiable"] as? String{
+        if let is_negotiable = self.parking_details.isNegotiable{
             params.updateValue(is_negotiable, forKey: "is_negotiable")
         }
         
-        if let note = self.parking_details["note"] as? String{
+        if let note = self.parking_details.note{
             params.updateValue(note, forKey: "note")
         }
         
-        if let parking_hours_limit = self.parking_details["parking_hours_limit"] as? String{
+        if let parking_hours_limit = self.parking_details.parkingHoursLimit{
             params.updateValue(parking_hours_limit, forKey: "parking_hours_limit")
         }
         
-        if let parking_extra_fee = self.parking_details["parking_extra_fee"] as? String{
+        if let parking_extra_fee = self.parking_details.parkingExtraFee{
             params.updateValue(parking_extra_fee, forKey: "parking_extra_fee")
         }
         
-        if let parking_allowed_until = self.parking_details["parking_allowed_until"] as? String{
+        if let parking_allowed_until = self.parking_details.parkingAllowedUntil{
             params.updateValue(parking_allowed_until, forKey: "parking_allowed_until")
         }
         
-        if let parking_extra_fee_unit = self.parking_details["parking_extra_fee_unit"] as? String{
+        if let parking_extra_fee_unit = self.parking_details.parkingExtraFeeUnit{
             params.updateValue(parking_extra_fee_unit, forKey: "parking_extra_fee_unit")
         }
         
-        if let is_resident_free = self.parking_details["is_resident_free"] as? String{
+        if let is_resident_free = self.parking_details.isResidentFree{
             params.updateValue(is_resident_free, forKey: "is_resident_free")
         }
         

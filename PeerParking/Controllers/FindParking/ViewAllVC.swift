@@ -12,7 +12,7 @@ import CoreLocation
 class ViewAllVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
-    var parkings:[Any] = []
+    var parkings:[Parking] = []
     
     var lat = 0.0
     var longg = 0.0
@@ -38,52 +38,33 @@ class ViewAllVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = my_table_view.dequeueReusableCell(withIdentifier: "Parking_table_cell") as! Parking_table_cell
        
-//        if(parkings.count>0){
-//            let dict = parkings[indexPath.row] as! NSDictionary
-//            print(dict)
-//            if(dict["address"] is NSNull)
-//            {
-//
-//            }
-//            else
-//            {
-//                cell.parking_title.text = (dict["address"] as! String)
-//            }
-//            //cell.setData(empReqObj: arrModel[indexPath.row])
-//        }
-        
         if(parkings.count>0){
             
             
-            let dict = parkings[indexPath.row] as! NSDictionary
+            let dict = parkings[indexPath.row]
             print(dict)
             
             
-            let seller = dict["seller"] as! NSDictionary
-            let seller_details = seller["details"] as! NSDictionary
+            let seller = dict.seller
+            let seller_details = seller?.details
             
-            let lat = dict["latitude"] as! String
-            let long = dict["longitude"] as! String
+            let lat = dict.latitude ?? ""
+            let long = dict.longitude ?? ""
             
             
-            let priceStr = dict["initial_price"] as! Double
+            let priceStr = dict.initialPrice ?? 0
             
             let distanceStr = cal_distance(lat: lat, long: long)
             
-            let imgUrl = dict["image_url"] as? String
+            let imgUrl = dict.imageURL
             cell.img.sd_setImage(with: URL(string: imgUrl!),placeholderImage: UIImage.init(named: "placeholder-img") )
-            if(dict["address"] is NSNull)
-            {
-                
-            }
-            else
-            {
-                cell.parking_title.text = (dict["address"] as! String)
-            }
+      
             
-            cell.vehicle_type.text = (dict["vehicle_type_text"] as? String)
+            cell.parking_title.text = dict.address ?? "-"
             
-            cell.rating_view.rating = ((seller_details["average_rating"] as? Double)!)
+            cell.vehicle_type.text = dict.vehicleTypeText
+            
+            cell.rating_view.rating = seller_details?.averageRating ?? 0.0
             
             cell.price.text = "$" + String(priceStr)
             
@@ -104,14 +85,14 @@ class ViewAllVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func parkingDetails(indexPath: IndexPath){
         
-        let dict = (self.parkings[indexPath.row]  as! NSDictionary)
+        let dict = self.parkings[indexPath.row]
         
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC") as! BottomSheetVC
         controller.parking_details = dict
         
         
-        let lat = dict["latitude"] as! String
-        let long = dict["longitude"] as! String
+        let lat = dict.latitude ?? "0.0"
+        let long = dict.longitude ?? "0.0"
         let distanceStr = cal_distance(lat: lat, long: long)
         
         

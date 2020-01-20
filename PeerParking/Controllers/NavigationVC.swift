@@ -47,7 +47,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     
     //Variables
     var alternateRoutes:[JSON]!
-    var parkings:[Any] = []
+    var parkings:[Parking] = []
     var estimateWidth=130
     var cellMarginSize=1
     var address = ""
@@ -265,7 +265,8 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     
     
       func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-          return parkings.count
+            print(parkings.count)
+            return parkings.count
       }
       
       func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -274,35 +275,30 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
           if(parkings.count>0){
               
               
-            let dict = parkings[indexPath.row] as! NSDictionary
+            let dict = parkings[indexPath.row]
             print(dict)
             
             
-            let seller = dict["seller"] as! NSDictionary
-            let seller_details = seller["details"] as! NSDictionary
+            let seller = dict.seller
+            let seller_details = seller?.details
             
-            let lat = dict["latitude"] as! String
-            let long = dict["longitude"] as! String
+            let lat = dict.latitude ?? ""
+            let long = dict.longitude ?? ""
             
             
-            let priceStr = dict["initial_price"] as! Double
+            let priceStr = dict.initialPrice ?? 0.0
             
             let distanceStr = cal_distance(lat: lat, long: long)
             
-            let imgUrl = dict["image_url"] as? String
+            let imgUrl = dict.imageURL
             cell.image.sd_setImage(with: URL(string: imgUrl!),placeholderImage: UIImage.init(named: "placeholder-img") )
-            if(dict["address"] is NSNull)
-            {
-                
-            }
-            else
-            {
-                cell.parking_title.text = (dict["address"] as! String)
-            }
+           
             
-            cell.rating_view.rating = ((seller_details["average_rating"] as? Double)!)
+           
             
-            cell.vehicle_type.text = (dict["vehicle_type_text"] as? String)
+            cell.parking_title.text = dict.address ?? "-"
+            cell.rating_view.rating = seller_details?.averageRating ?? 0.0
+            cell.vehicle_type.text = dict.vehicleTypeText
             
             
             cell.price.text = "$" + String(priceStr)
@@ -325,14 +321,14 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
       
       func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
           
-        let dict = (self.parkings[indexPath.row]  as! NSDictionary)
+        let dict = self.parkings[indexPath.row]
         
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC") as! BottomSheetVC
         controller.parking_details = dict
         
         
-        let lat = dict["latitude"] as! String
-        let long = dict["longitude"] as! String
+        let lat = dict.latitude ?? "0.0"
+        let long = dict.longitude ?? "0.0"
         let distanceStr = cal_distance(lat: lat, long: long)
         
         
@@ -345,13 +341,11 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
       func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
           for cell in myCollectionView.visibleCells {
               let indexPath = myCollectionView.indexPath(for: cell)
-              print("indexPath=\(indexPath?.row)")
+            
+              let dict = parkings[(indexPath?.row)!]
               
-              
-              let dict = parkings[(indexPath?.row)!] as! NSDictionary
-              
-              let lat = Double(dict["latitude"] as! String)
-              let long = Double(dict["longitude"] as! String)
+              let lat = Double(dict.latitude ?? "0.0")
+              let long = Double(dict.longitude ?? "0.0")
               
               let camera = GMSCameraPosition.camera(withLatitude: lat!, longitude: long!, zoom: 12.0)
               self.map.animate(to: camera)
@@ -537,66 +531,67 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
                 return
             }
             else {
-                let responseData = response.result.value as! NSDictionary
-                let status = responseData["success"] as! Bool
-                if(status)
-                {
-                    //                    UserDefaults.standard.set("isSocial", forKey: "yes")
-                    //                    UserDefaults.standard.synchronize()
+                
+                if let jsonData = response.data{
                     
-                    
-                    
-                    let message = responseData["message"] as! String
-                    let uData = responseData["data"] as! [Any]
-                   
-                    Helper().map_circle(data: uData, map_view: self.map)
-                    Helper().map_custom_marker(data: uData, map_view: self.map)
-                    //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
-                    self.parkings = uData
-                    print("parkings.count=\(self.parkings.count)")
-                   
-                  
-                    
-                    
-                    print("self.address=\(self.address)")
-                    
-                    
-                    if(self.parkings.count > 0){
+                    let response = try! JSONDecoder().decode(ResponseData<[Parking]>.self, from: jsonData)
+                    if response.success{
+                        //                    UserDefaults.standard.set("isSocial", forKey: "yes")
+                        //                    UserDefaults.standard.synchronize()
                         
-                        self.parkingCellHeightConstr.constant = 104
                         
-//                            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-//                                self.parkingCellHeightConstr.constant = 104
-//                            })
+                        
+                        let message = response.message
+                        if let uData = response.data{
+                            
+                            Helper().map_circle(data: uData, map_view: self.map)
+                            Helper().map_custom_marker(data: uData, map_view: self.map)
+                            //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
+                            self.parkings = uData
+                            
+                        }
+                        
+                      
+                        
+                        
+                        if(self.parkings.count > 0){
+                            
+                            self.parkingCellHeightConstr.constant = 104
+                            
+                            //                            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+                            //                                self.parkingCellHeightConstr.constant = 104
+                            //                            })
+                            
+                        }
+                        else{
+                            
+                            self.parkingCellHeightConstr.constant = 0
+                            
+                            //                            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+                            //                                self.parkingCellHeightConstr.constant = 0
+                            //                            })
+                        }
+                        
+                        self.myCollectionView.reloadData()
+                        SharedHelper().showToast(message: message, controller: self)
+                        
+                        //                        self.parkings_cells.isHidden = false
+                        
+                        
+                        
+                        completion()
+                        
+                        
                         
                     }
                     else{
-                        
-                        self.parkingCellHeightConstr.constant = 0
-                        
-//                            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-//                                self.parkingCellHeightConstr.constant = 0
-//                            })
+                        print("Eroor=\(response.message)")
+                        SharedHelper().showToast(message: response.message, controller: self)
+                        //   SharedHelper().hideSpinner(view: self.view)
+                        completion()
                     }
-                    
-                    self.myCollectionView.reloadData()
-                    SharedHelper().showToast(message: message, controller: self)
-                    
-//                        self.parkings_cells.isHidden = false
-                    
-                    
-                    
-                    completion()
-                   
-                    
-                   
                 }
-                else
-                {
-                    let message = responseData["message"] as! String
-                    SharedHelper().showToast(message: message, controller: self)
-                    //   SharedHelper().hideSpinner(view: self.view)
-                }
+                
             }
         }
             

@@ -19,7 +19,7 @@ class FBPopup: UIViewController {
 
     var key = ""
     var source = ""
-    var parking_details:NSDictionary!
+    var parking_details:Parking!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -175,7 +175,7 @@ class FBPopup: UIViewController {
                 //            self.present(vc, animated: false, completion: nil)
                 
                 //SharedHelper().showToast(message: "Login", controller: self)
-                let id = Int(self.parking_details["id"] as! Int)
+                let id = self.parking_details.id ?? 0
                 
                 
                     
@@ -183,11 +183,11 @@ class FBPopup: UIViewController {
                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
                 //
                 vc.parking_details = self.parking_details
-                vc.p_id = Int(self.parking_details["id"] as! Int)
-                vc.p_title =  parking_details["address"] as? String ?? ""
-                
-                vc.p_lat = Double(self.parking_details["latitude"] as! String)!
-                vc.p_longg = Double(self.parking_details["longitude"] as! String)!
+                vc.p_id = self.parking_details.id ?? 0
+                vc.p_title =  parking_details.address ?? ""
+                0.0
+                vc.p_lat = Double(self.parking_details.latitude ?? "0.0") as! Double
+                vc.p_longg = Double(self.parking_details.longitude ?? "0.0") as! Double
                 vc.vcName = ""
                 
                 

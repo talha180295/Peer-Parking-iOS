@@ -69,17 +69,15 @@ class Helper{
         }
     }
     
-    func map_circle(data:[Any], map_view:GMSMapView){
+    func map_circle(data:[Parking], map_view:GMSMapView){
         
         
         for n in 0..<data.count {
             
-            let dict = data[n] as! NSDictionary
+            let dict = data[n] 
             
-            
-            
-            let lat = Double(dict["latitude"] as! String)
-            let long = Double(dict["longitude"] as! String)
+            let lat = Double(dict.latitude ?? "")
+            let long = Double(dict.longitude  ?? "")
             print("dictABC=\(lat!)")
             print("dictABC=\(long!)")
             //        print("dictABC=\(type(of: lat) )")
@@ -103,6 +101,7 @@ class Helper{
             
         }
     }
+    
     
     func map_marker(lat:Double,longg:Double, map_view:GMSMapView, title:String){
         
@@ -148,7 +147,7 @@ class Helper{
         
     }
     
-    func map_custom_marker(data:[Any], map_view:GMSMapView){
+    func map_custom_marker(data:[Parking], map_view:GMSMapView){
         
         //        // I have taken a pin image which is a custom image
         //        let markerImage = UIImage(named: "radius_blue")!.withRenderingMode(.alwaysOriginal)
@@ -168,14 +167,14 @@ class Helper{
         
         for n in 0..<data.count {
             
-            let dict = data[n] as! NSDictionary
             
-            
-            let price = dict["initial_price"] as! Double
-            let lat = Double(dict["latitude"] as! String)
-            let longg = Double(dict["longitude"] as! String)
+            let dict = data[n] //as! NSDictionary
+
+            let price = dict.initialPrice ?? 0.0
+            let lat = Double(dict.latitude ?? "")
+            let long = Double(dict.longitude  ?? "")
             print("dictABC=\(lat!)")
-            print("dictABC=\(longg!)")
+            print("dictABC=\(long!)")
             let marker = GMSMarker()
         
             // I have taken a pin image which is a custom image
@@ -189,7 +188,7 @@ class Helper{
             //changing the tint color of the image
 //            markerView.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
         
-            let pos = CLLocationCoordinate2D(latitude: lat!-0.001, longitude: longg!-0.001)
+            let pos = CLLocationCoordinate2D(latitude: lat!-0.001, longitude: long!-0.001)
         
         
 //            let loc = CLLocationCoordinate2D(latitude: lat!, longitude: longg!)

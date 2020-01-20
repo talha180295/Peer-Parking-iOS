@@ -18,7 +18,7 @@ class FeedbackVC: UIViewController {
     @IBOutlet weak var rating_bar: CosmosView!
     @IBOutlet weak var label: UILabel!
     
-    var parking_details:NSDictionary!
+    var parking_details:Parking!
     var p_id:Int!
     
     override func viewDidLoad() {

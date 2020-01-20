@@ -42,7 +42,7 @@ class BottomSheetVC: UIViewController {
     
     let story = UIStoryboard(name: "Main", bundle: nil)
     
-    var parking_details:NSDictionary!
+    var parking_details:Parking!
     var distanceInMiles: String!
     
     var parkingId:Int?
@@ -62,49 +62,49 @@ class BottomSheetVC: UIViewController {
     
     func setData(){
         
-        self.parking_titile.text = parking_details["address"] as? String
+        self.parking_titile.text = parking_details.address
         
-        let dicInner = parking_details["seller"] as! NSDictionary
-        let dicInnerDetail = dicInner["details"] as! NSDictionary
-        let rating  = dicInnerDetail["average_rating"] as? Double
+        let seller = parking_details.seller
+        let sellerDetail = seller?.details
+        let rating  = sellerDetail?.averageRating
         trust_score.rating = Double(rating ?? 0)
-        let priceStr = parking_details["initial_price"] as! Double
-        if parking_details["image_url"] is NSNull
+        let priceStr = parking_details.initialPrice ?? 0.0
+        if parking_details.imageURL == nil
         {
             photo.image = UIImage.init(named: "placeholder")
         }
         else
         {
         
-            let imgUrl = parking_details["image_url"] as! String
-            photo.sd_setImage(with: URL(string: imgUrl),placeholderImage: UIImage.init(named: "placeholder-img") )
+            let imgUrl = parking_details.imageURL
+            photo.sd_setImage(with: URL(string: imgUrl ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
         }
         
         
-        self.price.text = "$" + String(priceStr)
+        self.price.text = "$\(priceStr)"
         print("adfsdf=\(distanceInMiles)")
         self.distance.text = distanceInMiles
         
-        if parking_details["note"] is NSNull
+        if parking_details.note == nil
         {
             self.note.text = ""
         }
         else
         {
-            self.note.text = parking_details["note"] as? String
+            self.note.text = parking_details.note
         }
         
       
-        self.parking_type.text = parking_details["parking_type_text"] as? String
+        self.parking_type.text = parking_details.parkingTypeText
         
-        self.viheicle_type.text = parking_details["vehicle_type_text"] as? String
+        self.viheicle_type.text = parking_details.vehicleTypeText
         
         
-        if let time_limit = parking_details["parking_allowed_until"] as? String{
+        if let time_limit = parking_details.parkingAllowedUntil{
             
             self.time_limit.text = "UNTIL \(time_limit)"
         }
-        if let ext_fee = parking_details["parking_extra_fee"] as? Double{
+        if let ext_fee = parking_details.parkingExtraFee{
             
             self.extra_charges.text = "\(ext_fee)"
         }
@@ -189,8 +189,8 @@ class BottomSheetVC: UIViewController {
     @IBAction func take_btn_click(_ sender: UIButton) {
         
         
-        let p_id = Int(self.parking_details["id"] as! Int)
-        let final_price = Double(self.parking_details["initial_price"] as! Double)
+        let p_id = Int(self.parking_details.id as! Int)
+        let final_price = Double(self.parking_details.initialPrice ?? 0.0)
         let myId = UserDefaults.standard.integer(forKey: "id")
             
         
