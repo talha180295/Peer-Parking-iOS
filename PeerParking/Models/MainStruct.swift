@@ -9,11 +9,11 @@
 import Foundation
 import Alamofire
 
-struct ResponseDataArray <T:Codable> : Codable {
-    var success:Bool
-    var data:[T]?
-    var message:String
-}
+//struct ResponseDataArray <T:Codable> : Codable {
+//    var success:Bool
+//    var data:[T]?
+//    var message:String
+//}
 
 
 struct ResponseData <T:Codable> : Codable {
@@ -49,12 +49,12 @@ extension DataRequest {
     }
     
     @discardableResult
-    func responseBargaining(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<ResponseDataArray<Bargaining>>) -> Void) -> Self {
+    func responseBargaining(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<ResponseData<[Bargaining]>>) -> Void) -> Self {
         return responseDecodable(queue: queue, completionHandler: completionHandler)
     }
     
     @discardableResult
-    func responseParking(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<ResponseDataArray<Parking>>) -> Void) -> Self {
+    func responseParking(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<ResponseData<[Parking]>>) -> Void) -> Self {
         return responseDecodable(queue: queue, completionHandler: completionHandler)
     }
     
@@ -69,7 +69,7 @@ extension DataRequest {
     }
     
     @discardableResult
-    func responsePostBargainigOffer(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<ResponseDataArray<PostBargainigOfferModel>>) -> Void) -> Self {
+    func responsePostBargainigOffer(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<ResponseData<[PostBargainigOfferModel]>>) -> Void) -> Self {
         return responseDecodable(queue: queue, completionHandler: completionHandler)
     }
 }

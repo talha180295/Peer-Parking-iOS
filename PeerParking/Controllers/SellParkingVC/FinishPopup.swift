@@ -27,54 +27,13 @@ class FinishPopup: UIViewController {
         GLOBAL_VAR.PARKING_POST_DONE = true
         
         sender.isHidden = true
-//        let vehicle_type = GLOBAL_VAR.PARKING_POST_DETAILS["vehicle_type"]
-//        let parking_type = GLOBAL_VAR.PARKING_POST_DETAILS["parking_type"]
-//        let status = GLOBAL_VAR.PARKING_POST_DETAILS["status"]
-//        let initial_price = GLOBAL_VAR.PARKING_POST_DETAILS["initial_price"]
-//        let final_price = GLOBAL_VAR.PARKING_POST_DETAILS["final_price"]
-//        let start_at = GLOBAL_VAR.PARKING_POST_DETAILS["start_at"]
-//        let end_at = GLOBAL_VAR.PARKING_POST_DETAILS["end_at"]
-//        let address = GLOBAL_VAR.PARKING_POST_DETAILS["address"]
-//        let longitude = GLOBAL_VAR.PARKING_POST_DETAILS["longitude"]
-//        let latitude = GLOBAL_VAR.PARKING_POST_DETAILS["latitude"]
-//        let is_negotiable = GLOBAL_VAR.PARKING_POST_DETAILS["is_negotiable"]
-//        let image = GLOBAL_VAR.PARKING_POST_DETAILS["image"]
-//        let note = GLOBAL_VAR.PARKING_POST_DETAILS["note"]
-//        let parking_hours_limit = GLOBAL_VAR.PARKING_POST_DETAILS["parking_hours_limit"]
-//        let parking_allowed_until = GLOBAL_VAR.PARKING_POST_DETAILS["parking_allowed_until"]
-//        let parking_extra_fee = GLOBAL_VAR.PARKING_POST_DETAILS["parking_extra_fee"]
-//        let parking_extra_fee_unit = GLOBAL_VAR.PARKING_POST_DETAILS["parking_extra_fee_unit"]
-//        let is_resident_free = GLOBAL_VAR.PARKING_POST_DETAILS["is_resident_free"]
         
         
         let image = GLOBAL_VAR.PARKING_POST_DETAILS["image"]
         
    
- 
-//        var params:[String:Any] = [
-//            "vehicle_type": vehicle_type,
-//            "parking_type": parking_type,
-//            "status": status,
-//            "initial_price": initial_price,
-//            "final_price": final_price,
-//            "start_at": start_at,
-//            "end_at": end_at,
-//            "address": address,
-//            "longitude": longitude,
-//            "latitude": latitude,
-//            "is_negotiable": is_negotiable,
-//            "note": note,
-//            "parking_hours_limit": parking_hours_limit,
-//            "parking_extra_fee": parking_extra_fee,
-//            "parking_allowed_until": parking_allowed_until,
-////            "parking_extra_fee_unit": parking_extra_fee_unit,
-//            "is_resident_free": is_resident_free
-//        ]
-//        if(parking_extra_fee_unit != nil){
-//            params.updateValue(parking_extra_fee_unit!, forKey: "parking_extra_fee_unit")
-//        }
         
-        var params:[String:Any] = GLOBAL_VAR.PARKING_POST_DETAILS
+        let params:[String:Any] = GLOBAL_VAR.PARKING_POST_DETAILS
         
         //params.updateValue("hello", forKey: "new_val")
         let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: "auth_token")!)"
