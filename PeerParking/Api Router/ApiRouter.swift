@@ -19,7 +19,7 @@ enum APIRouter: URLRequestConvertible {
     case getBargainings([String:Any])
     case postParking([String:Any])
     case postBargainingOffer([String:Any])
-    
+    case addUserCard([String:Any])
     
     private var accessToken:String{
         return  UserDefaults.standard.string(forKey: "auth_token") ?? ""
@@ -32,7 +32,7 @@ enum APIRouter: URLRequestConvertible {
         case .getParkingsWithoutToken,.getParkings,.getParkingsById,.getBargainings:
             return .get
             
-        case .postParking,.postBargainingOffer:
+        case .postParking,.postBargainingOffer,.addUserCard:
             return .post
         }
     }
@@ -53,6 +53,8 @@ enum APIRouter: URLRequestConvertible {
             return "bargainings"
         case .postBargainingOffer:
             return "bargainings"
+        case .addUserCard:
+            return "user-cards"
             
         }
     }
@@ -72,6 +74,8 @@ enum APIRouter: URLRequestConvertible {
         case .getBargainings(let params):
             return (params)
         case .postBargainingOffer(let params):
+            return (params)
+        case .addUserCard(let params):
             return (params)
         }
     }

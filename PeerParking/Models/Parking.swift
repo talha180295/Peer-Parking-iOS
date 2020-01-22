@@ -20,9 +20,9 @@ struct Parking: Codable {
     let isNegotiable: Bool?
     let startAt, endAt, address, latitude: String?
     let longitude, image, note: String?
-    let parkingHoursLimit: Int?
-    let parkingAllowedUntil: String?
-    let parkingExtraFee, parkingExtraFeeUnit: Int?
+    let parkingHoursLimit: String?
+    let parkingExtraFee, parkingAllowedUntil: String?
+    let parkingExtraFeeUnit: Int?
     let isResidentFree: Bool?
     let createdAt, updatedAt, deletedAt: String?
     let action: Int?

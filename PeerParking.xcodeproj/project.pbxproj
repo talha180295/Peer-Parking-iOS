@@ -57,6 +57,7 @@
 		18DB9C492397FB3C00A6968F /* Hours_picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DB9C482397FB3C00A6968F /* Hours_picker.swift */; };
 		18E099D02358F27E00B43A4B /* DGRunkeeperSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E099CE2358F27E00B43A4B /* DGRunkeeperSwitch.swift */; };
 		18E099D22358FB6500B43A4B /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E099D12358FB6500B43A4B /* NavigationVC.swift */; };
+		18F8118A23D87DAD00B3061F /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8118923D87DAD00B3061F /* PaymentView.swift */; };
 		67BC7B9623CC53B6001542D6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9523CC53B6001542D6 /* LoginViewController.swift */; };
 		67BC7B9823CC53CB001542D6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9723CC53CA001542D6 /* RegistrationViewController.swift */; };
 		67BC7B9A23CC5D64001542D6 /* ForgetPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9923CC5D64001542D6 /* ForgetPassViewController.swift */; };
@@ -199,6 +200,7 @@
 		18E099CC2358F27E00B43A4B /* DGRunkeeperSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGRunkeeperSwitch.h; sourceTree = "<group>"; };
 		18E099CE2358F27E00B43A4B /* DGRunkeeperSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGRunkeeperSwitch.swift; sourceTree = "<group>"; };
 		18E099D12358FB6500B43A4B /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
+		18F8118923D87DAD00B3061F /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67BC7B9523CC53B6001542D6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		67BC7B9723CC53CA001542D6 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -449,6 +451,14 @@
 			path = DGRunkeeperSwitch;
 			sourceTree = "<group>";
 		};
+		18F8118823D87D8A00B3061F /* Stripe */ = {
+			isa = PBXGroup;
+			children = (
+				18F8118923D87DAD00B3061F /* PaymentView.swift */,
+			);
+			path = Stripe;
+			sourceTree = "<group>";
+		};
 		2EEB6BD6F5BBF17D05AEE169 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,6 +545,7 @@
 		FA1150C32316838400D0B1FE /* PeerParking */ = {
 			isa = PBXGroup;
 			children = (
+				18F8118823D87D8A00B3061F /* Stripe */,
 				188888A5238EBEEA0008BC88 /* Crashlytics.framework */,
 				188888A6238EBEEA0008BC88 /* Fabric.framework */,
 				181E0D0E23CDF953005D7248 /* Api Router */,
@@ -1091,6 +1102,7 @@
 				FA526EF8232D210E0014517B /* SellParkingViewController.swift in Sources */,
 				185DE79E2360A84C00FC0E25 /* ParkingNavVC.swift in Sources */,
 				18DB9C492397FB3C00A6968F /* Hours_picker.swift in Sources */,
+				18F8118A23D87DAD00B3061F /* PaymentView.swift in Sources */,
 				1866BF5F237450A5008EE650 /* NotificationVC.swift in Sources */,
 				FA1150C52316838400D0B1FE /* AppDelegate.swift in Sources */,
 				185DE7A62360E2B300FC0E25 /* FeedbackVC.swift in Sources */,

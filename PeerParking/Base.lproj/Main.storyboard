@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -967,7 +966,7 @@
                                 <rect key="frame" x="10" y="49" width="394" height="70"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_bg" translatesAutoresizingMaskIntoConstraints="NO" id="RD1-A0-xxc">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394.00000000000006" height="70"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qmb-Vy-aOa">
                                         <rect key="frame" x="26" y="13" width="303" height="44"/>
@@ -1058,7 +1057,7 @@
                                         <rect key="frame" x="8" y="75" width="398" height="70"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_bg" translatesAutoresizingMaskIntoConstraints="NO" id="zMO-Yn-IRY">
-                                                <rect key="frame" x="0.0" y="0.0" width="398" height="70"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="398.00000000000006" height="70"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TV3-1X-rKc">
                                                 <rect key="frame" x="26" y="13" width="322" height="44"/>
@@ -1150,7 +1149,7 @@
                                 <rect key="frame" x="10" y="49" width="394" height="70"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_bg" translatesAutoresizingMaskIntoConstraints="NO" id="5lS-Gi-cFc">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394.00000000000006" height="70"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gtE-b0-sqX">
                                         <rect key="frame" x="26" y="13" width="271" height="44"/>
@@ -1242,7 +1241,7 @@
                                         <rect key="frame" x="8" y="75" width="398" height="70"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_bg" translatesAutoresizingMaskIntoConstraints="NO" id="WAO-j1-rIW">
-                                                <rect key="frame" x="0.0" y="0.0" width="398" height="70"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="398.00000000000006" height="70"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y8d-IA-lDX">
                                                 <rect key="frame" x="26" y="13" width="322" height="44"/>
@@ -3831,7 +3830,7 @@
                                         <rect key="frame" x="8" y="75" width="398" height="70"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_bg" translatesAutoresizingMaskIntoConstraints="NO" id="c1L-er-kqC">
-                                                <rect key="frame" x="0.0" y="0.0" width="398" height="70"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="398.00000000000006" height="70"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rfB-RE-9hQ">
                                                 <rect key="frame" x="26" y="13" width="322" height="44"/>
@@ -5313,6 +5312,9 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                                 <state key="normal" title="+ Add Card">
                                                     <color key="titleColor" red="0.18744784593582153" green="0.61218529939651489" blue="0.82450407743453979" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="ftK-Ns-8Gs" kind="show" id="uZ4-wt-hoa"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -5549,6 +5551,60 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ld-YL-Wf4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1424.6376811594205" y="3045.5357142857142"/>
+        </scene>
+        <!--Payment View-->
+        <scene sceneID="RQK-WR-VyB">
+            <objects>
+                <viewController id="ftK-Ns-8Gs" customClass="PaymentView" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U97-2a-l1U">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S6u-xu-cUA">
+                                <rect key="frame" x="20" y="54" width="374" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFv-wp-0kt">
+                                <rect key="frame" x="184" y="207" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmj-EY-kFr">
+                                <rect key="frame" x="18" y="108" width="378" height="137"/>
+                                <color key="backgroundColor" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="137" id="7kg-n9-svG"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mmj-EY-kFr" firstAttribute="top" secondItem="Igq-kg-v5C" secondAttribute="top" constant="20" id="0T4-si-MWC"/>
+                            <constraint firstItem="bFv-wp-0kt" firstAttribute="leading" secondItem="Igq-kg-v5C" secondAttribute="leading" constant="184" id="A9Z-Fs-u0Q"/>
+                            <constraint firstItem="mmj-EY-kFr" firstAttribute="leading" secondItem="Igq-kg-v5C" secondAttribute="leading" constant="18" id="bk8-Vu-a4V"/>
+                            <constraint firstItem="bFv-wp-0kt" firstAttribute="top" secondItem="S6u-xu-cUA" secondAttribute="bottom" constant="79" id="jQR-VD-eRH"/>
+                            <constraint firstItem="S6u-xu-cUA" firstAttribute="leading" secondItem="Igq-kg-v5C" secondAttribute="leading" constant="20" id="ldo-ZY-bhb"/>
+                            <constraint firstItem="S6u-xu-cUA" firstAttribute="top" secondItem="Igq-kg-v5C" secondAttribute="top" constant="10" id="rth-3D-pdG"/>
+                            <constraint firstItem="Igq-kg-v5C" firstAttribute="trailing" secondItem="mmj-EY-kFr" secondAttribute="trailing" constant="18" id="t1e-ly-YLe"/>
+                            <constraint firstItem="Igq-kg-v5C" firstAttribute="trailing" secondItem="bFv-wp-0kt" secondAttribute="trailing" constant="184" id="vBL-aU-xTQ"/>
+                            <constraint firstItem="Igq-kg-v5C" firstAttribute="trailing" secondItem="S6u-xu-cUA" secondAttribute="trailing" constant="20" id="xFc-dt-s40"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Igq-kg-v5C"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="S6u-xu-cUA"/>
+                                <exclude reference="bFv-wp-0kt"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="myView" destination="mmj-EY-kFr" id="F01-zK-UX5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fLC-7P-eqq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2234.7826086956525" y="3105.8035714285711"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Thi-Ak-gRi">

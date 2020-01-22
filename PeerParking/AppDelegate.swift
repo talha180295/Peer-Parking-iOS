@@ -14,6 +14,7 @@ import IQKeyboardManagerSwift
 import Fabric
 import Crashlytics
 import CoreLocation
+import Stripe
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -39,7 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Just add this line to get it done.
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15.0)], for: UIControl.State.normal)
 
-       
+        
+        //Stripe
+//         Stripe.setDefaultPublishableKey("pk_test_RXoa7kPDBX5WbbFUwobIagRn00bNqh0qyQ")
+        STPPaymentConfiguration.shared().publishableKey = "pk_test_RXoa7kPDBX5WbbFUwobIagRn00bNqh0qyQ"
+
         // Override point for customization after application launch.
         return true
     }

@@ -28,7 +28,7 @@ target 'PeerParking' do
   pod 'CircleProgressView'	
 #  pod 'DGRunkeeperSwitch' , '~> 1.1.4'
 
-
+  pod 'Stripe'
 
   target 'PeerParkingTests' do
     inherit! :search_paths
