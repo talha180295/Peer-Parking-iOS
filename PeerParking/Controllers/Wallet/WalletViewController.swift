@@ -8,7 +8,10 @@
 
 import UIKit
 import NotificationCenter
+import Stripe
+
 class WalletViewController: UIViewController {
+    
 
    // @IBOutlet weak var someView: UIView!
     @IBOutlet weak var blackView: UIView!
@@ -71,5 +74,39 @@ class WalletViewController: UIViewController {
         
         let name = NSNotification.Name(rawValue: "BottomViewMoved")
         NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil, using: receiveNotification(_:))
+    }
+    
+    
+    @IBAction func addCardBtn(_ sender: UIButton) {
+        
+//        choosePaymentButtonTapped()
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentView")
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
+
+
+extension WalletViewController: STPAddCardViewControllerDelegate {
+    
+    func addCardViewControllerDidCancel(_ addCardViewController: STPAddCardViewController) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func addCardViewController(_ addCardViewController: STPAddCardViewController,
+                               didCreateToken token: STPToken,
+                               completion: @escaping STPErrorBlock) {
+        
+        print("s_token===\(token)")
+    }
+    
+    
+    func choosePaymentButtonTapped() {
+        
+        // 2
+        let addCardViewController = STPAddCardViewController()
+        addCardViewController.delegate = self
+        navigationController?.pushViewController(addCardViewController, animated: true)
     }
 }

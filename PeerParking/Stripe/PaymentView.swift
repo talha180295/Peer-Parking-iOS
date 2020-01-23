@@ -15,6 +15,8 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
 
     @IBOutlet weak var myView: UIView!
     
+    
+    
     lazy var cardTextField: STPPaymentCardTextField = {
         let cardTextField = STPPaymentCardTextField()
         return cardTextField
@@ -24,7 +26,7 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
         button.layer.cornerRadius = 5
         button.backgroundColor = UIColor(named: "themeBlue")
         button.titleLabel?.font = UIFont.systemFont(ofSize: 22)
-        button.setTitle("Pay", for: .normal)
+        button.setTitle("Add Card", for: .normal)
         button.addTarget(self, action: #selector(pay), for: .touchUpInside)
         return button
     }()

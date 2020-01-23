@@ -275,24 +275,12 @@ class FBPopup: UIViewController {
     
     @IBAction func twitter_btn(_ sender: UIButton) {
         
-       LoginApi(email: "iosdev@gmail.com", password: "112233", device_type: "ios")
+       LoginApi(email: "iosdev@gmail.com", password: "123456", device_type: "ios")
     }
     
     func saveData(userData : NSDictionary)  {
         
         print("userData==\(userData)")
-//       // SharedHelper().hideSpinner(view: self.view)
-//        let detailUser = userData["user"] as! NSDictionary
-//        //let detailUser = userData["details"] as! NSDictionary
-//        UserDefaults.standard.set(userData["id"], forKey: "id")
-//
-//        let user_name = detailUser["fullname"] as! String
-//        //let bio = detailUser["bio"] as! NSNull
-//        let user_email = detailUser["email"] as! String
-//        let userID = detailUser["id"] as! String
-//        let  image_url = detailUser["image"] as! String
-//        // let address = detailUser["address"] as! NSNull
-//        let detailAuth = userData["auth"] as! NSDictionary
         
         let auth_token = userData["access_token"] as! String
         let created_at = userData["created_at"] as! String
@@ -303,17 +291,6 @@ class FBPopup: UIViewController {
         let userDetails = userData["details"] as! NSDictionary
         
         
-//        let address:String!
-//        let average_rating:String!
-//        let balance:String!
-//        let email_updates:String!
-//        let first_name:String!
-//        let full_name:String!
-//        let id:String!
-//        let image:String!
-//        let image_url:String!
-//        let last_name:String!
-//        let phone:String!
         
         
       
