@@ -483,7 +483,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         print("staging_url123=\(url)")
         Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: isHeaderIncluded, headers: headers){
             response in
-            //print("response=\(response)")
+            print("response=\(response)")
             if response.result.value == nil {
                 print("No response")
                 
@@ -563,141 +563,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     }
     
     
-    
-//    func get_all_parkings2(lat:Double,long:Double,isHeaderIncluded:Bool,filters:[String:String],completion: @escaping () -> Void){
-//
-//
-//        parkings = []
-//
-//        var params = [
-//
-//            "latitude": String(lat),
-//            "longitude": String(long)
-//
-//        ]
-//
-//        if(filters.keys.contains("vehicle_type")){
-//            params.updateValue(filters["vehicle_type"]!, forKey: "vehicle_type")
-//        }
-//        if(filters.keys.contains("parking_type")){
-//            params.updateValue(filters["parking_type"]!, forKey: "parking_type")
-//        }
-//        if(filters.keys.contains("orderBy_column")){
-//            params.updateValue(filters["orderBy_column"]!, forKey: "orderBy_column")
-//        }
-//        if(filters.keys.contains("time_margin")){
-//            params.updateValue(filters["time_margin"]!, forKey: "time_margin")
-//        }
-//
-//
-//        print("param123=\(params)")
-//
-//        var auth_value = ""
-//
-//        if let value : String = UserDefaults.standard.string(forKey: "auth_token"){
-//
-//           auth_value = "bearer " + value
-//        }
-//
-//
-//
-//
-//
-//        let headers: HTTPHeaders = [
-//            "Authorization" : auth_value
-//        ]
-//
-//
-//        var url = ""
-//
-//        if(Helper().IsUserLogin()){
-//            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITH_TOKEN
-//        }
-//        else{
-//            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
-//        }
-//        print("staging_url123=\(url)")
-//        Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: isHeaderIncluded, headers: headers){
-//            response in
-//            //print("response=\(response)")
-//            if response.result.value == nil {
-//                print("No response")
-//
-//                SharedHelper().showToast(message: "Internal Server Error", controller: self)
-//                completion()
-//                return
-//            }
-//            else {
-//                let responseData = response.result.value as! NSDictionary
-//                let status = responseData["success"] as! Bool
-//                if(status)
-//                {
-//                    //                    UserDefaults.standard.set("isSocial", forKey: "yes")
-//                    //                    UserDefaults.standard.synchronize()
-//
-//
-//
-//                    let message = responseData["message"] as! String
-//                    let uData = responseData["data"] as! [Any]
-//
-//                    Helper().map_circle(data: uData, map_view: self.map)
-//                    Helper().map_custom_marker(data: uData, map_view: self.map)
-//                    //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
-//                    self.parkings = uData
-//                    print("parkings.count=\(self.parkings.count)")
-//
-//
-//                    self.myCollectionView.reloadData()
-////                    SharedHelper().showToast(message: message, controller: self)
-//
-//                    print("self.address=\(self.address)")
-//
-//
-//                    if(self.parkings.count > 0){
-//
-//                        UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-//                            self.re_center_bottom_cont.constant = 40
-//                        })
-//
-//                        self.myCollectionView.isHidden = false
-//                        self.filter_btn.isHidden = false
-//                        self.view_all_btn.isHidden = false
-//
-//
-//                    }
-//                    else{
-//
-//                        UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-//                            self.re_center_bottom_cont.constant = -143
-//                        })
-//
-//                        self.myCollectionView.isHidden = true
-//                        self.filter_btn.isHidden = true
-//                        self.view_all_btn.isHidden = true
-//
-//                         SharedHelper().showToast(message: "No Parkings Available", controller: self)
-//
-//
-//                    }
-//
-//                    completion()
-//
-//
-//
-//                }
-//                else
-//                {
-//                    let message = responseData["message"] as! String
-//                    SharedHelper().showToast(message: message, controller: self)
-//                    //   SharedHelper().hideSpinner(view: self.view)
-//                    completion()
-//                }
-//            }
-//        }
-//
-//    }
-//
-    
+
     
     func cal_distance(lat:String,long:String)  -> Double{
 //
@@ -744,17 +610,6 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 }
 
 
-//extension FindParkingVC: GooglePlacesAutocompleteViewControllerDelegate {
-//    func viewController(didAutocompleteWith place: PlaceDetails) {
-//        print("::=place.description=\(place.description)")
-//        placesSearchController.isActive = false
-//
-//        let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate?.latitude)!, longitude: (place.coordinate?.longitude)!, zoom: 17.0)
-//
-//        self.map.animate(to: camera)
-//    }
-//
-//}
 extension FindParkingVC:FiltersProtocol{
     
     func applyFilters(filters: [String : String]) {

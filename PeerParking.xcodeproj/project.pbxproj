@@ -54,6 +54,7 @@
 		18CAA57F2368B6BB001B5503 /* FinishPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAA57E2368B6BA001B5503 /* FinishPopup.swift */; };
 		18CAA58123695B62001B5503 /* StepFiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAA58023695B62001B5503 /* StepFiveVC.swift */; };
 		18D1B63A2362024E002C875D /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1B6392362024E002C875D /* ScheduleVC.swift */; };
+		18D30D6323DAC4F2008889FB /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D30D6223DAC4F2008889FB /* WebView.swift */; };
 		18DB9C492397FB3C00A6968F /* Hours_picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DB9C482397FB3C00A6968F /* Hours_picker.swift */; };
 		18E099D02358F27E00B43A4B /* DGRunkeeperSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E099CE2358F27E00B43A4B /* DGRunkeeperSwitch.swift */; };
 		18E099D22358FB6500B43A4B /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E099D12358FB6500B43A4B /* NavigationVC.swift */; };
@@ -196,6 +197,7 @@
 		18CAA57E2368B6BA001B5503 /* FinishPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishPopup.swift; sourceTree = "<group>"; };
 		18CAA58023695B62001B5503 /* StepFiveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFiveVC.swift; sourceTree = "<group>"; };
 		18D1B6392362024E002C875D /* ScheduleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
+		18D30D6223DAC4F2008889FB /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		18DB9C482397FB3C00A6968F /* Hours_picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hours_picker.swift; sourceTree = "<group>"; };
 		18E099CC2358F27E00B43A4B /* DGRunkeeperSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGRunkeeperSwitch.h; sourceTree = "<group>"; };
 		18E099CE2358F27E00B43A4B /* DGRunkeeperSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGRunkeeperSwitch.swift; sourceTree = "<group>"; };
@@ -442,6 +444,14 @@
 			path = ScheduleVC;
 			sourceTree = "<group>";
 		};
+		18D30D6123DAC4D6008889FB /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				18D30D6223DAC4F2008889FB /* WebView.swift */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
 		18E099CB2358F27E00B43A4B /* DGRunkeeperSwitch */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,6 +555,7 @@
 		FA1150C32316838400D0B1FE /* PeerParking */ = {
 			isa = PBXGroup;
 			children = (
+				18D30D6123DAC4D6008889FB /* WebView */,
 				18F8118823D87D8A00B3061F /* Stripe */,
 				188888A5238EBEEA0008BC88 /* Crashlytics.framework */,
 				188888A6238EBEEA0008BC88 /* Fabric.framework */,
@@ -1044,6 +1055,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				181E0D1723CDF954005D7248 /* MainStruct.swift in Sources */,
+				18D30D6323DAC4F2008889FB /* WebView.swift in Sources */,
 				185FCF712358C10E0025DB5E /* FilterBottomSheetVC.swift in Sources */,
 				18C2195623ABB5F700BCCA75 /* BargainingCell.swift in Sources */,
 				FA2815AD231E3F92008AF3F5 /* ContentViewController.swift in Sources */,

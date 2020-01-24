@@ -2939,7 +2939,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gX9-ms-bWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1098.5507246376812" y="-238.39285714285714"/>
+            <point key="canvasLocation" x="2008.6956521739132" y="-238.39285714285714"/>
         </scene>
         <!--Find Parking-->
         <scene sceneID="WRd-Oi-rvX">
@@ -3149,7 +3149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YEk-hc-VzS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1853.6231884057972" y="-240.40178571428569"/>
+            <point key="canvasLocation" x="2763.768115942029" y="-240.40178571428569"/>
         </scene>
         <!--Filter Bottom SheetVC-->
         <scene sceneID="PFj-yi-i4d">
@@ -3585,7 +3585,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ckY-an-bwX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2657.971014492754" y="-240.40178571428569"/>
+            <point key="canvasLocation" x="3568.115942028986" y="-240.40178571428569"/>
         </scene>
         <!--ScheduleVC-->
         <scene sceneID="HQ6-hi-eBR">
@@ -3683,7 +3683,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nv1-7K-lOy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3479.7101449275365" y="-240.40178571428569"/>
+            <point key="canvasLocation" x="4389.855072463768" y="-240.40178571428569"/>
         </scene>
         <!--Find Parking-->
         <scene sceneID="HKh-hG-qqq">
@@ -4994,10 +4994,10 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                 <rect key="frame" x="20" y="88" width="394" height="808"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FxK-eK-qOW">
-                                        <rect key="frame" x="8" y="16" width="378" height="338"/>
+                                        <rect key="frame" x="8" y="16" width="378" height="360"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jex-AS-A3Z">
-                                                <rect key="frame" x="8" y="8" width="48.5" height="26"/>
+                                                <rect key="frame" x="8" y="8" width="55" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="26" id="sV9-LZ-U3z"/>
                                                 </constraints>
@@ -5011,9 +5011,12 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                                     <constraint firstAttribute="height" constant="33" id="zef-73-ZwM"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
-                                                <state key="normal" title="About Mob Park">
+                                                <state key="normal" title="About Peer Parking">
                                                     <color key="titleColor" red="0.37452399730682373" green="0.43006563186645508" blue="0.50908255577087402" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="aboutBtn:" destination="DcV-mf-Hp0" eventType="touchUpInside" id="VoS-rG-xQv"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5v-9f-do9">
                                                 <rect key="frame" x="8" y="89" width="362" height="33"/>
@@ -5024,6 +5027,9 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                                 <state key="normal" title="Terms of Use">
                                                     <color key="titleColor" red="0.37452399730000002" green="0.43006563190000002" blue="0.50908255579999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="termsBtn:" destination="DcV-mf-Hp0" eventType="touchUpInside" id="mT6-Dr-UJx"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VdG-wh-0Pj">
                                                 <rect key="frame" x="8" y="130" width="362" height="33"/>
@@ -5034,6 +5040,9 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                                 <state key="normal" title="Privacy Policy">
                                                     <color key="titleColor" red="0.37452399730000002" green="0.43006563190000002" blue="0.50908255579999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="privacyBtn:" destination="DcV-mf-Hp0" eventType="touchUpInside" id="81n-wQ-CGG"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyj-bW-tyi">
                                                 <rect key="frame" x="8" y="171" width="362" height="33"/>
@@ -5044,6 +5053,9 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                                 <state key="normal" title="Rate this App">
                                                     <color key="titleColor" red="0.37452399730000002" green="0.43006563190000002" blue="0.50908255579999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="rateBtn:" destination="DcV-mf-Hp0" eventType="touchUpInside" id="jLk-9e-pDz"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kUY-ye-bk5">
                                                 <rect key="frame" x="8" y="212" width="362" height="33"/>
@@ -5054,6 +5066,9 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                                 <state key="normal" title="Legal Information">
                                                     <color key="titleColor" red="0.37452399730000002" green="0.43006563190000002" blue="0.50908255579999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="legalBtn:" destination="DcV-mf-Hp0" eventType="touchUpInside" id="Ppk-oc-at7"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ilJ-N4-JT0">
                                                 <rect key="frame" x="8" y="253" width="362" height="33"/>
@@ -5061,9 +5076,12 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                                     <constraint firstAttribute="height" constant="33" id="VEj-ik-GET"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
-                                                <state key="normal" title="Version">
+                                                <state key="normal" title="Credits">
                                                     <color key="titleColor" red="0.37452399730000002" green="0.43006563190000002" blue="0.50908255579999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="creditsBtn:" destination="DcV-mf-Hp0" eventType="touchUpInside" id="i5M-Ao-s1J"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="irO-KK-C88">
                                                 <rect key="frame" x="8" y="39" width="362" height="1"/>
@@ -5078,16 +5096,27 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                                     <constraint firstAttribute="height" constant="33" id="ufg-dP-42v"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                <state key="normal" title="Version">
+                                                    <color key="titleColor" red="0.37452399730000002" green="0.43006563190000002" blue="0.50908255579999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2BQ-8G-6dj">
+                                                <rect key="frame" x="8" y="319" width="362" height="33"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="33" id="WEw-Gc-Yn5"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                                 <state key="normal" title="Change Password">
                                                     <color key="titleColor" red="0.37452399730000002" green="0.43006563190000002" blue="0.50908255579999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="btnChange:" destination="DcV-mf-Hp0" eventType="touchUpInside" id="qVf-jQ-iHP"/>
+                                                    <action selector="btnChange:" destination="DcV-mf-Hp0" eventType="touchUpInside" id="qxj-QH-Tou"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="2BQ-8G-6dj" secondAttribute="trailing" constant="8" id="4T8-Nd-iJy"/>
                                             <constraint firstAttribute="trailing" secondItem="kUY-ye-bk5" secondAttribute="trailing" constant="8" id="6ak-sL-giH"/>
                                             <constraint firstItem="irO-KK-C88" firstAttribute="leading" secondItem="FxK-eK-qOW" secondAttribute="leading" constant="8" id="7X6-4J-jW2"/>
                                             <constraint firstItem="ilJ-N4-JT0" firstAttribute="leading" secondItem="FxK-eK-qOW" secondAttribute="leading" constant="8" id="7eF-qC-226"/>
@@ -5098,8 +5127,10 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                             <constraint firstItem="Jex-AS-A3Z" firstAttribute="leading" secondItem="FxK-eK-qOW" secondAttribute="leading" constant="8" id="Gs9-PE-Koh"/>
                                             <constraint firstAttribute="trailing" secondItem="y5v-9f-do9" secondAttribute="trailing" constant="8" id="H50-WN-YiP"/>
                                             <constraint firstAttribute="trailing" secondItem="ilJ-N4-JT0" secondAttribute="trailing" constant="8" id="Jan-Sq-Q1y"/>
+                                            <constraint firstItem="2BQ-8G-6dj" firstAttribute="top" secondItem="bQi-vn-vLM" secondAttribute="bottom" id="JvD-eI-Xy6"/>
                                             <constraint firstAttribute="trailing" secondItem="pel-pS-UsH" secondAttribute="trailing" constant="8" id="LEu-Xh-r8h"/>
                                             <constraint firstItem="pel-pS-UsH" firstAttribute="top" secondItem="irO-KK-C88" secondAttribute="bottom" constant="8" id="NIf-J9-5Tx"/>
+                                            <constraint firstAttribute="bottom" secondItem="2BQ-8G-6dj" secondAttribute="bottom" constant="8" id="NJU-Ha-qzo"/>
                                             <constraint firstItem="tyj-bW-tyi" firstAttribute="leading" secondItem="FxK-eK-qOW" secondAttribute="leading" constant="8" id="NRe-27-YdP"/>
                                             <constraint firstItem="ilJ-N4-JT0" firstAttribute="top" secondItem="kUY-ye-bk5" secondAttribute="bottom" constant="8" id="Nmy-GN-5ju"/>
                                             <constraint firstAttribute="trailing" secondItem="bQi-vn-vLM" secondAttribute="trailing" constant="8" id="Pdg-tE-25E"/>
@@ -5109,12 +5140,13 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                             <constraint firstItem="y5v-9f-do9" firstAttribute="top" secondItem="pel-pS-UsH" secondAttribute="bottom" constant="8" id="g48-tf-5rQ"/>
                                             <constraint firstItem="y5v-9f-do9" firstAttribute="leading" secondItem="FxK-eK-qOW" secondAttribute="leading" constant="8" id="h9Z-Yc-ZkW"/>
                                             <constraint firstAttribute="trailing" secondItem="tyj-bW-tyi" secondAttribute="trailing" constant="8" id="hCi-Um-xui"/>
+                                            <constraint firstItem="2BQ-8G-6dj" firstAttribute="leading" secondItem="FxK-eK-qOW" secondAttribute="leading" constant="8" id="hc8-RS-wbX"/>
                                             <constraint firstItem="VdG-wh-0Pj" firstAttribute="leading" secondItem="FxK-eK-qOW" secondAttribute="leading" constant="8" id="jTk-vS-bna"/>
                                             <constraint firstItem="Jex-AS-A3Z" firstAttribute="top" secondItem="FxK-eK-qOW" secondAttribute="top" constant="8" id="m3f-yY-8E0"/>
                                             <constraint firstItem="tyj-bW-tyi" firstAttribute="top" secondItem="VdG-wh-0Pj" secondAttribute="bottom" constant="8" id="pzR-8m-Ocy"/>
                                             <constraint firstItem="bQi-vn-vLM" firstAttribute="leading" secondItem="FxK-eK-qOW" secondAttribute="leading" constant="8" id="uD0-ld-5AJ"/>
                                             <constraint firstItem="pel-pS-UsH" firstAttribute="leading" secondItem="FxK-eK-qOW" secondAttribute="leading" constant="8" id="ues-br-Zjo"/>
-                                            <constraint firstAttribute="height" constant="338" id="wRs-6w-hfk"/>
+                                            <constraint firstAttribute="height" constant="360" id="wRs-6w-hfk"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -5137,12 +5169,47 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="i7z-WP-3jV"/>
                     <connections>
-                        <outlet property="btnChange" destination="bQi-vn-vLM" id="tWU-eS-efZ"/>
+                        <outlet property="changePassBtn" destination="2BQ-8G-6dj" id="ZyC-2E-BQy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aiV-8F-GGH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2693" y="3165"/>
+            <point key="canvasLocation" x="-2694.202898550725" y="3164.7321428571427"/>
+        </scene>
+        <!--Web View-->
+        <scene sceneID="AVl-fx-FEd">
+            <objects>
+                <viewController storyboardIdentifier="WebView" id="Brm-hU-L8x" customClass="WebView" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bas-wp-RYI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d8b-lh-1FS">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dMQ-fs-Sx4" firstAttribute="bottom" secondItem="d8b-lh-1FS" secondAttribute="bottom" id="3l6-bQ-YnM"/>
+                            <constraint firstItem="d8b-lh-1FS" firstAttribute="leading" secondItem="dMQ-fs-Sx4" secondAttribute="leading" id="93b-ki-Plu"/>
+                            <constraint firstItem="dMQ-fs-Sx4" firstAttribute="trailing" secondItem="d8b-lh-1FS" secondAttribute="trailing" id="hnW-ZA-V6L"/>
+                            <constraint firstItem="d8b-lh-1FS" firstAttribute="top" secondItem="dMQ-fs-Sx4" secondAttribute="top" id="xad-tC-vPZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dMQ-fs-Sx4"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="63s-cn-1GX"/>
+                    <connections>
+                        <outlet property="webView" destination="d8b-lh-1FS" id="021-ZW-2iH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="or7-Tr-ySI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1017" y="3165"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8js-hd-wMu">
@@ -5550,7 +5617,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ld-YL-Wf4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1424.6376811594205" y="3045.5357142857142"/>
+            <point key="canvasLocation" x="2334.7826086956525" y="3045.5357142857142"/>
         </scene>
         <!--Payment View-->
         <scene sceneID="RQK-WR-VyB">
@@ -5604,7 +5671,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fLC-7P-eqq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2234.7826086956525" y="3105.8035714285711"/>
+            <point key="canvasLocation" x="3144.9275362318845" y="3105.8035714285711"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Thi-Ak-gRi">
@@ -5622,7 +5689,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a2S-hO-eGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="610" y="3046"/>
+            <point key="canvasLocation" x="1518.840579710145" y="3045.5357142857142"/>
         </scene>
         <!--Requests-->
         <scene sceneID="g3y-CD-yI0">
@@ -7738,7 +7805,7 @@ typeset text.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pws-x9-mcg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2334.7826086956525" y="-1008.4821428571428"/>
+            <point key="canvasLocation" x="3244.9275362318845" y="-1008.4821428571428"/>
         </scene>
         <!--Alternate Route View Controller-->
         <scene sceneID="pyi-Nw-LzC">
@@ -7806,7 +7873,7 @@ typeset text.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fel-3H-n0g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4624.6376811594209" y="-999.10714285714278"/>
+            <point key="canvasLocation" x="5534.7826086956529" y="-999.10714285714278"/>
         </scene>
         <!--Offer Bottom SheetVC-->
         <scene sceneID="0IQ-ig-1ua">
@@ -8142,7 +8209,7 @@ typeset text.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uPs-UW-ac4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3713.04347826087" y="-999.10714285714278"/>
+            <point key="canvasLocation" x="4623.188405797102" y="-999.10714285714278"/>
         </scene>
         <!--Container View-->
         <scene sceneID="4Py-wE-Kyb">
@@ -10108,7 +10175,7 @@ Click Finish to publish your offer</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4g-oh-g5S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1016" y="-454"/>
+            <point key="canvasLocation" x="-107.24637681159422" y="-454.01785714285711"/>
         </scene>
         <!--Reset View Controller-->
         <scene sceneID="Mnu-EH-9m2">
@@ -10419,18 +10486,18 @@ Click Finish to publish your offer</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="75s-Lg-H0B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-307" y="-454"/>
+            <point key="canvasLocation" x="602.89855072463774" y="-454.01785714285711"/>
         </scene>
-        <!--Change Pass View Controller-->
+        <!--Change Password-->
         <scene sceneID="Nom-Wd-jHj">
             <objects>
                 <viewController storyboardIdentifier="changeVC" id="pfm-Od-AcY" customClass="ChangePassViewController" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="FqI-3q-kVc">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="FqI-3q-kVc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PeT-ow-6cd">
-                                <rect key="frame" x="0.0" y="44" width="414" height="90"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bot-Q2-Lgq">
                                         <rect key="frame" x="8" y="25" width="40" height="40"/>
@@ -10471,17 +10538,17 @@ Click Finish to publish your offer</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PsG-u6-HSF">
-                                <rect key="frame" x="0.0" y="248" width="414" height="400"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="400"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FcA-BX-kwh">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bqz-xm-2JF">
-                                                <rect key="frame" x="14" y="6" width="161" height="28"/>
+                                                <rect key="frame" x="14" y="6" width="154" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="2Av-bj-weg"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" red="0.031372549020000001" green="0.4549019608" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -10490,7 +10557,7 @@ Click Finish to publish your offer</string>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Current Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ahc-NI-2EE">
                                                         <rect key="frame" x="14" y="0.0" width="386" height="56"/>
-                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="18"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     </textField>
                                                 </subviews>
@@ -10523,11 +10590,11 @@ Click Finish to publish your offer</string>
                                         <rect key="frame" x="0.0" y="108" width="414" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOR-vD-tTl">
-                                                <rect key="frame" x="14" y="6" width="134.5" height="28"/>
+                                                <rect key="frame" x="14" y="6" width="128" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="5yk-ZY-flO"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" red="0.031372549020000001" green="0.4549019608" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -10536,7 +10603,7 @@ Click Finish to publish your offer</string>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vdm-Vd-0h7">
                                                         <rect key="frame" x="14" y="0.0" width="386" height="56"/>
-                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="18"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     </textField>
                                                 </subviews>
@@ -10569,11 +10636,11 @@ Click Finish to publish your offer</string>
                                         <rect key="frame" x="0.0" y="216" width="414" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm New Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFk-3c-Ohb">
-                                                <rect key="frame" x="14" y="6" width="211.5" height="28"/>
+                                                <rect key="frame" x="14" y="6" width="202.5" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="a0W-GO-K9g"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" red="0.031372549020000001" green="0.4549019608" blue="0.73725490199999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -10582,7 +10649,7 @@ Click Finish to publish your offer</string>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Re-Enter Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0OG-n6-bk9">
                                                         <rect key="frame" x="14" y="0.0" width="386" height="56"/>
-                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="18"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     </textField>
                                                 </subviews>
@@ -10617,7 +10684,7 @@ Click Finish to publish your offer</string>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="51" id="o7D-h7-byt"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Change Password">
                                             <color key="titleColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -10654,13 +10721,20 @@ Click Finish to publish your offer</string>
                         <constraints>
                             <constraint firstItem="zyl-h2-1bf" firstAttribute="trailing" secondItem="PsG-u6-HSF" secondAttribute="trailing" id="Oe7-Qz-JHz"/>
                             <constraint firstItem="PsG-u6-HSF" firstAttribute="leading" secondItem="FqI-3q-kVc" secondAttribute="leading" id="VOm-Fj-uX4"/>
+                            <constraint firstItem="PsG-u6-HSF" firstAttribute="top" secondItem="zyl-h2-1bf" secondAttribute="top" constant="20" id="dCk-5V-RZi"/>
                             <constraint firstItem="PsG-u6-HSF" firstAttribute="centerY" secondItem="FqI-3q-kVc" secondAttribute="centerY" id="f9Q-KZ-c6e"/>
                             <constraint firstItem="PeT-ow-6cd" firstAttribute="leading" secondItem="zyl-h2-1bf" secondAttribute="leading" id="nE1-Dl-m75"/>
                             <constraint firstAttribute="trailing" secondItem="PeT-ow-6cd" secondAttribute="trailing" id="oJI-uh-dj7"/>
                             <constraint firstItem="PeT-ow-6cd" firstAttribute="top" secondItem="zyl-h2-1bf" secondAttribute="top" id="xKh-6X-rjP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zyl-h2-1bf"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="PeT-ow-6cd"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Change Password" id="RS2-Ob-99x"/>
                     <connections>
                         <outlet property="txtCPass" destination="0OG-n6-bk9" id="PtP-pm-c44"/>
                         <outlet property="txtCurrent" destination="ahc-NI-2EE" id="88w-Pe-dRt"/>
@@ -10669,7 +10743,43 @@ Click Finish to publish your offer</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1eZ-8f-VSJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1016" y="-454"/>
+            <point key="canvasLocation" x="-107.24637681159422" y="-454.01785714285711"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="26N-Yd-dwK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BwU-Xo-Nzi" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PoY-hf-s31">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Brm-hU-L8x" kind="relationship" relationship="rootViewController" id="98M-0a-Bsg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zy8-Ef-wS0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1722" y="3165"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="piC-lP-29Z">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="b9d-ep-aTt" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kC1-uI-L8z">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="pfm-Od-AcY" kind="relationship" relationship="rootViewController" id="VSC-xF-YwB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LwW-Si-wew" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1017.3913043478261" y="-454.01785714285711"/>
         </scene>
     </scenes>
     <resources>

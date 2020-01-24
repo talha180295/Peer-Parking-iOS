@@ -28,10 +28,13 @@ struct Key{
 struct APP_CONSTANT {
     
     
+    static let PAGE_URL = "http://peer-parking.apps.fomarkmedia.com/pages/"
+    
     struct API {
        
         //BASE URL FOR PEER PARKING
         static let BASE_URL = "http://peer-parking.apps.fomarkmedia.com/api/v1/"
+        
 //      static let BASE_URL = "http://peer-parking.servstaging.com/api/v1/"
         
         //STAGING_BASE_URL

@@ -82,7 +82,8 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
                 }
                 else{
                     
-                    Alamofire.request(APIRouter.addUserCard(params)).responsePost{ response in
+                    Alamofire.request(APIRouter.addUserCard(params)).responsePost<PostResponseData>{ response in
+                        
                         
                         switch response.result {
                         case .success:
