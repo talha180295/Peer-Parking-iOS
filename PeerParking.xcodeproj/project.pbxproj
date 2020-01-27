@@ -12,6 +12,8 @@
 		180FD0D8237331F30084230A /* ViewAllVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180FD0D7237331F30084230A /* ViewAllVC.swift */; };
 		180FD0DE237335BD0084230A /* Parking_table_cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180FD0DC237335BD0084230A /* Parking_table_cell.swift */; };
 		180FD0DF237335BD0084230A /* Parking_table_cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180FD0DD237335BD0084230A /* Parking_table_cell.xib */; };
+		1812701C23DEC7AC00337D01 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1812701B23DEC7AB00337D01 /* ApiClient.swift */; };
+		1812701E23DF32C500337D01 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1812701D23DF32C500337D01 /* Me.swift */; };
 		181C8E352379ED42000B66C7 /* Sell_parking_popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C8E342379ED42000B66C7 /* Sell_parking_popup.swift */; };
 		181E0D1123CDF954005D7248 /* Buyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0623CDF953005D7248 /* Buyer.swift */; };
 		181E0D1223CDF954005D7248 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0723CDF953005D7248 /* Details.swift */; };
@@ -155,6 +157,8 @@
 		180FD0D7237331F30084230A /* ViewAllVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllVC.swift; sourceTree = "<group>"; };
 		180FD0DC237335BD0084230A /* Parking_table_cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parking_table_cell.swift; sourceTree = "<group>"; };
 		180FD0DD237335BD0084230A /* Parking_table_cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Parking_table_cell.xib; sourceTree = "<group>"; };
+		1812701B23DEC7AB00337D01 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		1812701D23DF32C500337D01 /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
 		181C8E342379ED42000B66C7 /* Sell_parking_popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sell_parking_popup.swift; sourceTree = "<group>"; };
 		181E0D0623CDF953005D7248 /* Buyer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buyer.swift; sourceTree = "<group>"; };
 		181E0D0723CDF953005D7248 /* Details.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
@@ -340,17 +344,19 @@
 				181E0D0D23CDF953005D7248 /* Seller.swift */,
 				181E0D1E23CE0400005D7248 /* RefreshTokenModel.swift */,
 				181E0D2023CE22E3005D7248 /* PostBargainigOfferModel.swift */,
+				1812701D23DF32C500337D01 /* Me.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		181E0D0E23CDF953005D7248 /* Api Router */ = {
+		181E0D0E23CDF953005D7248 /* Api */ = {
 			isa = PBXGroup;
 			children = (
 				181E0D1B23CDF97D005D7248 /* Demo Function */,
 				181E0D1023CDF953005D7248 /* ApiRouter.swift */,
+				1812701B23DEC7AB00337D01 /* ApiClient.swift */,
 			);
-			path = "Api Router";
+			path = Api;
 			sourceTree = "<group>";
 		};
 		181E0D1B23CDF97D005D7248 /* Demo Function */ = {
@@ -559,7 +565,7 @@
 				18F8118823D87D8A00B3061F /* Stripe */,
 				188888A5238EBEEA0008BC88 /* Crashlytics.framework */,
 				188888A6238EBEEA0008BC88 /* Fabric.framework */,
-				181E0D0E23CDF953005D7248 /* Api Router */,
+				181E0D0E23CDF953005D7248 /* Api */,
 				181E0D0523CDF953005D7248 /* Models */,
 				FA57EBA22320EB1E000646B7 /* Extension */,
 				FAEDCF13231F98760063EFC0 /* Tabbar */,
@@ -1131,6 +1137,7 @@
 				FA6CD3802329122E00E18CF2 /* AlternateRouteViewController.swift in Sources */,
 				FAEDCF1A231F9EFB0063EFC0 /* FindParkingViewController.swift in Sources */,
 				18E099D02358F27E00B43A4B /* DGRunkeeperSwitch.swift in Sources */,
+				1812701C23DEC7AC00337D01 /* ApiClient.swift in Sources */,
 				FA6CD36B2328C67900E18CF2 /* ScheduledCell.swift in Sources */,
 				180FD0D8237331F30084230A /* ViewAllVC.swift in Sources */,
 				FA526EF2232CF4270014517B /* AddVehicleViewController.swift in Sources */,
@@ -1146,6 +1153,7 @@
 				181E0D1823CDF954005D7248 /* Seller.swift in Sources */,
 				FA2F9F3A232CB35E0025BF11 /* OfferViewController.swift in Sources */,
 				181E0D1F23CE0400005D7248 /* RefreshTokenModel.swift in Sources */,
+				1812701E23DF32C500337D01 /* Me.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

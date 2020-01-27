@@ -4997,7 +4997,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                                         <rect key="frame" x="8" y="16" width="378" height="360"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jex-AS-A3Z">
-                                                <rect key="frame" x="8" y="8" width="55" height="26"/>
+                                                <rect key="frame" x="8" y="8" width="48.5" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="26" id="sV9-LZ-U3z"/>
                                                 </constraints>
@@ -5427,7 +5427,9 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                     </view>
                     <navigationItem key="navigationItem" title="Wallet" id="yeF-Ex-0gJ"/>
                     <connections>
+                        <outlet property="balance" destination="1ic-ud-ecq" id="avW-lh-q6K"/>
                         <outlet property="blackView" destination="eZU-a2-I4L" id="Nvr-as-N9B"/>
+                        <outlet property="cardNumber" destination="9zB-3m-vvF" id="phx-H1-0bI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e49-j2-SQM" userLabel="First Responder" sceneMemberID="firstResponder"/>

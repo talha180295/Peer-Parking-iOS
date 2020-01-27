@@ -472,92 +472,174 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         ]
         
         
-        var url = ""
+        var url:URLRequestConvertible!
         
         if(Helper().IsUserLogin()){
-            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITH_TOKEN
+//            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITH_TOKEN
+            url = APIRouter.getParkings(params)
+            
         }
         else{
-            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
+//            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
+            
+            url = APIRouter.getParkingsWithoutToken(params)
         }
         print("staging_url123=\(url)")
-        Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: isHeaderIncluded, headers: headers){
-            response in
-            print("response=\(response)")
-            if response.result.value == nil {
-                print("No response")
-                
-                SharedHelper().showToast(message: "Internal Server Error", controller: self)
-                completion()
-                return
-            }
-            else {
-                
-                if let jsonData = response.data{
+        
+        
+        
+//        Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: isHeaderIncluded, headers: headers){
+//            response in
+//            print("response=\(response)")
+//            if response.result.value == nil {
+//                print("No response")
+//
+//                SharedHelper().showToast(message: "Internal Server Error", controller: self)
+//                completion()
+//                return
+//            }
+//            else {
+//
+//                if let jsonData = response.data{
+//
+//                    let response = try! JSONDecoder().decode(ResponseData<[Parking]>.self, from: jsonData)
+//                    if response.success{
+//                        //                    UserDefaults.standard.set("isSocial", forKey: "yes")
+//                        //                    UserDefaults.standard.synchronize()
+//
+//
+//
+//                        let message = response.message
+//                        if let uData = response.data{
+//
+//                            Helper().map_circle(data: uData, map_view: self.map)
+//                            Helper().map_custom_marker(data: uData, map_view: self.map)
+//                            //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
+//                            self.parkings = uData
+//
+//                        }
+//
+//                        print("parkings.count=\(self.parkings.count)")
+//
+//
+//                        self.myCollectionView.reloadData()
+//
+//                        if(self.parkings.count > 0){
+//
+//                            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+//                                self.re_center_bottom_cont.constant = 40
+//                            })
+//
+//                            self.myCollectionView.isHidden = false
+//                            self.filter_btn.isHidden = false
+//                            self.view_all_btn.isHidden = false
+//
+//
+//                        }
+//                        else{
+//
+//                            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+//                                self.re_center_bottom_cont.constant = -143
+//                            })
+//
+//                            self.myCollectionView.isHidden = true
+//                            self.filter_btn.isHidden = true
+//                            self.view_all_btn.isHidden = true
+//
+//                            SharedHelper().showToast(message: "No Parkings Available", controller: self)
+//
+//
+//                        }
+//
+//                        completion()
+//
+//
+//
+//                    }
+//                    else{
+//                        print("Eroor=\(response.message)")
+//                        SharedHelper().showToast(message: response.message, controller: self)
+//                        //   SharedHelper().hideSpinner(view: self.view)
+//                        completion()
+//                    }
+//                }
+//
+//            }
+//        }
+        
+        
+        APIClient.serverRequest(url: url, dec: ResponseData<[Parking]>.self) { (response,error) in
+            
+            if(response != nil){
+                if let success = response?.success {
                     
-                    let response = try! JSONDecoder().decode(ResponseData<[Parking]>.self, from: jsonData)
-                    if response.success{
-                        //                    UserDefaults.standard.set("isSocial", forKey: "yes")
-                        //                    UserDefaults.standard.synchronize()
-                        
-                        
-                        
-                        let message = response.message
-                        if let uData = response.data{
-                            
-                            Helper().map_circle(data: uData, map_view: self.map)
-                            Helper().map_custom_marker(data: uData, map_view: self.map)
-                            //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
-                            self.parkings = uData
-                            
-                        }
-                        
-                        print("parkings.count=\(self.parkings.count)")
-                        
-                        
-                        self.myCollectionView.reloadData()
-                        
-                        if(self.parkings.count > 0){
-                            
-                            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-                                self.re_center_bottom_cont.constant = 40
-                            })
-                            
-                            self.myCollectionView.isHidden = false
-                            self.filter_btn.isHidden = false
-                            self.view_all_btn.isHidden = false
-                            
-                            
-                        }
-                        else{
-                            
-                            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-                                self.re_center_bottom_cont.constant = -143
-                            })
-                            
-                            self.myCollectionView.isHidden = true
-                            self.filter_btn.isHidden = true
-                            self.view_all_btn.isHidden = true
-                            
-                            SharedHelper().showToast(message: "No Parkings Available", controller: self)
-                            
-                            
-                        }
-                        
-                        completion()
-                        
-                        
-                        
+                    
+                    
+                    let message = response?.message
+                    
+                    Helper().showToast(message: "\(message)", controller: self)
+                    
+                    if let uData = response?.data{
+
+                        Helper().map_circle(data: uData, map_view: self.map)
+                        Helper().map_custom_marker(data: uData, map_view: self.map)
+                        //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
+                        self.parkings = uData
+
+                    }
+
+                    print("parkings.count=\(self.parkings.count)")
+
+
+                    self.myCollectionView.reloadData()
+
+                    if(self.parkings.count > 0){
+
+                        UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+                            self.re_center_bottom_cont.constant = 40
+                        })
+
+                        self.myCollectionView.isHidden = false
+                        self.filter_btn.isHidden = false
+                        self.view_all_btn.isHidden = false
+
+
                     }
                     else{
-                        print("Eroor=\(response.message)")
-                        SharedHelper().showToast(message: response.message, controller: self)
-                        //   SharedHelper().hideSpinner(view: self.view)
-                        completion()
+
+                        UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
+                            self.re_center_bottom_cont.constant = -143
+                        })
+
+                        self.myCollectionView.isHidden = true
+                        self.filter_btn.isHidden = true
+                        self.view_all_btn.isHidden = true
+
+                        SharedHelper().showToast(message: "No Parkings Available", controller: self)
+
+
                     }
+
+                    completion()
+
+                    
                 }
-                
+                else{
+                    
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                    
+                    
+                }
             }
+            else if(error != nil){
+                
+                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+            }
+            else{
+                
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
+            
         }
         
     }

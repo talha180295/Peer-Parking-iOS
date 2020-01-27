@@ -15,24 +15,12 @@ import EzPopup
 import UIKit
 import SystemConfiguration
 import Alamofire
+import iProgressHUD
 
 
 class Helper{
     
-//    func bottomSheet(storyBoard:String,identifier:String,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor,view_controller:UIViewController){
-//
-//        let controller = UIStoryboard(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: identifier)
-//
-//
-//
-//        let sheetController = SheetViewController(controller: controller, sizes: sizes)
-//        //        // Turn off Handle
-//        sheetController.handleColor = handleColor
-//        // Turn off rounded corners
-//        sheetController.topCornersRadius = cornerRadius
-//
-//        view_controller.present(sheetController, animated: false, completion: nil)
-//    }
+    let iprogress: iProgressHUD = iProgressHUD()
     
     func bottomSheet(controller : UIViewController,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor,view_controller:UIViewController){
         
@@ -775,6 +763,30 @@ class Helper{
         controller.present(vc, animated: true, completion: nil)
     }
     
+    
+    /*! @discussion this method is use to add spinner
+     
+     *  @param view : UIView
+     */
+    func showSpinner(view : UIView) {
+        
+        
+        iprogress.isShowModal = true
+        iprogress.isShowCaption = true
+        iprogress.isTouchDismiss = false
+        iprogress.indicatorStyle = .circleStrokeSpin
+        iprogress.indicatorColor = .white
+        iprogress.iprogressStyle = .horizontal
+        iprogress.indicatorView.startAnimating()
+        
+        iprogress.attachProgress(toView: view)
+        view.showProgress()
+        
+    }
+    func hideSpinner(view : UIView) {
+        iprogress.indicatorView.stopAnimating()
+        view.dismissProgress()
+    }
     
 }
 

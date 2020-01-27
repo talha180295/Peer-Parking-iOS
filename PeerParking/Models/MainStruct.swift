@@ -60,7 +60,7 @@ extension DataRequest {
     
     
     @discardableResult
-    func responsePost<T: Decodable>(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
+    func responsePost(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<PostResponseData>) -> Void) -> Self {
         return responseDecodable(queue: queue, completionHandler: completionHandler)
     }
     

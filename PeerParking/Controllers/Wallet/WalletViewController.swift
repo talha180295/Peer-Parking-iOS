@@ -15,6 +15,8 @@ class WalletViewController: UIViewController {
 
    // @IBOutlet weak var someView: UIView!
     @IBOutlet weak var blackView: UIView!
+    @IBOutlet weak var cardNumber: UILabel!
+    @IBOutlet weak var balance: UILabel!
     
     var animator: UIViewPropertyAnimator?
     
@@ -76,6 +78,12 @@ class WalletViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil, using: receiveNotification(_:))
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        print("wallet will appear")
+        
+        getCardDetails()
+    }
     
     @IBAction func addCardBtn(_ sender: UIButton) {
         
@@ -108,5 +116,41 @@ extension WalletViewController: STPAddCardViewControllerDelegate {
         let addCardViewController = STPAddCardViewController()
         addCardViewController.delegate = self
         navigationController?.pushViewController(addCardViewController, animated: true)
+    }
+    
+    func getCardDetails(){
+        
+        Helper().showSpinner(view: self.view)
+        
+        let url = APIRouter.me
+        let decoder = ResponseData<Me>.self
+        
+        APIClient.serverRequest(url: url, dec: decoder) { (response,error) in
+            
+            print(response?.data)
+            Helper().hideSpinner(view: self.view)
+            if(response != nil){
+                if let success = response?.success {
+                    
+                    Helper().showToast(message: "Success=\(success)", controller: self)
+                    if let val = response?.data {
+                        
+                        self.balance.text = "$ \(val.details?.wallet ?? 0.0)"
+                        self.cardNumber.text = "**** **** **** \(val.card?.first?.lastFour ?? Nulls.nullInt)"
+                    }
+                }
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                }
+            }
+            else if(error != nil){
+                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+            }
+            else{
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
+            
+        }
+        
     }
 }

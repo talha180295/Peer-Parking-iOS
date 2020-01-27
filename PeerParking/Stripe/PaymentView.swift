@@ -61,17 +61,18 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
     //            self.dictPayData["stripe_token"] = token.tokenId
                 print(token.tokenId)
     
+                print(UserDefaults.standard.string(forKey: "access_token"))
                 
                 //post: user_card
                 
                 let params = ["stripeToken" : token.tokenId]
-//                self.addUserCard(params: params)
+                self.addUserCard(params: params)
             }
     }
 
     
     func addUserCard(params:[String:Any]){
-            
+            Helper().showSpinner(view: self.view)
             Helper().RefreshToken { response in
                 
                 print(response)
@@ -82,23 +83,26 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
                 }
                 else{
                     
-                    Alamofire.request(APIRouter.addUserCard(params)).responsePost<PostResponseData>{ response in
+                    Alamofire.request(APIRouter.addUserCard(params)).responsePost{ response in
                         
-                        
+                        Helper().hideSpinner(view: self.view)
                         switch response.result {
+                            
                         case .success:
                             if response.result.value?.success ?? false{
                                 
-                                print("val=\(response.result.value?.message ?? "-")")
+                                Helper().showToast(message: response.result.value?.message ?? "-", controller: self)
                                 
                             }
                             else{
                                 print("Server Message=\(response.result.value?.message ?? "-" )")
+                                Helper().showToast(message: response.result.value?.message ?? "-", controller: self)
                                 
                             }
                             
                         case .failure(let error):
                             print("ERROR==\(error)")
+                            
                         }
                     }
                     

@@ -4,11 +4,18 @@
 //   let card = try? newJSONDecoder().decode(Card.self, from: jsonData)
 
 import Foundation
+//
+//struct CardData: Codable{
+//    
+//    let card: [Card]?
+//    
+//}
 
 // MARK: - Card
 struct Card: Codable {
     let id, userID: Int?
     let stripeCardID: String?
+    let externalAccountId: String?
     let lastFour: Int?
     let brand, country: String?
     let expMonth, expYear: Int?
@@ -18,6 +25,7 @@ struct Card: Codable {
         case id
         case userID = "user_id"
         case stripeCardID = "stripe_card_id"
+        case externalAccountId = "external_account_id"
         case lastFour = "last_four"
         case brand, country
         case expMonth = "exp_month"

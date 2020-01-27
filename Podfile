@@ -27,7 +27,7 @@ target 'PeerParking' do
  # pod 'UICircularProgressRing'
   pod 'CircleProgressView'	
 #  pod 'DGRunkeeperSwitch' , '~> 1.1.4'
-
+  pod 'iProgressHUD'
   pod 'Stripe'
 
   target 'PeerParkingTests' do
