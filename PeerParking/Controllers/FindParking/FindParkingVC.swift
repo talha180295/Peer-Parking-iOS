@@ -69,14 +69,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 
         // Do any additional setup after loading the view.
      
-
-      
-        
         //Register
         self.myCollectionView.register(UINib(nibName: "homeParkingCell", bundle: nil), forCellWithReuseIdentifier: "homeParkingCell")
-        
-        
-        
         
         myCollectionView.isHidden = true
         filter_btn.isHidden = true
@@ -99,12 +93,11 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 
     override func viewWillAppear(_ animated: Bool) {
         
+        Helper().hideSpinner(view: self.view)
         tab_index = 0
         print("::=willapear")
         
-        print("created_at123=\(UserDefaults.standard.string(forKey: "created_at"))")
         self.tabBarController!.navigationItem.title = "Find Parking"
-        
         
     }
     
@@ -121,17 +114,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     func autocompleteClicked() {
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
-        
-//        // Specify the place data types to return.
-//        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-//            UInt(GMSPlaceField.placeID.rawValue))!
-//        autocompleteController.placeFields = fields
-//
-//        // Specify a filter.
-//        let filter = GMSAutocompleteFilter()
-//        filter.type = .address
-//        autocompleteController.autocompleteFilter = filter
-        
+
         // Display the autocomplete view controller.
         present(autocompleteController, animated: true, completion: nil)
     }
@@ -152,11 +135,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         map.isMyLocationEnabled = true
         
         self.map.animate(to: cameraView)
-        //Location Manager code to fetch current location
-//        self.locationManager.delegate = self
-//        self.locationManager.startUpdatingLocation()
-        
-//        setMapButton()
+
     }
     
     //Location Manager delegates
@@ -167,9 +146,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         self.lat = (location?.coordinate.latitude)!
         self.longg = (location?.coordinate.longitude)!
-//        print("lat==\(location?.coordinate.latitude)")
-//        print("long==\(location?.coordinate.longitude)")
-        
+
         self.filterLat = (location?.coordinate.latitude)!
         self.filterLong = (location?.coordinate.longitude)!
         
@@ -230,73 +207,41 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     @IBAction func cal_btn(_ sender: UIButton) {
         
-        
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScheduleVC")
         
         bottomSheet(controller: controller, sizes: [.fixed(360)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
-        
     }
     
     @IBAction func arrow_btn(_ sender: UIButton) {
 
-       
-        
         mapMoveToCurrentLoc(sender)
-        
     }
     
     func mapMoveToCurrentLoc(_ sender: UIButton){
         
         sender.isHidden = true
-        //Location Manager code to fetch current location
-//        self.locationManager.delegate = self
-//        self.locationManager.startUpdatingLocation()
-        
+
         print(" view_all_btn=\(self.view_all_btn.frame)")
         get_all_parkings(lat: self.lat, long: self.longg, isHeaderIncluded: Helper().IsUserLogin(), filters: [:]){
             
             sender.isHidden = false
-            //            self.myCollectionView.isHidden = false
-            //            self.filter_btn.isHidden = false
-            //            self.view_all_btn.isHidden = false
+
             self.search_tf.text = self.address
-            print(" self.re_center_btn.frame=\(self.view_all_btn.frame)")
-            
-            //           // let pos = UIScreen.main.bounds.height -  self.view_all_btn.frame.origin.y - 45
-            //            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-            //                self.re_center_bottom_cont.constant = 40
-            //            })
-            
-            print(" self.re_center_btn.frame=\(self.re_center_btn.frame)")
-            //            self.setMapButton()
+          
+
         }
     }
     func mapMoveToCurrentLoc(){
-        
-//        sender.isHidden = true
-        //Location Manager code to fetch current location
-//        self.locationManager.delegate = self
-//        self.locationManager.startUpdatingLocation()
-        
+
         print("self.addressabc=\(self.address)")
         print(" view_all_btn=\(self.view_all_btn.frame)")
+        
         get_all_parkings(lat: self.lat, long: self.longg, isHeaderIncluded: Helper().IsUserLogin(), filters: [:]){
             
-//            sender.isHidden = false
-            //            self.myCollectionView.isHidden = false
-            //            self.filter_btn.isHidden = false
-            //            self.view_all_btn.isHidden = false
             self.search_tf.text = self.address
-            print(" self.re_center_btn.frame=\(self.view_all_btn.frame)")
-            
-            //           // let pos = UIScreen.main.bounds.height -  self.view_all_btn.frame.origin.y - 45
-            //            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-            //                self.re_center_bottom_cont.constant = 40
-            //            })
-            
-            print(" self.re_center_btn.frame=\(self.re_center_btn.frame)")
-            //            self.setMapButton()
+          
         }
+        
     }
     
     @IBAction func view_all_btn(_ sender: UIButton) {
@@ -306,9 +251,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         vc.lat = self.lat
         vc.longg = self.longg
         self.navigationController?.pushViewController(vc, animated: true)
-//        self.navigationController?.present(vc, animated: true, completion: nil)
-        //present(vc, animated: true, completion: nil)
-        //bottomSheet(storyBoard: "Main",identifier: "ViewAllVC",sizes: [.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
+
     }
     
     
@@ -386,7 +329,6 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         for cell in myCollectionView.visibleCells {
             let indexPath = myCollectionView.indexPath(for: cell)
-            print("indexPath=\(indexPath?.row)")
             
             
             let dict = parkings[(indexPath?.row)!]
@@ -456,20 +398,20 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         print("param123=\(params)")
         
-        var auth_value = ""
-        
-        if let value : String = UserDefaults.standard.string(forKey: "auth_token"){
-            
-            auth_value = "bearer " + value
-        }
-        
-        
-        
+//        var auth_value = ""
+//
+//        if let value : String = UserDefaults.standard.string(forKey: "auth_token"){
+//
+//            auth_value = "bearer " + value
+//        }
+//
         
         
-        let headers: HTTPHeaders = [
-            "Authorization" : auth_value
-        ]
+        
+        
+//        let headers: HTTPHeaders = [
+//            "Authorization" : auth_value
+//        ]
         
         
         var url:URLRequestConvertible!
@@ -484,7 +426,6 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             
             url = APIRouter.getParkingsWithoutToken(params)
         }
-        print("staging_url123=\(url)")
         
         
         
@@ -567,17 +508,19 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 //            }
 //        }
         
+        Helper().showSpinner(view: self.view)
         
         APIClient.serverRequest(url: url, dec: ResponseData<[Parking]>.self) { (response,error) in
             
+            Helper().hideSpinner(view: self.view)
             if(response != nil){
-                if let success = response?.success {
+                if let _ = response?.success {
                     
                     
                     
                     let message = response?.message
                     
-                    Helper().showToast(message: "\(message)", controller: self)
+                    
                     
                     if let uData = response?.data{
 
@@ -595,6 +538,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 
                     if(self.parkings.count > 0){
 
+                        
                         UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
                             self.re_center_bottom_cont.constant = 40
                         })
@@ -602,7 +546,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                         self.myCollectionView.isHidden = false
                         self.filter_btn.isHidden = false
                         self.view_all_btn.isHidden = false
-
+                        
+                        Helper().showToast(message: "\(message ?? "-")", controller: self)
 
                     }
                     else{
@@ -615,7 +560,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                         self.filter_btn.isHidden = true
                         self.view_all_btn.isHidden = true
 
-                        SharedHelper().showToast(message: "No Parkings Available", controller: self)
+                        Helper().showToast(message: "No Parkings Available", controller: self)
 
 
                     }
@@ -633,7 +578,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             }
             else if(error != nil){
                 
-                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+                Helper().showToast(message: "\(error?.localizedDescription ?? "" )", controller: self)
             }
             else{
                 
@@ -702,7 +647,7 @@ extension FindParkingVC:FiltersProtocol{
         
         self.get_all_parkings(lat: self.filterLat, long: self.filterLong, isHeaderIncluded: Helper().IsUserLogin(), filters: filters){
             
-           
+//           Helper().hideSpinner(view: self.view)
         }
        
     }
@@ -714,11 +659,11 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
-        print("formattedAddress=\(place.formattedAddress) long=\(place.coordinate.longitude)")
+        print("formattedAddress=\(place.formattedAddress ?? "") long=\(place.coordinate.longitude)")
         
-        print("Place name: \(place.name)")
-        print("Place ID: \(place.placeID)")
-        print("Place attributions: \(place.attributions)")
+        print("Place name: \(place.name ?? "No Name")")
+        print("Place ID: \(place.placeID ?? "")")
+//        print("Place attributions: \(place.attributions)")
         self.search_tf.text = place.name!
         dismiss(animated: true){
             self.myCollectionView.isHidden = false
@@ -737,16 +682,12 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
             
             self.get_all_parkings(lat: place.coordinate.latitude, long: place.coordinate.longitude, isHeaderIncluded: Helper().IsUserLogin(),filters: [:]){
                 
+//                Helper().hideSpinner(view: self.view)
                 self.map.animate(to: camera)
-//                UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-//                    self.re_center_bottom_cont.constant = 40
-//                })
+
             }
             
-//            Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
-            //Helper().map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
-           
-            
+  
             
             
         }

@@ -132,7 +132,7 @@ extension WalletViewController: STPAddCardViewControllerDelegate {
             if(response != nil){
                 if let success = response?.success {
                     
-                    Helper().showToast(message: "Success=\(success)", controller: self)
+//                    Helper().showToast(message: "Success=\(success)", controller: self)
                     if let val = response?.data {
                         
                         self.balance.text = "$ \(val.details?.wallet ?? 0.0)"
@@ -144,7 +144,7 @@ extension WalletViewController: STPAddCardViewControllerDelegate {
                 }
             }
             else if(error != nil){
-                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+                Helper().showToast(message: "\(error?.localizedDescription ?? "" )", controller: self)
             }
             else{
                 Helper().showToast(message: "Nor Response and Error!!", controller: self)

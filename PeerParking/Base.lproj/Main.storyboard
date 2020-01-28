@@ -5534,7 +5534,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
         <!--Parking-->
         <scene sceneID="qAZ-p6-cur">
             <objects>
-                <viewController id="lVU-fo-VPV" customClass="ListParkingViewController" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lVU-fo-VPV" customClass="ParkingsVC" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="tSg-MA-1zR"/>
                         <viewControllerLayoutGuide type="bottom" id="gPv-dj-SHP"/>
@@ -5543,78 +5543,40 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XPA-St-y8Z">
-                                <rect key="frame" x="0.0" y="98" width="414" height="60"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6k1-rz-OXr">
-                                        <rect key="frame" x="67" y="15" width="280" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pQR-rr-mMN">
-                                                <rect key="frame" x="0.0" y="0.0" width="140" height="30"/>
-                                                <state key="normal" title="History" backgroundImage="big_white_btn"/>
-                                                <connections>
-                                                    <action selector="btnHistory:" destination="lVU-fo-VPV" eventType="touchUpInside" id="uI8-QN-qIC"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nLi-yT-7sa">
-                                                <rect key="frame" x="140" y="0.0" width="140" height="30"/>
-                                                <state key="normal" title="Scheduled"/>
-                                                <connections>
-                                                    <action selector="btnScheduled:" destination="lVU-fo-VPV" eventType="touchUpInside" id="6Az-aK-olp"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="pQR-rr-mMN" firstAttribute="top" secondItem="6k1-rz-OXr" secondAttribute="top" id="2gm-Gp-4BT"/>
-                                            <constraint firstAttribute="width" constant="280" id="LAa-je-n6K"/>
-                                            <constraint firstItem="nLi-yT-7sa" firstAttribute="leading" secondItem="pQR-rr-mMN" secondAttribute="trailing" id="NaG-ci-R4n"/>
-                                            <constraint firstItem="nLi-yT-7sa" firstAttribute="width" secondItem="pQR-rr-mMN" secondAttribute="width" id="Pqk-6F-uwe"/>
-                                            <constraint firstAttribute="trailing" secondItem="nLi-yT-7sa" secondAttribute="trailing" id="Thz-SX-Fj8"/>
-                                            <constraint firstAttribute="bottom" secondItem="pQR-rr-mMN" secondAttribute="bottom" id="maq-51-wAi"/>
-                                            <constraint firstItem="nLi-yT-7sa" firstAttribute="top" secondItem="6k1-rz-OXr" secondAttribute="top" id="wj0-Nt-Qna"/>
-                                            <constraint firstAttribute="bottom" secondItem="nLi-yT-7sa" secondAttribute="bottom" id="xfC-nD-H9o"/>
-                                            <constraint firstItem="pQR-rr-mMN" firstAttribute="leading" secondItem="6k1-rz-OXr" secondAttribute="leading" id="xtd-zh-Qok"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JBS-Kw-KMA">
+                                <rect key="frame" x="0.0" y="158" width="414" height="704"/>
+                            </scrollView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="m3b-X0-mHA" customClass="ButtonBarView" customModule="XLPagerTabStrip">
+                                <rect key="frame" x="0.0" y="88" width="414" height="70"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="6k1-rz-OXr" firstAttribute="centerY" secondItem="XPA-St-y8Z" secondAttribute="centerY" id="4f2-Qw-PSw"/>
-                                    <constraint firstAttribute="height" constant="60" id="9Ld-ip-Pdw"/>
-                                    <constraint firstItem="6k1-rz-OXr" firstAttribute="centerX" secondItem="XPA-St-y8Z" secondAttribute="centerX" id="TF3-Pd-SYX"/>
+                                    <constraint firstAttribute="height" constant="70" id="KjH-3b-m8j"/>
                                 </constraints>
-                            </view>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9BL-Z6-DjM">
-                                <rect key="frame" x="20" y="164" width="374" height="698"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZfK-Q9-KVs">
-                                <rect key="frame" x="20" y="164" width="374" height="698"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AkK-lp-gjN">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="fP6-aO-7Mu" firstAttribute="trailing" secondItem="ZfK-Q9-KVs" secondAttribute="trailing" constant="20" id="DRw-Jv-IqG"/>
-                            <constraint firstItem="XPA-St-y8Z" firstAttribute="top" secondItem="tSg-MA-1zR" secondAttribute="bottom" constant="10" id="EhE-PJ-NQp"/>
-                            <constraint firstItem="9BL-Z6-DjM" firstAttribute="top" secondItem="XPA-St-y8Z" secondAttribute="bottom" constant="6" id="M6h-1P-9xG"/>
-                            <constraint firstItem="gPv-dj-SHP" firstAttribute="top" secondItem="ZfK-Q9-KVs" secondAttribute="bottom" id="Otp-Sf-Nf5"/>
-                            <constraint firstItem="9BL-Z6-DjM" firstAttribute="leading" secondItem="fP6-aO-7Mu" secondAttribute="leading" constant="20" id="RdS-QX-tyR"/>
-                            <constraint firstItem="ZfK-Q9-KVs" firstAttribute="leading" secondItem="fP6-aO-7Mu" secondAttribute="leading" constant="20" id="UMS-is-fv9"/>
-                            <constraint firstItem="fP6-aO-7Mu" firstAttribute="trailing" secondItem="9BL-Z6-DjM" secondAttribute="trailing" constant="20" id="e7M-Zo-00i"/>
-                            <constraint firstItem="XPA-St-y8Z" firstAttribute="leading" secondItem="fP6-aO-7Mu" secondAttribute="leading" id="gSg-4J-UUA"/>
-                            <constraint firstItem="XPA-St-y8Z" firstAttribute="trailing" secondItem="fP6-aO-7Mu" secondAttribute="trailing" id="lvQ-GY-rGG"/>
-                            <constraint firstItem="gPv-dj-SHP" firstAttribute="top" secondItem="9BL-Z6-DjM" secondAttribute="bottom" id="ogg-tc-D8I"/>
-                            <constraint firstItem="ZfK-Q9-KVs" firstAttribute="top" secondItem="XPA-St-y8Z" secondAttribute="bottom" constant="6" id="wWZ-IV-k2e"/>
+                            <constraint firstItem="m3b-X0-mHA" firstAttribute="trailing" secondItem="fP6-aO-7Mu" secondAttribute="trailing" id="07t-rw-Wz6"/>
+                            <constraint firstItem="m3b-X0-mHA" firstAttribute="top" secondItem="tSg-MA-1zR" secondAttribute="bottom" id="DDv-2A-oQU"/>
+                            <constraint firstItem="fP6-aO-7Mu" firstAttribute="trailing" secondItem="JBS-Kw-KMA" secondAttribute="trailing" id="HmD-Hd-uue"/>
+                            <constraint firstItem="gPv-dj-SHP" firstAttribute="top" secondItem="JBS-Kw-KMA" secondAttribute="bottom" id="WTQ-MW-EVr"/>
+                            <constraint firstItem="JBS-Kw-KMA" firstAttribute="top" secondItem="m3b-X0-mHA" secondAttribute="bottom" id="XCo-nr-RC0"/>
+                            <constraint firstItem="JBS-Kw-KMA" firstAttribute="leading" secondItem="fP6-aO-7Mu" secondAttribute="leading" id="bDc-ry-k7f"/>
+                            <constraint firstItem="m3b-X0-mHA" firstAttribute="leading" secondItem="fP6-aO-7Mu" secondAttribute="leading" id="zXB-v5-qLm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fP6-aO-7Mu"/>
                     </view>
                     <navigationItem key="navigationItem" title="Parking" id="o7S-eb-fFz"/>
                     <connections>
-                        <outlet property="btnH" destination="pQR-rr-mMN" id="9YF-SV-RaM"/>
-                        <outlet property="btnS" destination="nLi-yT-7sa" id="j4e-bl-JJZ"/>
-                        <outlet property="tblHistory" destination="ZfK-Q9-KVs" id="yy3-SW-gDz"/>
-                        <outlet property="tblParking" destination="9BL-Z6-DjM" id="9Fk-fR-8de"/>
+                        <outlet property="buttonBarView" destination="m3b-X0-mHA" id="AnK-bi-1e5"/>
+                        <outlet property="containerView" destination="JBS-Kw-KMA" id="ZCA-5I-BGC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ld-YL-Wf4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5673,7 +5635,7 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fLC-7P-eqq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3144.9275362318845" y="3105.8035714285711"/>
+            <point key="canvasLocation" x="3761" y="2358"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Thi-Ak-gRi">
@@ -5742,6 +5704,21 @@ placed here solely to demonstrate the look and feel of finished, typeset text. O
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yg6-t3-fFm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="563.768115942029" y="3907.3660714285711"/>
+        </scene>
+        <!--Upcoming ParkingVC-->
+        <scene sceneID="Uyc-Va-wec">
+            <objects>
+                <viewController storyboardIdentifier="UpcomingParkingVC" id="QL8-Br-euK" customClass="UpcomingParkingVC" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bsW-A6-TYg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ZLW-5O-0HK"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HZN-LB-77V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1854" y="3767"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uSK-91-8ex">
@@ -10783,12 +10760,26 @@ Click Finish to publish your offer</string>
             </objects>
             <point key="canvasLocation" x="-1017.3913043478261" y="-454.01785714285711"/>
         </scene>
+        <!--Parkings HistoryVC-->
+        <scene sceneID="7J9-Zl-R9w">
+            <objects>
+                <viewController storyboardIdentifier="ParkingsHistoryVC" id="bQX-Hz-QOb" customClass="ParkingsHistoryVC" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xIs-tZ-rjj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="4dG-yA-Acp"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wbf-L1-pi9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2633" y="3767"/>
+        </scene>
     </scenes>
     <resources>
         <image name="alternate_routes_btn" width="105" height="105"/>
         <image name="back_btn" width="12" height="20.5"/>
         <image name="bg_img" width="213" height="213"/>
-        <image name="big_white_btn" width="162" height="63"/>
         <image name="btn_radio" width="18" height="18"/>
         <image name="bus_unselected" width="67" height="67"/>
         <image name="calender_btn" width="22" height="22"/>

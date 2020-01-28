@@ -29,7 +29,7 @@ target 'PeerParking' do
 #  pod 'DGRunkeeperSwitch' , '~> 1.1.4'
   pod 'iProgressHUD'
   pod 'Stripe'
-
+  pod 'XLPagerTabStrip'
   target 'PeerParkingTests' do
     inherit! :search_paths
     # Pods for testing

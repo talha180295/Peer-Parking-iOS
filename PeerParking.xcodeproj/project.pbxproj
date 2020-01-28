@@ -29,6 +29,9 @@
 		181E0D2123CE22E3005D7248 /* PostBargainigOfferModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D2023CE22E3005D7248 /* PostBargainigOfferModel.swift */; };
 		18392E792370487A007FB161 /* PricePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18392E782370487A007FB161 /* PricePicker.swift */; };
 		18392E7B23707220007FB161 /* StepFourVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18392E7A23707220007FB161 /* StepFourVC.swift */; };
+		183DAA3E23E0704B0022BC6E /* ParkingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183DAA3D23E0704B0022BC6E /* ParkingsVC.swift */; };
+		183DAA4023E073930022BC6E /* UpcomingParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183DAA3F23E073930022BC6E /* UpcomingParkingVC.swift */; };
+		183DAA4223E073A80022BC6E /* ParkingsHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183DAA4123E073A80022BC6E /* ParkingsHistoryVC.swift */; };
 		18451971235E08C700F3AF5A /* OfferBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18451970235E08C700F3AF5A /* OfferBottomSheetVC.swift */; };
 		185DE799236094DE00FC0E25 /* FBPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185DE798236094DE00FC0E25 /* FBPopup.swift */; };
 		185DE79B2360A59900FC0E25 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185DE79A2360A59900FC0E25 /* Constants.swift */; };
@@ -174,6 +177,9 @@
 		181E0D2023CE22E3005D7248 /* PostBargainigOfferModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBargainigOfferModel.swift; sourceTree = "<group>"; };
 		18392E782370487A007FB161 /* PricePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricePicker.swift; sourceTree = "<group>"; };
 		18392E7A23707220007FB161 /* StepFourVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFourVC.swift; sourceTree = "<group>"; };
+		183DAA3D23E0704B0022BC6E /* ParkingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingsVC.swift; sourceTree = "<group>"; };
+		183DAA3F23E073930022BC6E /* UpcomingParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingParkingVC.swift; sourceTree = "<group>"; };
+		183DAA4123E073A80022BC6E /* ParkingsHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingsHistoryVC.swift; sourceTree = "<group>"; };
 		18451970235E08C700F3AF5A /* OfferBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferBottomSheetVC.swift; sourceTree = "<group>"; };
 		185DE798236094DE00FC0E25 /* FBPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPopup.swift; sourceTree = "<group>"; };
 		185DE79A2360A59900FC0E25 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -365,6 +371,16 @@
 				181E0D1C23CDF994005D7248 /* DemoFunc.swift */,
 			);
 			path = "Demo Function";
+			sourceTree = "<group>";
+		};
+		183DAA3C23E070300022BC6E /* Parkings */ = {
+			isa = PBXGroup;
+			children = (
+				183DAA3D23E0704B0022BC6E /* ParkingsVC.swift */,
+				183DAA3F23E073930022BC6E /* UpcomingParkingVC.swift */,
+				183DAA4123E073A80022BC6E /* ParkingsHistoryVC.swift */,
+			);
+			path = Parkings;
 			sourceTree = "<group>";
 		};
 		185DE797236094BD00FC0E25 /* Pop Up */ = {
@@ -671,6 +687,7 @@
 		FA2815BC231E6669008AF3F5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				183DAA3C23E070300022BC6E /* Parkings */,
 				67BC7B9423CC5395001542D6 /* Registration */,
 				1866BF622374519F008EE650 /* Request */,
 				18924C252365B83A00C0E94F /* ContainerView */,
@@ -1085,8 +1102,10 @@
 				FA0FCC5C232250DD000FF52C /* SettingViewController.swift in Sources */,
 				FA2815AB231E3F92008AF3F5 /* CustomSideMenuController.swift in Sources */,
 				67BC7B9A23CC5D64001542D6 /* ForgetPassViewController.swift in Sources */,
+				183DAA4023E073930022BC6E /* UpcomingParkingVC.swift in Sources */,
 				FA2F9F37232CA7E30025BF11 /* offerCell.swift in Sources */,
 				18010AAD2354C463008412C0 /* FindParkingVC.swift in Sources */,
+				183DAA4223E073A80022BC6E /* ParkingsHistoryVC.swift in Sources */,
 				FA2815AE231E3F92008AF3F5 /* RootViewController.swift in Sources */,
 				1866BF642374617B008EE650 /* RequestCell.swift in Sources */,
 				FA6CD3732328F1C900E18CF2 /* ListParkingViewController.swift in Sources */,
@@ -1125,6 +1144,7 @@
 				FA1150C52316838400D0B1FE /* AppDelegate.swift in Sources */,
 				185DE7A62360E2B300FC0E25 /* FeedbackVC.swift in Sources */,
 				FA6CD3672328C00900E18CF2 /* HistoryCell.swift in Sources */,
+				183DAA3E23E0704B0022BC6E /* ParkingsVC.swift in Sources */,
 				181E0D1D23CDF995005D7248 /* DemoFunc.swift in Sources */,
 				18392E792370487A007FB161 /* PricePicker.swift in Sources */,
 				185DE7A12360BCEA00FC0E25 /* AlternateRouteVC.swift in Sources */,

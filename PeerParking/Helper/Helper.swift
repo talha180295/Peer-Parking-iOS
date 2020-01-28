@@ -772,11 +772,16 @@ class Helper{
         
         
         iprogress.isShowModal = true
-        iprogress.isShowCaption = true
+        iprogress.isShowCaption = false
         iprogress.isTouchDismiss = false
         iprogress.indicatorStyle = .circleStrokeSpin
         iprogress.indicatorColor = .white
-        iprogress.iprogressStyle = .horizontal
+        iprogress.boxColor = .gray
+        iprogress.iprogressStyle = .vertical
+        iprogress.indicatorStyle = .ballRotateChase
+        iprogress.indicatorSize = 50
+        iprogress.boxSize = 20
+
         iprogress.indicatorView.startAnimating()
         
         iprogress.attachProgress(toView: view)
