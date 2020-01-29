@@ -21,7 +21,7 @@ class UpcomingParkingVC: UIViewController,IndicatorInfoProvider {
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
-        return IndicatorInfo(title: "HISTORY", accessibilityLabel: "HISTORY", image: #imageLiteral(resourceName: "tab_findParking"), highlightedImage: #imageLiteral(resourceName: "family_selected"), userInfo: nil)
+        return IndicatorInfo(title: "UPCOMING", accessibilityLabel: "UPCOMING", image: UIImage(named: "upcomingUn"), highlightedImage: UIImage(named: "upcoming"), userInfo: nil)
     }
     
     

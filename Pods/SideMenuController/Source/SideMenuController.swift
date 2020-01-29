@@ -275,7 +275,7 @@ open class SideMenuController: UIViewController, UIGestureRecognizerDelegate {
             return
         }
         
-        sbw?.set(hidden, withBehaviour: _preferences.animating.statusBarBehaviour)
+//        sbw?.set(hidden, withBehaviour: _preferences.animating.statusBarBehaviour)
         
         if _preferences.animating.statusBarBehaviour == StatusBarBehaviour.horizontalPan {
             if !hidden {
@@ -385,14 +385,14 @@ open class SideMenuController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - Computed variables -
     
-    fileprivate var sbw: UIWindow? {
-        
-        let s = "status"
-        let b = "Bar"
-        let w = "Window"
-        
-        return UIApplication.shared.value(forKey: s+b+w) as? UIWindow
-    }
+//    fileprivate var sbw: UIWindow? {
+//
+//        let s = "status"
+//        let b = "Bar"
+//        let w = "Window"
+//
+//        return UIApplication.shared.value(forKey: s+b+w) as? UIWindow
+//    }
     
     fileprivate var showsStatusUnderlay: Bool {
         
@@ -413,7 +413,8 @@ open class SideMenuController: UIViewController, UIGestureRecognizerDelegate {
     
     fileprivate var previousStatusBarHeight: CGFloat = DefaultStatusBarHeight
     fileprivate var statusBarHeight: CGFloat {
-        return UIApplication.shared.statusBarFrame.size.height > 0 ? UIApplication.shared.statusBarFrame.size.height : DefaultStatusBarHeight
+        return 0
+//        return UIApplication.shared.statusBarFrame.size.height > 0 ? UIApplication.shared.statusBarFrame.size.height : DefaultStatusBarHeight
     }
     
     fileprivate var hidesStatusBar: Bool {

@@ -760,6 +760,7 @@ class Helper{
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
         tab_index = index
         vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .fullScreen
         controller.present(vc, animated: true, completion: nil)
     }
     

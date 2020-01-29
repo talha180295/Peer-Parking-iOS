@@ -516,12 +516,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             if(response != nil){
                 if let _ = response?.success {
                     
-                    
-                    
                     let message = response?.message
-                    
-                    
-                    
+        
                     if let uData = response?.data{
 
                         Helper().map_circle(data: uData, map_view: self.map)

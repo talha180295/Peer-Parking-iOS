@@ -22,6 +22,7 @@ enum APIRouter: URLRequestConvertible {
     case addUserCard([String:Any])
     case me
     
+    
     private var accessToken:String{
         return  UserDefaults.standard.string(forKey: "auth_token") ?? ""
     }

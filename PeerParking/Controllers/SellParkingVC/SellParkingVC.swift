@@ -44,96 +44,58 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
    
     override func viewWillAppear(_ animated: Bool) {
         
-        vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as? ParkingNavVC
-        vc1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC") as? ParkedViewController
-        
-        
-        if(Helper().IsUserLogin()){
-            checkStatus(){
-                response in
-                
-                var p_status = 0
-                
-                if let val = response["status"] as? Int{
-                    
-                    p_status = val
-                }
-                
-//                let data = response["data"] as! NSDictionary
-              
-                
-                
-                //print("p_status234=\(p_status)")
-                Helper().showToast(message: String(p_status), controller: self)
-               
-                if let val = response["start_at"] as? String{
-                    
-                    let dateFormatterNow = DateFormatter()
-                    dateFormatterNow.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
-                    //                dateFormatterNow.timeZone = TimeZone(abbreviation: "EST")
-                    
-                    let currentDate = Date()
-                    let currentDateStr = dateFormatterNow.string(from: currentDate)
-                    let oldDate = dateFormatterNow.date(from: currentDateStr)
-                    
-                    let newDateString = val
-                    let newDate = dateFormatterNow.date(from: newDateString)
-                    
-                    if let oldDate = oldDate, let newDate = newDate {
-                        let diffInMins = Calendar.current.dateComponents([.second], from: oldDate, to: newDate).second
-                        print("diffInMins=\(diffInMins)")
-                        self.vc1.seconds = diffInMins ?? 0
-                        self.vc1.MainSeconds = diffInMins ?? 0
-                    }
-                   
-                }
-                
-//                let dateFormatterNow = DateFormatter()
-//                dateFormatterNow.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
-////                dateFormatterNow.timeZone = TimeZone(abbreviation: "EST")
-//
-//                let oldDateString = "2019-12-13 21:55:44"
-//                let oldDate = dateFormatterNow.date(from: oldDateString)
-//
-//                let newDateString = "22019-12-13 21:59:44"
-//                let newDate = dateFormatterNow.date(from: newDateString)
-//
-//                if let oldDate = oldDate, let newDate = newDate {
-//                    let diffInMins = Calendar.current.dateComponents([.minute], from: oldDate, to: newDate).minute
-//                    print("diffInMins=\(diffInMins)")
-//                }
-             
-               
-                print("p_status===\(p_status)")
-                
-                switch p_status {
-
-                    
-                    case 10:
-                        self.openTimerScreen(vc: self.vc1)
-                    case 20:
-                        self.openNavigationScreen(vc: self.vc, dict: response)
-                    default:
-                        self.vc.remove()
-                        self.vc1.remove()
-                }
-
-            }
-        }
-        else{
-//            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
-        }
-        
         tab_index = 2
-//        print("parking_post_details=\(GLOBAL_VAR.PARKING_POST_DETAILS)")
-//        print("::--=viewWillAppear|SellParking")
         self.tabBarController!.navigationItem.title = "Sell Parking"
+        
+        self.setUPViews()
+       
     }
+    
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         
         vc1.remove()
     }
+    
+    func setUPViews(){
+
+        vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as? ParkingNavVC
+        vc1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC") as? ParkedViewController
+        
+        
+        if(Helper().IsUserLogin()){
+            
+            self.checkStatus()
+        }
+
+                
+    }
+    func setTimer(val:String){
+        
+
+        let dateFormatterNow = DateFormatter()
+        dateFormatterNow.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+        //                dateFormatterNow.timeZone = TimeZone(abbreviation: "EST")
+        
+        let currentDate = Date()
+        let currentDateStr = dateFormatterNow.string(from: currentDate)
+        let oldDate = dateFormatterNow.date(from: currentDateStr)
+        
+        let newDateString = val
+        let newDate = dateFormatterNow.date(from: newDateString)
+        
+        if let oldDate = oldDate, let newDate = newDate {
+            let diffInMins = Calendar.current.dateComponents([.second], from: oldDate, to: newDate).second
+            print("diffInMins=\(diffInMins ?? 0)")
+            self.vc1.seconds = diffInMins ?? 0
+            self.vc1.MainSeconds = diffInMins ?? 0
+        }
+        
+    }
+
+    
+    
     func openTimerScreen(vc:ParkedViewController){
         
         
@@ -141,31 +103,31 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
         add(vc)
         
     }
-    func openNavigationScreen(vc:ParkingNavVC, dict:NSDictionary){
+    func openNavigationScreen(vc:ParkingNavVC, dict:Parking){
         
         vc.parking_details = nil
         
 
         
-        if let id = dict["id"] as? Int{
+        if let id = dict.id{
             
             vc.p_id = id
             
         }
         
-        if let address = dict["address"] as? String{
+        if let address = dict.address{
             
             vc.p_title = address
             
         }
         
-        if let latitude = dict["latitude"] as? Double{
+        if let latitude = dict.latitude as? Double{
             
             vc.p_lat = latitude
             
         }
         
-        if let longitude = dict["longitude"] as? Double{
+        if let longitude = dict.longitude as? Double{
             
             vc.p_longg = longitude
             
@@ -183,19 +145,13 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    func checkStatus(completion: @escaping (NSDictionary) -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
+    func checkStatus(){//(withToken:Bool,completion: @escaping (JSON) -> Void){
         
-        var params = [
+        let params = [
             "is_schedule" : 1,
             "mood" : 10
-//            "latitude": String(lat),
-//            "longitude": String(long)
-            
         ]
-        
-       
-        
-        
+
         print("param123=\(params)")
         
         var auth_value = ""
@@ -217,56 +173,84 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
         
         var url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITH_TOKEN
         
-//        if(Helper().IsUserLogin()){
-//            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITH_TOKEN
-//        }
-//        else{
-//            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITHOUT_TOKEN
-//        }
         print("checkStatusurl=\(url)")
-        Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: true, headers: headers){
-            response in
-            print(response.response?.statusCode)
-            //print("response=\(response)")
-            if response.result.value == nil {
-//                print("No response status")
-                
-                let responseData = response.result.value as! NSDictionary
-                let uData = responseData["data"] as! [Any]
-                
-                SharedHelper().showToast(message: "Internal Server Error", controller: self)
-                completion([:])
-                return
-            }
-            else {
-                let responseData = response.result.value as! NSDictionary
-                let status = responseData["success"] as! Bool
-                if(status)
-                {
-                    
-                    let message = responseData["message"] as! String
-                    let uData = responseData["data"] as! [Any]
-                    
-                    if(uData.count>0){
+        
+        let url_r = APIRouter.getParkings(params)
+        let decoder = ResponseData<[Parking]>.self
+        APIClient.serverRequest(url: url_r, dec: decoder) { (response, error) in
                         
-                    
-                    let dict = uData[0] as! NSDictionary
-                    let p_status = dict["status"] as! Int
-                    
-                    completion(dict)
+            if(response != nil){
+                if let success = response?.success {
+                    if let val = response?.data {
+                        
+                        self.setTimer(val: val[0].startAt ?? "")
+                        
+                        let p_status = val[0].status
+                        switch p_status {
+                            
+                          case 10:
+                              self.openTimerScreen(vc: self.vc1)
+                          case 20:
+                              self.openNavigationScreen(vc: self.vc, dict: val[0])
+                          default:
+                              self.vc.remove()
+                              self.vc1.remove()
+                        }
                     }
-                    
-                    
-                    
                 }
-                else
-                {
-                    let message = responseData["message"] as! String
-                    SharedHelper().showToast(message: message, controller: self)
-                    //   SharedHelper().hideSpinner(view: self.view)
+                else{
+                  
                 }
+            }
+            else if(error != nil){
+            }
+            else{
+                
             }
         }
+//        Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: true, headers: headers){
+//            response in
+//            print(response.response?.statusCode)
+//            //print("response=\(response)")
+//            if response.result.value == nil {
+////                print("No response status")
+//                
+//                let responseData = response.result.value as! NSDictionary
+//                let uData = responseData["data"] as! [Any]
+//                
+//                SharedHelper().showToast(message: "Internal Server Error", controller: self)
+//                completion([:])
+//                return
+//            }
+//            else {
+//                let responseData = response.result.value as! NSDictionary
+//                let status = responseData["success"] as! Bool
+//                if(status)
+//                {
+//                    
+//                    let message = responseData["message"] as! String
+//                    let uData = responseData["data"] as! [Any]
+//                    
+//                    if(uData.count>0){
+//                        
+//                    
+//                    let dict = uData[0] as! NSDictionary
+//                    let p_status = dict["status"] as! Int
+//                    
+//                    completion(dict)
+//                    }
+//                    
+//                    
+//                    
+//                }
+//                else
+//                {
+//                    let message = responseData["message"] as! String
+//                    SharedHelper().showToast(message: message, controller: self)
+//                    //   SharedHelper().hideSpinner(view: self.view)
+//                }
+//            }
+//        }
         
     }
     

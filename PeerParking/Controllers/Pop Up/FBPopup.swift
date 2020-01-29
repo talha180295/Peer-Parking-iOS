@@ -189,7 +189,7 @@ class FBPopup: UIViewController {
                 vc.p_lat = Double(self.parking_details.latitude ?? "0.0") as! Double
                 vc.p_longg = Double(self.parking_details.longitude ?? "0.0") as! Double
                 vc.vcName = ""
-                
+                vc.modalPresentationStyle = .fullScreen
                 
                 //            self.navigationController?.pushViewController(vc, animated: true)
                 //            self.navigationController?.pushViewController(vc, animated: true)
@@ -564,6 +564,7 @@ class FBPopup: UIViewController {
                     
                     
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedbackVC") as! FeedbackVC
+                    vc.modalPresentationStyle = .fullScreen
                     vc.parking_details = self.parking_details
                     vc.p_id = p_id
                     self.present(vc, animated: true, completion: nil)
@@ -584,8 +585,8 @@ class FBPopup: UIViewController {
     @IBAction func btnLogin(_ sender: Any) {
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
- 
-         self.present(vc, animated: true, completion: nil)
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
         
     }
     
@@ -596,6 +597,7 @@ class FBPopup: UIViewController {
     @IBAction func btnSignUp(_ sender: Any) {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerVC") as! RegistrationViewController
         
+        vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
     
