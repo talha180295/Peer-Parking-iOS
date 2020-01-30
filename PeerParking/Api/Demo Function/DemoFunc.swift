@@ -171,27 +171,22 @@ class DemoFunc {
         APIClient.serverRequest(url: APIRouter.getParkings(params), dec: ResponseData<Parking>.self) { (response,error) in
             
             if(response != nil){
-                if let success = response?.success {
-                    //                    print("Succes=\(success)")
-//                    Helper().showToast(message: "Succes=\(success)", controller: self)
+                if (response?.success) != nil {
+                    //Helper().showToast(message: "Succes=\(success)", controller: self)
                     if let val = response?.data {
-                        //                print("bData=\(bData)")
-//                        self.pData = val
-//                        self.myTableView.reloadData()
+                    
+                        print(val)
                     }
                 }
                 else{
-                    //                    print("Server Message=\(response?.message ?? "-" )")
-//                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                    //Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
                 }
             }
             else if(error != nil){
-                //                print("Error=\(error?.localizedDescription ?? "" )")
-//                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+                //Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
             }
             else{
-                //                print("Nor Response and Error!!")
-//                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+                //Helper().showToast(message: "Nor Response and Error!!", controller: self)
             }
             
         }

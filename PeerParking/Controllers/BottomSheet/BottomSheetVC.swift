@@ -243,37 +243,48 @@ class BottomSheetVC: UIViewController {
     
     func postBargainingOffer(params:[String:Any]){
         
-        Helper().RefreshToken { response in
-            
-            print(response)
-            if response.result.value == nil {
-                print("No response")
-                
-                return
-            }
-            else{
-                
-                Alamofire.request(APIRouter.postBargainingOffer(params)).responsePost{ response in
-                    
-                    switch response.result {
-                    case .success:
-                        if response.result.value?.success ?? false{
-                            
-                            print("val=\(response.result.value?.message ?? "-")")
-                            
-                        }
-                        else{
-                            print("Server Message=\(response.result.value?.message ?? "-" )")
-                            
-                        }
-                        
-                    case .failure(let error):
-                        print("ERROR==\(error)")
-                    }
-                }
-                
-            }
+        APIClient.serverRequest(url: APIRouter.postBargainingOffer(params), dec: PostResponseData.self) { (response,error) in
+                   
+           if(response != nil){
+               if let success = response?.success {
+                   Helper().showToast(message: "Succes=\(success)", controller: self)
+//                   if let val = response?.data {
+//
+//                   }
+               }
+               else{
+                   Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+               }
+           }
+           else if(error != nil){
+               Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+           }
+           else{
+               Helper().showToast(message: "Nor Response and Error!!", controller: self)
+           }
+           
         }
+        
+        
+        
+//        Alamofire.request(APIRouter.postBargainingOffer(params)).responsePost{ response in
+//
+//           switch response.result {
+//           case .success:
+//               if response.result.value?.success ?? false{
+//
+//                   print("val=\(response.result.value?.message ?? "-")")
+//
+//               }
+//               else{
+//                   print("Server Message=\(response.result.value?.message ?? "-" )")
+//
+//               }
+//
+//           case .failure(let error):
+//               print("ERROR==\(error)")
+//           }
+//        }
         
     }
     

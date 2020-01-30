@@ -22,7 +22,8 @@ class FinishPopup: UIViewController {
 
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
         tab_index = 1
-        self.present(vc, animated: true, completion: nil)
+        Helper().presentOnMainScreens(controller: vc, index: tab_index)
+//        self.present(vc, animated: true, completion: nil)
         
         GLOBAL_VAR.PARKING_POST_DONE = true
         

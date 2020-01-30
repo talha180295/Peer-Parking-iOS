@@ -21,6 +21,8 @@ class SplashViewController: UIViewController {
         
 //        UserDefaults.standard.set("no", forKey: "login")
         
+        self.refreshToken()
+        
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let app_build_Version = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         
@@ -43,6 +45,35 @@ class SplashViewController: UIViewController {
     
     
    
+    func refreshToken(){
+        
+        let url = APIRouter.refresh
+        let decoder = ResponseData<RefreshTokenModel>.self
+        
+        APIClient.serverRequest(url: url, dec: decoder) { (response, error) in
+            
+                        
+            if(response != nil){
+                if let success = response?.success {
+            //                    Helper().showToast(message: "Succes=\(success)", controller: self)
+                    if let val = response?.data {
+                        
+                        UserDefaults.standard.set(val.user?.accessToken, forKey: "access_token")
+                        UserDefaults.standard.synchronize()
+                    }
+                }
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                }
+            }
+            else if(error != nil){
+                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+            }
+            else{
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
+        }
+    }
     
 
 }

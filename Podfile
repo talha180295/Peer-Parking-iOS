@@ -6,6 +6,7 @@ target 'PeerParking' do
   use_frameworks!
   
   # Pods for PeerParking
+  pod 'Alamofire'
   pod 'IQKeyboardManagerSwift'
   #pod 'MBCircularProgressBar'
   pod 'SideMenuController'

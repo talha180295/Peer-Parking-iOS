@@ -183,18 +183,20 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
                 if let success = response?.success {
                     if let val = response?.data {
                         
-                        self.setTimer(val: val[0].startAt ?? "")
-                        
-                        let p_status = val[0].status
-                        switch p_status {
+                        if(val.count>0){
+                            self.setTimer(val: val[0].startAt ?? "")
                             
-                          case 10:
-                              self.openTimerScreen(vc: self.vc1)
-                          case 20:
-                              self.openNavigationScreen(vc: self.vc, dict: val[0])
-                          default:
-                              self.vc.remove()
-                              self.vc1.remove()
+                            let p_status = val[0].status
+                            switch p_status {
+                                
+                              case 10:
+                                  self.openTimerScreen(vc: self.vc1)
+                              case 20:
+                                  self.openNavigationScreen(vc: self.vc, dict: val[0])
+                              default:
+                                  self.vc.remove()
+                                  self.vc1.remove()
+                            }
                         }
                     }
                 }

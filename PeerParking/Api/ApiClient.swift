@@ -32,23 +32,64 @@ class APIClient {
         
         Alamofire.request(url).responseJSON { (response) in
             
-            
-            if response.result.isSuccess {
+            print(response)
+            print(response.response?.statusCode ?? 0)
+            if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299){
                 
-                if let jsonData = response.data{
-                    let response = try! JSONDecoder().decode(dec.self, from: jsonData)
+                if response.result.isSuccess {
                     
+                    if let jsonData = response.data{
+                        let response = try! JSONDecoder().decode(dec.self, from: jsonData)
+                        
+                        
+                        completion(response, nil)
+                    }
                     
-                    completion(response, nil)
                 }
-                
+                else{
+                    
+                    completion(nil,response.error!)
+                }
             }
-            else{
+            else if(response.response?.statusCode ?? 0 == 401){
                 
-                completion(nil,response.error!)
+                //refresh Token
+                completion(nil,nil)
             }
         }
     }
     
+    
+    static func refreshTokenRequest(){
+        
+        let url = APIRouter.refresh
+        let decoder = ResponseData<RefreshTokenModel>.self
+        
+        Alamofire.request(url).responseJSON { (response) in
+            
+            print(response.response?.statusCode ?? 0)
+            if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299){
+                
+                if response.result.isSuccess {
+                    
+                    if let jsonData = response.data{
+                        let response = try! JSONDecoder().decode(decoder.self, from: jsonData)
+                        
+//                        print(response.data?.user?.accessToken)
+                        
+                       
+                    }
+                    
+                }
+                else{
+                    
+                }
+            }
+            else if(response.response?.statusCode ?? 0 == 401){
+                
+               
+            }
+        }
+    }
 
 }

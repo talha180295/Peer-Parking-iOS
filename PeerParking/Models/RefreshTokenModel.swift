@@ -23,11 +23,11 @@ import Foundation
 import Alamofire
 
 // MARK: - RefreshTokenModel
-struct RefreshTokenModel: Codable {
-    let success: Bool?
-    let data: DataClass?
-    let message: String?
-}
+//struct RefreshTokenModel: Codable {
+//    let success: Bool?
+//    let data: DataClass?
+//    let message: String?
+//}
 
 //
 // To parse values from Alamofire responses:
@@ -39,7 +39,7 @@ struct RefreshTokenModel: Codable {
 //   }
 
 // MARK: - DataClass
-struct DataClass: Codable {
+struct RefreshTokenModel: Codable {
     let user: User?
 }
 
@@ -57,7 +57,7 @@ struct User: Codable {
     let id: Int?
     let name, email, createdAt: String?
     let details: Details?
-    let card: Card?
+    let card: [Card?]
     let accessToken, tokenType: String?
     let expiresIn: Int?
     

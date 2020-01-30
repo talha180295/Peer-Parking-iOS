@@ -426,12 +426,12 @@ class FBPopup: UIViewController {
         key = "id"
         if userDetails[key] is NSNull {
             
-            UserDefaults.standard.set("", forKey: key)
+            UserDefaults.standard.set(0, forKey: key)
         }
         else
         {
             
-            let val = userDetails[key] as? String
+            let val = userDetails[key] as? Int
             UserDefaults.standard.set(val, forKey: key)
         }
         

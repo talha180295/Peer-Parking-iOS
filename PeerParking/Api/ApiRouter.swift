@@ -21,6 +21,7 @@ enum APIRouter: URLRequestConvertible {
     case postBargainingOffer([String:Any])
     case addUserCard([String:Any])
     case me
+    case refresh
     
     
     private var accessToken:String{
@@ -34,7 +35,7 @@ enum APIRouter: URLRequestConvertible {
         case .getParkingsWithoutToken,.getParkings,.getParkingsById,.getBargainings:
             return .get
             
-        case .postParking,.postBargainingOffer,.addUserCard,.me:
+        case .postParking,.postBargainingOffer,.addUserCard,.me,.refresh:
             return .post
         }
     }
@@ -59,6 +60,8 @@ enum APIRouter: URLRequestConvertible {
             return "user-cards"
         case .me:
             return "me"
+        case .refresh:
+            return "refresh"
             
         }
     }
@@ -83,7 +86,8 @@ enum APIRouter: URLRequestConvertible {
             return (params)
         case .me:
             return nil
-
+        case .refresh:
+            return nil
         }
     }
     
