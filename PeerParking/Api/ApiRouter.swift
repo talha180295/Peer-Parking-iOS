@@ -22,6 +22,8 @@ enum APIRouter: URLRequestConvertible {
     case addUserCard([String:Any])
     case me
     case refresh
+    case cancelSellerParking(id:Int)
+    case assignBuyer(id:Int,[String:Any])
     
     
     private var accessToken:String{
@@ -35,13 +37,14 @@ enum APIRouter: URLRequestConvertible {
         case .getParkingsWithoutToken,.getParkings,.getParkingsById,.getBargainings:
             return .get
             
-        case .postParking,.postBargainingOffer,.addUserCard,.me,.refresh:
+        case .postParking,.postBargainingOffer,.addUserCard,.me,.refresh, .cancelSellerParking, .assignBuyer:
             return .post
         }
     }
     
     // MARK: - Path
     private var path: String {
+       
         switch self {
        
         case .getParkingsWithoutToken:
@@ -62,7 +65,10 @@ enum APIRouter: URLRequestConvertible {
             return "me"
         case .refresh:
             return "refresh"
-            
+        case .cancelSellerParking(let id):
+            return "cancel-seller-parking/\(id)"
+        case .assignBuyer(let id, _):
+            return "assign-buyer/\(id)"
         }
     }
     
@@ -88,6 +94,10 @@ enum APIRouter: URLRequestConvertible {
             return nil
         case .refresh:
             return nil
+        case .cancelSellerParking:
+            return nil
+        case .assignBuyer(_, let params):
+            return (params)
         }
     }
     

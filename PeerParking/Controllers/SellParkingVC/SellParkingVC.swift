@@ -96,9 +96,9 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
 
     
     
-    func openTimerScreen(vc:ParkedViewController){
+    func openTimerScreen(vc:ParkedViewController, dict:Parking){
         
-        
+        vc.parking_details = dict
         //        configureChildViewController(childController: vc, onView: self.mainView)
         add(vc)
         
@@ -190,7 +190,7 @@ class SellParkingVC: UIViewController, CLLocationManagerDelegate {
                             switch p_status {
                                 
                               case 10:
-                                  self.openTimerScreen(vc: self.vc1)
+                                  self.openTimerScreen(vc: self.vc1, dict: val[0])
                               case 20:
                                   self.openNavigationScreen(vc: self.vc, dict: val[0])
                               default:

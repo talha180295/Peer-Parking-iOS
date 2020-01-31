@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -965,7 +966,7 @@
                                 <rect key="frame" x="10" y="49" width="394" height="70"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_bg" translatesAutoresizingMaskIntoConstraints="NO" id="RD1-A0-xxc">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394.00000000000006" height="70"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qmb-Vy-aOa">
                                         <rect key="frame" x="26" y="13" width="303" height="44"/>
@@ -1056,7 +1057,7 @@
                                         <rect key="frame" x="8" y="75" width="398" height="70"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_bg" translatesAutoresizingMaskIntoConstraints="NO" id="zMO-Yn-IRY">
-                                                <rect key="frame" x="0.0" y="0.0" width="398" height="70"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="398.00000000000006" height="70"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TV3-1X-rKc">
                                                 <rect key="frame" x="26" y="13" width="322" height="44"/>
@@ -1148,7 +1149,7 @@
                                 <rect key="frame" x="10" y="49" width="394" height="70"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_bg" translatesAutoresizingMaskIntoConstraints="NO" id="5lS-Gi-cFc">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="394.00000000000006" height="70"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gtE-b0-sqX">
                                         <rect key="frame" x="26" y="13" width="271" height="44"/>
@@ -1240,7 +1241,7 @@
                                         <rect key="frame" x="8" y="75" width="398" height="70"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_bg" translatesAutoresizingMaskIntoConstraints="NO" id="WAO-j1-rIW">
-                                                <rect key="frame" x="0.0" y="0.0" width="398" height="70"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="398.00000000000006" height="70"/>
                                             </imageView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y8d-IA-lDX">
                                                 <rect key="frame" x="26" y="13" width="322" height="44"/>
@@ -8903,7 +8904,7 @@ Click Finish to publish your offer</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aqi-7v-9fJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3127.536231884058" y="-1738.0580357142856"/>
+            <point key="canvasLocation" x="3112" y="-1767"/>
         </scene>
         <!--Hours picker-->
         <scene sceneID="CGv-8y-A2D">
@@ -10270,6 +10271,108 @@ Click Finish to publish your offer</string>
             </objects>
             <point key="canvasLocation" x="2297" y="3769"/>
         </scene>
+        <!--Time Finish Popup-->
+        <scene sceneID="DYI-vP-Neh">
+            <objects>
+                <viewController storyboardIdentifier="TimeFinishPopup" id="3hP-bL-uYA" customClass="TimeFinishPopup" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DvK-0v-xAw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fJP-Tw-oxh">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Finish" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1p6-RP-3er">
+                                        <rect key="frame" x="113" y="12" width="94" height="21"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you want to cancel parking or extend time?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSq-Py-bTz">
+                                        <rect key="frame" x="25" y="50" width="270" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6v4-Mq-tzn">
+                                        <rect key="frame" x="165" y="121" width="130" height="42"/>
+                                        <color key="backgroundColor" red="0.93725490196078431" green="0.20392156862745098" blue="0.28627450980392155" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="42" id="558-HJ-grw"/>
+                                            <constraint firstAttribute="width" constant="130" id="PSH-V3-JFf"/>
+                                        </constraints>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="cancelBtn:" destination="3hP-bL-uYA" eventType="touchUpInside" id="scS-fp-iGP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bG0-C3-MSx">
+                                        <rect key="frame" x="25" y="122" width="130" height="42"/>
+                                        <color key="backgroundColor" name="themeBlue"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="42" id="16r-dH-Jf7"/>
+                                            <constraint firstAttribute="width" constant="130" id="Wf6-Bg-Fae"/>
+                                        </constraints>
+                                        <state key="normal" title="Extend Time">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="extendBtn:" destination="3hP-bL-uYA" eventType="touchUpInside" id="s10-ip-h1d"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="6v4-Mq-tzn" firstAttribute="leading" secondItem="bG0-C3-MSx" secondAttribute="trailing" constant="10" id="Bro-Cd-B5B"/>
+                                    <constraint firstAttribute="bottom" secondItem="6v4-Mq-tzn" secondAttribute="bottom" constant="17" id="I75-fe-yK3"/>
+                                    <constraint firstAttribute="width" constant="320" id="Izd-3k-42a"/>
+                                    <constraint firstItem="bG0-C3-MSx" firstAttribute="leading" secondItem="fJP-Tw-oxh" secondAttribute="leading" constant="25" id="K1t-E5-Yk0"/>
+                                    <constraint firstItem="bG0-C3-MSx" firstAttribute="top" secondItem="kSq-Py-bTz" secondAttribute="bottom" constant="31" id="Os2-J9-qsV"/>
+                                    <constraint firstAttribute="trailing" secondItem="1p6-RP-3er" secondAttribute="trailing" constant="113" id="PTl-VL-1FG"/>
+                                    <constraint firstItem="1p6-RP-3er" firstAttribute="top" secondItem="fJP-Tw-oxh" secondAttribute="top" constant="12" id="Q2o-9D-08l"/>
+                                    <constraint firstAttribute="trailing" secondItem="kSq-Py-bTz" secondAttribute="trailing" constant="25" id="Qeg-zy-ePC"/>
+                                    <constraint firstItem="6v4-Mq-tzn" firstAttribute="top" secondItem="kSq-Py-bTz" secondAttribute="bottom" constant="30" id="QoL-eK-Udy"/>
+                                    <constraint firstAttribute="bottom" secondItem="bG0-C3-MSx" secondAttribute="bottom" constant="16" id="U2z-BU-gdR"/>
+                                    <constraint firstItem="kSq-Py-bTz" firstAttribute="leading" secondItem="fJP-Tw-oxh" secondAttribute="leading" constant="25" id="VEd-ec-bkO"/>
+                                    <constraint firstAttribute="height" constant="180" id="Y16-bf-9EL"/>
+                                    <constraint firstItem="kSq-Py-bTz" firstAttribute="top" secondItem="1p6-RP-3er" secondAttribute="bottom" constant="17" id="cy7-pY-lwc"/>
+                                    <constraint firstAttribute="trailing" secondItem="6v4-Mq-tzn" secondAttribute="trailing" constant="25" id="fzL-hE-lO2"/>
+                                    <constraint firstItem="1p6-RP-3er" firstAttribute="leading" secondItem="fJP-Tw-oxh" secondAttribute="leading" constant="113" id="h9X-jh-IFh"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fJP-Tw-oxh" firstAttribute="trailing" secondItem="M99-rX-qX5" secondAttribute="trailing" id="88l-bi-Jpw"/>
+                            <constraint firstItem="fJP-Tw-oxh" firstAttribute="leading" secondItem="M99-rX-qX5" secondAttribute="leading" id="G7u-AI-v6g"/>
+                            <constraint firstItem="fJP-Tw-oxh" firstAttribute="bottom" secondItem="M99-rX-qX5" secondAttribute="bottom" id="MMJ-u6-B9P"/>
+                            <constraint firstItem="fJP-Tw-oxh" firstAttribute="top" secondItem="DvK-0v-xAw" secondAttribute="top" id="iEd-bo-SF4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="M99-rX-qX5"/>
+                    </view>
+                    <size key="freeformSize" width="320" height="180"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zRj-lU-9au" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5460.8695652173919" y="-1767.1875"/>
+        </scene>
     </scenes>
     <resources>
         <image name="alternate_routes_btn" width="105" height="105"/>
@@ -10329,5 +10432,8 @@ Click Finish to publish your offer</string>
         <image name="timer" width="20.5" height="20.5"/>
         <image name="view_all_btn" width="77.5" height="34.5"/>
         <image name="white_btn_bg" width="138.5" height="63"/>
+        <namedColor name="themeBlue">
+            <color red="0.21568627450980393" green="0.61568627450980395" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
     </resources>
 </document>

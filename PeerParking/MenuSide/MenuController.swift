@@ -23,7 +23,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
     let story = UIStoryboard(name: "Main", bundle: nil)
     
     let dict1 = [["name" : "Home","segue":"HomeVC"],["name" : "Profile","segue":"ProfileVC"],["name" : "Wallet","segue":"WalletVC"],["name" : "Parkings","segue":"parkingVC"],
-                ["name" : "Requests","segue":"requestVC"],["name" : "Notifications","segue":"NotificationVC"],["name" : "","segue":""],["name" : "Settings","segue":"SettingVC"],["name" : "Help","segue":"helpVC"],["name" : "","segue":""],["name" : "Logout","segue":""]]
+                ["name" : "Requests","segue":"requestVC"],["name" : "","segue":""],["name" : "Settings","segue":"SettingVC"],["name" : "Help","segue":"helpVC"],["name" : "","segue":""],["name" : "Logout","segue":""]]
     
     
     let dict2 = [["name" : "Settings","segue":""],["name" : "Help","segue":""],["name" : "","segue":""], ["name" : "Login","segue":""]]

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		18010AAB23549C7F008412C0 /* GoogleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18010AAA23549C7F008412C0 /* GoogleMapView.swift */; };
 		18010AAD2354C463008412C0 /* FindParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18010AAC2354C463008412C0 /* FindParkingVC.swift */; };
+		180E9A1223E45B4000B2DFF4 /* TimeFinishPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E9A1123E45B4000B2DFF4 /* TimeFinishPopup.swift */; };
 		180FD0D8237331F30084230A /* ViewAllVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180FD0D7237331F30084230A /* ViewAllVC.swift */; };
 		180FD0DE237335BD0084230A /* Parking_table_cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180FD0DC237335BD0084230A /* Parking_table_cell.swift */; };
 		180FD0DF237335BD0084230A /* Parking_table_cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180FD0DD237335BD0084230A /* Parking_table_cell.xib */; };
@@ -157,6 +158,7 @@
 		0509213210B40E0E0C84432C /* Pods_PeerParkingUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParkingUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18010AAA23549C7F008412C0 /* GoogleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapView.swift; sourceTree = "<group>"; };
 		18010AAC2354C463008412C0 /* FindParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindParkingVC.swift; sourceTree = "<group>"; };
+		180E9A1123E45B4000B2DFF4 /* TimeFinishPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFinishPopup.swift; sourceTree = "<group>"; };
 		180FD0D7237331F30084230A /* ViewAllVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllVC.swift; sourceTree = "<group>"; };
 		180FD0DC237335BD0084230A /* Parking_table_cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parking_table_cell.swift; sourceTree = "<group>"; };
 		180FD0DD237335BD0084230A /* Parking_table_cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Parking_table_cell.xib; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				18392E782370487A007FB161 /* PricePicker.swift */,
 				181C8E342379ED42000B66C7 /* Sell_parking_popup.swift */,
 				18DB9C482397FB3C00A6968F /* Hours_picker.swift */,
+				180E9A1123E45B4000B2DFF4 /* TimeFinishPopup.swift */,
 			);
 			path = "Pop Up";
 			sourceTree = "<group>";
@@ -1127,6 +1130,7 @@
 				FA122149232A4366002720BE /* ParkingDetailViewController.swift in Sources */,
 				FA0FCC6323229FB9000FF52C /* CardView.swift in Sources */,
 				67BC7B9C23CC64AD001542D6 /* ResetViewController.swift in Sources */,
+				180E9A1223E45B4000B2DFF4 /* TimeFinishPopup.swift in Sources */,
 				67BC7B9823CC53CB001542D6 /* RegistrationViewController.swift in Sources */,
 				181E0D1123CDF954005D7248 /* Buyer.swift in Sources */,
 				181C8E352379ED42000B66C7 /* Sell_parking_popup.swift in Sources */,

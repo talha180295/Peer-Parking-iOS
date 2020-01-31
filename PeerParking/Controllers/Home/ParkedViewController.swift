@@ -10,6 +10,7 @@ import UIKit
 
 import CoreMedia
 import CircleProgressView
+import EzPopup
 
 class ParkedViewController: UIViewController {
     
@@ -22,7 +23,8 @@ class ParkedViewController: UIViewController {
    var seconds = 0 //This variable will hold a starting value of seconds. It could be any amount above 0.
    var MainSeconds = 0
    var timer = Timer()
-   var isTimerRunning = false
+    var isTimerRunning = false
+    var parking_details:Parking!
 
     @IBOutlet weak var btnT: UIButton!
     
@@ -36,18 +38,7 @@ class ParkedViewController: UIViewController {
         super.viewDidLoad()
 //        self.navigationController?.navigationBar.isHidden = true
         
-        print("secondssss=\(seconds)")
-        
-        if(seconds>0){
-            
-            lblTimer.text = timeString(time: TimeInterval(seconds))
-            runTimer()
-        }
-        else{
-            
-            
-            
-        }
+
        
         //timerView.addTarget(self, action: #selector(ParkedViewController.handleValueChanged(_:)), for: .valueChanged)
         
@@ -57,6 +48,30 @@ class ParkedViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("secondssss=\(seconds)")
+        
+        if(seconds>0){
+            
+            lblTimer.text = timeString(time: TimeInterval(seconds))
+            runTimer()
+        }
+        else{
+            
+            //show pop
+            
+            
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TimeFinishPopup") as! TimeFinishPopup
+            vc.parking_details = self.parking_details
+                          
+            let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 180)
+            popupVC.canTapOutsideToDismiss = true
+
+            present(popupVC, animated: true)
+            
+        }
     }
     
     @IBAction func btnChange(_ sender: Any) {
