@@ -794,6 +794,18 @@ class Helper{
         view.dismissProgress()
     }
     
+    func registerTableCell(tableView:UITableView,nibName:String,identifier:String){
+        
+        tableView.register(UINib(nibName: nibName, bundle: nil), forCellReuseIdentifier: identifier)
+        tableView.tableFooterView = UIView()
+        
+    }
+    func registerCollectionCell(collectionView:UICollectionView,nibName:String,identifier:String){
+           
+        collectionView.register(UINib(nibName: nibName, bundle: nil), forCellWithReuseIdentifier: identifier)
+          
+       }
+    
 }
 
 

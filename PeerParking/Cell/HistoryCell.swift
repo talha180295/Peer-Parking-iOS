@@ -10,6 +10,13 @@ import UIKit
 
 class HistoryCell: UITableViewCell {
 
+    @IBOutlet weak var direction: UILabel!
+    @IBOutlet weak var address: UILabel!
+    @IBOutlet weak var status: UILabel!
+    @IBOutlet weak var price: UILabel!
+    @IBOutlet weak var availablity: UILabel!
+    @IBOutlet weak var type: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -11,11 +11,19 @@ import XLPagerTabStrip
 
 class ParkingsHistoryVC: UIViewController,IndicatorInfoProvider {
     
+    var parkingModel = [Parking]()
+       
+    //Outlets
+    @IBOutlet weak var historyParkingTbl: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        
+        Helper().registerTableCell(tableView: historyParkingTbl, nibName: "HistoryCell", identifier: "HistoryCell")
+              
+        let params:[String:Any] = ["is_mine":1]
+        getHistoryParking(params: params)
     }
     
     
@@ -24,5 +32,66 @@ class ParkingsHistoryVC: UIViewController,IndicatorInfoProvider {
         return IndicatorInfo(title: "HISTORY", accessibilityLabel: "HISTORY", image: UIImage(named: "historyUn"), highlightedImage: UIImage(named: "history"), userInfo: nil)
     }
     
+  
+
+    
+    func getHistoryParking(params:[String:Any]){
+        
+        APIClient.serverRequest(url: APIRouter.getParkings(params), dec: ResponseData<[Parking]>.self) { (response, error) in
+            
+            if(response != nil){
+                if (response?.success) != nil {
+                    Helper().showToast(message: response?.message ?? "-", controller: self)
+                    if let val = response?.data {
+                    
+                        self.parkingModel = val
+                        self.historyParkingTbl.reloadData()
+                    }
+                }
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                }
+            }
+            else if(error != nil){
+                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+            }
+            else{
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
+            
+            
+        }
+    }
+    
+    
+}
+
+
+
+extension ParkingsHistoryVC: UITableViewDelegate,UITableViewDataSource{
+   
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.parkingModel.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let  cell = historyParkingTbl.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
+
+        cell.address.text = self.parkingModel[indexPath.row].address ?? ""
+        cell.price.text = String(self.parkingModel[indexPath.row].initialPrice ?? 0.0)
+        
+        if let parkingStatus = ParkingStatus(rawValue: self.parkingModel[indexPath.row].status ?? 0){
+                   
+            cell.status.text = "\(parkingStatus)"
+        }
+        cell.availablity.text = "\(self.parkingModel[indexPath.row].startAt ?? "") - \(self.parkingModel[indexPath.row].endAt ?? "")"
+              
+       
+        
+
+        return cell
+
+    }
     
 }

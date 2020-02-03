@@ -128,3 +128,56 @@ struct Nulls {
     static let nullString = "-"
     static let nullDouble:Double = 0.0
 }
+
+struct ParkingConst{
+
+
+
+    
+    static let  BARGAINING_STATUS_ACCEPTED = 10
+    static let  BARGAINING_STATUS_REJECTED = 20
+    static let  BARGAINING_STATUS_COUNTER_OFFER = 30
+    static let  BARGAINING_SELLER_TO_BUYER = 10
+    static let  BARGAINING_BUYER_TO_SELLER = 20
+
+}
+
+
+ 
+struct ParkingTypes{
+    
+    static let  PARKING_LOT = 10
+    static let  STRRET_PARKING = 20
+    static let  PRIVATE_PARKING = 30
+  
+    static let  PARKING_LOT_TEXT = "Pakring Lot"
+    static let  STRRET_PARKING_TEXT = "Street Parking"
+    static let  PRIVATE_PARKING_TEXT = "Private Parking"
+    
+}
+
+struct VehicleType{
+
+    static let  SUPER_MINI = 10
+    static let  FAMILY = 20
+    static let  SUV = 30
+    static let  BUS = 40
+    
+    static let  SUPER_MINI_TEXT = "Super Mini"
+    static let  FAMILY_TEXT = "Family"
+    static let  SUV_TEXT = "SUV"
+    static let  BUS_TEXT = "Bus"
+}
+
+enum ParkingStatus: Int{
+    
+    case  AVAILABLE  = 10
+    case  BOOKED     = 20
+    case  PARKED     = 30
+    case  CANCEL     = 40
+    case  PENDING    = 50
+    case  NAVIGATING = 60
+    
+}
+
+

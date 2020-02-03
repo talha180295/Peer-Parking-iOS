@@ -135,11 +135,11 @@
         <scene sceneID="Ojb-Fw-wkK">
             <objects>
                 <viewController storyboardIdentifier="loginVC" id="sJt-wj-JwE" customClass="LoginViewController" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3AH-DP-gXx">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="3AH-DP-gXx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayn-6I-IzX">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ayn-6I-IzX">
                                 <rect key="frame" x="10" y="234" width="394" height="300"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rcq-UA-FG4">
@@ -271,7 +271,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Rcq-UA-FG4" secondAttribute="trailing" id="ogr-g1-wd7"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ir-tG-JVb">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Ir-tG-JVb">
                                 <rect key="frame" x="0.0" y="554" width="414" height="132"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCl-bF-hVW">
@@ -341,7 +341,7 @@
                                     <constraint firstItem="RCl-bF-hVW" firstAttribute="centerX" secondItem="4Ir-tG-JVb" secondAttribute="centerX" id="vvq-1D-TZt"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2GT-5W-tIr">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2GT-5W-tIr">
                                 <rect key="frame" x="0.0" y="34" width="414" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43a-Jx-aDx">
@@ -382,7 +382,7 @@
                                     <constraint firstItem="Um5-Ol-RpY" firstAttribute="centerX" secondItem="2GT-5W-tIr" secondAttribute="centerX" id="m8P-si-dDI"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BlQ-lF-Pza">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BlQ-lF-Pza">
                                 <rect key="frame" x="156" y="131" width="102" height="102"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="102" id="qHp-VT-Dto"/>
@@ -5046,7 +5046,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fP6-aO-7Mu"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Parking" id="o7S-eb-fFz"/>
+                    <navigationItem key="navigationItem" title="Parking" id="o7S-eb-fFz">
+                        <barButtonItem key="rightBarButtonItem" image="parkingFilter" id="jN6-SG-Vlr">
+                            <connections>
+                                <action selector="filterBtn:" destination="lVU-fo-VPV" id="oQY-j4-jIv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="buttonBarView" destination="m3b-X0-mHA" id="AnK-bi-1e5"/>
                         <outlet property="containerView" destination="JBS-Kw-KMA" id="ZCA-5I-BGC"/>
@@ -5185,9 +5191,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="43d-sv-7sa">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="43d-sv-7sa">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="QL8-Br-euK" id="zHT-M7-qhD"/>
+                                    <outlet property="delegate" destination="QL8-Br-euK" id="S4k-xQ-XbQ"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -5199,6 +5209,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZLW-5O-0HK"/>
                     </view>
+                    <connections>
+                        <outlet property="upComingParkingTbl" destination="43d-sv-7sa" id="MdE-bZ-Eyy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HZN-LB-77V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -10255,6 +10268,10 @@ Click Finish to publish your offer</string>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aUK-ZX-8vw">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="bQX-Hz-QOb" id="FmB-jd-2dv"/>
+                                    <outlet property="delegate" destination="bQX-Hz-QOb" id="lyf-bh-6NW"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -10266,6 +10283,9 @@ Click Finish to publish your offer</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4dG-yA-Acp"/>
                     </view>
+                    <connections>
+                        <outlet property="historyParkingTbl" destination="aUK-ZX-8vw" id="t0z-cd-ClU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wbf-L1-pi9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -10408,6 +10428,7 @@ Click Finish to publish your offer</string>
         <image name="mini_unselected" width="67" height="67"/>
         <image name="next_btn" width="150" height="46"/>
         <image name="open_cam_btn" width="319" height="48"/>
+        <image name="parkingFilter" width="19" height="19"/>
         <image name="placeholder-img" width="800" height="600"/>
         <image name="pre_btn" width="150" height="46"/>
         <image name="radius_dp" width="153.5" height="153.5"/>
