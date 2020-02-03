@@ -39,8 +39,16 @@ class APIClient {
                 if response.result.isSuccess {
                     
                     if let jsonData = response.data{
-                        let response = try! JSONDecoder().decode(dec.self, from: jsonData)
-                        
+//                         let response = try! JSONDecoder().decode(dec.self, from: jsonData)
+                        do {
+                            //here dataResponse received from a network request
+                            if let jsonData = response.data{
+                                let model = try JSONDecoder().decode(decoder.self, from:jsonData) //Decode JSON Response Data
+                               
+                            }
+                        } catch let parsingError {
+                            print("Error", parsingError)
+                        }
                         
                         completion(response, nil)
                     }
