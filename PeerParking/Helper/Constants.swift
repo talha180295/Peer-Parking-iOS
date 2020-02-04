@@ -130,9 +130,6 @@ struct Nulls {
 }
 
 struct ParkingConst{
-
-
-
     
     static let  BARGAINING_STATUS_ACCEPTED = 10
     static let  BARGAINING_STATUS_REJECTED = 20
@@ -144,17 +141,14 @@ struct ParkingConst{
 
 
  
-struct ParkingTypes{
+enum ParkingTypes:Int{
     
-    static let  PARKING_LOT = 10
-    static let  STRRET_PARKING = 20
-    static let  PRIVATE_PARKING = 30
+    case PARKING_LOT = 10
+    case STRRET_PARKING = 20
+    case PRIVATE_PARKING = 30
   
-    static let  PARKING_LOT_TEXT = "Pakring Lot"
-    static let  STRRET_PARKING_TEXT = "Street Parking"
-    static let  PRIVATE_PARKING_TEXT = "Private Parking"
-    
 }
+
 
 struct VehicleType{
 
@@ -180,4 +174,9 @@ enum ParkingStatus: Int{
     
 }
 
+enum Action:Int{
+    
+    case Posted   = 10;
+    case Booked = 20;
 
+}

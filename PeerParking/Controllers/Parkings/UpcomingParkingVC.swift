@@ -11,8 +11,10 @@ import XLPagerTabStrip
 
 class UpcomingParkingVC: UIViewController,IndicatorInfoProvider {
     
+   
     //Variables
     var parkingModel = [Parking]()
+    var params:[String:Any] = ["is_schedule":1]
     
     //Outlets
     @IBOutlet weak var upComingParkingTbl: UITableView!
@@ -23,10 +25,38 @@ class UpcomingParkingVC: UIViewController,IndicatorInfoProvider {
    
         Helper().registerTableCell(tableView: upComingParkingTbl, nibName: "HistoryCell", identifier: "HistoryCell")
        
-        let params:[String:Any] = ["is_schedule":1]
+       
         getUpcomingParking(params: params)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+           
+        NotificationCenter.default.addObserver(self, selector: #selector(self.getFilters(notification:)), name: NSNotification.Name(rawValue: "mode_filter"), object: nil)
+    }
+       
+    override func viewWillDisappear(_ animated: Bool) {
+       
+       NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    @objc func getFilters(notification: NSNotification) {
+
+    
+        
+        if let dict = notification.userInfo as NSDictionary? {
+            
+            if let mode = dict.value(forKey: "mode"){
+                
+                self.params.updateValue(mode, forKey: "mood")
+//                Helper().showToast(message: "Notify -\(self.params)", controller: self)
+               
+//                let params:[String:Any] = ["is_mine":1]
+                getUpcomingParking(params: self.params)
+            }
+         
+        }
+    }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
@@ -36,11 +66,14 @@ class UpcomingParkingVC: UIViewController,IndicatorInfoProvider {
     
     func getUpcomingParking(params:[String:Any]){
         
+        self.parkingModel.removeAll()
+        self.upComingParkingTbl.reloadData()
+        
         APIClient.serverRequest(url: APIRouter.getParkings(params), dec: ResponseData<[Parking]>.self) { (response, error) in
             
             if(response != nil){
                 if (response?.success) != nil {
-                    Helper().showToast(message: response?.message ?? "-", controller: self)
+//                    Helper().showToast(message: response?.message ?? "-", controller: self)
                     if let val = response?.data {
                     
                         self.parkingModel = val
@@ -78,14 +111,23 @@ extension UpcomingParkingVC: UITableViewDelegate,UITableViewDataSource{
         let  cell = upComingParkingTbl.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
 
         cell.address.text = self.parkingModel[indexPath.row].address ?? ""
-        cell.price.text = String(self.parkingModel[indexPath.row].initialPrice ?? 0.0)
+        cell.price.text = "$\(self.parkingModel[indexPath.row].initialPrice ?? 0.0)"
         
         if let parkingStatus = ParkingStatus(rawValue: self.parkingModel[indexPath.row].status ?? 0){
                    
             cell.status.text = "\(parkingStatus)"
         }
               
-       
+        if let action = Action(rawValue: self.parkingModel[indexPath.row].action ?? 0){
+                         
+            cell.direction.text = "\(action)"
+        }
+        if let type = ParkingTypes(rawValue: self.parkingModel[indexPath.row].parkingType ?? 0){
+                                      
+            cell.type.text = "\(type)"
+        }
+        cell.availablity.text = "\(self.parkingModel[indexPath.row].startAt ?? "") - \(self.parkingModel[indexPath.row].endAt ?? "")"
+               
         
 
         return cell

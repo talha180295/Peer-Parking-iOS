@@ -32,27 +32,25 @@ class APIClient {
         
         Alamofire.request(url).responseJSON { (response) in
             
-            print(response)
-            print(response.response?.statusCode ?? 0)
+            print("serverResponse=\(response)")
+//            print(response)
+//            print(response.response?.statusCode ?? 0)
             if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299){
                 
                 if response.result.isSuccess {
                     
-                    if let jsonData = response.data{
-//                         let response = try! JSONDecoder().decode(dec.self, from: jsonData)
-                        do {
-                            //here dataResponse received from a network request
-                            if let jsonData = response.data{
-                                let response = try JSONDecoder().decode(dec.self, from:jsonData) //Decode JSON Response Data
-                               
-                                completion(response, nil)
-                            }
-                        } catch let parsingError {
-                            print("Error", parsingError)
+                    
+                    do {
+                        //here dataResponse received from a network request
+                        if let jsonData = response.data{
+                            let response = try JSONDecoder().decode(dec.self, from:jsonData) //Decode JSON Response Data
+                           
+                            completion(response, nil)
                         }
-                        
-                        
+                    } catch let parsingError {
+                        print("Error", parsingError)
                     }
+                        
                     
                 }
                 else{

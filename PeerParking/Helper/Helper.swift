@@ -806,6 +806,12 @@ class Helper{
           
        }
     
+    func getViewController(storyBoard:String, withIdentifier:String) ->UIViewController{
+        
+        let controller = UIStoryboard(name: storyBoard, bundle: nil).instantiateViewController(withIdentifier: withIdentifier)
+        return controller
+    }
+    
 }
 
 

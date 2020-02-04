@@ -149,6 +149,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
             else
             {
                 cell.viewLine.isHidden = true
+                cell.selectionStyle = .none
             }
             
 

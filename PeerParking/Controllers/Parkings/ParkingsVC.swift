@@ -9,12 +9,26 @@
 import UIKit
 import XLPagerTabStrip
 
-class ParkingsVC: ButtonBarPagerTabStripViewController {
+class ParkingsVC: ButtonBarPagerTabStripViewController{
 
+    
+    //Child ViewConrtrollers
+    let child_1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UpcomingParkingVC") as! UpcomingParkingVC
+    let child_2 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingsHistoryVC") as! ParkingsHistoryVC
+    
 //    let blueInstagramColor = UIColor(red: 37/255.0, green: 111/255.0, blue: 206/255.0, alpha: 1.0)
     let blueInstagramColor = UIColor(named: "themeBlue")
     
     override func viewDidLoad() {
+        
+        setupTopBar()
+        
+        super.viewDidLoad()
+    }
+    
+    
+    func setupTopBar(){
+        
         // change selected bar color
         settings.style.buttonBarBackgroundColor = .lightGray
         settings.style.buttonBarItemBackgroundColor = .white
@@ -32,19 +46,24 @@ class ParkingsVC: ButtonBarPagerTabStripViewController {
             oldCell?.label.textColor = .gray
             newCell?.label.textColor = self?.blueInstagramColor
         }
-        super.viewDidLoad()
+        
     }
-    
-    
     // MARK: - PagerTabStripDataSource
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let child_1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UpcomingParkingVC")
-        let child_2 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingsHistoryVC")
-        return [child_1, child_2]
+      
+        return [self.child_1, self.child_2]
     }
+    
+    
 
     @IBAction func filterBtn(_ sender: UIBarButtonItem) {
+        
+        
+        let vc = Helper().getViewController(storyBoard: "Main", withIdentifier: "ParkingFilterBS")
+        
+        Helper().bottomSheet(controller: vc, sizes: [.fixed(120)], cornerRadius: 0, handleColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), view_controller: self)
+
         
     }
     
