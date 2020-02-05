@@ -284,9 +284,9 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
         
     }
     func setData(data:NSDictionary){
-     print(data)
+        print(data)
         self.txtEmail.text = (data["email"] as! String)
-         let details = data["details"] as! NSDictionary
+        let details = data["details"] as! NSDictionary
         self.txtFirst.text = (details["first_name"] as! String)
         let lName:String!
         if details["last_name"] is NSNull{
@@ -310,12 +310,9 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
         }
         else{
             imag = (details["image_url"]  as! String)
-            
-           
         }
         
-        
-         img.sd_setImage(with: URL(string: imag),placeholderImage: UIImage.init(named: "placeholder_user") )
+        img.sd_setImage(with: URL(string: imag),placeholderImage: UIImage.init(named: "placeholder_user") )
     }
     
     

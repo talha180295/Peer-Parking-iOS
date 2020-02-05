@@ -14,10 +14,10 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
     
     
     
-    var requests:[Any] = []
+    var requests:[Bargaining] = []
     
-    var buyersRequest:[Any] = []
-    var sellerRequest:[Any] = []
+    var buyersRequest:[Bargaining] = []
+    var sellerRequest:[Bargaining] = []
     
     var auth_value = ""
     
@@ -49,8 +49,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         
         get_all_requests(isHeaderIncluded: true, mode: 20){
 
-
-
+            
         }
         
     }
@@ -96,9 +95,8 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         
         if(requests.count>0){
             
-            
-            let dict = requests[indexPath.row] as! NSDictionary
-            print("bargaining=\(dict)")
+            let dict = requests[indexPath.row]
+//            print("bargaining=\(dict)")
             
             cell.setData(data: dict)
             cell.index = indexPath.row
@@ -113,33 +111,29 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
     
     @IBAction func tabBar(_ sender: UISegmentedControl) {
         
-        
-        
+//        self.requests.removeAll()
         switch sender.selectedSegmentIndex
         {
-        case 0:
-            self.requests = self.buyersRequest
-            self.tblNotification.reloadData()
-        case 1:
-            self.requests = self.sellerRequest
-            self.tblNotification.reloadData()
-        default:
-            break
+            case 0:
+                self.requests = self.buyersRequest
+                self.tblNotification.reloadData()
+            case 1:
+                self.requests = self.sellerRequest
+                self.tblNotification.reloadData()
+            default:
+                break
         }
     }
     
     //protocol function
     func ViewOfferButtonDidSelect(index:Int) {
         
-//        
-//        helper.bottomSheet(storyBoard: "Main",identifier: "OfferBottomSheetVC", sizes: [.fixed(420)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0), view_controller: self)
-//        
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OfferBottomSheetVC") as! OfferBottomSheetVC
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OfferBottomSheetVC") as! OfferBottomSheetVC
         
-        let dict = requests[index] as! NSDictionary
-        controller.parking_details = dict
-//        controller.setData(data: dict)
-        Helper().bottomSheet(controller: controller, sizes: [.fixed(540)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0), view_controller: self)
+        let dict = requests[index]
+        vc.bargainingDetails = dict
+        
+        Helper().bottomSheet(controller: vc, sizes: [.fixed(540)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0), view_controller: self)
     }
     
     
@@ -157,73 +151,112 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         
         print("param123=\(params)")
         
-       
-        
-        if let value : String = UserDefaults.standard.string(forKey: "auth_token"){
+        APIClient.serverRequest(url: APIRouter.getBargainings(params), dec: ResponseData<[Bargaining]>.self) { (response, error) in
             
-            auth_value = "bearer " + value
-        }
-        
-        
-        let headers: HTTPHeaders = [
-            "Authorization" : auth_value
-        ]
-        
-        
-        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.BARGAININGS
-        
-        print("BARGAININGS_url=\(url)")
-        
-        Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: isHeaderIncluded, headers: headers){
-            response in
-            //print("response=\(response)")
-            if response.result.value == nil {
-                print("No response")
-                
-                Helper().showToast(message: "Internal Server Error", controller: self)
-                completion()
-                return
+            if(response != nil){
+                if (response?.success) != nil {
+                    //Helper().showToast(message: "Succes=\(success)", controller: self)
+                    if let val = response?.data {
+                    
+//                        print(val)
+                        let data = val
+
+//                        self.requests = data
+
+                        if(mode == 10){
+
+                            self.buyersRequest = data
+
+                        }
+                        else if(mode == 20){
+
+                            self.sellerRequest = data
+                        }
+
+
+//                        print("parkings.count=\(self.requests.count)")
+
+
+                        completion()
+                    }
+                }
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                }
+            }
+            else if(error != nil){
+                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
             }
             else{
-                let responseData = response.result.value as! NSDictionary
-                let status = responseData["success"] as! Bool
-                if(status){
-                  
-//                    let message = responseData["message"] as! String
-                    let data = responseData["data"] as! [Any]
-                   
-//                    self.requests = data
-                    
-                    if(mode == 10){
-                        
-                        self.buyersRequest = data
-                        
-                    }
-                    else if(mode == 20){
-                        
-                        self.sellerRequest = data
-                    }
-                    
-                    
-                    print("parkings.count=\(self.requests.count)")
-                    
-                    
-//                    self.tblNotification.reloadData()
-                    //SharedHelper().showToast(message: message, controller: self)
-                    
-                    completion()
-                  
-                        
-                }
-                else
-                {
-                    let message = responseData["message"] as! String
-                    Helper().showToast(message: message, controller: self)
-                    //   SharedHelper().hideSpinner(view: self.view)
-                    completion()
-                }
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
             }
         }
+       
+        
+        
+        
+//
+//        if let value : String = UserDefaults.standard.string(forKey: "auth_token"){
+//
+//            auth_value = "bearer " + value
+//        }
+//
+//
+//        let headers: HTTPHeaders = [
+//            "Authorization" : auth_value
+//        ]
+//
+//
+//        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.BARGAININGS
+//
+//        print("BARGAININGS_url=\(url)")
+//
+//        Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: isHeaderIncluded, headers: headers){
+//            response in
+//            //print("response=\(response)")
+//            if response.result.value == nil {
+//                print("No response")
+//
+//                Helper().showToast(message: "Internal Server Error", controller: self)
+//                completion()
+//                return
+//            }
+//            else{
+//                let responseData = response.result.value as! NSDictionary
+//                let status = responseData["success"] as! Bool
+//                if(status){
+//
+//                    let data = responseData["data"] as! [Any]
+//
+////                    self.requests = data
+//
+//                    if(mode == 10){
+//
+//                        self.buyersRequest = data
+//
+//                    }
+//                    else if(mode == 20){
+//
+//                        self.sellerRequest = data
+//                    }
+//
+//
+//                    print("parkings.count=\(self.requests.count)")
+//
+//
+//                    completion()
+//
+//
+//                }
+//                else
+//                {
+//                    let message = responseData["message"] as! String
+//                    Helper().showToast(message: message, controller: self)
+//                    //   SharedHelper().hideSpinner(view: self.view)
+//                    completion()
+//                }
+//            }
+//        }
         
     }
     

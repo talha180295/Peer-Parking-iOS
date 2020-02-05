@@ -14,6 +14,12 @@ import EzPopup
 
 class OfferBottomSheetVC: UIViewController {
 
+    //Intent Variables
+    var bargainingDetails:Bargaining!
+    var parkingDetails:Parking!
+    
+    
+    
     @IBOutlet weak var offersTblView: UITableView!
     
     @IBOutlet weak var image: UIImageView!
@@ -32,66 +38,116 @@ class OfferBottomSheetVC: UIViewController {
     
     @IBOutlet weak var price: UILabel!
     
-    var parking_details:NSDictionary!
+  
     
     @IBOutlet weak var offerTF: UITextField!
     
-    var bargainOffers:[Any] = []
+    
+
+    
+    //Variables
+    var bargainOffers:[Bargaining] = []
     var auth_value = ""
-    var bargainingId:Int!
-    var parkingId:Int?
     var buyerId:Int?
     var offerPrice:Double?
     var userType = 0  //20==seller
-    
+    var parkingId:Int?
+    let myId = UserDefaults.standard.integer(forKey: "id")
 //    var parking_id:Int!
 //    var p_title = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        offersTblView.tableFooterView = UIView()
+        
         offersTblView.dataSource = self
         offersTblView.delegate = self
         offersTblView.register(UINib(nibName: "BargainingCell", bundle: nil), forCellReuseIdentifier: "BargainingCell")
         
-        let parking = parking_details["parking"] as! NSDictionary
+       
         
-        self.parkingId = parking["id"] as? Int
-        
-        
-        let buyer = parking_details["buyer"] as! NSDictionary
-        
-        self.buyerId = buyer["id"] as? Int
-        
-        
-        
-        let myId = UserDefaults.standard.integer(forKey: "id")
-        
-        if(myId == buyerId){
+        if let parking = parkingDetails{
             
-            userType = 10
+//            print("parkings=\(parking)")
+            
+            self.parkingId = parking.id
+          
+            let buyer = parking.buyer
+
+            self.buyerId = buyer?.id ?? self.myId
+
+
+            if(myId == buyerId){
+
+                userType = 10
+
+            }
+            else{
+
+                userType = 20
+
+            }
+           
+            setData(data: parking)
             
         }
-        else{
-            
-            userType = 20
-            
+        
+        if let bargaining = bargainingDetails{
+
+            self.parkingId = bargaining.parkingID
+             
+            self.buyerId = bargaining.buyerID
+
+
+            if(myId == buyerId){
+
+              userType = 10
+
+            }
+            else{
+
+              userType = 20
+
+            }
+//            print("bargainings=\(bargainings)")
+            setData(data: bargaining)
+
         }
         
-        setData(data: parking_details)
         
+//        if let parking = bargaining_details{
+//
+//            self.parkingId = parking.id
+//
+//
+//            let buyer = bargaining_details.buyer
+//
+//            self.buyerId = buyer?.id
+//
+//
+//
+//            let myId = UserDefaults.standard.integer(forKey: "id")
+//
+//            if(myId == buyerId){
+//
+//                userType = 10
+//
+//            }
+//            else{
+//
+//                userType = 20
+//
+//            }
+//
+//            setData(data: bargaining_details)
+//
+//        }
         
-//        parking_title.text = p_title
     }
     
     @IBAction func accept_btn_click(_ sender: UIButton) {
         
         print("Accpet")
-//        // Get the destination view controller and data store
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let destinationVC = storyboard.instantiateViewController(withIdentifier: "BottomSheetVC") as! BottomSheetVC
-//        var destinationDS = destinationVC.offer_btn.setTitle("GO", for: .normal)
         
         NotificationCenter.default.post(name: Notification.Name("accept_offer"), object: nil)
             
@@ -109,9 +165,10 @@ class OfferBottomSheetVC: UIViewController {
         else{
             direction = 10
         }
+        
         if(offerTF.hasText){
-//            let price:String = offerTF.text!
-            let offer:[String:Any] = ["offer": self.offerPrice, "direction": direction]
+            
+            let offer = Bargaining(id: nil, parkingID: nil, buyerID: nil, status: nil, offer: self.offerPrice ?? 0.0, direction: direction, createdAt: nil, updatedAt: nil, deletedAt: nil, statusText: nil, buyer: nil, seller: nil, parking: nil)
             bargainOffers.append(offer)
             
             offersTblView.reloadData()
@@ -126,85 +183,126 @@ class OfferBottomSheetVC: UIViewController {
                 "offer": self.offerPrice ?? 0.0,
                 "direction": direction
             ]
+
+
             print(params)
             postBargainingOffer(params: params)
             
         }
         
-      
-//        self.dismiss(animated: false, completion: nil)
     }
     
     func postBargainingOffer(params:[String:Any]){
         
-        Helper().RefreshToken { response in
+        APIClient.serverRequest(url: APIRouter.postBargainingOffer(params), dec: PostResponseData.self) { (response,error) in
             
-            print(response)
-            if response.result.value == nil {
-                print("No response")
-                
-                return
+            if(response != nil){
+                Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+            }
+            else if(error != nil){
+                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
             }
             else{
-                
-                Alamofire.request(APIRouter.postBargainingOffer(params)).responsePost{ response in
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
+            
+        }
+       
+        
+    }
+    
+    
+    func setData(data:Bargaining){
+        
+        let parking = data.parking
+        
+        let id = data.id ?? 0
+        
+        self.parking_title.text = parking?.address ?? "-"
+    
+        self.price.text = "\(parking?.initialPrice ?? 0.0)"
+        
+        self.vehicle_type.text = parking?.vehicleTypeText
+        
+        getAllBargainOffers(id: id)
+        
+    }
+    
+    func setData(data:Parking){
+
+        let id = data.id ?? 0
+        
+        self.parking_title.text = data.address ?? "-"
+    
+        self.price.text = "\(data.initialPrice ?? 0.0)"
+        
+        self.vehicle_type.text = data.vehicleTypeText
+        
+        getAllBargainOffersByParkingID(id: id)
+        
+    }
+    
+    func getAllBargainOffersByParkingID(id:Int){
+        
+        let params:[String:Any] = ["parking_id":id]
+        APIClient.serverRequest(url: APIRouter.getBargainings(params), dec: ResponseData<[Bargaining]>.self) { (response,error) in
+            
+            if(response != nil){
+                if (response?.success) != nil {
+                    //Helper().showToast(message: "Succes=\(success)", controller: self)
+                    if let val = response?.data {
                     
-                    switch response.result {
-                    case .success:
-                        if response.result.value?.success ?? false{
-                            
-                            print("val=\(response.result.value?.message ?? "-")")
-                            
-                        }
-                        else{
-                            print("Server Message=\(response.result.value?.message ?? "-" )")
-                            
-                        }
-                        
-                    case .failure(let error):
-                        print("ERROR==\(error)")
+//                        print(val)
+                        self.bargainOffers = val
+                        self.offersTblView.reloadData()
                     }
                 }
-                
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                }
             }
+            else if(error != nil){
+                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+            }
+            else{
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
+            
         }
-        
     }
     
-    
-    func setData(data:NSDictionary){
+    func getAllBargainOffers(id:Int){
         
         
-        let parking = data["parking"] as! NSDictionary
+        print(id)
         
-        let id = data["id"] as! Int
-        
-        if let p_address = parking["address"] as? String{
-
-            self.parking_title.text = p_address
-        }
-        
-        if let initial_price = parking["initial_price"] as? Double{
+        APIClient.serverRequest(url: APIRouter.getBargainingsById(id: id), dec: ResponseData<[Bargaining]>.self) { (response,error) in
             
-            print("initial_price123=\(initial_price)")
-            self.price.text = "$\(initial_price)"
-        }
-        
-        if let vehicle_type_text = parking["vehicle_type_text"] as? String{
+            if(response != nil){
+                if (response?.success) != nil {
+                    //Helper().showToast(message: "Succes=\(success)", controller: self)
+                    if let val = response?.data {
+                    
+//                        print(val)
+                        self.bargainOffers = val
+                        self.offersTblView.reloadData()
+                    }
+                }
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                }
+            }
+            else if(error != nil){
+                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+            }
+            else{
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
             
-            self.vehicle_type.text = vehicle_type_text
         }
-        
-        getAllBargainOffers(id: id, isHeaderIncluded: true){
-            
-            
-        }
-        
-        
     }
     
-    func getAllBargainOffers(id:Int,isHeaderIncluded:Bool,completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
-        
+    func getAllBargainOffers2(id:Int,isHeaderIncluded:Bool,completion: @escaping () -> Void){
         
         bargainOffers = []
         
@@ -251,7 +349,7 @@ class OfferBottomSheetVC: UIViewController {
                     //                    let message = responseData["message"] as! String
                     let data = responseData["data"] as! [Any]
                     
-                    self.bargainOffers = data
+//                    self.bargainOffers = data
                     
                     
                     
@@ -292,15 +390,6 @@ class OfferBottomSheetVC: UIViewController {
         let popupVC = PopupViewController(contentController: vc, popupWidth: 300, popupHeight: 300)
         popupVC.canTapOutsideToDismiss = true
         
-        //properties
-        //            popupVC.backgroundAlpha = 1
-        //            popupVC.backgroundColor = .black
-        //            popupVC.canTapOutsideToDismiss = true
-        //            popupVC.cornerRadius = 10
-        //            popupVC.shadowEnabled = true
-        
-        // show it by call present(_ , animated:) method from a current UIViewController
-        
         present(popupVC, animated: true)
     }
     
@@ -323,22 +412,22 @@ extension OfferBottomSheetVC: UITableViewDelegate, UITableViewDataSource{
         cell.offer.textAlignment = .right
        
         
-        let dict = bargainOffers[indexPath.row] as! NSDictionary
+        let dict = bargainOffers[indexPath.row]
        
         
-        let direction = dict["direction"] as? Int
+        let direction = dict.direction ?? 0
         
-        let offer = dict["offer"] as? Double
+        let offer = dict.offer ?? 0.0
         
         switch self.userType {
         case 10:
             switch direction {
             case 10:
-                cell.leftOffer.text = "$ \(offer ?? 0.9)"
+                cell.leftOffer.text = "$ \(offer)"
                 cell.offer.superview?.isHidden = true
                 cell.leftOffer.superview?.isHidden = false
             case 20:
-                cell.offer.text = "$ \(offer ?? 0.9)"
+                cell.offer.text = "$ \(offer )"
                 cell.offer.superview?.isHidden = false
                 cell.leftOffer.superview?.isHidden = true
                 
@@ -348,11 +437,11 @@ extension OfferBottomSheetVC: UITableViewDelegate, UITableViewDataSource{
         case 20:
             switch direction {
             case 20:
-                cell.leftOffer.text = "$ \(offer ?? 0.9)"
+                cell.leftOffer.text = "$ \(offer)"
                 cell.offer.superview?.isHidden = true
                 cell.leftOffer.superview?.isHidden = false
             case 10:
-                cell.offer.text = "$ \(offer ?? 0.9)"
+                cell.offer.text = "$ \(offer)"
                 cell.offer.superview?.isHidden = false
                 cell.leftOffer.superview?.isHidden = true
                 

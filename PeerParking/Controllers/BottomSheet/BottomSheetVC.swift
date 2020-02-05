@@ -291,9 +291,10 @@ class BottomSheetVC: UIViewController {
     
     @IBAction func counter_btn(_ sender: UIButton) {
         
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OfferBottomSheetVC") as? OfferBottomSheetVC
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OfferBottomSheetVC") as! OfferBottomSheetVC
+        vc.parkingDetails = self.parking_details
 //        controller?.p_title = self.parking_titile.text!
-        bottomSheet(controller: controller!, sizes: [.fixed(360)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
+        bottomSheet(controller: vc, sizes: [.fixed(540)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
     }
     
     func bottomSheet(controller : UIViewController,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor){

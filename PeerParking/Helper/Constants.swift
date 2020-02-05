@@ -143,8 +143,8 @@ struct ParkingConst{
  
 enum ParkingTypes:Int{
     
-    case PARKING_LOT = 10
-    case STRRET_PARKING = 20
+    case PARKING_LOT     = 10
+    case STRRET_PARKING  = 20
     case PRIVATE_PARKING = 30
   
 }
@@ -153,9 +153,9 @@ enum ParkingTypes:Int{
 struct VehicleType{
 
     static let  SUPER_MINI = 10
-    static let  FAMILY = 20
-    static let  SUV = 30
-    static let  BUS = 40
+    static let  FAMILY     = 20
+    static let  SUV        = 30
+    static let  BUS        = 40
     
     static let  SUPER_MINI_TEXT = "Super Mini"
     static let  FAMILY_TEXT = "Family"
@@ -176,7 +176,7 @@ enum ParkingStatus: Int{
 
 enum Action:Int{
     
-    case Posted   = 10;
+    case Posted = 10;
     case Booked = 20;
 
 }

@@ -47,10 +47,10 @@ class RequestCell: UITableViewCell {
         self.delegate.ViewOfferButtonDidSelect(index: self.index)
     }
     
-    func setData(data:NSDictionary){
+    func setData(data:Bargaining){
         
         
-        if let created_at = data["created_at"] as? String{
+        if let created_at = data.createdAt{
             
             let created_at = created_at.components(separatedBy: " ")
             
@@ -58,14 +58,14 @@ class RequestCell: UITableViewCell {
             self.date.text = date
         }
         
-        if let direction = data["direction"] as? Int{
+        if let direction = data.direction{
             
             if(direction == 10){
                 self.directionText.text = "has sent you a new offer"
             }
         }
         
-        if let offer = data["offer"] as? Double{
+        if let offer = data.offer{
             
            self.price.text = "$ \(offer)"
         }
@@ -74,9 +74,9 @@ class RequestCell: UITableViewCell {
         
         
         
-        if let parking = data["parking"] as? NSDictionary{
+        if let parking = data.parking{
             
-            if let p_address = parking["address"] as? String{
+            if let p_address = parking.address{
                 
                 self.address.text = p_address
             }
@@ -85,12 +85,6 @@ class RequestCell: UITableViewCell {
         
         
        
-        
-        
-//        if let initial_price = parking["initial_price"] as? Double{
-//
-//            self.price.text = "$ \(initial_price)"
-//        }
         
         
     }
