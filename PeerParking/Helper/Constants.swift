@@ -131,38 +131,77 @@ struct Nulls {
 
 struct ParkingConst{
     
-    static let  BARGAINING_STATUS_ACCEPTED = 10
-    static let  BARGAINING_STATUS_REJECTED = 20
-    static let  BARGAINING_STATUS_COUNTER_OFFER = 30
-    static let  BARGAINING_SELLER_TO_BUYER = 10
-    static let  BARGAINING_BUYER_TO_SELLER = 20
+    static let  STATUS_ACCEPTED = 10
+    static let  STATUS_REJECTED = 20
+    static let  STATUS_COUNTER_OFFER = 30
+    
+    static let  SELLER_TO_BUYER = 10
+    static let  BUYER_TO_SELLER = 20
 
 }
 
 
- 
-enum ParkingTypes:Int{
+
+struct ParkingTypeText{
+    
+    static let  PARKING_LOT = "Parking Lot"
+    static let  STRRET_PARKING = "Street Paking"
+    static let  PRIVATE_PARKING = "Private Parking"
+}
+
+enum ParkingTypesEnum:Int{
     
     case PARKING_LOT     = 10
     case STRRET_PARKING  = 20
     case PRIVATE_PARKING = 30
+    
+    func getString() -> String {
+        switch self {
+        case .PARKING_LOT:
+            return ParkingTypeText.PARKING_LOT
+        case .STRRET_PARKING:
+            return ParkingTypeText.STRRET_PARKING
+        case .PRIVATE_PARKING:
+            return ParkingTypeText.PRIVATE_PARKING
+            
+        }
+    }
+    
   
 }
 
 
-struct VehicleType{
-
-    static let  SUPER_MINI = 10
-    static let  FAMILY     = 20
-    static let  SUV        = 30
-    static let  BUS        = 40
+struct VehicleTypeText{
     
-    static let  SUPER_MINI_TEXT = "Super Mini"
-    static let  FAMILY_TEXT = "Family"
-    static let  SUV_TEXT = "SUV"
-    static let  BUS_TEXT = "Bus"
+    static let  SUPER_MINI = "Super Mini"
+    static let  FAMILY = "Family"
+    static let  SUV = "SUV"
+    static let  BUS = "Bus"
+    
+    
 }
 
+enum VehicleTypeEnum:Int {
+    
+    case    SUPER_MINI = 10
+    case    FAMILY     = 20
+    case    SUV        = 30
+    case    BUS        = 40
+
+    func getString() -> String {
+        switch self {
+        case .SUPER_MINI:
+            return VehicleTypeText.SUPER_MINI
+        case .FAMILY:
+            return VehicleTypeText.FAMILY
+        case .SUV:
+            return VehicleTypeText.SUV
+        case .BUS:
+            return VehicleTypeText.BUS
+            
+        }
+    }
+}
 enum ParkingStatus: Int{
     
     case  AVAILABLE  = 10

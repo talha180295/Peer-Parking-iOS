@@ -52,9 +52,6 @@ class BottomSheetVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
-      
-        
         setData()
     }
     
@@ -82,7 +79,7 @@ class BottomSheetVC: UIViewController {
         
         
         self.price.text = "$\(priceStr)"
-        print("adfsdf=\(distanceInMiles)")
+        print("adfsdf=\(distanceInMiles ?? "")")
         self.distance.text = distanceInMiles
         
         if parking_details.note == nil
@@ -189,7 +186,7 @@ class BottomSheetVC: UIViewController {
     @IBAction func take_btn_click(_ sender: UIButton) {
         
         
-        let p_id = Int(self.parking_details.id as! Int)
+        let p_id = self.parking_details.id ?? 0
         let final_price = Double(self.parking_details.initialPrice ?? 0.0)
         let myId = UserDefaults.standard.integer(forKey: "id")
             
@@ -199,29 +196,15 @@ class BottomSheetVC: UIViewController {
             let params:[String:Any] = [
                 "parking_id": p_id,
                 "buyer_id": myId,
-                "status": 10,
+                "status": ParkingConst.STATUS_ACCEPTED,
                 "offer": final_price,
-                "direction": 20
+                "direction": ParkingConst.BUYER_TO_SELLER
             ]
             print(params)
             self.postBargainingOffer(params: params)
             
             self.dismiss(animated: true, completion: nil)
             
-            
-//            assign_buyer(p_id: id, status: 20, final_price: final_price)
-//            //SharedHelper().showToast(message: "Login", controller: self)
-//            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
-//            //
-//            vc.parking_details = self.parking_details
-//            vc.p_id = Int(self.parking_details["id"] as! Int)
-//            vc.p_title = self.parking_titile.text ?? ""
-//
-//            vc.p_lat = Double(self.parking_details["latitude"] as! String)!
-//            vc.p_longg = Double(self.parking_details["longitude"] as! String)!
-//            vc.vcName = ""
-//
-//            self.present(vc, animated: false, completion: nil)
             
         }
         else{
@@ -318,7 +301,7 @@ class BottomSheetVC: UIViewController {
         
        // let status:Int = 20
         
-        var params:[String:Any] = [
+        let params:[String:Any] = [
             
             
             "status" : status,

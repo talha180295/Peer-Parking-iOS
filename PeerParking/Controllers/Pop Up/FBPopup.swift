@@ -169,12 +169,6 @@ class FBPopup: UIViewController {
             }
             else{
                 
-                //            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
-                //            //
-                //            vc.vcName = ""
-                //            self.present(vc, animated: false, completion: nil)
-                
-                //SharedHelper().showToast(message: "Login", controller: self)
                 let id = self.parking_details.id ?? 0
                 
                 
@@ -185,9 +179,8 @@ class FBPopup: UIViewController {
                 vc.parking_details = self.parking_details
                 vc.p_id = self.parking_details.id ?? 0
                 vc.p_title =  parking_details.address ?? ""
-                0.0
-                vc.p_lat = Double(self.parking_details.latitude ?? "0.0") as! Double
-                vc.p_longg = Double(self.parking_details.longitude ?? "0.0") as! Double
+                vc.p_lat = Double(self.parking_details.latitude ?? "0.0") ?? 0.0
+                vc.p_longg = Double(self.parking_details.longitude ?? "0.0") ?? 0.0
                 vc.vcName = ""
                 vc.modalPresentationStyle = .fullScreen
                 

@@ -122,10 +122,9 @@ extension UpcomingParkingVC: UITableViewDelegate,UITableViewDataSource{
                          
             cell.direction.text = "\(action)"
         }
-        if let type = ParkingTypes(rawValue: self.parkingModel[indexPath.row].parkingType ?? 0){
-                                      
-            cell.type.text = "\(type)"
-        }
+            
+        cell.type.text = self.parkingModel[indexPath.row].parkingTypeText ?? "-"
+        
         cell.availablity.text = "\(self.parkingModel[indexPath.row].startAt ?? "") - \(self.parkingModel[indexPath.row].endAt ?? "")"
                
         

@@ -299,8 +299,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         UserDefaults.standard.set("homeVC", forKey: "VC")
         
         UserDefaults.standard.synchronize()
-        //        let vc = self.storyboard?.instantiateViewController(withIdentifier: "rootVC") as! ContainerVC
-        // let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
+ 
    
          Helper().presentOnMainScreens(controller: self, index: 1)
         

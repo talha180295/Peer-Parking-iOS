@@ -74,7 +74,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         NotificationCenter.default.addObserver(self, selector: #selector(self.RemoveOldDrawRoute(notification:)), name:
             NSNotification.Name(rawValue: "NotificationName"), object: nil)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             // your code here
             
             
@@ -374,10 +374,9 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "alternateVC") as! AlternateRouteViewController
-        //
-        //
+
         vc.alternateRoutes = self.alternateRoutes
-        
+        vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
         
         
@@ -387,7 +386,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
     
     @objc func RemoveOldDrawRoute(notification : NSNotification){
         
-        map.clear()
+//        map.clear()
         let origin = "\(c_lat),\(c_longg)"
         let destination = "\(p_lat),\(p_longg)"
         

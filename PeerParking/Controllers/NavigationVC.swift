@@ -102,10 +102,6 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         //loadMapView()
         self.tabBarController!.navigationItem.title = "Navigate"
         
-//        parkings_cells.isHidden = true
-        //
-        //        self.tabBarController?.tabBar.isHidden = false
-        //        self.navigationController?.navigationBar.isHidden = false
     }
     override func viewDidAppear(_ animated: Bool) {
         self.view.layoutIfNeeded()
@@ -120,17 +116,6 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
         
-        //        // Specify the place data types to return.
-        //        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-        //            UInt(GMSPlaceField.placeID.rawValue))!
-        //        autocompleteController.placeFields = fields
-        //
-        //        // Specify a filter.
-        //        let filter = GMSAutocompleteFilter()
-        //        filter.type = .address
-        //        autocompleteController.autocompleteFilter = filter
-        
-        // Display the autocomplete view controller.
         present(autocompleteController, animated: true, completion: nil)
     }
     
@@ -226,15 +211,15 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     
     @IBAction func btnGo(_ sender: Any) {
         
-          let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
-                    //
-                    vc.p_title = self.lblPlaceName.text!
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
                     
-                    vc.p_lat = d_lat
-                    vc.p_longg = d_longg
-                    vc.vcName = "nav"
-                vc.alternateRoutes = alternateRoutes
-                self.present(vc, animated: false, completion: nil)
+        vc.modalPresentationStyle = .fullScreen
+        vc.p_title = self.lblPlaceName.text!
+        vc.p_lat = d_lat
+        vc.p_longg = d_longg
+        vc.vcName = "nav"
+        vc.alternateRoutes = alternateRoutes
+        self.present(vc, animated: false, completion: nil)
         
         
     }
@@ -695,37 +680,3 @@ extension NavigationVC: GMSAutocompleteViewControllerDelegate {
     
     
 }
-
-//
-//
-//struct ReversedGeoLocation {
-//    let name: String            // eg. Apple Inc.
-//    let streetName: String      // eg. Infinite Loop
-//    let streetNumber: String    // eg. 1
-//    let city: String            // eg. Cupertino
-//    let state: String           // eg. CA
-//    let zipCode: String         // eg. 95014
-//    let country: String         // eg. United States
-//    let isoCountryCode: String  // eg. US
-//
-//    var formattedAddress: String {
-//        return """
-//        \(name),
-//        \(streetNumber) \(streetName),
-//        \(city), \(state) \(zipCode)
-//        \(country)
-//        """
-//    }
-//
-//    // Handle optionals as needed
-//    init(with placemark: CLPlacemark) {
-//        self.name           = placemark.name ?? ""
-//        self.streetName     = placemark.thoroughfare ?? ""
-//        self.streetNumber   = placemark.subThoroughfare ?? ""
-//        self.city           = placemark.locality ?? ""
-//        self.state          = placemark.administrativeArea ?? ""
-//        self.zipCode        = placemark.postalCode ?? ""
-//        self.country        = placemark.country ?? ""
-//        self.isoCountryCode = placemark.isoCountryCode ?? ""
-//    }
-//}

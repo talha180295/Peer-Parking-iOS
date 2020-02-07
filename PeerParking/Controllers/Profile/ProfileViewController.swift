@@ -273,10 +273,7 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
   
         SharedHelper().showToast(message: "UPDATED", controller: self)
         UserDefaults.standard.synchronize()
-        //        let vc = self.storyboard?.instantiateViewController(withIdentifier: "rootVC") as! ContainerVC
-        // let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
-        
-      
+
         
         //        let fname :String = UserDefaults.standard.string(forKey: "name")!
         //        let UID :String = UserDefaults.standard.string(forKey: "id")!

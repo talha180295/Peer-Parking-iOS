@@ -60,12 +60,11 @@ class AlternateRouteViewController: UIViewController ,UITableViewDataSource, UIT
             return  cell;
         }
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            
             let dict = alternateRoutes[indexPath.row].dictionary
            
-           
-           NotificationCenter.default.post(name: Notification.Name(rawValue: "NotificationName"), object: nil , userInfo: dict)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "NotificationName"), object: nil , userInfo: dict)
             self.dismiss(animated: true, completion: nil)
-            
             
         }
         
