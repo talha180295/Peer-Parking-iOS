@@ -13,7 +13,7 @@ class AlternateRouteViewController: UIViewController ,UITableViewDataSource, UIT
 
     @IBOutlet weak var tblRoute: UITableView!
     
-        var alternateRoutes:[JSON]!
+        var alternateRoutes:[Route]!
         var arrAlternate : [Any] = []
         
         override func viewDidLoad() {
@@ -38,19 +38,20 @@ class AlternateRouteViewController: UIViewController ,UITableViewDataSource, UIT
             let cell = tblRoute.dequeueReusableCell(withIdentifier: "RoutesCell") as! RoutesCell
             if(alternateRoutes.count>0)
             {
-                let dict = alternateRoutes[indexPath.row].dictionary
+                let dict = alternateRoutes[indexPath.row]
                 
                 
-                let leg = dict!["legs"]?.arrayValue
-               let legDict = leg![0].dictionary
-               let dictanceDict = legDict!["distance"]?.dictionary
-               let distance = dictanceDict?["text"]?.stringValue
+                
+                let leg = dict.legs
+               let legDict = leg?[0]
+                let dictanceDict = legDict?.distance
+                let distance = dictanceDict?.text
                 cell.lblDistance.text = distance! + "Away"
-               let durationDict = legDict!["duration"]?.dictionary
-               let duration = durationDict?["text"]?.stringValue
+                let durationDict = legDict?.duration
+                let duration = durationDict?.text
                 cell.lblTime.text = duration
                 
-                 let end_address = legDict!["end_address"]?.stringValue
+                let end_address = legDict?.endAddress
                 cell.lblName.text = end_address
                 
                 
@@ -61,9 +62,9 @@ class AlternateRouteViewController: UIViewController ,UITableViewDataSource, UIT
         }
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             
-            let dict = alternateRoutes[indexPath.row].dictionary
+            let dict = alternateRoutes[indexPath.row]
            
-            NotificationCenter.default.post(name: Notification.Name(rawValue: "NotificationName"), object: nil , userInfo: dict)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "NotificationRemoveRoute"), object: nil , userInfo: ["dict":dict])
             self.dismiss(animated: true, completion: nil)
             
         }
@@ -84,3 +85,4 @@ class AlternateRouteViewController: UIViewController ,UITableViewDataSource, UIT
     */
 
 }
+

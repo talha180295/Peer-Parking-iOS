@@ -27,34 +27,39 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var parkView: UIView!
     
     
+    var isMapLoaded = false
     var map = GMSMapView()
     var vcName : String!
     var locationManager = CLLocationManager()
     
-    
-    
+    var bearer = 0.0
+    var legs:[Leg]!
     var parking_details:Parking!
     var p_title:String = ""
     var p_lat:Double = 0.0
     var p_longg:Double = 0.0
     var p_id:Int!
     
-    var alternateRoutes:[JSON]!
+    var alternateRoutes:[Route]!
     var c_lat:Double = 0.0
     var c_longg:Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         print(UserDefaults.standard.string(forKey: "image_url"))
-        print("ParkingNavVC")
+         
+        print("ParkingNavVC=\(vcName)")
 //        loadMapView()
         self.parking_title.text = p_title
+        
+           
+
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         
 //        loadMapView()
        
+//        GMSGeometryIsLocationOnPathTolerance(<#T##point: CLLocationCoordinate2D##CLLocationCoordinate2D#>, <#T##path: GMSPath##GMSPath#>, <#T##geodesic: Bool##Bool#>, <#T##tolerance: CLLocationDistance##CLLocationDistance#>)
         
         if(vcName.elementsEqual("nav"))
         {
@@ -71,27 +76,9 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.RemoveOldDrawRoute(notification:)), name:
-            NSNotification.Name(rawValue: "NotificationName"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.RemoveOldDrawRoute(notification:)), name: NSNotification.Name(rawValue: "NotificationRemoveRoute"), object: nil)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            // your code here
-            
-            
-            if(self.vcName.elementsEqual("nav"))
-            {
-                self.drawRouteOnly()
-            }
-            else
-            {
-                self.drawRoute()
-            }
-            
-            let camera = GMSCameraPosition.camera(withLatitude: (self.c_lat), longitude: (self.c_longg), zoom: 18.0)
-            
-            self.map.animate(to: camera)
-            
-        }
+       
         
     }
     
@@ -100,9 +87,22 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         
         self.view.layoutIfNeeded()
         
-        loadMapView()
-        
-        
+        if (!isMapLoaded){
+            isMapLoaded = true
+            loadMapView()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                     
+                let sourcePosition = CLLocationCoordinate2D(latitude: self.c_lat, longitude: self.c_longg)
+                let endPosition = CLLocationCoordinate2D(latitude: self.p_lat, longitude: self.p_longg)
+                
+                self.getPolylineRoute(from: sourcePosition, to: endPosition)
+                Helper().map_marker(lat: self.c_lat, longg: self.c_longg, map_view: self.map, title: "This is you")
+                Helper().map_marker(lat: self.p_lat, longg: self.p_longg, map_view: self.map, title: "This is parking")
+                       
+            }
+        }
+               
+       
     }
     
     func loadMapView(){
@@ -138,9 +138,19 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         
         let origin = "\(c_lat),\(c_lat)"
         
+//        let sourcePosition = CLLocationCoordinate2D(latitude: self.c_lat, longitude: self.c_longg)
+        let endPosition = CLLocation(latitude: self.p_lat, longitude: self.p_longg)
+        
+        
+        if self.legs != nil{
+            
+             self.bearer = calculateBearer(legs: self.legs)
+        }
+       
         
         
         print("origin1=\(origin)")
+//        self.locationManager.stopUpdatingLocation()
         
 //                 if(vcName.elementsEqual("nav"))
 //                 {
@@ -148,7 +158,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
 //                 }
 //        //        else
 //        //           {
-                       drawRoute()
+//                       drawRoute()
         //           }
         //        print("lat==\(location?.coordinate.latitude)")
         //        print("long==\(location?.coordinate.longitude)")
@@ -165,184 +175,210 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         
     }
     
-    func drawRouteOnly(){
-        
-        map.clear()
-        let origin = "\(c_lat),\(c_longg)"
-        let destination = "\(p_lat),\(p_longg)"
-        
-        
-        print("origin2=\(origin)")
-        print("destination=\(destination)")
-        Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map, title: "This is you")
-        
-        Helper().map_marker(lat: p_lat, longg: p_longg, map_view: self.map, title: "This is parking")
-        
-        
-        
-        //            let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&alternatives=true&key=\(Key.Google.placesKey)"
-        //
-        //            print("alter_url=\(url)")
-        //            Alamofire.request(url).responseJSON { response in
-        //
-        //                do {
-        //                    let json = try JSON(data: response.data!)
-        //                    print(json)
-        //                    let routes = json["routes"].arrayValue
-        
-        //                    self.alternateRoutes = routes
-        //
-        //                    print("routes=\(routes.count)")
-        
-        if(self.alternateRoutes.count>0)
-        {
-            let route  = self.alternateRoutes[0]
-            
-            //                let route = dict as! NSDictionary
-            let routeOverviewPolyline = route["overview_polyline"].dictionary
-            let points = routeOverviewPolyline?["points"]?.stringValue
-            let path = GMSPath.init(fromEncodedPath: points!)
-            let polyline = GMSPolyline.init(path: path)
-            polyline.strokeWidth = 4
-            polyline.strokeColor =  #colorLiteral(red: 0, green: 0.5356405973, blue: 0.7853047252, alpha: 1)
-            polyline.map = self.map
-            
-            
-            let leg = route["legs"].arrayValue
-            let legDict = leg[0].dictionary
-            let dictanceDict = legDict!["distance"]?.dictionary
-            let distance = dictanceDict?["text"]?.stringValue
-            self.lblDistance.text = distance
-            let durationDict = legDict!["duration"]?.dictionary
-            let duration = durationDict?["text"]?.stringValue
-            self.lblTime.text = duration
-            
-            
-        }
-        //                for route in routes
-        //                {
-        //                    let routeOverviewPolyline = route["overview_polyline"].dictionary
-        //                    let points = routeOverviewPolyline?["points"]?.stringValue
-        //                    let path = GMSPath.init(fromEncodedPath: points!)
-        //
-        //                    let polyline = GMSPolyline(path: path)
-        //                    polyline.strokeColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
-        //                    polyline.strokeWidth = 4.0
-        //                    polyline.map = self.map
-        //
-        //                }
-        
-        
-    }
-    
-    
-    
-    func drawRoute(){
-        
-       // map.clear()
-        let origin = "\(c_lat),\(c_longg)"
-        let destination = "\(p_lat),\(p_longg)"
-        
-        
-        print("origin2=\(origin)")
-        print("destination=\(destination)")
-        
-        
-        let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&alternatives=true&key=\(Key.Google.placesKey)"
-        
-        print("alter_url=\(url)")
-        Alamofire.request(url).responseJSON { response in
-            
-            do {
-                let json = try JSON(data: response.data!)
-                print(json)
-                let routes = json["routes"].arrayValue
-                
-                self.alternateRoutes = routes
-                
-                print("routes=\(routes.count)")
-                
-                if(routes.count>0)
-                {
-                    let route  = routes[0].dictionary
-                    let leg = route!["legs"]?.arrayValue
-                    let legDict = leg![0].dictionary
-                    let dictanceDict = legDict!["distance"]?.dictionary
-                    let distance = dictanceDict?["text"]?.stringValue
-                    self.lblDistance.text = distance
-                    let durationDict = legDict!["duration"]?.dictionary
-                    let duration = durationDict?["text"]?.stringValue
-                    self.lblTime.text = duration
-                    //                let route = dict as! NSDictionary
-                    let routeOverviewPolyline = route!["overview_polyline"]?.dictionary
-                    let points = routeOverviewPolyline?["points"]?.stringValue
-                    let path = GMSPath.init(fromEncodedPath: points!)
-                    let polyline = GMSPolyline.init(path: path)
-                    polyline.strokeWidth = 4
-                    polyline.strokeColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
-                    
-                    
-                    self.map.clear()
-                    
-                    Helper().map_marker(lat: self.c_lat, longg: self.c_longg, map_view: self.map, title: "This is you")
-                    
-                    Helper().map_marker(lat: self.p_lat, longg: self.p_longg, map_view: self.map, title: "This is parking")
 
-                    polyline.map = self.map
-                }
-                //                for route in routes
-                //                {
-                //                    let routeOverviewPolyline = route["overview_polyline"].dictionary
-                //                    let points = routeOverviewPolyline?["points"]?.stringValue
-                //                    let path = GMSPath.init(fromEncodedPath: points!)
-                //
-                //                    let polyline = GMSPolyline(path: path)
-                //                    polyline.strokeColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
-                //                    polyline.strokeWidth = 4.0
-                //                    polyline.map = self.map
-                //
-                //                }
-                
-            } catch { print(error) }
-            
-            
-        }
+    func degreesToRadians(degrees: Double) -> Double { return degrees * .pi / 180.0 }
+    func radiansToDegrees(radians: Double) -> Double { return radians * 180.0 / .pi }
+
+    func calculateBearer(legs:[Leg]) -> Double {
+
+        print(legs[0].steps?[0].startLocation)
         
-        
-        func cal_distance(lat:Double,long:Double)  {
-            let current_coordinate =  CLLocation(latitude: self.c_lat, longitude: self.c_longg)
-            let coordinate2 = CLLocation(latitude: lat, longitude: long)
-            let distanceInMiles = (current_coordinate.distance(from: coordinate2))/1609.344 //
-            parking_title.text = String(format: "%.02f m", distanceInMiles)
-            
-        }
-        
-        //        let path = GMSMutablePath()
-        //
-        //        path.add(CLLocationCoordinate2DMake(24.91891891891892, 67.09286075038399))
-        //        path.add(CLLocationCoordinate2DMake(24.936936936936938, 67.10266777344651))
-        //
-        //
-        //        let rectangle = GMSPolyline(path: path)
-        //        rectangle
-        //        rectangle.strokeWidth = 2.0
-        //        rectangle.map = map
-        //
-        //        // Create a rectangular path
-        //        let rect = GMSMutablePath()
-        //        rect.add(CLLocationCoordinate2D(latitude: 24.91891891891892, longitude: 67.09286075038399))
-        //        rect.add(CLLocationCoordinate2D(latitude: 24.936936936936938, longitude: 67.10266777344651))
-        //
-        //
-        //
-        //
-        //        // Create the polygon, and assign it to the map.
-        //        let polygon = GMSPolygon(path: rect)
-        //        polygon.fillColor = UIColor(red: 0.25, green: 0, blue: 0, alpha: 0.05);
-        //        polygon.strokeColor = .black
-        //        polygon.strokeWidth = 2
-        //        polygon.map = self.map
+        let point1 = CLLocation(latitude: (legs[0].steps?[0].startLocation?.lat)!, longitude: (legs[0].steps?[0].startLocation?.lng)!)
+        let point2 = CLLocation(latitude: (legs[0].steps?[0].endLocation?.lat)!, longitude: (legs[0].steps?[0].endLocation?.lng)!)
+        let lat1 = degreesToRadians(degrees: point1.coordinate.latitude)
+        let lon1 = degreesToRadians(degrees: point1.coordinate.longitude)
+
+        let lat2 = degreesToRadians(degrees: point2.coordinate.latitude)
+        let lon2 = degreesToRadians(degrees: point2.coordinate.longitude)
+
+        let dLon = lon2 - lon1
+
+        let y = sin(dLon) * cos(lat2)
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
+        let radiansBearing = atan2(y, x)
+
+        return radiansToDegrees(radians: radiansBearing)
     }
+
+    
+//    func drawRouteOnly(){
+//
+//        map.clear()
+//        let origin = "\(c_lat),\(c_longg)"
+//        let destination = "\(p_lat),\(p_longg)"
+//
+//
+//        print("origin2=\(origin)")
+//        print("destination=\(destination)")
+//        Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map, title: "This is you")
+//
+//        Helper().map_marker(lat: p_lat, longg: p_longg, map_view: self.map, title: "This is parking")
+//
+//
+//
+//        //            let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&alternatives=true&key=\(Key.Google.placesKey)"
+//        //
+//        //            print("alter_url=\(url)")
+//        //            Alamofire.request(url).responseJSON { response in
+//        //
+//        //                do {
+//        //                    let json = try JSON(data: response.data!)
+//        //                    print(json)
+//        //                    let routes = json["routes"].arrayValue
+//
+//        //                    self.alternateRoutes = routes
+//        //
+//        //                    print("routes=\(routes.count)")
+//
+//        if(self.alternateRoutes.count>0)
+//        {
+//            let route  = self.alternateRoutes[0]
+//
+//            //                let route = dict as! NSDictionary
+//            let routeOverviewPolyline = route.overviewPolyline
+//            let points = routeOverviewPolyline?.points
+//            let path = GMSPath.init(fromEncodedPath: points!)
+//            let polyline = GMSPolyline.init(path: path)
+//            polyline.strokeWidth = 4
+//            polyline.strokeColor =  #colorLiteral(red: 0, green: 0.5356405973, blue: 0.7853047252, alpha: 1)
+//            polyline.map = self.map
+//
+//
+//            let leg = route["legs"].arrayValue
+//            let legDict = leg[0].dictionary
+//            let dictanceDict = legDict!["distance"]?.dictionary
+//            let distance = dictanceDict?["text"]?.stringValue
+//            self.lblDistance.text = distance
+//            let durationDict = legDict!["duration"]?.dictionary
+//            let duration = durationDict?["text"]?.stringValue
+//            self.lblTime.text = duration
+//
+//
+//        }
+//        //                for route in routes
+//        //                {
+//        //                    let routeOverviewPolyline = route["overview_polyline"].dictionary
+//        //                    let points = routeOverviewPolyline?["points"]?.stringValue
+//        //                    let path = GMSPath.init(fromEncodedPath: points!)
+//        //
+//        //                    let polyline = GMSPolyline(path: path)
+//        //                    polyline.strokeColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
+//        //                    polyline.strokeWidth = 4.0
+//        //                    polyline.map = self.map
+//        //
+//        //                }
+//
+//
+//    }
+//
+//
+    
+//    func drawRoute(){
+//
+//       // map.clear()
+//        let origin = "\(c_lat),\(c_longg)"
+//        let destination = "\(p_lat),\(p_longg)"
+//
+//
+//        print("origin2=\(origin)")
+//        print("destination=\(destination)")
+//
+//
+//        let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&alternatives=true&key=\(Key.Google.placesKey)"
+//
+//        print("alter_url=\(url)")
+//        Alamofire.request(url).responseJSON { response in
+//
+//            do {
+//                let json = try JSON(data: response.data!)
+//                print(json)
+//                let routes = json["routes"].arrayValue
+//
+//                self.alternateRoutes = routes
+//
+//                print("routes=\(routes.count)")
+//
+//                if(routes.count>0)
+//                {
+//                    let route  = routes[0].dictionary
+//                    let leg = route!["legs"]?.arrayValue
+//                    let legDict = leg![0].dictionary
+//                    let dictanceDict = legDict!["distance"]?.dictionary
+//                    let distance = dictanceDict?["text"]?.stringValue
+//                    self.lblDistance.text = distance
+//                    let durationDict = legDict!["duration"]?.dictionary
+//                    let duration = durationDict?["text"]?.stringValue
+//                    self.lblTime.text = duration
+//                    //                let route = dict as! NSDictionary
+//                    let routeOverviewPolyline = route!["overview_polyline"]?.dictionary
+//                    let points = routeOverviewPolyline?["points"]?.stringValue
+//                    let path = GMSPath.init(fromEncodedPath: points!)
+//                    let polyline = GMSPolyline.init(path: path)
+//                    polyline.strokeWidth = 4
+//                    polyline.strokeColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
+//
+//
+//                    self.map.clear()
+//
+//                    Helper().map_marker(lat: self.c_lat, longg: self.c_longg, map_view: self.map, title: "This is you")
+//
+//                    Helper().map_marker(lat: self.p_lat, longg: self.p_longg, map_view: self.map, title: "This is parking")
+//
+//                    polyline.map = self.map
+//                }
+//                //                for route in routes
+//                //                {
+//                //                    let routeOverviewPolyline = route["overview_polyline"].dictionary
+//                //                    let points = routeOverviewPolyline?["points"]?.stringValue
+//                //                    let path = GMSPath.init(fromEncodedPath: points!)
+//                //
+//                //                    let polyline = GMSPolyline(path: path)
+//                //                    polyline.strokeColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
+//                //                    polyline.strokeWidth = 4.0
+//                //                    polyline.map = self.map
+//                //
+//                //                }
+//
+//            } catch { print(error) }
+//
+//
+//        }
+//
+//
+//        func cal_distance(lat:Double,long:Double)  {
+//            let current_coordinate =  CLLocation(latitude: self.c_lat, longitude: self.c_longg)
+//            let coordinate2 = CLLocation(latitude: lat, longitude: long)
+//            let distanceInMiles = (current_coordinate.distance(from: coordinate2))/1609.344 //
+//            parking_title.text = String(format: "%.02f m", distanceInMiles)
+//
+//        }
+//
+//        //        let path = GMSMutablePath()
+//        //
+//        //        path.add(CLLocationCoordinate2DMake(24.91891891891892, 67.09286075038399))
+//        //        path.add(CLLocationCoordinate2DMake(24.936936936936938, 67.10266777344651))
+//        //
+//        //
+//        //        let rectangle = GMSPolyline(path: path)
+//        //        rectangle
+//        //        rectangle.strokeWidth = 2.0
+//        //        rectangle.map = map
+//        //
+//        //        // Create a rectangular path
+//        //        let rect = GMSMutablePath()
+//        //        rect.add(CLLocationCoordinate2D(latitude: 24.91891891891892, longitude: 67.09286075038399))
+//        //        rect.add(CLLocationCoordinate2D(latitude: 24.936936936936938, longitude: 67.10266777344651))
+//        //
+//        //
+//        //
+//        //
+//        //        // Create the polygon, and assign it to the map.
+//        //        let polygon = GMSPolygon(path: rect)
+//        //        polygon.fillColor = UIColor(red: 0.25, green: 0, blue: 0, alpha: 0.05);
+//        //        polygon.strokeColor = .black
+//        //        polygon.strokeWidth = 2
+//        //        polygon.map = self.map
+//    }
     @IBAction func park_now_btn(_ sender: UIButton) {
         
        
@@ -386,7 +422,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
     
     @objc func RemoveOldDrawRoute(notification : NSNotification){
         
-//        map.clear()
+        map.clear()
         let origin = "\(c_lat),\(c_longg)"
         let destination = "\(p_lat),\(p_longg)"
         
@@ -397,37 +433,48 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         
         Helper().map_marker(lat: p_lat, longg: p_longg, map_view: self.map, title: "This is parking")
         
+        if let userInfo = notification.userInfo as NSDictionary? {
+            if let dict = userInfo["dict"] as? Route{
+            
+//                print(dict.copyrights)
+                
+                let dictPolyline = dict.overviewPolyline
+
+                let points = dictPolyline?.points
+
+                 self.showPath(polyStr: points!)
+            }
+        }
         
-        
-        let json = try JSON(notification.userInfo as Any)
-        
-        //let routes = json["routes"].arrayValue
-        
-        
-        let route  = json
+//        let json = try JSON(notification.userInfo as Any)
+//
+//        //let routes = json["routes"].arrayValue
+//
+//
+//        let route  = json
         // let route  = notification.userInfo as! JSON
         
         
-        let routeOverviewPolyline = route["overview_polyline"].dictionary
-        let points = routeOverviewPolyline?["points"]?.stringValue
-        let path = GMSPath.init(fromEncodedPath: points!)
-        let polyline = GMSPolyline.init(path: path)
-        polyline.strokeWidth = 4
-        polyline.strokeColor =  #colorLiteral(red: 0, green: 0.5356405973, blue: 0.7853047252, alpha: 1)
-        polyline.map = self.map
+//        let routeOverviewPolyline = route["overview_polyline"].dictionary
+//        let points = routeOverviewPolyline?["points"]?.stringValue
+//        let path = GMSPath.init(fromEncodedPath: points!)
+//        let polyline = GMSPolyline.init(path: path)
+//        polyline.strokeWidth = 4
+//        polyline.strokeColor =  #colorLiteral(red: 0, green: 0.5356405973, blue: 0.7853047252, alpha: 1)
+//        polyline.map = self.map
+//
+//
+//        let leg = route["legs"].arrayValue
+//        let legDict = leg[0].dictionary
+//        let dictanceDict = legDict!["distance"]?.dictionary
+//        let distance = dictanceDict?["text"]?.stringValue
+//        self.lblDistance.text = distance
+//        let durationDict = legDict!["duration"]?.dictionary
+//        let duration = durationDict?["text"]?.stringValue
+//        self.lblTime.text = duration
         
-        
-        let leg = route["legs"].arrayValue
-        let legDict = leg[0].dictionary
-        let dictanceDict = legDict!["distance"]?.dictionary
-        let distance = dictanceDict?["text"]?.stringValue
-        self.lblDistance.text = distance
-        let durationDict = legDict!["duration"]?.dictionary
-        let duration = durationDict?["text"]?.stringValue
-        self.lblTime.text = duration
-        
-        
-        
+//        let overview_polyline = routes[0] as? NSDictionary
+         
         
         
     }
@@ -499,6 +546,111 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
                 }
             }
         }
+    }
+    
+    
+    
+    
+    //New Functions
+    
+    func getPolylineRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D){
+
+        Helper().showSpinner(view: self.view)
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+
+        
+        let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=true&mode=driving&alternatives=true&key=\(Key.Google.placesKey)")!
+               
+        print(url)
+//        let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=true&mode=driving&key=\(Key.Google.placesKey)")!
+
+        let task = session.dataTask(with: url, completionHandler: {
+            (data, response, error) in
+            if error != nil {
+                print(error!.localizedDescription)
+                
+                Helper().hideSpinner(view: self.view)
+//                self.activityIndicator.stopAnimating()
+            }
+            else {
+                do {
+                    
+                    if let json : [String:Any] = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]{
+
+                    
+                        guard let routes = json["routes"] as? NSArray else {
+                            DispatchQueue.main.async {
+
+                                Helper().hideSpinner(view: self.view)
+//                                self.activityIndicator.stopAnimating()
+                                
+                            }
+                            return
+                        }
+
+//                        var json = try JSON(data: data!)
+                        var json = try JSONDecoder().decode(DirectionAPI.self, from:data!)
+                        print(json.routes)
+                        let routesArray = json.routes!
+
+                        self.alternateRoutes = routesArray
+
+                        if (routesArray.count > 0) {
+                            let route = routesArray[0]
+                            let dictPolyline = route.overviewPolyline
+                            self.legs = route.legs
+                            print("legs==\(self.legs!)")
+                            let points = dictPolyline?.points
+
+                            self.showPath(polyStr: points!)
+
+                            DispatchQueue.main.async {
+
+                                Helper().hideSpinner(view: self.view)
+//                                self.activityIndicator.stopAnimating()
+
+                                let target = CLLocationCoordinate2D(latitude: source.latitude, longitude: source.longitude)
+                                let camera = GMSCameraPosition.camera(withTarget: target, zoom: 17, bearing: self.bearer, viewingAngle: 90)
+                                self.map.animate(to: camera)
+                            
+                                print("bearing=\(self.bearer)")
+//                                let bounds = GMSCoordinateBounds(coordinate: source, coordinate: destination)
+//                                let update = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 170, left: 30, bottom: 30, right: 30))
+//                                self.map.moveCamera(update)
+                            }
+                        }
+                        else {
+                            DispatchQueue.main.async {
+
+                                Helper().hideSpinner(view: self.view)
+//                                self.activityIndicator.stopAnimating()
+                            }
+                        }
+                    }
+                }
+                catch {
+                    print("error in JSONSerialization")
+                    DispatchQueue.main.async {
+
+                        Helper().hideSpinner(view: self.view)
+//                        self.activityIndicator.stopAnimating()
+                    }
+                }
+            }
+        })
+        task.resume()
+    }
+
+    func showPath(polyStr :String){
+        let path = GMSPath(fromEncodedPath: polyStr)
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeWidth = 3.0
+        polyline.strokeColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
+        polyline.map = self.map // Your map view
+        
+     
+
     }
     
     
