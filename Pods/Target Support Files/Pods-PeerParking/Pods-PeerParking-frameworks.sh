@@ -174,10 +174,12 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FittedSheets/FittedSheets.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GooglePlacesSearchController/GooglePlacesSearchController.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/HelperClassPod/HelperClassPod.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBRadioCheckboxButton/MBRadioCheckboxButton.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SideMenuController/SideMenuController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/StepIndicator/StepIndicator.framework"
@@ -186,6 +188,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/iProgressHUD/iProgressHUD.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
@@ -201,10 +204,12 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FittedSheets/FittedSheets.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/GooglePlacesSearchController/GooglePlacesSearchController.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/HelperClassPod/HelperClassPod.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MBRadioCheckboxButton/MBRadioCheckboxButton.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SideMenuController/SideMenuController.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/StepIndicator/StepIndicator.framework"
@@ -213,6 +218,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/iProgressHUD/iProgressHUD.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -31,6 +31,11 @@ target 'PeerParking' do
   pod 'iProgressHUD'
   pod 'Stripe'
   pod 'XLPagerTabStrip'
+  # Add the Firebase pod for Google Analytics
+  pod 'Firebase/Analytics'
+
+  # Add the pod for Firebase Cloud Messaging
+  pod 'Firebase/Messaging'
   target 'PeerParkingTests' do
     inherit! :search_paths
     # Pods for testing

@@ -46,7 +46,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     
     
     //Variables
-    var alternateRoutes:[JSON]!
+    var alternateRoutes:[Route]!
     var parkings:[Parking] = []
     var estimateWidth=130
     var cellMarginSize=1
@@ -383,25 +383,26 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
             Alamofire.request(url).responseJSON { response in
                 
                 do {
-                    let json = try JSON(data: response.data!)
+                   
+                    let json = try JSONDecoder().decode(DirectionAPI.self, from:response.data!)
                     print(json)
-                    let routes = json["routes"].arrayValue
+                    let routes = json.routes
                     
                     self.alternateRoutes = routes
                     
                     print("routes=\(routes)")
                     
-                    if(routes.count>0)
+                    if(self.alternateRoutes.count>0)
                     {
-                        let route  = routes[0].dictionary
-                        let leg = route!["legs"]?.arrayValue
-                        let legDict = leg![0].dictionary
-                        let dictanceDict = legDict!["distance"]?.dictionary
-                        let distance = dictanceDict?["text"]?.stringValue
+                        let route  = self.alternateRoutes[0]
+                        let leg = route.legs
+                        let legDict = leg?[0]
+                        let dictanceDict = legDict?.distance
+                        let distance = dictanceDict?.text
                         
-                        let durationDict = legDict!["duration"]?.dictionary
-                        let duration = durationDict?["text"]?.stringValue
-                        let durationVal = durationDict?["value"]?.intValue
+                        let durationDict = legDict?.duration
+                        let duration = durationDict?.text
+                        let durationVal = durationDict?.value
                         
                        // let ti = NSInteger(durationVal)
 
