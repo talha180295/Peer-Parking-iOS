@@ -82,7 +82,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 
     }
     
-    func  setMapButton()  {
+    func  setMapButton(){
+        
         let bottomPadding = UIScreen.main.bounds.height-view_all_btn.frame.origin.y
         print("bottomPadding=\(bottomPadding)")
         map.isMyLocationEnabled = true

@@ -135,11 +135,11 @@
         <scene sceneID="Ojb-Fw-wkK">
             <objects>
                 <viewController storyboardIdentifier="loginVC" id="sJt-wj-JwE" customClass="LoginViewController" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3AH-DP-gXx">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="3AH-DP-gXx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayn-6I-IzX">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ayn-6I-IzX">
                                 <rect key="frame" x="10" y="234" width="394" height="300"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rcq-UA-FG4">
@@ -271,7 +271,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Rcq-UA-FG4" secondAttribute="trailing" id="ogr-g1-wd7"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ir-tG-JVb">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Ir-tG-JVb">
                                 <rect key="frame" x="0.0" y="554" width="414" height="132"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCl-bF-hVW">
@@ -341,7 +341,7 @@
                                     <constraint firstItem="RCl-bF-hVW" firstAttribute="centerX" secondItem="4Ir-tG-JVb" secondAttribute="centerX" id="vvq-1D-TZt"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2GT-5W-tIr">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2GT-5W-tIr">
                                 <rect key="frame" x="0.0" y="34" width="414" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43a-Jx-aDx">
@@ -382,7 +382,7 @@
                                     <constraint firstItem="Um5-Ol-RpY" firstAttribute="centerX" secondItem="2GT-5W-tIr" secondAttribute="centerX" id="m8P-si-dDI"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BlQ-lF-Pza">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BlQ-lF-Pza">
                                 <rect key="frame" x="156" y="131" width="102" height="102"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="102" id="qHp-VT-Dto"/>

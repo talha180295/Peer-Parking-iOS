@@ -36,6 +36,9 @@ target 'PeerParking' do
 
   # Add the pod for Firebase Cloud Messaging
   pod 'Firebase/Messaging'
+  
+  pod 'SwiftLocation'
+  
   target 'PeerParkingTests' do
     inherit! :search_paths
     # Pods for testing

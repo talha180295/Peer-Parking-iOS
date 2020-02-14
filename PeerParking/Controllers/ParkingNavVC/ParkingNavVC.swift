@@ -8,12 +8,14 @@
 
 import UIKit
 import GoogleMaps
-import CoreLocation
+//import CoreLocation
 import Alamofire
 import SwiftyJSON
 import HelperClassPod
+import SwiftLocation
 
-class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
+
+class ParkingNavVC: UIViewController{
     
     //IBOutlets
     @IBOutlet weak var mapView: UIView!
@@ -35,12 +37,13 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
     var bearer = 0.0
     var legs:[Leg]!
     var parking_details:Parking!
+    //Intent Variables
     var p_title:String = ""
     var p_lat:Double = 0.0
     var p_longg:Double = 0.0
-    var p_id:Int!
-    
     var alternateRoutes:[Route]!
+    
+    var p_id:Int!
     var c_lat:Double = 0.0
     var c_longg:Double = 0.0
     
@@ -51,10 +54,29 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
 //        loadMapView()
         self.parking_title.text = p_title
         
+        locationUpdates()
            
 
         // Do any additional setup after loading the view.
     }
+    
+    func locationUpdates(){
+        
+        let request = LocationManager.shared.locateFromGPS(.continous, accuracy: .city) { data in
+          switch data {
+            case .failure(let error):
+                print("Location error: \(error)")
+            case .success(let location):
+                
+                self.c_lat = location.coordinate.latitude
+                self.c_longg = location.coordinate.longitude
+                self.drawRouteOnly()
+                print("New Location: \(location)")
+          }
+        }
+        request.dataFrequency = .fixed(minInterval: 40, minDistance: 100)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         
 //        loadMapView()
@@ -122,58 +144,38 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         map.settings.myLocationButton = true
         map.padding = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 15)
         
-        //Location Manager code to fetch current location
-        self.locationManager.delegate = self
-        self.locationManager.startUpdatingLocation()
+        
+//        //Location Manager code to fetch current location
+//        self.locationManager.delegate = self
+//        self.locationManager.startUpdatingLocation()
     }
     
-    //Location Manager delegates
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        let location = locations.last
-        
-        
-        self.c_lat = (location?.coordinate.latitude)!
-        self.c_longg = (location?.coordinate.longitude)!
-        
-        let origin = "\(c_lat),\(c_lat)"
-        
-//        let sourcePosition = CLLocationCoordinate2D(latitude: self.c_lat, longitude: self.c_longg)
-        let endPosition = CLLocation(latitude: self.p_lat, longitude: self.p_longg)
-        
-        
-        if self.legs != nil{
-            
-             self.bearer = calculateBearer(legs: self.legs)
-        }
-       
-        
-        
-        print("origin1=\(origin)")
-//        self.locationManager.stopUpdatingLocation()
-        
-//                 if(vcName.elementsEqual("nav"))
-//                 {
-//                      drawRouteOnly()
-//                 }
-//        //        else
-//        //           {
-//                       drawRoute()
-        //           }
-        //        print("lat==\(location?.coordinate.latitude)")
-        //        print("long==\(location?.coordinate.longitude)")
-        
-        //        self.filterLat = (location?.coordinate.latitude)!
-        //        self.filterLong = (location?.coordinate.longitude)!
-//
-//        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 18.0)
-//
-//        self.map.animate(to: camera)
-      //  Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map)
-        
-        // self.locationManager.stopUpdatingLocation()
-        
-    }
+    
+    
+//    //Location Manager delegates
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        
+//        let location = locations.last
+//        
+//        
+//        self.c_lat = (location?.coordinate.latitude)!
+//        self.c_longg = (location?.coordinate.longitude)!
+//        
+//        let origin = "\(c_lat),\(c_lat)"
+//        
+////        let sourcePosition = CLLocationCoordinate2D(latitude: self.c_lat, longitude: self.c_longg)
+//        let endPosition = CLLocation(latitude: self.p_lat, longitude: self.p_longg)
+//        
+//        
+//        if self.legs != nil{
+//            
+//             self.bearer = calculateBearer(legs: self.legs)
+//        }
+//       
+//        
+//        
+//        
+//    }
     
 
     func degreesToRadians(degrees: Double) -> Double { return degrees * .pi / 180.0 }
@@ -201,75 +203,75 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
     }
 
     
-//    func drawRouteOnly(){
-//
-//        map.clear()
-//        let origin = "\(c_lat),\(c_longg)"
-//        let destination = "\(p_lat),\(p_longg)"
-//
-//
-//        print("origin2=\(origin)")
-//        print("destination=\(destination)")
-//        Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map, title: "This is you")
-//
-//        Helper().map_marker(lat: p_lat, longg: p_longg, map_view: self.map, title: "This is parking")
-//
-//
-//
-//        //            let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&alternatives=true&key=\(Key.Google.placesKey)"
-//        //
-//        //            print("alter_url=\(url)")
-//        //            Alamofire.request(url).responseJSON { response in
-//        //
-//        //                do {
-//        //                    let json = try JSON(data: response.data!)
-//        //                    print(json)
-//        //                    let routes = json["routes"].arrayValue
-//
-//        //                    self.alternateRoutes = routes
-//        //
-//        //                    print("routes=\(routes.count)")
-//
-//        if(self.alternateRoutes.count>0)
-//        {
-//            let route  = self.alternateRoutes[0]
-//
-//            //                let route = dict as! NSDictionary
-//            let routeOverviewPolyline = route.overviewPolyline
-//            let points = routeOverviewPolyline?.points
-//            let path = GMSPath.init(fromEncodedPath: points!)
-//            let polyline = GMSPolyline.init(path: path)
-//            polyline.strokeWidth = 4
-//            polyline.strokeColor =  #colorLiteral(red: 0, green: 0.5356405973, blue: 0.7853047252, alpha: 1)
-//            polyline.map = self.map
-//
-//
+    func drawRouteOnly(){
+
+        map.clear()
+        let origin = "\(c_lat),\(c_longg)"
+        let destination = "\(p_lat),\(p_longg)"
+
+
+        print("origin2=\(origin)")
+        print("destination=\(destination)")
+        Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map, title: "This is you")
+
+        Helper().map_marker(lat: p_lat, longg: p_longg, map_view: self.map, title: "This is parking")
+
+
+
+        //            let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&alternatives=true&key=\(Key.Google.placesKey)"
+        //
+        //            print("alter_url=\(url)")
+        //            Alamofire.request(url).responseJSON { response in
+        //
+        //                do {
+        //                    let json = try JSON(data: response.data!)
+        //                    print(json)
+        //                    let routes = json["routes"].arrayValue
+
+        //                    self.alternateRoutes = routes
+        //
+        //                    print("routes=\(routes.count)")
+
+        if let alTRoures = self.alternateRoutes,(self.alternateRoutes.count>0)
+        {
+            let route  =  alTRoures[0]
+
+            //                let route = dict as! NSDictionary
+            let routeOverviewPolyline = route.overviewPolyline
+            let points = routeOverviewPolyline?.points
+            let path = GMSPath.init(fromEncodedPath: points!)
+            let polyline = GMSPolyline.init(path: path)
+            polyline.strokeWidth = 4
+            polyline.strokeColor =  #colorLiteral(red: 0, green: 0.5356405973, blue: 0.7853047252, alpha: 1)
+            polyline.map = self.map
+
+
 //            let leg = route["legs"].arrayValue
-//            let legDict = leg[0].dictionary
-//            let dictanceDict = legDict!["distance"]?.dictionary
-//            let distance = dictanceDict?["text"]?.stringValue
-//            self.lblDistance.text = distance
-//            let durationDict = legDict!["duration"]?.dictionary
-//            let duration = durationDict?["text"]?.stringValue
-//            self.lblTime.text = duration
-//
-//
-//        }
-//        //                for route in routes
-//        //                {
-//        //                    let routeOverviewPolyline = route["overview_polyline"].dictionary
-//        //                    let points = routeOverviewPolyline?["points"]?.stringValue
-//        //                    let path = GMSPath.init(fromEncodedPath: points!)
-//        //
-//        //                    let polyline = GMSPolyline(path: path)
-//        //                    polyline.strokeColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
-//        //                    polyline.strokeWidth = 4.0
-//        //                    polyline.map = self.map
-//        //
-//        //                }
-//
-//
-//    }
+            let legDict = route.legs?[0]
+            let dictanceDict = legDict?.distance
+            let distance = dictanceDict?.text
+            self.lblDistance.text = distance
+            let durationDict = legDict?.duration
+            let duration = durationDict?.text
+            self.lblTime.text = duration
+
+
+        }
+        //                for route in routes
+        //                {
+        //                    let routeOverviewPolyline = route["overview_polyline"].dictionary
+        //                    let points = routeOverviewPolyline?["points"]?.stringValue
+        //                    let path = GMSPath.init(fromEncodedPath: points!)
+        //
+        //                    let polyline = GMSPolyline(path: path)
+        //                    polyline.strokeColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
+        //                    polyline.strokeWidth = 4.0
+        //                    polyline.map = self.map
+        //
+        //                }
+
+
+    }
 //
 //
     
@@ -389,15 +391,8 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
             assign_buyer(p_id: id, status: 30)
             
         }
-        
-        
-        
-        
-//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedbackVC")
-//
-//        self.present(vc, animated: true, completion: nil)
-        
     }
+    
     @IBAction func cancel_btn(_ sender: UIButton) {
         
         //self.dismiss(animated: true, completion: nil)
@@ -446,36 +441,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
             }
         }
         
-//        let json = try JSON(notification.userInfo as Any)
-//
-//        //let routes = json["routes"].arrayValue
-//
-//
-//        let route  = json
-        // let route  = notification.userInfo as! JSON
-        
-        
-//        let routeOverviewPolyline = route["overview_polyline"].dictionary
-//        let points = routeOverviewPolyline?["points"]?.stringValue
-//        let path = GMSPath.init(fromEncodedPath: points!)
-//        let polyline = GMSPolyline.init(path: path)
-//        polyline.strokeWidth = 4
-//        polyline.strokeColor =  #colorLiteral(red: 0, green: 0.5356405973, blue: 0.7853047252, alpha: 1)
-//        polyline.map = self.map
-//
-//
-//        let leg = route["legs"].arrayValue
-//        let legDict = leg[0].dictionary
-//        let dictanceDict = legDict!["distance"]?.dictionary
-//        let distance = dictanceDict?["text"]?.stringValue
-//        self.lblDistance.text = distance
-//        let durationDict = legDict!["duration"]?.dictionary
-//        let duration = durationDict?["text"]?.stringValue
-//        self.lblTime.text = duration
-        
-//        let overview_polyline = routes[0] as? NSDictionary
-         
-        
+
         
     }
     
@@ -483,7 +449,7 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         
 //        let status:Int = 30
         
-        var params:[String:Any] = [
+        let params:[String:Any] = [
         
             
             "status" : status
@@ -563,39 +529,22 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
         let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=true&mode=driving&alternatives=true&key=\(Key.Google.placesKey)")!
                
         print(url)
-//        let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=true&mode=driving&key=\(Key.Google.placesKey)")!
-
-        let task = session.dataTask(with: url, completionHandler: {
-            (data, response, error) in
-            if error != nil {
-                print(error!.localizedDescription)
-                
-                Helper().hideSpinner(view: self.view)
-//                self.activityIndicator.stopAnimating()
-            }
-            else {
-                do {
-                    
-                    if let json : [String:Any] = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]{
-
-                    
-                        guard let routes = json["routes"] as? NSArray else {
-                            DispatchQueue.main.async {
-
-                                Helper().hideSpinner(view: self.view)
-//                                self.activityIndicator.stopAnimating()
-                                
-                            }
-                            return
-                        }
-
-//                        var json = try JSON(data: data!)
-                        var json = try JSONDecoder().decode(DirectionAPI.self, from:data!)
-                        print(json.routes)
-                        let routesArray = json.routes!
+        
+        
+      
+        Alamofire.request(url).responseJSON { response in
+            
+             do {
+                   //here dataResponse received from a network request
+                   if let jsonData = response.data{
+                       let response = try JSONDecoder().decode(DirectionAPI.self, from:jsonData) //Decode JSON Response Data
+                      
+                      
+                        let routesArray = response.routes!
 
                         self.alternateRoutes = routesArray
 
+                        print(self.alternateRoutes)
                         if (routesArray.count > 0) {
                             let route = routesArray[0]
                             let dictPolyline = route.overviewPolyline
@@ -605,41 +554,112 @@ class ParkingNavVC: UIViewController, CLLocationManagerDelegate{
 
                             self.showPath(polyStr: points!)
 
-                            DispatchQueue.main.async {
-
+                            
                                 Helper().hideSpinner(view: self.view)
-//                                self.activityIndicator.stopAnimating()
+                        //                                self.activityIndicator.stopAnimating()
 
                                 let target = CLLocationCoordinate2D(latitude: source.latitude, longitude: source.longitude)
                                 let camera = GMSCameraPosition.camera(withTarget: target, zoom: 17, bearing: self.bearer, viewingAngle: 90)
                                 self.map.animate(to: camera)
-                            
+
                                 print("bearing=\(self.bearer)")
-//                                let bounds = GMSCoordinateBounds(coordinate: source, coordinate: destination)
-//                                let update = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 170, left: 30, bottom: 30, right: 30))
-//                                self.map.moveCamera(update)
-                            }
+                        //                                let bounds = GMSCoordinateBounds(coordinate: source, coordinate: destination)
+                        //                                let update = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 170, left: 30, bottom: 30, right: 30))
+                        //                                self.map.moveCamera(update)
+                            
                         }
                         else {
-                            DispatchQueue.main.async {
+                           
 
                                 Helper().hideSpinner(view: self.view)
-//                                self.activityIndicator.stopAnimating()
-                            }
+                        //                                self.activityIndicator.stopAnimating()
+                            
                         }
-                    }
-                }
-                catch {
-                    print("error in JSONSerialization")
-                    DispatchQueue.main.async {
+                   }
+               } catch let parsingError {
+                   print("Error", parsingError)
+                    Helper().hideSpinner(view: self.view)
+               }
+                                  
+            
+        }
+//        let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(source.latitude),\(source.longitude)&destination=\(destination.latitude),\(destination.longitude)&sensor=true&mode=driving&key=\(Key.Google.placesKey)")!
 
-                        Helper().hideSpinner(view: self.view)
-//                        self.activityIndicator.stopAnimating()
-                    }
-                }
-            }
-        })
-        task.resume()
+//        let task = session.dataTask(with: url, completionHandler: {
+//            (data, response, error) in
+//            if error != nil {
+//                print(error!.localizedDescription)
+//
+//                Helper().hideSpinner(view: self.view)
+////                self.activityIndicator.stopAnimating()
+//            }
+//            else {
+//                do {
+//
+//                    if let json : [String:Any] = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]{
+//
+//
+//                        guard let routes = json["routes"] as? NSArray else {
+//                            DispatchQueue.main.async {
+//
+//                                Helper().hideSpinner(view: self.view)
+////                                self.activityIndicator.stopAnimating()
+//
+//                            }
+//                            return
+//                        }
+//
+////                        var json = try JSON(data: data!)
+//                        var json = try JSONDecoder().decode(DirectionAPI.self, from:data!)
+//                        print(json.routes)
+//                        let routesArray = json.routes!
+//
+//                        self.alternateRoutes = routesArray
+//
+//                        if (routesArray.count > 0) {
+//                            let route = routesArray[0]
+//                            let dictPolyline = route.overviewPolyline
+//                            self.legs = route.legs
+//                            print("legs==\(self.legs!)")
+//                            let points = dictPolyline?.points
+//
+//                            self.showPath(polyStr: points!)
+//
+//                            DispatchQueue.main.async {
+//
+//                                Helper().hideSpinner(view: self.view)
+////                                self.activityIndicator.stopAnimating()
+//
+//                                let target = CLLocationCoordinate2D(latitude: source.latitude, longitude: source.longitude)
+//                                let camera = GMSCameraPosition.camera(withTarget: target, zoom: 17, bearing: self.bearer, viewingAngle: 90)
+//                                self.map.animate(to: camera)
+//
+//                                print("bearing=\(self.bearer)")
+////                                let bounds = GMSCoordinateBounds(coordinate: source, coordinate: destination)
+////                                let update = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 170, left: 30, bottom: 30, right: 30))
+////                                self.map.moveCamera(update)
+//                            }
+//                        }
+//                        else {
+//                            DispatchQueue.main.async {
+//
+//                                Helper().hideSpinner(view: self.view)
+////                                self.activityIndicator.stopAnimating()
+//                            }
+//                        }
+//                    }
+//                }
+//                catch {
+//                    print("error in JSONSerialization")
+//                    DispatchQueue.main.async {
+//
+//                        Helper().hideSpinner(view: self.view)
+////                        self.activityIndicator.stopAnimating()
+//                    }
+//                }
+//            }
+//        })
+//        task.resume()
     }
 
     func showPath(polyStr :String){
