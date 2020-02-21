@@ -34,7 +34,8 @@ class ParkingNavVC: UIViewController{
     var vcName : String!
     var locationManager = CLLocationManager()
     
-    var bearer = 0.0
+    var counter = 0
+    var bearing = 0.0
     var legs:[Leg]!
     var parking_details:Parking!
     //Intent Variables
@@ -46,6 +47,13 @@ class ParkingNavVC: UIViewController{
     var p_id:Int!
     var c_lat:Double = 0.0
     var c_longg:Double = 0.0
+    
+    
+    var s_lat:Double = 0.0
+    var s_longg:Double = 0.0
+    
+    var d_lat:Double = 0.0
+    var d_longg:Double = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,8 +78,21 @@ class ParkingNavVC: UIViewController{
                 
                 self.c_lat = location.coordinate.latitude
                 self.c_longg = location.coordinate.longitude
+                
+                
+                if let leg = self.legs{
+                    
+                    print(leg[0].steps?[self.counter].endLocation?.lat)
+                    
+                    if(leg[0].steps?[self.counter].endLocation?.lat == location.coordinate.latitude)&&(leg[0].steps?[self.counter].endLocation?.lng == location.coordinate.longitude){
+                        
+                        Helper().showToast(message: "step#\(self.counter) completed", controller: self)
+                    }
+                }
+                
+                
                 self.drawRouteOnly()
-                print("New Location: \(location)")
+                print("New Locationabc: \(location)")
           }
         }
         request.dataFrequency = .fixed(minInterval: 40, minDistance: 100)
@@ -98,7 +119,7 @@ class ParkingNavVC: UIViewController{
         
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.RemoveOldDrawRoute(notification:)), name: NSNotification.Name(rawValue: "NotificationRemoveRoute"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.RemoveOldDrawNewRoute(notification:)), name: NSNotification.Name(rawValue: "NotificationRemoveRoute"), object: nil)
         
        
         
@@ -114,9 +135,10 @@ class ParkingNavVC: UIViewController{
             loadMapView()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                      
-                let sourcePosition = CLLocationCoordinate2D(latitude: self.c_lat, longitude: self.c_longg)
-                let endPosition = CLLocationCoordinate2D(latitude: self.p_lat, longitude: self.p_longg)
+                let sourcePosition = CLLocationCoordinate2D(latitude: self.s_lat, longitude: self.s_longg)
+                let endPosition = CLLocationCoordinate2D(latitude: self.d_lat, longitude: self.d_longg)
                 
+               
                 self.getPolylineRoute(from: sourcePosition, to: endPosition)
                 Helper().map_marker(lat: self.c_lat, longg: self.c_longg, map_view: self.map, title: "This is you")
                 Helper().map_marker(lat: self.p_lat, longg: self.p_longg, map_view: self.map, title: "This is parking")
@@ -183,10 +205,10 @@ class ParkingNavVC: UIViewController{
 
     func calculateBearer(legs:[Leg]) -> Double {
 
-        print(legs[0].steps?[0].startLocation)
+        print(legs[0].steps?[counter].startLocation)
         
-        let point1 = CLLocation(latitude: (legs[0].steps?[0].startLocation?.lat)!, longitude: (legs[0].steps?[0].startLocation?.lng)!)
-        let point2 = CLLocation(latitude: (legs[0].steps?[0].endLocation?.lat)!, longitude: (legs[0].steps?[0].endLocation?.lng)!)
+        let point1 = CLLocation(latitude: (legs[0].steps?[counter].startLocation?.lat)!, longitude: (legs[0].steps?[counter].startLocation?.lng)!)
+        let point2 = CLLocation(latitude: (legs[0].steps?[counter].endLocation?.lat)!, longitude: (legs[0].steps?[counter].endLocation?.lng)!)
         let lat1 = degreesToRadians(degrees: point1.coordinate.latitude)
         let lon1 = degreesToRadians(degrees: point1.coordinate.longitude)
 
@@ -214,23 +236,7 @@ class ParkingNavVC: UIViewController{
         print("destination=\(destination)")
         Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map, title: "This is you")
 
-        Helper().map_marker(lat: p_lat, longg: p_longg, map_view: self.map, title: "This is parking")
-
-
-
-        //            let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&alternatives=true&key=\(Key.Google.placesKey)"
-        //
-        //            print("alter_url=\(url)")
-        //            Alamofire.request(url).responseJSON { response in
-        //
-        //                do {
-        //                    let json = try JSON(data: response.data!)
-        //                    print(json)
-        //                    let routes = json["routes"].arrayValue
-
-        //                    self.alternateRoutes = routes
-        //
-        //                    print("routes=\(routes.count)")
+        Helper().map_marker(lat: d_lat, longg: d_longg, map_view: self.map, title: "This is parking")
 
         if let alTRoures = self.alternateRoutes,(self.alternateRoutes.count>0)
         {
@@ -241,7 +247,7 @@ class ParkingNavVC: UIViewController{
             let points = routeOverviewPolyline?.points
             let path = GMSPath.init(fromEncodedPath: points!)
             let polyline = GMSPolyline.init(path: path)
-            polyline.strokeWidth = 4
+            polyline.strokeWidth = 6.0
             polyline.strokeColor =  #colorLiteral(red: 0, green: 0.5356405973, blue: 0.7853047252, alpha: 1)
             polyline.map = self.map
 
@@ -272,8 +278,8 @@ class ParkingNavVC: UIViewController{
 
 
     }
-//
-//
+
+    
     
 //    func drawRoute(){
 //
@@ -415,7 +421,7 @@ class ParkingNavVC: UIViewController{
     
     
     
-    @objc func RemoveOldDrawRoute(notification : NSNotification){
+    @objc func RemoveOldDrawNewRoute(notification : NSNotification){
         
         map.clear()
         let origin = "\(c_lat),\(c_longg)"
@@ -424,9 +430,9 @@ class ParkingNavVC: UIViewController{
         
         print("origin2=\(origin)")
         print("destination=\(destination)")
-        Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map, title: "This is you")
+        Helper().map_marker(lat: s_lat, longg: s_longg, map_view: self.map, title: "This is you")
         
-        Helper().map_marker(lat: p_lat, longg: p_longg, map_view: self.map, title: "This is parking")
+        Helper().map_marker(lat: d_lat, longg: d_longg, map_view: self.map, title: "This is parking")
         
         if let userInfo = notification.userInfo as NSDictionary? {
             if let dict = userInfo["dict"] as? Route{
@@ -559,10 +565,11 @@ class ParkingNavVC: UIViewController{
                         //                                self.activityIndicator.stopAnimating()
 
                                 let target = CLLocationCoordinate2D(latitude: source.latitude, longitude: source.longitude)
-                                let camera = GMSCameraPosition.camera(withTarget: target, zoom: 17, bearing: self.bearer, viewingAngle: 90)
+                                self.bearing = self.calculateBearer(legs: self.legs)
+                                let camera = GMSCameraPosition.camera(withTarget: target, zoom: 17, bearing: self.bearing, viewingAngle: 90)
                                 self.map.animate(to: camera)
 
-                                print("bearing=\(self.bearer)")
+                                print("bearing=\(self.bearing)")
                         //                                let bounds = GMSCoordinateBounds(coordinate: source, coordinate: destination)
                         //                                let update = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 170, left: 30, bottom: 30, right: 30))
                         //                                self.map.moveCamera(update)
@@ -665,7 +672,7 @@ class ParkingNavVC: UIViewController{
     func showPath(polyStr :String){
         let path = GMSPath(fromEncodedPath: polyStr)
         let polyline = GMSPolyline(path: path)
-        polyline.strokeWidth = 3.0
+        polyline.strokeWidth = 6.0
         polyline.strokeColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)
         polyline.map = self.map // Your map view
         
