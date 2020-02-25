@@ -76,23 +76,34 @@ class ParkingNavVC: UIViewController{
                 print("Location error: \(error)")
             case .success(let location):
                 
-                self.c_lat = location.coordinate.latitude
-                self.c_longg = location.coordinate.longitude
-                
+                print("New Locationabc: \(location)")
+                self.c_lat =  Double(round(10000*(location.coordinate.latitude))/10000)
+                self.c_longg = Double(round(10000*(location.coordinate.longitude))/10000)
                 
                 if let leg = self.legs{
                     
-                    print(leg[0].steps?[self.counter].endLocation?.lat)
+                  
                     
-                    if(leg[0].steps?[self.counter].endLocation?.lat == location.coordinate.latitude)&&(leg[0].steps?[self.counter].endLocation?.lng == location.coordinate.longitude){
+                    let endLat =  Double(round(10000*(leg[0].steps?[self.counter].endLocation?.lat ?? 0.0))/10000)
+                    let endLng =  Double(round(10000*(leg[0].steps?[self.counter].endLocation?.lng ?? 0.0))/10000)
+                    
+                    print("\(endLat) == \(self.c_lat )  \(endLng)  == \(self.c_longg)")
+                    
+                    if(endLat == self.c_lat )&&(endLng == self.c_longg) && (self.legs[0].steps?.count ?? 0 >= self.counter){
                         
+                        self.counter += 1
+                        let target = CLLocationCoordinate2D(latitude: self.c_lat, longitude: self.c_longg)
+                        let bearing = self.calculateBearer()
+                        let camera = GMSCameraPosition.camera(withTarget: target, zoom: 18, bearing: bearing, viewingAngle: 180)
+                        self.map.animate(to: camera)
                         Helper().showToast(message: "step#\(self.counter) completed", controller: self)
+                       
                     }
                 }
                 
                 
                 self.drawRouteOnly()
-                print("New Locationabc: \(location)")
+               
           }
         }
         request.dataFrequency = .fixed(minInterval: 40, minDistance: 100)
@@ -203,12 +214,13 @@ class ParkingNavVC: UIViewController{
     func degreesToRadians(degrees: Double) -> Double { return degrees * .pi / 180.0 }
     func radiansToDegrees(radians: Double) -> Double { return radians * 180.0 / .pi }
 
-    func calculateBearer(legs:[Leg]) -> Double {
+    func calculateBearer() -> Double {
 
-        print(legs[0].steps?[counter].startLocation)
+//        print(self.legs[0].steps?[counter].startLocation)
         
-        let point1 = CLLocation(latitude: (legs[0].steps?[counter].startLocation?.lat)!, longitude: (legs[0].steps?[counter].startLocation?.lng)!)
-        let point2 = CLLocation(latitude: (legs[0].steps?[counter].endLocation?.lat)!, longitude: (legs[0].steps?[counter].endLocation?.lng)!)
+        let step = self.legs[0].steps?[counter]
+        let point1 = CLLocation(latitude: (step?.startLocation?.lat)!, longitude: (step?.startLocation?.lng)!)
+        let point2 = CLLocation(latitude: (step?.endLocation?.lat)!, longitude: (step?.endLocation?.lng)!)
         let lat1 = degreesToRadians(degrees: point1.coordinate.latitude)
         let lon1 = degreesToRadians(degrees: point1.coordinate.longitude)
 
@@ -555,7 +567,8 @@ class ParkingNavVC: UIViewController{
                             let route = routesArray[0]
                             let dictPolyline = route.overviewPolyline
                             self.legs = route.legs
-                            print("legs==\(self.legs!)")
+                            print("legs==\(route.legs?[0].steps?.count)")
+                            
                             let points = dictPolyline?.points
 
                             self.showPath(polyStr: points!)
@@ -565,8 +578,8 @@ class ParkingNavVC: UIViewController{
                         //                                self.activityIndicator.stopAnimating()
 
                                 let target = CLLocationCoordinate2D(latitude: source.latitude, longitude: source.longitude)
-                                self.bearing = self.calculateBearer(legs: self.legs)
-                                let camera = GMSCameraPosition.camera(withTarget: target, zoom: 17, bearing: self.bearing, viewingAngle: 90)
+                                self.bearing = self.calculateBearer()
+                                let camera = GMSCameraPosition.camera(withTarget: target, zoom: 18, bearing: self.bearing, viewingAngle: 180)
                                 self.map.animate(to: camera)
 
                                 print("bearing=\(self.bearing)")
@@ -638,7 +651,7 @@ class ParkingNavVC: UIViewController{
 ////                                self.activityIndicator.stopAnimating()
 //
 //                                let target = CLLocationCoordinate2D(latitude: source.latitude, longitude: source.longitude)
-//                                let camera = GMSCameraPosition.camera(withTarget: target, zoom: 17, bearing: self.bearer, viewingAngle: 90)
+//                                let camera = GMSCameraPosition.camera(withTarget: target, : 17, bearing: self.bearer, viewingAngle: 90)
 //                                self.map.animate(to: camera)
 //
 //                                print("bearing=\(self.bearer)")
