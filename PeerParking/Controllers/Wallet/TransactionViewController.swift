@@ -38,7 +38,7 @@ class TransactionViewController: UIViewController , UIGestureRecognizerDelegate,
                 tblTransaction.register(UINib(nibName: "transactionCell", bundle: nil), forCellReuseIdentifier: "transactionCell")
                 // Do any additional setup after loading the view.
       
-        self.tblTransaction.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: "headerCell")
+//        self.tblTransaction.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: "headerCell")
 
     
     
@@ -65,18 +65,18 @@ class TransactionViewController: UIViewController , UIGestureRecognizerDelegate,
     }
     
    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 70.0
-    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 70.0
+//    }
     // Header Cell
-     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let  headerCell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! HeaderCell
-       
-        
-        
-        
-        return headerCell
-    }
+//     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let  headerCell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! HeaderCell
+//
+//
+//
+//
+//        return headerCell
+//    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tblTransaction.dequeueReusableCell(withIdentifier: "transactionCell") as! transactionCell
         

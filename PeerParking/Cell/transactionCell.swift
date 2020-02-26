@@ -9,6 +9,10 @@
 import UIKit
 
 class transactionCell: UITableViewCell {
+//    
+//    @IBOutlet weak var parkingType: UILabel!
+//    @IBOutlet weak var parkingPrice: UILabel!
+//    @IBOutlet weak var parkingPrice: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -89,12 +89,16 @@ class ParkingNavVC: UIViewController{
                     
                     print("\(endLat) == \(self.c_lat )  \(endLng)  == \(self.c_longg)")
                     
-                    if(endLat == self.c_lat )&&(endLng == self.c_longg) && (self.legs[0].steps?.count ?? 0 >= self.counter){
+                    print("\(self.legs[0].steps?.count ?? 0) ===  \(self.counter)")
+                    if(endLat == self.c_lat )&&(endLng == self.c_longg){
                         
                         self.counter += 1
                         let target = CLLocationCoordinate2D(latitude: self.c_lat, longitude: self.c_longg)
-                        let bearing = self.calculateBearer()
-                        let camera = GMSCameraPosition.camera(withTarget: target, zoom: 18, bearing: bearing, viewingAngle: 180)
+                        if((self.legs[0].steps?.count ?? 0 > self.counter)){
+                            self.bearing = self.calculateBearer()
+                        }
+                        
+                        let camera = GMSCameraPosition.camera(withTarget: target, zoom: 18, bearing: self.bearing, viewingAngle: 180)
                         self.map.animate(to: camera)
                         Helper().showToast(message: "step#\(self.counter) completed", controller: self)
                        
@@ -217,7 +221,7 @@ class ParkingNavVC: UIViewController{
     func calculateBearer() -> Double {
 
 //        print(self.legs[0].steps?[counter].startLocation)
-        
+        print(counter)
         let step = self.legs[0].steps?[counter]
         let point1 = CLLocation(latitude: (step?.startLocation?.lat)!, longitude: (step?.startLocation?.lng)!)
         let point2 = CLLocation(latitude: (step?.endLocation?.lat)!, longitude: (step?.endLocation?.lng)!)
