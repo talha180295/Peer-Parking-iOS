@@ -25,6 +25,7 @@ enum APIRouter: URLRequestConvertible {
     case refresh
     case cancelSellerParking(id:Int)
     case assignBuyer(id:Int,[String:Any])
+    case getTransactions([String:Any])
     
     
     private var accessToken:String{
@@ -35,7 +36,7 @@ enum APIRouter: URLRequestConvertible {
     private var method: HTTPMethod {
         switch self {
         
-        case .getParkingsWithoutToken,.getParkings,.getParkingsById,.getBargainings,.getBargainingsById:
+        case .getParkingsWithoutToken,.getParkings,.getParkingsById,.getBargainings,.getBargainingsById , .getTransactions:
             return .get
             
         case .postParking,.postBargainingOffer,.addUserCard,.me,.refresh, .cancelSellerParking, .assignBuyer:
@@ -72,6 +73,8 @@ enum APIRouter: URLRequestConvertible {
             return "assign-buyer/\(id)"
         case .getBargainingsById(let id):
             return "bargainings/\(id)"
+        case .getTransactions:
+            return "transactions"
         }
     }
     
@@ -103,6 +106,8 @@ enum APIRouter: URLRequestConvertible {
             return (params)
         case .getBargainingsById(let id):
             return nil
+        case .getTransactions(let params):
+            return (params)
         }
     }
     

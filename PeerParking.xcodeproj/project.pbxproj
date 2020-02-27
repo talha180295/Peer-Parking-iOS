@@ -61,6 +61,7 @@
 		18C2195723ABB5F700BCCA75 /* BargainingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C2195523ABB5F600BCCA75 /* BargainingCell.xib */; };
 		18CAA57F2368B6BB001B5503 /* FinishPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAA57E2368B6BA001B5503 /* FinishPopup.swift */; };
 		18CAA58123695B62001B5503 /* StepFiveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAA58023695B62001B5503 /* StepFiveVC.swift */; };
+		18CCE44624079985008B9F4F /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CCE44524079985008B9F4F /* TransactionModel.swift */; };
 		18D1B63A2362024E002C875D /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1B6392362024E002C875D /* ScheduleVC.swift */; };
 		18D30D6323DAC4F2008889FB /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D30D6223DAC4F2008889FB /* WebView.swift */; };
 		18DB9C492397FB3C00A6968F /* Hours_picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DB9C482397FB3C00A6968F /* Hours_picker.swift */; };
@@ -213,6 +214,7 @@
 		18C2195523ABB5F600BCCA75 /* BargainingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BargainingCell.xib; sourceTree = "<group>"; };
 		18CAA57E2368B6BA001B5503 /* FinishPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishPopup.swift; sourceTree = "<group>"; };
 		18CAA58023695B62001B5503 /* StepFiveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFiveVC.swift; sourceTree = "<group>"; };
+		18CCE44524079985008B9F4F /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
 		18D1B6392362024E002C875D /* ScheduleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
 		18D30D6223DAC4F2008889FB /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		18DB9C482397FB3C00A6968F /* Hours_picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hours_picker.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 				181E0D2023CE22E3005D7248 /* PostBargainigOfferModel.swift */,
 				1812701D23DF32C500337D01 /* Me.swift */,
 				1827370623F417DD00C52347 /* DirectionAPI.swift */,
+				18CCE44524079985008B9F4F /* TransactionModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1138,6 +1141,7 @@
 				18924C3323672C6F00C0E94F /* StepThreeVC.swift in Sources */,
 				185DE79B2360A59900FC0E25 /* Constants.swift in Sources */,
 				18924C312366F06600C0E94F /* StepTwoVC.swift in Sources */,
+				18CCE44624079985008B9F4F /* TransactionModel.swift in Sources */,
 				18924C242363544800C0E94F /* SellParkingVC.swift in Sources */,
 				FA122149232A4366002720BE /* ParkingDetailViewController.swift in Sources */,
 				FA0FCC6323229FB9000FF52C /* CardView.swift in Sources */,
@@ -1380,6 +1384,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fomark.peerparking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1405,6 +1410,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fomark.peerparking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

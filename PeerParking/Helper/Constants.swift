@@ -74,6 +74,7 @@ struct APP_CONSTANT {
    
     
     static let DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss"
+    static let SHORT_DATE_TIME_FORMAT = "yyyy-MM-dd"
                                     
     // VEHICLE_TYPES
     
@@ -219,3 +220,20 @@ enum Action:Int{
     case Booked = 20;
 
 }
+
+
+enum Transaction_Types:Int{
+    
+    case CREDIT = 10;  // Sold
+    case DEBIT  = 20;  // Bought
+//    const EXTRA_FEE_NULL = null;
+}
+   
+
+enum Type:Int{
+    
+    case VIRTUAL = 10;     //  In App Transaction
+    case GATEWAY = 20;  //  Top-Up and Withdraw
+}
+
+ 

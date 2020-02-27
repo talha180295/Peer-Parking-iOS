@@ -53,6 +53,7 @@ class TimeFinishPopup: UIViewController {
                 Helper().showToast(message: "Nor Response and Error!!", controller: self)
             }
             
+            Helper().presentOnMainScreens(controller: self, index: 1)
         }
     }
 }

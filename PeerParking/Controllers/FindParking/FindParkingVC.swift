@@ -282,7 +282,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             let distanceStr = cal_distance(lat: lat, long: long)
             
             let imgUrl = dict.imageURL
-            cell.image.sd_setImage(with: URL(string: imgUrl!),placeholderImage: UIImage.init(named: "placeholder-img") )
+            cell.image.sd_setImage(with: URL(string: imgUrl ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
             
             cell.parking_title.text = dict.address
             cell.rating_view.rating = seller_details?.averageRating ?? 0.0

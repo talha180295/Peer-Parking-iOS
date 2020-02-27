@@ -20,6 +20,7 @@ class FinishPopup: UIViewController {
     
     @IBAction func finish_btn(_ sender: UIButton) {
 
+        Helper().showSpinner(view: self.view)
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
         tab_index = 1
         Helper().presentOnMainScreens(controller: vc, index: tab_index)
@@ -32,7 +33,7 @@ class FinishPopup: UIViewController {
         
         let image = GLOBAL_VAR.PARKING_POST_DETAILS["image"]
         
-   
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(10, forKey: "parking_type")
         
         let params:[String:Any] = GLOBAL_VAR.PARKING_POST_DETAILS
         
@@ -126,6 +127,9 @@ class FinishPopup: UIViewController {
                     //   SharedHelper().hideSpinner(view: self.view)
                 }
             }
+            
+            Helper().hideSpinner(view: self.view)
+            Helper().presentOnMainScreens(controller: self, index: 2)
         }
         
         

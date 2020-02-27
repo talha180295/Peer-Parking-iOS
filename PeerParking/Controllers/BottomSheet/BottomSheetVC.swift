@@ -108,62 +108,6 @@ class BottomSheetVC: UIViewController {
         
         
         
-        
-//        {
-//            "id": 16,
-//            "seller_id": 4,
-//            "buyer_id": null,
-//            "vehicle_type": 10,
-//            "parking_type": 10,
-//            "status": 10,
-//            "initial_price": 1,
-//            "final_price": 0,
-//            "is_negotiable": false,
-//            "start_at": "2019-11-14 18:11:17",
-//            "end_at": null,
-//            "address": "A-486 Allama Shabbir Ahmed Usmani Rd, Block 3 Gulshan-e-Iqbal, Karachi, Karachi City, Sindh, Pakistan",
-//            "latitude": "24.9280107",
-//            "longitude": "67.0957389",
-//            "image": "parking/7t6snDg40LBMjVTwitnynWt65lp1PPlyRqUbpNJV.jpeg",
-//            "note": null,
-//            "parking_hours_limit": 0,
-//            "parking_allowed_until": null,
-//            "parking_extra_fee": 0,
-//            "parking_extra_fee_unit": 0,
-//            "is_resident_free": false,
-//            "created_at": "2019-11-14 13:14:27",
-//            "updated_at": "2019-11-14 13:14:27",
-//            "deleted_at": null,
-//            "action": 20,
-//            "extra_fee_unit_text": null,
-//            "vehicle_type_text": "Super Mini",
-//            "image_url": "http://peer-parking.servstaging.com/api/resize/parking/7t6snDg40LBMjVTwitnynWt65lp1PPlyRqUbpNJV.jpeg",
-//            "seller": {
-//                "id": 4,
-//                "name": "Mc Fly",
-//                "email": "idfordeveloper@gmail.com",
-//                "created_at": "2019-11-14 13:14:21",
-//                "details": {
-//                    "id": 4,
-//                    "first_name": "Mc Fly",
-//                    "last_name": null,
-//                    "average_rating": 0,
-//                    "phone": null,
-//                    "address": null,
-//                    "image": "https://graph.facebook.com/203966683952886/picture?width=200&height=200",
-//                    "balance": 0,
-//                    "is_verified": 1,
-//                    "email_updates": 1,
-//                    "is_social_login": 1,
-//                    "image_url": "http://peer-parking.servstaging.com/api/resize/https://graph.facebook.com/203966683952886/picture?width=200&height=200",
-//                    "full_name": "Mc Fly "
-//                }
-//            },
-//            "buyer": null
-//        }
-        
-        
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         
@@ -171,6 +115,7 @@ class BottomSheetVC: UIViewController {
         
         
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         
         NotificationCenter.default.removeObserver(self)
@@ -248,26 +193,7 @@ class BottomSheetVC: UIViewController {
            
         }
         
-        
-        
-//        Alamofire.request(APIRouter.postBargainingOffer(params)).responsePost{ response in
-//
-//           switch response.result {
-//           case .success:
-//               if response.result.value?.success ?? false{
-//
-//                   print("val=\(response.result.value?.message ?? "-")")
-//
-//               }
-//               else{
-//                   print("Server Message=\(response.result.value?.message ?? "-" )")
-//
-//               }
-//
-//           case .failure(let error):
-//               print("ERROR==\(error)")
-//           }
-//        }
+ 
         
     }
     

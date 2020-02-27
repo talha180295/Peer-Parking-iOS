@@ -120,7 +120,7 @@ class StepTwoVC: UIViewController {
             street_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
             private_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
             private_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.PAR_LOT, forKey: "parking_type")
+//            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.PAR_LOT, forKey: "parking_type")
         }
         else if(sender.tag == 2){
             
@@ -133,7 +133,7 @@ class StepTwoVC: UIViewController {
             private_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
             private_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
             
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.ST_PARKING, forKey: "parking_type")
+//            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.ST_PARKING, forKey: "parking_type")
             
         }
         else if(sender.tag == 3){
@@ -147,7 +147,7 @@ class StepTwoVC: UIViewController {
             lot_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
             lot_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
             
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.PVT_PARKING, forKey: "parking_type")
+//            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.PVT_PARKING, forKey: "parking_type")
             
             
         }

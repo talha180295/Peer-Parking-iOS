@@ -67,7 +67,7 @@ class ParkedViewController: UIViewController {
             vc.parking_details = self.parking_details
                           
             let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 180)
-            popupVC.canTapOutsideToDismiss = true
+            popupVC.canTapOutsideToDismiss = false
 
             present(popupVC, animated: true)
             

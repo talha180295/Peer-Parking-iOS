@@ -136,7 +136,13 @@ extension WalletViewController: STPAddCardViewControllerDelegate {
                     if let val = response?.data {
                         
                         self.balance.text = "$ \(val.details?.wallet ?? 0.0)"
-                        self.cardNumber.text = "**** **** **** \(val.card?.first?.lastFour ?? Nulls.nullInt)"
+                        if let cardNo = val.card?.first?.lastFour {
+                            self.cardNumber.text = "**** **** **** \(cardNo)"
+                        }
+                        else{
+                            self.cardNumber.text = "Add Card"
+                        }
+                       
                     }
                 }
                 else{
