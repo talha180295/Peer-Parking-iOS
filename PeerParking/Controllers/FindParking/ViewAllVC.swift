@@ -56,8 +56,8 @@ class ViewAllVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             
             let distanceStr = cal_distance(lat: lat, long: long)
             
-            let imgUrl = dict.imageURL
-            cell.img.sd_setImage(with: URL(string: imgUrl!),placeholderImage: UIImage.init(named: "placeholder-img") )
+            let imgUrl = dict.imageURL ?? ""
+            cell.img.sd_setImage(with: URL(string: imgUrl),placeholderImage: UIImage.init(named: "placeholder-img") )
       
             
             cell.parking_title.text = dict.address ?? "-"

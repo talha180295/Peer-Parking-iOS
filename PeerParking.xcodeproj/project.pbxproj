@@ -47,6 +47,7 @@
 		1866BF6623746402008EE650 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1866BF6523746402008EE650 /* Helper.swift */; };
 		1866BF68237468A8008EE650 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1866BF67237468A8008EE650 /* NotificationCell.xib */; };
 		186F166023E9986F00DC988A /* ParkingFilterBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186F165F23E9986F00DC988A /* ParkingFilterBS.swift */; };
+		1878C528240E922D005F675E /* MapViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1878C527240E922D005F675E /* MapViewVC.swift */; };
 		188888A7238EBEEB0008BC88 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188888A5238EBEEA0008BC88 /* Crashlytics.framework */; };
 		188888A8238EBEEB0008BC88 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188888A6238EBEEA0008BC88 /* Fabric.framework */; };
 		188888AA238EF3C50008BC88 /* AlamofireApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188888A9238EF3C50008BC88 /* AlamofireApi.swift */; };
@@ -200,6 +201,7 @@
 		1866BF6523746402008EE650 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		1866BF67237468A8008EE650 /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		186F165F23E9986F00DC988A /* ParkingFilterBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingFilterBS.swift; sourceTree = "<group>"; };
+		1878C527240E922D005F675E /* MapViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewVC.swift; sourceTree = "<group>"; };
 		188888A5238EBEEA0008BC88 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		188888A6238EBEEA0008BC88 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		188888A9238EF3C50008BC88 /* AlamofireApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireApi.swift; sourceTree = "<group>"; };
@@ -438,6 +440,14 @@
 				1866BF60237450C3008EE650 /* RequestVC.swift */,
 			);
 			path = Request;
+			sourceTree = "<group>";
+		};
+		1878C526240E8DCC005F675E /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				1878C527240E922D005F675E /* MapViewVC.swift */,
+			);
+			path = MapView;
 			sourceTree = "<group>";
 		};
 		1889AE052357381C0081608E /* BottomSheet */ = {
@@ -703,6 +713,7 @@
 		FA2815BC231E6669008AF3F5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1878C526240E8DCC005F675E /* MapView */,
 				183DAA3C23E070300022BC6E /* Parkings */,
 				67BC7B9423CC5395001542D6 /* Registration */,
 				1866BF622374519F008EE650 /* Request */,
@@ -1117,6 +1128,7 @@
 				18392E7B23707220007FB161 /* StepFourVC.swift in Sources */,
 				181E0D1623CDF954005D7248 /* Parking.swift in Sources */,
 				18924C272365B84D00C0E94F /* ContainerView.swift in Sources */,
+				1878C528240E922D005F675E /* MapViewVC.swift in Sources */,
 				FA0FCC5C232250DD000FF52C /* SettingViewController.swift in Sources */,
 				FA2815AB231E3F92008AF3F5 /* CustomSideMenuController.swift in Sources */,
 				67BC7B9A23CC5D64001542D6 /* ForgetPassViewController.swift in Sources */,
