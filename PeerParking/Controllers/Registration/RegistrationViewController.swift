@@ -11,17 +11,25 @@ import Alamofire
 import HelperClassPod
     var isSocial:Bool!
 class RegistrationViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
-    @IBOutlet weak var txtPass: UITextField!
+   
     var imagePicker = UIImagePickerController()
-    @IBOutlet weak var txtConfirmPass: UITextField!
-    @IBOutlet weak var txtEmail: UITextField!
-
+    
     @IBOutlet weak var imgDp: UIImageView!
+    
     @IBOutlet weak var txtNAme: UITextField!
+    @IBOutlet weak var txtEmail: UITextField!
+    @IBOutlet weak var txtPass: UITextField!
+    @IBOutlet weak var txtConfirmPass: UITextField!
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
     
+        txtNAme.delegate = self
+        txtEmail.delegate = self
+        txtPass.delegate = self
+        txtConfirmPass.delegate = self
     }
     /// @brief This function is use to check internet connection textfield validations and call register function
     
@@ -350,7 +358,8 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     }
     
     @IBAction func btnBack(_ sender: Any) {
-         self.dismiss(animated: true, completion: nil)
+//         self.dismiss(animated: true, completion: nil)
+        Helper().presentOnMainScreens(controller: self, index: 1)
     }
     
     @IBAction func btnSignUp(_ sender: Any) {
@@ -360,4 +369,29 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         uploadImage()
         
     }
+    
+  
+}
+
+
+extension RegistrationViewController:UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        switch textField{
+            
+        case txtNAme:
+            txtEmail.becomeFirstResponder()
+        case txtEmail:
+            txtPass.becomeFirstResponder()
+        case txtPass:
+            txtConfirmPass.becomeFirstResponder()
+        case txtConfirmPass:
+            txtConfirmPass.resignFirstResponder()
+        default:
+            register()
+            textField.resignFirstResponder()
+        }
+        return false
+      }
 }

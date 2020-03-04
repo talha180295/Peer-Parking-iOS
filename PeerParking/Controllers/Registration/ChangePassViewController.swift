@@ -16,6 +16,10 @@ class ChangePassViewController: UIViewController {
     @IBOutlet weak var txtCurrent: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        txtCurrent.delegate = self
+        txtNew.delegate = self
+        txtCPass.delegate = self
 
     }
     
@@ -136,9 +140,11 @@ class ChangePassViewController: UIViewController {
                    
                     SharedHelper().showToast(message: message, controller: self)
                     
-                    
-                   self.dismiss(animated: true, completion: nil)
-                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // Change `2.0` to the desired number of seconds.
+                       // Code you want to be delayed
+                        Helper().presentOnMainScreens(controller: self, index: 1)
+
+                    }
                     
                 }
                 else
@@ -158,4 +164,26 @@ class ChangePassViewController: UIViewController {
     @IBAction func btnChange(_ sender: Any) {
         changeMain()
     }
+}
+
+extension ChangePassViewController:UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        txtCurrent.delegate = self
+               txtNew.delegate = self
+               txtCPass.delegate = self
+        switch textField{
+            
+        case txtCurrent:
+            txtNew.becomeFirstResponder()
+        case txtNew:
+            txtCPass.becomeFirstResponder()
+        
+        default:
+            changeMain()
+            textField.resignFirstResponder()
+        }
+        return false
+      }
 }

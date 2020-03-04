@@ -183,8 +183,22 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
                 let isLogin = IsUserLogin()
                 if(isLogin)
                 {
-                    tblMenu.reloadData()
-                    logOut()
+                    let alert = UIAlertController(title: "Alert", message: "Are sure to Logout?", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.destructive, handler: { action in
+
+                        // do something like...
+                        self.tblMenu.reloadData()
+                        self.logOut()
+
+                    }))
+                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { action in
+
+                        // do something like...
+                        self.dismiss(animated: true, completion: nil)
+
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                   
                 }
                 else
                 {
@@ -234,6 +248,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
 //            loginManager.logOut()
 //        }
         
+        Helper().showSpinner(view: RootViewController().view)
         loginManager.logOut()
         
         let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.LOGOUT
@@ -245,7 +260,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
         
         Helper().Request_Api(url: url, methodType: .post, parameters: [:], isHeaderIncluded: true, headers: headers){
             response in
-            
+            Helper().hideSpinner(view: RootViewController().view)
             if response.result.value == nil {
                 print("No response")
                // SharedHelper().hideSpinner(view: self.view)
