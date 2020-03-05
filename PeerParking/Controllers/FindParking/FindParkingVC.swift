@@ -97,13 +97,16 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         Helper().hideSpinner(view: self.view)
         tab_index = 0
         print("::=willapear")
-        
+        self.parkings.removeAll()
+        self.myCollectionView.reloadData()
         self.tabBarController!.navigationItem.title = "Find Parking"
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.view.layoutIfNeeded()
+        
+       
         if (!isMapLoaded){
             isMapLoaded = true
             loadMapView()
@@ -223,7 +226,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         sender.isHidden = true
 
         print(" view_all_btn=\(self.view_all_btn.frame)")
-        get_all_parkings(lat: self.lat, long: self.longg, isHeaderIncluded: Helper().IsUserLogin(), filters: [:]){
+        get_all_parkings(lat: self.lat, long: self.longg, date_time: Helper().getCurrentDate(), isHeaderIncluded: Helper().IsUserLogin(), filters: [:]){
             
             sender.isHidden = false
 
@@ -237,7 +240,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         print("self.addressabc=\(self.address)")
         print(" view_all_btn=\(self.view_all_btn.frame)")
         
-        get_all_parkings(lat: self.lat, long: self.longg, isHeaderIncluded: Helper().IsUserLogin(), filters: [:]){
+        get_all_parkings(lat: self.lat, long: self.longg, date_time: Helper().getCurrentDate(), isHeaderIncluded: Helper().IsUserLogin(), filters: [:]){
             
             self.search_tf.text = self.address
           
@@ -295,6 +298,18 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             
             cell.distance.text = String(format: "%.02f miles away", distanceStr)
         
+            Helper().getTimeDurationBetweenCordinate(s_lat: self.lat, s_longg: self.longg, d_lat: Double(lat) ?? 0.0, d_longg: Double(long) ?? 0.0){ duration in
+                
+                cell.time.text = duration
+            }
+            
+            if(dict.isNegotiable ?? false){
+                cell.isNegotiable.text = "Yes"
+            }
+            else{
+                cell.isNegotiable.text = "No"
+            }
+            
             //cell.barg_count.text = dict["vehicle_type_text"] as? String
         }
         
@@ -371,7 +386,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         return width
     }
     
-    func get_all_parkings(lat:Double,long:Double,isHeaderIncluded:Bool,filters:[String:String],completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
+    func get_all_parkings(lat:Double,long:Double,date_time:String,isHeaderIncluded:Bool,filters:[String:String],completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
         
         
         parkings = []
@@ -379,7 +394,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         var params = [
             
             "latitude": String(lat),
-            "longitude": String(long)
+            "longitude": String(long),
+            "date_time" : date_time
             
         ]
         
@@ -395,8 +411,12 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         if(filters.keys.contains("time_margin")){
             params.updateValue(filters["time_margin"]!, forKey: "time_margin")
         }
+        if(filters.keys.contains("date_time")){
+            params.updateValue(filters["date_time"]!, forKey: "date_time")
+        }
         
         
+        print("token=\(UserDefaults.standard.string(forKey: "access_token")!)")
         print("param123=\(params)")
         
 //        var auth_value = ""
@@ -643,7 +663,7 @@ extension FindParkingVC:FiltersProtocol{
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
         
-        self.get_all_parkings(lat: self.filterLat, long: self.filterLong, isHeaderIncluded: Helper().IsUserLogin(), filters: filters){
+        self.get_all_parkings(lat: self.filterLat, long: self.filterLong, date_time: Helper().getCurrentDate(), isHeaderIncluded: Helper().IsUserLogin(), filters: filters){
             
 //           Helper().hideSpinner(view: self.view)
         }
@@ -678,7 +698,8 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
             self.filterLat = place.coordinate.latitude
             self.filterLong = place.coordinate.longitude
             
-            self.get_all_parkings(lat: place.coordinate.latitude, long: place.coordinate.longitude, isHeaderIncluded: Helper().IsUserLogin(),filters: [:]){
+           
+            self.get_all_parkings(lat: place.coordinate.latitude, long: place.coordinate.longitude, date_time: Helper().getCurrentDate(), isHeaderIncluded: Helper().IsUserLogin(),filters: [:]){
                 
 //                Helper().hideSpinner(view: self.view)
                 self.map.animate(to: camera)

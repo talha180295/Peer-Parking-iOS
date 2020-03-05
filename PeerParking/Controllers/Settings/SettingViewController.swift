@@ -19,7 +19,10 @@ class SettingViewController: UIViewController {
             
               self.changePassBtn.isHidden = true
         }
-   
+        else if !Helper().IsUserLogin(){
+            
+            self.changePassBtn.isHidden = true
+        }
         else
         {
             self.changePassBtn.isHidden = false

@@ -23,7 +23,7 @@ class homeParkingCell: UICollectionViewCell {
     
     @IBOutlet weak var time: UILabel!
     
-    @IBOutlet weak var barg_count: UILabel!
+    @IBOutlet weak var isNegotiable: UILabel!
     
     @IBOutlet weak var price: UILabel!
     

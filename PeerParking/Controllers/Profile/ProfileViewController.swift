@@ -10,19 +10,32 @@ import UIKit
 import Alamofire
 import SDWebImage
 import HelperClassPod
+
+
 class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
 
+   
+    @IBOutlet weak var rightBarBtn: UIBarButtonItem!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPhone: UITextField!
     @IBOutlet weak var txtLast: UITextField!
     @IBOutlet weak var txtFirst: UITextField!
     @IBOutlet weak var img: UIImageView!
-       var imagePicker = UIImagePickerController()
+    @IBOutlet weak var saveBtn: UIButton!
+    @IBOutlet weak var imageBtn: UIButton!
+    
+    var imagePicker = UIImagePickerController()
     var me:NSDictionary!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-  getMe()
-        print(UserDefaults.standard.string(forKey: "last_name"))
+ 
+        self.txtEmail.delegate = self
+        self.txtPhone.delegate = self
+        self.txtLast.delegate = self
+        self.txtFirst.delegate = self
+        
+        getMe()
         self.img.clipsToBounds = true
        
         
@@ -30,11 +43,12 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        
       
     }
-    func getMe() {
-        
     
+    func getMe() {
         
         var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
         auth_value = "bearer " + auth_value
@@ -82,6 +96,7 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
         }
         
     }
+    
     /**  @brief This method is use to call register Api to register the user into the app
      **  @param name : String
      **  @param email : String
@@ -101,12 +116,14 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
         else if !(self.txtFirst.text!.isEmpty) &&
             !(self.txtLast.text!.isEmpty)
         {
-            name = self.txtFirst.text! + self.txtLast.text!
+            name = "\(self.txtFirst.text!) \(self.txtLast.text!)"
             
         }
         else{
             name = ""
         }
+        
+        print(name!)
         
         let param  = [
            
@@ -120,12 +137,15 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
       
         print(param)
   
+        Helper().showSpinner(view: self.view)
+        
         let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.UPDATE
         
         let imgData =  (self.img.image!.jpegData(compressionQuality: 1.0) )
         Helper().UpateProfileRequestPut(url: url, profileImg: imgData!, parameters: param)     {
             response in
             print(response)
+            Helper().hideSpinner(view: self.view)
             if response.result.value == nil {
                 print("No response")
                 
@@ -144,7 +164,9 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
                     SharedHelper().showToast(message: message, controller: self)
                     
                     self.saveData(userData: uData)
-                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        self.sideMenuController?.performSegue(withIdentifier: "ProfileVC", sender: nil)
+                    }
                 }
                 else
                 {
@@ -271,7 +293,7 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
        
       
   
-        SharedHelper().showToast(message: "UPDATED", controller: self)
+//        SharedHelper().showToast(message: "UPDATED", controller: self)
         UserDefaults.standard.synchronize()
 
         
@@ -355,6 +377,74 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
     @IBAction func btnSave(_ sender: Any) {
         
         edit(email: self.txtEmail.text!)
+        
+        self.saveBtn.isHidden = true
+        self.rightBarBtn.isEnabled = true
+        self.title = "Profile"
+        self.txtEmail.isUserInteractionEnabled = false
+        self.txtPhone.isUserInteractionEnabled = false
+        self.txtLast.isUserInteractionEnabled = false
+        self.txtFirst.isUserInteractionEnabled = false
+        self.imageBtn.isUserInteractionEnabled = false
+    }
+    
+    @IBAction func editBarBtn(_ sender: UIBarButtonItem) {
+           
+        if(sender.title == "Edit"){
+       
+            sender.title = "Cancel"
+            self.saveBtn.isHidden = false
+            self.title = "Editing Profile"
+            self.txtEmail.isUserInteractionEnabled = true
+            self.txtPhone.isUserInteractionEnabled = true
+            self.txtLast.isUserInteractionEnabled = true
+            self.txtFirst.isUserInteractionEnabled = true
+            self.imageBtn.isUserInteractionEnabled = true
+            
+        }
+        else{
+            
+            sender.title = "Edit"
+            self.saveBtn.isHidden = true
+            self.title = "Profile"
+            self.txtEmail.isUserInteractionEnabled = false
+            self.txtPhone.isUserInteractionEnabled = false
+            self.txtLast.isUserInteractionEnabled = false
+            self.txtFirst.isUserInteractionEnabled = false
+            self.imageBtn.isUserInteractionEnabled = false
+        }
+        
+        
     }
    
+}
+
+
+
+extension ProfileViewController:UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+
+        
+               
+        if(textField == txtFirst)
+        {
+            txtLast.becomeFirstResponder()
+        }
+        else if(textField == txtLast)
+        {
+            txtPhone.becomeFirstResponder()
+        }
+        else if(textField == txtPhone)
+        {
+            txtEmail.becomeFirstResponder()
+        }
+        else if(textField == txtEmail)
+        {
+            txtEmail.resignFirstResponder()
+            edit(email: self.txtEmail.text!)
+        }
+        return true
+      }
 }

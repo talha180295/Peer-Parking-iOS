@@ -103,6 +103,16 @@ class Helper{
         }
     }
     
+    func getCurrentDate() -> String{
+        
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+        let result = formatter.string(from: date)
+        
+        return result
+        
+    }
     
     func map_marker(lat:Double,longg:Double, map_view:GMSMapView, title:String){
         
@@ -718,6 +728,42 @@ class Helper{
         }
     }
     
+    
+    func getTimeDurationBetweenCordinate(s_lat:Double, s_longg:Double, d_lat:Double, d_longg:Double, completion: @escaping (String)->Void){
+        
+        var duration = ""
+        
+        
+        let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(s_lat),\(s_longg)&destination=\(d_lat),\(d_longg)&sensor=true&mode=driving&alternatives=true&key=\(Key.Google.placesKey)")!
+                 
+          print(url)
+        
+          Alamofire.request(url).responseJSON { response in
+              
+               do{
+                     if let jsonData = response.data{
+                         let response = try JSONDecoder().decode(DirectionAPI.self, from:jsonData) //Decode JSON Response Data
+                        
+                        
+                        let routes = response.routes!
+
+                        duration = routes[0].legs?[0].duration?.text ?? ""
+
+                        completion(duration)
+                         
+                     }
+                 } catch let parsingError {
+                     print("Error", parsingError)
+//                      Helper().hideSpinner(view: self.view)
+                 }
+                                    
+              
+          }
+        
+        
+       
+        
+    }
     
     /**
      * @brief this is a generic method use to show toast with generic message

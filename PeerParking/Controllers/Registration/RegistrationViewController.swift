@@ -99,7 +99,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
      //   let FCMToken :String = UserDefaults.standard.string(forKey: "FCMToken")!
         //        var strRole="2"
         //
-        
+        Helper().showSpinner(view: self.view)
    
         let deviceToken = "ios"
         
@@ -122,6 +122,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
        Helper().SignUpProfileRequest(url: url, profileImg: imgData!, parameters: param)     {
             response in
             print(response)
+        Helper().hideSpinner(view: self.view)
             if response.result.value == nil {
                 print("No response")
               

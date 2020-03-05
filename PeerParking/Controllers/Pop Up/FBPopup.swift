@@ -30,7 +30,7 @@ class FBPopup: UIViewController {
     
     func fb_login(){
         
-        
+        Helper().showSpinner(view: self.view)
         if let accessToken = AccessToken.current{
             print(accessToken)
             loginManager.logOut()
@@ -98,6 +98,7 @@ class FBPopup: UIViewController {
         Helper().Request_Api(url: url, methodType: .post, parameters: param, isHeaderIncluded: false, headers: headers){
             response in
             print("response=\(response)")
+            Helper().hideSpinner(view: self.view)
             if response.result.value == nil {
                 print("No response")
                 
@@ -196,13 +197,8 @@ class FBPopup: UIViewController {
     
     func LoginApi(email : String,password : String,device_type:String) {
         
-        //   let FCMToken :String = UserDefaults.standard.string(forKey: "FCMToken")!
-        //        var strRole="2"
-        //
-        // SharedHelper().showSpinner(view: self.view)
-        //let deviceToken = "ios"
-        //  SharedHelper().showSpinner(view: self.view)
-        // let deviceToken : String?
+        
+        Helper().showSpinner(view: self.view.parentContainerViewController()?.view ?? self.view)
         let param = [
             
             "email" : email,
@@ -218,6 +214,7 @@ class FBPopup: UIViewController {
         Helper().Request_Api(url: url, methodType: .post, parameters: param, isHeaderIncluded: false, headers: headers){
             response in
             print("response=\(response)")
+            Helper().hideSpinner(view: self.view.parentContainerViewController()?.view ?? self.view)
             if response.result.value == nil {
                 print("No response")
                 
@@ -268,7 +265,7 @@ class FBPopup: UIViewController {
     
     @IBAction func twitter_btn(_ sender: UIButton) {
         
-       LoginApi(email: "iosdev@gmail.com", password: "123456", device_type: "ios")
+       LoginApi(email: "iosdev2@gmail.com", password: "123456", device_type: "ios")
     }
     
     func saveData(userData : NSDictionary)  {

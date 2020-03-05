@@ -26,7 +26,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
                 ["name" : "Requests","segue":"requestVC"],["name" : "","segue":""],["name" : "Settings","segue":"SettingVC"],["name" : "Help","segue":"helpVC"],["name" : "","segue":""],["name" : "Logout","segue":""]]
     
     
-    let dict2 = [["name" : "Settings","segue":""],["name" : "Help","segue":""],["name" : "","segue":""], ["name" : "Login","segue":""]]
+    let dict2 = [["name" : "Home","segue":"HomeVC"],["name" : "Settings","segue":"SettingVC"],["name" : "Help","segue":"helpVC"],["name" : "","segue":""], ["name" : "Login","segue":""]]
     
     
     
@@ -113,8 +113,8 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let isLogin = IsUserLogin()
-        if(isLogin)
+        
+        if(IsUserLogin())
         {
             return dict1.count
         }
@@ -248,7 +248,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
 //            loginManager.logOut()
 //        }
         
-        Helper().showSpinner(view: RootViewController().view)
+        Helper().showSpinner(view: self.view.parentContainerViewController()?.view ?? self.view)
         loginManager.logOut()
         
         let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.LOGOUT
@@ -260,7 +260,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
         
         Helper().Request_Api(url: url, methodType: .post, parameters: [:], isHeaderIncluded: true, headers: headers){
             response in
-            Helper().hideSpinner(view: RootViewController().view)
+            Helper().hideSpinner(view: self.view.parentContainerViewController()?.view ?? self.view)
             if response.result.value == nil {
                 print("No response")
                // SharedHelper().hideSpinner(view: self.view)
