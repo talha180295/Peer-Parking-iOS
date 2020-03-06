@@ -32,9 +32,9 @@ class APIClient {
         
         Alamofire.request(url).responseJSON { (response) in
             
-//            print("serverResponse=\(response)")
+            print("serverResponse=\(response)")
 //            print(response)
-//            print(response.response?.statusCode ?? 0)
+            print(response.response?.statusCode ?? 0)
             if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299){
                 
                 if response.result.isSuccess {
@@ -62,6 +62,9 @@ class APIClient {
                 
                 //refresh Token
                 completion(nil,nil)
+            }
+            else{
+                completion(nil,response.error)
             }
         }
     }

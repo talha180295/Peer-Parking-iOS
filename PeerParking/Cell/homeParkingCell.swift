@@ -34,30 +34,6 @@ class homeParkingCell: UICollectionViewCell {
         // Initialization code
     }
 
-    
-//    func setData(taskObj:TaskListModel){
-//
-//
-//
-//        self.task_id.text = "Procedure # : \(taskObj.getId())"
-//        self.doc_title.text="Doctor Name : \(taskObj.getDocTitle())"
-//        self.patient_title.text="Patient Name : \(taskObj.getPatientTitle())"
-//
-//
-//
-//        print("(taskObj.getId()\((taskObj.getId()))")
-//        getTaskProgress(url:"https://purpledimes.com/Diftech/webservices/task_progress.php?task_id=\(taskObj.getId())")
-//
-//        print("progress=\( self.pro)")
-//        self.progress_percent.text = String(self.pro)
-//        self.progress_bar.setProgress(Float(self.pro/100) , animated: true)
-//        if(self.pro == 100){
-//            //print(pro*100)
-//            self.progress_bar.progressTintColor = UIColor(named: "dark-green")
-//            self.task_status.text = "Completed"
-//            self.task_status.textColor = UIColor(named: "dark-green")
-//            self.progress_percent.textColor = UIColor(named: "dark-green")
-//        }
-//}
+
 
 }

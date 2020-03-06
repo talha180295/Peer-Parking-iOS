@@ -25,8 +25,8 @@ class BottomSheetVC: UIViewController {
     @IBOutlet weak var mainView: UIView!
     
     @IBOutlet weak var parking_titile: UILabel!
+    @IBOutlet weak var trust_score_txt: UILabel!
     @IBOutlet weak var trust_score: CosmosView!
-    
     @IBOutlet weak var viheicle_type: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var photo: UIImageView!
@@ -64,7 +64,8 @@ class BottomSheetVC: UIViewController {
         let seller = parking_details.seller
         let sellerDetail = seller?.details
         let rating  = sellerDetail?.averageRating
-        trust_score.rating = Double(rating ?? 0)
+        trust_score.rating = rating ?? 0
+        trust_score_txt.text = String(rating ?? 0)
         let priceStr = parking_details.initialPrice ?? 0.0
         if parking_details.imageURL == nil
         {

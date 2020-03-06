@@ -416,7 +416,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         }
         
         
-        print("token=\(UserDefaults.standard.string(forKey: "access_token")!)")
+        print("token=\(UserDefaults.standard.string(forKey: "access_token"))")
         print("param123=\(params)")
         
 //        var auth_value = ""
@@ -564,7 +564,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                         self.filter_btn.isHidden = false
                         self.view_all_btn.isHidden = false
                         
-                        Helper().showToast(message: "\(message ?? "-")", controller: self)
+//                        Helper().showToast(message: "\(message ?? "-")", controller: self)
 
                     }
                     else{
