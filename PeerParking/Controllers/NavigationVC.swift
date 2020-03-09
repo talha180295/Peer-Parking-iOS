@@ -280,8 +280,8 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
             
             let distanceStr = cal_distance(lat: lat, long: long)
             
-            let imgUrl = dict.imageURL
-            cell.image.sd_setImage(with: URL(string: imgUrl!),placeholderImage: UIImage.init(named: "placeholder-img") )
+            let imgUrl = dict.imageURL ?? ""
+            cell.image.sd_setImage(with: URL(string: imgUrl),placeholderImage: UIImage.init(named: "placeholder-img") )
            
             
            
@@ -489,7 +489,10 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     func get_all_parkings(lat:Double,long:Double,filters:[String:String],completion: @escaping () -> Void){//(withToken:Bool,completion: @escaping (JSON) -> Void){
         
         
-        parkings = []
+        
+        self.parkings.removeAll()
+        
+        Helper().showSpinner(view: self.view)
         
         var params = [
            
@@ -514,6 +517,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: false, headers: headers){
             response in
             //print("response=\(response)")
+            Helper().hideSpinner(view: self.view)
             if response.result.value == nil {
                 print("No response")
                 
@@ -564,7 +568,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
                         }
                         
                         self.myCollectionView.reloadData()
-                        SharedHelper().showToast(message: message, controller: self)
+//                        SharedHelper().showToast(message: message, controller: self)
                         
                         //                        self.parkings_cells.isHidden = false
                         

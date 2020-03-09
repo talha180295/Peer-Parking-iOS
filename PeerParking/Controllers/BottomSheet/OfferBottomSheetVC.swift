@@ -53,9 +53,13 @@ class OfferBottomSheetVC: UIViewController {
     var userType = 0  //20==seller
     var parkingId:Int?
     let myId = UserDefaults.standard.integer(forKey: "id")
-//    var parking_id:Int!
-//    var p_title = ""
+    var buyerBargainingCount:Int = 0
+    var sellerBargainingCount:Int = 0
     
+    var buyerLastOffer:Double?
+           
+    var sellerLastOffer:Double?
+           
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -79,16 +83,18 @@ class OfferBottomSheetVC: UIViewController {
 
             if(myId == buyerId){
 
-                userType = 10
+                userType = 20
 
             }
             else{
 
-                userType = 20
+                userType = 10
 
             }
            
             setData(data: parking)
+            
+            
             
         }
         
@@ -101,12 +107,12 @@ class OfferBottomSheetVC: UIViewController {
 
             if(myId == buyerId){
 
-              userType = 10
+              userType = 20
 
             }
             else{
 
-              userType = 20
+              userType = 10
 
             }
 //            print("bargainings=\(bargainings)")
@@ -224,8 +230,42 @@ class OfferBottomSheetVC: UIViewController {
         
         self.vehicle_type.text = parking?.vehicleTypeText
         
-        getAllBargainOffers(id: id)
+        getAllBargainOffers(id: id){
+         
+
+            print(self.bargainOffers.count)
+            
+             for bargaining in self.bargainOffers {
+                 self.updateLimitsCount(bargainingModel: bargaining)
+             }
+             print(APP_CONSTANT.DIRECTION.BUYER_TO_SELLER)
+             print(self.userType)
+             print(self.buyerBargainingCount)
+             print(self.sellerBargainingCount)
+            
+            if(self.userType == APP_CONSTANT.DIRECTION.BUYER_TO_SELLER){
+                 self.barg_count.text = "\(self.buyerBargainingCount)/3"
+            }
+            else{
+                self.barg_count.text = "\(self.sellerBargainingCount)/3"
+            }
+           
+
+        }
         
+        getAllBargainOffersByParkingID(id: id){
+         
+
+            print(self.bargainOffers.count)
+            
+             for bargaining in self.bargainOffers {
+                 self.updateLimitsCount(bargainingModel: bargaining)
+             }
+             
+             print(self.sellerBargainingCount)
+             print(self.sellerBargainingCount)
+
+        }
     }
     
     func setData(data:Parking){
@@ -238,14 +278,28 @@ class OfferBottomSheetVC: UIViewController {
         
         self.vehicle_type.text = data.vehicleTypeText
         
-        getAllBargainOffersByParkingID(id: id)
+
         
     }
     
-    func getAllBargainOffersByParkingID(id:Int){
+    func updateLimitsCount(bargainingModel:Bargaining) {
+        
+        if (bargainingModel.direction == APP_CONSTANT.DIRECTION.BUYER_TO_SELLER) {
+            self.buyerBargainingCount+=1
+            buyerLastOffer = bargainingModel.offer
+        }
+        else if (bargainingModel.direction == APP_CONSTANT.DIRECTION.SELLER_TO_BUYER) {
+            self.sellerBargainingCount+=1
+            sellerLastOffer = bargainingModel.offer
+        }
+
+    }
+    
+    func getAllBargainOffersByParkingID(id:Int, completion: @escaping () -> Void){
         
         let params:[String:Any] = ["parking_id":id]
         APIClient.serverRequest(url: APIRouter.getBargainings(params), dec: ResponseData<[Bargaining]>.self) { (response,error) in
+            
             
             if(response != nil){
                 if (response?.success) != nil {
@@ -255,6 +309,7 @@ class OfferBottomSheetVC: UIViewController {
 //                        print(val)
                         self.bargainOffers = val
                         self.offersTblView.reloadData()
+                        completion()
                     }
                 }
                 else{
@@ -271,7 +326,7 @@ class OfferBottomSheetVC: UIViewController {
         }
     }
     
-    func getAllBargainOffers(id:Int){
+    func getAllBargainOffers(id:Int, completion: @escaping () -> Void){
         
         
         print(id)
@@ -286,6 +341,7 @@ class OfferBottomSheetVC: UIViewController {
 //                        print(val)
                         self.bargainOffers = val
                         self.offersTblView.reloadData()
+                        completion()
                     }
                 }
                 else{
@@ -302,75 +358,75 @@ class OfferBottomSheetVC: UIViewController {
         }
     }
     
-    func getAllBargainOffers2(id:Int,isHeaderIncluded:Bool,completion: @escaping () -> Void){
-        
-        bargainOffers = []
-        
-        let params = [
-            
-            "":""
-            
-        ]
-        
-        print("param123=\(params)")
-        
-        
-        
-        if let value : String = UserDefaults.standard.string(forKey: "auth_token"){
-            
-            auth_value = "bearer " + value
-        }
-        
-        
-        let headers: HTTPHeaders = [
-            "Authorization" : auth_value
-        ]
-        
-        
-        let url = "\(APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.BARGAININGS)/\(id)"
-        
-        print("BARGAININGS_url=\(url)")
-        
-        Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: isHeaderIncluded, headers: headers){
-            response in
-            //print("response=\(response)")
-            if response.result.value == nil {
-                print("No response")
-                
-                Helper().showToast(message: "Internal Server Error", controller: self)
-                completion()
-                return
-            }
-            else{
-                let responseData = response.result.value as! NSDictionary
-                let status = responseData["success"] as! Bool
-                if(status){
-                    
-                    //                    let message = responseData["message"] as! String
-                    let data = responseData["data"] as! [Any]
-                    
-//                    self.bargainOffers = data
-                    
-                    
-                    
-                    self.offersTblView.reloadData()
-//                    Helper().showToast(message: "\(self.bargainOffers.count)", controller: self)
-                    
-                    completion()
-                    
-                    
-                }
-                else
-                {
-                    let message = responseData["message"] as! String
-                    Helper().showToast(message: message, controller: self)
-                    //   SharedHelper().hideSpinner(view: self.view)
-                    completion()
-                }
-            }
-        }
-        
-    }
+//    func getAllBargainOffers2(id:Int,isHeaderIncluded:Bool,completion: @escaping () -> Void){
+//
+//        bargainOffers = []
+//
+//        let params = [
+//
+//            "":""
+//
+//        ]
+//
+//        print("param123=\(params)")
+//
+//
+//
+//        if let value : String = UserDefaults.standard.string(forKey: "auth_token"){
+//
+//            auth_value = "bearer " + value
+//        }
+//
+//
+//        let headers: HTTPHeaders = [
+//            "Authorization" : auth_value
+//        ]
+//
+//
+//        let url = "\(APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.BARGAININGS)/\(id)"
+//
+//        print("BARGAININGS_url=\(url)")
+//
+//        Helper().Request_Api(url: url, methodType: .get, parameters: params, isHeaderIncluded: isHeaderIncluded, headers: headers){
+//            response in
+//            //print("response=\(response)")
+//            if response.result.value == nil {
+//                print("No response")
+//
+//                Helper().showToast(message: "Internal Server Error", controller: self)
+//                completion()
+//                return
+//            }
+//            else{
+//                let responseData = response.result.value as! NSDictionary
+//                let status = responseData["success"] as! Bool
+//                if(status){
+//
+//                    //                    let message = responseData["message"] as! String
+//                    let data = responseData["data"] as! [Any]
+//
+////                    self.bargainOffers = data
+//
+//
+//
+//                    self.offersTblView.reloadData()
+////                    Helper().showToast(message: "\(self.bargainOffers.count)", controller: self)
+//
+//                    completion()
+//
+//
+//                }
+//                else
+//                {
+//                    let message = responseData["message"] as! String
+//                    Helper().showToast(message: message, controller: self)
+//                    //   SharedHelper().hideSpinner(view: self.view)
+//                    completion()
+//                }
+//            }
+//        }
+//
+//    }
     
     
     

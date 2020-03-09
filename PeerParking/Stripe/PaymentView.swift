@@ -48,6 +48,7 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
     
     @objc
     func pay() {
+        Helper().showSpinner(view: self.view)
         let cardParams = STPCardParams()
             cardParams.number = cardTextField.cardNumber
             cardParams.expMonth = (cardTextField.expirationMonth)
@@ -56,12 +57,14 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
             STPAPIClient.shared().createToken(withCard: cardParams) { (token: STPToken?, error: Error?) in
                 guard let token = token, error == nil else {
                     // Present error to user...
+                    Helper().hideSpinner(view: self.view)
+                    Helper().showToast(message: error?.localizedDescription ?? "Error nil", controller: self)
                     return
                 }
     //            self.dictPayData["stripe_token"] = token.tokenId
                 print(token.tokenId)
     
-                print(UserDefaults.standard.string(forKey: "access_token"))
+                print(UserDefaults.standard.string(forKey: "access_token") ?? "")
                 
                 //post: user_card
                 
@@ -72,7 +75,7 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
 
     
     func addUserCard(params:[String:Any]){
-            Helper().showSpinner(view: self.view)
+            
             Helper().RefreshToken { response in
                 
                 print(response)
@@ -107,6 +110,8 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
                     }
                     
                 }
+                
+                self.sideMenuController?.performSegue(withIdentifier: "WalletVC", sender: nil)
         }
     }
 

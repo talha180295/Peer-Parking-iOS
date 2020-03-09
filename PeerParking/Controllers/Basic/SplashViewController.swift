@@ -20,8 +20,10 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         
 //        UserDefaults.standard.set("no", forKey: "login")
+        if(Helper().IsUserLogin()){
+            self.refreshToken()
+        }
         
-        self.refreshToken()
         
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         let app_build_Version = Bundle.main.infoDictionary?["CFBundleVersion"] as? String

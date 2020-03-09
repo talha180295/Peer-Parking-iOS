@@ -36,6 +36,7 @@ class FBPopup: UIViewController {
             loginManager.logOut()
         }
         loginManager.logIn(permissions: [.publicProfile,.email], viewController: self) { loginResult in
+            Helper().hideSpinner(view: self.view)
             switch loginResult {
                 case .failed(let error):
                 print(error)

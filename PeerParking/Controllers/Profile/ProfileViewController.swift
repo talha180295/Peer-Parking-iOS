@@ -165,6 +165,7 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
                     
                     self.saveData(userData: uData)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        NotificationCenter.default.post(name: Notification.Name("reload_table"), object: nil)
                         self.sideMenuController?.performSegue(withIdentifier: "ProfileVC", sender: nil)
                     }
                 }

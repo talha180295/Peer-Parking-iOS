@@ -63,7 +63,7 @@ struct APP_CONSTANT {
         
         
         static let SIGN_UP = "register"
-      static let FORGET_PASS = "forget-password?email="
+        static let FORGET_PASS = "forget-password?email="
         static let VERIFY_CODE = "verify-reset-code?verification_code="
  
         static let RESET_PASS = "reset-password?email="
@@ -92,6 +92,13 @@ struct APP_CONSTANT {
         static let PAR_LOT = 10
         static let ST_PARKING = 20
         static let PVT_PARKING = 30
+        
+    }
+    
+    struct DIRECTION{
+        
+        static let SELLER_TO_BUYER = 10
+        static let BUYER_TO_SELLER = 20
         
     }
 }
@@ -140,6 +147,7 @@ struct ParkingConst{
     static let  BUYER_TO_SELLER = 20
 
 }
+
 
 
 

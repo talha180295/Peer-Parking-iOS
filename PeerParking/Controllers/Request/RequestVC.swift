@@ -54,40 +54,30 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    // return the number of rows in the specified section
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
+//    // return the number of rows in the specified section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var rowCount = 0
-        switch (section) {
-        case 0:
-            rowCount = 2
-        case 1:
-            rowCount = 2
-        case 2:
-            rowCount = 2
-        default:
-            rowCount = 0
-        }
-        
+      
+
 //        return rowCount
         return self.requests.count
     }
     
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40.0
-    }
-    // Header Cell
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
-        let  headerCell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! HeaderCell
-
-        headerCell.month.text = "December"
-
-        return headerCell
-    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 40.0
+//    }
+//    // Header Cell
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//
+//        let  headerCell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as! HeaderCell
+//
+//        headerCell.month.text = "December"
+//
+//        return headerCell
+//    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
         let cell = tblNotification.dequeueReusableCell(withIdentifier: "RequestCell") as! RequestCell

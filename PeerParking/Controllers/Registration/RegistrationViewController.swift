@@ -387,8 +387,7 @@ extension RegistrationViewController:UITextFieldDelegate{
             txtPass.becomeFirstResponder()
         case txtPass:
             txtConfirmPass.becomeFirstResponder()
-        case txtConfirmPass:
-            txtConfirmPass.resignFirstResponder()
+        
         default:
             register()
             textField.resignFirstResponder()
