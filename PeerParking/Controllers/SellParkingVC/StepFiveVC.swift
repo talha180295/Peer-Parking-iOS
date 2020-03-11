@@ -88,12 +88,6 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         
         print("MEDIA-URL=\(UIImagePickerController.InfoKey.mediaMetadata)")
 
-//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SellParkingVC") as? SellParkingVC
-//       // let vc = storyboard!.instantiateViewController(withIdentifier: "SellParkingVC") as? SellParkingVC
-//
-//        vc?.counter = 5
-//        self.showDetailViewController(vc!, sender: nil)
-
        // dismissPicker(picker: picker, img:img!)
         picker.self.dismiss(animated: true){
             self.img_height_constr.constant = 141

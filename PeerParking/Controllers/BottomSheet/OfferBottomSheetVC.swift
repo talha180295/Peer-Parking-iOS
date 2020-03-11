@@ -115,7 +115,7 @@ class OfferBottomSheetVC: UIViewController {
               userType = 10
 
             }
-//            print("bargainings=\(bargainings)")
+            
             setData(data: bargaining)
 
         }

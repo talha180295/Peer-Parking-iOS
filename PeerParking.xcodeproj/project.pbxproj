@@ -53,7 +53,9 @@
 		188888AA238EF3C50008BC88 /* AlamofireApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188888A9238EF3C50008BC88 /* AlamofireApi.swift */; };
 		1889AE07235738330081608E /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889AE06235738330081608E /* BottomSheetVC.swift */; };
 		1890871523BB8D4B0040D4C4 /* SelfSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1890871423BB8D4B0040D4C4 /* SelfSizedTableView.swift */; };
-		18924C242363544800C0E94F /* SellParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18924C232363544800C0E94F /* SellParkingVC.swift */; };
+		18916D182419169D00E408BB /* SellParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18916D172419169D00E408BB /* SellParkingVC.swift */; };
+		18916D1A241917A000E408BB /* SellParkingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18916D19241917A000E408BB /* SellParkingContainer.swift */; };
+		18924C242363544800C0E94F /* PublicParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18924C232363544800C0E94F /* PublicParkingVC.swift */; };
 		18924C272365B84D00C0E94F /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18924C262365B84D00C0E94F /* ContainerView.swift */; };
 		18924C2F23662EEA00C0E94F /* StepOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18924C2E23662EEA00C0E94F /* StepOneVC.swift */; };
 		18924C312366F06600C0E94F /* StepTwoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18924C302366F06600C0E94F /* StepTwoVC.swift */; };
@@ -207,7 +209,9 @@
 		188888A9238EF3C50008BC88 /* AlamofireApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireApi.swift; sourceTree = "<group>"; };
 		1889AE06235738330081608E /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
 		1890871423BB8D4B0040D4C4 /* SelfSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizedTableView.swift; sourceTree = "<group>"; };
-		18924C232363544800C0E94F /* SellParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellParkingVC.swift; sourceTree = "<group>"; };
+		18916D172419169D00E408BB /* SellParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellParkingVC.swift; sourceTree = "<group>"; };
+		18916D19241917A000E408BB /* SellParkingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellParkingContainer.swift; sourceTree = "<group>"; };
+		18924C232363544800C0E94F /* PublicParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicParkingVC.swift; sourceTree = "<group>"; };
 		18924C262365B84D00C0E94F /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		18924C2E23662EEA00C0E94F /* StepOneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneVC.swift; sourceTree = "<group>"; };
 		18924C302366F06600C0E94F /* StepTwoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoVC.swift; sourceTree = "<group>"; };
@@ -464,13 +468,14 @@
 		18924C222363542E00C0E94F /* SellParkingVC */ = {
 			isa = PBXGroup;
 			children = (
-				18924C232363544800C0E94F /* SellParkingVC.swift */,
+				18924C232363544800C0E94F /* PublicParkingVC.swift */,
 				18924C2E23662EEA00C0E94F /* StepOneVC.swift */,
 				18924C302366F06600C0E94F /* StepTwoVC.swift */,
 				18924C3223672C6F00C0E94F /* StepThreeVC.swift */,
 				18CAA57E2368B6BA001B5503 /* FinishPopup.swift */,
 				18CAA58023695B62001B5503 /* StepFiveVC.swift */,
 				18392E7A23707220007FB161 /* StepFourVC.swift */,
+				18916D172419169D00E408BB /* SellParkingVC.swift */,
 			);
 			path = SellParkingVC;
 			sourceTree = "<group>";
@@ -479,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				18924C262365B84D00C0E94F /* ContainerView.swift */,
+				18916D19241917A000E408BB /* SellParkingContainer.swift */,
 			);
 			path = ContainerView;
 			sourceTree = "<group>";
@@ -1142,11 +1148,13 @@
 				18CAA58123695B62001B5503 /* StepFiveVC.swift in Sources */,
 				181E0D1423CDF954005D7248 /* JSONSchemaSupport.swift in Sources */,
 				67BC7B9623CC53B6001542D6 /* LoginViewController.swift in Sources */,
+				18916D1A241917A000E408BB /* SellParkingContainer.swift in Sources */,
 				FA10FF28232BCD620023C31C /* ParkedViewController.swift in Sources */,
 				FA122146232A3068002720BE /* ParkingCell.swift in Sources */,
 				18010AAB23549C7F008412C0 /* GoogleMapView.swift in Sources */,
 				FA57EBA7232142AC000646B7 /* ProfileViewController.swift in Sources */,
 				18D1B63A2362024E002C875D /* ScheduleVC.swift in Sources */,
+				18916D182419169D00E408BB /* SellParkingVC.swift in Sources */,
 				FA6CD37D23290DF100E18CF2 /* RoutesCell.swift in Sources */,
 				FA0FCC56232229F9000FF52C /* vehicleCell.swift in Sources */,
 				18924C2F23662EEA00C0E94F /* StepOneVC.swift in Sources */,
@@ -1154,7 +1162,7 @@
 				185DE79B2360A59900FC0E25 /* Constants.swift in Sources */,
 				18924C312366F06600C0E94F /* StepTwoVC.swift in Sources */,
 				18CCE44624079985008B9F4F /* TransactionModel.swift in Sources */,
-				18924C242363544800C0E94F /* SellParkingVC.swift in Sources */,
+				18924C242363544800C0E94F /* PublicParkingVC.swift in Sources */,
 				FA122149232A4366002720BE /* ParkingDetailViewController.swift in Sources */,
 				FA0FCC6323229FB9000FF52C /* CardView.swift in Sources */,
 				67BC7B9C23CC64AD001542D6 /* ResetViewController.swift in Sources */,
@@ -1396,7 +1404,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fomark.peerparking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1422,7 +1430,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fomark.peerparking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
