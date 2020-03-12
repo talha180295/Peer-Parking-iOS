@@ -10,11 +10,17 @@ import UIKit
 
 class SellParkingContainer: UIViewController {
 
+    var publicParkingVC:UIViewController!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        publicParkingVC = storyboard!.instantiateViewController(withIdentifier: "PublicParkingVC")
         
-//         init_controllers()
+        addChild(publicParkingVC)
+        publicParkingVC.view.frame = view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+        view.addSubview(publicParkingVC.view)
+        publicParkingVC.didMove(toParent: self)
+        //         init_controllers()
     }
     
 

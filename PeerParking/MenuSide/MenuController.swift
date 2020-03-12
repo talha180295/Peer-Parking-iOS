@@ -194,7 +194,8 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
                     alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: { action in
 
                         // do something like...
-                        self.dismiss(animated: true, completion: nil)
+                        alert.dismiss(animated: true, completion: nil)
+//                        self.dismiss(animated: true, completion: nil)
 
                     }))
                     self.present(alert, animated: true, completion: nil)

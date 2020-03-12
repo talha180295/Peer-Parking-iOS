@@ -101,7 +101,9 @@ class FBPopup: UIViewController {
             print("response=\(response)")
             Helper().hideSpinner(view: self.view)
             if response.result.value == nil {
-                print("No response")
+                print("No response=\(response.error?.localizedDescription)")
+                print("No response=\(response.result.value)")
+                
                 
                 SharedHelper().showToast(message: "Internal Server Error", controller: self)
                 return
