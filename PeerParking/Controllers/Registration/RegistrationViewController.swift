@@ -101,15 +101,17 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         //
         Helper().showSpinner(view: self.view)
    
-        let deviceToken = "ios"
+        let device_type = "ios"
         
+        let device_token :String = UserDefaults.standard.string(forKey: "FCMToken")!
+        print(device_token)
         let param  = [
             "name" : name,
             "email" : email,
             "password" : password,
             "password_confirmation" : txtConfirmPass.text!,
-            "device_token" : "string",
-            "device_type" : deviceToken
+            "device_token" : device_token,
+            "device_type" : device_type
         ]
         let headers: HTTPHeaders = [
             "Authorization" : ""

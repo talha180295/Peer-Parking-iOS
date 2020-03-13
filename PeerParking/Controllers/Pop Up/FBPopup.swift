@@ -78,7 +78,10 @@ class FBPopup: UIViewController {
         //        var strRole="2"
         //
         // SharedHelper().showSpinner(view: self.view)
-        let deviceToken = "ios"
+         let device_type = "ios"
+               
+        let device_token :String = UserDefaults.standard.string(forKey: "FCMToken") ?? ""
+         print(device_token)
         //  SharedHelper().showSpinner(view: self.view)
         // let deviceToken : String?
         let param = [
@@ -87,8 +90,8 @@ class FBPopup: UIViewController {
         "token" : token,
         "username" : username,
         "email" : email,
-        "device_token" : "FCMToken",
-        "device_type" : deviceToken,
+        "device_token" : device_token,
+        "device_type" : device_type,
         "image" : imageUrl
         ]
         print(param)
