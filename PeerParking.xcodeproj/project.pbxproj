@@ -52,6 +52,8 @@
 		188888A8238EBEEB0008BC88 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188888A6238EBEEA0008BC88 /* Fabric.framework */; };
 		188888AA238EF3C50008BC88 /* AlamofireApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188888A9238EF3C50008BC88 /* AlamofireApi.swift */; };
 		1889AE07235738330081608E /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889AE06235738330081608E /* BottomSheetVC.swift */; };
+		18904F33241F5A8100DBA6A6 /* SellParkingInitaialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18904F32241F5A8100DBA6A6 /* SellParkingInitaialVC.swift */; };
+		18904F35241FA4C000DBA6A6 /* LocationStepVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18904F34241FA4C000DBA6A6 /* LocationStepVC.swift */; };
 		1890871523BB8D4B0040D4C4 /* SelfSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1890871423BB8D4B0040D4C4 /* SelfSizedTableView.swift */; };
 		18916D182419169D00E408BB /* SellParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18916D172419169D00E408BB /* SellParkingVC.swift */; };
 		18916D1A241917A000E408BB /* SellParkingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18916D19241917A000E408BB /* SellParkingContainer.swift */; };
@@ -208,6 +210,8 @@
 		188888A6238EBEEA0008BC88 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		188888A9238EF3C50008BC88 /* AlamofireApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireApi.swift; sourceTree = "<group>"; };
 		1889AE06235738330081608E /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
+		18904F32241F5A8100DBA6A6 /* SellParkingInitaialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellParkingInitaialVC.swift; sourceTree = "<group>"; };
+		18904F34241FA4C000DBA6A6 /* LocationStepVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStepVC.swift; sourceTree = "<group>"; };
 		1890871423BB8D4B0040D4C4 /* SelfSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizedTableView.swift; sourceTree = "<group>"; };
 		18916D172419169D00E408BB /* SellParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellParkingVC.swift; sourceTree = "<group>"; };
 		18916D19241917A000E408BB /* SellParkingContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellParkingContainer.swift; sourceTree = "<group>"; };
@@ -476,6 +480,8 @@
 				18CAA58023695B62001B5503 /* StepFiveVC.swift */,
 				18392E7A23707220007FB161 /* StepFourVC.swift */,
 				18916D172419169D00E408BB /* SellParkingVC.swift */,
+				18904F32241F5A8100DBA6A6 /* SellParkingInitaialVC.swift */,
+				18904F34241FA4C000DBA6A6 /* LocationStepVC.swift */,
 			);
 			path = SellParkingVC;
 			sourceTree = "<group>";
@@ -1188,6 +1194,7 @@
 				186F166023E9986F00DC988A /* ParkingFilterBS.swift in Sources */,
 				183DAA3E23E0704B0022BC6E /* ParkingsVC.swift in Sources */,
 				181E0D1D23CDF995005D7248 /* DemoFunc.swift in Sources */,
+				18904F33241F5A8100DBA6A6 /* SellParkingInitaialVC.swift in Sources */,
 				18392E792370487A007FB161 /* PricePicker.swift in Sources */,
 				185DE7A12360BCEA00FC0E25 /* AlternateRouteVC.swift in Sources */,
 				18CAA57F2368B6BB001B5503 /* FinishPopup.swift in Sources */,
@@ -1204,6 +1211,7 @@
 				180FD0D8237331F30084230A /* ViewAllVC.swift in Sources */,
 				FA526EF2232CF4270014517B /* AddVehicleViewController.swift in Sources */,
 				18E099D22358FB6500B43A4B /* NavigationVC.swift in Sources */,
+				18904F35241FA4C000DBA6A6 /* LocationStepVC.swift in Sources */,
 				1866BF6623746402008EE650 /* Helper.swift in Sources */,
 				FA526EFA232D28C80014517B /* RateViewController.swift in Sources */,
 				FAEDCF15231F988D0063EFC0 /* TabbarViewController.swift in Sources */,

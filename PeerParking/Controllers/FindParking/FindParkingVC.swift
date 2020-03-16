@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreLocation
-import MapKit
+//import MapKit
 import GooglePlacesSearchController
 import GoogleMaps
 import GooglePlaces

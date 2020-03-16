@@ -1,33 +1,44 @@
 //
-//  SellParkingContainer.swift
+//  SellParkingInitaialVC.swift
 //  PeerParking
 //
-//  Created by Apple on 11/03/2020.
+//  Created by Apple on 16/03/2020.
 //  Copyright © 2020 Munzareen Atique. All rights reserved.
 //
 
 import UIKit
 
+//protocol SellParkingProtocol{
+//
+//    func navigate(withIdentifier:String)
+//
+//}
+class SellParkingInitaialVC: UIViewController {
 
-
-class SellParkingContainer: UIViewController {
-
-    
-    
+//    var delegate:SellParkingProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setUpView(withIdentifier: "SellParkingInitaialVC")
-     
+       
+        // Do any additional setup after loading the view.
     }
     
 
-
+    @IBAction func publicParkingBtn(_ sender:UIButton){
+        
+        setUpView(withIdentifier: "PublicParkingVC")
+        
+    }
+    @IBAction func privateParkingBtn(_ sender:UIButton){
+           
+       
+           
+    }
+    
     func setUpView(withIdentifier:String){
         
         var vc:UIViewController!
-        
         vc = storyboard!.instantiateViewController(withIdentifier: withIdentifier)
 
         addChild(vc)
@@ -38,12 +49,3 @@ class SellParkingContainer: UIViewController {
     }
 
 }
-
-//extension SellParkingContainer:SellParkingProtocol{
-//
-//    func navigate(withIdentifier: String) {
-//        setUpView(withIdentifier: withIdentifier)
-//    }
-//
-//
-//}

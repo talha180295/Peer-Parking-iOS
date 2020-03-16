@@ -15,8 +15,8 @@ class StepOneVC: UIViewController {
     
     //@IBOutlet weak var price_switch: DGRunkeeperSwitch!
     
+    @IBOutlet weak var date_field: UITextField!
     @IBOutlet weak var time_field: UITextField!
-  
     
     
 
@@ -48,13 +48,21 @@ class StepOneVC: UIViewController {
     }
     
 
-    @IBAction func tap_field(_ sender: UITextField) {
+    @IBAction func tap_date_field(_ sender: UITextField) {
         
 
-        datePickerTapped()
+//        datePickerTapped()
   
         
     }
+    
+      @IBAction func tap_field(_ sender: UITextField) {
+          
+
+          datePickerTapped()
+    
+          
+      }
     
     
     

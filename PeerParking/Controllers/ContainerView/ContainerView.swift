@@ -22,6 +22,7 @@ class ContainerView: UIViewController {
     var controller3:UIViewController!
     var controller4:UIViewController!
     var controller5:UIViewController!
+    var controllerLoc:UIViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +72,7 @@ class ContainerView: UIViewController {
         controller3 = storyboard!.instantiateViewController(withIdentifier: "three")
         controller4 = storyboard!.instantiateViewController(withIdentifier: "four")
         controller5 = storyboard!.instantiateViewController(withIdentifier: "five")
-        
+        controllerLoc = storyboard!.instantiateViewController(withIdentifier: "LocationStepVC")
         addChild(controller1)
         controller1.view.frame = view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
         view.addSubview(controller1.view)
@@ -82,64 +83,16 @@ class ContainerView: UIViewController {
         
         if(counter == 0){
             
-            self.addChild(self.controller1)
-            self.controller1.view.frame = self.view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
-            self.view.addSubview(self.controller1.view)
-            self.controller1.didMove(toParent: self)
-//            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-//
-//                // let controller = storyboard!.instantiateViewController(withIdentifier: "one")
-//
-//
-//            })
-          
-//
-//            UIView.animate(withDuration: 0.5, delay: 1.25, options: UIView.AnimationOptions(), animations: { () -> Void in
-//
-//
-//
-//            },
-//            completion: nil)
-        
-            
-            
-            
-        }
-        else if(counter == 1){
-            
-            // let controller = storyboard!.instantiateViewController(withIdentifier: "one")
             self.addChild(self.controller2)
             self.controller2.view.frame = self.view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
             self.view.addSubview(self.controller2.view)
             self.controller2.didMove(toParent: self)
             
+            
+        }
+        else if(counter == 1){
+            
           
-            
-//            UIView.animate(withDuration: 0.5, delay: 1.25, options: UIView.AnimationOptions(), animations: { () -> Void in
-//                
-//               
-//                
-//            },
-//            completion: nil)
-            
-            
-            
-        }
-            
-        else if(counter == 2){
-            
-            //let controller = storyboard!.instantiateViewController(withIdentifier: "three")
-            self.addChild(self.controller3)
-            self.controller3.view.frame = self.view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
-            self.view.addSubview(self.controller3.view)
-            self.controller3.didMove(toParent: self)
-           
-            
-        }
-        else if(counter == 3){
-            
-            
-            //let controller = storyboard!.instantiateViewController(withIdentifier: "four")
             self.addChild(self.controller4)
             self.controller4.view.frame = self.view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
             self.view.addSubview(self.controller4.view)
@@ -147,7 +100,40 @@ class ContainerView: UIViewController {
             
             
         }
+            
+        else if(counter == 2){
+            
+            //let controller = storyboard!.instantiateViewController(withIdentifier: "three")
+            self.addChild(self.controller1)
+            self.controller1.view.frame = self.view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+            self.view.addSubview(self.controller1.view)
+            self.controller1.didMove(toParent: self)
+           
+            
+        }
+        else if(counter == 3){
+            
+            
+            //let controller = storyboard!.instantiateViewController(withIdentifier: "four")
+            self.addChild(self.controller3)
+            self.controller3.view.frame = self.view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+            self.view.addSubview(self.controller3.view)
+            self.controller3.didMove(toParent: self)
+            
+            
+        }
         else if(counter == 4){
+            
+            
+            //let controller = storyboard!.instantiateViewController(withIdentifier: "four")
+            self.addChild(self.controllerLoc)
+            self.controllerLoc.view.frame = self.view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+            self.view.addSubview(self.controllerLoc.view)
+            self.controllerLoc.didMove(toParent: self)
+            
+            
+        }
+        else if(counter == 5){
             
             //let controller = storyboard!.instantiateViewController(withIdentifier: "five")
             self.addChild(self.controller5)

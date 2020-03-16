@@ -46,12 +46,25 @@ class PublicParkingVC: UIViewController, CLLocationManagerDelegate {
         
         tab_index = 2
         self.tabBarController!.navigationItem.title = "Sell Parking"
+        //show right button
+        let rightButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_close"), style: .plain, target: self, action: #selector(menu))
+
+        
+
+        //show the Menu button item
+        self.tabBarController!.navigationItem.rightBarButtonItem = rightButton
+        //right Bar Button Item tint color
+        self.tabBarController!.navigationItem.rightBarButtonItem?.tintColor = .black
         
         self.setUPViews()
        
     }
     
-    
+    @objc func menu(){
+        print("showSlideOutMane fire ")
+        self.tabBarController!.navigationItem.rightBarButtonItem = nil
+        self.view.removeFromSuperview()
+    }
     
     override func viewDidDisappear(_ animated: Bool) {
         
@@ -268,13 +281,13 @@ class PublicParkingVC: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func for_btn(_ sender: UIButton) {
-        if(counter != 5){
+        if(counter != 6){
             counter+=1
             step_progress.currentStep = counter
             let data = ["counter":counter]
             NotificationCenter.default.post(name: Notification.Name("btn_tap"), object: nil,userInfo: data)
         }
-        if(counter == 5){
+        if(counter == 6){
             
             counter-=1
             step_progress.currentStep = counter

@@ -1,0 +1,256 @@
+//
+//  LocationStepVC.swift
+//  PeerParking
+//
+//  Created by Apple on 16/03/2020.
+//  Copyright © 2020 Munzareen Atique. All rights reserved.
+//
+
+import UIKit
+import GooglePlacesSearchController
+import GoogleMaps
+import GooglePlaces
+
+class LocationStepVC: UIViewController,GMSMapViewDelegate {
+
+    //IBOutlets
+    @IBOutlet weak var mapView: UIView!
+    @IBOutlet weak var search_tf: UITextField!
+    
+    //variables
+    var map = GMSMapView()
+    var isMapLoaded = false
+    var address = "abc"
+    
+    var lat = 0.0
+    var longg = 0.0
+    
+    var filterLat = 0.0
+    var filterLong = 0.0
+    
+    var parkings:[Parking] = []
+    
+    var locationManager = CLLocationManager()
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    var cameraView:GMSCameraPosition!
+    
+    let geocoder = GMSGeocoder()
+    
+    override func loadView() {
+        super.loadView()
+        
+        self.lat = self.appDelegate.currentLocation?.coordinate.latitude ?? 0.0
+        self.longg = self.appDelegate.currentLocation?.coordinate.longitude ?? 0.0
+        self.address = self.appDelegate.currentLocationAddress ?? ""
+        self.cameraView = self.appDelegate.camera
+        self.locationManager.delegate = self
+        self.locationManager.startUpdatingLocation()
+//        map.delegate = self
+        
+//        let camera = GMSCameraPosition.camera(withLatitude: self.lat,
+//                                              longitude: self.longg,
+//                                              zoom: 17)
+//
+//        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
+//        mapView.delegate = self
+//        let imageName = "pinmarker"
+//        let image = UIImage(named: imageName)
+//        let imageView = UIImageView(image: image!)
+//        imageView.frame = CGRect(x: mapView.bounds.width/2 - 15, y: mapView.bounds.height/2 - 20, width: 30, height: 40)
+//        mapView.addSubview(imageView)
+//        mapView.isMyLocationEnabled = true
+//        self.view = mapView
+        
+        
+//        self.mapView.addSubview(mapView)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+    
+
+    override func viewDidAppear(_ animated: Bool) {
+        self.view.layoutIfNeeded()
+        
+       
+        if (!isMapLoaded){
+            isMapLoaded = true
+            loadMapView()
+        }
+        
+       
+    }
+    
+    func loadMapView(){
+          
+        print("::=loadMap")
+
+        let camera = GMSCameraPosition.init()
+
+        map = GMSMapView.map(withFrame: self.mapView.bounds, camera: camera)
+        map.settings.scrollGestures = true
+        map.settings.zoomGestures = true
+        map.settings.myLocationButton = false
+        map.delegate = self
+        
+        let imageName = "pinmarker"
+        let image = UIImage(named: imageName)
+        let imageView = UIImageView(image: image!)
+        imageView.frame = CGRect(x: mapView.frame.width/2 - 20, y: mapView.frame.height/2 - 20, width: 40, height: 40)
+        map.addSubview(imageView)
+        // self.mapView = mapView
+//        Helper().map_marker(lat: self.lat, longg: self.longg, map_view: self.map, title: "")
+        self.mapView.addSubview(map)
+
+
+        map.isMyLocationEnabled = false
+        
+
+        self.map.animate(to: cameraView)
+        
+        
+
+    }
+    
+    @IBAction func textfield_tap(_ sender: UITextField) {
+        print("::=hello")
+        
+        sender.resignFirstResponder()
+        self.autocompleteClicked()
+       // self.navigationController?.present(placesSearchController, animated: true, completion: nil)
+    }
+
+    func autocompleteClicked() {
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+
+        // Display the autocomplete view controller.
+        present(autocompleteController, animated: true, completion: nil)
+    }
+    
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        
+       
+        
+    }
+
+    func mapView(_ mapView: GMSMapView, idleAt cameraPosition: GMSCameraPosition) {
+        geocoder.reverseGeocodeCoordinate(cameraPosition.target) { (response, error) in
+          guard error == nil else {
+            return
+          }
+
+          if let result = response?.firstResult() {
+            result.coordinate
+            let address = result.lines?.first ?? ""
+            print("result=\(address)")
+            self.search_tf.text = address
+          }
+        }
+      
+    }
+ 
+}
+
+
+extension LocationStepVC: GMSAutocompleteViewControllerDelegate {
+    
+    // Handle the user's selection.
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        
+        print("formattedAddress=\(place.formattedAddress ?? "") long=\(place.coordinate.longitude)")
+        
+        print("Place name: \(place.name ?? "No Name")")
+        print("Place ID: \(place.placeID ?? "")")
+//        print("Place attributions: \(place.attributions)")
+        self.search_tf.text = place.name!
+        dismiss(animated: true){
+            
+            let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 17)
+                  
+            print("lat=\(place.coordinate.latitude) long=\(place.coordinate.longitude)")
+
+            self.map.clear()
+            Helper().map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude, map_view: self.map, title: "")
+//            self.add_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude)
+
+            self.filterLat = place.coordinate.latitude
+            self.filterLong = place.coordinate.longitude
+            self.map.animate(to: camera)
+        }
+        
+        
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // User canceled the operation.
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
+}
+
+extension LocationStepVC:CLLocationManagerDelegate{
+    
+    //Location Manager delegates
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let location = locations.last
+        
+        
+        self.lat = (location?.coordinate.latitude)!
+        self.longg = (location?.coordinate.longitude)!
+
+        self.filterLat = (location?.coordinate.latitude)!
+        self.filterLong = (location?.coordinate.longitude)!
+        
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 14.0)
+        
+        self.map.animate(to: camera)
+        
+        //location.
+        
+        let geoCoder = CLGeocoder()
+        
+        geoCoder.reverseGeocodeLocation(location!, completionHandler:
+            {
+                placemarks, error in
+                
+                guard let placemark = placemarks?.first else {
+                    let errorString = error?.localizedDescription ?? "Unexpected Error"
+                    print("Unable to reverse geocode the given location. Error: \(errorString)")
+                    return
+                }
+                
+                let reversedGeoLocation = ReversedGeoLocation(with: placemark)
+                print("LOC=:\(reversedGeoLocation.formattedAddress)")
+                self.address = reversedGeoLocation.formattedAddressName
+                // Apple Inc.,
+                // 1 Infinite Loop,
+                // Cupertino, CA 95014
+                // United States
+        })
+        
+        //Finally stop updating location otherwise it will come again and again in this delegate
+        self.locationManager.stopUpdatingLocation()
+        
+    }
+}
