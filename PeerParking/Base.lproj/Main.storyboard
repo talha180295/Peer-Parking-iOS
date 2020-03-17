@@ -4770,13 +4770,13 @@
                                                 <rect key="frame" x="79" y="10" width="200" height="151"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 150" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ic-ud-ecq">
-                                                        <rect key="frame" x="38" y="40.666666666666657" width="124" height="70"/>
+                                                        <rect key="frame" x="37.333333333333336" y="46.333333333333343" width="125.33333333333331" height="58.333333333333343"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="50"/>
                                                         <color key="textColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Credit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="is4-hl-Ztt">
-                                                        <rect key="frame" x="40.666666666666657" y="115.66666666666666" width="119" height="24"/>
+                                                        <rect key="frame" x="40.666666666666657" y="109.66666666666666" width="119" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="24" id="fIt-fb-hxR"/>
                                                         </constraints>
@@ -7038,7 +7038,7 @@ typeset text.</string>
                                     <action selector="share_btn:" destination="b8P-kl-fop" eventType="touchUpInside" id="C9v-OQ-YeE"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gMg-EH-tGm" customClass="CosmosView" customModule="Cosmos">
+                            <view contentMode="scaleToFill" ambiguous="YES" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gMg-EH-tGm" customClass="CosmosView" customModule="Cosmos">
                                 <rect key="frame" x="84.666666666666686" y="610" width="245" height="44"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -7838,7 +7838,7 @@ typeset text.</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x3U-9i-2rl">
-                                <rect key="frame" x="0.0" y="165" width="414" height="97"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="97"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWX-js-Zz1">
                                         <rect key="frame" x="20" y="0.0" width="91" height="21"/>
@@ -7915,6 +7915,7 @@ typeset text.</string>
                             <constraint firstItem="9K6-3v-0uS" firstAttribute="top" secondItem="dm5-SO-i0X" secondAttribute="bottom" constant="31" id="E3y-vN-adg"/>
                             <constraint firstItem="87Z-Qc-bR8" firstAttribute="leading" secondItem="obr-Jq-3Ae" secondAttribute="leading" id="FF3-JC-Kze"/>
                             <constraint firstItem="x3U-9i-2rl" firstAttribute="top" secondItem="87Z-Qc-bR8" secondAttribute="bottom" constant="2" id="Fq8-9E-BLf"/>
+                            <constraint firstItem="x3U-9i-2rl" firstAttribute="top" secondItem="obr-Jq-3Ae" secondAttribute="top" constant="20" id="LYd-j4-ZCd"/>
                             <constraint firstItem="87Z-Qc-bR8" firstAttribute="trailing" secondItem="obr-Jq-3Ae" secondAttribute="trailing" id="OCj-T6-8J1"/>
                             <constraint firstItem="x3U-9i-2rl" firstAttribute="trailing" secondItem="obr-Jq-3Ae" secondAttribute="trailing" id="Q1F-SE-bv6"/>
                             <constraint firstItem="dm5-SO-i0X" firstAttribute="top" secondItem="8qN-BW-jD9" secondAttribute="top" constant="15" id="aKc-lm-Utn"/>
@@ -7925,6 +7926,7 @@ typeset text.</string>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="9K6-3v-0uS"/>
+                                <exclude reference="87Z-Qc-bR8"/>
                             </mask>
                         </variation>
                     </view>
@@ -9860,7 +9862,7 @@ Click Finish to publish your offer</string>
         <scene sceneID="Nom-Wd-jHj">
             <objects>
                 <viewController storyboardIdentifier="changeVC" id="pfm-Od-AcY" customClass="ChangePassViewController" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="FqI-3q-kVc">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="FqI-3q-kVc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

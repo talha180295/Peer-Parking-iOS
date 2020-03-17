@@ -75,7 +75,7 @@ class ContainerView: UIViewController {
         controllerLoc = storyboard!.instantiateViewController(withIdentifier: "LocationStepVC")
         addChild(controller1)
         controller1.view.frame = view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
-        view.addSubview(controller1.view)
+        view.addSubview(controller2.view)
         controller1.didMove(toParent: self)
     }
     

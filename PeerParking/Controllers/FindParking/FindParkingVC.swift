@@ -37,7 +37,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     var estimateWidth=130
     var cellMarginSize=1
     var address = "abc"
-    
+    var autocomp = false
     var lat = 0.0
     var longg = 0.0
     
@@ -94,10 +94,12 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 
     override func viewWillAppear(_ animated: Bool) {
         
-        Helper().hideSpinner(view: self.view)
+        
+//        Helper().hideSpinner(view: self.view)
         tab_index = 0
         print("::=willapear")
         self.parkings.removeAll()
+        self.map.clear()
         self.myCollectionView.reloadData()
         self.tabBarController!.navigationItem.title = "Find Parking"
         
@@ -106,13 +108,14 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     override func viewDidAppear(_ animated: Bool) {
         self.view.layoutIfNeeded()
         
-       
-        if (!isMapLoaded){
-            isMapLoaded = true
-            loadMapView()
+        if(!autocomp){
+            if (!isMapLoaded){
+                isMapLoaded = true
+                loadMapView()
+            }
+            
+            mapMoveToCurrentLoc()
         }
-        
-        mapMoveToCurrentLoc()
     }
     
     func autocompleteClicked() {
@@ -160,26 +163,41 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         //location.
         
-        let geoCoder = CLGeocoder()
+//        let geoCoder = CLGeocoder()
+//
+//        geoCoder.reverseGeocodeLocation(location!, completionHandler:
+//            {
+//                placemarks, error in
+//
+//                guard let placemark = placemarks?.first else {
+//                    let errorString = error?.localizedDescription ?? "Unexpected Error"
+//                    print("Unable to reverse geocode the given location. Error: \(errorString)")
+//                    return
+//                }
+//
+//                let reversedGeoLocation = ReversedGeoLocation(with: placemark)
+//                print("LOC=:\(reversedGeoLocation.formattedAddress)")
+//                self.address = reversedGeoLocation.formattedAddressName
+//                // Apple Inc.,
+//                // 1 Infinite Loop,
+//                // Cupertino, CA 95014
+//                // United States
+//        })
         
-        geoCoder.reverseGeocodeLocation(location!, completionHandler:
-            {
-                placemarks, error in
-                
-                guard let placemark = placemarks?.first else {
-                    let errorString = error?.localizedDescription ?? "Unexpected Error"
-                    print("Unable to reverse geocode the given location. Error: \(errorString)")
-                    return
-                }
-                
-                let reversedGeoLocation = ReversedGeoLocation(with: placemark)
-                print("LOC=:\(reversedGeoLocation.formattedAddress)")
-                self.address = reversedGeoLocation.formattedAddressName
-                // Apple Inc.,
-                // 1 Infinite Loop,
-                // Cupertino, CA 95014
-                // United States
-        })
+        let geocoder = GMSGeocoder()
+        geocoder.reverseGeocodeCoordinate(camera.target) { (response, error) in
+            guard error == nil else {
+            return
+            }
+
+            if let result = response?.firstResult() {
+                result.coordinate
+                let address = result.lines?.first ?? ""
+                print("result=\(address)")
+                self.address = address
+                self.search_tf.text = address
+            }
+        }
         
         //Finally stop updating location otherwise it will come again and again in this delegate
         self.locationManager.stopUpdatingLocation()
@@ -239,10 +257,13 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 
         print("self.addressabc=\(self.address)")
         print(" view_all_btn=\(self.view_all_btn.frame)")
+        self.add_marker(lat: self.lat, longg: self.longg)
+        let camera = GMSCameraPosition.camera(withLatitude: self.lat, longitude: self.longg , zoom: 13.7)
         
         get_all_parkings(lat: self.lat, long: self.longg, date_time: Helper().getCurrentDate(), isHeaderIncluded: Helper().IsUserLogin(), filters: [:]){
             
             self.search_tf.text = self.address
+            self.map.animate(to: camera)
           
         }
         
@@ -683,11 +704,15 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
         print("Place ID: \(place.placeID ?? "")")
 //        print("Place attributions: \(place.attributions)")
         self.search_tf.text = place.name!
+        self.autocomp = true
+        
         dismiss(animated: true){
             self.myCollectionView.isHidden = false
             self.filter_btn.isHidden = false
             self.view_all_btn.isHidden = false
-            
+            self.map.clear()
+            self.parkings.removeAll()
+            self.myCollectionView.reloadData()
             
             let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 13.7)
             
@@ -703,6 +728,7 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
                 
 //                Helper().hideSpinner(view: self.view)
                 self.map.animate(to: camera)
+                self.autocomp = false
 
             }
             

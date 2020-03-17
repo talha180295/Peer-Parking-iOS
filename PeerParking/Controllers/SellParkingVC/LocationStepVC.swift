@@ -21,12 +21,7 @@ class LocationStepVC: UIViewController,GMSMapViewDelegate {
     var map = GMSMapView()
     var isMapLoaded = false
     var address = "abc"
-    
-    var lat = 0.0
-    var longg = 0.0
-    
-    var filterLat = 0.0
-    var filterLong = 0.0
+
     
     var parkings:[Parking] = []
     
@@ -40,8 +35,7 @@ class LocationStepVC: UIViewController,GMSMapViewDelegate {
     override func loadView() {
         super.loadView()
         
-        self.lat = self.appDelegate.currentLocation?.coordinate.latitude ?? 0.0
-        self.longg = self.appDelegate.currentLocation?.coordinate.longitude ?? 0.0
+       
         self.address = self.appDelegate.currentLocationAddress ?? ""
         self.cameraView = self.appDelegate.camera
         self.locationManager.delegate = self
@@ -145,7 +139,7 @@ class LocationStepVC: UIViewController,GMSMapViewDelegate {
           }
 
           if let result = response?.firstResult() {
-            result.coordinate
+//            result.coordinate
             let address = result.lines?.first ?? ""
             print("result=\(address)")
             self.search_tf.text = address
@@ -171,15 +165,10 @@ extension LocationStepVC: GMSAutocompleteViewControllerDelegate {
         dismiss(animated: true){
             
             let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 17)
-                  
-            print("lat=\(place.coordinate.latitude) long=\(place.coordinate.longitude)")
-
+           
             self.map.clear()
-            Helper().map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude, map_view: self.map, title: "")
-//            self.add_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude)
+//            Helper().map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude, map_view: self.map, title: "")
 
-            self.filterLat = place.coordinate.latitude
-            self.filterLong = place.coordinate.longitude
             self.map.animate(to: camera)
         }
         
@@ -216,38 +205,28 @@ extension LocationStepVC:CLLocationManagerDelegate{
         let location = locations.last
         
         
-        self.lat = (location?.coordinate.latitude)!
-        self.longg = (location?.coordinate.longitude)!
-
-        self.filterLat = (location?.coordinate.latitude)!
-        self.filterLong = (location?.coordinate.longitude)!
+     
         
         let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 14.0)
         
         self.map.animate(to: camera)
         
-        //location.
         
-        let geoCoder = CLGeocoder()
         
-        geoCoder.reverseGeocodeLocation(location!, completionHandler:
-            {
-                placemarks, error in
-                
-                guard let placemark = placemarks?.first else {
-                    let errorString = error?.localizedDescription ?? "Unexpected Error"
-                    print("Unable to reverse geocode the given location. Error: \(errorString)")
-                    return
-                }
-                
-                let reversedGeoLocation = ReversedGeoLocation(with: placemark)
-                print("LOC=:\(reversedGeoLocation.formattedAddress)")
-                self.address = reversedGeoLocation.formattedAddressName
-                // Apple Inc.,
-                // 1 Infinite Loop,
-                // Cupertino, CA 95014
-                // United States
-        })
+    
+        self.geocoder.reverseGeocodeCoordinate(camera.target) { (response, error) in
+          guard error == nil else {
+            return
+          }
+
+          if let result = response?.firstResult() {
+            result.coordinate
+            let address = result.lines?.first ?? ""
+            print("result=\(address)")
+            self.search_tf.text = address
+          }
+        }
+
         
         //Finally stop updating location otherwise it will come again and again in this delegate
         self.locationManager.stopUpdatingLocation()

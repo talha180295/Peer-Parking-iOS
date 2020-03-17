@@ -89,9 +89,18 @@ struct APP_CONSTANT {
     // PARKING_TYPES
     struct PARKING_TYPES{
         
-        static let PAR_LOT = 10
-        static let ST_PARKING = 20
-        static let PVT_PARKING = 30
+        static let parking_type = "parking_type"
+        static let PUBLIC_CONST = 10
+        static let PRIVATE_CONST = 20
+        
+    }
+    
+    // PARKING_SUB_TYPES
+    struct PUBLIC_PARKING_SUB_TYPES{
+        
+        static let parking_sub_type = "parking_sub_type"
+        static let LOT_CONST = 10
+        static let STREET_CONST = 20
         
     }
     
