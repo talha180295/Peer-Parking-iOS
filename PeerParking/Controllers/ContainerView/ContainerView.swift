@@ -20,7 +20,7 @@ class ContainerView: UIViewController {
     var controller1:UIViewController!
     var controller2:UIViewController!
     var controller3:UIViewController!
-    var controller4:UIViewController!
+    var controller4:StepFourVC!
     var controller5:UIViewController!
     var controllerLoc:UIViewController!
     
@@ -70,7 +70,7 @@ class ContainerView: UIViewController {
         controller1 = storyboard!.instantiateViewController(withIdentifier: "one")
         controller2 = storyboard!.instantiateViewController(withIdentifier: "two")
         controller3 = storyboard!.instantiateViewController(withIdentifier: "three")
-        controller4 = storyboard!.instantiateViewController(withIdentifier: "four")
+        controller4 = storyboard!.instantiateViewController(withIdentifier: "four") as! StepFourVC
         controller5 = storyboard!.instantiateViewController(withIdentifier: "five")
         controllerLoc = storyboard!.instantiateViewController(withIdentifier: "LocationStepVC")
         addChild(controller1)
@@ -101,7 +101,7 @@ class ContainerView: UIViewController {
             
         }
             
-        else if(counter == 2){
+        else if(counter == 2) && self.controller4.amount_tf.hasText{
             
             //let controller = storyboard!.instantiateViewController(withIdentifier: "three")
             self.addChild(self.controller1)
