@@ -80,6 +80,7 @@ struct APP_CONSTANT {
     
     struct VEHICLE_TYPES{
         
+        static let vehicle_type = "vehicle_type"
         static let MINI = 10
         static let FAMILY = 20
         static let SUV = 30

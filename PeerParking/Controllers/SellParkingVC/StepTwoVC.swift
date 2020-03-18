@@ -22,7 +22,9 @@ class StepTwoVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.MINI, forKey: "vehicle_type")
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.MINI, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+        
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.PUBLIC_CONST, forKey: APP_CONSTANT.PARKING_TYPES.parking_type)
         
         GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PUBLIC_PARKING_SUB_TYPES.LOT_CONST, forKey: APP_CONSTANT.PUBLIC_PARKING_SUB_TYPES.parking_sub_type)
         //lot_btn.isSelected = true
@@ -42,7 +44,7 @@ class StepTwoVC: UIViewController {
             
             bus_btn.setImage(UIImage(named: "bus_unselected"), for: .normal)
             
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.MINI, forKey: "vehicle_type")
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.MINI, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
             
             
             
@@ -58,7 +60,7 @@ class StepTwoVC: UIViewController {
             
             bus_btn.setImage(UIImage(named: "bus_unselected"), for: .normal)
             
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.FAMILY, forKey: "vehicle_type")
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.FAMILY, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
         }
         else if(sender.tag == 3){
             
@@ -71,7 +73,7 @@ class StepTwoVC: UIViewController {
             
             bus_btn.setImage(UIImage(named: "bus_unselected"), for: .normal)
             
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.SUV, forKey: "vehicle_type")
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.SUV, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
         }
         else if(sender.tag == 4){
             
@@ -84,7 +86,7 @@ class StepTwoVC: UIViewController {
             
             bus_btn.setImage(UIImage(named: "bus_selected"), for: .normal)
             
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.BUS, forKey: "vehicle_type")
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.BUS, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
         }
         
     }

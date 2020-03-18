@@ -33,7 +33,7 @@ class FinishPopup: UIViewController {
         
         let image = GLOBAL_VAR.PARKING_POST_DETAILS["image"]
         
-        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(10, forKey: "parking_type")
+//        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(10, forKey: "parking_type")
         
         let params:[String:Any] = GLOBAL_VAR.PARKING_POST_DETAILS
         

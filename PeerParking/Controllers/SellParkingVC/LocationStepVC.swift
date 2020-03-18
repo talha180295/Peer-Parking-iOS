@@ -143,6 +143,7 @@ class LocationStepVC: UIViewController,GMSMapViewDelegate {
             let address = result.lines?.first ?? ""
             print("result=\(address)")
             self.search_tf.text = address
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(address, forKey: "address")
           }
         }
       
@@ -207,13 +208,13 @@ extension LocationStepVC:CLLocationManagerDelegate{
         
      
         
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue((location?.coordinate.latitude.description)!, forKey: "latitude")
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue((location?.coordinate.longitude.description)!, forKey: "longitude")
+        
         let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 14.0)
         
         self.map.animate(to: camera)
         
-        
-        
-    
         self.geocoder.reverseGeocodeCoordinate(camera.target) { (response, error) in
           guard error == nil else {
             return
@@ -224,6 +225,7 @@ extension LocationStepVC:CLLocationManagerDelegate{
             let address = result.lines?.first ?? ""
             print("result=\(address)")
             self.search_tf.text = address
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(address, forKey: "address")
           }
         }
 
