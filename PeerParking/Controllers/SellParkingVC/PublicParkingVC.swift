@@ -23,10 +23,20 @@ class PublicParkingVC: UIViewController, CLLocationManagerDelegate {
     let story = UIStoryboard(name: "Main", bundle: nil)
     
     @IBOutlet weak var step_progress: StepIndicatorView!
-    @IBOutlet var mainView: UIView!
+    @IBOutlet var containerView: UIView!
     
     var vc:ParkingNavVC!
     var vc1:ParkedViewController!
+    
+    
+    var controller1:UIViewController!
+    var controller2:UIViewController!
+    var controller3:UIViewController!
+    var controller4:StepFourVC!
+    var controller5:UIViewController!
+    var controllerLoc:UIViewController!
+    
+    
 //    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
 //    let vc1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC") as! ParkedViewController
     
@@ -35,13 +45,28 @@ class PublicParkingVC: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
 
         
-//        self.mainView.isHidden = true
+        init_controllers()
         //Location Manager code to fetch current location
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
       
     }
    
+    
+    func init_controllers(){
+        
+        // Do any additional setup after loading the view.
+        controller1 = storyboard!.instantiateViewController(withIdentifier: "one")
+        controller2 = storyboard!.instantiateViewController(withIdentifier: "two")
+        controller3 = storyboard!.instantiateViewController(withIdentifier: "three")
+        controller4 = storyboard!.instantiateViewController(withIdentifier: "four") as! StepFourVC
+        controller5 = storyboard!.instantiateViewController(withIdentifier: "five")
+        controllerLoc = storyboard!.instantiateViewController(withIdentifier: "LocationStepVC")
+        addChild(controller2)
+        controller2.view.frame = containerView.bounds  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+        containerView.addSubview(controller2.view)
+        controller2.didMove(toParent: self)
+    }
     override func viewWillAppear(_ animated: Bool) {
         
         tab_index = 2
@@ -57,8 +82,14 @@ class PublicParkingVC: UIViewController, CLLocationManagerDelegate {
         self.tabBarController!.navigationItem.rightBarButtonItem?.tintColor = .black
         
         self.setUPViews()
+        
+        
        
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        init_controllers()
+//    }
     
     @objc func menu(){
         print("showSlideOutMane fire ")
@@ -112,7 +143,7 @@ class PublicParkingVC: UIViewController, CLLocationManagerDelegate {
     func openTimerScreen(vc:ParkedViewController, dict:Parking){
         
         vc.parking_details = dict
-        //        configureChildViewController(childController: vc, onView: self.mainView)
+     
         add(vc)
         
     }
@@ -147,7 +178,6 @@ class PublicParkingVC: UIViewController, CLLocationManagerDelegate {
         }
         
         vc.vcName = "nav"
-//        configureChildViewController(childController: vc, onView: self.mainView)
         add(vc)
 
     }
@@ -205,13 +235,91 @@ class PublicParkingVC: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    func change_page(){
+        
+        if(counter == 0){
+            
+            self.addChild(self.controller2)
+            self.controller2.view.frame = self.containerView.bounds  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+            self.containerView.addSubview(self.controller2.view)
+            self.controller2.didMove(toParent: self)
+            
+            
+        }
+        else if(counter == 1){
+            
+          
+            self.addChild(self.controller4)
+            self.controller4.view.frame = self.containerView.bounds  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+            self.containerView.addSubview(self.controller4.view)
+            self.controller4.didMove(toParent: self)
+            
+            
+        }
+            
+        else if(counter == 2){
+            
+            if(self.controller4.amount_tf.hasText){
+                self.controller4.imgInfo.isHidden = true
+                self.addChild(self.controller1)
+                self.controller1.view.frame = self.containerView.bounds  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+                self.containerView.addSubview(self.controller1.view)
+                self.controller1.didMove(toParent: self)
+            }
+            else{
+                self.controller4.imgInfo.isHidden = false
+                counter -= 1
+                step_progress.currentStep = counter
+//                change_page()
+            }
+           
+           
+           
+            
+        }
+        else if(counter == 3){
+            
+            
+            //let controller = storyboard!.instantiateViewController(withIdentifier: "four")
+            self.addChild(self.controller3)
+            self.controller3.view.frame = self.containerView.bounds  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+            self.containerView.addSubview(self.controller3.view)
+            self.controller3.didMove(toParent: self)
+            
+            
+        }
+        else if(counter == 4){
+            
+            
+            //let controller = storyboard!.instantiateViewController(withIdentifier: "four")
+            self.addChild(self.controllerLoc)
+            self.controllerLoc.view.frame = self.containerView.bounds  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+            self.containerView.addSubview(self.controllerLoc.view)
+            self.controllerLoc.didMove(toParent: self)
+            
+            
+        }
+        else if(counter == 5){
+            
+            //let controller = storyboard!.instantiateViewController(withIdentifier: "five")
+            self.addChild(self.controller5)
+            self.controller5.view.frame = self.containerView.bounds  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+            self.containerView.addSubview(self.controller5.view)
+            self.controller5.didMove(toParent: self)
+            
+           
+            
+        }
+    }
+    
     @IBAction func pre_btn(_ sender: UIButton) {
         
         if(counter != 0){
             counter-=1
             step_progress.currentStep = counter
-            let data = ["counter":counter]
-            NotificationCenter.default.post(name: Notification.Name("btn_tap"), object: nil,userInfo: data)
+            change_page()
+//            let data = ["counter":counter]
+//            NotificationCenter.default.post(name: Notification.Name("btn_tap"), object: nil,userInfo: data)
         }
        
     }
@@ -220,8 +328,9 @@ class PublicParkingVC: UIViewController, CLLocationManagerDelegate {
         if(counter != 6){
             counter+=1
             step_progress.currentStep = counter
-            let data = ["counter":counter]
-            NotificationCenter.default.post(name: Notification.Name("btn_tap"), object: nil,userInfo: data)
+            change_page()
+//            let data = ["counter":counter]
+//            NotificationCenter.default.post(name: Notification.Name("btn_tap"), object: nil,userInfo: data)
         }
         if(counter == 6){
             

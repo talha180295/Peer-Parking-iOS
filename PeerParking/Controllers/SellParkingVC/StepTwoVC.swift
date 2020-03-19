@@ -10,6 +10,7 @@ import UIKit
 
 class StepTwoVC: UIViewController {
 
+     @IBOutlet weak var titleTF: UITextField!
     
     @IBOutlet weak var mini_btn: UIButton!
     @IBOutlet weak var family_btn: UIButton!
@@ -27,10 +28,18 @@ class StepTwoVC: UIViewController {
         GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.PUBLIC_CONST, forKey: APP_CONSTANT.PARKING_TYPES.parking_type)
         
         GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PUBLIC_PARKING_SUB_TYPES.LOT_CONST, forKey: APP_CONSTANT.PUBLIC_PARKING_SUB_TYPES.parking_sub_type)
-        //lot_btn.isSelected = true
+        
     }
     
-
+    @IBAction func titleTF_didchange(_ sender: UITextField) {
+        
+        if(titleTF.hasText){
+            let title = titleTF.text ?? ""
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(title , forKey: "title")
+        }
+        
+    
+    }
     @IBAction func car_size_btn_click(_ sender: UIButton) {
         
         if(sender.tag == 1){

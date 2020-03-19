@@ -101,6 +101,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         print("::=willapear")
         //loadMapView()
         self.tabBarController!.navigationItem.title = "Navigate"
+        self.tabBarController!.navigationItem.rightBarButtonItem = nil
         
     }
     override func viewDidAppear(_ animated: Bool) {

@@ -13,7 +13,7 @@ class StepFourVC: UIViewController {
 
     @IBOutlet weak var amount_tf: UITextField!
     @IBOutlet weak var is_negotiable: UISwitch!
-    
+    @IBOutlet weak var imgInfo: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +30,7 @@ class StepFourVC: UIViewController {
             //Data is returned **Do anything with it **
             print(dataReturned)
             self.amount_tf.text = dataReturned
+            self.imgInfo.isHidden = true
             GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "initial_price")
             
         }
@@ -54,6 +55,10 @@ class StepFourVC: UIViewController {
         if(sender.isOn){
             is_negotiable.isOn = true
             GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(true, forKey: "is_negotiable")
+        }
+        else{
+            is_negotiable.isOn = false
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(false, forKey: "is_negotiable")
         }
        
     }

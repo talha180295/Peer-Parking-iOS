@@ -73,10 +73,10 @@ class ContainerView: UIViewController {
         controller4 = storyboard!.instantiateViewController(withIdentifier: "four") as! StepFourVC
         controller5 = storyboard!.instantiateViewController(withIdentifier: "five")
         controllerLoc = storyboard!.instantiateViewController(withIdentifier: "LocationStepVC")
-        addChild(controller1)
-        controller1.view.frame = view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+        addChild(controller2)
+        controller2.view.frame = view.frame  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
         view.addSubview(controller2.view)
-        controller1.didMove(toParent: self)
+        controller2.didMove(toParent: self)
     }
     
     func change_page(){
@@ -101,7 +101,7 @@ class ContainerView: UIViewController {
             
         }
             
-        else if(counter == 2) && self.controller4.amount_tf.hasText{
+        else if(counter == 2) {//&& self.controller4.amount_tf.hasText{
             
             //let controller = storyboard!.instantiateViewController(withIdentifier: "three")
             self.addChild(self.controller1)

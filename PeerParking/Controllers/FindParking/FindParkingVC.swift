@@ -102,6 +102,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         self.map.clear()
         self.myCollectionView.reloadData()
         self.tabBarController!.navigationItem.title = "Find Parking"
+        self.tabBarController!.navigationItem.rightBarButtonItem = nil
         
     }
     

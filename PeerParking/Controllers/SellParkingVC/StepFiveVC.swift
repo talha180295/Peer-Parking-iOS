@@ -70,13 +70,6 @@ class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     @IBAction func open_cam_btn(_ sender: UIButton) {
         print("cam")
        
-//        let imagePickerController = UIImagePickerController()
-//        imagePickerController.delegate = self
-//        imagePickerController.sourceType = .photoLibrary
-//        imagePickerController.mediaTypes = ["public.image"]
-//        present(imagePickerController, animated: true, completion: nil)
-//        showAlert()
-//        showAlert()
         self.getImage(fromSourceType: .camera)
     }
     
