@@ -9,7 +9,7 @@
 import UIKit
 import EzPopup
 
-class StepFourVC: UIViewController {
+class PriceStepVC: UIViewController {
 
     @IBOutlet weak var amount_tf: UITextField!
     @IBOutlet weak var is_negotiable: UISwitch!

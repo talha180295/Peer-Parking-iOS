@@ -1,9 +1,9 @@
 //
-//  SellParkingVC.swift
+//  PrivateParkingVC.swift
 //  PeerParking
 //
-//  Created by Apple on 25/10/2019.
-//  Copyright © 2019 Munzareen Atique. All rights reserved.
+//  Created by Apple on 20/03/2020.
+//  Copyright © 2020 Munzareen Atique. All rights reserved.
 //
 
 import UIKit
@@ -13,8 +13,7 @@ import CoreLocation
 import Alamofire
 import HelperClassPod
 
-
-class PublicParkingVC: UIViewController {
+class PrivateParkingVC: UIViewController {
 
     var counter = 0
     
@@ -29,16 +28,14 @@ class PublicParkingVC: UIViewController {
     var vc1:ParkedViewController!
     
     
-    var detailStepVC:UIViewController!
+    var detailStepVC:DetailStepVC!
     var priceStepVC:PriceStepVC!
-    var whenStepVC:UIViewController!
-    var limitationStepVC:UIViewController!
+    var privateWhenStepVC:UIViewController!
+   // var limitationStepVC:UIViewController!
     var locationStepVC:UIViewController!
     var imageStepVC:UIViewController!
     
     
-//    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
-//    let vc1 = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC") as! ParkedViewController
     
     
     override func viewDidLoad() {
@@ -46,11 +43,9 @@ class PublicParkingVC: UIViewController {
 
         
         init_controllers()
-        //Location Manager code to fetch current location
-//        self.locationManager.delegate = self
-//        self.locationManager.startUpdatingLocation()
-        step_progress.step_text = APP_CONSTANT.public_step_text
-        step_progress.numberOfSteps = 6
+        
+        step_progress.step_text = APP_CONSTANT.private_step_text
+        step_progress.numberOfSteps = 5
     }
    
     
@@ -59,12 +54,12 @@ class PublicParkingVC: UIViewController {
         // Do any additional setup after loading the view.
         detailStepVC = storyboard!.instantiateViewController(withIdentifier: "DetailStepVC") as? DetailStepVC
         priceStepVC = storyboard!.instantiateViewController(withIdentifier: "PriceStepVC") as? PriceStepVC
-        whenStepVC = storyboard!.instantiateViewController(withIdentifier: "WhenStepVC") as? WhenStepVC
-        limitationStepVC = storyboard!.instantiateViewController(withIdentifier: "LimitationStepVC") as? LimitationStepVC
+        privateWhenStepVC = storyboard!.instantiateViewController(withIdentifier: "PrivateWhenStepVC") as? PrivateWhenStepVC
         locationStepVC = storyboard!.instantiateViewController(withIdentifier: "LocationStepVC") as? LocationStepVC
         imageStepVC = storyboard!.instantiateViewController(withIdentifier: "ImageStepVC")
         
         addChild(detailStepVC)
+        self.detailStepVC.isPrivate = true
         detailStepVC.view.frame = containerView.bounds  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
         containerView.addSubview(detailStepVC.view)
         detailStepVC.didMove(toParent: self)
@@ -72,7 +67,7 @@ class PublicParkingVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         tab_index = 2
-        self.tabBarController!.navigationItem.title = "Sell Public Parking"
+        self.tabBarController!.navigationItem.title = "Sell Private Parking"
         //show right button
         let rightButton = UIBarButtonItem(image: #imageLiteral(resourceName: "icon_close"), style: .plain, target: self, action: #selector(menu))
 
@@ -92,7 +87,7 @@ class PublicParkingVC: UIViewController {
     @objc func menu(){
         print("showSlideOutMane fire ")
         self.tabBarController!.navigationItem.rightBarButtonItem = nil
-        self.tabBarController!.navigationItem.title = "Sell Parking" 
+        self.tabBarController!.navigationItem.title = "Sell Parking"   
         self.view.removeFromSuperview()
     }
     
@@ -239,6 +234,7 @@ class PublicParkingVC: UIViewController {
         if(counter == 0){
             
             self.addChild(self.detailStepVC)
+            self.detailStepVC.isPrivate = true
             self.detailStepVC.view.frame = self.containerView.bounds  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
             self.containerView.addSubview(self.detailStepVC.view)
             self.detailStepVC.didMove(toParent: self)
@@ -260,10 +256,10 @@ class PublicParkingVC: UIViewController {
             
             if(self.priceStepVC.amount_tf.hasText){
                 self.priceStepVC.imgInfo.isHidden = true
-                self.addChild(self.whenStepVC)
-                self.whenStepVC.view.frame = self.containerView.bounds  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
-                self.containerView.addSubview(self.whenStepVC.view)
-                self.whenStepVC.didMove(toParent: self)
+                self.addChild(self.privateWhenStepVC)
+                self.privateWhenStepVC.view.frame = self.containerView.bounds  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+                self.containerView.addSubview(self.privateWhenStepVC.view)
+                self.privateWhenStepVC.didMove(toParent: self)
             }
             else{
                 self.priceStepVC.imgInfo.isHidden = false
@@ -276,18 +272,8 @@ class PublicParkingVC: UIViewController {
            
             
         }
+       
         else if(counter == 3){
-            
-            
-            //let controller = storyboard!.instantiateViewController(withIdentifier: "four")
-            self.addChild(self.limitationStepVC)
-            self.limitationStepVC.view.frame = self.containerView.bounds  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
-            self.containerView.addSubview(self.limitationStepVC.view)
-            self.limitationStepVC.didMove(toParent: self)
-            
-            
-        }
-        else if(counter == 4){
             
             
             //let controller = storyboard!.instantiateViewController(withIdentifier: "four")
@@ -298,7 +284,7 @@ class PublicParkingVC: UIViewController {
             
             
         }
-        else if(counter == 5){
+        else if(counter == 4){
             
             //let controller = storyboard!.instantiateViewController(withIdentifier: "five")
             self.addChild(self.imageStepVC)
@@ -383,26 +369,4 @@ class PublicParkingVC: UIViewController {
     }
     
     
-}
-
-extension UIViewController {
-
-    /// Adds child view controller to the parent.
-    ///
-    /// - Parameter child: Child view controller.
-    func add(_ child: UIViewController) {
-        addChild(child)
-        view.addSubview(child.view)
-        child.didMove(toParent: self)
-    }
-    
-    /// It removes the child view controller from the parent.
-    func remove() {
-        guard parent != nil else {
-            return
-        }
-        willMove(toParent: nil)
-        removeFromParent()
-        view.removeFromSuperview()
-    }
 }

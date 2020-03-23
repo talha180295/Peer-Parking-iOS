@@ -330,9 +330,10 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
         }
         else{
             imag = (details["image_url"]  as! String)
+            print(imag)
         }
         
-        img.sd_setImage(with: URL(string: imag),placeholderImage: UIImage.init(named: "placeholder_user") )
+        img.sd_setImage(with: URL(string: imag),placeholderImage: UIImage.init(named: "icon_user") )
     }
     
     

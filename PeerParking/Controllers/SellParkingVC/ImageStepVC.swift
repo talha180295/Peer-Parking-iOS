@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StepFiveVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextViewDelegate {
+class ImageStepVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextViewDelegate {
 
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var text_view: UITextView!

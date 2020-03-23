@@ -103,7 +103,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
    
         let device_type = "ios"
         
-        let device_token :String = UserDefaults.standard.string(forKey: "FCMToken")!
+        let device_token :String = UserDefaults.standard.string(forKey: "FCMToken") ?? ""
         print(device_token)
         let param  = [
             "name" : name,

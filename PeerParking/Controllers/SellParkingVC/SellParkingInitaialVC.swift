@@ -32,7 +32,7 @@ class SellParkingInitaialVC: UIViewController {
     }
     @IBAction func privateParkingBtn(_ sender:UIButton){
            
-       
+        setUpView(withIdentifier: "PrivateParkingVC")
            
     }
     

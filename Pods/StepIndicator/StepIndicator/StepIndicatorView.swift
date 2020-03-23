@@ -23,7 +23,7 @@ public class StepIndicatorView: UIView {
     private var annularLayers = [AnnularLayer]()
     private var horizontalLineLayers = [LineLayer]()
     private let containerLayer = CALayer()
-    let step_text = ["Details","Price","When","Limitations","Location","Image", ""]
+    public var step_text = [String]()// = ["Details","Price","When","Limitations","Location","ImageUpl"]
     
     
     // MARK: - Overrided properties and methods
@@ -40,7 +40,7 @@ public class StepIndicatorView: UIView {
     
     
     // MARK: - Custom properties
-    @IBInspectable public var numberOfSteps: Int = 6 {
+    @IBInspectable public var numberOfSteps: Int = 3 {
         didSet {
             self.createSteps()
         }

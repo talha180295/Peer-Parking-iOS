@@ -46,7 +46,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
             imag =  UserDefaults.standard.string(forKey: "image_url")!
             
             
-                    img.sd_setImage(with: URL(string: imag),placeholderImage: UIImage.init(named: "placeholder_user") )
+                    img.sd_setImage(with: URL(string: imag),placeholderImage: UIImage.init(named: "icon_user") )
         }
 
         tblMenu.delegate =  self

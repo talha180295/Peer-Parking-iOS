@@ -10,15 +10,17 @@ import UIKit
 
 class DetailStepVC: UIViewController {
 
-     @IBOutlet weak var titleTF: UITextField!
+    @IBOutlet weak var titleTF: UITextField!
     
     @IBOutlet weak var mini_btn: UIButton!
     @IBOutlet weak var family_btn: UIButton!
     @IBOutlet weak var suv_btn: UIButton!
     @IBOutlet weak var bus_btn: UIButton!
     
-    @IBOutlet weak var lot_btn: UIButton!
-    @IBOutlet weak var street_btn: UIButton!
+    @IBOutlet weak var parkingType1: UIButton!
+    @IBOutlet weak var parkingType2: UIButton!
+    
+    var isPrivate = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,15 @@ class DetailStepVC: UIViewController {
         
         GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.PUBLIC_CONST, forKey: APP_CONSTANT.PARKING_TYPES.parking_type)
         
-        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PUBLIC_PARKING_SUB_TYPES.LOT_CONST, forKey: APP_CONSTANT.PUBLIC_PARKING_SUB_TYPES.parking_sub_type)
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_SUB_TYPES.LOT_CONST, forKey: APP_CONSTANT.PARKING_SUB_TYPES.parking_sub_type)
+        
+        print(isPrivate)
+        
+        if(isPrivate){
+            parkingType1.setTitle("Garage", for: .normal)
+            parkingType2.setTitle("Driveway", for: .normal)
+        }
+        
         
     }
     
@@ -121,10 +131,10 @@ class DetailStepVC: UIViewController {
             sender.setBackgroundImage(UIImage(named: "round_rect_blue"), for: .normal)
             sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
             
-            street_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
-            street_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+            parkingType2.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+            parkingType2.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
           
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PUBLIC_PARKING_SUB_TYPES.LOT_CONST, forKey: APP_CONSTANT.PUBLIC_PARKING_SUB_TYPES.parking_sub_type)
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_SUB_TYPES.LOT_CONST, forKey: APP_CONSTANT.PARKING_SUB_TYPES.parking_sub_type)
         }
         else if(sender.tag == 2){
             
@@ -132,11 +142,11 @@ class DetailStepVC: UIViewController {
             sender.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
             
             
-            lot_btn.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
-            lot_btn.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
+            parkingType1.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
+            parkingType1.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
          
             
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PUBLIC_PARKING_SUB_TYPES.STREET_CONST, forKey: APP_CONSTANT.PUBLIC_PARKING_SUB_TYPES.parking_sub_type)
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_SUB_TYPES.STREET_CONST, forKey: APP_CONSTANT.PARKING_SUB_TYPES.parking_sub_type)
             
         }
 

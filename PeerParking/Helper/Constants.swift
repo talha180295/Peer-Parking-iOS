@@ -15,10 +15,10 @@ struct Key{
     
     struct Google{
         
-        static let placesKey = "AIzaSyB9ppk-0eNcK42I5ykfreGWwgiUClqmMIs"
-//        static let placesKey = "AIzaSyCkoOvnd1_eougL23wAx7DP65C_duaJRjQ"
-        
-//        static let placesKey2 = "AIzaSyAdxovNnHIWKOKQcgn6H0PhwZsFCMfXjnQ"
+            static let placesKey = "AIzaSyB9ppk-0eNcK42I5ykfreGWwgiUClqmMIs"
+    //        static let placesKey = "AIzaSyCkoOvnd1_eougL23wAx7DP65C_duaJRjQ"
+            
+    //        static let placesKey2 = "AIzaSyAdxovNnHIWKOKQcgn6H0PhwZsFCMfXjnQ"
         
         static let serverKey = "some key here"
     }
@@ -27,9 +27,10 @@ struct Key{
 
 struct APP_CONSTANT {
     
-    
+    static let public_step_text = ["Details","Price","When","Limitations","Location","Image"]
+    static let private_step_text = ["Details","Price","When","Location","Image"]
 //    static let PAGE_URL = "http://peer-parking.apps.fomarkmedia.com/pages/"
-        static let PAGE_URL = "http://peer-parking.demo.servstaging.com/pages/"
+    static let PAGE_URL = "http://peer-parking.demo.servstaging.com/pages/"
     
     struct API {
        
@@ -98,7 +99,7 @@ struct APP_CONSTANT {
     }
     
     // PARKING_SUB_TYPES
-    struct PUBLIC_PARKING_SUB_TYPES{
+    struct PARKING_SUB_TYPES{
         
         static let parking_sub_type = "parking_sub_type"
         static let LOT_CONST = 10
