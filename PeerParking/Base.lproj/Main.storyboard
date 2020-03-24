@@ -11046,10 +11046,10 @@ Click Finish to publish your offer</string>
                                     <action selector="indexChanged:" destination="kpC-hh-IeQ" eventType="valueChanged" id="NRA-Xl-D2M"/>
                                 </connections>
                             </segmentedControl>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XkQ-ko-mmE">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="XkQ-ko-mmE">
                                 <rect key="frame" x="47" y="120" width="320" height="162"/>
                             </datePicker>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="My3-rH-Pd2">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="My3-rH-Pd2">
                                 <rect key="frame" x="47" y="120" width="320" height="162"/>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kf2-cT-YDa">
@@ -11062,9 +11062,10 @@ Click Finish to publish your offer</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a4H-J5-HhU">
-                                <rect key="frame" x="157" y="298" width="100" height="30"/>
+                                <rect key="frame" x="157" y="288" width="100" height="40"/>
                                 <color key="backgroundColor" name="themeBlue"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="dRk-T3-Hau"/>
                                     <constraint firstAttribute="width" constant="100" id="hhp-wn-lXW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
@@ -11076,17 +11077,20 @@ Click Finish to publish your offer</string>
                                         <real key="value" value="2"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="done_btn:" destination="kpC-hh-IeQ" eventType="touchUpInside" id="THe-8z-F6f"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="My3-rH-Pd2" firstAttribute="top" secondItem="kf2-cT-YDa" secondAttribute="bottom" constant="18" id="2K0-dP-CFg"/>
                             <constraint firstItem="XkQ-ko-mmE" firstAttribute="centerX" secondItem="i33-8t-UgL" secondAttribute="centerX" id="AJD-Ad-qZh"/>
-                            <constraint firstItem="a4H-J5-HhU" firstAttribute="top" secondItem="XkQ-ko-mmE" secondAttribute="bottom" constant="16" id="Feh-gv-yLy"/>
                             <constraint firstItem="TdE-1p-QV9" firstAttribute="bottom" secondItem="My3-rH-Pd2" secondAttribute="bottom" constant="68" id="GCN-Lm-3cx"/>
                             <constraint firstItem="kf2-cT-YDa" firstAttribute="centerX" secondItem="i33-8t-UgL" secondAttribute="centerX" id="H19-OH-6ko"/>
                             <constraint firstItem="kf2-cT-YDa" firstAttribute="top" secondItem="j9i-WJ-TH3" secondAttribute="bottom" constant="25" id="HOb-Ix-dSg"/>
                             <constraint firstItem="My3-rH-Pd2" firstAttribute="centerX" secondItem="i33-8t-UgL" secondAttribute="centerX" id="TUG-cr-rss"/>
+                            <constraint firstItem="a4H-J5-HhU" firstAttribute="top" secondItem="XkQ-ko-mmE" secondAttribute="bottom" constant="6" id="XBd-2o-YeF"/>
                             <constraint firstItem="XkQ-ko-mmE" firstAttribute="top" secondItem="kf2-cT-YDa" secondAttribute="bottom" constant="18" id="cOy-Jc-zDB"/>
                             <constraint firstItem="j9i-WJ-TH3" firstAttribute="top" secondItem="i33-8t-UgL" secondAttribute="top" constant="25" id="dDP-X1-V5f"/>
                             <constraint firstItem="j9i-WJ-TH3" firstAttribute="centerX" secondItem="i33-8t-UgL" secondAttribute="centerX" id="f7p-rh-BiZ"/>

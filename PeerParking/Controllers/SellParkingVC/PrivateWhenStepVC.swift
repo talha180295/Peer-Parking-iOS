@@ -9,15 +9,37 @@
 import UIKit
 import EzPopup
 
+//struct Day {
+//
+//    let day: Int!
+//    let startAt, endAt: String!
+//
+//    enum CodingKeys: String, CodingKey {
+//        case day
+//        case startAt = "start_at"
+//        case endAt = "end_at"
+//    }
+//}
+
+
 class PrivateWhenStepVC: UIViewController {
 
     //Outlets
     @IBOutlet weak var timingTblView:UITableView!
    
     
+    
     //Variables
+    
+    //    var daysModel = [Day]()
+    
     let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sarurday", "Sunday"]
+    
+//    var day = ["day" : "", "startAt" : "", "endAt" : ""]
+
+    var daysModel = [[String : Any]]()
     var selectedItems = [Int]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +49,7 @@ class PrivateWhenStepVC: UIViewController {
         
         Helper().registerTableCell(tableView: timingTblView, nibName: "TimingsCell", identifier: "TimingsCell")
     
-        // Do any additional setup after loading the view.
+        
     }
     
 
@@ -35,9 +57,11 @@ class PrivateWhenStepVC: UIViewController {
         
         if sender.isOn{
             timingTblView.isHidden = true
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.removeValue(forKey: "days")
         }
         else{
-             timingTblView.isHidden = false
+            timingTblView.isHidden = false
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(self.daysModel, forKey: "days")
         }
         
     }
@@ -75,29 +99,66 @@ extension PrivateWhenStepVC:UITableViewDelegate, UITableViewDataSource, TimePop{
     }
  
     @objc func buttonClicked(sender: UIButton) {
-         if (self.selectedItems.contains(sender.tag)) {
+        
+        let indexPath = IndexPath(row: sender.tag, section: 0)
+        let cell = self.timingTblView.cellForRow(at: indexPath) as! TimingsCell
+        
+        if (self.selectedItems.contains(sender.tag)) {
+        
             let index = self.selectedItems.firstIndex(of: sender.tag)!
-              self.selectedItems.remove(at: index)
-         }
-         else {
-              self.selectedItems.append(sender.tag)
-         }
-         self.timingTblView.reloadData()
+            self.selectedItems.remove(at: index)
+            
+            self.daysModel.remove(at: index)
+            
+           
+            
+        }
+        else {
+            self.selectedItems.append(sender.tag)
+            let dayCount = sender.tag + 1
+            self.daysModel.append( [ "day" : dayCount, "startAt" : cell.startTime.text ?? "", "endAt" : cell.endTime.text ?? "" ] )
+//            self.daysModel.append(Day(day: dayCount , startAt: cell.startTime.text, endAt: cell.endTime.text))
+        }
+        
+        
+        if(self.selectedItems.count == 0){
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.removeValue(forKey: "days")
+        }
+        else{
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(self.daysModel, forKey: "days")
+        }
+        
+        self.timingTblView.reloadData()
     }
     
     func setTime(index: Int) {
         
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StartEndPopUp") as! StartEndPopUp
+        let indexPath = IndexPath(row: index, section: 0)
+        let cell = self.timingTblView.cellForRow(at: indexPath) as! TimingsCell
         
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StartEndPopUp") as! StartEndPopUp
+        vc.startDate = cell.startTime.text ?? ""
+        vc.endDate = cell.endTime.text ?? ""
+        
+        vc.completionBlock = {(startDtae, endDate) -> ()in
+            
+           
+            cell.startTime.text = startDtae
+            cell.endTime.text = endDate
+            self.daysModel.append( [ "day" :  index+1, "startAt" : cell.startTime.text ?? "", "endAt" : cell.endTime.text ?? "" ] )
+//            self.daysModel.append(Day(day: index+1 , startAt: cell.startTime.text, endAt: cell.endTime.text))
+            
+//            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "parking_extra_fee")
+        }
         let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 350)
         popupVC.canTapOutsideToDismiss = true
         
         //properties
-        //            popupVC.backgroundAlpha = 1
-        //            popupVC.backgroundColor = .black
-        //            popupVC.canTapOutsideToDismiss = true
-                    popupVC.cornerRadius = 10
-        //            popupVC.shadowEnabled = true
+        // popupVC.backgroundAlpha = 1
+        // popupVC.backgroundColor = .black
+        // popupVC.canTapOutsideToDismiss = true
+        popupVC.cornerRadius = 10
+        // popupVC.shadowEnabled = true
         
         // show it by call present(_ , animated:) method from a current UIViewController
         self.present(popupVC, animated: true)

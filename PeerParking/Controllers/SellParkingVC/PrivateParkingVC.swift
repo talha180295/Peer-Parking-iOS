@@ -276,6 +276,8 @@ class PrivateParkingVC: UIViewController {
         else if(counter == 3){
             
             
+           
+            print("PRIVATE_PARKING_MODEL=\(GLOBAL_VAR.PRIVATE_PARKING_MODEL)")
             //let controller = storyboard!.instantiateViewController(withIdentifier: "four")
             self.addChild(self.locationStepVC)
             self.locationStepVC.view.frame = self.containerView.bounds  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
@@ -310,14 +312,14 @@ class PrivateParkingVC: UIViewController {
     }
     
     @IBAction func for_btn(_ sender: UIButton) {
-        if(counter != 6){
+        if(counter != 5){
             counter+=1
             step_progress.currentStep = counter
             change_page()
 //            let data = ["counter":counter]
 //            NotificationCenter.default.post(name: Notification.Name("btn_tap"), object: nil,userInfo: data)
         }
-        if(counter == 6){
+        if(counter == 5){
             
             counter-=1
             step_progress.currentStep = counter

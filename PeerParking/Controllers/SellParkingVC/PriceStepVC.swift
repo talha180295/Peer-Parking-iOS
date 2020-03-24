@@ -18,7 +18,11 @@ class PriceStepVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(5.0, forKey: "initial_price")
+ 
+        
+        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(false, forKey: "is_negotiable")
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(false, forKey: "is_negotiable")
+        
     }
     
     @IBAction func amount_tf(_ sender: UITextField) {
@@ -31,6 +35,8 @@ class PriceStepVC: UIViewController {
             print(dataReturned)
             self.amount_tf.text = dataReturned
             self.imgInfo.isHidden = true
+            
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(Double(dataReturned)!, forKey: "initial_price")
             GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "initial_price")
             
         }
@@ -54,10 +60,12 @@ class PriceStepVC: UIViewController {
         
         if(sender.isOn){
             is_negotiable.isOn = true
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(true, forKey: "is_negotiable")
             GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(true, forKey: "is_negotiable")
         }
         else{
             is_negotiable.isOn = false
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(false, forKey: "is_negotiable")
             GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(false, forKey: "is_negotiable")
         }
        

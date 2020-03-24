@@ -25,11 +25,23 @@ class DetailStepVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.MINI, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+        if(isPrivate){
+          
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(APP_CONSTANT.VEHICLE_TYPES.MINI, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+                   
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(APP_CONSTANT.PARKING_TYPES.PRIVATE_CONST, forKey: APP_CONSTANT.PARKING_TYPES.parking_type)
+
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(APP_CONSTANT.PARKING_SUB_TYPES.LOT_CONST, forKey: APP_CONSTANT.PARKING_SUB_TYPES.parking_sub_type)
+        }
+        else{
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.MINI, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.PUBLIC_CONST, forKey: APP_CONSTANT.PARKING_TYPES.parking_type)
+
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_SUB_TYPES.LOT_CONST, forKey: APP_CONSTANT.PARKING_SUB_TYPES.parking_sub_type)
+        }
         
-        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_TYPES.PUBLIC_CONST, forKey: APP_CONSTANT.PARKING_TYPES.parking_type)
-        
-        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_SUB_TYPES.LOT_CONST, forKey: APP_CONSTANT.PARKING_SUB_TYPES.parking_sub_type)
+       
         
         print(isPrivate)
         
@@ -44,8 +56,15 @@ class DetailStepVC: UIViewController {
     @IBAction func titleTF_didchange(_ sender: UITextField) {
         
         if(titleTF.hasText){
+          
             let title = titleTF.text ?? ""
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(title , forKey: "title")
+            if(isPrivate){
+                GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(title , forKey: "title")
+            }
+            else{
+                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(title , forKey: "title")
+            }
+            
         }
         
     
@@ -63,7 +82,13 @@ class DetailStepVC: UIViewController {
             
             bus_btn.setImage(UIImage(named: "bus_unselected"), for: .normal)
             
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.MINI, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+            if(isPrivate){
+                GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(APP_CONSTANT.VEHICLE_TYPES.MINI, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+            }
+            else{
+                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.MINI, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+            }
+            
             
             
             
@@ -79,7 +104,14 @@ class DetailStepVC: UIViewController {
             
             bus_btn.setImage(UIImage(named: "bus_unselected"), for: .normal)
             
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.FAMILY, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+            if(isPrivate){
+                GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(APP_CONSTANT.VEHICLE_TYPES.FAMILY, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+            }
+            else{
+                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.FAMILY, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+            }
+            
+            
         }
         else if(sender.tag == 3){
             
@@ -92,7 +124,14 @@ class DetailStepVC: UIViewController {
             
             bus_btn.setImage(UIImage(named: "bus_unselected"), for: .normal)
             
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.SUV, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+            if(isPrivate){
+                GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(APP_CONSTANT.VEHICLE_TYPES.SUV, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+            }
+            else{
+                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.SUV, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+            }
+            
+            
         }
         else if(sender.tag == 4){
             
@@ -105,7 +144,14 @@ class DetailStepVC: UIViewController {
             
             bus_btn.setImage(UIImage(named: "bus_selected"), for: .normal)
             
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.BUS, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+            if(isPrivate){
+                GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(APP_CONSTANT.VEHICLE_TYPES.BUS, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+            }
+            else{
+                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.VEHICLE_TYPES.BUS, forKey: APP_CONSTANT.VEHICLE_TYPES.vehicle_type)
+            }
+            
+            
         }
         
     }
@@ -134,7 +180,14 @@ class DetailStepVC: UIViewController {
             parkingType2.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
             parkingType2.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
           
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_SUB_TYPES.LOT_CONST, forKey: APP_CONSTANT.PARKING_SUB_TYPES.parking_sub_type)
+            if(isPrivate){
+                GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(APP_CONSTANT.PARKING_SUB_TYPES.LOT_CONST, forKey: APP_CONSTANT.PARKING_SUB_TYPES.parking_sub_type)
+            }
+            else{
+                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_SUB_TYPES.LOT_CONST, forKey: APP_CONSTANT.PARKING_SUB_TYPES.parking_sub_type)
+            }
+            
+            
         }
         else if(sender.tag == 2){
             
@@ -145,8 +198,14 @@ class DetailStepVC: UIViewController {
             parkingType1.setBackgroundImage(UIImage(named: "round_rect_white"), for: .normal)
             parkingType1.setTitleColor(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1), for: .normal)
          
+            if(isPrivate){
+                GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(APP_CONSTANT.PARKING_SUB_TYPES.STREET_CONST, forKey: APP_CONSTANT.PARKING_SUB_TYPES.parking_sub_type)
+            }
+            else{
+                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_SUB_TYPES.STREET_CONST, forKey: APP_CONSTANT.PARKING_SUB_TYPES.parking_sub_type)
+            }
             
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(APP_CONSTANT.PARKING_SUB_TYPES.STREET_CONST, forKey: APP_CONSTANT.PARKING_SUB_TYPES.parking_sub_type)
+            
             
         }
 
