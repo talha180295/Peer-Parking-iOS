@@ -323,12 +323,13 @@ class PrivateParkingVC: UIViewController {
             
             counter-=1
             step_progress.currentStep = counter
-            print("parking_post_details=\(GLOBAL_VAR.PARKING_POST_DETAILS)")
+            print("parking_post_details=\(GLOBAL_VAR.PRIVATE_PARKING_MODEL)")
             if Helper().IsUserLogin(){
                 
                
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FinishPopup")
-    
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FinishPopup") as! FinishPopup
+                vc.isPrivate = true
+                
     
                 let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
                 popupVC.canTapOutsideToDismiss = true

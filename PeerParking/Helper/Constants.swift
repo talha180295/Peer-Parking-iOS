@@ -48,6 +48,8 @@ struct APP_CONSTANT {
         //GET /parkings API
         static let POST_PARKING = "parkings"
         
+        static let POST_PRIVATE_PARKING = "private-parkings"
+        
         //GET /parkings-without-token
         static let GET_PARKING_WITHOUT_TOKEN = "parkings-without-token"
         

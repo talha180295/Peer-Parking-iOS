@@ -144,6 +144,8 @@ class LocationStepVC: UIViewController,GMSMapViewDelegate {
             print("result=\(address)")
             self.search_tf.text = address
             GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(address, forKey: "address")
+            
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(address, forKey: "address")
           }
         }
       
@@ -211,6 +213,9 @@ extension LocationStepVC:CLLocationManagerDelegate{
         GLOBAL_VAR.PARKING_POST_DETAILS.updateValue((location?.coordinate.latitude.description)!, forKey: "latitude")
         GLOBAL_VAR.PARKING_POST_DETAILS.updateValue((location?.coordinate.longitude.description)!, forKey: "longitude")
         
+        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue((location?.coordinate.latitude.description)!, forKey: "latitude")
+        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue((location?.coordinate.longitude.description)!, forKey: "longitude")
+        
         let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 14.0)
         
         self.map.animate(to: camera)
@@ -226,6 +231,8 @@ extension LocationStepVC:CLLocationManagerDelegate{
             print("result=\(address)")
             self.search_tf.text = address
             GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(address, forKey: "address")
+            
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(address, forKey: "address")
           }
         }
 

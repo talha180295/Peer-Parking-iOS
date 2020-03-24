@@ -32,6 +32,8 @@ class ImageStepVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         
         GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(imageData, forKey: "image")
+        
+        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(imageData, forKey: "image")
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -46,10 +48,14 @@ class ImageStepVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
             textView.text = "Add some usefull information"
             textView.textColor = UIColor.lightGray
             GLOBAL_VAR.PARKING_POST_DETAILS.updateValue("", forKey: "note")
+            
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue("", forKey: "note")
         }
         else{
             
             GLOBAL_VAR.PARKING_POST_DETAILS.updateValue((textView.text)!, forKey: "note")
+            
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue((textView.text)!, forKey: "note")
         }
         
         print("heee=\(textView.text)")
@@ -95,6 +101,8 @@ class ImageStepVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         }
 
         GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(imageData, forKey: "image")
+
+        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(imageData, forKey: "image")
         
 //        picker.dismiss(animated: true){
 //            self.img.image = img

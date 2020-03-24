@@ -18,10 +18,8 @@ class PriceStepVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
- 
-        
-        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(false, forKey: "is_negotiable")
-        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(false, forKey: "is_negotiable")
+        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(0, forKey: "is_negotiable")
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(0, forKey: "is_negotiable")
         
     }
     
@@ -60,13 +58,13 @@ class PriceStepVC: UIViewController {
         
         if(sender.isOn){
             is_negotiable.isOn = true
-            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(true, forKey: "is_negotiable")
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(true, forKey: "is_negotiable")
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(1, forKey: "is_negotiable")
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(1, forKey: "is_negotiable")
         }
         else{
             is_negotiable.isOn = false
-            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(false, forKey: "is_negotiable")
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(false, forKey: "is_negotiable")
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(0, forKey: "is_negotiable")
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(0, forKey: "is_negotiable")
         }
        
     }

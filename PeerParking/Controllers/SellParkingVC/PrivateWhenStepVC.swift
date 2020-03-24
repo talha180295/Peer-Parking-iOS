@@ -12,12 +12,12 @@ import EzPopup
 //struct Day {
 //
 //    let day: Int!
-//    let startAt, endAt: String!
+//    let start_at, end_at: String!
 //
 //    enum CodingKeys: String, CodingKey {
 //        case day
-//        case startAt = "start_at"
-//        case endAt = "end_at"
+//        case start_at = "start_at"
+//        case end_at = "end_at"
 //    }
 //}
 
@@ -31,11 +31,12 @@ class PrivateWhenStepVC: UIViewController {
     
     //Variables
     
+    
     //    var daysModel = [Day]()
     
     let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sarurday", "Sunday"]
     
-//    var day = ["day" : "", "startAt" : "", "endAt" : ""]
+//    var day = ["day" : "", "start_at" : "", "end_at" : ""]
 
     var daysModel = [[String : Any]]()
     var selectedItems = [Int]()
@@ -50,6 +51,8 @@ class PrivateWhenStepVC: UIViewController {
         Helper().registerTableCell(tableView: timingTblView, nibName: "TimingsCell", identifier: "TimingsCell")
     
         
+        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(0, forKey: "is_always")
+        
     }
     
 
@@ -57,13 +60,26 @@ class PrivateWhenStepVC: UIViewController {
         
         if sender.isOn{
             timingTblView.isHidden = true
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(1, forKey: "is_always")
             GLOBAL_VAR.PRIVATE_PARKING_MODEL.removeValue(forKey: "days")
         }
         else{
             timingTblView.isHidden = false
-            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(self.daysModel, forKey: "days")
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(0, forKey: "is_always")
+            
+          
+             let depStr = filterString(str: self.daysModel.description)
+             GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(depStr, forKey: "days")
+//            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(self.daysModel, forKey: "days")
         }
         
+    }
+    
+    func filterString(str:String) -> String{
+        
+        let  depStr = str.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "[[", with: "[{").replacingOccurrences(of: "],[", with: "},{").replacingOccurrences(of: "]]", with: "}]").replacingOccurrences(of: "Optional(", with: "").replacingOccurrences(of: "),", with: ",").replacingOccurrences(of: ")", with: "")
+        
+        return depStr
     }
     
 
@@ -116,8 +132,22 @@ extension PrivateWhenStepVC:UITableViewDelegate, UITableViewDataSource, TimePop{
         else {
             self.selectedItems.append(sender.tag)
             let dayCount = sender.tag + 1
-            self.daysModel.append( [ "day" : dayCount, "startAt" : cell.startTime.text ?? "", "endAt" : cell.endTime.text ?? "" ] )
-//            self.daysModel.append(Day(day: dayCount , startAt: cell.startTime.text, endAt: cell.endTime.text))
+            
+            let s_dateAsString = cell.startTime.text ?? ""
+            let e_dateAsString = cell.endTime.text ?? ""
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "h:mm a"
+            
+            let date1 = dateFormatter.date(from: s_dateAsString)
+            let date2 = dateFormatter.date(from: e_dateAsString)
+            
+            dateFormatter.dateFormat = "HH:mm"
+            let s_time24 = dateFormatter.string(from: date1!)
+            let e_time24 = dateFormatter.string(from: date2!)
+            
+            
+            self.daysModel.append( [ "day" : dayCount, "start_at" : s_time24, "end_at" : e_time24 ] )
         }
         
         
@@ -125,7 +155,10 @@ extension PrivateWhenStepVC:UITableViewDelegate, UITableViewDataSource, TimePop{
             GLOBAL_VAR.PRIVATE_PARKING_MODEL.removeValue(forKey: "days")
         }
         else{
-            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(self.daysModel, forKey: "days")
+            
+            let depStr = filterString(str: self.daysModel.description)
+             
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(depStr, forKey: "days")
         }
         
         self.timingTblView.reloadData()
@@ -145,8 +178,36 @@ extension PrivateWhenStepVC:UITableViewDelegate, UITableViewDataSource, TimePop{
            
             cell.startTime.text = startDtae
             cell.endTime.text = endDate
-            self.daysModel.append( [ "day" :  index+1, "startAt" : cell.startTime.text ?? "", "endAt" : cell.endTime.text ?? "" ] )
-//            self.daysModel.append(Day(day: index+1 , startAt: cell.startTime.text, endAt: cell.endTime.text))
+            
+            let s_dateAsString = startDtae
+            let e_dateAsString = endDate
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "h:mm a"
+
+            let date1 = dateFormatter.date(from: s_dateAsString)
+            let date2 = dateFormatter.date(from: e_dateAsString)
+
+            dateFormatter.dateFormat = "HH:mm"
+            let s_time24 = dateFormatter.string(from: date1!)
+            let e_time24 = dateFormatter.string(from: date2!)
+            
+//            print("index=\(index+1)")
+            var i = 0
+            for item in self.daysModel{
+                if(item["day"] as? Int == index+1){
+                    self.daysModel.remove(at: i)
+                }
+                i+=1
+            }
+            
+            self.daysModel.append( [ "day" :  index+1, "start_at" : s_time24, "end_at" : e_time24 ] )
+            
+            
+            let depStr = self.filterString(str: self.daysModel.description)
+           
+            
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(depStr, forKey: "days")
             
 //            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "parking_extra_fee")
         }
