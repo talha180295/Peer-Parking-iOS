@@ -52,7 +52,9 @@ class FinishPopup: UIViewController {
         let image = GLOBAL_VAR.PARKING_POST_DETAILS["image"]
 
         
-        let params:[String:Any] = GLOBAL_VAR.PARKING_POST_DETAILS
+        var params:[String:Any] = GLOBAL_VAR.PARKING_POST_DETAILS
+        
+        params.removeValue(forKey: "image")
         
         let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: "auth_token")!)"
         let headers: HTTPHeaders = [
@@ -65,20 +67,20 @@ class FinishPopup: UIViewController {
         
         print("url--\(url)")
         
-        
+        GLOBAL_VAR.PARKING_POST_DETAILS.removeAll()
         
         uploadImage(urlString: url, imageParamKey: "image", imageData: image as! Data, param: params, headers: headers){
             response in
-            print("response>>>\(response)")
-
-            if response.result.value == nil {
+            
+            if response?.result.value == nil {
                 print("No response")
 
+                Helper().hideSpinner(view: self.view)
                 SharedHelper().showToast(message: "Internal Server Error", controller: vc)
-                return
+                
             }
             else {
-                let responseData = response.result.value as! NSDictionary
+                let responseData = response?.result.value as! NSDictionary
                 let status = responseData["success"] as! Bool
                 if(status)
                 {
@@ -104,7 +106,7 @@ class FinishPopup: UIViewController {
                 }
             }
             
-            Helper().hideSpinner(view: self.view)
+            
             Helper().presentOnMainScreens(controller: self, index: 2)
         }
     }
@@ -139,20 +141,21 @@ class FinishPopup: UIViewController {
         
         print("url--\(url)")
         
-        
+        GLOBAL_VAR.PRIVATE_PARKING_MODEL.removeAll()
         
         uploadImage(urlString: url, imageParamKey: "image", imageData: image as! Data, param: params, headers: headers){
             response in
             print("response>>>\(response)")
 
-            if response.result.value == nil {
+            Helper().hideSpinner(view: self.view)
+            if response?.result.value == nil {
                 print("No response")
 
                 SharedHelper().showToast(message: "Internal Server Error", controller: vc)
-                return
+                
             }
             else {
-                let responseData = response.result.value as! NSDictionary
+                let responseData = response?.result.value as! NSDictionary
                 let status = responseData["success"] as! Bool
                 if(status)
                 {
@@ -178,12 +181,12 @@ class FinishPopup: UIViewController {
                 }
             }
 
-            Helper().hideSpinner(view: self.view)
+            
             Helper().presentOnMainScreens(controller: self, index: 2)
         }
     }
     
-    func uploadImage(urlString : String ,imageParamKey:String, imageData : Data, param : [String : Any],headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>) -> Void){
+    func uploadImage(urlString : String ,imageParamKey:String, imageData : Data, param : [String : Any],headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>?) -> Void){
         
         
 //        guard let imageData = image.jpegData(compressionQuality: 1.0) else {
@@ -198,7 +201,7 @@ class FinishPopup: UIViewController {
             print(response)
             if response.result.value == nil {
                 print("No response")
-                
+                completion(nil)
                 return
             }
             else {

@@ -304,7 +304,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             
             let priceStr = dict.initialPrice ?? 0.0
             
-            let distanceStr = cal_distance(lat: lat, long: long)
+//            let distanceStr = cal_distance(lat: lat, long: long)
             
             let imgUrl = dict.imageURL
             cell.image.sd_setImage(with: URL(string: imgUrl ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
@@ -313,17 +313,17 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             cell.rating_view.rating = seller_details?.averageRating ?? 0.0
             
             cell.vehicle_type.text = dict.vehicleTypeText
-           
+            cell.parking_type.text = dict.parkingTypeText
 
             cell.price.text = "$\(priceStr)"
             
             
-            cell.distance.text = String(format: "%.02f miles away", distanceStr)
+//            cell.distance.text = String(format: "%.02f miles away", distanceStr)
         
-            Helper().getTimeDurationBetweenCordinate(s_lat: self.lat, s_longg: self.longg, d_lat: Double(lat) ?? 0.0, d_longg: Double(long) ?? 0.0){ duration in
-                
-                cell.time.text = duration
-            }
+//            Helper().getTimeDurationBetweenCordinate(s_lat: self.lat, s_longg: self.longg, d_lat: Double(lat) ?? 0.0, d_longg: Double(long) ?? 0.0){ duration in
+//
+//                cell.time.text = duration
+//            }
             
             if(dict.isNegotiable ?? false){
                 cell.isNegotiable.text = "Yes"

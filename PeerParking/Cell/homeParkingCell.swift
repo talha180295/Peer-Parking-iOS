@@ -19,9 +19,11 @@ class homeParkingCell: UICollectionViewCell {
     
     @IBOutlet weak var vehicle_type: UILabel!
     
-    @IBOutlet weak var distance: UILabel!
+    @IBOutlet weak var parking_type: UILabel!
     
-    @IBOutlet weak var time: UILabel!
+//    @IBOutlet weak var distance: UILabel!
+//
+//    @IBOutlet weak var time: UILabel!
     
     @IBOutlet weak var isNegotiable: UILabel!
     

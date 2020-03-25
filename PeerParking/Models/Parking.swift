@@ -18,7 +18,7 @@ struct Parking: Codable {
     let parkingType, status: Int?
     let initialPrice, finalPrice: Double?
     let isNegotiable: Bool?
-    let startAt, endAt, address, latitude: String?
+    let title,startAt, endAt, address, latitude: String?
     let longitude, image, note: String?
     let parkingHoursLimit: String?
     let parkingExtraFee, parkingAllowedUntil: String?
@@ -34,6 +34,7 @@ struct Parking: Codable {
     
     enum CodingKeys: String, CodingKey {
         case id
+        case title
         case sellerID = "seller_id"
         case buyerID = "buyer_id"
         case vehicleType = "vehicle_type"

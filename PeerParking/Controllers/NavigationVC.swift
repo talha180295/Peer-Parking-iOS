@@ -295,7 +295,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
             cell.price.text = "$" + String(priceStr)
             
             
-            cell.distance.text = String(format: "%.02f miles away", distanceStr)
+//            cell.distance.text = String(format: "%.02f miles away", distanceStr)
           
               //cell.barg_count.text = dict["vehicle_type_text"] as? String
           }
