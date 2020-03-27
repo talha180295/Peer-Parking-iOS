@@ -104,7 +104,7 @@ class PrivateParkingVC: UIViewController {
         
         if(Helper().IsUserLogin()){
             
-            self.checkStatus()
+//            self.checkStatus()
         }
 
                 

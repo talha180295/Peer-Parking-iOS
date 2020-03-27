@@ -1,5 +1,9 @@
 PODS:
   - Alamofire (4.9.1)
+  - AvailableHapticFeedback (1.0.2)
+  - Charts (3.4.0):
+    - Charts/Core (= 3.4.0)
+  - Charts/Core (3.4.0)
   - CircleProgressView (1.2.0)
   - Cosmos (20.0.1)
   - DatePickerDialog (3.0)
@@ -117,6 +121,9 @@ PODS:
   - iProgressHUD (1.1.1)
   - IQKeyboardManagerSwift (6.5.4)
   - MBRadioCheckboxButton (2.0)
+  - MultiSlider (1.10.8):
+    - AvailableHapticFeedback
+    - SweeterSwift
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -130,6 +137,7 @@ PODS:
   - SideMenuController (0.2.4)
   - StepIndicator (1.0.8)
   - Stripe (18.4.0)
+  - SweeterSwift (1.1.3)
   - SwiftGifOrigin (1.7.0)
   - SwiftLocation (4.2.0)
   - SwiftyJSON (5.0.0)
@@ -137,6 +145,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - Charts
   - CircleProgressView
   - Cosmos
   - DatePickerDialog
@@ -154,6 +163,7 @@ DEPENDENCIES:
   - iProgressHUD
   - IQKeyboardManagerSwift
   - MBRadioCheckboxButton
+  - MultiSlider
   - SDWebImage
   - SideMenuController
   - StepIndicator
@@ -165,6 +175,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - AvailableHapticFeedback
+    - Charts
     - CircleProgressView
     - Cosmos
     - DatePickerDialog
@@ -195,6 +207,7 @@ SPEC REPOS:
     - iProgressHUD
     - IQKeyboardManagerSwift
     - MBRadioCheckboxButton
+    - MultiSlider
     - nanopb
     - ObjectMapper
     - Protobuf
@@ -202,6 +215,7 @@ SPEC REPOS:
     - SideMenuController
     - StepIndicator
     - Stripe
+    - SweeterSwift
     - SwiftGifOrigin
     - SwiftLocation
     - SwiftyJSON
@@ -209,6 +223,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  AvailableHapticFeedback: 9b21b9f6d3e4566015988b5de35b40abefe6c09a
+  Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
   CircleProgressView: 6b5b091d59dc5e5d2fda84e637a40498cdc39937
   Cosmos: b47fddf2102bb48580cd3025d9ce0a5c658a65da
   DatePickerDialog: 03dbb8350bfa80302ab2a8c83cee1fec70184444
@@ -239,6 +255,7 @@ SPEC CHECKSUMS:
   iProgressHUD: caa742128253c97f2c2e1ec59e2bbe6cf689df6a
   IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
   MBRadioCheckboxButton: 6e2a2cdc441e292e45b64c4e65eb8fc1fc05eef2
+  MultiSlider: a4fdcb3fb058a0af95720570b44d8683da5312c8
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   Protobuf: dd1aaea7140debfe4dd0683fb8ef208e527ae153
@@ -246,11 +263,12 @@ SPEC CHECKSUMS:
   SideMenuController: b463d2b3aa58e2afe57f57a07938fa9a647894ca
   StepIndicator: 748b293f671355b021253f82031ac002f153dc81
   Stripe: fa837c60f0644b488c994024ce7d9b001ea4e97c
+  SweeterSwift: d909211f6833405628c8c7c6bf9f8f2e8a0e9df9
   SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
   SwiftLocation: 609ac8859f2c5d48a6cadd2a58c63b1dae02dc25
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: 99a6091d7192904cf039c361cb107344176e461f
+PODFILE CHECKSUM: 1ab8d4e6cf5a713565bb24124750bc94ecc956e4
 
 COCOAPODS: 1.8.4
