@@ -10,6 +10,8 @@ import UIKit
 
 class MySpotsDetailBS: UIViewController {
 
+    var privateSpot:PrivateParkingModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,9 +20,12 @@ class MySpotsDetailBS: UIViewController {
     
     @IBAction func showDetailsBtn(_ sender: UIButton) {
         
-        NotificationCenter.default.post(name: Notification.Name("mode_filter"), object: nil, userInfo:["mode" : 10] )
-        
-        self.dismiss(animated: false)
+        let vc = Helper().getViewController(storyBoard: "Main", withIdentifier: "PrivateParkingDetailsVC") as! PrivateParkingDetailsVC
+        vc.privateSpot = self.privateSpot
+        self.present(vc, animated: true)
+//        NotificationCenter.default.post(name: Notification.Name("mode_filter"), object: nil, userInfo:["mode" : 10] )
+//
+//        self.dismiss(animated: false)
     }
     
     

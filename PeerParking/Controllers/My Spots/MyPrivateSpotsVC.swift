@@ -115,8 +115,32 @@ extension MyPrivateSpotsVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
         
-        let vc = Helper().getViewController(storyBoard: "Main", withIdentifier: "MySpotsDetailBS")
-               
+//        showAlert()
+        let vc = Helper().getViewController(storyBoard: "Main", withIdentifier: "MySpotsDetailBS") as! MySpotsDetailBS 
+        vc.privateSpot = self.privateSpotModel[indexPath.row]
         Helper().bottomSheet(controller: vc, sizes: [.fixed(120)], cornerRadius: 0, handleColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), view_controller: self)
+    }
+    
+     func showAlert() {
+        
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        alert.addAction(UIAlertAction(title: "View Details", style: .default , handler:{ (UIAlertAction)in
+            print("User click Approve button")
+        }))
+
+        alert.addAction(UIAlertAction(title: "View Bookings", style: .default , handler:{ (UIAlertAction)in
+            print("User click Edit button")
+        }))
+
+
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler:{ (UIAlertAction)in
+            print("User click Dismiss button")
+        }))
+
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
     }
 }

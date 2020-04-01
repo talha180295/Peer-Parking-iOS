@@ -95,6 +95,9 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     override func viewWillAppear(_ animated: Bool) {
         
         
+        let device_token :String = UserDefaults.standard.string(forKey: "FCMToken") ?? ""
+        print(device_token)
+        
 //        Helper().hideSpinner(view: self.view)
         tab_index = 0
         print("::=willapear")

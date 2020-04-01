@@ -60,6 +60,7 @@ class PrivateParkingVC: UIViewController {
         
         addChild(detailStepVC)
         self.detailStepVC.isPrivate = true
+        self.priceStepVC.isPrivate = true
         detailStepVC.view.frame = containerView.bounds  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
         containerView.addSubview(detailStepVC.view)
         detailStepVC.didMove(toParent: self)

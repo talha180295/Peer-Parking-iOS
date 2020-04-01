@@ -175,16 +175,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterD
            if let messageID = userInfo[gcmMessageIDKey] {
                print("Message ID: \(messageID)")
            }
-   //        let alert = userInfo["aps"] as! NSDictionary
-   //        let alertbody = alert["alert"] as! NSDictionary
-   //        let alert1 = alertbody["body"] as! String
-           
-          // if(alert1 == "One of our Service Provider send you a quote")
-          
-           //check and add all the data here too
-           
-           // Print full message.
-           print(userInfo)
+        
+        
+        
+        let jsonStringifiedString = userInfo["extra_payload"] as! String
+        let jsonStringifiedData = jsonStringifiedString.data(using: .utf8) as! Data
+        let jsonDict = try! JSONSerialization.jsonObject(with: jsonStringifiedData, options: []) as! [String: Any]
+        print(jsonDict["action_type"] as! String)
+//        print(jsonDict["action_type"])
+        print(userInfo)
            
            // Change this to your preferred presentation option
         completionHandler([.alert, .sound])
@@ -199,6 +198,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterD
                print("Message ID: \(messageID)")
            }
            
+          let jsonStringifiedString = userInfo["extra_payload"] as! String
+                let jsonStringifiedData = jsonStringifiedString.data(using: .utf8) as! Data
+                let jsonDict = try! JSONSerialization.jsonObject(with: jsonStringifiedData, options: []) as! [String: Any]
+                print(jsonDict["action_type"] as! String)            
    //        let alert = userInfo["aps"] as! NSDictionary
    //        let alertbody = alert["alert"] as! NSDictionary
    //        let alert1 = alertbody["body"] as! String
@@ -258,6 +261,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterD
 //    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 //        locationManager.startMonitoringSignificantLocationChanges()
 //    }
+    
+    func resetApp() {
+          Messaging.messaging().delegate = self
+          let storyboard = UIStoryboard(name: "Main", bundle: nil)
+          guard let newRoot = storyboard.instantiateInitialViewController() else {
+              return // This shouldn't happen
+          }
+          self.window?.rootViewController = newRoot
+      }
 
 }
 
@@ -316,6 +328,6 @@ extension AppDelegate:CLLocationManagerDelegate{
         print("Error")
     }
     
-    
+  
    
 }

@@ -15,6 +15,9 @@ class PriceStepVC: UIViewController {
     @IBOutlet weak var is_negotiable: UISwitch!
     @IBOutlet weak var imgInfo: UIImageView!
     
+    //Intent Variables
+    var isPrivate = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -67,6 +70,35 @@ class PriceStepVC: UIViewController {
             GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(0, forKey: "is_negotiable")
         }
        
+    }
+    
+    @IBAction func quickPost(_ sender: UIButton) {
+        
+         if(self.amount_tf.hasText){
+            self.imgInfo.isHidden = true
+            
+
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QuickPopup") as! QuickPopup
+            
+            vc.isPrivate = isPrivate
+            
+            let popupVC = PopupViewController(contentController: vc, popupWidth: 350, popupHeight: 500)
+            popupVC.canTapOutsideToDismiss = true
+            
+            //properties
+            //            popupVC.backgroundAlpha = 1
+            //            popupVC.backgroundColor = .black
+            //            popupVC.canTapOutsideToDismiss = true
+                        popupVC.cornerRadius = 10
+            //            popupVC.shadowEnabled = true
+            
+            // show it by call present(_ , animated:) method from a current UIViewController
+            present(popupVC, animated: true)
+        }
+        else{
+            self.imgInfo.isHidden = false
+            
+        }
     }
     
 

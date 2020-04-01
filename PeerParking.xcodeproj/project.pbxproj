@@ -64,6 +64,7 @@
 		1866BF6623746402008EE650 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1866BF6523746402008EE650 /* Helper.swift */; };
 		1866BF68237468A8008EE650 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1866BF67237468A8008EE650 /* NotificationCell.xib */; };
 		186F166023E9986F00DC988A /* ParkingFilterBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186F165F23E9986F00DC988A /* ParkingFilterBS.swift */; };
+		1876D726243372C500164442 /* PrivateParkingDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876D725243372C500164442 /* PrivateParkingDetailsVC.swift */; };
 		1878C528240E922D005F675E /* MapViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1878C527240E922D005F675E /* MapViewVC.swift */; };
 		188888A7238EBEEB0008BC88 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188888A5238EBEEA0008BC88 /* Crashlytics.framework */; };
 		188888A8238EBEEB0008BC88 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188888A6238EBEEA0008BC88 /* Fabric.framework */; };
@@ -84,6 +85,7 @@
 		18CAA57F2368B6BB001B5503 /* FinishPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAA57E2368B6BA001B5503 /* FinishPopup.swift */; };
 		18CAA58123695B62001B5503 /* ImageStepVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAA58023695B62001B5503 /* ImageStepVC.swift */; };
 		18CCE44624079985008B9F4F /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CCE44524079985008B9F4F /* TransactionModel.swift */; };
+		18CE20F924313B5100B59C06 /* QuickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CE20F824313B5100B59C06 /* QuickPopup.swift */; };
 		18D1B63A2362024E002C875D /* ScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D1B6392362024E002C875D /* ScheduleVC.swift */; };
 		18D30D6323DAC4F2008889FB /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D30D6223DAC4F2008889FB /* WebView.swift */; };
 		18DB9C492397FB3C00A6968F /* Hours_picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DB9C482397FB3C00A6968F /* Hours_picker.swift */; };
@@ -239,6 +241,7 @@
 		1866BF6523746402008EE650 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		1866BF67237468A8008EE650 /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		186F165F23E9986F00DC988A /* ParkingFilterBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingFilterBS.swift; sourceTree = "<group>"; };
+		1876D725243372C500164442 /* PrivateParkingDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateParkingDetailsVC.swift; sourceTree = "<group>"; };
 		1878C527240E922D005F675E /* MapViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewVC.swift; sourceTree = "<group>"; };
 		188888A5238EBEEA0008BC88 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		188888A6238EBEEA0008BC88 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
@@ -259,6 +262,7 @@
 		18CAA57E2368B6BA001B5503 /* FinishPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishPopup.swift; sourceTree = "<group>"; };
 		18CAA58023695B62001B5503 /* ImageStepVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStepVC.swift; sourceTree = "<group>"; };
 		18CCE44524079985008B9F4F /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
+		18CE20F824313B5100B59C06 /* QuickPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickPopup.swift; sourceTree = "<group>"; };
 		18D1B6392362024E002C875D /* ScheduleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleVC.swift; sourceTree = "<group>"; };
 		18D30D6223DAC4F2008889FB /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		18DB9C482397FB3C00A6968F /* Hours_picker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hours_picker.swift; sourceTree = "<group>"; };
@@ -409,6 +413,7 @@
 				1814031A242CF35D007AEA58 /* MySpotsVC.swift */,
 				1814031C242CF914007AEA58 /* MyPrivateSpotsVC.swift */,
 				1814031E242CF9E8007AEA58 /* MyPublicSpotsVC.swift */,
+				1876D725243372C500164442 /* PrivateParkingDetailsVC.swift */,
 			);
 			path = "My Spots";
 			sourceTree = "<group>";
@@ -471,6 +476,7 @@
 				18DB9C482397FB3C00A6968F /* Hours_picker.swift */,
 				180E9A1123E45B4000B2DFF4 /* TimeFinishPopup.swift */,
 				1841BED52428FE3300B621AF /* StartEndPopUp.swift */,
+				18CE20F824313B5100B59C06 /* QuickPopup.swift */,
 			);
 			path = "Pop Up";
 			sourceTree = "<group>";
@@ -1216,6 +1222,7 @@
 				18924C272365B84D00C0E94F /* ContainerView.swift in Sources */,
 				1878C528240E922D005F675E /* MapViewVC.swift in Sources */,
 				FA0FCC5C232250DD000FF52C /* SettingViewController.swift in Sources */,
+				1876D726243372C500164442 /* PrivateParkingDetailsVC.swift in Sources */,
 				FA2815AB231E3F92008AF3F5 /* CustomSideMenuController.swift in Sources */,
 				1841BED62428FE3300B621AF /* StartEndPopUp.swift in Sources */,
 				67BC7B9A23CC5D64001542D6 /* ForgetPassViewController.swift in Sources */,
@@ -1255,6 +1262,7 @@
 				181E0D1123CDF954005D7248 /* Buyer.swift in Sources */,
 				181C8E352379ED42000B66C7 /* Sell_parking_popup.swift in Sources */,
 				FA1C6124234F0A8400EF0F3D /* homeParkingCell.swift in Sources */,
+				18CE20F924313B5100B59C06 /* QuickPopup.swift in Sources */,
 				181E0D1223CDF954005D7248 /* Details.swift in Sources */,
 				FAF807B023263644004DB3B1 /* transactionCell.swift in Sources */,
 				FA57EBA42320EB2E000646B7 /* ViewHelper.swift in Sources */,

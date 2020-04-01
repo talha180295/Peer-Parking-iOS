@@ -20,32 +20,34 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         
 //        UserDefaults.standard.set("no", forKey: "login")
-        if(Helper().IsUserLogin()){
-            self.refreshToken()
-        }
-        
-        
-        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-        let app_build_Version = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-        
-        print("appVersion=\(appVersion!)(\(app_build_Version!))")
-        
-        self.app_version.text = "v \(appVersion!)(\(app_build_Version!))"
-        
-       
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            
-            
-            
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
-            //
-            
-            self.navigationController?.pushViewController(vc, animated: true)
-
-        };
+     
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+           if(Helper().IsUserLogin()){
+                 self.refreshToken()
+             }
+             
+             
+             let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+             let app_build_Version = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+             
+             print("appVersion=\(appVersion!)(\(app_build_Version!))")
+             
+             self.app_version.text = "v \(appVersion!)(\(app_build_Version!))"
+             
+            
+             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                 
+                 
+                 
+                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
+                 //
+                 
+                 self.navigationController?.pushViewController(vc, animated: true)
+
+             };
+    }
    
     func refreshToken(){
         
