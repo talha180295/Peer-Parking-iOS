@@ -15,6 +15,15 @@
 		180FD0DF237335BD0084230A /* Parking_table_cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180FD0DD237335BD0084230A /* Parking_table_cell.xib */; };
 		1812701C23DEC7AC00337D01 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1812701B23DEC7AB00337D01 /* ApiClient.swift */; };
 		1812701E23DF32C500337D01 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1812701D23DF32C500337D01 /* Me.swift */; };
+		18140316242C9457007AEA58 /* BarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18140315242C9147007AEA58 /* BarViewController.swift */; };
+		18140318242C96FA007AEA58 /* DemoBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18140317242C96FA007AEA58 /* DemoBaseViewController.swift */; };
+		1814031B242CF35D007AEA58 /* MySpotsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1814031A242CF35D007AEA58 /* MySpotsVC.swift */; };
+		1814031D242CF914007AEA58 /* MyPrivateSpotsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1814031C242CF914007AEA58 /* MyPrivateSpotsVC.swift */; };
+		1814031F242CF9E8007AEA58 /* MyPublicSpotsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1814031E242CF9E8007AEA58 /* MyPublicSpotsVC.swift */; };
+		18140322242D0134007AEA58 /* MySpotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18140320242D0134007AEA58 /* MySpotCell.swift */; };
+		18140323242D0134007AEA58 /* MySpotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18140321242D0134007AEA58 /* MySpotCell.xib */; };
+		18140325242D0FF8007AEA58 /* PrivateParkingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18140324242D0FF8007AEA58 /* PrivateParkingModel.swift */; };
+		18140327242D143A007AEA58 /* MySpotsDetailBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18140326242D143A007AEA58 /* MySpotsDetailBS.swift */; };
 		181C8E352379ED42000B66C7 /* Sell_parking_popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C8E342379ED42000B66C7 /* Sell_parking_popup.swift */; };
 		181E0D1123CDF954005D7248 /* Buyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0623CDF953005D7248 /* Buyer.swift */; };
 		181E0D1223CDF954005D7248 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0723CDF953005D7248 /* Details.swift */; };
@@ -181,6 +190,15 @@
 		180FD0DD237335BD0084230A /* Parking_table_cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Parking_table_cell.xib; sourceTree = "<group>"; };
 		1812701B23DEC7AB00337D01 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		1812701D23DF32C500337D01 /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
+		18140315242C9147007AEA58 /* BarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarViewController.swift; sourceTree = "<group>"; };
+		18140317242C96FA007AEA58 /* DemoBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoBaseViewController.swift; sourceTree = "<group>"; };
+		1814031A242CF35D007AEA58 /* MySpotsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpotsVC.swift; sourceTree = "<group>"; };
+		1814031C242CF914007AEA58 /* MyPrivateSpotsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPrivateSpotsVC.swift; sourceTree = "<group>"; };
+		1814031E242CF9E8007AEA58 /* MyPublicSpotsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPublicSpotsVC.swift; sourceTree = "<group>"; };
+		18140320242D0134007AEA58 /* MySpotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpotCell.swift; sourceTree = "<group>"; };
+		18140321242D0134007AEA58 /* MySpotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MySpotCell.xib; sourceTree = "<group>"; };
+		18140324242D0FF8007AEA58 /* PrivateParkingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateParkingModel.swift; sourceTree = "<group>"; };
+		18140326242D143A007AEA58 /* MySpotsDetailBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpotsDetailBS.swift; sourceTree = "<group>"; };
 		181C8E342379ED42000B66C7 /* Sell_parking_popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sell_parking_popup.swift; sourceTree = "<group>"; };
 		181E0D0623CDF953005D7248 /* Buyer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buyer.swift; sourceTree = "<group>"; };
 		181E0D0723CDF953005D7248 /* Details.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
@@ -376,6 +394,25 @@
 			path = "Table View Cell";
 			sourceTree = "<group>";
 		};
+		18140314242C910F007AEA58 /* Time Picker Widget */ = {
+			isa = PBXGroup;
+			children = (
+				18140317242C96FA007AEA58 /* DemoBaseViewController.swift */,
+				18140315242C9147007AEA58 /* BarViewController.swift */,
+			);
+			path = "Time Picker Widget";
+			sourceTree = "<group>";
+		};
+		18140319242CF343007AEA58 /* My Spots */ = {
+			isa = PBXGroup;
+			children = (
+				1814031A242CF35D007AEA58 /* MySpotsVC.swift */,
+				1814031C242CF914007AEA58 /* MyPrivateSpotsVC.swift */,
+				1814031E242CF9E8007AEA58 /* MyPublicSpotsVC.swift */,
+			);
+			path = "My Spots";
+			sourceTree = "<group>";
+		};
 		181E0D0523CDF953005D7248 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,6 +429,7 @@
 				1812701D23DF32C500337D01 /* Me.swift */,
 				1827370623F417DD00C52347 /* DirectionAPI.swift */,
 				18CCE44524079985008B9F4F /* TransactionModel.swift */,
+				18140324242D0FF8007AEA58 /* PrivateParkingModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -480,6 +518,7 @@
 		1889AE052357381C0081608E /* BottomSheet */ = {
 			isa = PBXGroup;
 			children = (
+				18140326242D143A007AEA58 /* MySpotsDetailBS.swift */,
 				1889AE06235738330081608E /* BottomSheetVC.swift */,
 				185FCF702358C10E0025DB5E /* FilterBottomSheetVC.swift */,
 				18451970235E08C700F3AF5A /* OfferBottomSheetVC.swift */,
@@ -636,6 +675,7 @@
 			isa = PBXGroup;
 			children = (
 				FAA351A223F193BC00E11CA2 /* PeerParking.entitlements */,
+				18140314242C910F007AEA58 /* Time Picker Widget */,
 				18D30D6123DAC4D6008889FB /* WebView */,
 				18F8118823D87D8A00B3061F /* Stripe */,
 				188888A5238EBEEA0008BC88 /* Crashlytics.framework */,
@@ -739,6 +779,8 @@
 				FA1C6122234F0A8400EF0F3D /* homeParkingCell.swift */,
 				FA1C6123234F0A8400EF0F3D /* homeParkingCell.xib */,
 				1866BF67237468A8008EE650 /* NotificationCell.xib */,
+				18140320242D0134007AEA58 /* MySpotCell.swift */,
+				18140321242D0134007AEA58 /* MySpotCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -746,6 +788,7 @@
 		FA2815BC231E6669008AF3F5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				18140319242CF343007AEA58 /* My Spots */,
 				1878C526240E8DCC005F675E /* MapView */,
 				183DAA3C23E070300022BC6E /* Parkings */,
 				67BC7B9423CC5395001542D6 /* Registration */,
@@ -985,6 +1028,7 @@
 				FA2F9F38232CA7E30025BF11 /* offerCell.xib in Resources */,
 				FA1150CC2316838500D0B1FE /* Assets.xcassets in Resources */,
 				FA1C6125234F0A8400EF0F3D /* homeParkingCell.xib in Resources */,
+				18140323242D0134007AEA58 /* MySpotCell.xib in Resources */,
 				18C2195723ABB5F700BCCA75 /* BargainingCell.xib in Resources */,
 				FA2815B9231E6602008AF3F5 /* Poppins-Regular.ttf in Resources */,
 				FA2815BA231E6602008AF3F5 /* Poppins-Light.ttf in Resources */,
@@ -1155,6 +1199,7 @@
 				FA2815C0231E7058008AF3F5 /* menuCell.swift in Sources */,
 				FA82B500232F66A6002675AC /* Knob.swift in Sources */,
 				185DE799236094DE00FC0E25 /* FBPopup.swift in Sources */,
+				18140325242D0FF8007AEA58 /* PrivateParkingModel.swift in Sources */,
 				67BC7B9E23CCB886001542D6 /* ChangePassViewController.swift in Sources */,
 				181E0D2123CE22E3005D7248 /* PostBargainigOfferModel.swift in Sources */,
 				FA526EF5232CF7570014517B /* HeaderCell.swift in Sources */,
@@ -1163,8 +1208,11 @@
 				FA2815C3231E806D008AF3F5 /* HomeViewController.swift in Sources */,
 				FA0E9F6F2330FE7E0005A54C /* PlaceViewController.swift in Sources */,
 				FA6CD3792328FFE600E18CF2 /* LoacationCell.swift in Sources */,
+				18140318242C96FA007AEA58 /* DemoBaseViewController.swift in Sources */,
+				1814031F242CF9E8007AEA58 /* MyPublicSpotsVC.swift in Sources */,
 				18392E7B23707220007FB161 /* PriceStepVC.swift in Sources */,
 				181E0D1623CDF954005D7248 /* Parking.swift in Sources */,
+				18140327242D143A007AEA58 /* MySpotsDetailBS.swift in Sources */,
 				18924C272365B84D00C0E94F /* ContainerView.swift in Sources */,
 				1878C528240E922D005F675E /* MapViewVC.swift in Sources */,
 				FA0FCC5C232250DD000FF52C /* SettingViewController.swift in Sources */,
@@ -1196,6 +1244,7 @@
 				185DE79B2360A59900FC0E25 /* Constants.swift in Sources */,
 				18924C312366F06600C0E94F /* DetailStepVC.swift in Sources */,
 				18CCE44624079985008B9F4F /* TransactionModel.swift in Sources */,
+				1814031B242CF35D007AEA58 /* MySpotsVC.swift in Sources */,
 				18924C242363544800C0E94F /* PublicParkingVC.swift in Sources */,
 				FA122149232A4366002720BE /* ParkingDetailViewController.swift in Sources */,
 				FA0FCC6323229FB9000FF52C /* CardView.swift in Sources */,
@@ -1214,6 +1263,7 @@
 				FA526EF8232D210E0014517B /* SellParkingViewController.swift in Sources */,
 				185DE79E2360A84C00FC0E25 /* ParkingNavVC.swift in Sources */,
 				18DB9C492397FB3C00A6968F /* Hours_picker.swift in Sources */,
+				18140322242D0134007AEA58 /* MySpotCell.swift in Sources */,
 				18F8118A23D87DAD00B3061F /* PaymentView.swift in Sources */,
 				1866BF5F237450A5008EE650 /* NotificationVC.swift in Sources */,
 				FA1150C52316838400D0B1FE /* AppDelegate.swift in Sources */,
@@ -1242,6 +1292,7 @@
 				18E099D22358FB6500B43A4B /* NavigationVC.swift in Sources */,
 				1841BED32428CE9E00B621AF /* UIButton+Extension.swift in Sources */,
 				18904F35241FA4C000DBA6A6 /* LocationStepVC.swift in Sources */,
+				1814031D242CF914007AEA58 /* MyPrivateSpotsVC.swift in Sources */,
 				1841BEC82424E51C00B621AF /* PrivateParkingVC.swift in Sources */,
 				1866BF6623746402008EE650 /* Helper.swift in Sources */,
 				FA526EFA232D28C80014517B /* RateViewController.swift in Sources */,
@@ -1255,6 +1306,7 @@
 				181E0D1823CDF954005D7248 /* Seller.swift in Sources */,
 				FA2F9F3A232CB35E0025BF11 /* OfferViewController.swift in Sources */,
 				181E0D1F23CE0400005D7248 /* RefreshTokenModel.swift in Sources */,
+				18140316242C9457007AEA58 /* BarViewController.swift in Sources */,
 				1812701E23DF32C500337D01 /* Me.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1432,6 +1484,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PeerParking/PeerParking.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9SRKL49KA2;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1447,6 +1500,7 @@
 				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fomark.peerparking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1458,6 +1512,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PeerParking/PeerParking.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9SRKL49KA2;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1473,6 +1528,7 @@
 				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fomark.peerparking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

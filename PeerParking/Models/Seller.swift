@@ -7,16 +7,30 @@
 //
 
 import Foundation
+
+//// MARK: - Seller
+//struct Seller: Codable {
+//    let id: Int?
+//    let name, email, createdAt: String?
+//    let details: Details?
+//    let card: [Card?]
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id, name, email
+//        case createdAt = "created_at"
+//        case details, card
+//    }
+//}
+
 // MARK: - Seller
 struct Seller: Codable {
     let id: Int?
     let name, email, createdAt: String?
     let details: Details?
-    let card: [Card?]
-    
+
     enum CodingKeys: String, CodingKey {
         case id, name, email
         case createdAt = "created_at"
-        case details, card
+        case details
     }
 }

@@ -85,19 +85,40 @@ class ViewAllVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func parkingDetails(indexPath: IndexPath){
         
-        let dict = self.parkings[indexPath.row]
-        
-        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC") as! BottomSheetVC
-        controller.parking_details = dict
-        
-        
-        let lat = dict.latitude ?? "0.0"
-        let long = dict.longitude ?? "0.0"
-        let distanceStr = cal_distance(lat: lat, long: long)
+         let dict = self.parkings[indexPath.row]
+                
+                let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC") as! BottomSheetVC
+                controller.parking_details = dict
+                
+                let lat = dict.latitude ?? "0.0"
+                let long = dict.longitude ?? "0.0"
         
         
-        controller.distanceInMiles = String(format: "%.03f miles away", distanceStr)
+                
+                controller.lat = Double(lat)
+                controller.longg = Double(long)
+        
+                let distanceStr = cal_distance(lat: lat, long: long)
+                
+                
+                
+        //        controller.distanceInMiles = String(format: "%.03f miles from destination", distanceStr)
         Helper().bottomSheet(controller: controller, sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0), view_controller: self)
+        
+        
+//        let dict = self.parkings[indexPath.row]
+//
+//        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC") as! BottomSheetVC
+//        controller.parking_details = dict
+//
+//
+//        let lat = dict.latitude ?? "0.0"
+//        let long = dict.longitude ?? "0.0"
+//        let distanceStr = cal_distance(lat: lat, long: long)
+//
+//
+////        controller.distanceInMiles = String(format: "%.03f miles away", distanceStr)
+//        Helper().bottomSheet(controller: controller, sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0), view_controller: self)
     }
     
     func cal_distance(lat:String,long:String)  -> Double{

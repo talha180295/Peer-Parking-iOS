@@ -27,7 +27,6 @@ class FBPopup: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
     func fb_login(){
         
         Helper().showSpinner(view: self.view)
@@ -496,13 +495,10 @@ class FBPopup: UIViewController {
             UserDefaults.standard.set(val, forKey: key)
         }
         
-   print(userDetails)
-        
-        
+        print(userDetails)
         
         UserDefaults.standard.set("yes", forKey: "login")
         UserDefaults.standard.synchronize()
-
         
     }
     
@@ -547,6 +543,7 @@ class FBPopup: UIViewController {
             else {
                 let responseData = response.result.value as! NSDictionary
                 let status = responseData["success"] as! Bool
+                
                 if(status)
                 {
                     let message = responseData["message"] as! String
@@ -557,7 +554,6 @@ class FBPopup: UIViewController {
                     //                     UserDefaults.standard.set("yes", forKey: "login")
                     //                    UserDefaults.standard.synchronize()
                     SharedHelper().showToast(message: message, controller: self)
-                    
                     
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedbackVC") as! FeedbackVC
                     vc.modalPresentationStyle = .fullScreen
@@ -575,9 +571,7 @@ class FBPopup: UIViewController {
             }
         }
     }
-    
-    
-    
+   
     @IBAction func btnLogin(_ sender: Any) {
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "loginVC") as! LoginViewController
@@ -585,11 +579,7 @@ class FBPopup: UIViewController {
         self.present(vc, animated: true, completion: nil)
         
     }
-    
-    
-    
-    
-    
+   
     @IBAction func btnSignUp(_ sender: Any) {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "registerVC") as! RegistrationViewController
         

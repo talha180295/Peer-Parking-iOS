@@ -871,6 +871,12 @@ class Helper{
         return controller
     }
     
+    func popScreen(controller: UIViewController){
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                            controller.dismiss(animated: true, completion: nil)
+                       })
+    }
+    
 }
 
 

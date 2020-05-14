@@ -119,6 +119,10 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        Helper().hideSpinner(view: self.view)
+    }
+    
     func autocompleteClicked() {
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
@@ -313,8 +317,16 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             cell.rating_view.rating = seller_details?.averageRating ?? 0.0
             
             cell.vehicle_type.text = dict.vehicleTypeText
-            cell.parking_type.text = dict.parkingTypeText
+            
+            if(dict.parkingType == 10){
+                cell.parking_type.text = "Public Parking"
+            }
+            else if(dict.parkingType == 20){
+                cell.parking_type.text = "Private Parking"
+            }
+            
 
+            
             cell.price.text = "$\(priceStr)"
             
             
@@ -355,11 +367,12 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         let lat = dict.latitude ?? ""
         let long = dict.longitude ?? ""
-        let distanceStr = cal_distance(lat: lat, long: long)
+//        let distanceStr = cal_distance(lat: lat, long: long)
         
         
-        
-        controller.distanceInMiles = String(format: "%.03f miles from destination", distanceStr)
+        controller.lat = Double(lat)
+        controller.longg = Double(long)
+//        controller.distanceInMiles = String(format: "%.03f miles from destination", distanceStr)
         bottomSheet(controller: controller, sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
     }
     
@@ -632,38 +645,38 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
 
     
-    func cal_distance(lat:String,long:String)  -> Double{
+//    func cal_distance(lat:String,long:String)  -> Double{
+////
+////        print("coordinate1==\(coordinate1)")
+////        print("coordinate1==\(coordinate2)")
 //
-//        print("coordinate1==\(coordinate1)")
-//        print("coordinate1==\(coordinate2)")
-        
-        let current_coordinate =  CLLocation(latitude: self.lat, longitude: self.longg)
-        let lat = Double(lat)
-        let long = Double(long)
-        let coordinate2 = CLLocation(latitude: lat!, longitude: long!)
-
-        let distanceInMiles = current_coordinate.distance(from: coordinate2)/1609.344 // result is in meters
-        
-        
-        print("distanceInMiles=\(distanceInMiles)")
-        
-        return distanceInMiles
-        
-    }
-    
-    func cal_distance2() -> Double{
-        
-        
-        let coordinate1 = CLLocation(latitude: 5.0, longitude: 5.0)
-        let coordinate2 = CLLocation(latitude: 5.0, longitude: 3.0)
-        
-        let distanceInMeters = coordinate1.distance(from: coordinate2) // result is in meters
-        
-        print("distanceInMeters=\(distanceInMeters)")
-        
-        return distanceInMeters
-        
-    }
+//        let current_coordinate =  CLLocation(latitude: self.lat, longitude: self.longg)
+//        let lat = Double(lat)
+//        let long = Double(long)
+//        let coordinate2 = CLLocation(latitude: lat!, longitude: long!)
+//
+//        let distanceInMiles = current_coordinate.distance(from: coordinate2)/1609.344 // result is in meters
+//
+//
+//        print("distanceInMiles=\(distanceInMiles)")
+//
+//        return distanceInMiles
+//
+//    }
+//
+//    func cal_distance2() -> Double{
+//
+//
+//        let coordinate1 = CLLocation(latitude: 5.0, longitude: 5.0)
+//        let coordinate2 = CLLocation(latitude: 5.0, longitude: 3.0)
+//
+//        let distanceInMeters = coordinate1.distance(from: coordinate2) // result is in meters
+//
+//        print("distanceInMeters=\(distanceInMeters)")
+//
+//        return distanceInMeters
+//
+//    }
     
     func add_marker(lat:Double,longg:Double){
         let position = CLLocationCoordinate2D(latitude: lat, longitude: longg)

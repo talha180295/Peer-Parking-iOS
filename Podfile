@@ -39,6 +39,10 @@ target 'PeerParking' do
   
   pod 'SwiftLocation'
   
+  
+  pod 'Charts'
+  pod 'MultiSlider'
+  
   target 'PeerParkingTests' do
     inherit! :search_paths
     # Pods for testing

@@ -317,14 +317,13 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BottomSheetVC") as! BottomSheetVC
         controller.parking_details = dict
         
-        
         let lat = dict.latitude ?? "0.0"
         let long = dict.longitude ?? "0.0"
         let distanceStr = cal_distance(lat: lat, long: long)
         
         
         
-        controller.distanceInMiles = String(format: "%.03f miles from destination", distanceStr)
+//        controller.distanceInMiles = String(format: "%.03f miles from destination", distanceStr)
         bottomSheet(controller: controller, sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
       }
       

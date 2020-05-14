@@ -31,19 +31,25 @@ class BottomSheetVC: UIViewController {
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var distance: UILabel!
+    @IBOutlet weak var duration: UILabel!
     @IBOutlet weak var time_limit: UILabel!
     @IBOutlet weak var parking_type: UILabel!
     @IBOutlet weak var extra_charges: UILabel!
     
     @IBOutlet weak var note: UILabel!
     
-    
+    @IBOutlet weak var timeView: UIView!
+    @IBOutlet weak var st_time: UILabel!
+    @IBOutlet weak var end_time: UILabel!
     
     
     let story = UIStoryboard(name: "Main", bundle: nil)
     
+    //Intent Variables
     var parking_details:Parking!
-    var distanceInMiles: String!
+    var lat:Double!
+    var longg:Double!
+//    var distanceInMiles: String!
     
     var parkingId:Int?
     var buyerId:Int?
@@ -59,6 +65,23 @@ class BottomSheetVC: UIViewController {
     
     func setData(){
         
+        if(parking_details.parkingType == 10){
+                   
+           timeView.isHidden = true
+        }
+        else{
+            self.st_time.text = "From: "
+            self.end_time.text = "To: "
+            timeView.isHidden = false
+        }
+        
+        if(parking_details.isNegotiable ?? false){
+            
+            counter_btn.isHidden = false
+        }
+        else{
+            counter_btn.isHidden = true
+        }
         self.parking_titile.text = parking_details.address
         
         let seller = parking_details.seller
@@ -80,9 +103,18 @@ class BottomSheetVC: UIViewController {
         
         
         self.price.text = "$\(priceStr)"
-        print("adfsdf=\(distanceInMiles ?? "")")
-        self.distance.text = distanceInMiles
+       
+        self.distance.text = String(format: "%.03f miles from destination", parking_details.distance ?? 0.0)
         
+        let d_lat = Double(parking_details?.latitude ?? "") ?? 0.0
+        let d_long = Double(parking_details?.longitude ?? "") ?? 0.0
+        
+        Helper().getTimeDurationBetweenCordinate(s_lat: self.lat, s_longg: self.longg, d_lat: d_lat, d_longg: d_long)
+        { (duration) in
+        
+            self.duration.text = "\(duration) min"
+        }
+            
         if parking_details.note == nil
         {
             self.note.text = ""
@@ -93,7 +125,7 @@ class BottomSheetVC: UIViewController {
         }
         
       
-        self.parking_type.text = parking_details.parkingTypeText
+        self.parking_type.text = parking_details.parkingSubTypeText
         
         self.viheicle_type.text = parking_details.vehicleTypeText
         
@@ -149,7 +181,7 @@ class BottomSheetVC: UIViewController {
             print(params)
             self.postBargainingOffer(params: params)
             
-            self.dismiss(animated: true, completion: nil)
+//            self.dismiss(animated: true, completion: nil)
             
             
         }
@@ -176,7 +208,24 @@ class BottomSheetVC: UIViewController {
                    
            if(response != nil){
                if let success = response?.success {
-                   Helper().showToast(message: "Succes=\(success)", controller: self)
+                
+//                let status = responseData["success"] as! Bool
+                              
+                                  
+                
+                
+                
+                let message = response?.message
+                Helper().showToast(message: message!, controller: self)
+                
+                Helper().popScreen(controller:self)
+                
+                
+               
+                
+               
+                
+                
 //                   if let val = response?.data {
 //
 //                   }
@@ -198,6 +247,12 @@ class BottomSheetVC: UIViewController {
         
     }
     
+    @IBAction func selectTimeBtn(_ sender: UIButton) {
+            
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BarViewController") as! BarViewController
+        
+        self.present(vc, animated: true, completion: nil)
+    }
     
     @IBAction func counter_btn(_ sender: UIButton) {
         

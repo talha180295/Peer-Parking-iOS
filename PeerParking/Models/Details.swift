@@ -32,3 +32,30 @@ struct Details: Codable {
         case fullName = "full_name"
     }
 }
+//
+//// MARK: - Details
+//struct Details: Codable {
+//    let id, externalAccountID: Int?
+//    let firstName, lastName ,stripeUserID: String?
+//    let averageRating, wallet: Double?
+//    let phone, address, image: String?
+//    let isVerified, emailUpdates, isSocialLogin: Int?
+//    let imageURL: String?
+//    let fullName: String?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case id
+//        case stripeUserID = "stripe_user_id"
+//        case externalAccountID = "external_account_id"
+//        case firstName = "first_name"
+//        case lastName = "last_name"
+//        case averageRating = "average_rating"
+//        case phone, address, image
+//        case isVerified = "is_verified"
+//        case emailUpdates = "email_updates"
+//        case isSocialLogin = "is_social_login"
+//        case wallet
+//        case imageURL = "image_url"
+//        case fullName = "full_name"
+//    }
+//}
