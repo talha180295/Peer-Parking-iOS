@@ -17,6 +17,8 @@ import SDWebImage
 import Alamofire
 
 
+
+
 class BottomSheetVC: UIViewController {
 
     @IBOutlet weak var offer_btn: UIButton!
@@ -54,6 +56,9 @@ class BottomSheetVC: UIViewController {
     var parkingId:Int?
     var buyerId:Int?
     var offerPrice:Double?
+    
+    var sTime : String?
+    var fTime : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,6 +169,14 @@ class BottomSheetVC: UIViewController {
     @IBAction func take_btn_click(_ sender: UIButton) {
         
         
+        
+        if(self.sTime == nil || self.fTime == nil)
+        {
+            
+            Helper().showToast(message: "Please select time", controller: self)
+            return
+        }
+        
         let p_id = self.parking_details.id ?? 0
         let final_price = Double(self.parking_details.initialPrice ?? 0.0)
         let myId = UserDefaults.standard.integer(forKey: "id")
@@ -210,22 +223,13 @@ class BottomSheetVC: UIViewController {
                if let success = response?.success {
                 
 //                let status = responseData["success"] as! Bool
-                              
-                                  
-                
                 
                 
                 let message = response?.message
                 Helper().showToast(message: message!, controller: self)
                 
                 Helper().popScreen(controller:self)
-                
-                
-               
-                
-               
-                
-                
+              
 //                   if let val = response?.data {
 //
 //                   }
@@ -249,17 +253,32 @@ class BottomSheetVC: UIViewController {
     
     @IBAction func selectTimeBtn(_ sender: UIButton) {
             
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BarViewController") as! BarViewController
-        
-        self.present(vc, animated: true, completion: nil)
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SliderTimerVC") as! SliderTimerVC
+
+//        self.navigationController?.pushViewController(vc, animated: true)
+        vc.modalPresentationStyle = .fullScreen
+        vc.parking_details = parking_details
+        vc.delegate = self
+        self.present(vc, animated: true,completion: nil)
+    
     }
     
     @IBAction func counter_btn(_ sender: UIButton) {
+        
+        
+        if(self.sTime == nil || self.fTime == nil)
+        {
+            
+            Helper().showToast(message: "Please select time", controller: self)
+            return
+        }
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OfferBottomSheetVC") as! OfferBottomSheetVC
         vc.parkingDetails = self.parking_details
 //        controller?.p_title = self.parking_titile.text!
         bottomSheet(controller: vc, sizes: [.fixed(540)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
+        
+    
     }
     
     @IBAction func mapViewBtn(_ sender: UIButton) {
@@ -359,4 +378,27 @@ class BottomSheetVC: UIViewController {
         }
     }
   
+}
+
+extension BottomSheetVC:OnTimeSelectDelegate{
+   
+    func timeSelect(startigTime: String, endingTime: String){
+//
+//        var times : [String] = []
+//        times[0] = startigTime
+//        times[1] = endingTime
+//
+//        return times
+        
+        sTime = startigTime
+        fTime = endingTime
+        
+        
+        st_time.text = "From : \(startigTime)"
+        end_time.text = "To : \(endingTime)"
+        
+    }
+    
+    
+    
 }

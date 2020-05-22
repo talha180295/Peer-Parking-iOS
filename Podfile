@@ -38,6 +38,7 @@ target 'PeerParking' do
   pod 'Firebase/Messaging'
   
   pod 'SwiftLocation'
+  pod 'MultiSlider'
   
   
   pod 'Charts'

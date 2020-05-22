@@ -24,6 +24,7 @@
 		18140323242D0134007AEA58 /* MySpotCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18140321242D0134007AEA58 /* MySpotCell.xib */; };
 		18140325242D0FF8007AEA58 /* PrivateParkingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18140324242D0FF8007AEA58 /* PrivateParkingModel.swift */; };
 		18140327242D143A007AEA58 /* MySpotsDetailBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18140326242D143A007AEA58 /* MySpotsDetailBS.swift */; };
+		1817D9722472ABD200F4AA2C /* SliderTimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1817D9712472ABD200F4AA2C /* SliderTimerVC.swift */; };
 		181C8E352379ED42000B66C7 /* Sell_parking_popup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181C8E342379ED42000B66C7 /* Sell_parking_popup.swift */; };
 		181E0D1123CDF954005D7248 /* Buyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0623CDF953005D7248 /* Buyer.swift */; };
 		181E0D1223CDF954005D7248 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0723CDF953005D7248 /* Details.swift */; };
@@ -199,6 +200,7 @@
 		18140321242D0134007AEA58 /* MySpotCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MySpotCell.xib; sourceTree = "<group>"; };
 		18140324242D0FF8007AEA58 /* PrivateParkingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateParkingModel.swift; sourceTree = "<group>"; };
 		18140326242D143A007AEA58 /* MySpotsDetailBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpotsDetailBS.swift; sourceTree = "<group>"; };
+		1817D9712472ABD200F4AA2C /* SliderTimerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderTimerVC.swift; sourceTree = "<group>"; };
 		181C8E342379ED42000B66C7 /* Sell_parking_popup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sell_parking_popup.swift; sourceTree = "<group>"; };
 		181E0D0623CDF953005D7248 /* Buyer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buyer.swift; sourceTree = "<group>"; };
 		181E0D0723CDF953005D7248 /* Details.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 		1889AE052357381C0081608E /* BottomSheet */ = {
 			isa = PBXGroup;
 			children = (
+				1817D9712472ABD200F4AA2C /* SliderTimerVC.swift */,
 				18140326242D143A007AEA58 /* MySpotsDetailBS.swift */,
 				1889AE06235738330081608E /* BottomSheetVC.swift */,
 				185FCF702358C10E0025DB5E /* FilterBottomSheetVC.swift */,
@@ -1243,6 +1246,7 @@
 				18924C3323672C6F00C0E94F /* LimitationStepVC.swift in Sources */,
 				185DE79B2360A59900FC0E25 /* Constants.swift in Sources */,
 				18924C312366F06600C0E94F /* DetailStepVC.swift in Sources */,
+				1817D9722472ABD200F4AA2C /* SliderTimerVC.swift in Sources */,
 				18CCE44624079985008B9F4F /* TransactionModel.swift in Sources */,
 				1814031B242CF35D007AEA58 /* MySpotsVC.swift in Sources */,
 				18924C242363544800C0E94F /* PublicParkingVC.swift in Sources */,
