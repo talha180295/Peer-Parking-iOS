@@ -204,11 +204,13 @@ class FBPopup: UIViewController {
         
         
         Helper().showSpinner(view: self.view.parentContainerViewController()?.view ?? self.view)
+        let device_token :String = UserDefaults.standard.string(forKey: "FCMToken") ?? ""
         let param = [
             
             "email" : email,
             "password" : password,
             "device_type" : device_type,
+            "device_token" : device_token
             
         ]
         print(param)

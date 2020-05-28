@@ -126,6 +126,7 @@ class FinishPopup: UIViewController {
         let image = GLOBAL_VAR.PRIVATE_PARKING_MODEL["image"]
 
         
+        
         var params:[String:Any] = GLOBAL_VAR.PRIVATE_PARKING_MODEL
         
         params.removeValue(forKey: "image")

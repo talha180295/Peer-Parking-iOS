@@ -20,6 +20,8 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var top_view_height_contr: NSLayoutConstraint!
     
+    
+    
     let story = UIStoryboard(name: "Main", bundle: nil)
     
     let dict1 = [["name" : "Home","segue":"HomeVC"],["name" : "Profile","segue":"ProfileVC"],["name" : "Wallet","segue":"WalletVC"] ,["name" : "My Spots","segue":"MySpotsVC"],["name" : "Parkings","segue":"parkingVC"],
@@ -55,6 +57,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         
         if(!IsUserLogin()){
             top_view_height_contr.constant = 0
@@ -274,8 +277,12 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
                     //                {  let fcmToken :String = UserDefaults.standard.string(forKey: "FCMToken")!
                 {
                     //                    let user_id : String = UserDefaults.standard.string(forKey: "id")!
+                    let device_token :String = UserDefaults.standard.string(forKey: "FCMToken") ?? ""
+                    
                     self.resetDefaults()
-                    // UserDefaults.standard.set(fcmToken, forKey: "FCMToken")
+                    
+                    
+                    UserDefaults.standard.set(device_token, forKey: "FCMToken")
                     UserDefaults.standard.set("no", forKey: "login")
                     UserDefaults.standard.synchronize()
 //                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
@@ -294,6 +301,14 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
 //                    //
 //                    self.navigationController?.pushViewController(vc, animated: true)
                 }
+                
+//                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                
+//                appDelegate.resetApp()
+//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "StartApp")
+//                //
+//                vc?.modalPresentationStyle = .fullScreen
+//                self.present(vc!, animated: true)
                 
                 Helper().presentOnMainScreens(controller: self, index: 1)
             }
