@@ -90,6 +90,7 @@
 		18DB9C492397FB3C00A6968F /* Hours_picker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DB9C482397FB3C00A6968F /* Hours_picker.swift */; };
 		18E099D02358F27E00B43A4B /* DGRunkeeperSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E099CE2358F27E00B43A4B /* DGRunkeeperSwitch.swift */; };
 		18E099D22358FB6500B43A4B /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E099D12358FB6500B43A4B /* NavigationVC.swift */; };
+		18F27A30247E4BF400BC7D79 /* MySpotParkingDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F27A2F247E4BF400BC7D79 /* MySpotParkingDetailVC.swift */; };
 		18F8118A23D87DAD00B3061F /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8118923D87DAD00B3061F /* PaymentView.swift */; };
 		67BC7B9623CC53B6001542D6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9523CC53B6001542D6 /* LoginViewController.swift */; };
 		67BC7B9823CC53CB001542D6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9723CC53CA001542D6 /* RegistrationViewController.swift */; };
@@ -267,6 +268,7 @@
 		18E099CC2358F27E00B43A4B /* DGRunkeeperSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGRunkeeperSwitch.h; sourceTree = "<group>"; };
 		18E099CE2358F27E00B43A4B /* DGRunkeeperSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGRunkeeperSwitch.swift; sourceTree = "<group>"; };
 		18E099D12358FB6500B43A4B /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
+		18F27A2F247E4BF400BC7D79 /* MySpotParkingDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpotParkingDetailVC.swift; sourceTree = "<group>"; };
 		18F8118923D87DAD00B3061F /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67BC7B9523CC53B6001542D6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -411,6 +413,7 @@
 				1814031A242CF35D007AEA58 /* MySpotsVC.swift */,
 				1814031C242CF914007AEA58 /* MyPrivateSpotsVC.swift */,
 				1814031E242CF9E8007AEA58 /* MyPublicSpotsVC.swift */,
+				18F27A2F247E4BF400BC7D79 /* MySpotParkingDetailVC.swift */,
 			);
 			path = "My Spots";
 			sourceTree = "<group>";
@@ -1284,6 +1287,7 @@
 				FA0FCC5F232250FE000FF52C /* WalletViewController.swift in Sources */,
 				FA0FCC612322510F000FF52C /* TransactionViewController.swift in Sources */,
 				181E0D1323CDF954005D7248 /* Card.swift in Sources */,
+				18F27A30247E4BF400BC7D79 /* MySpotParkingDetailVC.swift in Sources */,
 				181E0D1523CDF954005D7248 /* Bargaining.swift in Sources */,
 				FA6CD3802329122E00E18CF2 /* AlternateRouteViewController.swift in Sources */,
 				FAEDCF1A231F9EFB0063EFC0 /* FindParkingViewController.swift in Sources */,

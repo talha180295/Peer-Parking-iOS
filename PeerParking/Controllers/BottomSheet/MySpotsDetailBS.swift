@@ -20,7 +20,15 @@ class MySpotsDetailBS: UIViewController {
         
         NotificationCenter.default.post(name: Notification.Name("mode_filter"), object: nil, userInfo:["mode" : 10] )
         
-        self.dismiss(animated: false)
+        
+        
+         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MySpotParkingDetailVC") as! MySpotParkingDetailVC
+
+        //        self.navigationController?.pushViewController(vc, animated: true)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true,completion: nil)
+        
+//        self.dismiss(animated: false)
     }
     
     

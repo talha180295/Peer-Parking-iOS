@@ -23,6 +23,7 @@ import FirebaseMessaging
 class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterDelegate ,MessagingDelegate {
 
     
+    
     let gcmMessageIDKey = "gcm.message_id"
     var window: UIWindow?
     var locationManager:CLLocationManager!
