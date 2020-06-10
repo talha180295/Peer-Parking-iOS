@@ -29,19 +29,22 @@ enum APIRouter: URLRequestConvertible {
     case getPrivateParkings([String:Any])
     
     private var accessToken:String{
-        return  UserDefaults.standard.string(forKey: "auth_token") ?? ""
+        return  UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN) ?? ""
     }
     
     // MARK: - HTTPMethod
     private var method: HTTPMethod {
         switch self {
         
-        case .getParkingsWithoutToken,.getParkings,.getParkingsById,.getBargainings,.getBargainingsById , .getTransactions ,.getPrivateParkings:
+            
+         case .getParkingsWithoutToken,.getParkings,.getParkingsById,.getBargainings,.getBargainingsById , .getTransactions ,.getPrivateParkings:
             return .get
             
-        case .postParking,.postBargainingOffer,.addUserCard,.me,.refresh, .cancelSellerParking, .assignBuyer:
+         case .postParking,.postBargainingOffer,.addUserCard,.me,.refresh, .cancelSellerParking, .assignBuyer:
             return .post
+            
         }
+        
     }
     
     // MARK: - Path

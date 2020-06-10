@@ -28,78 +28,128 @@ class APIClient {
     static func serverRequest<T:Decodable>(url:URLRequestConvertible,dec:T.Type,completion:@escaping (T? ,Error?)->Void) {
         
         print("url==\(String(describing: try? url.asURLRequest()))")
-        
-        
-        Alamofire.request(url).responseJSON { (response) in
+        refreshTokenRequest(completion:{
+        response in
+        print(response)
+        if response.result.value == nil {
+            print("No response")
             
-            print("serverResponse=\(response)")
-//            print(response)
-            print(response.response?.statusCode ?? 0)
-            if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299){
-                
-                if response.result.isSuccess {
-                    
-                    
-                    do {
-                        //here dataResponse received from a network request
-                        if let jsonData = response.data{
-                            let response = try JSONDecoder().decode(dec.self, from:jsonData) //Decode JSON Response Data
-                           
-                            completion(response, nil)
-                        }
-                    } catch let parsingError {
-                        print("Error", parsingError)
-                    }
-                        
-                    
-                }
-                else{
-                    
-                    completion(nil,response.error!)
-                }
-            }
-            else if(response.response?.statusCode ?? 0 == 401){
-                
-                //refresh Token
-                completion(nil,nil)
-            }
-            else{
-                completion(nil,response.error)
-            }
+//            SharedHelper().hideSpinner(view: self.view)
+            return
         }
+        else{
+            Alamofire.request(url).responseJSON { (response) in
+
+                        print("serverResponse=\(response)")
+            //            print(response)
+                        print(response.response?.statusCode ?? 0)
+                        if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299){
+
+                            if response.result.isSuccess {
+
+
+                                do {
+                                    //here dataResponse received from a network request
+                                    if let jsonData = response.data{
+                                        let response = try JSONDecoder().decode(dec.self, from:jsonData) //Decode JSON Response Data
+
+                                        completion(response, nil)
+                                    }
+                                } catch let parsingError {
+                                    print("Error", parsingError)
+                                }
+
+
+                            }
+                            else{
+
+                                completion(nil,response.error!)
+                            }
+                        }
+                        else if(response.response?.statusCode ?? 0 == 401){
+
+                            //refresh Token
+                            completion(nil,nil)
+                        }
+                        else{
+                            completion(nil,response.error)
+                        }
+                    }
+            }
+            
+        })
+        
     }
     
     
-    static func refreshTokenRequest(){
+       static func refreshTokenRequest(completion: @escaping (_ result: DataResponse<Any>) -> Void){
         
-        let url = APIRouter.refresh
-        let decoder = ResponseData<RefreshTokenModel>.self
+//        let url = APIRouter.refresh
+//        let decoder = ResponseData<RefreshTokenModel>.self
         
-        Alamofire.request(url).responseJSON { (response) in
+//        print("token=\(String(describing: UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)))")
+//        String(describing: UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN))
+        
+        var auth_value : String = UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!
+        
+      
+        auth_value = "bearer " + auth_value
+        
+        
+        let headers: HTTPHeaders = [
+            "Authorization" : auth_value
+        ]
+        
+        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.REFRESH_TOKEN
+        
+        
+        print("refresh url \(url)")
+        print("refresh header \(auth_value)")
+        
+        Alamofire.request(url, method: .post, parameters: nil, headers:headers).validate(contentType: ["application/json","text/html"]).responseJSON { (response) in
             
             print(response.response?.statusCode ?? 0)
-            if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299){
+            
+            
+            
+            switch response.result {
+            case .success:
+                let responseData = response.result.value as! NSDictionary
+                let uData = responseData["data"] as! NSDictionary
+                let userData = uData["user"] as! NSDictionary
                 
-                if response.result.isSuccess {
-                    
-                    if let jsonData = response.data{
-                        let response = try! JSONDecoder().decode(decoder.self, from: jsonData)
-                        
-//                        print(response.data?.user?.accessToken)
-                        
-                       
-                    }
-                    
-                }
-                else{
-                    
-                }
-            }
-            else if(response.response?.statusCode ?? 0 == 401){
-                
+                let auth_token = userData[APP_CONSTANT.ACCESSTOKEN] as! String
                
+                UserDefaults.standard.set(auth_token, forKey: APP_CONSTANT.ACCESSTOKEN)
+               
+                completion(response)
+                break
+            case .failure(let error):
+                print(error)
+               completion(response)
             }
+//            if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299){
+//
+//                if response.result.isSuccess {
+//
+//                    if let jsonData = response.data{
+//                        let response = try! JSONDecoder().decode(decoder.self, from: jsonData)
+//
+////                        print(response.data?.user?.accessToken)
+//
+//
+//                    }
+//
+//                }
+//                else{
+//
+//                }
+//            }
+//            else if(response.response?.statusCode ?? 0 == 401){
+//
+//
+//            }
         }
     }
 
-}
+    }

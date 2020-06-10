@@ -451,7 +451,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         }
         
         
-        print("token=\(UserDefaults.standard.string(forKey: "access_token"))")
+        print("token=\(UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN))")
         print("param123=\(params)")
         
 //        var auth_value = ""

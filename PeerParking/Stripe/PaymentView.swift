@@ -64,7 +64,7 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
     //            self.dictPayData["stripe_token"] = token.tokenId
                 print(token.tokenId)
     
-                print(UserDefaults.standard.string(forKey: "access_token") ?? "")
+                print(UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN) ?? "")
                 
                 //post: user_card
                 

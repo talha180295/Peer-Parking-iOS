@@ -137,7 +137,7 @@ class LoginViewController: UIViewController {
         
         let user_name = userData["name"] as! String
         let user_email = userData["email"] as! String
-        let auth_token = userData["access_token"] as! String
+        let auth_token = userData[APP_CONSTANT.ACCESSTOKEN] as! String
         let token_type = userData["token_type"] as! String
         let expires_in = userData["expires_in"] as! Int
         let  image_url = detailUser["image_url"] as! String
@@ -187,6 +187,7 @@ class LoginViewController: UIViewController {
         {
             UserDefaults.standard.set("", forKey: "image_url")
         }
+        
         
         
         //        let about = detailUser["about"] as! String
@@ -261,11 +262,11 @@ class LoginViewController: UIViewController {
         }
         if(!auth_token.isEmpty)
         {
-            UserDefaults.standard.set(auth_token, forKey: "auth_token")
+            UserDefaults.standard.set(auth_token, forKey: APP_CONSTANT.ACCESSTOKEN)
         }
         else
         {
-            UserDefaults.standard.set("", forKey: "auth_token")
+            UserDefaults.standard.set("", forKey: APP_CONSTANT.ACCESSTOKEN)
         }
         if(!token_type.isEmpty)
         {

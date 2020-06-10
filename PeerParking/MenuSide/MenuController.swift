@@ -257,7 +257,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
         
         let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.LOGOUT
         
-        let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: "auth_token")!)"
+        let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!)"
         let headers: HTTPHeaders = [
             "Authorization" : auth_value
         ]

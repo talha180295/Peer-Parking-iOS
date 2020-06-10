@@ -62,7 +62,7 @@ class SplashViewController: UIViewController {
             //                    Helper().showToast(message: "Succes=\(success)", controller: self)
                     if let val = response?.data {
                         
-                        UserDefaults.standard.set(val.user?.accessToken, forKey: "auth_token")
+                        UserDefaults.standard.set(val.user?.accessToken, forKey: APP_CONSTANT.ACCESSTOKEN)
                         UserDefaults.standard.synchronize()
                     }
                 }

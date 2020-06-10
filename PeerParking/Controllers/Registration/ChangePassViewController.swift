@@ -107,7 +107,7 @@ class ChangePassViewController: UIViewController {
             "password" : newPass,
             "password_confirmation" : confirmPass
         ]
-        var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
+        var auth_value : String = UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!
         auth_value = "bearer " + auth_value
         
         

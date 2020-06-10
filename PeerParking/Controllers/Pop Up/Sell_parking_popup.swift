@@ -227,7 +227,7 @@ class Sell_parking_popup: UIViewController {
         
         
         //params.updateValue("hello", forKey: "new_val")
-        let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: "auth_token")!)"
+        let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!)"
         let headers: HTTPHeaders = [
             "Authorization" : auth_value
         ]

@@ -69,6 +69,7 @@
 		188888A7238EBEEB0008BC88 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188888A5238EBEEA0008BC88 /* Crashlytics.framework */; };
 		188888A8238EBEEB0008BC88 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188888A6238EBEEA0008BC88 /* Fabric.framework */; };
 		188888AA238EF3C50008BC88 /* AlamofireApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188888A9238EF3C50008BC88 /* AlamofireApi.swift */; };
+		18899344248FE4A00045F453 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18899343248FE4A00045F453 /* ChatVC.swift */; };
 		1889AE07235738330081608E /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889AE06235738330081608E /* BottomSheetVC.swift */; };
 		18904F33241F5A8100DBA6A6 /* SellParkingInitaialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18904F32241F5A8100DBA6A6 /* SellParkingInitaialVC.swift */; };
 		18904F35241FA4C000DBA6A6 /* LocationStepVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18904F34241FA4C000DBA6A6 /* LocationStepVC.swift */; };
@@ -247,6 +248,7 @@
 		188888A5238EBEEA0008BC88 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		188888A6238EBEEA0008BC88 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		188888A9238EF3C50008BC88 /* AlamofireApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireApi.swift; sourceTree = "<group>"; };
+		18899343248FE4A00045F453 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		1889AE06235738330081608E /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
 		18904F32241F5A8100DBA6A6 /* SellParkingInitaialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellParkingInitaialVC.swift; sourceTree = "<group>"; };
 		18904F34241FA4C000DBA6A6 /* LocationStepVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStepVC.swift; sourceTree = "<group>"; };
@@ -523,6 +525,14 @@
 			path = MapView;
 			sourceTree = "<group>";
 		};
+		18899340248FE3140045F453 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				18899343248FE4A00045F453 /* ChatVC.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		1889AE052357381C0081608E /* BottomSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -797,6 +807,7 @@
 		FA2815BC231E6669008AF3F5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				18899340248FE3140045F453 /* Chat */,
 				18140319242CF343007AEA58 /* My Spots */,
 				1878C526240E8DCC005F675E /* MapView */,
 				183DAA3C23E070300022BC6E /* Parkings */,
@@ -1255,6 +1266,7 @@
 				18924C312366F06600C0E94F /* DetailStepVC.swift in Sources */,
 				1817D9722472ABD200F4AA2C /* SliderTimerVC.swift in Sources */,
 				18CCE44624079985008B9F4F /* TransactionModel.swift in Sources */,
+				18899344248FE4A00045F453 /* ChatVC.swift in Sources */,
 				1814031B242CF35D007AEA58 /* MySpotsVC.swift in Sources */,
 				18924C242363544800C0E94F /* PublicParkingVC.swift in Sources */,
 				FA122149232A4366002720BE /* ParkingDetailViewController.swift in Sources */,

@@ -168,7 +168,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
         let user_name = userDict["name"] as! String
         let user_email = userDict["email"] as! String
-        let auth_token = userDict["access_token"] as! String
+        let auth_token = userDict[APP_CONSTANT.ACCESSTOKEN] as! String
         let token_type = userDict["token_type"] as! String
         let expires_in = userDict["expires_in"] as! Int
       let  image_url = detailUser["image_url"] as! String
@@ -280,11 +280,11 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         }
         if(!auth_token.isEmpty)
         {
-            UserDefaults.standard.set(auth_token, forKey: "auth_token")
+            UserDefaults.standard.set(auth_token, forKey: APP_CONSTANT.ACCESSTOKEN)
         }
         else
         {
-            UserDefaults.standard.set("", forKey: "auth_token")
+            UserDefaults.standard.set("", forKey: APP_CONSTANT.ACCESSTOKEN)
         }
         if(!token_type.isEmpty)
         {

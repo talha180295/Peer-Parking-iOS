@@ -279,7 +279,7 @@ class FBPopup: UIViewController {
         
         print("userData==\(userData)")
         
-        let auth_token = userData["access_token"] as! String
+        let auth_token = userData[APP_CONSTANT.ACCESSTOKEN] as! String
         let created_at = userData["created_at"] as! String
         let email = userData["email"] as! String
         let expires_in = userData["expires_in"] as! Int
@@ -291,7 +291,7 @@ class FBPopup: UIViewController {
         
         
       
-        key = "auth_token"
+        key = APP_CONSTANT.ACCESSTOKEN
         if !(auth_token.isEmpty)
         {
             UserDefaults.standard.set(auth_token, forKey: key)
@@ -516,7 +516,7 @@ class FBPopup: UIViewController {
         ]
         
         //params.updateValue("hello", forKey: "new_val")
-        let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: "auth_token")!)"
+        let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!)"
         let headers: HTTPHeaders = [
             "Authorization" : auth_value
         ]

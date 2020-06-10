@@ -33,7 +33,7 @@ class Helper{
 //        let date: Date? = dateFormatter.date(from: dateStr)
         
         return dateFormatter.string(from: formateDate)
-        
+    
     }
     func bottomSheet(controller : UIViewController,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor,view_controller:UIViewController){
         
@@ -377,7 +377,7 @@ class Helper{
     
     func RefreshToken(completion: @escaping (_ result: DataResponse<Any>) -> Void) {
         
-        var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
+        var auth_value : String = UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!
         auth_value = "bearer " + auth_value
         
         
@@ -398,8 +398,8 @@ class Helper{
                         let uData = responseData["data"] as! NSDictionary
                         let userData = uData["user"] as! NSDictionary
                         
-                        let auth_token = userData["access_token"] as! String
-                        UserDefaults.standard.set(auth_token, forKey: "access_token")
+                        let auth_token = userData[APP_CONSTANT.ACCESSTOKEN] as! String
+                        UserDefaults.standard.set(auth_token, forKey: APP_CONSTANT.ACCESSTOKEN)
                         UserDefaults.standard.synchronize()
                     }
                     completion(response)
@@ -488,11 +488,12 @@ class Helper{
                     let uData = responseData["data"] as! NSDictionary
                     let userData = uData["user"] as! NSDictionary
                     
-                    let auth_token = userData["access_token"] as! String
-                    UserDefaults.standard.set(auth_token, forKey: "access_token")
+                    
+                    let auth_token = userData[APP_CONSTANT.ACCESSTOKEN] as! String
+                    UserDefaults.standard.set(auth_token, forKey: APP_CONSTANT.ACCESSTOKEN)
                     UserDefaults.standard.synchronize()
                     
-                    var auth_value : String = UserDefaults.standard.string(forKey: "access_token")!
+                    var auth_value : String = UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!
                     auth_value = "bearer " + auth_value
                     
                     let headers: HTTPHeaders = [
@@ -581,11 +582,11 @@ class Helper{
                         
                         let userData = uData["user"] as! NSDictionary
                         
-                        let auth_token = userData["access_token"] as! String
-                        UserDefaults.standard.set(auth_token, forKey: "auth_token")
+                        let auth_token = userData[APP_CONSTANT.ACCESSTOKEN] as! String
+                        UserDefaults.standard.set(auth_token, forKey: APP_CONSTANT.ACCESSTOKEN)
                         UserDefaults.standard.synchronize()
                         
-                        var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
+                        var auth_value : String = UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!
                         auth_value = "bearer " + auth_value
                         
                         let headers1: HTTPHeaders = [
@@ -665,11 +666,11 @@ class Helper{
                         
                         let userData = uData["user"] as! NSDictionary
                         
-                        let auth_token = userData["access_token"] as! String
-                        UserDefaults.standard.set(auth_token, forKey: "auth_token")
+                        let auth_token = userData[APP_CONSTANT.ACCESSTOKEN] as! String
+                        UserDefaults.standard.set(auth_token, forKey: APP_CONSTANT.ACCESSTOKEN)
                         UserDefaults.standard.synchronize()
                         
-                        var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
+                        var auth_value : String = UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!
                         auth_value = "bearer " + auth_value
                         
                         let headers1: HTTPHeaders = [

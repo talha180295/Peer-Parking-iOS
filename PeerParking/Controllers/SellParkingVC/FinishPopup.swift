@@ -56,7 +56,7 @@ class FinishPopup: UIViewController {
         
         params.removeValue(forKey: "image")
         
-        let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: "auth_token")!)"
+        let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!)"
         let headers: HTTPHeaders = [
             "Authorization" : auth_value
         ]
@@ -131,7 +131,7 @@ class FinishPopup: UIViewController {
         
         params.removeValue(forKey: "image")
         
-        let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: "auth_token")!)"
+        let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!)"
         let headers: HTTPHeaders = [
             "Authorization" : auth_value
         ]
@@ -214,11 +214,11 @@ class FinishPopup: UIViewController {
                     
                     let userData = uData["user"] as! NSDictionary
                     
-                    let auth_token = userData["access_token"] as! String
-                    UserDefaults.standard.set(auth_token, forKey: "auth_token")
+                    let auth_token = userData[APP_CONSTANT.ACCESSTOKEN] as! String
+                    UserDefaults.standard.set(auth_token, forKey: APP_CONSTANT.ACCESSTOKEN)
                     UserDefaults.standard.synchronize()
                     
-                    var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
+                    var auth_value : String = UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!
                     auth_value = "bearer " + auth_value
                     
                     let headers1: HTTPHeaders = [

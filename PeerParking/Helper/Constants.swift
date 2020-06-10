@@ -31,6 +31,7 @@ struct APP_CONSTANT {
     static let private_step_text = ["Details","Price","When","Location","Image"]
 //    static let PAGE_URL = "http://peer-parking.apps.fomarkmedia.com/pages/"
     static let PAGE_URL = "http://peer-parking.demo.servstaging.com/pages/"
+    static let ACCESSTOKEN = "access_token"
     
     struct API {
        
@@ -41,10 +42,13 @@ struct APP_CONSTANT {
         
         //STAGING_BASE_URL
         static let STAGING_BASE_URL = "http://peer-parking.demo.servstaging.com/api/v1/"
+        
         //SOCIAL LOGIN API
         static let SOCIAL_LOGIN = "social_login"
+        
         //LOGIN API
         static let LOGIN = "login"
+        
         //GET /parkings API
         static let POST_PARKING = "parkings"
         
@@ -74,6 +78,8 @@ struct APP_CONSTANT {
         static let CHANGE_PASS = "change-password?current_password="
         static let ME = "me"
         static let UPDATE = "profile"
+        
+        
     }
    
     

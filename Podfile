@@ -47,6 +47,7 @@ target 'PeerParking' do
   
   pod 'Charts'
   pod 'MultiSlider'
+  pod 'BLKFlexibleHeightBar'
   
   target 'PeerParkingTests' do
     inherit! :search_paths

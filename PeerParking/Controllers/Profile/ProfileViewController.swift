@@ -34,6 +34,7 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
         self.txtPhone.delegate = self
         self.txtLast.delegate = self
         self.txtFirst.delegate = self
+        self.txtEmail.isUserInteractionEnabled = false
         
         getMe()
         self.img.clipsToBounds = true
@@ -50,7 +51,7 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
     
     func getMe() {
         
-        var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
+        var auth_value : String = UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!
         auth_value = "bearer " + auth_value
         
         
@@ -132,7 +133,7 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
             "name" : name!
         
             ] as [String : Any]
-        var auth_value : String = UserDefaults.standard.string(forKey: "auth_token")!
+        var auth_value : String = UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!
         auth_value = "bearer " + auth_value
       
         print(param)
@@ -397,7 +398,7 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
             sender.title = "Cancel"
             self.saveBtn.isHidden = false
             self.title = "Editing Profile"
-            self.txtEmail.isUserInteractionEnabled = true
+            self.txtEmail.isUserInteractionEnabled = false
             self.txtPhone.isUserInteractionEnabled = true
             self.txtLast.isUserInteractionEnabled = true
             self.txtFirst.isUserInteractionEnabled = true

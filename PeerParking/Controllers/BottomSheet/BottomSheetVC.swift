@@ -65,11 +65,20 @@ class BottomSheetVC: UIViewController {
 
         setData()
     }
-    
-    
+    override func viewWillLayoutSubviews() {
+         self.note.sizeToFit()
+    }
+   
+  
     
     func setData(){
         
+       
+//        self.note.numberOfLines = 0
+//        [self.note sizeToFit]
+        
+        
+//        self.note.sizeToFit()
         if(parking_details.parkingType == 10){
                    
            timeView.isHidden = true
@@ -117,7 +126,7 @@ class BottomSheetVC: UIViewController {
         Helper().getTimeDurationBetweenCordinate(s_lat: self.lat, s_longg: self.longg, d_lat: d_lat, d_longg: d_long)
         { (duration) in
         
-            self.duration.text = "\(duration) min"
+            self.duration.text = "\(duration)"
         }
             
         if parking_details.note == nil
@@ -130,7 +139,7 @@ class BottomSheetVC: UIViewController {
         }
         
       
-        self.parking_type.text = parking_details.parkingSubTypeText
+        self.parking_type.text = parking_details.parkingSubTypeText == "Drive" ? "Driveway" : parking_details.parkingSubTypeText
         
         self.viheicle_type.text = parking_details.vehicleTypeText
         
@@ -149,6 +158,7 @@ class BottomSheetVC: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         
+         self.note.sizeToFit()
         NotificationCenter.default.addObserver(self, selector: #selector(self.accept_offer_tap(notification:)), name: NSNotification.Name(rawValue: "accept_offer"), object: nil)
         
         
@@ -321,7 +331,7 @@ class BottomSheetVC: UIViewController {
         ]
         
         //params.updateValue("hello", forKey: "new_val")
-        let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: "auth_token")!)"
+        let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!)"
         let headers: HTTPHeaders = [
             "Authorization" : auth_value
         ]
