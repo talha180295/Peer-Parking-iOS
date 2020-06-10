@@ -29,52 +29,51 @@ class APIClient {
         
         print("url==\(String(describing: try? url.asURLRequest()))")
         refreshTokenRequest(completion:{
-        response in
-        print(response)
-        if response.result.value == nil {
-            print("No response")
-            
-//            SharedHelper().hideSpinner(view: self.view)
-            return
-        }
-        else{
-            Alamofire.request(url).responseJSON { (response) in
-
-                        print("serverResponse=\(response)")
-            //            print(response)
-                        print(response.response?.statusCode ?? 0)
-                        if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299){
-
-                            if response.result.isSuccess {
-
-
-                                do {
-                                    //here dataResponse received from a network request
-                                    if let jsonData = response.data{
-                                        let response = try JSONDecoder().decode(dec.self, from:jsonData) //Decode JSON Response Data
-
-                                        completion(response, nil)
-                                    }
-                                } catch let parsingError {
-                                    print("Error", parsingError)
+            response in
+            print(response)
+            if Helper().IsUserLogin() == true && response.result.value == nil {
+                print("No response")
+                
+                //            SharedHelper().hideSpinner(view: self.view)
+                return
+            }
+            else{
+                Alamofire.request(url).responseJSON { (response) in
+                    
+                    print("serverResponse=\(response)")
+                    print(response.response?.statusCode ?? 0)
+                    if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299){
+                        
+                        if response.result.isSuccess {
+                            
+                            
+                            do {
+                                //here dataResponse received from a network request
+                                if let jsonData = response.data{
+                                    let response = try JSONDecoder().decode(dec.self, from:jsonData) //Decode JSON Response Data
+                                    
+                                    completion(response, nil)
                                 }
-
-
+                            } catch let parsingError {
+                                print("Error", parsingError)
                             }
-                            else{
-
-                                completion(nil,response.error!)
-                            }
-                        }
-                        else if(response.response?.statusCode ?? 0 == 401){
-
-                            //refresh Token
-                            completion(nil,nil)
+                            
+                            
                         }
                         else{
-                            completion(nil,response.error)
+                            
+                            completion(nil,response.error!)
                         }
                     }
+                    else if(response.response?.statusCode ?? 0 == 401){
+                        
+                        //refresh Token
+                        completion(nil,nil)
+                    }
+                    else{
+                        completion(nil,response.error)
+                    }
+                }
             }
             
         })
@@ -82,17 +81,19 @@ class APIClient {
     }
     
     
-       static func refreshTokenRequest(completion: @escaping (_ result: DataResponse<Any>) -> Void){
+    
+    
+    static func refreshTokenRequest(completion: @escaping (_ result: DataResponse<Any>) -> Void){
         
-//        let url = APIRouter.refresh
-//        let decoder = ResponseData<RefreshTokenModel>.self
+        //        let url = APIRouter.refresh
+        //        let decoder = ResponseData<RefreshTokenModel>.self
         
-//        print("token=\(String(describing: UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)))")
-//        String(describing: UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN))
+        //        print("token=\(String(describing: UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)))")
+        //        String(describing: UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN))
         
-        var auth_value : String = UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!
+        var auth_value : String = UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN) ?? ""
         
-      
+        
         auth_value = "bearer " + auth_value
         
         
@@ -119,37 +120,42 @@ class APIClient {
                 let userData = uData["user"] as! NSDictionary
                 
                 let auth_token = userData[APP_CONSTANT.ACCESSTOKEN] as! String
-               
+                
                 UserDefaults.standard.set(auth_token, forKey: APP_CONSTANT.ACCESSTOKEN)
-               
+                
                 completion(response)
                 break
             case .failure(let error):
                 print(error)
-               completion(response)
+                completion(response)
             }
-//            if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299){
-//
-//                if response.result.isSuccess {
-//
-//                    if let jsonData = response.data{
-//                        let response = try! JSONDecoder().decode(decoder.self, from: jsonData)
-//
-////                        print(response.data?.user?.accessToken)
-//
-//
-//                    }
-//
-//                }
-//                else{
-//
-//                }
-//            }
-//            else if(response.response?.statusCode ?? 0 == 401){
-//
-//
-//            }
+            //            if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299){
+            //
+            //                if response.result.isSuccess {
+            //
+            //                    if let jsonData = response.data{
+            //                        let response = try! JSONDecoder().decode(decoder.self, from: jsonData)
+            //
+            ////                        print(response.data?.user?.accessToken)
+            //
+            //
+            //                    }
+            //
+            //                }
+            //                else{
+            //
+            //                }
+            //            }
+            //            else if(response.response?.statusCode ?? 0 == 401){
+            //
+            //
+            //            }
         }
     }
-
+    
+    
+    private func ifUserlogedIN(){
+        
+        
     }
+}
