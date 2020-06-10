@@ -283,10 +283,18 @@ class BottomSheetVC: UIViewController {
             return
         }
         
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OfferBottomSheetVC") as! OfferBottomSheetVC
-        vc.parkingDetails = self.parking_details
+        
+        let vc = UIStoryboard(name: "Chat", bundle: nil).instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
+        
+        vc.modalPresentationStyle = .fullScreen
+        
+         self.present(vc, animated: true, completion: nil)
+//        vc.parkingDetails = self.parking_details
 //        controller?.p_title = self.parking_titile.text!
-        bottomSheet(controller: vc, sizes: [.fixed(540)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
+       
+        
+        
+//        bottomSheet(controller: vc, sizes: [.fixed(540)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
         
     
     }

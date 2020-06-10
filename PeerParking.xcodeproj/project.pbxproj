@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		18010AAB23549C7F008412C0 /* GoogleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18010AAA23549C7F008412C0 /* GoogleMapView.swift */; };
 		18010AAD2354C463008412C0 /* FindParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18010AAC2354C463008412C0 /* FindParkingVC.swift */; };
+		180797D12490D7FA008E4487 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 180797D02490D7FA008E4487 /* Chat.storyboard */; };
 		180E9A1223E45B4000B2DFF4 /* TimeFinishPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180E9A1123E45B4000B2DFF4 /* TimeFinishPopup.swift */; };
 		180FD0D8237331F30084230A /* ViewAllVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180FD0D7237331F30084230A /* ViewAllVC.swift */; };
 		180FD0DE237335BD0084230A /* Parking_table_cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180FD0DC237335BD0084230A /* Parking_table_cell.swift */; };
@@ -188,6 +189,7 @@
 		0509213210B40E0E0C84432C /* Pods_PeerParkingUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParkingUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18010AAA23549C7F008412C0 /* GoogleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMapView.swift; sourceTree = "<group>"; };
 		18010AAC2354C463008412C0 /* FindParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindParkingVC.swift; sourceTree = "<group>"; };
+		180797D02490D7FA008E4487 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		180E9A1123E45B4000B2DFF4 /* TimeFinishPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFinishPopup.swift; sourceTree = "<group>"; };
 		180FD0D7237331F30084230A /* ViewAllVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllVC.swift; sourceTree = "<group>"; };
 		180FD0DC237335BD0084230A /* Parking_table_cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parking_table_cell.swift; sourceTree = "<group>"; };
@@ -714,6 +716,7 @@
 				FA1150CD2316838500D0B1FE /* LaunchScreen.storyboard */,
 				FA1150D02316838500D0B1FE /* Info.plist */,
 				18010AAA23549C7F008412C0 /* GoogleMapView.swift */,
+				180797D02490D7FA008E4487 /* Chat.storyboard */,
 			);
 			path = PeerParking;
 			sourceTree = "<group>";
@@ -1055,6 +1058,7 @@
 				FA1150CA2316838400D0B1FE /* Main.storyboard in Resources */,
 				FA2815B8231E6602008AF3F5 /* Poppins-Medium.ttf in Resources */,
 				FA2815B6231E6602008AF3F5 /* Poppins-Bold.ttf in Resources */,
+				180797D12490D7FA008E4487 /* Chat.storyboard in Resources */,
 				FAA351A123F18B6F00E11CA2 /* GoogleService-Info.plist in Resources */,
 				FA2815C1231E7058008AF3F5 /* menuCell.xib in Resources */,
 				1841BECE2428C7AB00B621AF /* TimingsCell.xib in Resources */,
