@@ -101,6 +101,9 @@
 		67BC7B9C23CC64AD001542D6 /* ResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9B23CC64AD001542D6 /* ResetViewController.swift */; };
 		67BC7B9E23CCB886001542D6 /* ChangePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9D23CCB886001542D6 /* ChangePassViewController.swift */; };
 		A9D762387663A23BCCC8DF20 /* Pods_PeerParkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */; };
+		BC8511832490D84700D4B3BA /* PeerParkingStotyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */; };
+		BC8511862490D94300D4B3BA /* ParkingDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */; };
+		BC85118C2490DF3900D4B3BA /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC85118B2490DF3800D4B3BA /* Chat.storyboard */; };
 		E2616B4D5E0A2ED92F2CAAF3 /* Pods_PeerParking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */; };
 		FA0E9F6F2330FE7E0005A54C /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E9F6E2330FE7E0005A54C /* PlaceViewController.swift */; };
 		FA0FCC56232229F9000FF52C /* vehicleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0FCC54232229F9000FF52C /* vehicleCell.swift */; };
@@ -286,6 +289,9 @@
 		8B0459CE46FCE0435C2CC795 /* Pods-PeerParking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParking.debug.xcconfig"; path = "Target Support Files/Pods-PeerParking/Pods-PeerParking.debug.xcconfig"; sourceTree = "<group>"; };
 		A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParkingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BACE3107569777F337087DF8 /* Pods-PeerParkingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingUITests.release.xcconfig"; path = "Target Support Files/Pods-PeerParkingUITests/Pods-PeerParkingUITests.release.xcconfig"; sourceTree = "<group>"; };
+		BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerParkingStotyboards.swift; sourceTree = "<group>"; };
+		BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ParkingDetails.storyboard; sourceTree = "<group>"; };
+		BC85118B2490DF3800D4B3BA /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		BF58D38B340DB6271FACD986 /* Pods-PeerParkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingTests.release.xcconfig"; path = "Target Support Files/Pods-PeerParkingTests/Pods-PeerParkingTests.release.xcconfig"; sourceTree = "<group>"; };
 		C53DD1F3CFB8035A3E4024F2 /* Pods-PeerParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParking.release.xcconfig"; path = "Target Support Files/Pods-PeerParking/Pods-PeerParking.release.xcconfig"; sourceTree = "<group>"; };
 		E8DB06BFD47AAB708811B861 /* Pods-PeerParkingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingTests.debug.xcconfig"; path = "Target Support Files/Pods-PeerParkingTests/Pods-PeerParkingTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -634,6 +640,18 @@
 			path = Registration;
 			sourceTree = "<group>";
 		};
+		BC8511842490D91D00D4B3BA /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */,
+				FA1150C82316838400D0B1FE /* Main.storyboard */,
+				FA1150CD2316838500D0B1FE /* LaunchScreen.storyboard */,
+				BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */,
+				BC85118B2490DF3800D4B3BA /* Chat.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		DA2D335CC57FF81A4BC8D086 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -696,6 +714,7 @@
 			isa = PBXGroup;
 			children = (
 				FAA351A223F193BC00E11CA2 /* PeerParking.entitlements */,
+				BC8511842490D91D00D4B3BA /* Storyboards */,
 				18140314242C910F007AEA58 /* Time Picker Widget */,
 				18D30D6123DAC4D6008889FB /* WebView */,
 				18F8118823D87D8A00B3061F /* Stripe */,
@@ -712,8 +731,6 @@
 				FA2815A5231E3F84008AF3F5 /* MenuSide */,
 				FA1150C42316838400D0B1FE /* AppDelegate.swift */,
 				FA1150CB2316838500D0B1FE /* Assets.xcassets */,
-				FA1150C82316838400D0B1FE /* Main.storyboard */,
-				FA1150CD2316838500D0B1FE /* LaunchScreen.storyboard */,
 				FA1150D02316838500D0B1FE /* Info.plist */,
 				18010AAA23549C7F008412C0 /* GoogleMapView.swift */,
 				180797D02490D7FA008E4487 /* Chat.storyboard */,
@@ -1044,6 +1061,7 @@
 				FA526EF6232CF7570014517B /* HeaderCell.xib in Resources */,
 				FA0FCC57232229F9000FF52C /* vehicleCell.xib in Resources */,
 				FA6CD37E23290DF100E18CF2 /* RoutesCell.xib in Resources */,
+				BC8511862490D94300D4B3BA /* ParkingDetails.storyboard in Resources */,
 				FA1150CF2316838500D0B1FE /* LaunchScreen.storyboard in Resources */,
 				FAF807B123263644004DB3B1 /* transactionCell.xib in Resources */,
 				FA6CD36C2328C67900E18CF2 /* ScheduledCell.xib in Resources */,
@@ -1053,6 +1071,7 @@
 				FA1C6125234F0A8400EF0F3D /* homeParkingCell.xib in Resources */,
 				18140323242D0134007AEA58 /* MySpotCell.xib in Resources */,
 				18C2195723ABB5F700BCCA75 /* BargainingCell.xib in Resources */,
+				BC85118C2490DF3900D4B3BA /* Chat.storyboard in Resources */,
 				FA2815B9231E6602008AF3F5 /* Poppins-Regular.ttf in Resources */,
 				FA2815BA231E6602008AF3F5 /* Poppins-Light.ttf in Resources */,
 				FA1150CA2316838400D0B1FE /* Main.storyboard in Resources */,
@@ -1282,6 +1301,7 @@
 				181E0D1123CDF954005D7248 /* Buyer.swift in Sources */,
 				181C8E352379ED42000B66C7 /* Sell_parking_popup.swift in Sources */,
 				FA1C6124234F0A8400EF0F3D /* homeParkingCell.swift in Sources */,
+				BC8511832490D84700D4B3BA /* PeerParkingStotyboards.swift in Sources */,
 				181E0D1223CDF954005D7248 /* Details.swift in Sources */,
 				FAF807B023263644004DB3B1 /* transactionCell.swift in Sources */,
 				FA57EBA42320EB2E000646B7 /* ViewHelper.swift in Sources */,
