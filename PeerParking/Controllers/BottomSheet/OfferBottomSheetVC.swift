@@ -466,7 +466,7 @@ extension OfferBottomSheetVC: UITableViewDelegate, UITableViewDataSource{
         let cell = offersTblView.dequeueReusableCell(withIdentifier: "BargainingCell") as! BargainingCell
        
         cell.offer.textAlignment = .right
-       
+        
         
         let dict = bargainOffers[indexPath.row]
        

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="chatTextCell" customModule="PeerParking"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="chatTextCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="chatTextCell" rowHeight="200" id="Fmk-P5-hXu" customClass="chatTextCell" customModule="PeerParking" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="356" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fmk-P5-hXu" id="Psn-oB-Ohg">
+                <rect key="frame" x="0.0" y="0.0" width="356" height="200"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRj-NW-es5" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
+                        <rect key="frame" x="8" y="9" width="64" height="153"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="askfldkanfklanfkladnflkndalkfnalkdnfladnflkad" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXO-eQ-nQs">
+                                <rect key="frame" x="8" y="6" width="48" height="141"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="themeBlue"/>
+                        <constraints>
+                            <constraint firstItem="hXO-eQ-nQs" firstAttribute="top" secondItem="WRj-NW-es5" secondAttribute="top" constant="6" id="Z8F-46-aZe"/>
+                            <constraint firstAttribute="bottom" secondItem="hXO-eQ-nQs" secondAttribute="bottom" constant="6" id="eiS-3L-6TE"/>
+                            <constraint firstItem="hXO-eQ-nQs" firstAttribute="leading" secondItem="WRj-NW-es5" secondAttribute="leading" constant="8" id="qqk-J1-xVP"/>
+                            <constraint firstAttribute="trailing" secondItem="hXO-eQ-nQs" secondAttribute="trailing" constant="8" id="tJQ-7N-28Z"/>
+                            <constraint firstItem="hXO-eQ-nQs" firstAttribute="leading" secondItem="WRj-NW-es5" secondAttribute="leading" constant="8" id="x8n-PI-oGE"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="corner_Radius">
+                                <real key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="06/10/2020 03:28 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCf-Vh-Ryx">
+                        <rect key="frame" x="8" y="168" width="56" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="WvJ-78-d5g"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="JCf-Vh-Ryx" secondAttribute="bottom" id="16o-G0-Y9A"/>
+                    <constraint firstItem="WRj-NW-es5" firstAttribute="width" relation="lessThanOrEqual" secondItem="Psn-oB-Ohg" secondAttribute="width" multiplier="0.8" id="P7A-TB-jtj"/>
+                    <constraint firstItem="WRj-NW-es5" firstAttribute="top" secondItem="Psn-oB-Ohg" secondAttribute="top" constant="9" id="UKD-Wd-pps"/>
+                    <constraint firstItem="WRj-NW-es5" firstAttribute="leading" secondItem="Psn-oB-Ohg" secondAttribute="leading" constant="8" id="XWq-Qq-Fx6"/>
+                    <constraint firstItem="JCf-Vh-Ryx" firstAttribute="top" secondItem="WRj-NW-es5" secondAttribute="bottom" constant="6" id="aO4-XD-7oj"/>
+                    <constraint firstItem="JCf-Vh-Ryx" firstAttribute="leading" secondItem="Psn-oB-Ohg" secondAttribute="leading" constant="8" id="cYL-oh-a44"/>
+                    <constraint firstAttribute="trailing" secondItem="WRj-NW-es5" secondAttribute="trailing" constant="8" id="fGl-5a-0lu"/>
+                    <constraint firstAttribute="trailing" secondItem="JCf-Vh-Ryx" secondAttribute="trailing" constant="8" id="hc4-dH-9zy"/>
+                    <constraint firstItem="JCf-Vh-Ryx" firstAttribute="width" secondItem="Psn-oB-Ohg" secondAttribute="width" multiplier="0.7" id="lvn-yj-Kxh"/>
+                    <constraint firstAttribute="bottom" secondItem="JCf-Vh-Ryx" secondAttribute="bottom" constant="11" id="nGz-fL-qOa"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="nGz-fL-qOa"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <directionalEdgeInsets key="directionalLayoutMargins" top="0.0" leading="0.0" bottom="0.0" trailing="0.0"/>
+            <viewLayoutGuide key="safeArea" id="ZkR-e7-MN6"/>
+            <connections>
+                <outlet property="dateLabel" destination="JCf-Vh-Ryx" id="rcm-Zb-wxf"/>
+                <outlet property="leadingDateConstrain" destination="cYL-oh-a44" id="TdK-H3-W9C"/>
+                <outlet property="leadingTextConstrain" destination="XWq-Qq-Fx6" id="MX0-8L-SZi"/>
+                <outlet property="textView" destination="WRj-NW-es5" id="LuP-tp-wts"/>
+                <outlet property="trailingDateConstrain" destination="hc4-dH-9zy" id="4Vp-4g-Bv1"/>
+                <outlet property="trailingTextConstrain" destination="fGl-5a-0lu" id="z0M-Nw-Joi"/>
+            </connections>
+            <point key="canvasLocation" x="155.07246376811597" y="91.071428571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="themeBlue">
+            <color red="0.21568627450980393" green="0.61568627450980395" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>

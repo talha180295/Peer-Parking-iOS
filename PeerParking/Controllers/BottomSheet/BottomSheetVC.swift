@@ -284,11 +284,18 @@ class BottomSheetVC: UIViewController {
         }
         
         
-        let vc = UIStoryboard(name: "Chat", bundle: nil).instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
+//        let vc = UIStoryboard(name: "Chat", bundle: nil).instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
+        
+        let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
         
         vc.modalPresentationStyle = .fullScreen
         
-         self.present(vc, animated: true, completion: nil)
+        
+        
+        self.present(vc, animated: true, completion: nil)
+        
+//        self.navigationController!.pushViewController(vc, animated: true)
+         
 //        vc.parkingDetails = self.parking_details
 //        controller?.p_title = self.parking_titile.text!
        
@@ -307,6 +314,9 @@ class BottomSheetVC: UIViewController {
         vc.parkingDetails = arr
 //        controller?.p_title = self.parking_titile.text!
         self.present(vc, animated: true, completion: nil)
+        
+        
+        
     }
     
     func bottomSheet(controller : UIViewController,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor){
