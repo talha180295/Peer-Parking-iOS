@@ -40,6 +40,9 @@ PODS:
     - FirebaseAnalytics (= 6.1.7)
   - Firebase/CoreOnly (6.14.0):
     - FirebaseCore (= 6.5.0)
+  - Firebase/Database (6.14.0):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (~> 6.1.3)
   - Firebase/Messaging (6.14.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 4.1.10)
@@ -53,6 +56,7 @@ PODS:
     - "GoogleUtilities/NSData+zlib (~> 6.0)"
     - nanopb (= 0.3.9011)
   - FirebaseAnalyticsInterop (1.4.0)
+  - FirebaseAuthInterop (1.1.0)
   - FirebaseCore (6.5.0):
     - FirebaseCoreDiagnostics (~> 1.0)
     - FirebaseCoreDiagnosticsInterop (~> 1.0)
@@ -65,6 +69,10 @@ PODS:
     - GoogleUtilities/Logger (~> 6.2)
     - nanopb (~> 0.3.901)
   - FirebaseCoreDiagnosticsInterop (1.1.0)
+  - FirebaseDatabase (6.1.4):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 6.0)
+    - leveldb-library (~> 1.22)
   - FirebaseInstanceID (4.2.8):
     - FirebaseCore (~> 6.5)
     - GoogleUtilities/Environment (~> 6.4)
@@ -121,6 +129,7 @@ PODS:
     - SwiftGifOrigin
   - iProgressHUD (1.1.1)
   - IQKeyboardManagerSwift (6.5.4)
+  - leveldb-library (1.22)
   - MBRadioCheckboxButton (2.0)
   - MultiSlider (1.10.8):
     - AvailableHapticFeedback
@@ -156,6 +165,7 @@ DEPENDENCIES:
   - FacebookLogin
   - FacebookShare
   - Firebase/Analytics
+  - Firebase/Database
   - Firebase/Messaging
   - FittedSheets
   - GoogleMaps
@@ -193,9 +203,11 @@ SPEC REPOS:
     - Firebase
     - FirebaseAnalytics
     - FirebaseAnalyticsInterop
+    - FirebaseAuthInterop
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
+    - FirebaseDatabase
     - FirebaseInstanceID
     - FirebaseMessaging
     - FittedSheets
@@ -209,6 +221,7 @@ SPEC REPOS:
     - HelperClassPod
     - iProgressHUD
     - IQKeyboardManagerSwift
+    - leveldb-library
     - MBRadioCheckboxButton
     - MultiSlider
     - nanopb
@@ -242,9 +255,11 @@ SPEC CHECKSUMS:
   Firebase: 0219bb4782eb1406f1b9b0628a2e625484ce910d
   FirebaseAnalytics: f68b9f3f1241385129ae0a83b63627fc420c05e5
   FirebaseAnalyticsInterop: d48b6ab67bcf016a05e55b71fc39c61c0cb6b7f3
+  FirebaseAuthInterop: a0f37ae05833af156e72028f648d313f7e7592e9
   FirebaseCore: 632e05cc5e1199d9147122c16d92305eb04c34bd
   FirebaseCoreDiagnostics: 511f4f3ed7d440bb69127e8b97c2bc8befae639e
   FirebaseCoreDiagnosticsInterop: e9b1b023157e3a2fc6418b5cb601e79b9af7b3a0
+  FirebaseDatabase: 0144e0706a4761f1b0e8679572eba8095ddb59be
   FirebaseInstanceID: ce993a3c3670a8f5d47ce371ac5d143c560608c5
   FirebaseMessaging: 089b7a4991425783384acc8bcefcd78c0af913bd
   FittedSheets: 7f754c9f6fb4ea330cbc57c652b594255f2a6819
@@ -258,6 +273,7 @@ SPEC CHECKSUMS:
   HelperClassPod: bb76030247217e6fc69ce1eb6aa8c2b1daa55ae7
   iProgressHUD: caa742128253c97f2c2e1ec59e2bbe6cf689df6a
   IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
+  leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   MBRadioCheckboxButton: 6e2a2cdc441e292e45b64c4e65eb8fc1fc05eef2
   MultiSlider: a4fdcb3fb058a0af95720570b44d8683da5312c8
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
@@ -273,6 +289,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: 23e3eba183fb29b722f469083f37de1ea058c2e6
+PODFILE CHECKSUM: 886b7682e273e7778dad3470249ab006fa880c1c
 
 COCOAPODS: 1.9.1

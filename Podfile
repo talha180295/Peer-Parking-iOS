@@ -33,7 +33,7 @@ target 'PeerParking' do
   pod 'XLPagerTabStrip'
   # Add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
-
+  pod ‘Firebase/Database’
   # Add the pod for Firebase Cloud Messaging
   pod 'Firebase/Messaging'
   
