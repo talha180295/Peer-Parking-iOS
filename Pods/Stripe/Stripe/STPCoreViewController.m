@@ -62,8 +62,6 @@
 
         self.stp_navigationItemProxy.leftBarButtonItem = self.cancelItem;
     }
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateAppearance) name:UIContentSizeCategoryDidChangeNotification object:nil];
 }
 
 - (void)setTheme:(STPTheme *)theme {

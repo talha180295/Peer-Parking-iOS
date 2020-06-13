@@ -54,29 +54,20 @@ typedef NS_ENUM(NSUInteger, STPPaymentMethodCardCheckResult) {
  */
 - (instancetype)init __attribute__((unavailable("You cannot directly instantiate an STPPaymentMethodCardChecks.")));
 
-#pragma mark - Deprecated
 /**
  If a address line1 was provided, results of the check.
-
- @deprecated Card check values are no longer returned to clients using publishable keys. Retrieve them on your server using you secret key instead.
  */
-@property (nonatomic, readonly) STPPaymentMethodCardCheckResult addressLine1Check DEPRECATED_MSG_ATTRIBUTE("Card check values are no longer returned to clients using publishable keys. Retrieve them on your server using you secret key instead.");
+@property (nonatomic, readonly) STPPaymentMethodCardCheckResult addressLine1Check;
 
 /**
  If a address postal code was provided, results of the check.
-
-
- @deprecated Card check values are no longer returned to clients using publishable keys. Retrieve them on your server using you secret key instead.
  */
-@property (nonatomic, readonly) STPPaymentMethodCardCheckResult addressPostalCodeCheck DEPRECATED_MSG_ATTRIBUTE("Card check values are no longer returned to clients using publishable keys. Retrieve them on your server using you secret key instead.");
+@property (nonatomic, readonly) STPPaymentMethodCardCheckResult addressPostalCodeCheck;
 
 /**
  If a CVC was provided, results of the check.
-
-
- @deprecated Card check values are no longer returned to clients using publishable keys. Retrieve them on your server using you secret key instead.
  */
-@property (nonatomic, readonly) STPPaymentMethodCardCheckResult cvcCheck DEPRECATED_MSG_ATTRIBUTE("Card check values are no longer returned to clients using publishable keys. Retrieve them on your server using you secret key instead.");
+@property (nonatomic, readonly) STPPaymentMethodCardCheckResult cvcCheck;
 
 @end
 

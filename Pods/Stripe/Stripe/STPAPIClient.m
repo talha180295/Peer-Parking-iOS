@@ -72,7 +72,6 @@ static NSString * const APIEndpointFPXStatus = @"fpx/bank_statuses";
 
 static NSArray<PKPaymentNetwork> *_additionalEnabledApplePayNetworks;
 static NSString *_defaultPublishableKey;
-static BOOL _advancedFraudSignalsEnabled;
 
 + (void)setDefaultPublishableKey:(NSString *)publishableKey {
     _defaultPublishableKey = [publishableKey copy];
@@ -80,19 +79,6 @@ static BOOL _advancedFraudSignalsEnabled;
 
 + (NSString *)defaultPublishableKey {
     return _defaultPublishableKey;
-}
-
-+ (void)setAdvancedFraudSignalsEnabled:(BOOL)enabled {
-    [self advancedFraudSignalsEnabled];
-    _advancedFraudSignalsEnabled = enabled;
-}
-
-+ (BOOL)advancedFraudSignalsEnabled {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _advancedFraudSignalsEnabled = YES;
-    });
-    return _advancedFraudSignalsEnabled;
 }
 
 @end
@@ -115,6 +101,7 @@ static BOOL _advancedFraudSignalsEnabled;
 }
 
 + (void)initialize {
+    [STPAnalyticsClient initializeIfNeeded];
     [STPTelemetryClient sharedInstance];
 #ifdef STP_STATIC_LIBRARY_BUILD
     [STPCategoryLoader loadCategories];
@@ -427,12 +414,7 @@ static BOOL _advancedFraudSignalsEnabled;
     if (paymentRequest.merchantIdentifier == nil) {
         return NO;
     }
-    // "In versions of iOS prior to version 12.0 and watchOS prior to version 5.0, the amount of the grand total must be greater than zero."
-    if (@available(iOS 12, *)) {
-        return [[[paymentRequest.paymentSummaryItems lastObject] amount] floatValue] >= 0;
-    } else {
-        return [[[paymentRequest.paymentSummaryItems lastObject] amount] floatValue] > 0;
-    }
+    return [[[paymentRequest.paymentSummaryItems lastObject] amount] floatValue] > 0;
 }
 
 + (NSArray<NSString *> *)supportedPKPaymentNetworks {
@@ -533,9 +515,7 @@ static BOOL _advancedFraudSignalsEnabled;
     }];
 }
 
-- (NSURLSessionDataTask *)retrieveSourceWithId:(NSString *)identifier
-                                  clientSecret:(NSString *)secret
-                            responseCompletion:(void (^)(STPSource * _Nullable, NSHTTPURLResponse * _Nullable, NSError * _Nullable))completion {
+- (NSURLSessionDataTask *)retrieveSourceWithId:(NSString *)identifier clientSecret:(NSString *)secret responseCompletion:(STPAPIResponseBlock)completion {
     NSString *endpoint = [NSString stringWithFormat:@"%@/%@", APIEndpointSources, identifier];
     NSDictionary *parameters = @{@"client_secret": secret};
     return [STPAPIRequest<STPSource *> getWithAPIClient:self
@@ -763,9 +743,9 @@ toCustomerUsingKey:(STPEphemeralKey *)ephemeralKey
     NSCAssert([STPPaymentIntentParams isClientSecretValid:paymentIntentParams.clientSecret], @"`paymentIntentParams.clientSecret` format does not match expected client secret formatting.");
 
     NSString *identifier = paymentIntentParams.stripeId;
-    NSString *type = paymentIntentParams.paymentMethodParams.rawTypeString ?: paymentIntentParams.sourceParams.rawTypeString;
+    NSString *sourceType = [STPSource stringFromType:paymentIntentParams.sourceParams.type];
     [[STPAnalyticsClient sharedClient] logPaymentIntentConfirmationAttemptWithConfiguration:self.configuration
-                                                                          paymentMethodType:type];
+                                                                                 sourceType:sourceType];
 
     NSString *endpoint = [NSString stringWithFormat:@"%@/%@/confirm", APIEndpointPaymentIntents, identifier];
 
@@ -829,8 +809,9 @@ toCustomerUsingKey:(STPEphemeralKey *)ephemeralKey
     NSCAssert(setupIntentParams.clientSecret != nil, @"'clientSecret' is required to confirm a SetupIntent");
     NSCAssert([STPSetupIntentConfirmParams isClientSecretValid:setupIntentParams.clientSecret], @"`setupIntentParams.clientSecret` format does not match expected client secret formatting.");
 
+    NSString *paymentMethodType = [STPPaymentMethod stringFromType:setupIntentParams.paymentMethodParams.type];
     [[STPAnalyticsClient sharedClient] logSetupIntentConfirmationAttemptWithConfiguration:self.configuration
-                                                                        paymentMethodType:setupIntentParams.paymentMethodParams.rawTypeString];
+                                                                        paymentMethodType:paymentMethodType];
 
     NSString *identifier = [STPSetupIntent idFromClientSecret:setupIntentParams.clientSecret];
     NSString *endpoint = [NSString stringWithFormat:@"%@/%@/confirm", APIEndpointSetupIntents, identifier];
@@ -866,13 +847,14 @@ toCustomerUsingKey:(STPEphemeralKey *)ephemeralKey
                                  completion:(STPPaymentMethodCompletionBlock)completion {
     NSCAssert(paymentMethodParams != nil, @"'paymentMethodParams' is required to create a PaymentMethod");
     NSCAssert(paymentMethodParams.rawTypeString != nil, @"Set the `type` or `rawTypeString` property on paymentMethodParams.");
-    [[STPAnalyticsClient sharedClient] logPaymentMethodCreationAttemptWithConfiguration:self.configuration paymentMethodType:paymentMethodParams.rawTypeString];
-    
     [STPAPIRequest<STPPaymentMethod *> postWithAPIClient:self
                                                endpoint:APIEndpointPaymentMethods
                                              parameters:[STPFormEncoder dictionaryForObject:paymentMethodParams]
                                            deserializer:[STPPaymentMethod new]
                                              completion:^(STPPaymentMethod *paymentMethod, __unused NSHTTPURLResponse *response, NSError *error) {
+                                                 if (error == nil && paymentMethod != nil) {
+                                                     [[STPAnalyticsClient sharedClient] logPaymentMethodCreationSucceededWithConfiguration:self.configuration paymentMethodID:paymentMethod.stripeId];
+                                                 }
                                                  completion(paymentMethod, error);
                                              }];
 

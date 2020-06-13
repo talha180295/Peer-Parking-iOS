@@ -15,6 +15,7 @@
 #import "STPAPIClient+Private.h"
 #import "STPAddCardViewController+Private.h"
 #import "STPAddCardViewController.h"
+#import "STPAspects.h"
 #import "STPCard.h"
 #import "STPCardIOProxy.h"
 #import "STPFormEncodable.h"
@@ -30,7 +31,7 @@
 
 @interface STPAnalyticsClient()
 
-@property (nonatomic) NSMutableSet *productUsage;
+@property (nonatomic) NSSet *apiUsage;
 @property (nonatomic) NSSet *additionalInfoSet;
 @property (nonatomic, readwrite) NSURLSession *urlSession;
 
@@ -45,6 +46,73 @@
         sharedClient = [self new];
     });
     return sharedClient;
+}
+
++ (void)initialize {
+    [self initializeIfNeeded];
+}
+
++ (void)initializeIfNeeded {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+
+        // Individual views
+
+        [STPPaymentCardTextField stp_aspect_hookSelector:@selector(commonInit)
+                                             withOptions:STPAspectPositionAfter
+                                              usingBlock:^{
+                                                  STPAnalyticsClient *client = [self sharedClient];
+                                                  [client setApiUsage:[client.apiUsage setByAddingObject:NSStringFromClass([STPPaymentCardTextField class])]];
+                                              } error:nil];
+
+        // Pay context
+
+        [STPPaymentContext stp_aspect_hookSelector:@selector(initWithAPIAdapter:configuration:theme:)
+                                       withOptions:STPAspectPositionAfter
+                                        usingBlock:^{
+                                            STPAnalyticsClient *client = [self sharedClient];
+                                            [client setApiUsage:[client.apiUsage setByAddingObject:NSStringFromClass([STPPaymentContext class])]];
+                                        } error:nil];
+        
+
+        // View controllers
+
+        [STPAddCardViewController stp_aspect_hookSelector:@selector(commonInitWithConfiguration:)
+                                              withOptions:STPAspectPositionAfter
+                                               usingBlock:^{
+                                                   STPAnalyticsClient *client = [self sharedClient];
+                                                   [client setApiUsage:[client.apiUsage setByAddingObject:NSStringFromClass([STPAddCardViewController class])]];
+                                               } error:nil];
+        
+        [STPPaymentOptionsViewController stp_aspect_hookSelector:@selector(initWithConfiguration:apiAdapter:apiClient:loadingPromise:theme:shippingAddress:delegate:)
+                                                     withOptions:STPAspectPositionAfter
+                                                      usingBlock:^{
+                                                          STPAnalyticsClient *client = [self sharedClient];
+                                                          [client setApiUsage:[client.apiUsage setByAddingObject:NSStringFromClass([STPPaymentOptionsViewController class])]];
+                                                      } error:nil];
+
+        [STPBankSelectionViewController stp_aspect_hookSelector:@selector(initWithBankMethod:configuration:theme:)
+                                                     withOptions:STPAspectPositionAfter
+                                                      usingBlock:^{
+                                                          STPAnalyticsClient *client = [self sharedClient];
+                                                          [client setApiUsage:[client.apiUsage setByAddingObject:NSStringFromClass([STPBankSelectionViewController class])]];
+                                                      } error:nil];
+        
+        [STPShippingAddressViewController stp_aspect_hookSelector:@selector(initWithConfiguration:theme:currency:shippingAddress:selectedShippingMethod:prefilledInformation:)
+                                                      withOptions:STPAspectPositionAfter
+                                                       usingBlock:^{
+                                                           STPAnalyticsClient *client = [self sharedClient];
+                                                           [client setApiUsage:[client.apiUsage setByAddingObject:NSStringFromClass([STPShippingAddressViewController class])]];
+                                                       } error:nil];
+
+        [STPCustomerContext stp_aspect_hookSelector:@selector(initWithKeyProvider:)
+                                        withOptions:STPAspectPositionAfter
+                                         usingBlock:^{
+                                             STPAnalyticsClient *client = [self sharedClient];
+                                             [client setApiUsage:[client.apiUsage setByAddingObject:NSStringFromClass([STPCustomerContext class])]];
+                                         } error:nil];
+
+    });
 }
 
 + (BOOL)shouldCollectAnalytics {
@@ -76,16 +144,10 @@
     if (self) {
         NSURLSessionConfiguration *config = [STPAPIClient sharedUrlSessionConfiguration];
         _urlSession = [NSURLSession sessionWithConfiguration:config];
-        _productUsage = [NSMutableSet set];
+        _apiUsage = [NSSet set];
         _additionalInfoSet = [NSSet set];
     }
     return self;
-}
-
-- (void)addClassToProductUsageIfNecessary:(Class)klass {
-    @synchronized (self) {
-        [self.productUsage addObject:NSStringFromClass(klass)];
-    }
 }
 
 - (void)addAdditionalInfo:(NSString *)info {
@@ -102,29 +164,30 @@
     return additionalInfo ?: @[];
 }
 
-- (NSDictionary *)productUsageDictionary {
+- (NSArray *)productUsage {
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(description)) ascending:YES];
-    NSMutableDictionary *usage = [NSMutableDictionary new];
-    NSArray *productUsage;
-    @synchronized (self) {
-        productUsage = [self.productUsage sortedArrayUsingDescriptors:@[sortDescriptor]] ?: @[];
-    }
+    NSArray *productUsage = [self.apiUsage sortedArrayUsingDescriptors:@[sortDescriptor]];
+    return productUsage ?: @[];
+}
+
+- (NSDictionary *)productUsageDictionary {
+    NSMutableDictionary *productUsage = [NSMutableDictionary new];
 
     NSString *uiUsageLevel = nil;
-    if ([self.productUsage containsObject:NSStringFromClass([STPPaymentContext class])]) {
+    if ([self.apiUsage containsObject:NSStringFromClass([STPPaymentContext class])]) {
         uiUsageLevel = @"full";
-    } else if (self.productUsage.count == 1
-             && [self.productUsage containsObject:NSStringFromClass([STPPaymentCardTextField class])]) {
+    } else if (self.apiUsage.count == 1
+             && [self.apiUsage containsObject:NSStringFromClass([STPPaymentCardTextField class])]) {
         uiUsageLevel = @"card_text_field";
-    } else if (self.productUsage.count > 0) {
+    } else if (self.apiUsage.count > 0) {
         uiUsageLevel = @"partial";
     } else {
         uiUsageLevel = @"none";
     }
-    usage[@"ui_usage_level"] = uiUsageLevel;
-    usage[@"product_usage"] = productUsage;
+    productUsage[@"ui_usage_level"] = uiUsageLevel;
+    productUsage[@"product_usage"] = [self productUsage];
 
-    return [usage copy];
+    return productUsage.copy;
 }
 
 - (void)logTokenCreationAttemptWithConfiguration:(STPPaymentConfiguration *)configuration
@@ -155,13 +218,13 @@
     [self logPayload:payload];
 }
 
-- (void)logPaymentMethodCreationAttemptWithConfiguration:(STPPaymentConfiguration *)configuration
-                                       paymentMethodType:(NSString *)paymentMethodType {
+- (void)logPaymentMethodCreationSucceededWithConfiguration:(STPPaymentConfiguration *)configuration
+                                           paymentMethodID:(NSString *)paymentMethodID {
     NSDictionary *configurationDictionary = [self.class serializeConfiguration:configuration];
     NSMutableDictionary *payload = [self.class commonPayload];
     [payload addEntriesFromDictionary:@{
                                         @"event": @"stripeios.payment_method_creation",
-                                        @"source_type": paymentMethodType ?: @"unknown",
+                                        @"payment_method_id": paymentMethodID,
                                         @"additional_info": [self additionalInfo],
                                         }];
     [payload addEntriesFromDictionary:[self productUsageDictionary]];
@@ -170,12 +233,12 @@
 }
 
 - (void)logPaymentIntentConfirmationAttemptWithConfiguration:(STPPaymentConfiguration *)configuration
-                                           paymentMethodType:(NSString *)paymentMethodType {
+                                                  sourceType:(NSString *)sourceType {
     NSDictionary *configurationDictionary = [self.class serializeConfiguration:configuration];
     NSMutableDictionary *payload = [self.class commonPayload];
     [payload addEntriesFromDictionary:@{
                                         @"event": @"stripeios.payment_intent_confirmation",
-                                        @"source_type": paymentMethodType ?: @"unknown",
+                                        @"source_type": sourceType ?: @"unknown",
                                         @"additional_info": [self additionalInfo],
                                         }];
     [payload addEntriesFromDictionary:[self productUsageDictionary]];
@@ -189,7 +252,7 @@
     NSMutableDictionary *payload = [self.class commonPayload];
     [payload addEntriesFromDictionary:@{
                                         @"event": @"stripeios.setup_intent_confirmation",
-                                        @"source_type": paymentMethodType ?: @"unknown",
+                                        @"payment_method_type": paymentMethodType ?: @"unknown",
                                         @"additional_info": [self additionalInfo],
                                         }];
     [payload addEntriesFromDictionary:[self productUsageDictionary]];

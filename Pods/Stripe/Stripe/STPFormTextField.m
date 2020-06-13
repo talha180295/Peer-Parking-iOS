@@ -133,7 +133,8 @@ typedef NSAttributedString* (^STPFormTextTransformationBlock)(NSAttributedString
                     return [inputString copy];
                 }
                 NSMutableAttributedString *attributedString = [inputString mutableCopy];
-                NSArray<NSNumber *> *cardNumberFormat = [STPCardValidator cardNumberFormatForCardNumber:attributedString.string];
+                STPCardBrand currentBrand = [STPCardValidator brandForNumber:attributedString.string];
+                NSArray<NSNumber *> *cardNumberFormat = [STPCardValidator cardNumberFormatForBrand:currentBrand];
 
                 NSUInteger index = 0;
                 for (NSNumber *segmentLength in cardNumberFormat) {

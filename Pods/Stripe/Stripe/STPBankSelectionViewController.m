@@ -9,7 +9,6 @@
 #import "STPBankSelectionViewController.h"
 
 #import "NSArray+Stripe.h"
-#import "STPAnalyticsClient.h"
 #import "STPAPIClient+Private.h"
 #import "STPFPXBankStatusResponse.h"
 #import "STPColorUtils.h"
@@ -39,10 +38,6 @@ static NSString *const STPBankSelectionCellReuseIdentifier = @"STPBankSelectionC
 @end
 
 @implementation STPBankSelectionViewController
-
-+ (void)initialize{
-    [[STPAnalyticsClient sharedClient] addClassToProductUsageIfNecessary:[self class]];
-}
 
 - (instancetype)initWithBankMethod:(STPBankSelectionMethod)bankMethod {
     return [self initWithBankMethod:bankMethod configuration:[STPPaymentConfiguration sharedConfiguration] theme:[STPTheme defaultTheme]];

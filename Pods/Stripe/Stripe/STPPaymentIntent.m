@@ -118,8 +118,8 @@
 
 + (STPPaymentIntentConfirmationMethod)confirmationMethodFromString:(NSString *)string {
     NSDictionary<NSString *, NSNumber *> *map = @{
-                                                  @"automatic": @(STPPaymentIntentConfirmationMethodAutomatic),
-                                                  @"manual": @(STPPaymentIntentConfirmationMethodManual),
+                                                  @"secret": @(STPPaymentIntentConfirmationMethodSecret),
+                                                  @"publishable": @(STPPaymentIntentConfirmationMethodPublishable),
                                                   };
 
     NSString *key = string.lowercaseString;

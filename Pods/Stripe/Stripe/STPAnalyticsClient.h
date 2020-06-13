@@ -15,9 +15,9 @@
 
 + (instancetype)sharedClient;
 
-+ (NSString *)tokenTypeFromParameters:(NSDictionary *)parameters;
++ (void)initializeIfNeeded;
 
-- (void)addClassToProductUsageIfNecessary:(Class)klass;
++ (NSString *)tokenTypeFromParameters:(NSDictionary *)parameters;
 
 - (void)addAdditionalInfo:(NSString *)info;
 
@@ -30,13 +30,13 @@
 - (void)logSourceCreationAttemptWithConfiguration:(STPPaymentConfiguration *)configuration
                                        sourceType:(NSString *)sourceType;
 
-- (void)logPaymentMethodCreationAttemptWithConfiguration:(STPPaymentConfiguration *)configuration
-                                       paymentMethodType:(NSString *)paymentMethodType;
+- (void)logPaymentMethodCreationSucceededWithConfiguration:(STPPaymentConfiguration *)configuration
+                                           paymentMethodID:(NSString *)paymentMethodID;
 
 #pragma mark - Confirmation
 
 - (void)logPaymentIntentConfirmationAttemptWithConfiguration:(STPPaymentConfiguration *)configuration
-                                           paymentMethodType:(NSString *)paymentMethodType;
+                                                  sourceType:(NSString *)sourceType;
 
 - (void)logSetupIntentConfirmationAttemptWithConfiguration:(STPPaymentConfiguration *)configuration
                                          paymentMethodType:(NSString *)paymentMethodType;

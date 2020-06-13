@@ -9,7 +9,6 @@
 #import "STPShippingAddressViewController.h"
 
 #import "NSArray+Stripe.h"
-#import "STPAnalyticsClient.h"
 #import "STPAddress.h"
 #import "STPAddressViewModel.h"
 #import "STPColorUtils.h"
@@ -44,10 +43,6 @@
 @end
 
 @implementation STPShippingAddressViewController
-
-+ (void)initialize{
-    [[STPAnalyticsClient sharedClient] addClassToProductUsageIfNecessary:[self class]];
-}
 
 - (instancetype)init {
     return [self initWithConfiguration:[STPPaymentConfiguration sharedConfiguration] theme:[STPTheme defaultTheme] currency:nil shippingAddress:nil selectedShippingMethod:nil prefilledInformation:nil];
@@ -88,7 +83,6 @@
                  prefilledInformation:(STPUserInformation *)prefilledInformation {
     self = [super initWithTheme:theme];
     if (self) {
-        NSCAssert([configuration.requiredShippingAddressFields count] > 0, @"`requiredShippingAddressFields` must not be empty when initializing an STPShippingAddressViewController.");
         _configuration = configuration;
         _currency = currency ?: @"usd";
         _selectedShippingMethod = selectedShippingMethod;
@@ -177,7 +171,6 @@
     for (STPAddressFieldTableViewCell *cell in self.addressViewModel.addressCells) {
         cell.theme = self.theme;
     }
-    self.addressHeaderView.theme = self.theme;
 }
 
 

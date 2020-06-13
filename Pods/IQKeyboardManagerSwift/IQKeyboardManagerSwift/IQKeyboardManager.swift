@@ -81,13 +81,14 @@ Codeless drop-in universal library allows to prevent issues of keyboard sliding 
         
         var isEnabled = enable
         
-        let enableMode = _textFieldView?.enableMode
-
-        if enableMode == .enabled {
-            isEnabled = true
-        } else if enableMode == .disabled {
-            isEnabled = false
-        } else {
+//        let enableMode = _textFieldView?.enableMode
+//
+//        if enableMode == .enabled {
+//            isEnabled = true
+//        } else if enableMode == .disabled {
+//            isEnabled = false
+//        } else {
+        
             if var textFieldViewController = _textFieldView?.viewContainingController() {
                 
                 //If it is searchBar textField embedded in Navigation Bar
@@ -130,7 +131,7 @@ Codeless drop-in universal library allows to prevent issues of keyboard sliding 
                     }
                 }
             }
-        }
+//        }
         
         return isEnabled
     }
@@ -1541,8 +1542,6 @@ Codeless drop-in universal library allows to prevent issues of keyboard sliding 
         }
 
         if privateIsEnabled() == false {
-            restorePosition()
-            _topViewBeginOrigin = IQKeyboardManager.kIQCGPointInvalid
             return
         }
         
@@ -1792,10 +1791,7 @@ Codeless drop-in universal library allows to prevent issues of keyboard sliding 
         resignFirstResponderGesture.isEnabled = privateShouldResignOnTouchOutside()
         _textFieldView?.window?.addGestureRecognizer(resignFirstResponderGesture)    //   (Enhancement ID: #14)
 
-        if privateIsEnabled() == false {
-            restorePosition()
-            _topViewBeginOrigin = IQKeyboardManager.kIQCGPointInvalid
-        } else {
+        if privateIsEnabled() == true {
             if _topViewBeginOrigin.equalTo(IQKeyboardManager.kIQCGPointInvalid) == true {    //  (Bug ID: #5)
                 
                 _rootViewController = _textFieldView?.parentContainerViewController()

@@ -76,7 +76,7 @@ extension MultiSlider {
     }
 
     func setupTrackLayoutMargins() {
-        let thumbSize = (thumbImage ?? defaultThumbImage)?.size ?? CGSize(width: 200, height: 2)
+        let thumbSize = (thumbImage ?? defaultThumbImage)?.size ?? CGSize(width: 2, height: 2)
         let thumbDiameter = orientation == .vertical ? thumbSize.height : thumbSize.width
         let halfThumb = thumbDiameter / 2 - 1 // 1 pixel for semi-transparent boundary
         if orientation == .vertical {
@@ -173,8 +173,11 @@ extension MultiSlider {
         guard valueLabelPosition != .notAnAttribute else { return }
         let valueLabel = UITextField()
         valueLabel.borderStyle = .none
-        slideView.addSubview(valueLabel)
-        valueLabel.translatesAutoresizingMaskIntoConstraints = false
+        slideView.addConstrainedSubview(valueLabel)
+        valueLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
+        if #available(iOS 10.0, *) {
+            valueLabel.adjustsFontForContentSizeCategory = true
+        }
         let thumbView = thumbViews[i]
         slideView.constrain(valueLabel, at: valueLabelPosition.perpendicularCenter, to: thumbView)
         slideView.constrain(

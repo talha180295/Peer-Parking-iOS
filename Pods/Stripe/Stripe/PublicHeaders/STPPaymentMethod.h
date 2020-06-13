@@ -17,8 +17,7 @@ STPPaymentMethodCard,
 STPPaymentMethodCardPresent,
 STPPaymentMethodFPX,
 STPPaymentMethodiDEAL,
-STPPaymentMethodSEPADebit,
-STPPaymentMethodBacsDebit;
+STPPaymentMethodSEPADebit;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -79,11 +78,6 @@ NS_ASSUME_NONNULL_BEGIN
  If this is a SEPA Debit PaymentMethod (ie `self.type == STPPaymentMethodTypeSEPADebit`), this contains additional details.
  */
 @property (nonatomic, nullable, readonly) STPPaymentMethodSEPADebit *sepaDebit;
-
-/**
- If this is a Bacs Debit PaymentMethod (ie `self.type == STPPaymentMethodTypeBacsDebit`), this contains additional details.
- */
-@property (nonatomic, nullable, readonly) STPPaymentMethodBacsDebit *bacsDebit;
 
 /**
  The ID of the Customer to which this PaymentMethod is saved. Nil when the PaymentMethod has not been saved to a Customer.

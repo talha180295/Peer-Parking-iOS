@@ -100,12 +100,12 @@ typedef NS_ENUM(NSInteger, STPPaymentIntentConfirmationMethod) {
     /**
      Confirmed via publishable key
      */
-    STPPaymentIntentConfirmationMethodManual,
+    STPPaymentIntentConfirmationMethodPublishable,
 
     /**
      Confirmed via secret key
      */
-    STPPaymentIntentConfirmationMethodAutomatic,
+    STPPaymentIntentConfirmationMethodSecret,
 };
 
 /**

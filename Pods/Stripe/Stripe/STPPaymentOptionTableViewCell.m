@@ -78,7 +78,6 @@ static const CGFloat kCheckmarkWidth = 14.f;
             [self.titleLabel.centerYAnchor constraintEqualToAnchor:self.contentView.centerYAnchor],
 
         ]];
-        self.accessibilityTraits |= UIAccessibilityTraitButton;
         self.isAccessibilityElement = YES;
     }
     return self;

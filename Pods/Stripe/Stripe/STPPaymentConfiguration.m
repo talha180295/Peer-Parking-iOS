@@ -26,6 +26,7 @@
 @synthesize stripeAccount = _stripeAccount;
 
 + (void)initialize {
+    [STPAnalyticsClient initializeIfNeeded];
     [STPTelemetryClient sharedInstance];
 }
 

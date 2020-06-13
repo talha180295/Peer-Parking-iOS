@@ -60,11 +60,9 @@
 }
 
 - (STPMandateDataParams *)mandateData {
-    BOOL paymentMethodRequiresMandate = self.paymentMethodParams.type == STPPaymentMethodTypeSEPADebit || self.paymentMethodParams.type == STPPaymentMethodTypeBacsDebit;
-    
     if (_mandateData != nil) {
         return _mandateData;
-    } else if (self.mandate == nil && paymentMethodRequiresMandate) {
+    } else if (self.paymentMethodParams.type == STPPaymentMethodTypeSEPADebit && self.mandate == nil) {
         // Create default infer from client mandate_data
         STPMandateDataParams *mandateData = [[STPMandateDataParams alloc] init];
         STPMandateCustomerAcceptanceParams *customerAcceptance = [[STPMandateCustomerAcceptanceParams alloc] init];

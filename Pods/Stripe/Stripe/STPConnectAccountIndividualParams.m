@@ -44,10 +44,6 @@
 @synthesize additionalAPIParameters;
 
 - (STPDateOfBirth *)_dateOfBirth {
-    if (!self.dateOfBirth) {
-        return nil;
-    }
-
     STPDateOfBirth *dob = [STPDateOfBirth new];
     dob.day = self.dateOfBirth.day;
     dob.month = self.dateOfBirth.month;

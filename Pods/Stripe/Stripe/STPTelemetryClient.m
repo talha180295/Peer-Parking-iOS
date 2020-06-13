@@ -15,6 +15,7 @@
 #import "STPAPIClient+Private.h"
 
 @interface STPTelemetryClient ()
+@property (nonatomic) NSDate *appOpenTime;
 @property (nonatomic, readwrite) NSURLSession *urlSession;
 @end
 
@@ -24,7 +25,7 @@
 #if TARGET_OS_SIMULATOR
     return NO;
 #else
-    return [Stripe advancedFraudSignalsEnabled] && NSClassFromString(@"XCTest") == nil;
+    return NSClassFromString(@"XCTest") == nil;
 #endif
 }
 
@@ -46,17 +47,37 @@
     self = [super init];
     if (self) {
         _urlSession = [NSURLSession sessionWithConfiguration:config];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
     }
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)addTelemetryFieldsToParams:(NSMutableDictionary *)params {
     params[@"muid"] = [self muid];
+    params[@"time_on_page"] = [self timeOnPage];
+}
+
+- (void)applicationDidBecomeActive {
+    self.appOpenTime = [NSDate date];
 }
 
 - (NSString *)muid {
     NSString *muid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     return muid ?: @"";
+}
+
+- (NSNumber *)timeOnPage {
+    if (!self.appOpenTime) {
+        return @(0);
+    }
+    NSTimeInterval seconds = [[NSDate date] timeIntervalSinceDate:self.appOpenTime];
+    NSInteger millis = (NSInteger)round(seconds*1000);
+    return @(MAX(millis, 0));
 }
 
 - (NSString *)language {
