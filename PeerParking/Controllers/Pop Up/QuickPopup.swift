@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EzPopup
 
 class QuickPopup: UIViewController {
 
@@ -16,8 +17,12 @@ class QuickPopup: UIViewController {
     @IBOutlet weak var parkingType:UILabel!
     @IBOutlet weak var size:UILabel!
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     var isPrivate = false
     var params:[String:Any]!
+    let placeHolderImage = UIImage(named: "placeholder-img")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,7 +34,9 @@ class QuickPopup: UIViewController {
         }
         
         self.setupView()
-        
+        self.setCoordinates()
+        self.setImage()
+        self.setIsAlways()
     }
     
     func setupView(){
@@ -62,13 +69,59 @@ class QuickPopup: UIViewController {
             self.size.text =  "\(VehicleTypeText.BUS)"
         }
         
-        
+    
         
         
     }
 
-    @IBAction func post(_ sender:UIButton){
+    func setCoordinates(){
+        let lat = self.appDelegate.currentLocation?.coordinate.latitude ?? 0.0
+        let longg = self.appDelegate.currentLocation?.coordinate.longitude ?? 0.0
+        let address = self.appDelegate.currentLocationAddress ?? ""
         
+        self.location.text = address
+        
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(lat, forKey: "latitude")
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(longg, forKey: "longitude")
+        
+        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(lat, forKey: "latitude")
+        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(longg, forKey: "longitude")
+        
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(address, forKey: "address")
+        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(address, forKey: "address")
+    }
+    func setImage(){
+        guard let imageData = placeHolderImage?.jpegData(compressionQuality: 1.0) else {
+            print("Could not get JPEG representation of UIImage")
+            return
+        }
+        
+        
+        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(imageData, forKey: "image")
+        
+        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(imageData, forKey: "image")
+    }
+    
+    func setIsAlways(){
+        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(1, forKey: "is_always")
+    }
+    
+    @IBAction func post(_ sender:UIButton){
+        let vc = FinishPopup.instantiate(fromPeerParkingStoryboard: .Main)
+        vc.isPrivate = true
+        
+        let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
+        popupVC.canTapOutsideToDismiss = true
+        
+        //properties
+        //            popupVC.backgroundAlpha = 1
+        //            popupVC.backgroundColor = .black
+        //            popupVC.canTapOutsideToDismiss = true
+        //            popupVC.cornerRadius = 10
+        //            popupVC.shadowEnabled = true
+        
+        // show it by call present(_ , animated:) method from a current UIViewController
+        present(popupVC, animated: true)
         
     }
 

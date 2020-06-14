@@ -355,7 +355,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
         
         let vc = self.story.instantiateViewController(withIdentifier: "FBPopup") as? FBPopup
         
-        vc?.source = "sideMenu"
+        vc?.source = Source.SIDE_MENU.rawValue
         let popupVC = PopupViewController(contentController: vc!, popupWidth: 320, popupHeight: 365)
         popupVC.canTapOutsideToDismiss = true
         

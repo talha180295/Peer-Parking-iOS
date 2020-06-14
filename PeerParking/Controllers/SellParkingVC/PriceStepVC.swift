@@ -78,11 +78,10 @@ class PriceStepVC: UIViewController {
             self.imgInfo.isHidden = true
             
 
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "QuickPopup") as! QuickPopup
-            
+            let vc = QuickPopup.instantiate(fromPeerParkingStoryboard: .SellParking)
             vc.isPrivate = isPrivate
             
-            let popupVC = PopupViewController(contentController: vc, popupWidth: 350, popupHeight: 500)
+            let popupVC = PopupViewController(contentController: vc, popupWidth: 350, popupHeight: 400)
             popupVC.canTapOutsideToDismiss = true
             
             //properties

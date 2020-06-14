@@ -367,8 +367,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         controller.parking_details = dict
         
         
-        let lat = dict.latitude ?? ""
-        let long = dict.longitude ?? ""
+        let lat = self.lat
+        let long = self.longg
 //        let distanceStr = cal_distance(lat: lat, long: long)
         
         

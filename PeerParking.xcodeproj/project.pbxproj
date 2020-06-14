@@ -105,6 +105,7 @@
 		67BC7B9C23CC64AD001542D6 /* ResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9B23CC64AD001542D6 /* ResetViewController.swift */; };
 		67BC7B9E23CCB886001542D6 /* ChangePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9D23CCB886001542D6 /* ChangePassViewController.swift */; };
 		A9D762387663A23BCCC8DF20 /* Pods_PeerParkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */; };
+		BC514A9A2496D088003DF452 /* SellParking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC514A992496D087003DF452 /* SellParking.storyboard */; };
 		BC8511832490D84700D4B3BA /* PeerParkingStotyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */; };
 		BC8511862490D94300D4B3BA /* ParkingDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */; };
 		E2616B4D5E0A2ED92F2CAAF3 /* Pods_PeerParking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */; };
@@ -296,6 +297,7 @@
 		8B0459CE46FCE0435C2CC795 /* Pods-PeerParking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParking.debug.xcconfig"; path = "Target Support Files/Pods-PeerParking/Pods-PeerParking.debug.xcconfig"; sourceTree = "<group>"; };
 		A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParkingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BACE3107569777F337087DF8 /* Pods-PeerParkingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingUITests.release.xcconfig"; path = "Target Support Files/Pods-PeerParkingUITests/Pods-PeerParkingUITests.release.xcconfig"; sourceTree = "<group>"; };
+		BC514A992496D087003DF452 /* SellParking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SellParking.storyboard; sourceTree = "<group>"; };
 		BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerParkingStotyboards.swift; sourceTree = "<group>"; };
 		BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ParkingDetails.storyboard; sourceTree = "<group>"; };
 		BF58D38B340DB6271FACD986 /* Pods-PeerParkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingTests.release.xcconfig"; path = "Target Support Files/Pods-PeerParkingTests/Pods-PeerParkingTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -658,6 +660,7 @@
 				FA1150C82316838400D0B1FE /* Main.storyboard */,
 				FA1150CD2316838500D0B1FE /* LaunchScreen.storyboard */,
 				BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */,
+				BC514A992496D087003DF452 /* SellParking.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1085,6 +1088,7 @@
 				FA1150CA2316838400D0B1FE /* Main.storyboard in Resources */,
 				FA2815B8231E6602008AF3F5 /* Poppins-Medium.ttf in Resources */,
 				18253CDB2492428B0046EAE0 /* chatTextCell.xib in Resources */,
+				BC514A9A2496D088003DF452 /* SellParking.storyboard in Resources */,
 				FA2815B6231E6602008AF3F5 /* Poppins-Bold.ttf in Resources */,
 				180797D12490D7FA008E4487 /* Chat.storyboard in Resources */,
 				FAA351A123F18B6F00E11CA2 /* GoogleService-Info.plist in Resources */,

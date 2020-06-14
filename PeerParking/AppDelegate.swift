@@ -278,6 +278,7 @@ extension AppDelegate:CLLocationManagerDelegate{
     
     
     func setupLocationManager(){
+        
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         self.locationManager?.requestAlwaysAuthorization()

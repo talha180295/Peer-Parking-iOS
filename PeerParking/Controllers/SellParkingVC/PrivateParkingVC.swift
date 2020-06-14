@@ -53,7 +53,7 @@ class PrivateParkingVC: UIViewController {
         
         // Do any additional setup after loading the view.
         detailStepVC = storyboard!.instantiateViewController(withIdentifier: "DetailStepVC") as? DetailStepVC
-        priceStepVC = storyboard!.instantiateViewController(withIdentifier: "PriceStepVC") as? PriceStepVC
+        priceStepVC = PriceStepVC.instantiate(fromPeerParkingStoryboard: .SellParking)
         privateWhenStepVC = storyboard!.instantiateViewController(withIdentifier: "PrivateWhenStepVC") as? PrivateWhenStepVC
         locationStepVC = storyboard!.instantiateViewController(withIdentifier: "LocationStepVC") as? LocationStepVC
         imageStepVC = storyboard!.instantiateViewController(withIdentifier: "ImageStepVC")

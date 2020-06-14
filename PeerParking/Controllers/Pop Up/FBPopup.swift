@@ -15,6 +15,12 @@ import EzPopup
 
 let loginManager = LoginManager()
 
+enum Source:String{
+    
+    case SIDE_MENU
+    case SELL_PARKING
+}
+
 class FBPopup: UIViewController {
 
     var key = ""
@@ -146,56 +152,15 @@ class FBPopup: UIViewController {
         
         NotificationCenter.default.post(name: Notification.Name("reload_table"), object: nil)
         
-        if(source == "sideMenu"){
-           
-//            self.dismiss(animated: true, completion: nil)
+        switch source {
+        case Source.SIDE_MENU.rawValue:
             Helper().presentOnMainScreens(controller: self, index: 1)
+        case Source.SELL_PARKING.rawValue:
+            Helper().presentOnMainScreens(controller: self, index: 2)
+        default:
+            break;
         }
-        else{
-            
-            if(tab_index==2){
-                
-                
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FinishPopup")
-                
-                
-                let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
-                popupVC.canTapOutsideToDismiss = true
-                
-                //properties
-                //            popupVC.backgroundAlpha = 1
-                //            popupVC.backgroundColor = .black
-                //            popupVC.canTapOutsideToDismiss = true
-                //            popupVC.cornerRadius = 10
-                //            popupVC.shadowEnabled = true
-                
-                // show it by call present(_ , animated:) method from a current UIViewController
-                present(popupVC, animated: true)
-                
-            }
-            else{
-                
-                let id = self.parking_details.id ?? 0
-                
-                
-                    
-                assign_buyer(p_id: id, status: 20)
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParkingNavVC") as! ParkingNavVC
-                //
-                vc.parking_details = self.parking_details
-                vc.p_id = self.parking_details.id ?? 0
-                vc.p_title =  parking_details.address ?? ""
-                vc.p_lat = Double(self.parking_details.latitude ?? "0.0") ?? 0.0
-                vc.p_longg = Double(self.parking_details.longitude ?? "0.0") ?? 0.0
-                vc.vcName = ""
-                vc.modalPresentationStyle = .fullScreen
-                
-                //            self.navigationController?.pushViewController(vc, animated: true)
-                //            self.navigationController?.pushViewController(vc, animated: true)
-                self.present(vc, animated: false, completion: nil)
-                
-            }
-        }
+
         
     }
     
