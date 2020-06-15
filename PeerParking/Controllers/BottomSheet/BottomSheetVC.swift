@@ -19,6 +19,7 @@ import Alamofire
 
 
 
+
 class BottomSheetVC: UIViewController {
 
     @IBOutlet weak var offer_btn: UIButton!
@@ -284,19 +285,25 @@ class BottomSheetVC: UIViewController {
         }
         
         
-//        let vc = UIStoryboard(name: "Chat", bundle: nil).instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
+   
+        
+        
+       
+        
+        
+        
         
         let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
         
         vc.modalPresentationStyle = .fullScreen
         
-        
+         vc.parking_details = self.parking_details
         
         self.present(vc, animated: true, completion: nil)
         
 //        self.navigationController!.pushViewController(vc, animated: true)
          
-//        vc.parkingDetails = self.parking_details
+       
 //        controller?.p_title = self.parking_titile.text!
        
         

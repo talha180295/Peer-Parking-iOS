@@ -17,8 +17,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="356" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXx-GF-ENO" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
+                    <view contentMode="scaleToFill" id="nXx-GF-ENO" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
                         <rect key="frame" x="6" y="5" width="249.5" height="86"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="q1a-3j-3X7">
                                 <rect key="frame" x="0.0" y="0.0" width="249.5" height="86"/>
@@ -26,10 +27,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0E-J7-wHO">
                                         <rect key="frame" x="0.0" y="0.0" width="249.5" height="43"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have new offer $ 100.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="60" id="PYp-0H-mah">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have new offer $ 100.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYp-0H-mah">
                                                 <rect key="frame" x="0.0" y="0.0" width="249.5" height="43"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" name="themeBlue"/>
                                                 <nil key="highlightedColor"/>
@@ -92,6 +91,7 @@
                             <constraint firstAttribute="bottom" secondItem="q1a-3j-3X7" secondAttribute="bottom" id="cNg-oz-oRT"/>
                             <constraint firstItem="q1a-3j-3X7" firstAttribute="leading" secondItem="nXx-GF-ENO" secondAttribute="leading" id="sFT-hb-LqJ"/>
                         </constraints>
+                        <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="corner_Radius">
                                 <real key="value" value="2"/>

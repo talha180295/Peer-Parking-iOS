@@ -71,8 +71,8 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4E8-Se-OBA">
                                                                         <rect key="frame" x="5" y="76" width="181" height="11"/>
                                                                         <subviews>
-                                                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gss-z5-0I7" customClass="CosmosView" customModule="Cosmos">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="126" height="11"/>
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gss-z5-0I7" customClass="CosmosView" customModule="Cosmos">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="80" height="11"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <userDefinedRuntimeAttributes>
                                                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -307,8 +307,8 @@
                                                             <constraint firstAttribute="height" constant="40" id="gCW-Tw-pMC"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ac3-f5-uhv">
-                                                        <rect key="frame" x="48" y="11" width="177" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="New" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ac3-f5-uhv">
+                                                        <rect key="frame" x="48" y="10" width="177" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="MJk-ex-7Zk"/>
                                                         </constraints>
@@ -534,6 +534,9 @@
                     </view>
                     <connections>
                         <outlet property="bargainCountVoew" destination="wMB-lq-5wZ" id="npt-HB-vh6"/>
+                        <outlet property="circularProgressHeader" destination="7Eo-qZ-TXC" id="Hys-Te-Rf6"/>
+                        <outlet property="circularProgressParkingDetail" destination="qhc-yV-1xV" id="5ve-qQ-gD3"/>
+                        <outlet property="circularTextHeader" destination="Ihf-BO-Sks" id="Cvo-7a-WaG"/>
                         <outlet property="headerHeightConstrain" destination="a0K-oz-yp1" id="MzY-eQ-u7Q"/>
                         <outlet property="headerView" destination="uYw-Vu-QdG" id="EQB-Vl-Kli"/>
                         <outlet property="messageTextFieldLabel" destination="ti9-dR-gUX" id="K9A-Of-xcD"/>
@@ -542,12 +545,22 @@
                         <outlet property="parkingDetailHeightConstraint" destination="HUV-dp-7cT" id="5Fl-k4-Cgh"/>
                         <outlet property="parkingDetailTopConstrain" destination="HUV-dp-7cT" id="K5P-SU-qzx"/>
                         <outlet property="parkingDetailView" destination="Y5o-08-b1U" id="YAd-oj-rIG"/>
+                        <outlet property="parkingFromView" destination="X6y-7o-QIX" id="fhz-xK-uhM"/>
+                        <outlet property="parkingImageView" destination="CfB-i6-1AV" id="VYg-vK-rXd"/>
+                        <outlet property="parkingRatingView" destination="Gss-z5-0I7" id="MBo-eZ-uwR"/>
+                        <outlet property="parkingTitleView" destination="JzE-pp-8n2" id="N2B-Ky-nBo"/>
+                        <outlet property="parkingToView" destination="d1a-7w-c3X" id="fwR-Q0-gp5"/>
+                        <outlet property="parkingTotalCostView" destination="FAp-Zj-681" id="GV9-0U-3JU"/>
+                        <outlet property="parkingTypeView" destination="NUx-az-oMb" id="noI-ze-AaR"/>
+                        <outlet property="progressTextParkingDetail" destination="C1P-u4-1Wp" id="4Nl-xC-mDv"/>
                         <outlet property="tv" destination="Xo3-ZU-cGE" id="lhV-0Q-a6f"/>
+                        <outlet property="userImageView" destination="vkb-34-9v2" id="vpz-FU-vOi"/>
+                        <outlet property="userNameView" destination="Ac3-f5-uhv" id="kzo-wm-M1l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XX7-Yd-aQk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1788.75" y="6.3380281690140849"/>
+            <point key="canvasLocation" x="-1804" y="-70"/>
         </scene>
     </scenes>
     <resources>

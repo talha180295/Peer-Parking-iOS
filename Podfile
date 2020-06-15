@@ -25,6 +25,7 @@ target 'PeerParking' do
   pod 'FacebookShare'
   pod 'HelperClassPod'
   pod 'SwiftyJSON'
+  pod 'CodableFirebase'
  # pod 'UICircularProgressRing'
   pod 'CircleProgressView'	
 #  pod 'DGRunkeeperSwitch' , '~> 1.1.4'

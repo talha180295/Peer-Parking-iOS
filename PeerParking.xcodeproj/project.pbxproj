@@ -74,7 +74,6 @@
 		188888A7238EBEEB0008BC88 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188888A5238EBEEA0008BC88 /* Crashlytics.framework */; };
 		188888A8238EBEEB0008BC88 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188888A6238EBEEA0008BC88 /* Fabric.framework */; };
 		188888AA238EF3C50008BC88 /* AlamofireApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188888A9238EF3C50008BC88 /* AlamofireApi.swift */; };
-		18899344248FE4A00045F453 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18899343248FE4A00045F453 /* ChatVC.swift */; };
 		1889AE07235738330081608E /* BottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1889AE06235738330081608E /* BottomSheetVC.swift */; };
 		18904F33241F5A8100DBA6A6 /* SellParkingInitaialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18904F32241F5A8100DBA6A6 /* SellParkingInitaialVC.swift */; };
 		18904F35241FA4C000DBA6A6 /* LocationStepVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18904F34241FA4C000DBA6A6 /* LocationStepVC.swift */; };
@@ -86,6 +85,8 @@
 		18924C2F23662EEA00C0E94F /* WhenStepVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18924C2E23662EEA00C0E94F /* WhenStepVC.swift */; };
 		18924C312366F06600C0E94F /* DetailStepVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18924C302366F06600C0E94F /* DetailStepVC.swift */; };
 		18924C3323672C6F00C0E94F /* LimitationStepVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18924C3223672C6F00C0E94F /* LimitationStepVC.swift */; };
+		18A2446024967CCE001A5350 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2445F24967CCE001A5350 /* ChatModel.swift */; };
+		18A244632496D6A0001A5350 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A244622496D6A0001A5350 /* ChatVC.swift */; };
 		18C2195623ABB5F700BCCA75 /* BargainingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C2195423ABB5F600BCCA75 /* BargainingCell.swift */; };
 		18C2195723ABB5F700BCCA75 /* BargainingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C2195523ABB5F600BCCA75 /* BargainingCell.xib */; };
 		18CAA57F2368B6BB001B5503 /* FinishPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CAA57E2368B6BA001B5503 /* FinishPopup.swift */; };
@@ -260,7 +261,6 @@
 		188888A5238EBEEA0008BC88 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		188888A6238EBEEA0008BC88 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		188888A9238EF3C50008BC88 /* AlamofireApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireApi.swift; sourceTree = "<group>"; };
-		18899343248FE4A00045F453 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		1889AE06235738330081608E /* BottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetVC.swift; sourceTree = "<group>"; };
 		18904F32241F5A8100DBA6A6 /* SellParkingInitaialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellParkingInitaialVC.swift; sourceTree = "<group>"; };
 		18904F34241FA4C000DBA6A6 /* LocationStepVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStepVC.swift; sourceTree = "<group>"; };
@@ -272,6 +272,8 @@
 		18924C2E23662EEA00C0E94F /* WhenStepVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhenStepVC.swift; sourceTree = "<group>"; };
 		18924C302366F06600C0E94F /* DetailStepVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStepVC.swift; sourceTree = "<group>"; };
 		18924C3223672C6F00C0E94F /* LimitationStepVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitationStepVC.swift; sourceTree = "<group>"; };
+		18A2445F24967CCE001A5350 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
+		18A244622496D6A0001A5350 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		18C2195423ABB5F600BCCA75 /* BargainingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BargainingCell.swift; sourceTree = "<group>"; };
 		18C2195523ABB5F600BCCA75 /* BargainingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BargainingCell.xib; sourceTree = "<group>"; };
 		18CAA57E2368B6BA001B5503 /* FinishPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishPopup.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 				1827370623F417DD00C52347 /* DirectionAPI.swift */,
 				18CCE44524079985008B9F4F /* TransactionModel.swift */,
 				18140324242D0FF8007AEA58 /* PrivateParkingModel.swift */,
+				18A2445F24967CCE001A5350 /* ChatModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -546,7 +549,7 @@
 		18899340248FE3140045F453 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				18899343248FE4A00045F453 /* ChatVC.swift */,
+				18A244622496D6A0001A5350 /* ChatVC.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1275,6 +1278,7 @@
 				1841BED62428FE3300B621AF /* StartEndPopUp.swift in Sources */,
 				67BC7B9A23CC5D64001542D6 /* ForgetPassViewController.swift in Sources */,
 				183DAA4023E073930022BC6E /* UpcomingParkingVC.swift in Sources */,
+				18A2446024967CCE001A5350 /* ChatModel.swift in Sources */,
 				FA2F9F37232CA7E30025BF11 /* offerCell.swift in Sources */,
 				18010AAD2354C463008412C0 /* FindParkingVC.swift in Sources */,
 				18253CDA2492428B0046EAE0 /* chatTextCell.swift in Sources */,
@@ -1301,7 +1305,6 @@
 				18924C312366F06600C0E94F /* DetailStepVC.swift in Sources */,
 				1817D9722472ABD200F4AA2C /* SliderTimerVC.swift in Sources */,
 				18CCE44624079985008B9F4F /* TransactionModel.swift in Sources */,
-				18899344248FE4A00045F453 /* ChatVC.swift in Sources */,
 				1814031B242CF35D007AEA58 /* MySpotsVC.swift in Sources */,
 				18924C242363544800C0E94F /* PublicParkingVC.swift in Sources */,
 				FA122149232A4366002720BE /* ParkingDetailViewController.swift in Sources */,
@@ -1342,6 +1345,7 @@
 				18F27A30247E4BF400BC7D79 /* MySpotParkingDetailVC.swift in Sources */,
 				181E0D1523CDF954005D7248 /* Bargaining.swift in Sources */,
 				FA6CD3802329122E00E18CF2 /* AlternateRouteViewController.swift in Sources */,
+				18A244632496D6A0001A5350 /* ChatVC.swift in Sources */,
 				FAEDCF1A231F9EFB0063EFC0 /* FindParkingViewController.swift in Sources */,
 				1841BED22428CE9E00B621AF /* UIView+Extension.swift in Sources */,
 				18E099D02358F27E00B43A4B /* DGRunkeeperSwitch.swift in Sources */,

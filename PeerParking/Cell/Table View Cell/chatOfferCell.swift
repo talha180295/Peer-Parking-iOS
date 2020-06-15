@@ -18,11 +18,11 @@ class chatOfferCell: UITableViewCell {
      
       
 
-      @IBOutlet weak var leadingTextConstrain: NSLayoutConstraint!
-      @IBOutlet weak var trailingTextConstrain: NSLayoutConstraint!
+      @IBOutlet  var leadingTextConstrain: NSLayoutConstraint!
+      @IBOutlet  var trailingTextConstrain: NSLayoutConstraint!
       
-      @IBOutlet weak var leadingDateConstrain: NSLayoutConstraint!
-      @IBOutlet weak var trailingDateConstrain: NSLayoutConstraint!
+      @IBOutlet  var leadingDateConstrain: NSLayoutConstraint!
+      @IBOutlet  var trailingDateConstrain: NSLayoutConstraint!
       
     
     override func awakeFromNib() {
@@ -31,17 +31,27 @@ class chatOfferCell: UITableViewCell {
        }
     
     
-    
     func setLayout(_ isMine : Bool){
           
+//        leadingTextConstrain.isActive = true
+//         leadingDateConstrain.isActive = true
+//        trailingDateConstrain.isActive = true
+//        trailingTextConstrain.isActive = true
+        
+        
           if(isMine){
               
               trailingTextConstrain.constant = 8
+            
+            
+            
+           
+            
               leadingTextConstrain.isActive = false
               
               leadingDateConstrain.isActive = false
               trailingDateConstrain.constant = 8
-              
+            
               dateLabel.textAlignment = .right
             
             offerLabel.text = "You send an offer of $ 100.0"
@@ -69,6 +79,22 @@ class chatOfferCell: UITableViewCell {
           
           
       }
+    
+    func setOfferText(offer : Int , isRight : Bool){
+        
+        
+        if(isRight)
+        {
+            offerLabel.text = "You send an offer of $" + String(offer)
+        }
+        else
+        {
+            
+        }
+        
+        offerLabel.text = "You have new offer $" + String(offer)
+        
+    }
 
     /*
     // MARK: - Navigation

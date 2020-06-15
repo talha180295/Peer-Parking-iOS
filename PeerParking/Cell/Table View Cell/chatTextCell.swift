@@ -11,6 +11,7 @@ import UIKit
 class chatTextCell: UITableViewCell {
 
    
+    @IBOutlet weak var chatText: UILabel!
     @IBOutlet weak var textView: CardView!
     
     @IBOutlet weak var dateLabel: UILabel!
@@ -29,9 +30,9 @@ class chatTextCell: UITableViewCell {
         // Initialization code
     }
     
-    func setLayout(_ isMine : Bool){
+    func setLayout(_ isRight : Bool){
         
-        if(isMine){
+        if(isRight){
             
             trailingTextConstrain.constant = 8
             leadingTextConstrain.isActive = false
