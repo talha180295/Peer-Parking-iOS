@@ -60,9 +60,9 @@ class ParkingsVC: ButtonBarPagerTabStripViewController{
     @IBAction func filterBtn(_ sender: UIBarButtonItem) {
         
         
-        let vc = Helper().getViewController(storyBoard: "Main", withIdentifier: "ParkingFilterBS")
+        let vc = ParkingFilterBS.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
         
-        Helper().bottomSheet(controller: vc, sizes: [.fixed(120)], cornerRadius: 0, handleColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), view_controller: self)
+        Helper().bottomSheet(controller: vc, sizes: [.fixed(150)], cornerRadius: 0, handleColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), view_controller: self)
 
         
     }

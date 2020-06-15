@@ -17,6 +17,13 @@ class ParkingFilterBS: UIViewController {
     }
     
 
+    @IBAction func showAllBtn(_ sender: UIButton) {
+        
+        NotificationCenter.default.post(name: Notification.Name("mode_filter"), object: nil, userInfo:["is_schedule" : 10] )
+        
+        self.dismiss(animated: false)
+    }
+    
     @IBAction func showPostedBtn(_ sender: UIButton) {
         
         NotificationCenter.default.post(name: Notification.Name("mode_filter"), object: nil, userInfo:["mode" : 10] )

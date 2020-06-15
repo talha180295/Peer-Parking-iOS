@@ -21,11 +21,9 @@ class UpcomingParkingVC: UIViewController,IndicatorInfoProvider {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-   
+           
         Helper().registerTableCell(tableView: upComingParkingTbl, nibName: "HistoryCell", identifier: "HistoryCell")
-       
-       
+
         getUpcomingParking(params: params)
     }
     
@@ -35,26 +33,27 @@ class UpcomingParkingVC: UIViewController,IndicatorInfoProvider {
     }
        
     override func viewWillDisappear(_ animated: Bool) {
-       
-       NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
+        Helper().hideSpinner(view: self.view)
     }
     
     
     @objc func getFilters(notification: NSNotification) {
-
-    
         
         if let dict = notification.userInfo as NSDictionary? {
             
             if let mode = dict.value(forKey: "mode"){
                 
                 self.params.updateValue(mode, forKey: "mood")
-//                Helper().showToast(message: "Notify -\(self.params)", controller: self)
-               
-//                let params:[String:Any] = ["is_mine":1]
+                //                Helper().showToast(message: "Notify -\(self.params)", controller: self)
+                
+                //                let params:[String:Any] = ["is_mine":1]
                 getUpcomingParking(params: self.params)
             }
-         
+            if let _ = dict.value(forKey: "is_schedule"){
+                let param = ["is_schedule":1]
+                getUpcomingParking(params: param)
+            }
         }
     }
     
@@ -66,11 +65,13 @@ class UpcomingParkingVC: UIViewController,IndicatorInfoProvider {
     
     func getUpcomingParking(params:[String:Any]){
         
+        Helper().showSpinner(view: self.view)
         self.parkingModel.removeAll()
         self.upComingParkingTbl.reloadData()
         
         APIClient.serverRequest(url: APIRouter.getParkings(params), dec: ResponseData<[Parking]>.self) { (response, error) in
             
+            Helper().hideSpinner(view: self.view)
             if(response != nil){
                 if (response?.success) != nil {
 //                    Helper().showToast(message: response?.message ?? "-", controller: self)
@@ -109,7 +110,7 @@ extension UpcomingParkingVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let  cell = upComingParkingTbl.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
-
+        cell.parkingTitle.text = self.parkingModel[indexPath.row].title ?? ""
         cell.address.text = self.parkingModel[indexPath.row].address ?? ""
         cell.price.text = "$\(self.parkingModel[indexPath.row].initialPrice ?? 0.0)"
         
@@ -125,12 +126,23 @@ extension UpcomingParkingVC: UITableViewDelegate,UITableViewDataSource{
             
         cell.type.text = self.parkingModel[indexPath.row].parkingTypeText ?? "-"
         
-        cell.availablity.text = "\(self.parkingModel[indexPath.row].startAt ?? "") - \(self.parkingModel[indexPath.row].endAt ?? "")"
+        cell.availablity.text = "\(self.parkingModel[indexPath.row].startAt ?? "")"
+        
+//        cell.availablity.text = "\(self.parkingModel[indexPath.row].startAt ?? "") - \(self.parkingModel[indexPath.row].endAt ?? "")"
                
         
 
         return cell
 
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let parking = parkingModel[indexPath.item]
+        let vc = MySpotParkingDetailVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
+        vc.viewModel = MySpotParkingDetailViewModel.init(parkingDetails: parking)
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true,completion: nil)
     }
     
 }

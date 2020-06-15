@@ -12,17 +12,24 @@ import EzPopup
 
 class MySpotParkingDetailVC : UIViewController{
     
+    //ViewModel
+    var viewModel : MySpotParkingDetailViewModel?
     
     //Outlets
     @IBOutlet weak var timingTblView:UITableView!
+    @IBOutlet weak var parkingTitle:UILabel!
+    @IBOutlet weak var location:UILabel!
+    @IBOutlet weak var price:UILabel!
+    @IBOutlet weak var type:UILabel!
+    @IBOutlet weak var size:UILabel!
+    @IBOutlet weak var date:UILabel!
+//    @IBOutlet weak var time:UILabel!
+    @IBOutlet weak var timingsCard: CardView!
     
-     
-
-
     let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sarurday", "Sunday"]
-        
+    
     //    var day = ["day" : "", "start_at" : "", "end_at" : ""]
-
+    
     var daysModel = [[String : Any]]()
     var selectedItems = [Int]()
     
@@ -37,6 +44,9 @@ class MySpotParkingDetailVC : UIViewController{
         
         
         GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(0, forKey: "is_always")
+        
+        self.setupViews()
+        self.setData()
         
     }
     
@@ -74,6 +84,36 @@ class MySpotParkingDetailVC : UIViewController{
     }
 }
 
+//Ui methods
+extension MySpotParkingDetailVC{
+    
+    func setupViews(){
+        let pType = viewModel?.getParkingDetails().parkingType ?? 0
+        switch pType {
+        case APP_CONSTANT.PARKING_TYPES.PUBLIC_CONST:
+            self.timingsCard.isHidden = true
+        default:
+            self.timingsCard.isHidden = false
+        }
+        
+    }
+    
+}
+//Data methods
+extension MySpotParkingDetailVC{
+    
+    func setData(){
+        self.parkingTitle.text = self.viewModel?.getParkingDetails().title ?? "-"
+        self.location.text = self.viewModel?.getParkingDetails().address ?? "-"
+        self.price.text = "\(self.viewModel?.getParkingDetails().initialPrice ?? 0.0)"
+        self.type.text = self.viewModel?.getParkingDetails().parkingSubTypeText ?? "-"
+        self.size.text = self.viewModel?.getParkingDetails().vehicleTypeText ?? "-"
+        self.date.text = self.viewModel?.getParkingDetails().startAt ?? "-"
+//        self.time.text = self.viewModel?.getParkingDetails().startAt ?? "-"
+    }
+    
+}
+
 extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, TimePop{
     
     
@@ -82,7 +122,7 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimingsCell", for: indexPath) as! TimingsCell
         
         cell.delegate = self
@@ -102,20 +142,20 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
         
         return cell
     }
- 
+    
     @objc func buttonClicked(sender: UIButton) {
         
         let indexPath = IndexPath(row: sender.tag, section: 0)
         let cell = self.timingTblView.cellForRow(at: indexPath) as! TimingsCell
         
         if (self.selectedItems.contains(sender.tag)) {
-        
+            
             let index = self.selectedItems.firstIndex(of: sender.tag)!
             self.selectedItems.remove(at: index)
             
             self.daysModel.remove(at: index)
             
-           
+            
             
         }
         else {
@@ -146,7 +186,7 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
         else{
             
             let depStr = filterString(str: self.daysModel.description)
-             
+            
             GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(depStr, forKey: "days")
         }
         
@@ -164,24 +204,24 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
         
         vc.completionBlock = {(startDtae, endDate) -> ()in
             
-           
+            
             cell.startTime.text = startDtae
             cell.endTime.text = endDate
             
             let s_dateAsString = startDtae
             let e_dateAsString = endDate
-
+            
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "h:mm a"
-
+            
             let date1 = dateFormatter.date(from: s_dateAsString)
             let date2 = dateFormatter.date(from: e_dateAsString)
-
+            
             dateFormatter.dateFormat = "HH:mm"
             let s_time24 = dateFormatter.string(from: date1!)
             let e_time24 = dateFormatter.string(from: date2!)
             
-//            print("index=\(index+1)")
+            //            print("index=\(index+1)")
             var i = 0
             for item in self.daysModel{
                 if(item["day"] as? Int == index+1){
@@ -194,11 +234,11 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
             
             
             let depStr = self.filterString(str: self.daysModel.description)
-           
+            
             
             GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(depStr, forKey: "days")
             
-//            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "parking_extra_fee")
+            //            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "parking_extra_fee")
         }
         let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 350)
         popupVC.canTapOutsideToDismiss = true
@@ -212,8 +252,8 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
         
         // show it by call present(_ , animated:) method from a current UIViewController
         self.present(popupVC, animated: true)
-//        Helper().showToast(message: "\(index)", controller: self)
+        //        Helper().showToast(message: "\(index)", controller: self)
     }
     
-   
+    
 }

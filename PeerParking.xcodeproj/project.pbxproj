@@ -109,6 +109,7 @@
 		BC514A9A2496D088003DF452 /* SellParking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC514A992496D087003DF452 /* SellParking.storyboard */; };
 		BC8511832490D84700D4B3BA /* PeerParkingStotyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */; };
 		BC8511862490D94300D4B3BA /* ParkingDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */; };
+		BCB2DBB424981DCD007EAC4D /* MySpotParkingDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2DBB324981DCD007EAC4D /* MySpotParkingDetailViewModel.swift */; };
 		E2616B4D5E0A2ED92F2CAAF3 /* Pods_PeerParking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */; };
 		FA0E9F6F2330FE7E0005A54C /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E9F6E2330FE7E0005A54C /* PlaceViewController.swift */; };
 		FA0FCC56232229F9000FF52C /* vehicleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0FCC54232229F9000FF52C /* vehicleCell.swift */; };
@@ -302,6 +303,7 @@
 		BC514A992496D087003DF452 /* SellParking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SellParking.storyboard; sourceTree = "<group>"; };
 		BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerParkingStotyboards.swift; sourceTree = "<group>"; };
 		BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ParkingDetails.storyboard; sourceTree = "<group>"; };
+		BCB2DBB324981DCD007EAC4D /* MySpotParkingDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpotParkingDetailViewModel.swift; sourceTree = "<group>"; };
 		BF58D38B340DB6271FACD986 /* Pods-PeerParkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingTests.release.xcconfig"; path = "Target Support Files/Pods-PeerParkingTests/Pods-PeerParkingTests.release.xcconfig"; sourceTree = "<group>"; };
 		C53DD1F3CFB8035A3E4024F2 /* Pods-PeerParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParking.release.xcconfig"; path = "Target Support Files/Pods-PeerParking/Pods-PeerParking.release.xcconfig"; sourceTree = "<group>"; };
 		E8DB06BFD47AAB708811B861 /* Pods-PeerParkingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingTests.debug.xcconfig"; path = "Target Support Files/Pods-PeerParkingTests/Pods-PeerParkingTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 				1814031C242CF914007AEA58 /* MyPrivateSpotsVC.swift */,
 				1814031E242CF9E8007AEA58 /* MyPublicSpotsVC.swift */,
 				18F27A2F247E4BF400BC7D79 /* MySpotParkingDetailVC.swift */,
+				BCB2DBB324981DCD007EAC4D /* MySpotParkingDetailViewModel.swift */,
 			);
 			path = "My Spots";
 			sourceTree = "<group>";
@@ -1267,6 +1270,7 @@
 				FA2815AF231E3F92008AF3F5 /* MenuController.swift in Sources */,
 				181E0D1A23CDF954005D7248 /* ApiRouter.swift in Sources */,
 				FA2815C3231E806D008AF3F5 /* HomeViewController.swift in Sources */,
+				BCB2DBB424981DCD007EAC4D /* MySpotParkingDetailViewModel.swift in Sources */,
 				FA0E9F6F2330FE7E0005A54C /* PlaceViewController.swift in Sources */,
 				18F27A3224801FB400BC7D79 /* QuickPopup.swift in Sources */,
 				FA6CD3792328FFE600E18CF2 /* LoacationCell.swift in Sources */,
