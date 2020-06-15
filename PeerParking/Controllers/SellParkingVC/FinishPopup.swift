@@ -101,13 +101,17 @@ class FinishPopup: UIViewController {
                 else
                 {
                     let message = responseData["message"] as! String
-                    SharedHelper().showToast(message: message, controller: vc)
+                    SharedHelper().showToast(message: message, controller: self)
                     //   SharedHelper().hideSpinner(view: self.view)
                 }
             }
             
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
+               // Code you want to be delayed
+                Helper().presentOnMainScreens(controller: self, index: 2)
+            }
+
             
-            Helper().presentOnMainScreens(controller: self, index: 2)
         }
     }
     
@@ -167,7 +171,7 @@ class FinishPopup: UIViewController {
                     //                    SharedHelper().hideSpinner(view: self.view)
                     //                     UserDefaults.standard.set("yes", forKey: "login")
                     //                    UserDefaults.standard.synchronize()
-                    SharedHelper().showToast(message: message, controller: vc)
+                    SharedHelper().showToast(message: message, controller: self)
     //                    tab_index = 1
     //                    self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
 
@@ -182,8 +186,10 @@ class FinishPopup: UIViewController {
                 }
             }
 
-            
-            Helper().presentOnMainScreens(controller: self, index: 2)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
+               // Code you want to be delayed
+                Helper().presentOnMainScreens(controller: self, index: 2)
+            }
         }
     }
     

@@ -134,19 +134,25 @@ class LocationStepVC: UIViewController,GMSMapViewDelegate {
 
     func mapView(_ mapView: GMSMapView, idleAt cameraPosition: GMSCameraPosition) {
         geocoder.reverseGeocodeCoordinate(cameraPosition.target) { (response, error) in
-          guard error == nil else {
-            return
-          }
-
-          if let result = response?.firstResult() {
-//            result.coordinate
-            let address = result.lines?.first ?? ""
-            print("result=\(address)")
-            self.search_tf.text = address
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(address, forKey: "address")
+            guard error == nil else {
+                return
+            }
             
-            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(address, forKey: "address")
-          }
+            if let result = response?.firstResult() {
+                let coordinates = result.coordinate
+                let address = result.lines?.first ?? ""
+                print("result=\(address)")
+                print("result=\(coordinates)")
+                self.search_tf.text = address
+                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(address, forKey: "address")
+                
+                GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(address, forKey: "address")
+                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(coordinates.latitude, forKey: "latitude")
+                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(coordinates.longitude, forKey: "longitude")
+                
+                GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(coordinates.latitude, forKey: "latitude")
+                GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(coordinates.longitude, forKey: "longitude")
+            }
         }
       
     }

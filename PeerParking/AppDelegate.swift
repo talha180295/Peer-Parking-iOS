@@ -278,6 +278,7 @@ extension AppDelegate:CLLocationManagerDelegate{
     
     
     func setupLocationManager(){
+        
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         self.locationManager?.requestAlwaysAuthorization()
@@ -299,27 +300,42 @@ extension AppDelegate:CLLocationManagerDelegate{
             //location.
             
             self.camera = GMSCameraPosition.camera(withLatitude: (currentLocation?.coordinate.latitude)!, longitude: (currentLocation?.coordinate.longitude)!, zoom: 14.0)
+//
+//            let geoCoder = CLGeocoder()
+//
+//            geoCoder.reverseGeocodeLocation(currentLocation!, completionHandler:
+//                {
+//                    placemarks, error in
+//
+//                    guard let placemark = placemarks?.first else {
+//                        let errorString = error?.localizedDescription ?? "Unexpected Error"
+//                        print("Unable to reverse geocode the given location. Error: \(errorString)")
+//                        return
+//                    }
+//
+//                    let reversedGeoLocation = ReversedGeoLocation(with: placemark)
+//                    print("LOC=:\(reversedGeoLocation.formattedAddress)")
+//                    self.currentLocationAddress = reversedGeoLocation.formattedAddressName
+//                    // Apple Inc.,
+//                    // 1 Infinite Loop,
+//                    // Cupertino, CA 95014
+//                    // United States
+//            })
             
-            let geoCoder = CLGeocoder()
-            
-            geoCoder.reverseGeocodeLocation(currentLocation!, completionHandler:
-                {
-                    placemarks, error in
-                    
-                    guard let placemark = placemarks?.first else {
-                        let errorString = error?.localizedDescription ?? "Unexpected Error"
-                        print("Unable to reverse geocode the given location. Error: \(errorString)")
-                        return
-                    }
-                    
-                    let reversedGeoLocation = ReversedGeoLocation(with: placemark)
-                    print("LOC=:\(reversedGeoLocation.formattedAddress)")
-                    self.currentLocationAddress = reversedGeoLocation.formattedAddressName
-                    // Apple Inc.,
-                    // 1 Infinite Loop,
-                    // Cupertino, CA 95014
-                    // United States
-            })
+            let geocoder = GMSGeocoder()
+            geocoder.reverseGeocodeCoordinate(camera.target) { (response, error) in
+                guard error == nil else {
+                return
+                }
+
+                if let result = response?.firstResult() {
+                    result.coordinate
+                    let address = result.lines?.first ?? ""
+                    print("result=\(address)")
+                    self.currentLocationAddress = address
+                   
+                }
+            }
             locationManager?.stopUpdatingLocation()
         }
     }
