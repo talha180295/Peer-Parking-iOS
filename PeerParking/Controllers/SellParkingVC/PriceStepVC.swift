@@ -44,15 +44,7 @@ class PriceStepVC: UIViewController {
         let popupVC = PopupViewController(contentController: vc, popupWidth: 300, popupHeight: 300)
         popupVC.canTapOutsideToDismiss = true
         
-        //properties
-        //            popupVC.backgroundAlpha = 1
-        //            popupVC.backgroundColor = .black
-        //            popupVC.canTapOutsideToDismiss = true
-        //            popupVC.cornerRadius = 10
-        //            popupVC.shadowEnabled = true
-        
-        // show it by call present(_ , animated:) method from a current UIViewController
-        
+     
         present(popupVC, animated: true)
         
     }

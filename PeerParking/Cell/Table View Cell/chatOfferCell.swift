@@ -85,14 +85,14 @@ class chatOfferCell: UITableViewCell {
         
         if(isRight)
         {
-            offerLabel.text = "You send an offer of $" + String(offer)
+            offerLabel.text = "You sent an offer of $" + String(offer)
         }
         else
         {
             
         }
         
-        offerLabel.text = "You have new offer $" + String(offer)
+        offerLabel.text = "You recieved an offer of $" + String(offer)
         
     }
 

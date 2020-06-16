@@ -7,18 +7,55 @@
 //
 
 import Foundation
-struct ChatModel: Codable {
-    let createdAt: CreatedAt
-    let direction: Int
-    let id, message: String
-    let messageType, offer, offerStatus: Int
+class ChatModel: Codable {
+    var createdAt: CreatedAt?
+    var direction: Int?
+    var id, message: String?
+    var messageType, offerStatus: Int?
+    var offer : Double?
+    
+    
+    
+    
+//    init(
+//        message: String? = "", //
+//         createdAt: CreatedAt? = nil,
+//         direction: Int? = nil ,
+//         messageType :Int? = nil,
+//         offer : Int? = 0,
+//         offerStatus : Int? = nil,
+//        id : String? = ""
+//         ) {
+//        
+//        self.message = message!
+//        self.createdAt = createdAt!
+//        self.direction = direction!
+//        self.messageType = messageType!
+//        self.offer = offer!
+//        self.offerStatus = offerStatus!
+//        self.id = id!
+//
+//    }
+    
+   
+    
+    
+    
 }
 
 
 // MARK: - CreatedAt
 
-struct CreatedAt: Codable {
-    let date, day, hours, minutes: Int
-    let month, seconds, time, timezoneOffset: Int
-    let year: Int
+class CreatedAt: Codable {
+     
+    var  date, day, hours, minutes: Int?
+    var month, seconds, time, timezoneOffset: Int?
+    var year: Int?
+    
+    
+    
+    
 }
+
+
+

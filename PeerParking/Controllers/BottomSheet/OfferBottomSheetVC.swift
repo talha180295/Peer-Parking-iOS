@@ -64,8 +64,8 @@ class OfferBottomSheetVC: UIViewController {
         super.viewDidLoad()
 
         
-        offersTblView.dataSource = self
-        offersTblView.delegate = self
+//        offersTblView.dataSource = self
+//        offersTblView.delegate = self
         offersTblView.register(UINib(nibName: "BargainingCell", bundle: nil), forCellReuseIdentifier: "BargainingCell")
         
        
@@ -454,63 +454,63 @@ class OfferBottomSheetVC: UIViewController {
 }
 
 
-extension OfferBottomSheetVC: UITableViewDelegate, UITableViewDataSource{
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return bargainOffers.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = offersTblView.dequeueReusableCell(withIdentifier: "BargainingCell") as! BargainingCell
-       
-        cell.offer.textAlignment = .right
-        
-        
-        let dict = bargainOffers[indexPath.row]
-       
-        
-        let direction = dict.direction ?? 0
-        
-        let offer = dict.offer ?? 0.0
-        
-        switch self.userType {
-        case 10:
-            switch direction {
-            case 10:
-                cell.leftOffer.text = "$ \(offer)"
-                cell.offer.superview?.isHidden = true
-                cell.leftOffer.superview?.isHidden = false
-            case 20:
-                cell.offer.text = "$ \(offer )"
-                cell.offer.superview?.isHidden = false
-                cell.leftOffer.superview?.isHidden = true
-                
-            default:
-                break
-            }
-        case 20:
-            switch direction {
-            case 20:
-                cell.leftOffer.text = "$ \(offer)"
-                cell.offer.superview?.isHidden = true
-                cell.leftOffer.superview?.isHidden = false
-            case 10:
-                cell.offer.text = "$ \(offer)"
-                cell.offer.superview?.isHidden = false
-                cell.leftOffer.superview?.isHidden = true
-                
-            default:
-                break
-            }
-        default:
-            break
-        }
-        
-        
-        return  cell
-    }
-    
-}
+//extension OfferBottomSheetVC: UITableViewDelegate, UITableViewDataSource{
+//    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        
+//        return bargainOffers.count
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        
+//        let cell = offersTblView.dequeueReusableCell(withIdentifier: "BargainingCell") as! BargainingCell
+//       
+//        cell.offer.textAlignment = .right
+//        
+//        
+//        let dict = bargainOffers[indexPath.row]
+//       
+//        
+//        let direction = dict.direction ?? 0
+//        
+//        let offer = dict.offer ?? 0.0
+//        
+//        switch self.userType {
+//        case 10:
+//            switch direction {
+//            case 10:
+//                cell.leftOffer.text = "$ \(offer)"
+//                cell.offer.superview?.isHidden = true
+//                cell.leftOffer.superview?.isHidden = false
+//            case 20:
+//                cell.offer.text = "$ \(offer )"
+//                cell.offer.superview?.isHidden = false
+//                cell.leftOffer.superview?.isHidden = true
+//                
+//            default:
+//                break
+//            }
+//        case 20:
+//            switch direction {
+//            case 20:
+//                cell.leftOffer.text = "$ \(offer)"
+//                cell.offer.superview?.isHidden = true
+//                cell.leftOffer.superview?.isHidden = false
+//            case 10:
+//                cell.offer.text = "$ \(offer)"
+//                cell.offer.superview?.isHidden = false
+//                cell.leftOffer.superview?.isHidden = true
+//                
+//            default:
+//                break
+//            }
+//        default:
+//            break
+//        }
+//        
+//        
+//        return  cell
+//    }
+//    
+//}
 

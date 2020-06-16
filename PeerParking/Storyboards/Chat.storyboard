@@ -166,15 +166,6 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TiA-aN-1Ef">
                                                         <rect key="frame" x="277" y="0.0" width="73" height="87"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 74.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAp-Zj-681">
-                                                                <rect key="frame" x="0.0" y="0.0" width="73" height="21"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="21" id="349-0R-FwV"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PaF-9w-U7J">
                                                                 <rect key="frame" x="-3" y="25" width="86" height="50"/>
                                                                 <subviews>
@@ -196,27 +187,27 @@
                                                                                 <real key="value" value="2"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="progress">
-                                                                                <real key="value" value="0.33000000000000002"/>
+                                                                                <real key="value" value="0.0"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                             <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
-                                                                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <color key="value" name="themeBlue"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
-                                                                                <real key="value" value="0.0"/>
+                                                                                <real key="value" value="1"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCap" value="NO"/>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="trackBorderWidth">
                                                                                 <real key="value" value="0.0"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                             <userDefinedRuntimeAttribute type="color" keyPath="trackBackgroundColor">
-                                                                                <color key="value" name="themeBlue"/>
+                                                                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1P-u4-1Wp">
-                                                                        <rect key="frame" x="52.5" y="16" width="19" height="29"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1P-u4-1Wp">
+                                                                        <rect key="frame" x="52.5" y="16" width="29" height="29"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="19" id="Kbk-uM-7JV"/>
+                                                                            <constraint firstAttribute="width" constant="29" id="Kbk-uM-7JV"/>
                                                                             <constraint firstAttribute="height" constant="29" id="z80-gw-Tsl"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -241,25 +232,34 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="PaF-9w-U7J" firstAttribute="top" secondItem="FAp-Zj-681" secondAttribute="bottom" constant="4" id="402-49-aHk"/>
-                                                            <constraint firstItem="FAp-Zj-681" firstAttribute="top" secondItem="TiA-aN-1Ef" secondAttribute="top" id="K4E-K5-60N"/>
                                                             <constraint firstItem="PaF-9w-U7J" firstAttribute="leading" secondItem="TiA-aN-1Ef" secondAttribute="leading" constant="-3" id="XOc-ns-ehK"/>
-                                                            <constraint firstItem="FAp-Zj-681" firstAttribute="leading" secondItem="TiA-aN-1Ef" secondAttribute="leading" id="b7p-cU-S8g"/>
                                                             <constraint firstAttribute="trailing" secondItem="PaF-9w-U7J" secondAttribute="trailing" constant="-10.166666666666671" id="c1S-bZ-Tuh"/>
-                                                            <constraint firstAttribute="trailing" secondItem="FAp-Zj-681" secondAttribute="trailing" id="jHA-56-ZpX"/>
                                                         </constraints>
                                                     </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 74.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAp-Zj-681">
+                                                        <rect key="frame" x="277" y="0.0" width="73" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="21" id="349-0R-FwV"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="bottom" secondItem="TiA-aN-1Ef" secondAttribute="bottom" constant="1" id="3Mc-7o-Qrq"/>
+                                                    <constraint firstItem="FAp-Zj-681" firstAttribute="leading" secondItem="hP7-gW-bss" secondAttribute="leading" constant="277" id="OxT-lE-UzV"/>
                                                     <constraint firstAttribute="height" constant="88" id="QFO-Dq-mdd"/>
                                                     <constraint firstAttribute="bottom" secondItem="H6i-KR-cDM" secondAttribute="bottom" id="aJT-jo-hFF"/>
                                                     <constraint firstItem="TiA-aN-1Ef" firstAttribute="top" secondItem="hP7-gW-bss" secondAttribute="top" id="fk0-Hh-tuq"/>
+                                                    <constraint firstItem="PaF-9w-U7J" firstAttribute="top" secondItem="FAp-Zj-681" secondAttribute="bottom" constant="4" id="hl7-pW-N43"/>
                                                     <constraint firstAttribute="trailing" secondItem="TiA-aN-1Ef" secondAttribute="trailing" id="hpM-Tr-318"/>
                                                     <constraint firstItem="H6i-KR-cDM" firstAttribute="leading" secondItem="hP7-gW-bss" secondAttribute="leading" id="r0Q-ri-po0"/>
                                                     <constraint firstItem="TiA-aN-1Ef" firstAttribute="leading" secondItem="H6i-KR-cDM" secondAttribute="trailing" constant="3.3300000000000001" id="rzH-Ci-gmU"/>
+                                                    <constraint firstItem="FAp-Zj-681" firstAttribute="top" secondItem="hP7-gW-bss" secondAttribute="top" id="s5r-aw-8sN"/>
                                                     <constraint firstItem="H6i-KR-cDM" firstAttribute="top" secondItem="hP7-gW-bss" secondAttribute="top" id="soO-NP-6jX"/>
+                                                    <constraint firstAttribute="trailing" secondItem="FAp-Zj-681" secondAttribute="trailing" id="y3W-sN-aqI"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="corner_Radius">
@@ -352,24 +352,24 @@
                                                                 <real key="value" value="2"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="progress">
-                                                                <real key="value" value="0.33000000000000002"/>
+                                                                <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
-                                                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="value" name="themeBlue"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="refreshRate">
-                                                                <real key="value" value="0.0"/>
+                                                                <real key="value" value="1"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCap" value="NO"/>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="trackBorderWidth">
                                                                 <real key="value" value="0.0"/>
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="trackBackgroundColor">
-                                                                <color key="value" name="themeBlue"/>
+                                                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ihf-BO-Sks">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ihf-BO-Sks">
                                                         <rect key="frame" x="47" y="16" width="29" height="29"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="29" id="Snf-Fa-hif"/>
@@ -456,7 +456,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wx3-Qk-W3l">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type your message" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ti9-dR-gUX">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Type your message" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ti9-dR-gUX">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -481,6 +481,9 @@
                                                     <constraint firstAttribute="width" constant="124" id="oAh-u9-hrl"/>
                                                 </constraints>
                                                 <state key="normal" title="Send an offer"/>
+                                                <connections>
+                                                    <action selector="sendAnOfferAction:" destination="4b8-Wk-BHo" eventType="touchUpInside" id="5U7-Pi-Ikf"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncz-Bq-QhC">
                                                 <rect key="frame" x="344" y="5" width="25" height="25"/>
@@ -490,6 +493,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="Button" image="send-button"/>
+                                                <connections>
+                                                    <action selector="sendMessageAction:" destination="4b8-Wk-BHo" eventType="touchUpInside" id="Gnq-Ln-IcB"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -534,11 +540,13 @@
                     </view>
                     <connections>
                         <outlet property="bargainCountVoew" destination="wMB-lq-5wZ" id="npt-HB-vh6"/>
+                        <outlet property="bottomView" destination="1fS-Kz-kFF" id="Ue1-Sb-9Ho"/>
                         <outlet property="circularProgressHeader" destination="7Eo-qZ-TXC" id="Hys-Te-Rf6"/>
                         <outlet property="circularProgressParkingDetail" destination="qhc-yV-1xV" id="5ve-qQ-gD3"/>
                         <outlet property="circularTextHeader" destination="Ihf-BO-Sks" id="Cvo-7a-WaG"/>
                         <outlet property="headerHeightConstrain" destination="a0K-oz-yp1" id="MzY-eQ-u7Q"/>
                         <outlet property="headerView" destination="uYw-Vu-QdG" id="EQB-Vl-Kli"/>
+                        <outlet property="meesageLabel" destination="ti9-dR-gUX" id="kx2-Th-eWe"/>
                         <outlet property="messageTextFieldLabel" destination="ti9-dR-gUX" id="K9A-Of-xcD"/>
                         <outlet property="parkingContentHeightConstrain" destination="QFO-Dq-mdd" id="StJ-06-3vx"/>
                         <outlet property="parkingDetailContent" destination="hP7-gW-bss" id="xNf-3V-8MS"/>
@@ -553,6 +561,8 @@
                         <outlet property="parkingTotalCostView" destination="FAp-Zj-681" id="GV9-0U-3JU"/>
                         <outlet property="parkingTypeView" destination="NUx-az-oMb" id="noI-ze-AaR"/>
                         <outlet property="progressTextParkingDetail" destination="C1P-u4-1Wp" id="4Nl-xC-mDv"/>
+                        <outlet property="sandOfferButton" destination="KMj-LU-M7P" id="BMK-4x-LzF"/>
+                        <outlet property="sendMessageBtn" destination="ncz-Bq-QhC" id="olD-dR-rRC"/>
                         <outlet property="tv" destination="Xo3-ZU-cGE" id="lhV-0Q-a6f"/>
                         <outlet property="userImageView" destination="vkb-34-9v2" id="vpz-FU-vOi"/>
                         <outlet property="userNameView" destination="Ac3-f5-uhv" id="kzo-wm-M1l"/>
