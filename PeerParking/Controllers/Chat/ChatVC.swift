@@ -699,29 +699,29 @@ extension ChatVC  : UITableViewDelegate,UITableViewDataSource  {
                 
                 print("chat direction \(chatModelArray[indexPath.row].direction)")
                 
-    
+                
                 if(  chatModelArray[indexPath.row].direction == Constants.init().SELLER_TO_BUYER ) {
-
+                    
                     cell.rightOffer.text = chatModelArray[indexPath.row].message
                     cell.rightOfferDate.text = convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0))
-
+                    
                     cell.rightOffer.superview?.isHidden = false
                     cell.rightOfferDate.isHidden = false
-
+                    
                     cell.leftOffer.superview?.isHidden = true
                     cell.leftOfferDate.isHidden = true
-
+                    
                 }
                 else
                 {
-
-
+                    
+                    
                     cell.leftOffer.text = chatModelArray[indexPath.row].message
                     cell.leftOfferDate.text = convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0))
-
+                    
                     cell.rightOffer.superview?.isHidden = true
                     cell.rightOfferDate.isHidden = true
-
+                    
                     cell.leftOffer.superview?.isHidden = false
                     cell.leftOfferDate.isHidden = false
                 }
@@ -734,43 +734,92 @@ extension ChatVC  : UITableViewDelegate,UITableViewDataSource  {
                 
                 
             }
-//            else
-//            {
-//
-//
-//                if(  chatModelArray[indexPath.row].direction == Constants.init().SELLER_TO_BUYER ) {
-//
-//
-//
-//
-//                    cell.offer.text = "$ \(offer )"
-//                    cell.offer.superview?.isHidden = false
-//                    cell.leftOffer.superview?.isHidden = true
-//                }
-//                else
-//                {
-//                    cell.leftOffer.text = "$ \(offer)"
-//                    cell.offer.superview?.isHidden = true
-//                    cell.leftOffer.superview?.isHidden = false
-//                }
-//
-//
-//            }
+            else
+            {
+                
+                
+                
+                if(  chatModelArray[indexPath.row].direction == Constants.init().SELLER_TO_BUYER ) {
+                    
+                    
+                    
+                    
+                    cell.leftOffer.text = chatModelArray[indexPath.row].message
+                    cell.leftOfferDate.text = convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0))
+                    
+                    cell.rightOffer.superview?.isHidden = true
+                    cell.rightOfferDate.isHidden = true
+                    
+                    cell.leftOffer.superview?.isHidden = false
+                    cell.leftOfferDate.isHidden = false
+                }
+                else
+                {
+                    cell.rightOffer.text = chatModelArray[indexPath.row].message
+                    cell.rightOfferDate.text = convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0))
+                    
+                    cell.rightOffer.superview?.isHidden = false
+                    cell.rightOfferDate.isHidden = false
+                    
+                    cell.leftOffer.superview?.isHidden = true
+                    cell.leftOfferDate.isHidden = true
+                    
+                }
+                
+                
+            }
             ////
             
             
             return cell
         }
-//        else
-//        {
-//            let  cell = tv.dequeueReusableCell(withIdentifier: "BargainingCell") as! BargainingCell
-//
-//            return cell
-//
-//        }
+        else
+        {
+            let  cell = tv.dequeueReusableCell(withIdentifier: "chatOfferCell") as! chatOfferCell
+            
+            if(checkIamSeller!)
+            {
+                
+                if(  chatModelArray[indexPath.row].direction == Constants.init().SELLER_TO_BUYER ) {
+                  
+                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) , isRight: true)
+                    
+                }
+                else
+                {
+                   
+                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) , isRight: false)
+                    
+                }
+                
+                
+                
+            }
+            else
+            {
+                if(  chatModelArray[indexPath.row].direction == Constants.init().SELLER_TO_BUYER ) {
+                    
+                    
+                  
+                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) , isRight: false)
+                    
+                }
+                else
+                {
+                   
+                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) , isRight: true)
+                    
+                }
+            }
+            
+            
+            
+            return cell
+            
+        }
         
         
-      
+        
         return UITableViewCell()
         
         

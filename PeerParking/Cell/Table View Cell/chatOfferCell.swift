@@ -10,11 +10,20 @@ import UIKit
 
 class chatOfferCell: UITableViewCell {
 
+    @IBOutlet weak var leftOfferView: CardView!
     @IBOutlet weak var offerLabel: UILabel!
-    @IBOutlet weak var acceptButtonView: UIView!
+    @IBOutlet weak var acceptButtonView: UIButton!
+      @IBOutlet weak var dateLabel: UILabel!
+    
+    
+    @IBOutlet weak var rightOfferView: CardView!
+       @IBOutlet weak var rightOfferLabel: UILabel!
+//       @IBOutlet weak var rightAcceptButtonView: UIButton!
+         @IBOutlet weak var rightDateLabel: UILabel!
+    
     @IBOutlet weak var textView: CardView!
       
-      @IBOutlet weak var dateLabel: UILabel!
+    
      
       
 
@@ -31,70 +40,100 @@ class chatOfferCell: UITableViewCell {
        }
     
     
-    func setLayout(_ isMine : Bool){
-          
-//        leadingTextConstrain.isActive = true
-//         leadingDateConstrain.isActive = true
-//        trailingDateConstrain.isActive = true
-//        trailingTextConstrain.isActive = true
+    
+    
+    
+    func hideLeft(isHidden : Bool){
+        if(isHidden){
+            leftOfferView.isHidden = true
+            offerLabel.isHidden = true
+//            isAcceptbuttonHide(_isHide: true)
+              dateLabel.isHidden = true
+        }
+        else
+        {
+            leftOfferView.isHidden = false
+            offerLabel.isHidden = false
+//            isAcceptbuttonHide(_isHide: false)
+              dateLabel.isHidden = false
+        }
         
+                   
         
-          if(isMine){
-              
-              trailingTextConstrain.constant = 8
-            
-            
-            
+    }
+    
+    func isAcceptbuttonHide(_isHide : Bool){
+        
+//        if(_isHide){
+//            acceptButtonView.isHidden = true
+//            acceptButtonView.superview!.isHidden = true
+//            acceptButtonView.superview!.superview!.isHidden = true
+//        }
+//        else
+//        {
+//            acceptButtonView.superview!.isHidden = false
+//            acceptButtonView.isHidden = false
+//             acceptButtonView.superview!.superview!.isHidden = false
+//        }
+        
+    }
+    
+    func hideRight(isHidden : Bool){
+        if(isHidden){
+            rightOfferView.isHidden = true
+            rightOfferLabel.isHidden = true
            
+              rightDateLabel.isHidden = true
             
-              leadingTextConstrain.isActive = false
-              
-              leadingDateConstrain.isActive = false
-              trailingDateConstrain.constant = 8
             
-              dateLabel.textAlignment = .right
+
+        }
+        else
+        {
+             rightOfferView.isHidden = false
+                       rightOfferLabel.isHidden = false
+                    
+                         rightDateLabel.isHidden = false
             
-            offerLabel.text = "You send an offer of $ 100.0"
-            acceptButtonView.isHidden = true
-              
-          }
-          
-          else
-          {
-              
-              trailingTextConstrain.isActive = false
-              leadingTextConstrain.constant = 8
-              
-              leadingDateConstrain.constant = 8
-              trailingDateConstrain.isActive = false
-              
-              dateLabel.textAlignment = .left
-              
-          }
-          
-              
-          
-          
-          
-          
-          
-      }
+         
+        }
+        
+                   
+        
+    }
     
     func setOfferText(offer : Int , isRight : Bool){
         
         
-        if(isRight)
-        {
-            offerLabel.text = "You sent an offer of $" + String(offer)
-        }
-        else
-        {
-            
-        }
         
-        offerLabel.text = "You recieved an offer of $" + String(offer)
+        if(isRight){
+                    rightOfferLabel.text = "You sent an offer of $" + String(offer)
+                  hideLeft(isHidden: true)
+                   hideRight(isHidden: false)
+            
+            
+           
+            
+            
+                 }
+                 
+                 else
+                 {
+                      offerLabel.text = "You recieved an offer of $" + String(offer)
+                      hideLeft(isHidden: false)
+                                hideRight(isHidden: true)
+                    
+                    
+                     
+                 }
+        
+   
+        
+        
         
     }
+    
+    
 
     /*
     // MARK: - Navigation

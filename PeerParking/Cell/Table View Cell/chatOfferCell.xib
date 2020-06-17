@@ -11,24 +11,23 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="chatOfferCell" customModule="PeerParking" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="chatOfferCell" rowHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="UgQ-JP-bvh" customClass="chatOfferCell" customModule="PeerParking" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="356" height="120"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="chatOfferCell" translatesAutoresizingMaskIntoConstraints="NO" id="UgQ-JP-bvh" customClass="chatOfferCell" customModule="PeerParking" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="1000" height="120"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UgQ-JP-bvh" id="NFN-7t-O3B">
-                <rect key="frame" x="0.0" y="0.0" width="356" height="120"/>
+                <rect key="frame" x="0.0" y="0.0" width="1000" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" id="nXx-GF-ENO" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
-                        <rect key="frame" x="6" y="5" width="249.5" height="86"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aee-Mp-kgh" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
+                        <rect key="frame" x="5" y="5" width="700" height="86"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="q1a-3j-3X7">
-                                <rect key="frame" x="0.0" y="0.0" width="249.5" height="86"/>
+                                <rect key="frame" x="0.0" y="0.0" width="700" height="86"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0E-J7-wHO">
-                                        <rect key="frame" x="0.0" y="0.0" width="249.5" height="43"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="700" height="43"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have new offer $ 100.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYp-0H-mah">
-                                                <rect key="frame" x="0.0" y="0.0" width="249.5" height="43"/>
+                                                <rect key="frame" x="246.5" y="11.5" width="207.5" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" name="themeBlue"/>
                                                 <nil key="highlightedColor"/>
@@ -36,20 +35,18 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="PYp-0H-mah" secondAttribute="trailing" id="4w7-oH-vNK"/>
-                                            <constraint firstAttribute="bottom" secondItem="PYp-0H-mah" secondAttribute="bottom" id="8Pt-X7-yCN"/>
-                                            <constraint firstItem="PYp-0H-mah" firstAttribute="top" secondItem="k0E-J7-wHO" secondAttribute="top" id="VDR-Gu-rve"/>
-                                            <constraint firstItem="PYp-0H-mah" firstAttribute="leading" secondItem="k0E-J7-wHO" secondAttribute="leading" id="jCV-xI-Imp"/>
+                                            <constraint firstItem="PYp-0H-mah" firstAttribute="centerX" secondItem="k0E-J7-wHO" secondAttribute="centerX" id="EGg-bu-B2y"/>
+                                            <constraint firstItem="PYp-0H-mah" firstAttribute="centerY" secondItem="k0E-J7-wHO" secondAttribute="centerY" id="fRZ-gl-HMj"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TAc-Ka-KGq">
-                                        <rect key="frame" x="0.0" y="43" width="249.5" height="43"/>
+                                        <rect key="frame" x="0.0" y="43" width="700" height="43"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTy-WF-Bgp" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
-                                                <rect key="frame" x="70" y="8" width="109.5" height="27"/>
+                                                <rect key="frame" x="70" y="8" width="560" height="27"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yOh-Sb-l0f">
-                                                        <rect key="frame" x="0.0" y="0.0" width="109.5" height="27"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="560" height="27"/>
                                                         <state key="normal" title="Accept">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -86,12 +83,11 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="q1a-3j-3X7" firstAttribute="top" secondItem="nXx-GF-ENO" secondAttribute="top" id="Gr3-qr-PRH"/>
-                            <constraint firstAttribute="trailing" secondItem="q1a-3j-3X7" secondAttribute="trailing" id="Pb5-cM-RfS"/>
-                            <constraint firstAttribute="bottom" secondItem="q1a-3j-3X7" secondAttribute="bottom" id="cNg-oz-oRT"/>
-                            <constraint firstItem="q1a-3j-3X7" firstAttribute="leading" secondItem="nXx-GF-ENO" secondAttribute="leading" id="sFT-hb-LqJ"/>
+                            <constraint firstItem="q1a-3j-3X7" firstAttribute="top" secondItem="Aee-Mp-kgh" secondAttribute="top" id="8hX-bV-a7G"/>
+                            <constraint firstItem="q1a-3j-3X7" firstAttribute="leading" secondItem="Aee-Mp-kgh" secondAttribute="leading" id="RI6-hx-D2S"/>
+                            <constraint firstAttribute="bottom" secondItem="q1a-3j-3X7" secondAttribute="bottom" id="gcr-9t-QaQ"/>
+                            <constraint firstAttribute="trailing" secondItem="q1a-3j-3X7" secondAttribute="trailing" id="lD7-ri-4Je"/>
                         </constraints>
-                        <directionalEdgeInsets key="directionalLayoutMargins" top="8" leading="8" bottom="8" trailing="8"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="corner_Radius">
                                 <real key="value" value="2"/>
@@ -102,39 +98,135 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="06/10/2020 03:28 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNR-Lz-P3s">
-                        <rect key="frame" x="6" y="97" width="249.5" height="21"/>
+                        <rect key="frame" x="5" y="100" width="700" height="17"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="0wa-XB-oDg"/>
+                            <constraint firstAttribute="height" constant="17" id="Kbe-Vx-LAq"/>
                         </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kzh-3W-a2l" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
+                        <rect key="frame" x="295" y="5" width="700" height="86"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="EIb-Ur-Kxw">
+                                <rect key="frame" x="0.0" y="0.0" width="700" height="86"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mSO-5a-41U">
+                                        <rect key="frame" x="0.0" y="0.0" width="700" height="86"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have new offer $ 100.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wsB-fM-uX6">
+                                                <rect key="frame" x="246.5" y="33" width="207.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" name="themeBlue"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="wsB-fM-uX6" firstAttribute="centerY" secondItem="mSO-5a-41U" secondAttribute="centerY" id="M6C-7R-UK9"/>
+                                            <constraint firstItem="wsB-fM-uX6" firstAttribute="centerX" secondItem="mSO-5a-41U" secondAttribute="centerX" id="zg5-YQ-kgG"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KS4-6m-xLC">
+                                        <rect key="frame" x="0.0" y="43" width="700" height="43"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Yr-jd-L25" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
+                                                <rect key="frame" x="70" y="8" width="560" height="27"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arX-9q-KVS">
+                                                        <rect key="frame" x="0.0" y="0.0" width="560" height="27"/>
+                                                        <state key="normal" title="Accept">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" name="themeBlue"/>
+                                                <constraints>
+                                                    <constraint firstItem="arX-9q-KVS" firstAttribute="leading" secondItem="3Yr-jd-L25" secondAttribute="leading" id="DC6-wK-QVv"/>
+                                                    <constraint firstAttribute="trailing" secondItem="arX-9q-KVS" secondAttribute="trailing" id="UP1-Sq-ec5"/>
+                                                    <constraint firstAttribute="height" constant="27" id="Xbb-pw-GKm"/>
+                                                    <constraint firstItem="arX-9q-KVS" firstAttribute="leading" secondItem="3Yr-jd-L25" secondAttribute="leading" id="YJR-8z-jpG"/>
+                                                    <constraint firstAttribute="trailing" secondItem="arX-9q-KVS" secondAttribute="trailing" id="ZSi-sY-cwg"/>
+                                                    <constraint firstAttribute="bottom" secondItem="arX-9q-KVS" secondAttribute="bottom" id="bab-71-SXc"/>
+                                                    <constraint firstItem="arX-9q-KVS" firstAttribute="top" secondItem="3Yr-jd-L25" secondAttribute="top" id="gGi-GX-SvG"/>
+                                                    <constraint firstItem="arX-9q-KVS" firstAttribute="top" secondItem="3Yr-jd-L25" secondAttribute="top" id="glr-3I-8p1"/>
+                                                    <constraint firstAttribute="bottom" secondItem="arX-9q-KVS" secondAttribute="bottom" id="uWh-9e-PjX"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="corner_Radius">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="2"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="3Yr-jd-L25" firstAttribute="centerX" secondItem="KS4-6m-xLC" secondAttribute="centerX" id="80H-K0-Lim"/>
+                                            <constraint firstItem="3Yr-jd-L25" firstAttribute="centerY" secondItem="KS4-6m-xLC" secondAttribute="centerY" id="D0B-GF-dtt"/>
+                                            <constraint firstItem="3Yr-jd-L25" firstAttribute="leading" secondItem="KS4-6m-xLC" secondAttribute="leading" constant="70" id="JkN-bX-QUx"/>
+                                            <constraint firstItem="3Yr-jd-L25" firstAttribute="bottom" secondItem="KS4-6m-xLC" secondAttribute="bottomMargin" id="zjN-ff-6xs"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="KS4-6m-xLC"/>
+                                    </mask>
+                                </variation>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="EIb-Ur-Kxw" firstAttribute="top" secondItem="kzh-3W-a2l" secondAttribute="top" id="Kc3-fd-Nod"/>
+                            <constraint firstItem="EIb-Ur-Kxw" firstAttribute="leading" secondItem="kzh-3W-a2l" secondAttribute="leading" id="NbR-84-5fc"/>
+                            <constraint firstAttribute="trailing" secondItem="EIb-Ur-Kxw" secondAttribute="trailing" id="VnG-X4-rvC"/>
+                            <constraint firstAttribute="bottom" secondItem="EIb-Ur-Kxw" secondAttribute="bottom" id="qFR-gc-ngs"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="corner_Radius">
+                                <real key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="06/10/2020 03:28 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Mb-oE-vZO">
+                        <rect key="frame" x="295" y="100" width="700" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="nNR-Lz-P3s" secondAttribute="trailing" constant="101" id="1fv-Ir-Yc6"/>
-                    <constraint firstItem="nNR-Lz-P3s" firstAttribute="leading" secondItem="NFN-7t-O3B" secondAttribute="leading" constant="6" id="7PR-du-fCr"/>
-                    <constraint firstAttribute="bottom" secondItem="nNR-Lz-P3s" secondAttribute="bottom" constant="2" id="BDO-hc-XTG"/>
-                    <constraint firstItem="nXx-GF-ENO" firstAttribute="top" secondItem="NFN-7t-O3B" secondAttribute="top" constant="5" id="Sgb-ay-2O5"/>
-                    <constraint firstItem="nXx-GF-ENO" firstAttribute="width" secondItem="NFN-7t-O3B" secondAttribute="width" multiplier="0.7" id="VaJ-X4-u9n"/>
-                    <constraint firstItem="nNR-Lz-P3s" firstAttribute="top" secondItem="nXx-GF-ENO" secondAttribute="bottom" constant="6" id="ZwC-Qi-E4Z"/>
-                    <constraint firstItem="nNR-Lz-P3s" firstAttribute="width" secondItem="NFN-7t-O3B" secondAttribute="width" multiplier="0.7" id="fJc-Ld-SSk"/>
-                    <constraint firstAttribute="trailing" secondItem="nXx-GF-ENO" secondAttribute="trailing" constant="101" id="jnI-hk-uk7"/>
-                    <constraint firstItem="nXx-GF-ENO" firstAttribute="leading" secondItem="NFN-7t-O3B" secondAttribute="leading" constant="6" id="mFx-a6-mXc"/>
+                    <constraint firstItem="Aee-Mp-kgh" firstAttribute="top" secondItem="NFN-7t-O3B" secondAttribute="top" constant="5" id="1I9-se-8gF"/>
+                    <constraint firstItem="kzh-3W-a2l" firstAttribute="width" secondItem="NFN-7t-O3B" secondAttribute="width" multiplier="0.7" id="6fA-7O-IfW"/>
+                    <constraint firstAttribute="trailing" secondItem="kzh-3W-a2l" secondAttribute="trailing" constant="5" id="8c2-eg-zeC"/>
+                    <constraint firstItem="5Mb-oE-vZO" firstAttribute="width" secondItem="NFN-7t-O3B" secondAttribute="width" multiplier="0.7" id="9kq-RF-15g"/>
+                    <constraint firstItem="Aee-Mp-kgh" firstAttribute="width" secondItem="NFN-7t-O3B" secondAttribute="width" multiplier="0.7" id="Lab-mJ-MSA" customClass="ca"/>
+                    <constraint firstItem="nNR-Lz-P3s" firstAttribute="top" secondItem="Aee-Mp-kgh" secondAttribute="bottom" constant="9" id="O89-k7-Yr6"/>
+                    <constraint firstItem="nNR-Lz-P3s" firstAttribute="leading" secondItem="NFN-7t-O3B" secondAttribute="leading" constant="5" id="P5W-1D-nun"/>
+                    <constraint firstItem="kzh-3W-a2l" firstAttribute="top" secondItem="NFN-7t-O3B" secondAttribute="top" constant="5" id="PaJ-7b-mGz"/>
+                    <constraint firstAttribute="trailing" secondItem="5Mb-oE-vZO" secondAttribute="trailing" constant="5" id="QDD-TZ-Ynp"/>
+                    <constraint firstItem="5Mb-oE-vZO" firstAttribute="top" secondItem="kzh-3W-a2l" secondAttribute="bottom" constant="9" id="Us1-RA-3BP"/>
+                    <constraint firstAttribute="bottom" secondItem="5Mb-oE-vZO" secondAttribute="bottom" constant="3" id="Xwc-Xe-DRc"/>
+                    <constraint firstAttribute="bottom" secondItem="nNR-Lz-P3s" secondAttribute="bottom" constant="3" id="iDM-q5-K7q"/>
+                    <constraint firstItem="Aee-Mp-kgh" firstAttribute="leading" secondItem="NFN-7t-O3B" secondAttribute="leading" constant="5" id="jSn-Iw-FI9"/>
+                    <constraint firstItem="nNR-Lz-P3s" firstAttribute="width" secondItem="NFN-7t-O3B" secondAttribute="width" multiplier="0.7" id="jip-Dv-GzU"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="hH7-58-qai"/>
             <connections>
-                <outlet property="acceptButtonView" destination="TAc-Ka-KGq" id="CEN-vK-S1l"/>
+                <outlet property="acceptButtonView" destination="yOh-Sb-l0f" id="xjd-Bu-I4K"/>
                 <outlet property="dateLabel" destination="nNR-Lz-P3s" id="x3z-Ln-Htm"/>
-                <outlet property="leadingDateConstrain" destination="7PR-du-fCr" id="olv-Cb-rYG"/>
-                <outlet property="leadingTextConstrain" destination="mFx-a6-mXc" id="nWx-hP-h68"/>
+                <outlet property="leftOfferView" destination="Aee-Mp-kgh" id="rmL-fo-aF2"/>
                 <outlet property="offerLabel" destination="PYp-0H-mah" id="7Fd-43-930"/>
-                <outlet property="textView" destination="nXx-GF-ENO" id="nyK-OK-icH"/>
-                <outlet property="trailingDateConstrain" destination="1fv-Ir-Yc6" id="fqg-sL-3LQ"/>
-                <outlet property="trailingTextConstrain" destination="jnI-hk-uk7" id="Vxv-89-Nyi"/>
+                <outlet property="rightDateLabel" destination="5Mb-oE-vZO" id="Kiz-6f-eQb"/>
+                <outlet property="rightOfferLabel" destination="wsB-fM-uX6" id="VNu-4u-cjK"/>
+                <outlet property="rightOfferView" destination="kzh-3W-a2l" id="q8d-kd-HPb"/>
             </connections>
-            <point key="canvasLocation" x="153.62318840579712" y="39.508928571428569"/>
+            <point key="canvasLocation" x="-59.420289855072468" y="-23.4375"/>
         </tableViewCell>
     </objects>
     <resources>
