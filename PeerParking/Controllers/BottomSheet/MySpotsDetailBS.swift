@@ -22,13 +22,12 @@ class MySpotsDetailBS: UIViewController {
         
         
         
-         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MySpotParkingDetailVC") as! MySpotParkingDetailVC
-
+        let vc = MySpotParkingDetailVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
         //        self.navigationController?.pushViewController(vc, animated: true)
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true,completion: nil)
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true,completion: nil)
         
-//        self.dismiss(animated: false)
+        //        self.dismiss(animated: false)
     }
     
     
