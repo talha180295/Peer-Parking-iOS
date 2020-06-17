@@ -42,6 +42,7 @@ class chatTextCell: UITableViewCell {
             
             dateLabel.textAlignment = .right
             
+            
         }
         
         else
@@ -54,6 +55,7 @@ class chatTextCell: UITableViewCell {
             trailingDateConstrain.isActive = false
             
             dateLabel.textAlignment = .left
+//            textView.backgroundColor = .green
             
         }
         

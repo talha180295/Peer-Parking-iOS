@@ -10,8 +10,11 @@ import UIKit
 
 class BargainingCell: UITableViewCell {
 
-    @IBOutlet weak var offer: UILabel!
+    @IBOutlet weak var rightOffer: UILabel!
     @IBOutlet weak var leftOffer: UILabel!
+    
+    @IBOutlet weak var rightOfferDate: UILabel!
+    @IBOutlet weak var leftOfferDate: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
