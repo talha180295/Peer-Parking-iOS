@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -218,25 +218,25 @@
                                         <rect key="frame" x="8" y="0.0" width="398" height="651"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mnA-3S-cdM">
-                                                <rect key="frame" x="0.0" y="0.0" width="398" height="1264"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="398" height="1374"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="r6T-YK-1ag">
-                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="1213"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="1323"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B9O-dP-JZk" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="398" height="438"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="398" height="548"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xq9-Vl-rxf">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="438"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="548"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8Ge-b0-LqM">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="398" height="438"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="398" height="548"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alM-e0-5CS">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="219"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="274"/>
                                                                                         <subviews>
                                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-img" translatesAutoresizingMaskIntoConstraints="NO" id="xlC-43-UPq">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="398" height="219"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="398" height="274"/>
                                                                                             </imageView>
                                                                                         </subviews>
                                                                                         <constraints>
@@ -246,14 +246,14 @@
                                                                                             <constraint firstItem="xlC-43-UPq" firstAttribute="leading" secondItem="alM-e0-5CS" secondAttribute="leading" id="dhp-Vc-WwR"/>
                                                                                         </constraints>
                                                                                     </view>
-                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="FQA-uJ-Wb9">
-                                                                                        <rect key="frame" x="0.0" y="219" width="398" height="219"/>
+                                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="FQA-uJ-Wb9">
+                                                                                        <rect key="frame" x="0.0" y="274" width="398" height="274"/>
                                                                                         <subviews>
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4d-aP-50o" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
-                                                                                                <rect key="frame" x="0.0" y="0.0" width="398" height="43"/>
+                                                                                                <rect key="frame" x="0.0" y="0.0" width="398" height="50"/>
                                                                                                 <subviews>
                                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0yi-X3-qhT">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="43"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="50"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SIT-vf-doL">
                                                                                                                 <rect key="frame" x="10" y="10" width="68" height="21"/>
@@ -305,10 +305,10 @@
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </view>
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1yl-vj-RcV" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
-                                                                                                <rect key="frame" x="0.0" y="44" width="398" height="43"/>
+                                                                                                <rect key="frame" x="0.0" y="51" width="398" height="50"/>
                                                                                                 <subviews>
                                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abl-mM-L9s">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="43"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="50"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVk-Sh-d26">
                                                                                                                 <rect key="frame" x="10" y="10" width="68" height="21"/>
@@ -361,10 +361,10 @@
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </view>
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cgd-0I-f0Q" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
-                                                                                                <rect key="frame" x="0.0" y="88" width="398" height="43"/>
+                                                                                                <rect key="frame" x="0.0" y="102" width="398" height="70"/>
                                                                                                 <subviews>
                                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e7n-aC-BWa">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="43"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="70"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NOM-hY-duR">
                                                                                                                 <rect key="frame" x="10" y="10" width="68" height="21"/>
@@ -376,8 +376,8 @@
                                                                                                                 <nil key="textColor"/>
                                                                                                                 <nil key="highlightedColor"/>
                                                                                                             </label>
-                                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lable" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2hD-vB-0Bg">
-                                                                                                                <rect key="frame" x="106" y="10" width="284" height="20.5"/>
+                                                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lablelablelablelablelablelablelablelablelablelablelablelablelablelablelablelablelablelablelable" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2hD-vB-0Bg">
+                                                                                                                <rect key="frame" x="106" y="10" width="284" height="61"/>
                                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                 <nil key="textColor"/>
                                                                                                                 <nil key="highlightedColor"/>
@@ -387,6 +387,7 @@
                                                                                                         <constraints>
                                                                                                             <constraint firstAttribute="bottom" secondItem="NOM-hY-duR" secondAttribute="bottom" constant="12" id="8pe-nb-6rt"/>
                                                                                                             <constraint firstItem="2hD-vB-0Bg" firstAttribute="top" secondItem="e7n-aC-BWa" secondAttribute="top" constant="10" id="Oqz-8G-HEt"/>
+                                                                                                            <constraint firstAttribute="bottom" secondItem="2hD-vB-0Bg" secondAttribute="bottom" constant="12.5" id="QaX-7r-BSi"/>
                                                                                                             <constraint firstItem="NOM-hY-duR" firstAttribute="top" secondItem="e7n-aC-BWa" secondAttribute="top" constant="10" id="YNV-fJ-XXs"/>
                                                                                                             <constraint firstItem="2hD-vB-0Bg" firstAttribute="leading" secondItem="NOM-hY-duR" secondAttribute="trailing" constant="28" id="hCc-kw-B3U"/>
                                                                                                             <constraint firstAttribute="trailing" secondItem="2hD-vB-0Bg" secondAttribute="trailing" constant="8" id="ugo-gf-AS1"/>
@@ -395,6 +396,7 @@
                                                                                                     </view>
                                                                                                 </subviews>
                                                                                                 <constraints>
+                                                                                                    <constraint firstAttribute="height" constant="200" id="687-hi-ggI"/>
                                                                                                     <constraint firstAttribute="trailing" secondItem="e7n-aC-BWa" secondAttribute="trailing" id="Rmj-Mv-iSP"/>
                                                                                                     <constraint firstItem="e7n-aC-BWa" firstAttribute="leading" secondItem="Cgd-0I-f0Q" secondAttribute="leading" id="TOC-DA-c0v"/>
                                                                                                     <constraint firstAttribute="bottom" secondItem="e7n-aC-BWa" secondAttribute="bottom" id="Xei-DI-GhX"/>
@@ -413,10 +415,10 @@
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </view>
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2OY-NV-vfj" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
-                                                                                                <rect key="frame" x="0.0" y="132" width="398" height="43"/>
+                                                                                                <rect key="frame" x="0.0" y="173" width="398" height="50"/>
                                                                                                 <subviews>
                                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jwV-70-Vk8">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="43"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="50"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Negotiable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZJ-Xo-maw">
                                                                                                                 <rect key="frame" x="10" y="10" width="105" height="21"/>
@@ -468,10 +470,10 @@
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </view>
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2R0-m4-Wlp" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
-                                                                                                <rect key="frame" x="0.0" y="176" width="398" height="43"/>
+                                                                                                <rect key="frame" x="0.0" y="224" width="398" height="50"/>
                                                                                                 <subviews>
                                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aGQ-st-kLL">
-                                                                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="43"/>
+                                                                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="50"/>
                                                                                                         <subviews>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMi-MC-cAX">
                                                                                                                 <rect key="frame" x="10" y="10" width="68" height="21"/>
@@ -484,7 +486,7 @@
                                                                                                                 <nil key="highlightedColor"/>
                                                                                                             </label>
                                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0q-TT-vqf">
-                                                                                                                <rect key="frame" x="238" y="10" width="152" height="21"/>
+                                                                                                                <rect key="frame" x="238" y="10" width="152" height="0.0"/>
                                                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                                 <nil key="textColor"/>
                                                                                                                 <nil key="highlightedColor"/>
@@ -553,7 +555,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gdf-xZ-1NR" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="446" width="398" height="110"/>
+                                                                <rect key="frame" x="0.0" y="556" width="398" height="110"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vcd-tO-6aX">
                                                                         <rect key="frame" x="0.0" y="0.0" width="398" height="110"/>
@@ -720,7 +722,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nvr-1N-XLo" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="564" width="398" height="110"/>
+                                                                <rect key="frame" x="0.0" y="674" width="398" height="110"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xqf-B7-UMW">
                                                                         <rect key="frame" x="0.0" y="0.0" width="398" height="110"/>
@@ -887,7 +889,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vN8-DR-7fw" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="682" width="398" height="531"/>
+                                                                <rect key="frame" x="0.0" y="792" width="398" height="531"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tq4-KU-Rea">
                                                                         <rect key="frame" x="0.0" y="0.0" width="398" height="531"/>
