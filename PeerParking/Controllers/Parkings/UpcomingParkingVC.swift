@@ -142,12 +142,18 @@ extension UpcomingParkingVC: UITableViewDelegate,UITableViewDataSource{
         
         if((parking.status == ParkingStatus.AVAILABLE.rawValue) ||
             (parking.status == ParkingStatus.UNAVAILABLE.rawValue) &&
-            (parking.parkingType == ParkingType.PARKING_TYPE_PUBLIC)){ let vc = MySpotParkingDetailVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
+            (parking.parkingType == ParkingType.PARKING_TYPE_PUBLIC)){
+            
+            let vc = MySpotParkingDetailVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
             vc.viewModel = MySpotParkingDetailViewModel.init(parkingDetails: parking)
             vc.modalPresentationStyle = .fullScreen
             self.present(vc, animated: true,completion: nil)
+            
         }else{
 //            ((BaseActivity) getActivity()).addDockableFragment(BookingDetailFragment.newInstance(arrDates.get(position)), false);
+            let vc = ParkingBookingDetailsVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
+            vc.viewModel = ParkingBookingDetailsViewModel.init(parkingModel: parking)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         
        
