@@ -173,14 +173,14 @@ struct ParkingConst{
 
 
 
-struct ParkingTypeText{
+struct ParkingSubTypeText{
     
     static let  PARKING_LOT = "Parking Lot"
     static let  STRRET_PARKING = "Street Paking"
     static let  PRIVATE_PARKING = "Private Parking"
 }
 
-enum ParkingTypesEnum:Int{
+enum ParkingSubTypesEnum:Int{
     
     case PARKING_LOT     = 10
     case STRRET_PARKING  = 20
@@ -189,11 +189,11 @@ enum ParkingTypesEnum:Int{
     func getString() -> String {
         switch self {
         case .PARKING_LOT:
-            return ParkingTypeText.PARKING_LOT
+            return ParkingSubTypeText.PARKING_LOT
         case .STRRET_PARKING:
-            return ParkingTypeText.STRRET_PARKING
+            return ParkingSubTypeText.STRRET_PARKING
         case .PRIVATE_PARKING:
-            return ParkingTypeText.PRIVATE_PARKING
+            return ParkingSubTypeText.PRIVATE_PARKING
             
         }
     }
@@ -239,7 +239,7 @@ enum ParkingStatus: Int{
     case  BOOKED     = 20
     case  PARKED     = 30
     case  CANCEL     = 40
-    case  PENDING    = 50
+    case  UNAVAILABLE    = 50
     case  NAVIGATING = 60
     
 }
@@ -265,5 +265,9 @@ enum Type:Int{
     case VIRTUAL = 10;     //  In App Transaction
     case GATEWAY = 20;  //  Top-Up and Withdraw
 }
+public class ParkingType {
+    public static let  PARKING_TYPE_PUBLIC = 10;
+    public static let PARKING_TYPE_PRIVATE = 20;
 
+}
  

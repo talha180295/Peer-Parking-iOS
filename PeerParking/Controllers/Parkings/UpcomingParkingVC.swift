@@ -139,10 +139,18 @@ extension UpcomingParkingVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let parking = parkingModel[indexPath.item]
-        let vc = MySpotParkingDetailVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
-        vc.viewModel = MySpotParkingDetailViewModel.init(parkingDetails: parking)
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true,completion: nil)
+        
+        if((parking.status == ParkingStatus.AVAILABLE.rawValue) ||
+            (parking.status == ParkingStatus.UNAVAILABLE.rawValue) &&
+            (parking.parkingType == ParkingType.PARKING_TYPE_PUBLIC)){ let vc = MySpotParkingDetailVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
+            vc.viewModel = MySpotParkingDetailViewModel.init(parkingDetails: parking)
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true,completion: nil)
+        }else{
+//            ((BaseActivity) getActivity()).addDockableFragment(BookingDetailFragment.newInstance(arrDates.get(position)), false);
+        }
+        
+       
     }
     
 }
