@@ -153,6 +153,17 @@ extension UpcomingParkingVC: UITableViewDelegate,UITableViewDataSource{
 //            ((BaseActivity) getActivity()).addDockableFragment(BookingDetailFragment.newInstance(arrDates.get(position)), false);
             let vc = ParkingBookingDetailsVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
             vc.viewModel = ParkingBookingDetailsViewModel.init(parkingModel: parking)
+            
+            
+            switch parking.action ?? 0 {
+            case Action.Booked.rawValue:
+                vc.viewModel.setIsPosted(isPosted: false)
+            case Action.Posted.rawValue:
+                vc.viewModel.setIsPosted(isPosted: true)
+            default:
+                break
+            }
+            
             self.navigationController?.pushViewController(vc, animated: true)
         }
         

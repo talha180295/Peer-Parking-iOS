@@ -11,6 +11,7 @@ import UIKit
 class ParkingBookingDetailsViewModel: NSObject {
 
     private var parkingModel:Parking!
+    private var isPosted:Bool!
     
     init(parkingModel:Parking) {
         self.parkingModel = parkingModel
@@ -19,4 +20,12 @@ class ParkingBookingDetailsViewModel: NSObject {
     func getParkingModel() -> Parking{
         return self.parkingModel
     }
+    
+    func setIsPosted(isPosted:Bool){        
+        self.isPosted = isPosted
+    }
+    func getIsPosted() -> Bool{
+        return self.isPosted
+    }
+
 }
