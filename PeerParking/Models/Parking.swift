@@ -14,23 +14,26 @@ import Foundation
 
 // MARK: - Parkings
 struct Parking: Codable {
-    let id, sellerID, buyerID, vehicleType: Int?
-    let parkingType, status: Int?
-    let initialPrice, finalPrice ,distance: Double?
-    let isNegotiable: Bool?
-    let title,startAt, endAt, address, latitude: String?
-    let longitude, image, note: String?
-    let parkingHoursLimit: String?
-    let parkingExtraFee, parkingAllowedUntil: String?
-    let parkingExtraFeeUnit: Int?
-    let isResidentFree: Bool?
-    let createdAt, updatedAt, deletedAt: String?
-    let action: Int?
-    let extraFeeUnitText, vehicleTypeText: String?
-    let imageURL: String?
-    let parkingTypeText, parkingSubTypeText: String?
-    let seller: Seller?
-    let buyer: Buyer?
+    var id, sellerID, buyerID, vehicleType: Int?
+    var parkingType, status: Int?
+    var initialPrice, finalPrice ,distance: Double?
+    var isNegotiable: Bool?
+    var title,startAt, endAt, address, latitude: String?
+    var longitude, image, note: String?
+    var parkingHoursLimit: String?
+    var parkingExtraFee, parkingAllowedUntil: String?
+    var parkingExtraFeeUnit: Int?
+    var isResidentFree: Bool?
+    var createdAt, updatedAt, deletedAt: String?
+    var action: Int?
+    var extraFeeUnitText, vehicleTypeText: String?
+    var imageURL: String?
+    var parkingTypeText, parkingSubTypeText: String?
+    var seller: Seller?
+    var buyer: Buyer?
+    var slots: [Slot]?
+    var tempParkingID:Int?
+    var isAlways:Bool?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -61,7 +64,8 @@ struct Parking: Codable {
         case vehicleTypeText = "vehicle_type_text"
         case imageURL = "image_url"
         case parkingTypeText = "parking_type_text"
-        case seller, buyer
+        case seller, buyer , slots
+        case isAlways = "is_always"
     }
 }
 

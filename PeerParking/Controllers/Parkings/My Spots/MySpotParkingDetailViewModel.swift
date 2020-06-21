@@ -7,19 +7,19 @@
 //
 
 import Foundation
-class MySpotParkingDetailViewModel{
-    
-    private var parkingDetails:Parking!
-    
-    init(parkingDetails:Parking) {
-        self.parkingDetails = parkingDetails
-    }
-    
-    public func getParkingDetails() -> Parking{
-        return self.parkingDetails
-    }
-    public func setParkingDetails(parkingDetails:Parking){
-        self.parkingDetails = parkingDetails
-    }
-    
-}
+//class MySpotParkingDetailViewModel{
+//    
+//    private var parkingDetails:Parking!
+//    
+//    init(parkingDetails:Parking) {
+//        self.parkingDetails = parkingDetails
+//    }
+//    
+//    public func getParkingDetails() -> Parking{
+//        return self.parkingDetails
+//    }
+//    public func setParkingDetails(parkingDetails:Parking){
+//        self.parkingDetails = parkingDetails
+//    }
+//    
+//}

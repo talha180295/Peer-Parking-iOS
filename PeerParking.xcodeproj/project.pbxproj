@@ -112,6 +112,7 @@
 		BC514A9A2496D088003DF452 /* SellParking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC514A992496D087003DF452 /* SellParking.storyboard */; };
 		BC8511832490D84700D4B3BA /* PeerParkingStotyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */; };
 		BC8511862490D94300D4B3BA /* ParkingDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */; };
+		BC97A7FE249FEA990059FAF6 /* UpdateParkingSendingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97A7FD249FEA990059FAF6 /* UpdateParkingSendingModel.swift */; };
 		BCB2DBB424981DCD007EAC4D /* MySpotParkingDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB2DBB324981DCD007EAC4D /* MySpotParkingDetailViewModel.swift */; };
 		E2616B4D5E0A2ED92F2CAAF3 /* Pods_PeerParking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */; };
 		FA0E9F6F2330FE7E0005A54C /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E9F6E2330FE7E0005A54C /* PlaceViewController.swift */; };
@@ -309,6 +310,7 @@
 		BC514A992496D087003DF452 /* SellParking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SellParking.storyboard; sourceTree = "<group>"; };
 		BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerParkingStotyboards.swift; sourceTree = "<group>"; };
 		BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ParkingDetails.storyboard; sourceTree = "<group>"; };
+		BC97A7FD249FEA990059FAF6 /* UpdateParkingSendingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateParkingSendingModel.swift; sourceTree = "<group>"; };
 		BCB2DBB324981DCD007EAC4D /* MySpotParkingDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpotParkingDetailViewModel.swift; sourceTree = "<group>"; };
 		BF58D38B340DB6271FACD986 /* Pods-PeerParkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingTests.release.xcconfig"; path = "Target Support Files/Pods-PeerParkingTests/Pods-PeerParkingTests.release.xcconfig"; sourceTree = "<group>"; };
 		C53DD1F3CFB8035A3E4024F2 /* Pods-PeerParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParking.release.xcconfig"; path = "Target Support Files/Pods-PeerParking/Pods-PeerParking.release.xcconfig"; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 		181E0D0523CDF953005D7248 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BC97A7FC249FEA720059FAF6 /* RequestModel */,
 				181E0D0623CDF953005D7248 /* Buyer.swift */,
 				181E0D0723CDF953005D7248 /* Details.swift */,
 				181E0D0823CDF953005D7248 /* Card.swift */,
@@ -471,7 +474,6 @@
 				18CCE44524079985008B9F4F /* TransactionModel.swift */,
 				18140324242D0FF8007AEA58 /* PrivateParkingModel.swift */,
 				18A2445F24967CCE001A5350 /* ChatModel.swift */,
-				BC072886249ECB7E00CBDE62 /* BuyerParkingSendingModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -687,6 +689,15 @@
 				BC514A992496D087003DF452 /* SellParking.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		BC97A7FC249FEA720059FAF6 /* RequestModel */ = {
+			isa = PBXGroup;
+			children = (
+				BC072886249ECB7E00CBDE62 /* BuyerParkingSendingModel.swift */,
+				BC97A7FD249FEA990059FAF6 /* UpdateParkingSendingModel.swift */,
+			);
+			path = RequestModel;
 			sourceTree = "<group>";
 		};
 		DA2D335CC57FF81A4BC8D086 /* Frameworks */ = {
@@ -1387,6 +1398,7 @@
 				1814031D242CF914007AEA58 /* MyPrivateSpotsVC.swift in Sources */,
 				1841BEC82424E51C00B621AF /* PrivateParkingVC.swift in Sources */,
 				1866BF6623746402008EE650 /* Helper.swift in Sources */,
+				BC97A7FE249FEA990059FAF6 /* UpdateParkingSendingModel.swift in Sources */,
 				FA526EFA232D28C80014517B /* RateViewController.swift in Sources */,
 				FAEDCF15231F988D0063EFC0 /* TabbarViewController.swift in Sources */,
 				18451971235E08C700F3AF5A /* OfferBottomSheetVC.swift in Sources */,

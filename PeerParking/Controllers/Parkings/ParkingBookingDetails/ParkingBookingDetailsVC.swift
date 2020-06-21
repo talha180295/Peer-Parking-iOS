@@ -11,8 +11,8 @@ import Cosmos
 
 class ParkingBookingDetailsVC: UIViewController {
     
-    var viewModel:ParkingBookingDetailsViewModel!
-    
+//    var viewModel:ParkingBookingDetailsViewModel!
+    private var parkingModel:Parking!
     
     //Outlets
     @IBOutlet weak var image: UIImageView!
@@ -33,11 +33,13 @@ class ParkingBookingDetailsVC: UIViewController {
         super.viewDidLoad()
         
         self.title = "Parking Bookin Details"
-        self.setData(data: viewModel.getParkingModel())
+        self.setData(data: self.parkingModel)
     }
     
     @IBAction func navigateBtnClick(_sender:UIButton){
         
+        let buyerParkingSendingModel = BuyerParkingSendingModel.init(status: 20, endAt: "currentDateandTime")
+        print("buyerParkingSendingModel= \(buyerParkingSendingModel.dictionary ?? [:])")
         //        if (parkingModel1.getSellerId() == getCurrentUser().getId()) {
         //            if (parkingModel1.getStatus() == AppConstants.STATUS_PARKING_BOOKED) {
         //                Toast.makeText(getContext(), "Buyer has not started navigation yet", Toast.LENGTH_LONG).show();
@@ -48,6 +50,9 @@ class ParkingBookingDetailsVC: UIViewController {
         //            openMapScreen();
         //        }
         
+    }
+    func setParingModel(parkingModel:Parking){
+        self.parkingModel = parkingModel
     }
     @IBAction func parkNowBtnClick(_sender:UIButton){
         
@@ -118,7 +123,7 @@ extension ParkingBookingDetailsVC{
         self.address.text = data.address ?? "-"
         self.ratingView.rating = data.seller?.details?.averageRating ?? 0.0
         self.subType.text = data.vehicleTypeText ?? "-"
-        self.price.text = String(data.finalPrice ?? 0.0)
+        self.price.text = "$\(data.finalPrice ?? 0.0)"
         
         
         if (data.status == APP_CONSTANT.STATUS_PARKING_PARKED ||
@@ -138,15 +143,17 @@ extension ParkingBookingDetailsVC{
             self.navigateBtn.setTitle("Track buyer", for: .normal)
             self.parkNowBtn.isHidden = true
             self.userType.text = "Buyer's Information"
+            self.name.text = data.buyer?.details?.fullName ?? "-"
+            self.number.text = data.buyer?.details?.phone ?? "-"
             //          btnNavigate.setText("Track buyer");
             //          btnParkNow.setVisibility(View.GONE);
             //          infoTxtView.setText("Buyer Information");
-            if (data.buyer != nil) {
-                self.name.text = data.buyer?.details?.fullName ?? "-"
-                self.number.text = data.buyer?.details?.phone ?? "-"
-                //              txtViewBuyerName.setText(parkingModel1.getBuyerMdoel().getDetails().getFullName());
-                //              txtViewBuyerNumber.setText(parkingModel1.getBuyerMdoel().getDetails().getPhone());
-            }
+            //            if (data.buyer != nil) {
+            //                self.name.text = data.buyer?.details?.fullName ?? "-"
+            //                self.number.text = data.buyer?.details?.phone ?? "-"
+            //                //              txtViewBuyerName.setText(parkingModel1.getBuyerMdoel().getDetails().getFullName());
+            //                //              txtViewBuyerNumber.setText(parkingModel1.getBuyerMdoel().getDetails().getPhone());
+            //            }
         } else {
             self.userType.text = "Seller Information"
             //          infoTxtView.setText("Seller Information");
@@ -195,12 +202,22 @@ extension ParkingBookingDetailsVC{
         do{
             let data = try JSONEncoder().encode(buyerParkingSendingModel)
             
-            let request = APIRouter.assignBuyer(id: viewModel.getParkingModel().id!, data)
-            APIClient.serverRequest(url: request, path: request.getPath(), dec: PostResponseData.self) { (response, error) in
+            let request = APIRouter.assignBuyer(id: self.parkingModel.id!, data)
+            APIClient.serverRequest(url: request, path: request.getPath(),body: buyerParkingSendingModel.dictionary ?? [:], dec: PostResponseData.self) { (response, error) in
                 
                 if(response != nil){
                     if (response?.success) != nil {
                         Helper().showToast(message: response?.message ?? "-", controller: self)
+                        //FirebaseUtils.deleteChatAndRequests(parkingModel1);
+                        if (status == APP_CONSTANT.STATUS_PARKING_PARKED) {
+                            self.parkingModel.status = APP_CONSTANT.STATUS_PARKING_NAVIGATING
+                            //((HomeActivity) getActivity()).popStackTill(1);
+                            let vc = FeedbackVC.instantiate(fromPeerParkingStoryboard: .Main)
+                            vc.parking_details = self.parkingModel
+                            self.present(vc, animated: true)
+                            self.sendNotification(actionType: APP_CONSTANT.BUYER_REACHED, message: APP_CONSTANT.BUYER_REACHED_MESSAGE);
+                            
+                        }
                     }
                     else{
                         Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
@@ -247,5 +264,25 @@ extension ParkingBookingDetailsVC{
         //        });
         
         
+    }
+    
+    private func sendNotification(actionType:String, message:String) {
+
+//        NotificationSendingModel model = new NotificationSendingModel();
+//        model.setRef_id(String.valueOf(parkingModel1.getId()));
+//        model.setReceiver_id(parkingModel1.getSellerId());
+//        model.setAction_type(actionType);
+//        model.setMessage(message);
+//
+//        getBaseWebServices(true).postAPIAnyObject(WebServiceConstants.PATH_SEND_NOTIFICATION, model.toString(), new WebServices.IRequestWebResponseAnyObjectCallBack() {
+//            @Override
+//            public void requestDataResponse(WebResponse<Object> webResponse) {
+//            }
+//
+//            @Override
+//            public void onError(Object object) {
+//
+//            }
+//        });
     }
 }

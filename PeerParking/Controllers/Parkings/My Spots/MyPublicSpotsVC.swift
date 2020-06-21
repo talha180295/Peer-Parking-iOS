@@ -15,7 +15,7 @@ class MyPublicSpotsVC: UIViewController,IndicatorInfoProvider {
    
     //Variables
     var parkingModel = [Parking]()
-    var params:[String:Any] = ["is_schedule":1]
+    var params:[String:Any] = ["my_public_spots":1]
     
     //Outlets
     @IBOutlet weak var publicSpotsParkingTbl: UITableView!

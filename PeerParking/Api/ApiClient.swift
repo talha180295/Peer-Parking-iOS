@@ -25,7 +25,7 @@ class APIClient {
     }
     
     
-    static func serverRequest<T:Decodable>(url:URLRequestConvertible,path:String,dec:T.Type,completion:@escaping (T? ,Error?)->Void) {
+    static func serverRequest<T:Decodable>(url:URLRequestConvertible,path:String, body:[String:Any]? = nil ,dec:T.Type,completion:@escaping (T? ,Error?)->Void) {
         
         
         
@@ -45,7 +45,8 @@ class APIClient {
                 print("***************** Requst Start \(path) ********************")
                 print("url==\(try! url.asURLRequest())")
                 print("Headers: \(url.urlRequest?.allHTTPHeaderFields ?? [:])")
-                print("Body: \(url.urlRequest?.httpBody?.description ?? "")")
+//                print("Body: \(url.urlRequest?.httpBody?.description ?? "")")
+                print("Body: \(body ?? [:])")
                 print("***************** Requst End \(path) ********************\n")
                 
                 Alamofire.request(url).responseJSON { (response) in
