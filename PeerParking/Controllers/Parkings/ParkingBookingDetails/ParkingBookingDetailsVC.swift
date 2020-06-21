@@ -10,9 +10,9 @@ import UIKit
 import Cosmos
 
 class ParkingBookingDetailsVC: UIViewController {
-
+    
     var viewModel:ParkingBookingDetailsViewModel!
-
+    
     
     //Outlets
     @IBOutlet weak var image: UIImageView!
@@ -24,15 +24,87 @@ class ParkingBookingDetailsVC: UIViewController {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var number: UILabel!
     
+    @IBOutlet weak var navigateBtn: UIButton!
+    @IBOutlet weak var parkNowBtn: UIButton!
+    @IBOutlet weak var chatBtn: UIButton!
+    @IBOutlet weak var cancelBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.title = "Parking Bookin Details"
         self.setData(data: viewModel.getParkingModel())
     }
     
-
-
+    @IBAction func navigateBtnClick(_sender:UIButton){
+        
+        //        if (parkingModel1.getSellerId() == getCurrentUser().getId()) {
+        //            if (parkingModel1.getStatus() == AppConstants.STATUS_PARKING_BOOKED) {
+        //                Toast.makeText(getContext(), "Buyer has not started navigation yet", Toast.LENGTH_LONG).show();
+        //            } else {
+        //                openMapScreen();
+        //            }
+        //        } else {
+        //            openMapScreen();
+        //        }
+        
+    }
+    @IBAction func parkNowBtnClick(_sender:UIButton){
+        
+        let alert = UIAlertController(title: "Alert!", message: "Do you really want to park?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+            self.setParkingStatus(status: APP_CONSTANT.STATUS_PARKING_PARKED)
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        //        btnParkNow.setOnClickListener(new View.OnClickListener() {
+        //            @Override
+        //            public void onClick(View v) {
+        //
+        //                new AlertDialog.Builder(getContext()).
+        //                setTitle("Alert").
+        //                setMessage("Do you really want to park?").
+        //                setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        //                    @Override
+        //                    public void onClick(DialogInterface dialog, int which) {
+        //
+        //                        dialog.dismiss();
+        //                        setParkingStatus(AppConstants.STATUS_PARKING_PARKED);
+        //
+        //                    }
+        //                }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+        //                    @Override
+        //                    public void onClick(DialogInterface dialog, int which) {
+        //                        dialog.dismiss();
+        //
+        //
+        //                    }
+        //                }).setCancelable(false).show();
+        //
+        //            }
+        //
+        //        });
+    }
+    @IBAction func chatBtnClick(_sender:UIButton){
+        //        Intent i = new Intent(getHomeActivity(), ChatActivity.class);
+        //        Gson gson = new Gson();
+        //        String parkingJson= gson.toJson(parkingModel1);
+        //        i.putExtra("parkingModel", parkingJson);
+        //        startActivity(i);
+        //        break;
+        
+    }
+    @IBAction func cancelBtnClick(_sender:UIButton){
+        //        showCancelParkingConfirmationDialog()
+    }
+    
+    
 }
 
 //Data Methods
@@ -45,19 +117,135 @@ extension ParkingBookingDetailsVC{
         self.image.sd_setImage(with: URL(string: imgUrl ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
         self.address.text = data.address ?? "-"
         self.ratingView.rating = data.seller?.details?.averageRating ?? 0.0
-        self.subType.text = data.parkingSubTypeText ?? "-"
+        self.subType.text = data.vehicleTypeText ?? "-"
         self.price.text = String(data.finalPrice ?? 0.0)
         
-        if(viewModel.getIsPosted()){
+        
+        if (data.status == APP_CONSTANT.STATUS_PARKING_PARKED ||
+            data.status == APP_CONSTANT.STATUS_PARKING_CANCEL ) {
+            
+            self.navigateBtn.isHidden = true
+            self.cancelBtn.isHidden = true
+            self.chatBtn.isHidden = true
+            self.parkNowBtn.isHidden = true
+            //            btnNavigate.setVisibility(View.GONE);
+            //            btnCancel.setVisibility(View.GONE);
+            //            btnChat.setVisibility(View.GONE);
+            //            btnParkNow.setVisibility(View.GONE);
+        }
+        if (data.sellerID == Helper().getCurrentUserId()) {
+            
+            self.navigateBtn.setTitle("Track buyer", for: .normal)
+            self.parkNowBtn.isHidden = true
             self.userType.text = "Buyer's Information"
-            self.name.text = data.buyer?.details?.fullName ?? "-"
-            self.number.text = data.buyer?.details?.phone ?? "-"
-        }
-        else{
+            //          btnNavigate.setText("Track buyer");
+            //          btnParkNow.setVisibility(View.GONE);
+            //          infoTxtView.setText("Buyer Information");
+            if (data.buyer != nil) {
+                self.name.text = data.buyer?.details?.fullName ?? "-"
+                self.number.text = data.buyer?.details?.phone ?? "-"
+                //              txtViewBuyerName.setText(parkingModel1.getBuyerMdoel().getDetails().getFullName());
+                //              txtViewBuyerNumber.setText(parkingModel1.getBuyerMdoel().getDetails().getPhone());
+            }
+        } else {
             self.userType.text = "Seller Information"
-            self.name.text = data.seller?.details?.fullName ?? "-"
-            self.number.text = data.seller?.details?.phone ?? "-"
+            //          infoTxtView.setText("Seller Information");
+            if (data.seller != nil) {
+                self.name.text = data.seller?.details?.fullName ?? "-"
+                self.number.text = data.seller?.details?.phone ?? "-"
+                //              txtViewBuyerName.setText(parkingModel1.getSellerMdoel().getDetails().getFullName());
+                //              txtViewBuyerNumber.setText(parkingModel1.getSellerMdoel().getDetails().getPhone());
+            }
         }
+        
+    }
+    
+    
+    private func showCancelParkingConfirmationDialog() {
+        
+        //        new AlertDialog.Builder(getContext()).
+        //        setTitle("Alert").
+        //        setMessage("Do you really want to cancel?").
+        //        setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        //            @Override
+        //            public void onClick(DialogInterface dialog, int which) {
+        //            dialog.dismiss();
+        //            cancelBuyerParking();
+        //            }
+        //            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+        //            @Override
+        //            public void onClick(DialogInterface dialog, int which) {
+        //
+        //            dialog.dismiss();
+        //
+        //            }
+        //            }).
+        //        setCancelable(false).
+        //        show();
+    }
+    
+    private func setParkingStatus(status:Int) {
+        
+        //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        //
+        //        String currentDateandTime = sdf.format(new Date());
+        //
+        let currentDateandTime = Date().description(with: .current)
+        let buyerParkingSendingModel = BuyerParkingSendingModel.init(status: status, endAt: currentDateandTime)
+        do{
+            let data = try JSONEncoder().encode(buyerParkingSendingModel)
+            
+            let request = APIRouter.assignBuyer(id: viewModel.getParkingModel().id!, data)
+            APIClient.serverRequest(url: request, path: request.getPath(), dec: PostResponseData.self) { (response, error) in
+                
+                if(response != nil){
+                    if (response?.success) != nil {
+                        Helper().showToast(message: response?.message ?? "-", controller: self)
+                    }
+                    else{
+                        Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                    }
+                }
+                else if(error != nil){
+                    Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+                }
+                else{
+                    Helper().showToast(message: "Nor Response and Error!!", controller: self)
+                }
+                
+                
+            }
+        }
+        catch let parsingError {
+            
+            print("Error", parsingError)
+            
+        }
+        //        getBaseWebServices(true).postAPIAnyObject(WebServiceConstants.ASSIGN_BUYER + parkingModel1.getId(), buyerParkingSendingModel.toString(), new WebServices.IRequestWebResponseAnyObjectCallBack() {
+        //        @Override
+        //        public void requestDataResponse(WebResponse<Object> webResponse) {
+        //
+        //        if (webResponse.isSuccess()) {
+        //        FirebaseUtils.deleteChatAndRequests(parkingModel1);
+        //        if (status == AppConstants.STATUS_PARKING_PARKED) {
+        //        parkingModel1.setStatus(AppConstants.STATUS_PARKING_NAVIGATING);
+        //        ((HomeActivity) getActivity()).popStackTill(1);
+        //        ((HomeActivity) getActivity()).addDockableFragment(ParkingFeedbackFragment.newInstance(parkingModel1), false);
+        //        sendNotification(AppConstants.BUYER_REACHED, AppConstants.BUYER_REACHED_MESSAGE);
+        //
+        //        }
+        //
+        //        }
+        //
+        //
+        //        }
+        //
+        //        @Override
+        //        public void onError(Object object) {
+        //
+        //        }
+        //        });
+        
         
     }
 }

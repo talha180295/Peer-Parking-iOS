@@ -69,7 +69,7 @@ class UpcomingParkingVC: UIViewController,IndicatorInfoProvider {
         self.parkingModel.removeAll()
         self.upComingParkingTbl.reloadData()
         
-        APIClient.serverRequest(url: APIRouter.getParkings(params), dec: ResponseData<[Parking]>.self) { (response, error) in
+        APIClient.serverRequest(url: APIRouter.getParkings(params),path:APIRouter.getParkings(params).getPath(), dec: ResponseData<[Parking]>.self) { (response, error) in
             
             Helper().hideSpinner(view: self.view)
             if(response != nil){
@@ -124,7 +124,7 @@ extension UpcomingParkingVC: UITableViewDelegate,UITableViewDataSource{
             cell.direction.text = "\(action)"
         }
             
-        cell.type.text = self.parkingModel[indexPath.row].parkingTypeText ?? "-"
+        cell.type.text = self.parkingModel[indexPath.row].parkingSubTypeText ?? "-"
         
         cell.availablity.text = "\(self.parkingModel[indexPath.row].startAt ?? "")"
         

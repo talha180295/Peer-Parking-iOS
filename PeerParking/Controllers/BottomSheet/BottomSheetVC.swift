@@ -228,7 +228,7 @@ class BottomSheetVC: UIViewController {
     
     func postBargainingOffer(params:[String:Any]){
         
-        APIClient.serverRequest(url: APIRouter.postBargainingOffer(params), dec: PostResponseData.self) { (response,error) in
+        APIClient.serverRequest(url: APIRouter.postBargainingOffer(params), path: "", dec: PostResponseData.self) { (response,error) in
                    
            if(response != nil){
                if let success = response?.success {

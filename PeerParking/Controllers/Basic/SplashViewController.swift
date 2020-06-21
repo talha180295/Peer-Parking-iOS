@@ -54,7 +54,7 @@ class SplashViewController: UIViewController {
         let url = APIRouter.refresh
         let decoder = ResponseData<RefreshTokenModel>.self
         
-        APIClient.serverRequest(url: url, dec: decoder) { (response, error) in
+        APIClient.serverRequest(url: url, path: url.getPath(), dec: decoder) { (response, error) in
             
                         
             if(response != nil){

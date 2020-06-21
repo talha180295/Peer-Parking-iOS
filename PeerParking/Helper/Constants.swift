@@ -121,6 +121,14 @@ struct APP_CONSTANT {
         static let BUYER_TO_SELLER = 20
         
     }
+    
+    public static var STATUS_PARKING_AVAILABLE  = 10;
+    public static var STATUS_PARKING_BOOKED     = 20;
+    public static var STATUS_PARKING_PARKED     = 30;
+    public static var STATUS_PARKING_CANCEL     = 40;
+    public static var STATUS_PARKING_UNAVAILABLE = 50;
+    public static var STATUS_PARKING_NAVIGATING = 60;
+    public static var STATUS_PARKING_TEMP  =  70;
 }
 
 

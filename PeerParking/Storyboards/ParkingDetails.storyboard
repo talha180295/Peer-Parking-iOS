@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1281,6 +1281,9 @@
                                                         <state key="normal" title="NAVIGATE">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="navigateBtnClickWith_sender:" destination="zXn-ZX-Xyc" eventType="touchUpInside" id="H8U-5T-boU"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wHW-uK-4cZ">
                                                         <rect key="frame" x="0.0" y="50" width="339" height="35"/>
@@ -1291,6 +1294,9 @@
                                                         <state key="normal" title="PARK NOW">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="parkNowBtnClickWith_sender:" destination="zXn-ZX-Xyc" eventType="touchUpInside" id="Ari-Lv-t7K"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7u-T5-KZm">
                                                         <rect key="frame" x="0.0" y="100" width="339" height="35"/>
@@ -1301,6 +1307,9 @@
                                                         <state key="normal" title="CHAT">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="chatBtnClickWith_sender:" destination="zXn-ZX-Xyc" eventType="touchUpInside" id="5rm-0A-Ous"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cOz-mP-ZOa">
                                                         <rect key="frame" x="0.0" y="150" width="339" height="35"/>
@@ -1311,6 +1320,9 @@
                                                         <state key="normal" title="CANCEL">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="cancelBtnClickWith_sender:" destination="zXn-ZX-Xyc" eventType="touchUpInside" id="ThO-dU-cue"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -1353,9 +1365,13 @@
                     </view>
                     <connections>
                         <outlet property="address" destination="oYO-6c-KE0" id="t3g-0T-r0c"/>
+                        <outlet property="cancelBtn" destination="cOz-mP-ZOa" id="Ige-mq-o0q"/>
+                        <outlet property="chatBtn" destination="X7u-T5-KZm" id="SWM-a2-4e0"/>
                         <outlet property="image" destination="2dJ-3F-uEK" id="tW7-aw-cYU"/>
                         <outlet property="name" destination="Icx-uq-GIW" id="rth-JC-vAs"/>
+                        <outlet property="navigateBtn" destination="SmH-U5-aRz" id="YCy-kX-iwC"/>
                         <outlet property="number" destination="A5E-Uh-WeY" id="pam-3R-mBW"/>
+                        <outlet property="parkNowBtn" destination="wHW-uK-4cZ" id="qVY-eN-wJ6"/>
                         <outlet property="price" destination="KZi-Qi-c72" id="BgI-0u-rgy"/>
                         <outlet property="ratingView" destination="nr2-kD-tYu" id="eAT-cr-EMt"/>
                         <outlet property="subType" destination="23t-en-b0x" id="2Ni-wa-14h"/>

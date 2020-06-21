@@ -51,7 +51,7 @@ class MyPrivateSpotsVC: UIViewController,IndicatorInfoProvider {
         self.privateSpotModel.removeAll()
         self.privateSpotsParkingTbl.reloadData()
         
-        APIClient.serverRequest(url: APIRouter.getPrivateParkings(params), dec: ResponseData<[PrivateParkingModel]>.self) { (response, error) in
+        APIClient.serverRequest(url: APIRouter.getPrivateParkings(params), path: APIRouter.getPrivateParkings(params).getPath(), dec: ResponseData<[PrivateParkingModel]>.self) { (response, error) in
             
             if(response != nil){
                 if (response?.success) != nil {

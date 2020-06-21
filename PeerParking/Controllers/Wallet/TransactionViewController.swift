@@ -242,7 +242,7 @@ class TransactionViewController: UIViewController , UIGestureRecognizerDelegate,
         
         let params:[String:Any] = ["is_mine" : 1]
         
-        APIClient.serverRequest(url: APIRouter.getTransactions(params), dec: ResponseData<[TransactionModel]>.self) { (response, error) in
+        APIClient.serverRequest(url: APIRouter.getTransactions(params), path: APIRouter.getTransactions(params).getPath(), dec: ResponseData<[TransactionModel]>.self) { (response, error) in
             
             if(response != nil){
                 

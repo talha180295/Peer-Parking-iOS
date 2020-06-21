@@ -329,7 +329,7 @@ extension AppDelegate:CLLocationManagerDelegate{
                 }
 
                 if let result = response?.firstResult() {
-                    result.coordinate
+                    
                     let address = result.lines?.first ?? ""
                     print("result=\(address)")
                     self.currentLocationAddress = address

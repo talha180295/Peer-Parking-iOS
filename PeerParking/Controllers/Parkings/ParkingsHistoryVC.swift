@@ -72,7 +72,7 @@ class ParkingsHistoryVC: UIViewController,IndicatorInfoProvider {
         self.parkingModel.removeAll()
         self.historyParkingTbl.reloadData()
         
-        APIClient.serverRequest(url: APIRouter.getParkings(params), dec: ResponseData<[Parking]>.self) { (response, error) in
+        APIClient.serverRequest(url: APIRouter.getParkings(params), path: APIRouter.getParkings(params).getPath(), dec: ResponseData<[Parking]>.self) { (response, error) in
             
             if(response != nil){
                 if (response?.success) != nil {
