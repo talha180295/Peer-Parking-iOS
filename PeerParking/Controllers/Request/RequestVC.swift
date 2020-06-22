@@ -141,7 +141,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         
         print("param123=\(params)")
         
-        APIClient.serverRequest(url: APIRouter.getBargainings(params), dec: ResponseData<[Bargaining]>.self) { (response, error) in
+        APIClient.serverRequest(url: APIRouter.getBargainings(params), path: APIRouter.getBargainings(params).getPath(), dec: ResponseData<[Bargaining]>.self) { (response, error) in
             
             if(response != nil){
                 if (response?.success) != nil {

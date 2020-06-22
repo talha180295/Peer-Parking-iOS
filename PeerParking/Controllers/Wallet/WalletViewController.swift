@@ -125,7 +125,7 @@ extension WalletViewController: STPAddCardViewControllerDelegate {
         let url = APIRouter.me
         let decoder = ResponseData<Me>.self
         
-        APIClient.serverRequest(url: url, dec: decoder) { (response,error) in
+        APIClient.serverRequest(url: url, path: url.getPath(), dec: decoder) { (response,error) in
             
             print(response?.data)
             Helper().hideSpinner(view: self.view)

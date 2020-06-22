@@ -9,34 +9,41 @@
 import UIKit
 
 class MySpotsDetailBS: UIViewController {
-
+    
+    //Intent Variables
+    var privateParkingModel:PrivateParkingModel!
+    var navigator:UINavigationController!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
     @IBAction func showDetailsBtn(_ sender: UIButton) {
         
-        NotificationCenter.default.post(name: Notification.Name("mode_filter"), object: nil, userInfo:["mode" : 10] )
-        
-        
-        
         let vc = MySpotParkingDetailVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
-        //        self.navigationController?.pushViewController(vc, animated: true)
+        vc.setPrivateParingModel(privateParkingModel: privateParkingModel)
+        vc.isPublicParking = false
+//        vc.delegate = self
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true,completion: nil)
         
-        //        self.dismiss(animated: false)
     }
     
     
     @IBAction func showBookingsBtn(_ sender: UIButton) {
+        let vc = PrivateParkingBookingListVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
+        vc.modalPresentationStyle = .fullScreen
+        self.navigator?.pushViewController(vc, animated: true)
+        self.dismiss(animated: false, completion: nil)
+//        self.present(vc, animated: true,completion: nil)
         
-       NotificationCenter.default.post(name: Notification.Name("mode_filter"), object: nil, userInfo:["mode" : 20] )
         
-        self.dismiss(animated: false)
-    
     }
-
+    
 }
+//extension MySpotsDetailBS:MySpotParkingDetailVCDelegate{
+//    func didBackButtonPressed() {
+//        
+//    }
+//}

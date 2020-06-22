@@ -70,6 +70,11 @@ class Helper{
         view_controller.present(sheetController, animated: false, completion: nil)
     }
     
+    func getCurrentUserId() -> Int{
+        
+        let myId = UserDefaults.standard.integer(forKey: "id")
+        return myId
+    }
     
     func IsUserLogin() -> Bool {
         if ((UserDefaults.standard.object(forKey: "login")) == nil) {
@@ -944,6 +949,8 @@ extension CLLocationCoordinate2D {
         let lon2 = lon1 + atan2(sin(bearing) * sin(distRadians) * cos(lat1), cos(distRadians) - sin(lat1) * sin(lat2))
         return CLLocationCoordinate2D(latitude: lat2 * 180 / Double.pi, longitude: lon2 * 180 / Double.pi)
     }
+    
+
     
     
 }

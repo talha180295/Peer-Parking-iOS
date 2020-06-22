@@ -35,7 +35,7 @@ class TimeFinishPopup: UIViewController {
     func cancelParkking(id:Int){
         
         
-        APIClient.serverRequest(url: APIRouter.cancelSellerParking(id: id), dec: PostResponseData.self) { (response, error) in
+        APIClient.serverRequest(url: APIRouter.cancelSellerParking(id: id), path: APIRouter.cancelSellerParking(id: id).getPath(), dec: PostResponseData.self) { (response, error) in
             
             if(response != nil){
                 if (response?.success) != nil {

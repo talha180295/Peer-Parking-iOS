@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 //import MapKit
-import GooglePlacesSearchController
+//import GooglePlacesSearchController
 import GoogleMaps
 import GooglePlaces
 import FittedSheets
@@ -472,7 +472,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 //        ]
         
         
-        var url:URLRequestConvertible!
+        var url:APIRouter!
         
         if(Helper().IsUserLogin()){
 //            url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.GET_PARKING_WITH_TOKEN
@@ -568,7 +568,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
         Helper().showSpinner(view: self.view)
         
-        APIClient.serverRequest(url: url, dec: ResponseData<[Parking]>.self) { (response,error) in
+        APIClient.serverRequest(url: url, path: url.getPath(), dec: ResponseData<[Parking]>.self) { (response,error) in
             
             Helper().hideSpinner(view: self.view)
             if(response != nil){

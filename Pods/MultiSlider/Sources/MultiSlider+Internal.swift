@@ -173,11 +173,8 @@ extension MultiSlider {
         guard valueLabelPosition != .notAnAttribute else { return }
         let valueLabel = UITextField()
         valueLabel.borderStyle = .none
-        slideView.addConstrainedSubview(valueLabel)
-        valueLabel.font = UIFont.preferredFont(forTextStyle: .footnote)
-        if #available(iOS 10.0, *) {
-            valueLabel.adjustsFontForContentSizeCategory = true
-        }
+        slideView.addSubview(valueLabel)
+        valueLabel.translatesAutoresizingMaskIntoConstraints = false
         let thumbView = thumbViews[i]
         slideView.constrain(valueLabel, at: valueLabelPosition.perpendicularCenter, to: thumbView)
         slideView.constrain(

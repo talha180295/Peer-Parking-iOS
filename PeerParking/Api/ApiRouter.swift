@@ -12,7 +12,7 @@ import Alamofire
 enum APIRouter: URLRequestConvertible {
     
     
-  
+    
     case getParkingsWithoutToken([String:Any])
     case getParkings([String:Any])
     case getParkingsById(id:Int)
@@ -24,9 +24,10 @@ enum APIRouter: URLRequestConvertible {
     case me
     case refresh
     case cancelSellerParking(id:Int)
-    case assignBuyer(id:Int,[String:Any])
+    case assignBuyer(id:Int,Data)
     case getTransactions([String:Any])
     case getPrivateParkings([String:Any])
+    case updateParking(id:Int,Data)
     
     private var accessToken:String{
         return  UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN) ?? ""
@@ -35,12 +36,11 @@ enum APIRouter: URLRequestConvertible {
     // MARK: - HTTPMethod
     private var method: HTTPMethod {
         switch self {
-        
             
-         case .getParkingsWithoutToken,.getParkings,.getParkingsById,.getBargainings,.getBargainingsById , .getTransactions ,.getPrivateParkings:
+        case .getParkingsWithoutToken,.getParkings,.getParkingsById,.getBargainings,.getBargainingsById , .getTransactions ,.getPrivateParkings:
             return .get
             
-         case .postParking,.postBargainingOffer,.addUserCard,.me,.refresh, .cancelSellerParking, .assignBuyer:
+        case .postParking,.postBargainingOffer,.addUserCard,.me,.refresh, .cancelSellerParking, .assignBuyer, .updateParking:
             return .post
             
         }
@@ -49,9 +49,9 @@ enum APIRouter: URLRequestConvertible {
     
     // MARK: - Path
     private var path: String {
-       
+        
         switch self {
-       
+            
         case .getParkingsWithoutToken:
             return "parkings-without-token"
         case .postParking:
@@ -80,13 +80,16 @@ enum APIRouter: URLRequestConvertible {
             return "transactions"
         case .getPrivateParkings:
             return "private-parkings"
+        case .updateParking(let id, _):
+            return "update-parking/\(id)"
+            
         }
     }
     
     // MARK: - Parameters
     private var parameters: Parameters? {
         switch self {
-       
+            
         case .getParkingsWithoutToken(let params):
             return (params)
         case .postParking(let params):
@@ -107,18 +110,43 @@ enum APIRouter: URLRequestConvertible {
             return nil
         case .cancelSellerParking:
             return nil
-        case .assignBuyer(_, let params):
-            return (params)
-        case .getBargainingsById(let id):
+        case .assignBuyer(_,_):
+            return nil
+        case .getBargainingsById:
             return nil
         case .getTransactions(let params):
             return (params)
         case .getPrivateParkings(let params):
             return (params)
+        case .updateParking:
+            return nil
+            
         }
     }
     
-
+    // MARK: - HTTPMethod
+    private var urlEncoding: URLEncoding {
+        switch self {
+            
+        case .assignBuyer, .updateParking:
+            return .httpBody
+        case .getParkingsWithoutToken, .postParking ,.getParkings, .getParkingsById, .postBargainingOffer, .addUserCard, .me, .refresh ,.cancelSellerParking ,.getBargainingsById ,.getTransactions ,.getPrivateParkings,.getBargainings:
+            return .default
+        }
+    }
+    
+    // MARK: - HTTPMethod
+    private var body: Data? {
+        switch self {
+            
+        case .assignBuyer(_,let data), .updateParking(_,let data):
+            return data
+        case .getParkingsWithoutToken, .postParking ,.getParkings, .getParkingsById, .postBargainingOffer, .addUserCard, .me, .refresh ,.cancelSellerParking ,.getBargainingsById ,.getTransactions ,.getPrivateParkings, .getBargainings:
+            return nil
+            
+        }
+    }
+    
     
     // MARK: - URLRequestConvertible
     func asURLRequest() throws -> URLRequest {
@@ -133,12 +161,17 @@ enum APIRouter: URLRequestConvertible {
         urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.acceptType.rawValue)
         urlRequest.setValue(ContentType.json.rawValue, forHTTPHeaderField: HTTPHeaderField.contentType.rawValue)
         urlRequest.setValue("Bearer \(self.accessToken)", forHTTPHeaderField: HTTPHeaderField.authentication.rawValue)
-//        urlRequest.allHTTPHeaderFields = ["Authorization" : K.AccessToken]
+        //        urlRequest.allHTTPHeaderFields = ["Authorization" : K.AccessToken]
         
-
-
-        let encoding = URLEncoding(destination: .queryString)
-        return try encoding.encode(urlRequest, with: parameters)
-//        return urlRequest
+        urlRequest.httpBody = body
+        
+        return try urlEncoding.encode(urlRequest, with: parameters)
+        //        let encoding = URLEncoding(destination: .queryString)
+        //        return try encoding.encode(urlRequest, with: parameters)
+        //        return urlRequest
+    }
+    
+    public func getPath() -> String{
+        return path
     }
 }

@@ -200,7 +200,7 @@ class OfferBottomSheetVC: UIViewController {
     
     func postBargainingOffer(params:[String:Any]){
         
-        APIClient.serverRequest(url: APIRouter.postBargainingOffer(params), dec: PostResponseData.self) { (response,error) in
+        APIClient.serverRequest(url: APIRouter.postBargainingOffer(params), path: "", dec: PostResponseData.self) { (response,error) in
             
             if(response != nil){
                 Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
@@ -298,7 +298,7 @@ class OfferBottomSheetVC: UIViewController {
     func getAllBargainOffersByParkingID(id:Int, completion: @escaping () -> Void){
         
         let params:[String:Any] = ["parking_id":id]
-        APIClient.serverRequest(url: APIRouter.getBargainings(params), dec: ResponseData<[Bargaining]>.self) { (response,error) in
+        APIClient.serverRequest(url: APIRouter.getBargainings(params), path: "", dec: ResponseData<[Bargaining]>.self) { (response,error) in
             
             
             if(response != nil){
@@ -331,7 +331,7 @@ class OfferBottomSheetVC: UIViewController {
         
         print(id)
         
-        APIClient.serverRequest(url: APIRouter.getBargainingsById(id: id), dec: ResponseData<[Bargaining]>.self) { (response,error) in
+        APIClient.serverRequest(url: APIRouter.getBargainingsById(id: id), path: "", dec: ResponseData<[Bargaining]>.self) { (response,error) in
             
             if(response != nil){
                 if (response?.success) != nil {

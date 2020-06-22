@@ -25,12 +25,16 @@ class APIClient {
     }
     
     
-    static func serverRequest<T:Decodable>(url:URLRequestConvertible,dec:T.Type,completion:@escaping (T? ,Error?)->Void) {
+    static func serverRequest<T:Decodable>(url:URLRequestConvertible,path:String, body:[String:Any]? = nil ,dec:T.Type,completion:@escaping (T? ,Error?)->Void) {
         
-        print("url==\(String(describing: try? url.asURLRequest()))")
+        
+        
+       
         refreshTokenRequest(completion:{
             response in
+            print("***************** RefreshToken Response Start ********************")
             print(response)
+            print("***************** RefreshToken Response End ********************\n")
             if Helper().IsUserLogin() == true && response.result.value == nil {
                 print("No response")
                 
@@ -38,9 +42,18 @@ class APIClient {
                 return
             }
             else{
+                print("***************** Requst Start \(path) ********************")
+                print("url==\(try! url.asURLRequest())")
+                print("Headers: \(url.urlRequest?.allHTTPHeaderFields ?? [:])")
+//                print("Body: \(url.urlRequest?.httpBody?.description ?? "")")
+                print("Body: \(body ?? [:])")
+                print("***************** Requst End \(path) ********************\n")
+                
                 Alamofire.request(url).responseJSON { (response) in
                     
-                    print("serverResponse=\(response)")
+                    print("***************** Response Start \(path) ********************")
+                    print(response)
+                    print("***************** Response End \(path) ********************\n")
                     print(response.response?.statusCode ?? 0)
                     if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299){
                         

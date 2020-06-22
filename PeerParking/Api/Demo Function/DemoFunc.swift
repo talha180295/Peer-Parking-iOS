@@ -168,7 +168,7 @@ class DemoFunc {
         let params:[String:Any]  = [ "is_schedule" : 1 ]
         
         
-        APIClient.serverRequest(url: APIRouter.getParkings(params), dec: ResponseData<Parking>.self) { (response,error) in
+        APIClient.serverRequest(url: APIRouter.getParkings(params), path: APIRouter.getParkings(params).getPath(), dec: ResponseData<Parking>.self) { (response,error) in
             
             if(response != nil){
                 if (response?.success) != nil {

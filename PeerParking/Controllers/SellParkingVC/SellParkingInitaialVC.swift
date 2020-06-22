@@ -118,7 +118,7 @@ class SellParkingInitaialVC: UIViewController {
         let url_r = APIRouter.getParkings(params)
         let decoder = ResponseData<[Parking]>.self
         Helper().showSpinner(view: self.view)
-        APIClient.serverRequest(url: url_r, dec: decoder) { (response, error) in
+        APIClient.serverRequest(url: url_r, path: url_r.getPath(), dec: decoder) { (response, error) in
             Helper().hideSpinner(view: self.view)
             if(response != nil){
                 if let _ = response?.success {

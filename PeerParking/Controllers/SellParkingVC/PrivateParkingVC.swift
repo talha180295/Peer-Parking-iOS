@@ -195,7 +195,7 @@ class PrivateParkingVC: UIViewController {
 
         let url_r = APIRouter.getParkings(params)
         let decoder = ResponseData<[Parking]>.self
-        APIClient.serverRequest(url: url_r, dec: decoder) { (response, error) in
+        APIClient.serverRequest(url: url_r, path: url_r.getPath(), dec: decoder) { (response, error) in
                         
             if(response != nil){
                 if let _ = response?.success {

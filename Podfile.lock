@@ -2,9 +2,9 @@ PODS:
   - Alamofire (4.9.1)
   - AvailableHapticFeedback (1.0.2)
   - BLKFlexibleHeightBar (1.0.2)
-  - Charts (3.5.0):
-    - Charts/Core (= 3.5.0)
-  - Charts/Core (3.5.0)
+  - Charts (3.4.0):
+    - Charts/Core (= 3.4.0)
+  - Charts/Core (3.4.0)
   - CircleProgressView (1.2.0)
   - CodableFirebase (0.2.1)
   - Cosmos (20.0.1)
@@ -103,14 +103,13 @@ PODS:
   - GoogleDataTransportCCTSupport (2.0.0):
     - GoogleDataTransport (~> 5.0)
     - nanopb (~> 0.3.901)
-  - GoogleMaps (3.6.0):
-    - GoogleMaps/Maps (= 3.6.0)
-  - GoogleMaps/Base (3.6.0)
-  - GoogleMaps/Maps (3.6.0):
+  - GoogleMaps (3.9.0):
+    - GoogleMaps/Maps (= 3.9.0)
+  - GoogleMaps/Base (3.9.0)
+  - GoogleMaps/Maps (3.9.0):
     - GoogleMaps/Base
-  - GooglePlaces (3.6.0):
-    - GoogleMaps/Base (= 3.6.0)
-  - GooglePlacesSearchController (0.2.3)
+  - GooglePlaces (3.9.0):
+    - GoogleMaps/Base (= 3.9.0)
   - GoogleUtilities/AppDelegateSwizzler (6.5.1):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -137,7 +136,7 @@ PODS:
   - IQKeyboardManagerSwift (6.5.2)
   - leveldb-library (1.22)
   - MBRadioCheckboxButton (2.0)
-  - MultiSlider (1.10.10):
+  - MultiSlider (1.10.8):
     - AvailableHapticFeedback
     - SweeterSwift
   - nanopb (0.3.9011):
@@ -153,7 +152,7 @@ PODS:
   - SDWebImage/Core (5.5.2)
   - SideMenuController (0.2.4)
   - StepIndicator (1.0.8)
-  - Stripe (19.0.0)
+  - Stripe (19.2.0)
   - SweeterSwift (1.1.3)
   - SwiftGifOrigin (1.7.0)
   - SwiftLocation (4.2.0)
@@ -176,9 +175,8 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Messaging
   - FittedSheets
-  - GoogleMaps
+  - GoogleMaps (~> 3.9.0.0)
   - GooglePlaces
-  - GooglePlacesSearchController
   - HelperClassPod
   - iProgressHUD
   - IQKeyboardManagerSwift
@@ -226,7 +224,6 @@ SPEC REPOS:
     - GoogleDataTransportCCTSupport
     - GoogleMaps
     - GooglePlaces
-    - GooglePlacesSearchController
     - GoogleUtilities
     - HelperClassPod
     - iProgressHUD
@@ -252,7 +249,7 @@ SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AvailableHapticFeedback: 9b21b9f6d3e4566015988b5de35b40abefe6c09a
   BLKFlexibleHeightBar: b27572a69633d8e33f1f2bbc486b04d8e86f742d
-  Charts: 40a08591df1f8ad5c223ddedfb1a06da92f24f7c
+  Charts: 74c9f256eaf0460c0c416522d1cf8c634ea6b286
   CircleProgressView: 6b5b091d59dc5e5d2fda84e637a40498cdc39937
   CodableFirebase: 0bf201991eeec35eb9fcd987d271ea463cf34a80
   Cosmos: b47fddf2102bb48580cd3025d9ce0a5c658a65da
@@ -279,16 +276,15 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: c29d405ff76e18551b5d158eaba6753fda8c7542
   GoogleDataTransport: a857c6a002d201b524dd4bc2ed7e7355ed07e785
   GoogleDataTransportCCTSupport: 32f75fbe904c82772fcbb6b6bd4525bfb6f2a862
-  GoogleMaps: 82f8fe307193bb4de6ef6bf9e88f1d624b718f9d
-  GooglePlaces: 1b9d29cf3e164903d873600f511f42acdfe85294
-  GooglePlacesSearchController: f8c7da8c3bf0bcf901c5873c22fda7db5fbfc15e
+  GoogleMaps: 4b5346bddfe6911bb89155d43c903020170523ac
+  GooglePlaces: 1634d019549b969d40fe0ccb0b9513055adebe01
   GoogleUtilities: 06eb53bb579efe7099152735900dd04bf09e7275
   HelperClassPod: bb76030247217e6fc69ce1eb6aa8c2b1daa55ae7
   iProgressHUD: caa742128253c97f2c2e1ec59e2bbe6cf689df6a
   IQKeyboardManagerSwift: c75366f1f19590e8caeae45fcd5815c9289d6099
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   MBRadioCheckboxButton: 6e2a2cdc441e292e45b64c4e65eb8fc1fc05eef2
-  MultiSlider: 4ed2802e93cb8d46c6d7271aefb5d97b42c8e94c
+  MultiSlider: a4fdcb3fb058a0af95720570b44d8683da5312c8
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
@@ -296,13 +292,13 @@ SPEC CHECKSUMS:
   SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
   SideMenuController: b463d2b3aa58e2afe57f57a07938fa9a647894ca
   StepIndicator: 748b293f671355b021253f82031ac002f153dc81
-  Stripe: 5afd38a520f7a1a16b609127165d517fa9f7de32
+  Stripe: d481c2dab9a892fd923f097f854661217f70dc7f
   SweeterSwift: d909211f6833405628c8c7c6bf9f8f2e8a0e9df9
   SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
   SwiftLocation: 609ac8859f2c5d48a6cadd2a58c63b1dae02dc25
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: 3eb8809468b0a8c7f87310ba67f10ec105ddefa8
+PODFILE CHECKSUM: 4c607aabe7e36a936fdea0501dd02a67134d07ec
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3

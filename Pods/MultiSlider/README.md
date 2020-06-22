@@ -92,26 +92,9 @@ slider.showsThumbImageShadow = false // wide tracks look better without thumb sh
 ### Images
 
 ```swift
-// add images at the ends of the slider:
+slider.thumbImage   = UIImage(named: "balloon")
 slider.minimumImage = UIImage(named: "clown")
 slider.maximumImage = UIImage(named: "cloud")
-
-// change image for all thumbs:
-slider.thumbImage = UIImage(named: "balloon")
-
-// or let each thumb have a different image:
-slider.thumbViews[0].image = UIImage(named: "ball")
-slider.thumbViews[1].image = UIImage(named: "club")
-```
-
-### Distance/Overlap Between Thumbs
-
-```swift
-// allow thumbs to overlap:
-slider.keepsDistanceBetweenThumbs = false
-
-// make thumbs keep a greater distance from each other (default = half the thumb size):
-slider.distanceBetweenThumbs = 3.14
 ```
 
 ### Disabling/freezing thumbs
@@ -145,7 +128,7 @@ Legacy versions:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/yonat/MultiSlider", from: "1.10.10")
+    .package(url: "https://github.com/yonat/MultiSlider", from: "1.10.8")
 ]
 ```
 
