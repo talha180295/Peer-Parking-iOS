@@ -205,7 +205,35 @@ class ChatVC: UIViewController  {
     }
     func setParkingData(){
         
-        if parking_details.imageURL == nil
+//        self.sTime = pModel.startAt ?? ""
+//        self.fTime = pModel.endAt ?? ""
+//        self.st_time.text = "From : \( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
+//                       self.end_time.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.fTime!))"
+//
+        
+        
+        if( parking_details.startAt != nil)
+        {
+           
+            self.parkingFromView.text = "From : \(Helper().getFormatedDateAndTime(dateStr: self.parking_details.startAt!))"
+            
+            
+        }
+        
+        if( parking_details.endAt != nil)
+               {
+                  
+                   self.parkingToView.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.parking_details.endAt!))"
+                   
+                   
+               }
+        
+        if(parking_details.initialPrice != nil)
+        {
+            self.parkingTotalCostView.text = "$ \(String(self.parking_details.initialPrice ?? 0.0))"
+        }
+        
+        if (parking_details.imageURL == nil)
         {
             parkingImageView.image = UIImage.init(named: "placeholder")
         }

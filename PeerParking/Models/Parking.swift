@@ -16,7 +16,7 @@ import Foundation
 struct Parking: Codable {
     let id, sellerID, buyerID, vehicleType: Int?
     let parkingType, status: Int?
-    let initialPrice, finalPrice ,distance: Double?
+    var initialPrice, finalPrice ,distance: Double?
     let isNegotiable: Bool?
     let title,startAt, endAt, address, latitude: String?
     let longitude, image, note: String?
@@ -25,12 +25,13 @@ struct Parking: Codable {
     let parkingExtraFeeUnit: Int?
     let isResidentFree: Bool?
     let createdAt, updatedAt, deletedAt: String?
-    let action: Int?
+    let action , tempParkingID: Int?
     let extraFeeUnitText, vehicleTypeText: String?
     let imageURL: String?
     let parkingTypeText, parkingSubTypeText: String?
-    let seller: Seller?
+    var seller: Seller?
     let buyer: Buyer?
+    let slots: [Slot]?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -62,6 +63,25 @@ struct Parking: Codable {
         case imageURL = "image_url"
         case parkingTypeText = "parking_type_text"
         case seller, buyer
+        case tempParkingID = "temp_parking_id"
+        case slots
+    }
+}
+
+struct Slot: Codable {
+    let id, parkingID, day: Int?
+    let startAt, endAt, createdAt, updatedAt: String?
+    let deletedAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case parkingID = "parking_id"
+        case day
+        case startAt = "start_at"
+        case endAt = "end_at"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        case deletedAt = "deleted_at"
     }
 }
 
