@@ -1,24 +1,24 @@
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:
 //
-//   let privateParkingModel = try? newJSONDecoder().decode(PrivateParkingModel.self, from: jsonData)
+//   var privateParkingModel = try? newJSONDecoder().decode(PrivateParkingModel.self, from: jsonData)
 
 import Foundation
 
 // MARK: - PrivateParkingModel
 struct PrivateParkingModel: Codable {
-    let id, sellerID, vehicleType, parkingSubType: Int?
-    let title: String?
-    let status: Int?
-    let initialPrice: Double?
-    let isNegotiable, isAlways: Bool?
-    let address, latitude, longitude, image: String?
-    let note, createdAt, updatedAt, deletedAt: String?
-    let vehicleTypeText, parkingSubTypeText: String?
-    let parkingType, tempParkingID: Int?
-    let imageURL: String?
-    let seller: Seller?
-    let slots: [Slot]?
+    var id, sellerID, vehicleType, parkingSubType: Int?
+    var title: String?
+    var status: Int?
+    var initialPrice: Double?
+    var isNegotiable, isAlways: Bool?
+    var address, latitude, longitude, image: String?
+    var note, createdAt, updatedAt, deletedAt: String?
+    var vehicleTypeText, parkingSubTypeText: String?
+    var parkingType, tempParkingID: Int?
+    var imageURL: String?
+    var seller: Seller?
+    var slots: [Slot]?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -44,9 +44,9 @@ struct PrivateParkingModel: Codable {
 
 // MARK: - Slot
 struct Slot: Codable {
-    let id, parkingID, day: Int?
-    let startAt, endAt, createdAt, updatedAt: String?
-    let deletedAt: String?
+    var id, parkingID, day: Int?
+    var startAt, endAt, createdAt, updatedAt: String?
+    var deletedAt: String?
 
     enum CodingKeys: String, CodingKey {
         case id

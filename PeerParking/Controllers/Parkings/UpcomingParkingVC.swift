@@ -169,6 +169,4 @@ extension UpcomingParkingVC:MySpotParkingDetailVCDelegate{
     func didBackButtonPressed() {
         getUpcomingParking(params: self.params)
     }
-    
-    
 }

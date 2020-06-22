@@ -115,8 +115,8 @@ extension MyPrivateSpotsVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
         
-        let vc = Helper().getViewController(storyBoard: "Main", withIdentifier: "MySpotsDetailBS")
-               
+        let vc = MySpotsDetailBS.instantiate(fromPeerParkingStoryboard: .Main)
+        vc.privateParkingModel = self.privateSpotModel[indexPath.row]
         Helper().bottomSheet(controller: vc, sizes: [.fixed(120)], cornerRadius: 0, handleColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), view_controller: self)
     }
 }

@@ -34,33 +34,35 @@ class MySpotParkingDetailVC : UIViewController{
     @IBOutlet weak var type:UILabel!
     @IBOutlet weak var size:UILabel!
     @IBOutlet weak var date:UILabel!
-    //    @IBOutlet weak var time:UILabel!
     @IBOutlet weak var timingsCard: CardView!
+    @IBOutlet weak var availableOnCard: CardView!
     @IBOutlet weak var availableSwitch: UISwitch!
     @IBOutlet weak var negotiableSwitch: UISwitch!
+    @IBOutlet weak var isAlwaysSwitch: UISwitch!
     @IBOutlet weak var timeSwitch: UISwitch!
     
     let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sarurday", "Sunday"]
     
     //    var day = ["day" : "", "start_at" : "", "end_at" : ""]
     
-    var daysModel = [[String : Any]]()
+    var daysModel = [Slot]()
     var selectedItems = [Int]()
-    
+    var seletedCounter = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         timingTblView.delegate = self
         timingTblView.dataSource = self
-        
+        timingTblView.isScrollEnabled = false
         Helper().registerTableCell(tableView: timingTblView, nibName: "TimingsCell", identifier: "TimingsCell")
         
-        
-        //        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(0, forKey: "is_always")
-        
-        self.setupViews()
-        self.setData()
+        if isPublicParking{
+            self.setPublicData(data: self.parkingModel)
+        }
+        else{
+            self.setPrivateData(data: self.privateParkingModel)
+        }
         
     }
     
@@ -100,69 +102,110 @@ class MySpotParkingDetailVC : UIViewController{
     @IBAction func backAction(_ sender: Any) {
         
         self.dismiss(animated: true){
-            self.delegate.didBackButtonPressed()
+            if self.isPublicParking{
+                self.delegate.didBackButtonPressed()
+            }
         }
         
     }
     
     @IBAction func updateBtn(_ sender: UIButton) {
         
-        self.updateParking()
+        if isPublicParking{
+            self.updatePublicParking()
+        }
+        else{
+            self.updatePrivateParking()
+        }
+        
     }
     
     @IBAction func deleteBtn(_ sender: UIButton) {
         
         self.showDeleteParkingConfirmationDialog()
-        
+    
     }
 }
 
 //Ui methods
 extension MySpotParkingDetailVC{
     
-    func setupViews(){
-        //        let pType = self.parkingModel.parkingType ?? 0
-        //        switch pType {
-        //        case APP_CONSTANT.PARKING_TYPES.PUBLIC_CONST:
-        //            self.timingsCard.isHidden = true
-        //        default:
-        //            self.timingsCard.isHidden = false
-        //        }
-        //
-        if isPublicParking{
-            self.timingsCard.isHidden = true
-        }
-        else{
-            self.timingsCard.isHidden = false
-        }
-    }
     
 }
 //Data methods
 extension MySpotParkingDetailVC{
     
-    func setData(){
-        let imgUrl = self.parkingModel.imageURL
-        self.image.sd_setImage(with: URL(string: imgUrl ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
-        self.parkingTitle.text = self.parkingModel.title ?? "-"
-        self.location.text = self.parkingModel.address ?? "-"
-        self.price.text = "\(self.parkingModel.initialPrice ?? 0.0)"
-        self.type.text = self.parkingModel.parkingSubTypeText ?? "-"
-        self.size.text = self.parkingModel.vehicleTypeText ?? "-"
-        self.date.text = self.parkingModel.startAt ?? "-"
+    func setPublicData(data:Parking){
+        self.timingsCard.isHidden = true
+        self.availableOnCard.isHidden = false
         
-        if (self.parkingModel.isNegotiable ?? false) {
+        let imgUrl = data.imageURL
+        self.image.sd_setImage(with: URL(string: imgUrl ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
+        self.parkingTitle.text = data.title ?? "-"
+        self.location.text = data.address ?? "-"
+        self.price.text = "\(data.initialPrice ?? 0.0)"
+        self.type.text = data.parkingSubTypeText ?? "-"
+        self.size.text = data.vehicleTypeText ?? "-"
+        self.date.text = data.startAt ?? "-"
+        
+        if (data.isNegotiable ?? false) {
             self.negotiableSwitch.isOn = true
         }
-        if (self.parkingModel.status == APP_CONSTANT.STATUS_PARKING_AVAILABLE) {
+        if (data.status == APP_CONSTANT.STATUS_PARKING_AVAILABLE) {
             self.availableSwitch.isOn = true
-        } else {
+        }
+        else {
             self.availableSwitch.isOn = false
         }
         
     }
     
-    public func updateParking() {
+    func setPrivateData(data:PrivateParkingModel){
+        
+        self.timingsCard.isHidden = false
+        self.availableOnCard.isHidden = true
+        
+        let imgUrl = data.imageURL
+        self.image.sd_setImage(with: URL(string: imgUrl ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
+        self.parkingTitle.text = data.title ?? "-"
+        self.location.text = data.address ?? "-"
+        self.price.text = "\(data.initialPrice ?? 0.0)"
+        self.type.text = data.parkingSubTypeText ?? "-"
+        self.size.text = data.vehicleTypeText ?? "-"
+        
+        if (data.isNegotiable ?? false) {
+            self.negotiableSwitch.isOn = true
+        }
+        if (data.status == APP_CONSTANT.STATUS_PARKING_AVAILABLE) {
+            self.availableSwitch.isOn = true
+        }
+        else {
+            self.availableSwitch.isOn = false
+        }
+        
+        if (data.isAlways ?? false) {
+            self.isAlwaysSwitch.isOn = true
+            timingTblView.isHidden = true
+        }
+        else {
+            self.isAlwaysSwitch.isOn = false
+            timingTblView.isHidden = false
+        }
+        
+        if (data.slots != nil) {
+            
+            for item in data.slots!{
+                let index = item.day! - 1
+                self.selectedItems.append(index)
+                self.daysModel.append(item)
+            }
+        }
+        
+    }
+        
+
+    
+    public func updatePublicParking() {
         
         print("availableSwitch=\(self.availableSwitch.isOn)")
         print("negotiableSwitch=\(self.negotiableSwitch.isOn)")
@@ -220,13 +263,79 @@ extension MySpotParkingDetailVC{
         }
     }
     
+    public func updatePrivateParking() {
+        
+        print("availableSwitch=\(self.availableSwitch.isOn)")
+        print("negotiableSwitch=\(self.negotiableSwitch.isOn)")
+        print("title=\(self.parkingTitle.text ?? "")")
+        print("day=\(self.daysModel)")
+        
+ 
+        var park_model = self.privateParkingModel!
+        
+        
+        
+        if (self.availableSwitch.isOn) {
+            park_model.status = APP_CONSTANT.STATUS_PARKING_AVAILABLE
+        } else {
+            park_model.status = APP_CONSTANT.STATUS_PARKING_UNAVAILABLE
+        }
+        
+        park_model.title = self.parkingTitle.text
+        park_model.address = self.location.text
+        park_model.isNegotiable = self.negotiableSwitch.isOn
+
+        
+//        do{
+//            let data = try JSONEncoder().encode(park_model)
+//            Helper().showSpinner(view: self.view)
+//            let request = APIRouter.updateParking(id: self.parkingModel.id!, data)
+//            APIClient.serverRequest(url: request, path: request.getPath(),body: park_model.dictionary ?? [:], dec: PostResponseData.self) { (response, error) in
+//                Helper().hideSpinner(view: self.view)
+//                if(response != nil){
+//                    if (response?.success) != nil {
+//                        Helper().showToast(message: response?.message ?? "-", controller: self)
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//                            self.dismiss(animated: true){
+//                                self.delegate.didBackButtonPressed()
+//                            }
+//                        }
+//
+//                    }
+//                    else{
+//                        Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+//                    }
+//                }
+//                else if(error != nil){
+//                    Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+//                }
+//                else{
+//                    Helper().showToast(message: "Nor Response and Error!!", controller: self)
+//                }
+//
+//
+//            }
+//        }
+//        catch let parsingError {
+//
+//            print("Error", parsingError)
+//
+//        }
+    }
+    
     private func showDeleteParkingConfirmationDialog() {
         
         let alert = UIAlertController(title: "Alert!", message: "Do you really want to delete?", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             alert.dismiss(animated: true, completion: nil)
-            self.deleteBuyerParking()
+            if self.isPublicParking{
+                self.deleteBuyerPublicParking()
+            }
+            else{
+            
+            }
+            
         }))
         alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
             alert.dismiss(animated: true, completion: nil)
@@ -235,7 +344,7 @@ extension MySpotParkingDetailVC{
         self.present(alert, animated: true, completion: nil)
     }
     
-    public func deleteBuyerParking() {
+    public func deleteBuyerPublicParking() {
         
         
         Helper().showSpinner(view: self.view)
@@ -285,12 +394,32 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
             
             cell.checkBoxOutlet.setImage(UIImage(named:"checkbox"), for: .normal)
             cell.checkBoxOutlet.isSelected = true
+            
+            let day = self.daysModel[self.seletedCounter]
+            
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "HH:mm:ss"
+//
+//
+//            let date1 = dateFormatter.date(from: day.startAt ?? "")
+//            let date2 = dateFormatter.date(from: day.endAt ?? "")
+//
+//            dateFormatter.dateFormat = "hh:mm a"
+//
+//            let s_time = dateFormatter.string(from: date1!)
+//            let e_time = dateFormatter.string(from: date2!)
+            
+            cell.startTime.text = day.startAt
+            cell.endTime.text = day.endAt
+            self.seletedCounter += 1
         }
         else {
             cell.checkBoxOutlet.setImage(UIImage(named: "uncheckbox"), for: .normal)
             cell.checkBoxOutlet.isSelected = false
         }
         cell.checkBoxOutlet.addTarget(self, action:#selector(self.buttonClicked), for: UIControl.Event.touchUpInside)
+        
+        
         
         return cell
     }
@@ -306,7 +435,7 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
             self.selectedItems.remove(at: index)
             
             self.daysModel.remove(at: index)
-            
+//            self.seletedCounter -= 1
             
             
         }
@@ -326,9 +455,10 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
             dateFormatter.dateFormat = "HH:mm"
             let s_time24 = dateFormatter.string(from: date1!)
             let e_time24 = dateFormatter.string(from: date2!)
+            self.seletedCounter = 0
             
-            
-            self.daysModel.append( [ "day" : dayCount, "start_at" : s_time24, "end_at" : e_time24 ] )
+            let slot = Slot(dictionary:  ["day" : dayCount, "start_at" : s_time24, "end_at" : e_time24 ] )
+            self.daysModel.append(slot!)
         }
         
         
@@ -376,15 +506,15 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
             //            print("index=\(index+1)")
             var i = 0
             for item in self.daysModel{
-                if(item["day"] as? Int == index+1){
+                if(item.day == index+1){
                     self.daysModel.remove(at: i)
                 }
                 i+=1
             }
+    
             
-            self.daysModel.append( [ "day" :  index+1, "start_at" : s_time24, "end_at" : e_time24 ] )
-            
-            
+            let slot = Slot(dictionary: [ "day" :  index+1, "start_at" : s_time24, "end_at" : e_time24 ])
+            self.daysModel.append(slot!)
             let depStr = self.filterString(str: self.daysModel.description)
             
             

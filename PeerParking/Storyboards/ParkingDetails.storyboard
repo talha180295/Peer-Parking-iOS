@@ -906,8 +906,8 @@
                                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HSS-QO-dz4">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="359" height="36"/>
                                                                                                 <subviews>
-                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeB-pH-ip8">
-                                                                                                        <rect key="frame" x="10" y="5" width="67.333333333333329" height="21"/>
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Always" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VeB-pH-ip8">
+                                                                                                        <rect key="frame" x="10" y="5" width="54" height="21"/>
                                                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                                         <nil key="textColor"/>
@@ -1097,9 +1097,11 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="availableOnCard" destination="Nvr-1N-XLo" id="lw9-fp-ACB"/>
                         <outlet property="availableSwitch" destination="JM3-O8-GST" id="NKl-ZI-Q2D"/>
                         <outlet property="date" destination="i5B-ju-atw" id="jYf-Sn-jSQ"/>
                         <outlet property="image" destination="xlC-43-UPq" id="Qoh-bS-WzR"/>
+                        <outlet property="isAlwaysSwitch" destination="QXT-Pn-ZVc" id="jHi-m6-e9u"/>
                         <outlet property="location" destination="2hD-vB-0Bg" id="asp-cv-5bF"/>
                         <outlet property="negotiableSwitch" destination="eDs-Mq-h2K" id="Ruu-1B-Q7g"/>
                         <outlet property="parkingTitle" destination="Kbg-Kd-G35" id="kd4-Zj-zHe"/>
