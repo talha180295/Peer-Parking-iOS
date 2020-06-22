@@ -21,7 +21,7 @@ import Alamofire
 
 
 class BottomSheetVC: UIViewController {
-
+    
     @IBOutlet weak var offer_btn: UIButton!
     @IBOutlet weak var counter_btn: UIButton!
     
@@ -52,7 +52,7 @@ class BottomSheetVC: UIViewController {
     var parking_details:Parking!
     var lat:Double!
     var longg:Double!
-//    var distanceInMiles: String!
+    //    var distanceInMiles: String!
     
     var parkingId:Int?
     var buyerId:Int?
@@ -63,26 +63,26 @@ class BottomSheetVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setData()
     }
     override func viewWillLayoutSubviews() {
-         self.note.sizeToFit()
+        self.note.sizeToFit()
     }
-   
-  
+    
+    
     
     func setData(){
         
-       
-//        self.note.numberOfLines = 0
-//        [self.note sizeToFit]
+        
+        //        self.note.numberOfLines = 0
+        //        [self.note sizeToFit]
         
         
-//        self.note.sizeToFit()
+        //        self.note.sizeToFit()
         if(parking_details.parkingType == 10){
-                   
-           timeView.isHidden = true
+            
+            timeView.isHidden = true
         }
         else{
             self.st_time.text = "From: "
@@ -111,14 +111,14 @@ class BottomSheetVC: UIViewController {
         }
         else
         {
-        
+            
             let imgUrl = parking_details.imageURL
             photo.sd_setImage(with: URL(string: imgUrl ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
         }
         
         
         self.price.text = "$\(priceStr)"
-       
+        
         self.distance.text = String(format: "%.03f miles from destination", parking_details.distance ?? 0.0)
         
         let d_lat = Double(parking_details?.latitude ?? "") ?? 0.0
@@ -126,10 +126,10 @@ class BottomSheetVC: UIViewController {
         
         Helper().getTimeDurationBetweenCordinate(s_lat: self.lat, s_longg: self.longg, d_lat: d_lat, d_longg: d_long)
         { (duration) in
-        
+            
             self.duration.text = "\(duration)"
         }
-            
+        
         if parking_details.note == nil
         {
             self.note.text = ""
@@ -139,7 +139,7 @@ class BottomSheetVC: UIViewController {
             self.note.text = parking_details.note
         }
         
-      
+        
         self.parking_type.text = parking_details.parkingSubTypeText == "Drive" ? "Driveway" : parking_details.parkingSubTypeText
         
         self.viheicle_type.text = parking_details.vehicleTypeText
@@ -155,15 +155,158 @@ class BottomSheetVC: UIViewController {
         }
         
         
+        // checking either already a temp parking or not if parking is private parking
+        
+        print("already temp parking ? \(checkIsAlreadyTempParking())")
+        
+        
+        
+        if(checkIsAlreadyTempParking()){
+            
+            getTempParking(isChatOpen: false,id: self.parking_details.tempParkingID ?? -1)
+            
+        }
+        
+        
+        
         
     }
     override func viewWillAppear(_ animated: Bool) {
         
-         self.note.sizeToFit()
+        self.note.sizeToFit()
         NotificationCenter.default.addObserver(self, selector: #selector(self.accept_offer_tap(notification:)), name: NSNotification.Name(rawValue: "accept_offer"), object: nil)
         
         
     }
+    
+    
+    func checkIsAlreadyTempParking()->Bool{
+        
+        return self.parking_details.tempParkingID == 0 ? false : true
+        
+        
+    }
+    
+    func getTempParking(isChatOpen : Bool , id : Int){
+        
+        
+        
+        
+        getTempParkingServer(id: id) { (pModel) in
+            
+           
+            
+            if (pModel != nil)
+            {
+                
+                self.sTime = pModel.startAt ?? ""
+                self.fTime = pModel.endAt ?? ""
+                
+                
+                self.st_time.text = "From : \( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
+                self.end_time.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.fTime!))"
+                
+                if(isChatOpen)
+                {
+                    
+                    
+                    
+                    
+                    self.openChatScreen(model: pModel)
+                    
+                }
+                    
+                else
+                {
+                   
+                    self.parking_details.initialPrice = pModel.initialPrice ?? 0.0
+                }
+                
+            }
+           
+        }
+        
+        
+        
+    }
+    
+    func createTempParking(isTakeOffer : Bool)
+    {
+        
+        var model1 : Parking = cloneParking(parkingModel: self.parking_details)
+        
+        var seller : Seller = model1.seller!
+        
+        
+        model1.seller = nil
+        
+    }
+    
+    func cloneParking(parkingModel : Parking) -> Parking
+    {
+        
+        
+        let parking : Parking = parkingModel
+        
+        return parking
+        
+    }
+    
+    func openChatScreen(model : Parking){
+        
+        
+        let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
+               
+               vc.modalPresentationStyle = .fullScreen
+               
+               vc.parking_details = model
+               
+               self.present(vc, animated: true, completion: nil)
+    }
+    
+    func getTempParkingServer(id : Int   , completion: @escaping (Parking) -> Void){
+        
+        
+         Helper().showSpinner(view: self.view)
+        APIClient.serverRequest(url: APIRouter.getParkingsById(id: id), path: APIRouter.getParkingsById(id: id).getPath(), dec:
+            ResponseData<Parking>.self) { (response,error) in
+                
+            if(response != nil){
+                if (response?.success) != nil {
+                    //Helper().showToast(message: "Succes=\(success)", controller: self)
+                    if let val = response?.data {
+                        
+                        
+                        //                        print(val)
+                        
+                        Helper().hideSpinner(view: self.view)
+                        completion((response?.data ?? nil)! )
+                    }
+                }
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                    
+                      Helper().hideSpinner(view: self.view)
+                    completion((response?.data ?? nil)! )
+                }
+            }
+            else if(error != nil){
+                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+                  Helper().hideSpinner(view: self.view)
+                completion((response?.data ?? nil)! )
+            }
+            else{
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+                  Helper().hideSpinner(view: self.view)
+//                completion((response?.data ?? nil) ?? )
+            }
+            
+        }
+        
+        
+        
+    }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         
@@ -173,7 +316,7 @@ class BottomSheetVC: UIViewController {
     
     @objc func accept_offer_tap(notification: NSNotification) {
         
-       // self.offer_btn.setTitle("Go", for: .normal)
+        // self.offer_btn.setTitle("Go", for: .normal)
         
     }
     
@@ -191,7 +334,7 @@ class BottomSheetVC: UIViewController {
         let p_id = self.parking_details.id ?? 0
         let final_price = Double(self.parking_details.initialPrice ?? 0.0)
         let myId = UserDefaults.standard.integer(forKey: "id")
-            
+        
         
         if Helper().IsUserLogin(){
             
@@ -205,7 +348,7 @@ class BottomSheetVC: UIViewController {
             print(params)
             self.postBargainingOffer(params: params)
             
-//            self.dismiss(animated: true, completion: nil)
+            //            self.dismiss(animated: true, completion: nil)
             
             
         }
@@ -223,103 +366,106 @@ class BottomSheetVC: UIViewController {
             present(popupVC, animated: true)
             
         }
-
+        
     }
     
     func postBargainingOffer(params:[String:Any]){
         
-        APIClient.serverRequest(url: APIRouter.postBargainingOffer(params), path: "", dec: PostResponseData.self) { (response,error) in
-                   
-           if(response != nil){
-               if let success = response?.success {
-                
-//                let status = responseData["success"] as! Bool
-                
-                
-                let message = response?.message
-                Helper().showToast(message: message!, controller: self)
-                
-                Helper().popScreen(controller:self)
-              
-//                   if let val = response?.data {
-//
-//                   }
-               }
-               else{
-                   Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
-               }
-           }
-           else if(error != nil){
-               Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
-           }
-           else{
-               Helper().showToast(message: "Nor Response and Error!!", controller: self)
-           }
-           
+        APIClient.serverRequest(url: APIRouter.postBargainingOffer(params), path: APIRouter.postBargainingOffer(params).getPath(), dec: PostResponseData.self) { (response,error) in
+            
+            if(response != nil){
+                if let success = response?.success {
+                    
+                    //                let status = responseData["success"] as! Bool
+                    
+                    
+                    let message = response?.message
+                    Helper().showToast(message: message!, controller: self)
+                    
+                    Helper().popScreen(controller:self)
+                    
+                    //                   if let val = response?.data {
+                    //
+                    //                   }
+                }
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                }
+            }
+            else if(error != nil){
+                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+            }
+            else{
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
+            
         }
         
- 
+        
         
     }
     
     @IBAction func selectTimeBtn(_ sender: UIButton) {
-            
+        
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SliderTimerVC") as! SliderTimerVC
-
-//        self.navigationController?.pushViewController(vc, animated: true)
+        
+        //        self.navigationController?.pushViewController(vc, animated: true)
         vc.modalPresentationStyle = .fullScreen
         vc.parking_details = parking_details
         vc.delegate = self
         self.present(vc, animated: true,completion: nil)
-    
+        
     }
     
     @IBAction func counter_btn(_ sender: UIButton) {
         
         
-        if(self.sTime == nil || self.fTime == nil)
-        {
+        
+
+        
+        if(self.parking_details.parkingType == 10){
             
-            Helper().showToast(message: "Please select time", controller: self)
-            return
+            openChatScreen(model: self.parking_details)
+            
+        }
+        else
+        {
+            if(checkIsAlreadyTempParking()){
+                getTempParking(isChatOpen: true , id: self.parking_details.tempParkingID ?? -1)
+            }
+            else
+            {
+                createTempParking(isTakeOffer: false)
+            }
         }
         
         
-   
-        
-        
-       
         
         
         
         
-        let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
         
-        vc.modalPresentationStyle = .fullScreen
+        self.getTempParking(isChatOpen: true,id: self.parking_details.tempParkingID ?? -1)
         
-         vc.parking_details = self.parking_details
-        
-        self.present(vc, animated: true, completion: nil)
-        
-//        self.navigationController!.pushViewController(vc, animated: true)
-         
-       
-//        controller?.p_title = self.parking_titile.text!
-       
+        //        self.navigationController!.pushViewController(vc, animated: true)
         
         
-//        bottomSheet(controller: vc, sizes: [.fixed(540)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
+        //        controller?.p_title = self.parking_titile.text!
         
-    
+        
+        
+        //        bottomSheet(controller: vc, sizes: [.fixed(540)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
+        
+        
     }
     
     @IBAction func mapViewBtn(_ sender: UIButton) {
-            
+        
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewVC") as! MapViewVC
         var arr = [Parking]()
         arr.append(self.parking_details)
         vc.parkingDetails = arr
-//        controller?.p_title = self.parking_titile.text!
+        //        controller?.p_title = self.parking_titile.text!
         self.present(vc, animated: true, completion: nil)
         
         
@@ -345,7 +491,7 @@ class BottomSheetVC: UIViewController {
     
     func assign_buyer(p_id:Int,status:Int,final_price:Double){
         
-       // let status:Int = 20
+        // let status:Int = 20
         
         let params:[String:Any] = [
             
@@ -412,18 +558,18 @@ class BottomSheetVC: UIViewController {
             }
         }
     }
-  
+    
 }
 
 extension BottomSheetVC:OnTimeSelectDelegate{
-   
+    
     func timeSelect(startigTime: String, endingTime: String){
-//
-//        var times : [String] = []
-//        times[0] = startigTime
-//        times[1] = endingTime
-//
-//        return times
+        //
+        //        var times : [String] = []
+        //        times[0] = startigTime
+        //        times[1] = endingTime
+        //
+        //        return times
         
         sTime = startigTime
         fTime = endingTime
