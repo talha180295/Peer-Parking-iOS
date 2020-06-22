@@ -163,7 +163,7 @@ class BottomSheetVC: UIViewController {
         
         if(checkIsAlreadyTempParking()){
             
-            getTempParking(isChatOpen: false)
+            getTempParking(isChatOpen: false,id: self.parking_details.tempParkingID ?? -1)
             
         }
         
@@ -187,12 +187,12 @@ class BottomSheetVC: UIViewController {
         
     }
     
-    func getTempParking(isChatOpen : Bool){
+    func getTempParking(isChatOpen : Bool , id : Int){
         
         
         
         
-        getTempParkingServer(id: self.parking_details.tempParkingID ?? -1) { (pModel) in
+        getTempParkingServer(id: id) { (pModel) in
             
            
             
@@ -205,13 +205,6 @@ class BottomSheetVC: UIViewController {
                 
                 self.st_time.text = "From : \( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
                 self.end_time.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.fTime!))"
-                
-               
-                
-                
-                
-                
-                
                 
                 if(isChatOpen)
                 {
@@ -240,25 +233,12 @@ class BottomSheetVC: UIViewController {
     func createTempParking(isTakeOffer : Bool)
     {
         
-        
-        
-       
-        
         var model1 : Parking = cloneParking(parkingModel: self.parking_details)
         
         var seller : Seller = model1.seller!
         
         
         model1.seller = nil
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
     }
     
@@ -284,15 +264,13 @@ class BottomSheetVC: UIViewController {
                self.present(vc, animated: true, completion: nil)
     }
     
-    func getTempParkingServer(id : Int?   , completion: @escaping (Parking) -> Void){
+    func getTempParkingServer(id : Int   , completion: @escaping (Parking) -> Void){
         
         
          Helper().showSpinner(view: self.view)
-        APIClient.serverRequest(url: APIRouter.getParkingsById(id: parking_details.tempParkingID ?? -1), dec: ResponseData<Parking>.self) { (response,error) in
-            
-            
-           
-            
+        APIClient.serverRequest(url: APIRouter.getParkingsById(id: id), path: APIRouter.getParkingsById(id: id).getPath(), dec:
+            ResponseData<Parking>.self) { (response,error) in
+                
             if(response != nil){
                 if (response?.success) != nil {
                     //Helper().showToast(message: "Succes=\(success)", controller: self)
@@ -393,7 +371,7 @@ class BottomSheetVC: UIViewController {
     
     func postBargainingOffer(params:[String:Any]){
         
-        APIClient.serverRequest(url: APIRouter.postBargainingOffer(params), dec: PostResponseData.self) { (response,error) in
+        APIClient.serverRequest(url: APIRouter.postBargainingOffer(params), path: APIRouter.postBargainingOffer(params).getPath(), dec: PostResponseData.self) { (response,error) in
             
             if(response != nil){
                 if let success = response?.success {
@@ -453,7 +431,7 @@ class BottomSheetVC: UIViewController {
         else
         {
             if(checkIsAlreadyTempParking()){
-                getTempParking(isChatOpen: true )
+                getTempParking(isChatOpen: true , id: self.parking_details.tempParkingID ?? -1)
             }
             else
             {
@@ -467,7 +445,7 @@ class BottomSheetVC: UIViewController {
         
         
         
-        self.getTempParking(isChatOpen: true)
+        self.getTempParking(isChatOpen: true,id: self.parking_details.tempParkingID ?? -1)
         
         //        self.navigationController!.pushViewController(vc, animated: true)
         

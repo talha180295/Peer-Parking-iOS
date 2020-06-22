@@ -35,6 +35,8 @@ struct Parking: Codable {
     var tempParkingID:Int?
     var isAlways:Bool?
     
+    
+    
     enum CodingKeys: String, CodingKey {
         case id
         case title
@@ -66,6 +68,7 @@ struct Parking: Codable {
         case parkingTypeText = "parking_type_text"
         case seller, buyer , slots
         case isAlways = "is_always"
+        case tempParkingID = "temp_parking_id"
     }
 }
 
