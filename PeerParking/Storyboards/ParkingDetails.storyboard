@@ -1390,6 +1390,36 @@
             </objects>
             <point key="canvasLocation" x="6792.8000000000002" y="-339.58020989505252"/>
         </scene>
+        <!--Private Parking Booking ListVC-->
+        <scene sceneID="iE4-Nr-y2q">
+            <objects>
+                <viewController storyboardIdentifier="PrivateParkingBookingListVC" id="ScT-w1-hrM" customClass="PrivateParkingBookingListVC" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yQ7-V9-hWr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yoX-Gu-CJv">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Hcs-Sg-cdx" firstAttribute="trailing" secondItem="yoX-Gu-CJv" secondAttribute="trailing" id="Exp-Ir-IaC"/>
+                            <constraint firstItem="yoX-Gu-CJv" firstAttribute="leading" secondItem="Hcs-Sg-cdx" secondAttribute="leading" id="LZg-pn-pc5"/>
+                            <constraint firstItem="yoX-Gu-CJv" firstAttribute="top" secondItem="Hcs-Sg-cdx" secondAttribute="top" id="pKM-Pe-vHT"/>
+                            <constraint firstItem="Hcs-Sg-cdx" firstAttribute="bottom" secondItem="yoX-Gu-CJv" secondAttribute="bottom" id="pNP-jG-ReI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Hcs-Sg-cdx"/>
+                    </view>
+                    <connections>
+                        <outlet property="bookingsTblView" destination="yoX-Gu-CJv" id="keb-GC-mxD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X8t-CQ-N6M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7724" y="-348"/>
+        </scene>
     </scenes>
     <resources>
         <image name="back_btn" width="12" height="20.5"/>

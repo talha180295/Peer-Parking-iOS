@@ -117,6 +117,8 @@ extension MyPrivateSpotsVC: UITableViewDelegate,UITableViewDataSource{
         
         let vc = MySpotsDetailBS.instantiate(fromPeerParkingStoryboard: .Main)
         vc.privateParkingModel = self.privateSpotModel[indexPath.row]
+        vc.navigator = self.navigationController
+//        self.navigationController?.pushViewController(vc, animated: true)
         Helper().bottomSheet(controller: vc, sizes: [.fixed(120)], cornerRadius: 0, handleColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0), view_controller: self)
     }
 }

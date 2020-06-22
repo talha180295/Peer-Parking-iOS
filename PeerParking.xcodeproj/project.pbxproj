@@ -101,6 +101,9 @@
 		18F27A3224801FB400BC7D79 /* QuickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F27A3124801FB400BC7D79 /* QuickPopup.swift */; };
 		18F8118A23D87DAD00B3061F /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8118923D87DAD00B3061F /* PaymentView.swift */; };
 		67104A31249BBA55008DA0EF /* ParkingBookingDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67104A30249BBA55008DA0EF /* ParkingBookingDetailsVC.swift */; };
+		6795ED7324A0CDEC00FD57F8 /* PrivateParkingBookingListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6795ED7224A0CDEC00FD57F8 /* PrivateParkingBookingListVC.swift */; };
+		6795ED7624A0CF8000FD57F8 /* PrivateBookingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6795ED7424A0CF8000FD57F8 /* PrivateBookingsCell.swift */; };
+		6795ED7724A0CF8000FD57F8 /* PrivateBookingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6795ED7524A0CF8000FD57F8 /* PrivateBookingsCell.xib */; };
 		67BC7B9623CC53B6001542D6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9523CC53B6001542D6 /* LoginViewController.swift */; };
 		67BC7B9823CC53CB001542D6 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9723CC53CA001542D6 /* RegistrationViewController.swift */; };
 		67BC7B9A23CC5D64001542D6 /* ForgetPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC7B9923CC5D64001542D6 /* ForgetPassViewController.swift */; };
@@ -296,6 +299,9 @@
 		18F8118923D87DAD00B3061F /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67104A30249BBA55008DA0EF /* ParkingBookingDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingBookingDetailsVC.swift; sourceTree = "<group>"; };
+		6795ED7224A0CDEC00FD57F8 /* PrivateParkingBookingListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateParkingBookingListVC.swift; sourceTree = "<group>"; };
+		6795ED7424A0CF8000FD57F8 /* PrivateBookingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateBookingsCell.swift; sourceTree = "<group>"; };
+		6795ED7524A0CF8000FD57F8 /* PrivateBookingsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrivateBookingsCell.xib; sourceTree = "<group>"; };
 		67BC7B9523CC53B6001542D6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		67BC7B9723CC53CA001542D6 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		67BC7B9923CC5D64001542D6 /* ForgetPassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPassViewController.swift; sourceTree = "<group>"; };
@@ -430,6 +436,8 @@
 				18253CD92492428B0046EAE0 /* chatTextCell.xib */,
 				187B5C9B2492B2A200C7E8D9 /* chatOfferCell.swift */,
 				187B5C9C2492B2A200C7E8D9 /* chatOfferCell.xib */,
+				6795ED7424A0CF8000FD57F8 /* PrivateBookingsCell.swift */,
+				6795ED7524A0CF8000FD57F8 /* PrivateBookingsCell.xib */,
 			);
 			path = "Table View Cell";
 			sourceTree = "<group>";
@@ -499,6 +507,7 @@
 		183DAA3C23E070300022BC6E /* Parkings */ = {
 			isa = PBXGroup;
 			children = (
+				6795ED7124A0CDB800FD57F8 /* PrivateParkingBookingList */,
 				67F33258249BCC54000EFDC7 /* ParkingBookingDetails */,
 				18140319242CF343007AEA58 /* My Spots */,
 				183DAA3D23E0704B0022BC6E /* ParkingsVC.swift */,
@@ -655,6 +664,14 @@
 				BACE3107569777F337087DF8 /* Pods-PeerParkingUITests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		6795ED7124A0CDB800FD57F8 /* PrivateParkingBookingList */ = {
+			isa = PBXGroup;
+			children = (
+				6795ED7224A0CDEC00FD57F8 /* PrivateParkingBookingListVC.swift */,
+			);
+			path = PrivateParkingBookingList;
 			sourceTree = "<group>";
 		};
 		67BC7B9423CC5395001542D6 /* Registration */ = {
@@ -1134,6 +1151,7 @@
 				FA2815B7231E6602008AF3F5 /* Poppins-Black.ttf in Resources */,
 				187B5C9E2492B2A200C7E8D9 /* chatOfferCell.xib in Resources */,
 				FA6CD37A2328FFE600E18CF2 /* LoacationCell.xib in Resources */,
+				6795ED7724A0CF8000FD57F8 /* PrivateBookingsCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1368,6 +1386,7 @@
 				18F8118A23D87DAD00B3061F /* PaymentView.swift in Sources */,
 				1866BF5F237450A5008EE650 /* NotificationVC.swift in Sources */,
 				FA1150C52316838400D0B1FE /* AppDelegate.swift in Sources */,
+				6795ED7324A0CDEC00FD57F8 /* PrivateParkingBookingListVC.swift in Sources */,
 				185DE7A62360E2B300FC0E25 /* FeedbackVC.swift in Sources */,
 				FA6CD3672328C00900E18CF2 /* HistoryCell.swift in Sources */,
 				186F166023E9986F00DC988A /* ParkingFilterBS.swift in Sources */,
@@ -1384,6 +1403,7 @@
 				18F27A30247E4BF400BC7D79 /* MySpotParkingDetailVC.swift in Sources */,
 				181E0D1523CDF954005D7248 /* Bargaining.swift in Sources */,
 				FA6CD3802329122E00E18CF2 /* AlternateRouteViewController.swift in Sources */,
+				6795ED7624A0CF8000FD57F8 /* PrivateBookingsCell.swift in Sources */,
 				18A244632496D6A0001A5350 /* ChatVC.swift in Sources */,
 				FAEDCF1A231F9EFB0063EFC0 /* FindParkingViewController.swift in Sources */,
 				1841BED22428CE9E00B621AF /* UIView+Extension.swift in Sources */,

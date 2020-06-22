@@ -22,7 +22,7 @@ class MySpotParkingDetailVC : UIViewController{
     
     //Intent Variables
     private var parkingModel:Parking!
-    private var privateParkingModel:PrivateParkingModel!
+    private var privateParkingModel = PrivateParkingModel()
     var isPublicParking:Bool = false
     
     //Outlets
@@ -115,7 +115,7 @@ class MySpotParkingDetailVC : UIViewController{
             self.updatePublicParking()
         }
         else{
-            self.updatePrivateParking()
+            self.updatePrivateParking(data: self.privateParkingModel)
         }
         
     }
@@ -263,7 +263,7 @@ extension MySpotParkingDetailVC{
         }
     }
     
-    public func updatePrivateParking() {
+    public func updatePrivateParking(data:PrivateParkingModel) {
         
         print("availableSwitch=\(self.availableSwitch.isOn)")
         print("negotiableSwitch=\(self.negotiableSwitch.isOn)")
@@ -271,7 +271,7 @@ extension MySpotParkingDetailVC{
         print("day=\(self.daysModel)")
         
  
-        var park_model = self.privateParkingModel!
+        var park_model = data
         
         
         
@@ -284,7 +284,7 @@ extension MySpotParkingDetailVC{
         park_model.title = self.parkingTitle.text
         park_model.address = self.location.text
         park_model.isNegotiable = self.negotiableSwitch.isOn
-
+        park_model.slots = self.daysModel
         
 //        do{
 //            let data = try JSONEncoder().encode(park_model)
@@ -435,7 +435,7 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
             self.selectedItems.remove(at: index)
             
             self.daysModel.remove(at: index)
-//            self.seletedCounter -= 1
+            self.seletedCounter = 0
             
             
         }
@@ -452,7 +452,7 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
             let date1 = dateFormatter.date(from: s_dateAsString)
             let date2 = dateFormatter.date(from: e_dateAsString)
             
-            dateFormatter.dateFormat = "HH:mm"
+            dateFormatter.dateFormat = "HH:mm:ss"
             let s_time24 = dateFormatter.string(from: date1!)
             let e_time24 = dateFormatter.string(from: date2!)
             self.seletedCounter = 0
