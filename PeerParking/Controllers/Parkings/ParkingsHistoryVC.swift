@@ -34,7 +34,7 @@ class ParkingsHistoryVC: UIViewController,IndicatorInfoProvider {
     
     override func viewWillAppear(_ animated: Bool) {
         
-         NotificationCenter.default.addObserver(self, selector: #selector(self.getFilters(notification:)), name: NSNotification.Name(rawValue: "mode_filter"), object: nil)
+         NotificationCenter.default.addObserver(self, selector: #selector(self.getFilters(notification:)), name: NSNotification.Name(rawValue: "history_filter"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -61,7 +61,10 @@ class ParkingsHistoryVC: UIViewController,IndicatorInfoProvider {
 //                let params:[String:Any] = ["is_mine":1]
                 getHistoryParking(params: self.params)
             }
-         
+            if let is_mine = dict.value(forKey: "is_mine"){
+                let param = ["is_mine":is_mine]
+                getHistoryParking(params: param)
+            }
         }
     }
   
@@ -116,10 +119,10 @@ extension ParkingsHistoryVC: UITableViewDelegate,UITableViewDataSource{
         cell.address.text = self.parkingModel[indexPath.row].address ?? ""
         cell.price.text = "$\(self.parkingModel[indexPath.row].initialPrice ?? 0.0)"
         
-        if let parkingStatus = ParkingStatus(rawValue: self.parkingModel[indexPath.row].status ?? 0){
-                   
-            cell.status.text = "\(parkingStatus)"
-        }
+//        if let parkingStatus = ParkingStatus(rawValue: self.parkingModel[indexPath.row].status ?? 0){
+//
+//
+//        }
         if let action = Action(rawValue: self.parkingModel[indexPath.row].action ?? 0){
                                
                   cell.direction.text = "\(action)"
@@ -129,12 +132,26 @@ extension ParkingsHistoryVC: UITableViewDelegate,UITableViewDataSource{
 //                         cell.type.text = "\(type)"
 //        }
         
-        cell.type.text = self.parkingModel[indexPath.row].parkingTypeText ?? "-"
+        cell.status.text = Helper.getStatusText(status: self.parkingModel[indexPath.row].status ?? 0)
+        cell.parkingTitle.text = self.parkingModel[indexPath.row].title ?? "-"
+        cell.type.text = self.parkingModel[indexPath.row].parkingSubTypeText ?? "-"
         cell.availablity.text = "\(self.parkingModel[indexPath.row].startAt ?? "") - \(self.parkingModel[indexPath.row].endAt ?? "")"
         
         return cell
 
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let parking = parkingModel[indexPath.item]
+        
+        let vc = ParkingBookingDetailsVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
+        vc.setParingModel(parkingModel: parking)
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    
     
 }
 

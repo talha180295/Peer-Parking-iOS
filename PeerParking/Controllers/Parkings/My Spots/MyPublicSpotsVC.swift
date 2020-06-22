@@ -67,11 +67,12 @@ class MyPublicSpotsVC: UIViewController,IndicatorInfoProvider {
     
     func getMyPublicSpots(params:[String:Any]){
         
+        Helper().showSpinner(view: self.view)
         self.parkingModel.removeAll()
         self.publicSpotsParkingTbl.reloadData()
         
         APIClient.serverRequest(url: APIRouter.getParkings(params), path: APIRouter.getParkings(params).getPath(), dec: ResponseData<[Parking]>.self) { (response, error) in
-            
+            Helper().hideSpinner(view: self.view)
             if(response != nil){
                 if (response?.success) != nil {
 //                    Helper().showToast(message: response?.message ?? "-", controller: self)
@@ -134,6 +135,20 @@ extension MyPublicSpotsVC: UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
+        
+        let parking = parkingModel[indexPath.item]
+        let vc = MySpotParkingDetailVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
+        vc.setParingModel(parkingModel: parking)
+        vc.isPublicParking = true
+        vc.delegate = self
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true,completion: nil)
     }
     
+}
+
+extension MyPublicSpotsVC:MySpotParkingDetailVCDelegate{
+    func didBackButtonPressed() {
+        getMyPublicSpots(params: self.params)
+    }
 }

@@ -24,6 +24,7 @@ class ParkingBookingDetailsVC: UIViewController {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var number: UILabel!
     
+    @IBOutlet weak var btnCardView: CardView!
     @IBOutlet weak var navigateBtn: UIButton!
     @IBOutlet weak var parkNowBtn: UIButton!
     @IBOutlet weak var chatBtn: UIButton!
@@ -129,6 +130,7 @@ extension ParkingBookingDetailsVC{
         if (data.status == APP_CONSTANT.STATUS_PARKING_PARKED ||
             data.status == APP_CONSTANT.STATUS_PARKING_CANCEL ) {
             
+            self.btnCardView.isHidden = true
             self.navigateBtn.isHidden = true
             self.cancelBtn.isHidden = true
             self.chatBtn.isHidden = true

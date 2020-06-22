@@ -20,6 +20,8 @@ class ParkingFilterBS: UIViewController {
     @IBAction func showAllBtn(_ sender: UIButton) {
         
         NotificationCenter.default.post(name: Notification.Name("mode_filter"), object: nil, userInfo:["is_schedule" : 10] )
+        NotificationCenter.default.post(name: Notification.Name("history_filter"), object: nil, userInfo:["is_mine" : 10] )
+        
         
         self.dismiss(animated: false)
     }
@@ -27,6 +29,7 @@ class ParkingFilterBS: UIViewController {
     @IBAction func showPostedBtn(_ sender: UIButton) {
         
         NotificationCenter.default.post(name: Notification.Name("mode_filter"), object: nil, userInfo:["mode" : 10] )
+        NotificationCenter.default.post(name: Notification.Name("history_filter"), object: nil, userInfo:["mode" : 10] )
         
         self.dismiss(animated: false)
     }
@@ -34,7 +37,8 @@ class ParkingFilterBS: UIViewController {
     
     @IBAction func showBookedBtn(_ sender: UIButton) {
         
-       NotificationCenter.default.post(name: Notification.Name("mode_filter"), object: nil, userInfo:["mode" : 20] )
+        NotificationCenter.default.post(name: Notification.Name("mode_filter"), object: nil, userInfo:["mode" : 20] )
+        NotificationCenter.default.post(name: Notification.Name("history_filter"), object: nil, userInfo:["mode" : 20] )
         
         self.dismiss(animated: false)
     

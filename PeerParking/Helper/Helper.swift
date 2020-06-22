@@ -51,6 +51,24 @@ class Helper{
         view_controller.present(sheetController, animated: false, completion: nil)
     }
     
+    public static func getStatusText(status:Int) -> String{
+        switch (status){
+        case APP_CONSTANT.STATUS_PARKING_BOOKED:
+            return "In Progress";
+        case APP_CONSTANT.STATUS_PARKING_AVAILABLE:
+            return "Available";
+        case APP_CONSTANT.STATUS_PARKING_CANCEL:
+            return "Cancel";
+        case APP_CONSTANT.STATUS_PARKING_UNAVAILABLE:
+            return "Unavaiable";
+        case APP_CONSTANT.STATUS_PARKING_NAVIGATING:
+            return "Navigating";
+        case  APP_CONSTANT.STATUS_PARKING_PARKED:
+            return "Completed";
+        default:
+            return ""
+        }
+    }
     func getCurrentUserId() -> Int{
         
         let myId = UserDefaults.standard.integer(forKey: "id")

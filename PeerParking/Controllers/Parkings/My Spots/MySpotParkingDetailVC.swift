@@ -101,11 +101,7 @@ class MySpotParkingDetailVC : UIViewController{
     
     @IBAction func backAction(_ sender: Any) {
         
-        self.dismiss(animated: true){
-            if self.isPublicParking{
-                self.delegate.didBackButtonPressed()
-            }
-        }
+        self.dismiss(animated: true)
         
     }
     
