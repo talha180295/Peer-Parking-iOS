@@ -67,6 +67,8 @@
 		1866BF642374617B008EE650 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1866BF632374617B008EE650 /* RequestCell.swift */; };
 		1866BF6623746402008EE650 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1866BF6523746402008EE650 /* Helper.swift */; };
 		1866BF68237468A8008EE650 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1866BF67237468A8008EE650 /* NotificationCell.xib */; };
+		186AEB6324A15D6500C4EBE3 /* FirebaseRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186AEB6224A15D6500C4EBE3 /* FirebaseRequestModel.swift */; };
+		186AEB6524A23FE100C4EBE3 /* BuyerTakeOfferModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186AEB6424A23FE100C4EBE3 /* BuyerTakeOfferModel.swift */; };
 		186F166023E9986F00DC988A /* ParkingFilterBS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186F165F23E9986F00DC988A /* ParkingFilterBS.swift */; };
 		1878C528240E922D005F675E /* MapViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1878C527240E922D005F675E /* MapViewVC.swift */; };
 		187B5C9D2492B2A200C7E8D9 /* chatOfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187B5C9B2492B2A200C7E8D9 /* chatOfferCell.swift */; };
@@ -263,6 +265,8 @@
 		1866BF632374617B008EE650 /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
 		1866BF6523746402008EE650 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		1866BF67237468A8008EE650 /* NotificationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
+		186AEB6224A15D6500C4EBE3 /* FirebaseRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRequestModel.swift; sourceTree = "<group>"; };
+		186AEB6424A23FE100C4EBE3 /* BuyerTakeOfferModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerTakeOfferModel.swift; sourceTree = "<group>"; };
 		186F165F23E9986F00DC988A /* ParkingFilterBS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingFilterBS.swift; sourceTree = "<group>"; };
 		1878C527240E922D005F675E /* MapViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewVC.swift; sourceTree = "<group>"; };
 		187B5C9B2492B2A200C7E8D9 /* chatOfferCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatOfferCell.swift; sourceTree = "<group>"; };
@@ -713,6 +717,8 @@
 			children = (
 				BC072886249ECB7E00CBDE62 /* BuyerParkingSendingModel.swift */,
 				BC97A7FD249FEA990059FAF6 /* UpdateParkingSendingModel.swift */,
+				186AEB6224A15D6500C4EBE3 /* FirebaseRequestModel.swift */,
+				186AEB6424A23FE100C4EBE3 /* BuyerTakeOfferModel.swift */,
 			);
 			path = RequestModel;
 			sourceTree = "<group>";
@@ -1344,6 +1350,7 @@
 				FA6CD3732328F1C900E18CF2 /* ListParkingViewController.swift in Sources */,
 				18CAA58123695B62001B5503 /* ImageStepVC.swift in Sources */,
 				181E0D1423CDF954005D7248 /* JSONSchemaSupport.swift in Sources */,
+				186AEB6324A15D6500C4EBE3 /* FirebaseRequestModel.swift in Sources */,
 				67BC7B9623CC53B6001542D6 /* LoginViewController.swift in Sources */,
 				18916D1A241917A000E408BB /* SellParkingContainer.swift in Sources */,
 				FA10FF28232BCD620023C31C /* ParkedViewController.swift in Sources */,
@@ -1432,6 +1439,7 @@
 				181E0D1F23CE0400005D7248 /* RefreshTokenModel.swift in Sources */,
 				18140316242C9457007AEA58 /* BarViewController.swift in Sources */,
 				1812701E23DF32C500337D01 /* Me.swift in Sources */,
+				186AEB6524A23FE100C4EBE3 /* BuyerTakeOfferModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

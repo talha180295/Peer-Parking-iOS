@@ -95,7 +95,7 @@ class BottomSheetVC: UIViewController {
             counter_btn.isHidden = false
         }
         else{
-            counter_btn.isHidden = true
+            counter_btn.isHidden = false
         }
         self.parking_titile.text = parking_details.address
         
@@ -171,7 +171,11 @@ class BottomSheetVC: UIViewController {
         
         
     }
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
+        
         
         self.note.sizeToFit()
         NotificationCenter.default.addObserver(self, selector: #selector(self.accept_offer_tap(notification:)), name: NSNotification.Name(rawValue: "accept_offer"), object: nil)
@@ -230,6 +234,8 @@ class BottomSheetVC: UIViewController {
         
     }
     
+    
+    
     func createTempParking(isTakeOffer : Bool)
     {
         
@@ -282,7 +288,10 @@ class BottomSheetVC: UIViewController {
                         Helper().hideSpinner(view: self.view)
                         completion((response?.data ?? nil)! )
                     }
+                     Helper().hideSpinner(view: self.view)
                 }
+              
+                    
                 else{
                     Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
                     
@@ -327,8 +336,11 @@ class BottomSheetVC: UIViewController {
         if(self.sTime == nil || self.fTime == nil)
         {
             
+            
             Helper().showToast(message: "Please select time", controller: self)
             return
+            
+            
         }
         
         let p_id = self.parking_details.id ?? 0

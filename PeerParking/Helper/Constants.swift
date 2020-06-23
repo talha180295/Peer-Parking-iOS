@@ -128,6 +128,7 @@ struct APP_CONSTANT {
     public static let STATUS_PARKING_CANCEL     = 40;
     public static let STATUS_PARKING_UNAVAILABLE = 50;
     public static let STATUS_PARKING_NAVIGATING = 60;
+    public static let  STATUS_ACCEPTED = 10;
     public static let STATUS_PARKING_TEMP  =  70;
     
     public static let ONE_MINUTE_NOTIFICATION_FOR_PARKING = "ONE_MINUTE_NOTIFICATION_FOR_PARKING_";

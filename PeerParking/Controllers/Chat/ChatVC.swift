@@ -44,6 +44,8 @@ class ChatVC: UIViewController  {
         let MESSAGEOFFER = 10
         let STATUS_CHAT = 40
         let STATUS_COUNTER_OFFER = 30
+        let BARGAINING_MESSAGE_FROM_SELLER = "Seller has a message for you"
+        let BARGAINING_MESSAGE_FROM_BUYER = "Buyer has a message for you"
         
     }
     
@@ -63,6 +65,7 @@ class ChatVC: UIViewController  {
     
     var buyerMaxOffer : Double! = 0.0;
     var sellerMinOffer : Double! = 0.0;
+    var  amountInWallet = 0.0;
     
     
     
@@ -73,6 +76,11 @@ class ChatVC: UIViewController  {
     @IBOutlet weak var tv: UITableView!
     
     var chatRef : DatabaseReference!
+    var parkingBuyerModelReference : DatabaseReference!
+    var parkingReference : DatabaseReference!
+    var requestReference : DatabaseReference!
+    var sellerRequestIndexReference : DatabaseReference!
+    var buyerRequestIndexReference : DatabaseReference!
     
     var isScroll : Bool = true
     
@@ -83,6 +91,9 @@ class ChatVC: UIViewController  {
     
     
     var parking_details:Parking!
+    
+    var parkingId : Int = 0
+    var buyerId : Int = 0
     
     var buyerBargainingCount : Int = 0
     var sellerBargainingCount : Int = 0
@@ -115,6 +126,7 @@ class ChatVC: UIViewController  {
         
         
         
+        
         checkIamSeller = checkMeAsASeller() ? true : false
         
         
@@ -125,6 +137,9 @@ class ChatVC: UIViewController  {
         //        animated: true)
         
         setUserData()
+        
+        
+        
         setParkingData()
         initial()
         
@@ -154,12 +169,69 @@ class ChatVC: UIViewController  {
         
         makeReferences()
         loadChats()
+        getUpdatedWalletAmount()
+        
         
         
         
     }
+    
+    private func getUpdatedWalletAmount() {
+        
+        let url = APIRouter.me
+        let decoder = ResponseData<Me>.self
+        
+        Helper().showSpinner(view: self.view)
+        APIClient.serverRequest(url: url,path:url.getPath(), dec: decoder) { (response, error) in
+            
+            Helper().hideSpinner(view: self.view)
+            if(response != nil){
+                if (response?.success) != nil {
+                    //                    Helper().showToast(message: response?.message ?? "-", controller: self)
+                    if let val = response?.data {
+                        
+                        
+                        self.amountInWallet = val.details?.wallet ?? -1.0 //userModel.getUserDetails().getWallet();
+                        
+                    }
+                }
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                }
+            }
+            else if(error != nil){
+                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+            }
+            else{
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
+            
+            
+        }
+        
+        //        getBaseWebServices(true).postAPIAnyObject(WebServiceConstants.PATH_ME, "", new WebServices.IRequestWebResponseAnyObjectCallBack() {
+        //            @Override
+        //            public void requestDataResponse(WebResponse<Object> webResponse) {
+        //
+        //                UserModel userModel = new Gson().fromJson(new Gson().toJson(webResponse.result), UserModel.class);
+        //                amountInWallet = userModel.getUserDetails().getWallet();
+        //            }
+        //
+        //            @Override
+        //            public void onError(Object object) {
+        //
+        //            }
+        //        });
+    }
     func setUserData(){
         
+        
+        
+        parkingId = parking_details.id ?? 0
+        buyerId = parking_details.buyerID ?? 0
+        
+        
+        //        amountInWallet = Helper().getUserWallet()
         
         if(checkIamSeller)
         {
@@ -205,28 +277,32 @@ class ChatVC: UIViewController  {
     }
     func setParkingData(){
         
-//        self.sTime = pModel.startAt ?? ""
-//        self.fTime = pModel.endAt ?? ""
-//        self.st_time.text = "From : \( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
-//                       self.end_time.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.fTime!))"
-//
+        //        self.sTime = pModel.startAt ?? ""
+        //        self.fTime = pModel.endAt ?? ""
+        //        self.st_time.text = "From : \( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
+        //                       self.end_time.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.fTime!))"
+        //
         
+        
+        if(parking_details.isNegotiable == false){
+            self.sandOfferButton.isHidden = true
+        }
         
         if( parking_details.startAt != nil)
         {
-           
+            
             self.parkingFromView.text = "From : \(Helper().getFormatedDateAndTime(dateStr: self.parking_details.startAt!))"
             
             
         }
         
         if( parking_details.endAt != nil)
-               {
-                  
-                   self.parkingToView.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.parking_details.endAt!))"
-                   
-                   
-               }
+        {
+            
+            self.parkingToView.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.parking_details.endAt!))"
+            
+            
+        }
         
         if(parking_details.initialPrice != nil)
         {
@@ -277,24 +353,13 @@ class ChatVC: UIViewController  {
         
         
         print("parking id \(String(parking_details.id!))")
-        //        print(String(parking_details.buyer.id!))
         
-        //        chatRef = Database.database().reference(withPath: "chat/").child(String(self.parking_details.id!)).child(String(self.parking_details.buyer!.id!))
-        
-        
-        if(checkIamSeller)
-        {
-            //            chatRef = Database.database().reference(withPath: "chat/").child(String(self.parking_details.id!)).child(String(self.parking_details.buyer!.id!))
-            chatRef = Database.database().reference(withPath: "chat/").child(String(536)).child(String(8))
-            
-        }
-            
-        else
-        {
-            //             chatRef = Database.database().reference(withPath: "chat/").child(String(self.parking_details.id!)).child(String(UserDefaults.standard.integer(forKey: "id")))
-            
-            chatRef = Database.database().reference(withPath: "chat/").child(String(536)).child(String(8))
-        }
+        chatRef = Database.database().reference(withPath: "chat/").child(String(parkingId)).child(String(buyerId))
+        parkingBuyerModelReference = Database.database().reference(withPath: "buyerModel/").child(String(buyerId))
+        parkingReference = Database.database().reference(withPath: "chat/").child(String(buyerId))
+        requestReference = Database.database().reference(withPath: "requests/").child(String(parkingId) + "-" + String(buyerId))
+        sellerRequestIndexReference = Database.database().reference(withPath: "sellerRequestsIndex/")
+        buyerRequestIndexReference = Database.database().reference(withPath: "buyerRequestsIndex/")
         
         
         
@@ -312,7 +377,7 @@ class ChatVC: UIViewController  {
             self.chatModelArray.removeAll()
             self.buyerBargainingCount = 0
             self.sellerBargainingCount = 0
-            self.sandOfferButton.isHidden = false
+            //            self.sandOfferButton.isHidden = false
             
             if let result = snapshot.children.allObjects as? [DataSnapshot] {
                 
@@ -374,7 +439,7 @@ class ChatVC: UIViewController  {
                 
             }
                 
-            else if (chatModel.direction == Constants.init().SELLER_TO_BUYER)
+            else
             {
                 sellerBargainingCount = sellerBargainingCount + 1
                 if (chatModel.offer! < sellerMinOffer || sellerMinOffer == 0) {
@@ -396,8 +461,8 @@ class ChatVC: UIViewController  {
         let UID :Int = UserDefaults.standard.integer(forKey: "id")
         
         
-        //        let id = self.parking_details.sellerID
-        let id = 44
+        //               let id = self.parking_details.sellerID
+        let id = 60
         return UID == id ? true :  false
         
         
@@ -431,6 +496,13 @@ class ChatVC: UIViewController  {
             let offerVal:Double = Double(self.offer)!
             if(self.isOfferValid(offer: offerVal))
             {
+                
+                if (self.amountInWallet <= 0) {
+                    
+                    Helper().showToast(message: "Insufficient amount in wallet", controller: self)
+                    return
+                }
+                
                 let alert = UIAlertController(title: "Are you sure you want to offer $ \(self.offer!) ?", message: "Message", preferredStyle: .alert)
                 
                 
@@ -632,13 +704,72 @@ class ChatVC: UIViewController  {
         do {
             
             
+            
             let dict = try! FirebaseEncoder().encode(chatModel)
             //          let object =  try DictionaryDecoder().decode(ChatModel.self, from: chatModel)
-            self.chatRef.child(messageKey).setValue(dict)
+            self.chatRef.child(messageKey).setValue(dict,withCompletionBlock:{ (error, ref) -> Void in
+                
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                    
+                else
+                {
+                    
+                    var actionType = ""
+                    
+                    if(chatModel.messageType == Constants.init().MESSAGEOFFER)
+                    {
+                        
+                        actionType = self.checkIamSeller ?  Constants().BARGAINING_MESSAGE_FROM_SELLER : Constants().BARGAINING_MESSAGE_FROM_BUYER
+                        
+                        
+                    }
+                    else
+                    {
+                        actionType = self.checkIamSeller ?  Constants().BARGAINING_MESSAGE_FROM_BUYER : Constants().BARGAINING_MESSAGE_FROM_SELLER
+                    }
+                    
+                    
+                    var refId = String(self.parkingId) + "-" + String(self.buyerId)
+                    self.sendNotification(actionType: actionType, message: "new message", refId: refId)
+                    
+                    var firebaseRequestModel : FirebaseRequestModel = FirebaseRequestModel()
+                    
+                    firebaseRequestModel.parkingID = self.parkingId
+                    firebaseRequestModel.sellerID = self.parking_details.sellerID
+                    firebaseRequestModel.buyerID = self.buyerId
+                    firebaseRequestModel.lastMessage = chatModel
+                    firebaseRequestModel.parkingLocation = self.parking_details.address
+                    firebaseRequestModel.parkingStatus = self.parking_details.status
+                    
+                    
+                    let request_dict = try! FirebaseEncoder().encode(firebaseRequestModel)
+                    
+                    self.requestReference.setValue(request_dict)
+                    
+                    self.buyerRequestIndexReference.child(String(self.buyerId)).child(refId).setValue(chatModel.createdAt?.time)
+                    self.sellerRequestIndexReference.child(String(self.parking_details.sellerID!)).child(refId).setValue(chatModel.createdAt?.time)
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+            })
         } catch let error {
             print(error)
         }
         
+        
+    }
+    
+    func sendNotification(actionType : String , message : String , refId : String){
         
     }
     
@@ -662,19 +793,20 @@ class ChatVC: UIViewController  {
                 Helper().showToast(message: "Your new offer cannot be greater than previous.", controller: self)
                 return false;
             }
-            else
-            {
-                
-                if (offer < buyerMaxOffer) {
-                    Helper().showToast(message: "Your new offer cannot be less than previous.", controller: self)
-                    
-                    return false;
-                }
-                
-            }
             
             
         }
+        else
+        {
+            
+            if (offer < buyerMaxOffer) {
+                Helper().showToast(message: "Your new offer cannot be less than previous.", controller: self)
+                
+                return false;
+            }
+            
+        }
+        
         
         return true
         
@@ -805,18 +937,30 @@ extension ChatVC  : UITableViewDelegate,UITableViewDataSource  {
         {
             let  cell = tv.dequeueReusableCell(withIdentifier: "chatOfferCell") as! chatOfferCell
             
+            cell.index = indexPath.row
+            
+            
+            cell.delegate = self
+            
+            
+            if(chatModelArray[indexPath.row].offerStatus == 10){
+                self.sandOfferButton.isHidden = true
+            }
+            
+            
             if(checkIamSeller!)
             {
                 
                 if(  chatModelArray[indexPath.row].direction == Constants.init().SELLER_TO_BUYER ) {
-                  
-                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) , isRight: true)
+                    
+                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) , date: convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0)) , isRight: true,offerStatus: chatModelArray[indexPath.row].offerStatus!)
+                    
                     
                 }
                 else
                 {
-                   
-                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) , isRight: false)
+                    
+                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) , date: convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0)), isRight: false,offerStatus: chatModelArray[indexPath.row].offerStatus!)
                     
                 }
                 
@@ -828,14 +972,14 @@ extension ChatVC  : UITableViewDelegate,UITableViewDataSource  {
                 if(  chatModelArray[indexPath.row].direction == Constants.init().SELLER_TO_BUYER ) {
                     
                     
-                  
-                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) , isRight: false)
+                    
+                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) ,date: convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0)), isRight: false,offerStatus: chatModelArray[indexPath.row].offerStatus!)
                     
                 }
                 else
                 {
-                   
-                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) , isRight: true)
+                    
+                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) , date: convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0)) , isRight: true,offerStatus: chatModelArray[indexPath.row].offerStatus!)
                     
                 }
             }
@@ -852,101 +996,6 @@ extension ChatVC  : UITableViewDelegate,UITableViewDataSource  {
         
         
     }
-    //    {
-    //        //           let cell = tableView.dequeueReusableCell(withIdentifier: "DemoCell", for: indexPath)
-    //        //           cell.textLabel?.text = "row \(indexPath.row)"
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //        if(chatModelArray[indexPath.row].messageType == Constants.init().MESSAGETEXT)
-    //        {
-    //
-    //            let  cell = tv.dequeueReusableCell(withIdentifier: "chatTextCell") as! chatTextCell
-    //
-    //
-    //
-    //            cell.dateLabel.text = convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0))
-    //
-    //            cell.chatText.text = chatModelArray[indexPath.row].message
-    //
-    //            print("check seller \(checkIamSeller!)")
-    //
-    //
-    //            if(checkIamSeller!)
-    //            {
-    //
-    //
-    //                print("chat direction \(chatModelArray[indexPath.row].direction)")
-    //
-    //
-    //                cell.setLayout(
-    //
-    //                    chatModelArray[indexPath.row].direction == Constants.init().SELLER_TO_BUYER ? true : false
-    //                )
-    //
-    //
-    //
-    //            }
-    //            else
-    //            {
-    //
-    //
-    //                chatModelArray[indexPath.row].direction == Constants.init().SELLER_TO_BUYER ?
-    //                    cell.setLayout(false)
-    //                    :  cell.setLayout(true)
-    //
-    //
-    //            }
-    //            ////
-    //
-    //
-    //            return cell
-    //        }
-    //
-    //        else
-    //        {
-    //
-    //
-    //            let  cell = tv.dequeueReusableCell(withIdentifier: "chatOfferCell") as! chatOfferCell
-    //
-    //            cell.dateLabel.text = convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0))
-    //
-    //
-    //
-    //            if(checkIamSeller!)
-    //            {
-    //
-    //                cell.setOfferText(offer:  Int(chatModelArray[indexPath.row].offer ?? 0.0) , isRight:  chatModelArray[indexPath.row].direction == Constants.init().SELLER_TO_BUYER ? true : false)
-    //
-    //
-    //
-    //
-    //                cell.setLayout(chatModelArray[indexPath.row].direction == Constants.init().SELLER_TO_BUYER ? true : false)
-    //
-    //            }
-    //            else
-    //            {
-    //
-    //                cell.setLayout(chatModelArray[indexPath.row].direction == Constants.init().BUYER_TO_SELLER ? false : true)
-    //
-    //
-    //                cell.setOfferText(offer:  Int(chatModelArray[indexPath.row].offer ?? 0.0) , isRight:  chatModelArray[indexPath.row].direction == Constants.init().BUYER_TO_SELLER ? false : true)
-    //
-    //
-    //            }
-    //
-    //            return cell
-    //        }
-    //
-    //    }
-    
-    
     
     func convertTimestamp(timeStamp: Double) -> String {
         let x = timeStamp / 1000
@@ -1014,9 +1063,9 @@ extension ChatVC  : UITableViewDelegate,UITableViewDataSource  {
     
     func isOfferValid (offer : Double ) -> Bool {
         
-        
+        let val = Double(self.offer)!
         if(checkIamSeller){
-            let val = Double(self.offer)!
+            
             if(val < self.buyerMaxOffer)
             {
                 
@@ -1024,27 +1073,32 @@ extension ChatVC  : UITableViewDelegate,UITableViewDataSource  {
                 
                 return false
             }
-            else
+            
+            
+        }
+            
+        else
+        {
+            
+            if(self.sellerMinOffer == 0)
             {
-                if(val == 0){
+                if(val > self.parking_details.initialPrice!){
                     
-                    if(val > self.parking_details.initialPrice!){
-                        
-                        Helper().showToast(message: "You are offering more than the parking price", controller: self)
-                        
-                        return false
-                        
-                    }
-                    else if (val > self.sellerMinOffer){
-                        
-                        Helper().showToast(message: " You are offering more than the sellers last offer", controller: self)
-                        
-                        return false
-                        
-                    }
+                    Helper().showToast(message: "You are offering more than the parking price", controller: self)
+                    
+                    return false
                     
                 }
             }
+                
+            else if (val > self.sellerMinOffer){
+                
+                Helper().showToast(message: " You are offering more than the sellers last offer", controller: self)
+                
+                return false
+                
+            }
+            
             
         }
         
@@ -1054,6 +1108,153 @@ extension ChatVC  : UITableViewDelegate,UITableViewDataSource  {
     
     
 }
+
+extension ChatVC : chatOfferCellDelegate{
+    func acceptButton(index: Int) {
+        
+        
+        
+        
+        
+        if (!checkIamSeller && amountInWallet <= 0) {
+            
+            Helper().showToast(message: "Insufficient amount in wallet", controller: self)
+            
+            return;
+        }
+        
+        
+        var model : ChatModel = ChatModel()
+        
+        
+        model.offerStatus = APP_CONSTANT.STATUS_ACCEPTED
+        
+        let alert = UIAlertController(title: "Alert!", message: "Are you sure you want to accept offer of $ \(chatModelArray[index].offer)", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+            
+            self.assignBuyerApi(model : self.chatModelArray[index]);
+            
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        
+        
+        
+    }
+    
+    public func assignBuyerApi( model : ChatModel ) {
+        
+        
+        let buyerParkingSendingModel = BuyerTakeOfferModel.init(status: APP_CONSTANT.STATUS_PARKING_BOOKED, buyer_id: self.parking_details?.buyerID ?? -1, final_price: model.offer)
+        do{
+            let data = try JSONEncoder().encode(buyerParkingSendingModel)
+            
+            let request = APIRouter.assignBuyer(id: self.parking_details.id!, data)
+            APIClient.serverRequest(url: request, path: request.getPath(),body: buyerParkingSendingModel.dictionary ?? [:], dec: PostResponseData.self) { (response, error) in
+                
+                if(response != nil){
+                    if (response?.success) != nil {
+                        
+                        
+                        Helper().showToast(message: response?.message ?? "-", controller: self)
+                        
+                        
+                        var firebaseRequestModel : FirebaseRequestModel = FirebaseRequestModel()
+                        
+                        firebaseRequestModel.parkingID = self.parkingId
+                        firebaseRequestModel.sellerID = self.parking_details.sellerID
+                        firebaseRequestModel.buyerID = self.buyerId
+                        firebaseRequestModel.lastMessage = model
+                        firebaseRequestModel.parkingLocation = self.parking_details.address
+                        firebaseRequestModel.parkingStatus = self.parking_details.status
+                        
+                        
+                        let request_dict = try! FirebaseEncoder().encode(firebaseRequestModel)
+                        
+                        self.requestReference.setValue(request_dict)
+                        
+//                        var  messageKey : String = self.chatRef.childByAutoId().key!
+                        
+                        let dict = try! FirebaseEncoder().encode(model)
+                        //          let object =  try DictionaryDecoder().decode(ChatModel.self, from: chatModel)
+                        self.chatRef.child(model.id!).setValue(dict)
+                        
+                        self.parkingReference.child("buyer_id").setValue(self.parking_details.buyerID)
+                        self.parkingReference.child("status").setValue(APP_CONSTANT.STATUS_PARKING_BOOKED
+                            ,withCompletionBlock:{ (error, ref) -> Void in
+                                
+                                if let error = error {
+                                    print(error.localizedDescription)
+                                }
+                                else
+                                {
+                                    
+//                                    removeRequestsOfAllOtherBuyers(parkingModel1: model, buyersList: [String])
+                                    
+                                }
+                                
+                                
+                        })
+                        
+                        
+                    }
+                    else{
+                        Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                    }
+                }
+                else if(error != nil){
+                    Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+                }
+                else{
+                    Helper().showToast(message: "Nor Response and Error!!", controller: self)
+                }
+                
+                
+            }
+        }
+        catch let parsingError {
+            
+            print("Error", parsingError)
+            
+        }
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    public func removeRequestsOfAllOtherBuyers( parkingModel1 : Parking , buyersList: [String] ) {
+        //        \(parkingModel1.id) - \(parkingModel1.buyerID)
+        
+        
+        
+        buyersList.forEach { (buyerId) in
+            if(String(parkingModel1.buyerID ?? -1) == buyerId){
+                
+            }else{
+                Database.database().reference(withPath: "requests/").child("\(parkingModel1.id) - \(parkingModel1.buyerID)").removeValue()
+                
+                
+            }
+        }
+        
+        
+        
+    }
+    
+}
+
+
+
 
 extension Date {
     var millisecondsSince1970:Int64 {

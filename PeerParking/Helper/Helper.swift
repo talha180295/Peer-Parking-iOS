@@ -76,6 +76,12 @@ class Helper{
         return myId
     }
     
+    func getUserWallet() -> Double{
+        
+        let wallet = UserDefaults.standard.double(forKey: "wallet")
+        return wallet
+    }
+    
     func IsUserLogin() -> Bool {
         if ((UserDefaults.standard.object(forKey: "login")) == nil) {
             return false

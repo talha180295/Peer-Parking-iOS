@@ -287,6 +287,29 @@ class LoginViewController: UIViewController {
         {
             UserDefaults.standard.set("no", forKey: "isSocial")
         }
+        
+        if(!token_type.isEmpty)
+        {
+            UserDefaults.standard.set(token_type, forKey: "wallet")
+        }
+        else
+        {
+            UserDefaults.standard.set("", forKey: "wallet")
+        }
+        
+        let key = "wallet"
+        if detailUser[key] is NSNull {
+            
+            UserDefaults.standard.set("", forKey: key)
+        }
+        else
+        {
+            
+            let val = detailUser[key] as? Double
+            UserDefaults.standard.set(val, forKey: key)
+        }
+        
+        
         UserDefaults.standard.set(expires_in, forKey: "expires_in")
         UserDefaults.standard.set("yes", forKey: "login")
         UserDefaults.standard.set("homeVC", forKey: "VC")
