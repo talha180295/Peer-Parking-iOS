@@ -48,11 +48,12 @@ class MyPrivateSpotsVC: UIViewController,IndicatorInfoProvider {
     
     func getMyPrivateSpots(params:[String:Any]){
         
+        Helper().showSpinner(view: self.view)
         self.privateSpotModel.removeAll()
         self.privateSpotsParkingTbl.reloadData()
         
         APIClient.serverRequest(url: APIRouter.getPrivateParkings(params), path: APIRouter.getPrivateParkings(params).getPath(), dec: ResponseData<[PrivateParkingModel]>.self) { (response, error) in
-            
+            Helper().hideSpinner(view: self.view)
             if(response != nil){
                 if (response?.success) != nil {
 //                    Helper().showToast(message: response?.message ?? "-", controller: self)

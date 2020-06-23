@@ -10,6 +10,12 @@ import UIKit
 
 class PrivateBookingsCell: UITableViewCell {
 
+    @IBOutlet weak var parkingTitle:UILabel!
+    @IBOutlet weak var address:UILabel!
+    @IBOutlet weak var availability:UILabel!
+    @IBOutlet weak var status:UILabel!
+    @IBOutlet weak var price:UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

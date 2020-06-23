@@ -33,6 +33,7 @@ class MySpotsDetailBS: UIViewController {
     
     @IBAction func showBookingsBtn(_ sender: UIButton) {
         let vc = PrivateParkingBookingListVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
+        vc.privateParkingModel = self.privateParkingModel
         vc.modalPresentationStyle = .fullScreen
         self.navigator?.pushViewController(vc, animated: true)
         self.dismiss(animated: false, completion: nil)

@@ -24,6 +24,7 @@ class ParkingBookingDetailsVC: UIViewController {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var number: UILabel!
     
+    @IBOutlet weak var btnCardView: CardView!
     @IBOutlet weak var navigateBtn: UIButton!
     @IBOutlet weak var parkNowBtn: UIButton!
     @IBOutlet weak var chatBtn: UIButton!
@@ -32,7 +33,7 @@ class ParkingBookingDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Parking Bookin Details"
+        self.title = "Parking Booking Details"
         self.setData(data: self.parkingModel)
     }
     
@@ -106,7 +107,7 @@ class ParkingBookingDetailsVC: UIViewController {
         
     }
     @IBAction func cancelBtnClick(_sender:UIButton){
-        //        showCancelParkingConfirmationDialog()
+        showCancelParkingConfirmationDialog()
     }
     
     
@@ -129,6 +130,7 @@ extension ParkingBookingDetailsVC{
         if (data.status == APP_CONSTANT.STATUS_PARKING_PARKED ||
             data.status == APP_CONSTANT.STATUS_PARKING_CANCEL ) {
             
+            self.btnCardView.isHidden = true
             self.navigateBtn.isHidden = true
             self.cancelBtn.isHidden = true
             self.chatBtn.isHidden = true
@@ -170,27 +172,84 @@ extension ParkingBookingDetailsVC{
     
     private func showCancelParkingConfirmationDialog() {
         
-        //        new AlertDialog.Builder(getContext()).
-        //        setTitle("Alert").
-        //        setMessage("Do you really want to cancel?").
-        //        setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-        //            @Override
-        //            public void onClick(DialogInterface dialog, int which) {
-        //            dialog.dismiss();
-        //            cancelBuyerParking();
-        //            }
-        //            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-        //            @Override
-        //            public void onClick(DialogInterface dialog, int which) {
-        //
-        //            dialog.dismiss();
-        //
-        //            }
-        //            }).
-        //        setCancelable(false).
-        //        show();
+        let alert = UIAlertController(title: "Alert!", message: "Do you really want to cancel?", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+            self.cancelBuyerParking()
+            
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+
     }
     
+    public func cancelBuyerParking() {
+        
+        if (self.parkingModel == nil) {
+            
+            return
+        }
+        var request:APIRouter!
+        
+        if (isSeller()) {
+            request = APIRouter.cancelSellerParking(id: self.parkingModel.id ?? -1)
+        } else {
+            request = APIRouter.cancelBuyerParking(id: self.parkingModel.id ?? -1)
+        }
+        
+        Helper().showSpinner(view: self.view)
+        
+        APIClient.serverRequest(url: request, path: request.getPath(),body:nil, dec: PostResponseData.self) { (response, error) in
+            Helper().hideSpinner(view: self.view)
+            if(response != nil){
+                if (response?.success) != nil {
+                    Helper().showToast(message: response?.message ?? "-", controller: self)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        Helper().presentOnMainScreens(controller: self, index: 0)
+                    }
+                    
+                }
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                }
+            }
+            else if(error != nil){
+                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+            }
+            else{
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
+            
+            
+        }
+        
+        
+//        getBaseWebServices(true).postAPIAnyObject(cancelUrl + parkingModel1.getId(), "", new WebServices.IRequestWebResponseAnyObjectCallBack() {
+//            @Override
+//            public void requestDataResponse(WebResponse<Object> webResponse) {
+//                if (webResponse.isSuccess()) {
+//                    FirebaseUtils.deleteChatAndRequests(parkingModel1);
+//                    getHomeActivity().setBackPressedListener(null);
+//                    Toast.makeText(getContext(), webResponse.message, Toast.LENGTH_LONG).show();
+//                    getHomeActivity().popStackTill(1);
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onError(Object object) {
+//
+//            }
+//        });
+    }
+    
+    private func isSeller() -> Bool{
+        return self.parkingModel != nil && self.parkingModel.sellerID == Helper().getCurrentUserId()
+    }
     private func setParkingStatus(status:Int) {
         
         //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());

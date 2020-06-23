@@ -24,6 +24,7 @@ enum APIRouter: URLRequestConvertible {
     case me
     case refresh
     case cancelSellerParking(id:Int)
+    case cancelBuyerParking(id:Int)
     case assignBuyer(id:Int,Data)
     case getTransactions([String:Any])
     case getPrivateParkings([String:Any])
@@ -40,7 +41,7 @@ enum APIRouter: URLRequestConvertible {
         case .getParkingsWithoutToken,.getParkings,.getParkingsById,.getBargainings,.getBargainingsById , .getTransactions ,.getPrivateParkings:
             return .get
             
-        case .postParking,.postBargainingOffer,.addUserCard,.me,.refresh, .cancelSellerParking, .assignBuyer, .updateParking:
+        case .postParking,.postBargainingOffer,.addUserCard,.me,.refresh, .cancelSellerParking, .assignBuyer, .updateParking, .cancelBuyerParking:
             return .post
             
         }
@@ -82,6 +83,9 @@ enum APIRouter: URLRequestConvertible {
             return "private-parkings"
         case .updateParking(let id, _):
             return "update-parking/\(id)"
+        case .cancelBuyerParking(let id):
+            return "cancel-buyer-parking/\(id)"
+           
             
         }
     }
@@ -118,8 +122,9 @@ enum APIRouter: URLRequestConvertible {
             return (params)
         case .getPrivateParkings(let params):
             return (params)
-        case .updateParking:
+        case .updateParking, .cancelBuyerParking:
             return nil
+            
             
         }
     }
@@ -130,7 +135,7 @@ enum APIRouter: URLRequestConvertible {
             
         case .assignBuyer, .updateParking:
             return .httpBody
-        case .getParkingsWithoutToken, .postParking ,.getParkings, .getParkingsById, .postBargainingOffer, .addUserCard, .me, .refresh ,.cancelSellerParking ,.getBargainingsById ,.getTransactions ,.getPrivateParkings,.getBargainings:
+        case .getParkingsWithoutToken, .postParking ,.getParkings, .getParkingsById, .postBargainingOffer, .addUserCard, .me, .refresh ,.cancelSellerParking ,.getBargainingsById ,.getTransactions ,.getPrivateParkings,.getBargainings ,.cancelBuyerParking:
             return .default
         }
     }
@@ -141,7 +146,7 @@ enum APIRouter: URLRequestConvertible {
             
         case .assignBuyer(_,let data), .updateParking(_,let data):
             return data
-        case .getParkingsWithoutToken, .postParking ,.getParkings, .getParkingsById, .postBargainingOffer, .addUserCard, .me, .refresh ,.cancelSellerParking ,.getBargainingsById ,.getTransactions ,.getPrivateParkings, .getBargainings:
+        case .getParkingsWithoutToken, .postParking ,.getParkings, .getParkingsById, .postBargainingOffer, .addUserCard, .me, .refresh ,.cancelSellerParking ,.getBargainingsById ,.getTransactions ,.getPrivateParkings, .getBargainings, .cancelBuyerParking:
             return nil
             
         }
