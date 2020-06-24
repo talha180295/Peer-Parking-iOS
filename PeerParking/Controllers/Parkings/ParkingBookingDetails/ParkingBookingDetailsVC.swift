@@ -274,7 +274,7 @@ extension ParkingBookingDetailsVC{
                             let vc = FeedbackVC.instantiate(fromPeerParkingStoryboard: .Main)
                             vc.parking_details = self.parkingModel
                             self.present(vc, animated: true)
-                            self.sendNotification(actionType: APP_CONSTANT.BUYER_REACHED, message: APP_CONSTANT.BUYER_REACHED_MESSAGE);
+                            self.sendNotification()
                             
                         }
                     }
@@ -297,51 +297,24 @@ extension ParkingBookingDetailsVC{
             print("Error", parsingError)
             
         }
-        //        getBaseWebServices(true).postAPIAnyObject(WebServiceConstants.ASSIGN_BUYER + parkingModel1.getId(), buyerParkingSendingModel.toString(), new WebServices.IRequestWebResponseAnyObjectCallBack() {
-        //        @Override
-        //        public void requestDataResponse(WebResponse<Object> webResponse) {
-        //
-        //        if (webResponse.isSuccess()) {
-        //        FirebaseUtils.deleteChatAndRequests(parkingModel1);
-        //        if (status == AppConstants.STATUS_PARKING_PARKED) {
-        //        parkingModel1.setStatus(AppConstants.STATUS_PARKING_NAVIGATING);
-        //        ((HomeActivity) getActivity()).popStackTill(1);
-        //        ((HomeActivity) getActivity()).addDockableFragment(ParkingFeedbackFragment.newInstance(parkingModel1), false);
-        //        sendNotification(AppConstants.BUYER_REACHED, AppConstants.BUYER_REACHED_MESSAGE);
-        //
-        //        }
-        //
-        //        }
-        //
-        //
-        //        }
-        //
-        //        @Override
-        //        public void onError(Object object) {
-        //
-        //        }
-        //        });
-        
-        
     }
     
-    private func sendNotification(actionType:String, message:String) {
-
-//        NotificationSendingModel model = new NotificationSendingModel();
-//        model.setRef_id(String.valueOf(parkingModel1.getId()));
-//        model.setReceiver_id(parkingModel1.getSellerId());
-//        model.setAction_type(actionType);
-//        model.setMessage(message);
-//
-//        getBaseWebServices(true).postAPIAnyObject(WebServiceConstants.PATH_SEND_NOTIFICATION, model.toString(), new WebServices.IRequestWebResponseAnyObjectCallBack() {
-//            @Override
-//            public void requestDataResponse(WebResponse<Object> webResponse) {
-//            }
-//
-//            @Override
-//            public void onError(Object object) {
-//
-//            }
-//        });
+    private func sendNotification() {
+        
+        var model:NotificationSendingModel = NotificationSendingModel()
+        model.refId = String(self.parkingModel.id ?? -1)
+        model.recieverId = Int(self.parkingModel.sellerID ?? -1)
+        model.actionType = APP_CONSTANT.BUYER_REACHED
+        model.message = APP_CONSTANT.BUYER_REACHED_MESSAGE
+ 
+        do{
+            let data = try JSONEncoder().encode(model)
+            Helper.customSendNotification(data: data, controller: self)
+        }
+        catch let parsingError {
+            
+            print("Parsing Error", parsingError)
+            
+        }
     }
 }

@@ -112,6 +112,7 @@
 		67F3325A249BCC86000EFDC7 /* ParkingBookingDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F33259249BCC86000EFDC7 /* ParkingBookingDetailsViewModel.swift */; };
 		A9D762387663A23BCCC8DF20 /* Pods_PeerParkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */; };
 		BC072887249ECB7E00CBDE62 /* BuyerParkingSendingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC072886249ECB7E00CBDE62 /* BuyerParkingSendingModel.swift */; };
+		BC28D59A24A3C923000F5B87 /* NotificationSendingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC28D59924A3C923000F5B87 /* NotificationSendingModel.swift */; };
 		BC514A9A2496D088003DF452 /* SellParking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC514A992496D087003DF452 /* SellParking.storyboard */; };
 		BC8511832490D84700D4B3BA /* PeerParkingStotyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */; };
 		BC8511862490D94300D4B3BA /* ParkingDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */; };
@@ -313,6 +314,7 @@
 		A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParkingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BACE3107569777F337087DF8 /* Pods-PeerParkingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingUITests.release.xcconfig"; path = "Target Support Files/Pods-PeerParkingUITests/Pods-PeerParkingUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BC072886249ECB7E00CBDE62 /* BuyerParkingSendingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerParkingSendingModel.swift; sourceTree = "<group>"; };
+		BC28D59924A3C923000F5B87 /* NotificationSendingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSendingModel.swift; sourceTree = "<group>"; };
 		BC514A992496D087003DF452 /* SellParking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SellParking.storyboard; sourceTree = "<group>"; };
 		BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerParkingStotyboards.swift; sourceTree = "<group>"; };
 		BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ParkingDetails.storyboard; sourceTree = "<group>"; };
@@ -713,6 +715,7 @@
 			children = (
 				BC072886249ECB7E00CBDE62 /* BuyerParkingSendingModel.swift */,
 				BC97A7FD249FEA990059FAF6 /* UpdateParkingSendingModel.swift */,
+				BC28D59924A3C923000F5B87 /* NotificationSendingModel.swift */,
 			);
 			path = RequestModel;
 			sourceTree = "<group>";
@@ -1400,6 +1403,7 @@
 				FA0FCC5F232250FE000FF52C /* WalletViewController.swift in Sources */,
 				FA0FCC612322510F000FF52C /* TransactionViewController.swift in Sources */,
 				181E0D1323CDF954005D7248 /* Card.swift in Sources */,
+				BC28D59A24A3C923000F5B87 /* NotificationSendingModel.swift in Sources */,
 				18F27A30247E4BF400BC7D79 /* MySpotParkingDetailVC.swift in Sources */,
 				181E0D1523CDF954005D7248 /* Bargaining.swift in Sources */,
 				FA6CD3802329122E00E18CF2 /* AlternateRouteViewController.swift in Sources */,
