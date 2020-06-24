@@ -16,6 +16,7 @@ import UIKit
 import SystemConfiguration
 import Alamofire
 import iProgressHUD
+import Firebase
 
 
 class Helper{
@@ -26,31 +27,31 @@ class Helper{
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
-
+        
         let formateDate = dateFormatter.date(from:dateStr)!
         dateFormatter.dateFormat = "dd/MM/yyyy" // Output Formated
-
-//        let date: Date? = dateFormatter.date(from: dateStr)
+        
+        //        let date: Date? = dateFormatter.date(from: dateStr)
         
         return dateFormatter.string(from: formateDate)
-    
+        
         
     }
     
     func getFormatedDateAndTime(dateStr:String) -> String{
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
-
-            let formateDate = dateFormatter.date(from:dateStr)!
-            dateFormatter.dateFormat = "MM/dd/yyyy h:mm a" // Output Formated
-
-    //        let date: Date? = dateFormatter.date(from: dateStr)
-            
-            return dateFormatter.string(from: formateDate)
         
-            
-        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+        
+        let formateDate = dateFormatter.date(from:dateStr) ?? Date()
+        dateFormatter.dateFormat = "MM/dd/yyyy h:mm a" // Output Formated
+        
+        //        let date: Date? = dateFormatter.date(from: dateStr)
+        
+        return dateFormatter.string(from: formateDate)
+        
+        
+    }
     
     
     
@@ -88,6 +89,21 @@ class Helper{
             return ""
         }
     }
+    
+    public static func removeRequestsOfAllOtherBuyers(parkingModel1 : Parking , buyersList : [String]){
+        
+        buyersList.forEach { (buyerId) in
+            
+            
+            if(String(parkingModel1.buyerID!) != buyerId ){
+                
+                Database.database().reference(withPath: "requests/").child(String(parkingModel1.id!) + "-" + String(buyerId)).removeValue()
+            }
+            
+        }
+        
+    }
+    
     func getCurrentUserId() -> Int{
         
         let myId = UserDefaults.standard.integer(forKey: "id")
@@ -143,7 +159,7 @@ class Helper{
             circle.position = position // Your CLLocationCoordinate2D  position
             circle.strokeWidth = 0.5;
             circle.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//            circle.title = "$15"
+            //            circle.title = "$15"
             circle.map = map_view; // Add it to the map
             
             
@@ -164,21 +180,21 @@ class Helper{
     
     func map_marker(lat:Double,longg:Double, map_view:GMSMapView, title:String){
         
-//        // I have taken a pin image which is a custom image
-//        let markerImage = UIImage(named: "radius_blue")!.withRenderingMode(.alwaysOriginal)
-//
-//        //creating a marker view
-//        let markerView = UIImageView(image: markerImage)
-//
-//        //        //changing the tint color of the image
-//        //        markerView.tintColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 0.4467572774)
-//
-//
-//        let position = CLLocationCoordinate2D(latitude: lat, longitude: longg)
-//        let marker = GMSMarker(position: position)
-//        marker.title = "marker"
-//        marker.iconView = markerView
-//        marker.map = map_view
+        //        // I have taken a pin image which is a custom image
+        //        let markerImage = UIImage(named: "radius_blue")!.withRenderingMode(.alwaysOriginal)
+        //
+        //        //creating a marker view
+        //        let markerView = UIImageView(image: markerImage)
+        //
+        //        //        //changing the tint color of the image
+        //        //        markerView.tintColor = #colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 0.4467572774)
+        //
+        //
+        //        let position = CLLocationCoordinate2D(latitude: lat, longitude: longg)
+        //        let marker = GMSMarker(position: position)
+        //        marker.title = "marker"
+        //        marker.iconView = markerView
+        //        marker.map = map_view
         
         
         let marker = GMSMarker()
@@ -201,7 +217,7 @@ class Helper{
         
         
         //comment this line if you don't wish to put a callout bubble
-//        map_view.selectedMarker = marker
+        //        map_view.selectedMarker = marker
         
         
     }
@@ -228,44 +244,44 @@ class Helper{
             
             
             let dict = data[n] //as! NSDictionary
-
+            
             let price = dict.initialPrice ?? 0.0
             let lat = Double(dict.latitude ?? "")
             let long = Double(dict.longitude  ?? "")
             print("dictABC=\(lat!)")
             print("dictABC=\(long!)")
             let marker = GMSMarker()
-        
+            
             // I have taken a pin image which is a custom image
             
-           
+            
             let markerImage =  drawText(text: "$\(price)" as NSString, inImage: UIImage(named: "price_marker")!.withRenderingMode(.alwaysOriginal))
-        
+            
             //creating a marker view
             let markerView = UIImageView(image: markerImage)
-        
+            
             //changing the tint color of the image
-//            markerView.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-        
+            //            markerView.tintColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+            
             let pos = CLLocationCoordinate2D(latitude: lat!-0.001, longitude: long!-0.001)
-        
-        
-//            let loc = CLLocationCoordinate2D(latitude: lat!, longitude: longg!)
-//            let newLoc = loc.locationWithBearing(bearing: 90.degreesToRadians, distanceMeters: 500.0, lat: lat!,longg: longg!)
-        
+            
+            
+            //            let loc = CLLocationCoordinate2D(latitude: lat!, longitude: longg!)
+            //            let newLoc = loc.locationWithBearing(bearing: 90.degreesToRadians, distanceMeters: 500.0, lat: lat!,longg: longg!)
+            
             
             let newLoc = pos.shift(byDistance: 500, azimuth: 0) // 100m to North
-        
+            
             marker.position = newLoc
-        
+            
             marker.iconView = markerView
-//            marker.title = "10$"
+            //            marker.title = "10$"
             //marker.snippet = "price"
             marker.map = map_view
-        
-        
+            
+            
             //comment this line if you don't wish to put a callout bubble
-//            map_view.selectedMarker = marker
+            //            map_view.selectedMarker = marker
         }
         
         
@@ -309,15 +325,15 @@ class Helper{
                 .responseJSON { response in
                     
                     
-//                    switch response.result {
-//                    case .success:
-//                        print(response)
-//                        completion(response)
-//                        break
-//                    case .failure(let error):
-//                        print(error)
-//                        completion(response)
-//                    }
+                    //                    switch response.result {
+                    //                    case .success:
+                    //                        print(response)
+                    //                        completion(response)
+                    //                        break
+                    //                    case .failure(let error):
+                    //                        print(error)
+                    //                        completion(response)
+                    //                    }
                     
                     
                     if response.data != nil {
@@ -655,18 +671,18 @@ class Helper{
                                     completion(response)
                                 }
                                 
-                            }.responseString { response in
-                                print(response.result.value as Any)
-                                switch(response.result) {
-                                case .success(_):
-                                    if let data = response.result.value{
-                                        print(data)
-                                    }
-                                    
-                                case .failure(_):
-                                    print(response.result.error as Any)
-                                    break
+                        }.responseString { response in
+                            print(response.result.value as Any)
+                            switch(response.result) {
+                            case .success(_):
+                                if let data = response.result.value{
+                                    print(data)
                                 }
+                                
+                            case .failure(_):
+                                print(response.result.error as Any)
+                                break
+                            }
                         }
                     }
                 }
@@ -739,18 +755,18 @@ class Helper{
                                     completion(response)
                                 }
                                 
-                            }.responseString { response in
-                                print(response.result.value as Any)
-                                switch(response.result) {
-                                case .success(_):
-                                    if let data = response.result.value{
-                                        print(data)
-                                    }
-                                    
-                                case .failure(_):
-                                    print(response.result.error as Any)
-                                    break
+                        }.responseString { response in
+                            print(response.result.value as Any)
+                            switch(response.result) {
+                            case .success(_):
+                                if let data = response.result.value{
+                                    print(data)
                                 }
+                                
+                            case .failure(_):
+                                print(response.result.error as Any)
+                                break
+                            }
                         }
                     }
                 }
@@ -784,33 +800,33 @@ class Helper{
         
         
         let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(s_lat),\(s_longg)&destination=\(d_lat),\(d_longg)&sensor=true&mode=driving&alternatives=true&key=\(Key.Google.placesKey)")!
-                 
-          print(url)
         
-          Alamofire.request(url).responseJSON { response in
-              
-               do{
-                     if let jsonData = response.data{
-                         let response = try JSONDecoder().decode(DirectionAPI.self, from:jsonData) //Decode JSON Response Data
-                        
-                        
-                        let routes = response.routes!
-
-                        duration = routes[0].legs?[0].duration?.text ?? ""
-
-                        completion(duration)
-                         
-                     }
-                 } catch let parsingError {
-                     print("Error", parsingError)
-//                      Helper().hideSpinner(view: self.view)
-                 }
-                                    
-              
-          }
+        print(url)
+        
+        Alamofire.request(url).responseJSON { response in
+            
+            do{
+                if let jsonData = response.data{
+                    let response = try JSONDecoder().decode(DirectionAPI.self, from:jsonData) //Decode JSON Response Data
+                    
+                    
+                    let routes = response.routes!
+                    
+                    duration = routes[0].legs?[0].duration?.text ?? ""
+                    
+                    completion(duration)
+                    
+                }
+            } catch let parsingError {
+                print("Error", parsingError)
+                //                      Helper().hideSpinner(view: self.view)
+            }
+            
+            
+        }
         
         
-       
+        
         
     }
     
@@ -890,7 +906,7 @@ class Helper{
         iprogress.indicatorStyle = .ballRotateChase
         iprogress.indicatorSize = 50
         iprogress.boxSize = 20
-
+        
         iprogress.indicatorView.startAnimating()
         
         iprogress.attachProgress(toView: view)
@@ -909,10 +925,10 @@ class Helper{
         
     }
     func registerCollectionCell(collectionView:UICollectionView,nibName:String,identifier:String){
-           
+        
         collectionView.register(UINib(nibName: nibName, bundle: nil), forCellWithReuseIdentifier: identifier)
-          
-       }
+        
+    }
     
     func getViewController(storyBoard:String, withIdentifier:String) ->UIViewController{
         
@@ -922,8 +938,8 @@ class Helper{
     
     func popScreen(controller: UIViewController){
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                            controller.dismiss(animated: true, completion: nil)
-                       })
+            controller.dismiss(animated: true, completion: nil)
+        })
     }
     
 }
@@ -974,7 +990,7 @@ extension CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: lat2 * 180 / Double.pi, longitude: lon2 * 180 / Double.pi)
     }
     
-
+    
     
     
 }

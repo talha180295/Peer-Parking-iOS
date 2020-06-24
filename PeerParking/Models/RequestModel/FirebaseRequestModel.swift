@@ -13,6 +13,7 @@ class FirebaseRequestModel: Codable {
     var parkingID: Int?
     var parkingLocation: String?
     var parkingStatus, sellerID: Int?
+    var parkingTitle : String!
 
     enum CodingKeys: String, CodingKey {
         case buyerID = "buyerId"
@@ -20,6 +21,7 @@ class FirebaseRequestModel: Codable {
         case parkingID = "parkingId"
         case parkingLocation, parkingStatus
         case sellerID = "sellerId"
+        case parkingTitle
     }
 
     

@@ -69,8 +69,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
     public var settings = ButtonBarPagerTabStripSettings()
 
     public var buttonBarItemSpec: ButtonBarItemSpec<ButtonBarViewCell>!
-
+    
     public var changeCurrentIndex: ((_ oldCell: ButtonBarViewCell?, _ newCell: ButtonBarViewCell?, _ animated: Bool) -> Void)?
+    
     public var changeCurrentIndexProgressive: ((_ oldCell: ButtonBarViewCell?, _ newCell: ButtonBarViewCell?, _ progressPercentage: CGFloat, _ changeCurrentIndex: Bool, _ animated: Bool) -> Void)?
 
     @IBOutlet public weak var buttonBarView: ButtonBarView!

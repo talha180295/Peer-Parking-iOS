@@ -22,7 +22,7 @@ class chatOfferCell: UITableViewCell {
         @IBOutlet weak var leftButtonView: UIView!
     @IBOutlet weak var leftOfferView: CardView!
     @IBOutlet weak var offerLabel: UILabel!
-    @IBOutlet weak var acceptButtonView: UIButton!
+    @IBOutlet weak var leftacceptButton: UIButton!
       @IBOutlet weak var dateLabel: UILabel!
     
     
@@ -156,7 +156,8 @@ class chatOfferCell: UITableViewCell {
                     if(offerStatus == 10) {
 
 
-                       leftButtonView.isHidden = true
+                       leftacceptButton.isHidden = true
+                        leftacceptButton.superview?.isHidden = true
                         
                                
                     }

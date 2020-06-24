@@ -67,7 +67,7 @@ class ChatVC: UIViewController  {
     var sellerMinOffer : Double! = 0.0;
     var  amountInWallet = 0.0;
     
-    
+    var buyersList : [String] = []
     
     
     
@@ -97,6 +97,8 @@ class ChatVC: UIViewController  {
     
     var buyerBargainingCount : Int = 0
     var sellerBargainingCount : Int = 0
+    
+    var parkingStatus : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,12 +171,16 @@ class ChatVC: UIViewController  {
         
         makeReferences()
         loadChats()
+        loadParking()
         getUpdatedWalletAmount()
         
         
         
         
+        
     }
+    
+    
     
     private func getUpdatedWalletAmount() {
         
@@ -356,7 +362,7 @@ class ChatVC: UIViewController  {
         
         chatRef = Database.database().reference(withPath: "chat/").child(String(parkingId)).child(String(buyerId))
         parkingBuyerModelReference = Database.database().reference(withPath: "buyerModel/").child(String(buyerId))
-        parkingReference = Database.database().reference(withPath: "chat/").child(String(buyerId))
+        parkingReference = Database.database().reference(withPath: "chat/").child(String(parking_details.id!))
         requestReference = Database.database().reference(withPath: "requests/").child(String(parkingId) + "-" + String(buyerId))
         sellerRequestIndexReference = Database.database().reference(withPath: "sellerRequestsIndex/")
         buyerRequestIndexReference = Database.database().reference(withPath: "buyerRequestsIndex/")
@@ -365,6 +371,60 @@ class ChatVC: UIViewController  {
         
         
         
+        
+    }
+    
+    func loadParking(){
+        
+        
+        self.parkingReference.observe(.value) { (snapshot) in
+            
+            if(snapshot.exists())
+            {
+                
+                
+                
+                if let snapDict = snapshot.value as? [String:AnyObject] {
+
+                    //here you can get data as string , int or anyway you want
+                     print("parking status \(snapDict["status"] )")
+                                   
+                    self.parkingStatus = snapDict["status"] as? Int ?? 0
+
+
+                }
+                
+                self.buyersList.removeAll()
+                
+                let enumerator = snapshot.children
+                                           
+                                           
+                                           
+                                           while let childSnapShot = enumerator.nextObject() as? DataSnapshot {
+                                               
+                                               guard let value = childSnapShot.value else { return }
+                                               do {
+                                                   
+                                                 if (value is Dictionary<AnyHashable,Any>)  {
+                                                     
+                                                    self.buyersList.append(childSnapShot.key)
+                                                     // obj is a string array. Do something with stringArray
+                                                 }
+                                                 else {
+                                                     // obj is not a string array
+                                                 }
+                                                 
+                                                   
+                                                   
+                                               } catch let error {
+                                                   print(error)
+                                               }
+                                           }
+               
+                
+                
+            }
+        }
         
     }
     
@@ -461,8 +521,8 @@ class ChatVC: UIViewController  {
         let UID :Int = UserDefaults.standard.integer(forKey: "id")
         
         
-        //               let id = self.parking_details.sellerID
-        let id = 60
+                  let id = self.parking_details.sellerID
+//        let id = 60
         return UID == id ? true :  false
         
         
@@ -740,6 +800,7 @@ class ChatVC: UIViewController  {
                     firebaseRequestModel.sellerID = self.parking_details.sellerID
                     firebaseRequestModel.buyerID = self.buyerId
                     firebaseRequestModel.lastMessage = chatModel
+                    firebaseRequestModel.parkingTitle = self.parking_details.title ?? ""
                     firebaseRequestModel.parkingLocation = self.parking_details.address
                     firebaseRequestModel.parkingStatus = self.parking_details.status
                     
@@ -943,8 +1004,18 @@ extension ChatVC  : UITableViewDelegate,UITableViewDataSource  {
             cell.delegate = self
             
             
+           
+            
+            
             if(chatModelArray[indexPath.row].offerStatus == 10){
+                
                 self.sandOfferButton.isHidden = true
+            }
+            if(self.parkingStatus == 20){
+
+                
+               cell.leftacceptButton.isEnabled = false
+                cell.leftacceptButton.isUserInteractionEnabled = false
             }
             
             
@@ -1129,7 +1200,7 @@ extension ChatVC : chatOfferCellDelegate{
         
         model.offerStatus = APP_CONSTANT.STATUS_ACCEPTED
         
-        let alert = UIAlertController(title: "Alert!", message: "Are you sure you want to accept offer of $ \(chatModelArray[index].offer)", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Alert!", message: "Are you sure you want to accept offer of $ \(chatModelArray[index].offer!)", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             alert.dismiss(animated: true, completion: nil)
@@ -1167,12 +1238,14 @@ extension ChatVC : chatOfferCellDelegate{
                         
                         var firebaseRequestModel : FirebaseRequestModel = FirebaseRequestModel()
                         
+                        model.offerStatus =  APP_CONSTANT.STATUS_ACCEPTED
                         firebaseRequestModel.parkingID = self.parkingId
+                        firebaseRequestModel.parkingTitle = self.parking_details.title ?? ""
                         firebaseRequestModel.sellerID = self.parking_details.sellerID
                         firebaseRequestModel.buyerID = self.buyerId
                         firebaseRequestModel.lastMessage = model
                         firebaseRequestModel.parkingLocation = self.parking_details.address
-                        firebaseRequestModel.parkingStatus = self.parking_details.status
+                        firebaseRequestModel.parkingStatus = APP_CONSTANT.STATUS_PARKING_BOOKED
                         
                         
                         let request_dict = try! FirebaseEncoder().encode(firebaseRequestModel)
@@ -1181,8 +1254,12 @@ extension ChatVC : chatOfferCellDelegate{
                         
 //                        var  messageKey : String = self.chatRef.childByAutoId().key!
                         
+                        model.offerStatus = APP_CONSTANT.STATUS_ACCEPTED
+                        
                         let dict = try! FirebaseEncoder().encode(model)
                         //          let object =  try DictionaryDecoder().decode(ChatModel.self, from: chatModel)
+                        
+                        
                         self.chatRef.child(model.id!).setValue(dict)
                         
                         self.parkingReference.child("buyer_id").setValue(self.parking_details.buyerID)
@@ -1195,6 +1272,8 @@ extension ChatVC : chatOfferCellDelegate{
                                 else
                                 {
                                     
+                                    
+                                    Helper.removeRequestsOfAllOtherBuyers(parkingModel1: self.parking_details, buyersList: self.buyersList)
 //                                    removeRequestsOfAllOtherBuyers(parkingModel1: model, buyersList: [String])
                                     
                                 }

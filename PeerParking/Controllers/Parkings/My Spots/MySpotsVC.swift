@@ -23,6 +23,7 @@ class MySpotsVC: ButtonBarPagerTabStripViewController {
         setupTopBar()
         
         super.viewDidLoad()
+    
     }
 
 
@@ -53,9 +54,6 @@ class MySpotsVC: ButtonBarPagerTabStripViewController {
       
         return [self.child_1, self.child_2]
     }
-
-            
-
-            
+          
 
 }

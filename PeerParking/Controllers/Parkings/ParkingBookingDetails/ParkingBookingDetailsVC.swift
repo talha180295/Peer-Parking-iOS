@@ -98,17 +98,25 @@ class ParkingBookingDetailsVC: UIViewController {
         //        });
     }
     @IBAction func chatBtnClick(_sender:UIButton){
-        //        Intent i = new Intent(getHomeActivity(), ChatActivity.class);
-        //        Gson gson = new Gson();
-        //        String parkingJson= gson.toJson(parkingModel1);
-        //        i.putExtra("parkingModel", parkingJson);
-        //        startActivity(i);
-        //        break;
+        openChatScreen(model:parkingModel)
+        
         
     }
     @IBAction func cancelBtnClick(_sender:UIButton){
         showCancelParkingConfirmationDialog()
     }
+    
+    func openChatScreen(model : Parking){
+           
+           
+           let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
+                  
+                  vc.modalPresentationStyle = .fullScreen
+                  
+                  vc.parking_details = model
+                  
+                  self.present(vc, animated: true, completion: nil)
+       }
     
     
 }

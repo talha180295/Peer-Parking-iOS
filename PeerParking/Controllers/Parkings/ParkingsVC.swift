@@ -30,6 +30,7 @@ class ParkingsVC: ButtonBarPagerTabStripViewController{
     func setupTopBar(){
         
         // change selected bar color
+        
         settings.style.buttonBarBackgroundColor = .lightGray
         settings.style.buttonBarItemBackgroundColor = .white
         settings.style.selectedBarBackgroundColor = blueInstagramColor!

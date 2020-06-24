@@ -11,13 +11,17 @@ import FittedSheets
 
 
 protocol ViewOfferProtocol {
-    func ViewOfferButtonDidSelect(index:Int)
+    func chatButtonSelectListner(index:Int)
+     func acceptButtonSelectListner(index:Int)
 }
 
 class RequestCell: UITableViewCell {
 
     var index:Int!
     
+    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var lastMessageView: UILabel!
+    @IBOutlet weak var parkingTitleView: UILabel!
     @IBOutlet weak private var date: UILabel!
     
     @IBOutlet weak private var address: UILabel!
@@ -27,6 +31,9 @@ class RequestCell: UITableViewCell {
     @IBOutlet weak private var price: UILabel!
     
     var delegate: ViewOfferProtocol!
+    
+    var SELLR_TO_BUYER = 10
+    var BUYER_TO_SELLER = 20
     
     
     override func awakeFromNib() {
@@ -40,48 +47,92 @@ class RequestCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func chatButtonAction(_ sender: Any) {
+        delegate.chatButtonSelectListner(index: self.index)
+    }
     
+    @IBAction func acceptButtonAction(_ sender: Any) {
+         self.delegate.acceptButtonSelectListner(index: self.index)
+        
+    }
     @IBAction func view_offer_btn(_ sender: UIButton) {
      
         
-        self.delegate.ViewOfferButtonDidSelect(index: self.index)
+        
     }
     
-    func setData(data:Bargaining){
+    func setData(requestsModel:FirebaseRequestModel , position : Int){
         
         
-        if let created_at = data.createdAt{
-            
-            let created_at = created_at.components(separatedBy: " ")
-            
-            let date = created_at[0]
-            self.date.text = date
-        }
+        self.index = position
         
-        if let direction = data.direction{
-            
-            if(direction == 10){
-                self.directionText.text = "has sent you a new offer"
-            }
-        }
+        acceptButton.isHidden = true
+        parkingTitleView.text = requestsModel.parkingTitle
+        address.text = requestsModel.parkingLocation
         
-        if let offer = data.offer{
-            
-           self.price.text = "$ \(offer)"
-        }
-        
-        
-        
-        
-        
-        if let parking = data.parking{
-            
-            if let p_address = parking.address{
-                
-                self.address.text = p_address
-            }
+        if(requestsModel.lastMessage?.messageType == 20)
+        {
+            lastMessageView.text = requestsModel.lastMessage?.message
             
         }
+        else
+        {
+            var currentUserId = Helper().getCurrentUserId()
+            
+            if(requestsModel.sellerID == currentUserId){
+                if(requestsModel.lastMessage?.offerStatus == APP_CONSTANT.STATUS_ACCEPTED){
+                    if(requestsModel.lastMessage?.direction == SELLR_TO_BUYER){
+                                lastMessageView.text = "Buyer accepted the offer of $ \(requestsModel.lastMessage!.offer!)"
+                               }else{
+                                
+                                 lastMessageView.text = "You accepted the offer of $ \(requestsModel.lastMessage!.offer!)"
+                                
+                                  
+                               }
+                           }else{
+
+                               if(requestsModel.lastMessage?.direction == SELLR_TO_BUYER){
+                                
+                                 lastMessageView.text = "You sent the offer of $ \(requestsModel.lastMessage!.offer!)"
+                                
+                                  
+                               }else{
+                                acceptButton.isHidden = false
+                                   lastMessageView.text = "Buyer sent the offer of $ \(requestsModel.lastMessage!.offer!)"
+                                  
+                               }
+                           }
+                       }else{
+                if(requestsModel.lastMessage?.offerStatus == APP_CONSTANT.STATUS_ACCEPTED){
+                    if(requestsModel.lastMessage?.direction == BUYER_TO_SELLER){
+                        
+                         lastMessageView.text = "Seller accepted the offer of $ \(requestsModel.lastMessage!.offer!)"
+                        
+                                  
+                               }else{
+                        
+                         lastMessageView.text = "You accepted the offer of $ \(requestsModel.lastMessage!.offer!)"
+                                  
+                               }
+                           }else{
+
+                               if(requestsModel.lastMessage?.direction == BUYER_TO_SELLER){
+                                
+                                 lastMessageView.text = "You sent the offer of $ \(requestsModel.lastMessage!.offer!)"
+                                
+                                  
+                               }else{
+                                  acceptButton.isHidden = false
+                                
+                                 lastMessageView.text = "Seller sent the offer of $ \(requestsModel.lastMessage!.offer!)"
+                                
+                                  
+                               }
+                           }
+                       }
+        }
+        
+        
         
         
        
