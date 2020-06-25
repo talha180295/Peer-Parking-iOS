@@ -29,6 +29,7 @@ enum APIRouter: URLRequestConvertible {
     case getTransactions([String:Any])
     case getPrivateParkings([String:Any])
     case updateParking(id:Int,Data)
+    case createTempParking(Data)
     case sendNotification(Data)
     
     private var accessToken:String{
@@ -42,7 +43,7 @@ enum APIRouter: URLRequestConvertible {
         case .getParkingsWithoutToken,.getParkings,.getParkingsById,.getBargainings,.getBargainingsById , .getTransactions ,.getPrivateParkings:
             return .get
             
-        case .postParking,.postBargainingOffer,.addUserCard,.me,.refresh, .cancelSellerParking, .assignBuyer, .updateParking, .cancelBuyerParking, .sendNotification:
+        case .postParking,.postBargainingOffer,.addUserCard,.me,.refresh, .cancelSellerParking, .assignBuyer, .updateParking, .cancelBuyerParking, .createTempParking, .sendNotification:
             return .post
             
         }
@@ -86,8 +87,12 @@ enum APIRouter: URLRequestConvertible {
             return "update-parking/\(id)"
         case .cancelBuyerParking(let id):
             return "cancel-buyer-parking/\(id)"
+        case .createTempParking(_):
+            return "parkings"
         case .sendNotification(_):
             return "send-notification"
+           
+            
         }
     }
     
@@ -123,7 +128,7 @@ enum APIRouter: URLRequestConvertible {
             return (params)
         case .getPrivateParkings(let params):
             return (params)
-        case .updateParking, .cancelBuyerParking, .sendNotification:
+        case .updateParking, .cancelBuyerParking, .createTempParking, .sendNotification:
             return nil
             
             
@@ -134,7 +139,7 @@ enum APIRouter: URLRequestConvertible {
     private var urlEncoding: URLEncoding {
         switch self {
             
-        case .assignBuyer, .updateParking, .sendNotification:
+        case .assignBuyer, .updateParking, .createTempParking, .sendNotification:
             return .httpBody
         case .getParkingsWithoutToken, .postParking ,.getParkings, .getParkingsById, .postBargainingOffer, .addUserCard, .me, .refresh ,.cancelSellerParking ,.getBargainingsById ,.getTransactions ,.getPrivateParkings,.getBargainings ,.cancelBuyerParking:
             return .default
@@ -145,7 +150,7 @@ enum APIRouter: URLRequestConvertible {
     private var body: Data? {
         switch self {
             
-        case .assignBuyer(_,let data), .updateParking(_,let data), .sendNotification(let data):
+        case .assignBuyer(_,let data), .updateParking(_,let data), .createTempParking(let data), .sendNotification(let data):
             return data
         case .getParkingsWithoutToken, .postParking ,.getParkings, .getParkingsById, .postBargainingOffer, .addUserCard, .me, .refresh ,.cancelSellerParking ,.getBargainingsById ,.getTransactions ,.getPrivateParkings, .getBargainings, .cancelBuyerParking:
             return nil

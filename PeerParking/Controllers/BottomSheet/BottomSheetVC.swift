@@ -15,7 +15,8 @@ import HelperClassPod
 import Cosmos
 import SDWebImage
 import Alamofire
-
+import Firebase
+import CodableFirebase
 
 
 
@@ -24,6 +25,7 @@ class BottomSheetVC: UIViewController {
     
     @IBOutlet weak var offer_btn: UIButton!
     @IBOutlet weak var counter_btn: UIButton!
+    @IBOutlet weak var btnSelectTime: UIButton!
     
     @IBOutlet weak var mainView: UIView!
     
@@ -61,11 +63,25 @@ class BottomSheetVC: UIViewController {
     var sTime : String?
     var fTime : String?
     
+    var tempParkingId = 0
+    var initialPrice = 0.0
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setData()
+        
+        
+    
+        
+        
+        
+        
+        
+               setData()
     }
+    
+    
     override func viewWillLayoutSubviews() {
         self.note.sizeToFit()
     }
@@ -79,99 +95,249 @@ class BottomSheetVC: UIViewController {
         //        [self.note sizeToFit]
         
         
-        //        self.note.sizeToFit()
-        if(parking_details.parkingType == 10){
-            
-            timeView.isHidden = true
+        if(self.parking_details.parkingType == ParkingType.PARKING_TYPE_PRIVATE)
+        {
+//            self.timeView.isHidden = false
+              self.extra_charges.isHidden = true
+          
         }
-        else{
-            self.st_time.text = "From: "
-            self.end_time.text = "To: "
-            timeView.isHidden = false
+        else
+        {
+            if(self.parking_details.parkingHoursLimit == nil || self.parking_details.parkingHoursLimit!.isEmpty ){
+                
+//                self.timeView.isHidden = true
+                
+            }else{
+                
+                
+                self.time_limit.text = self.parking_details.parkingHoursLimit
+//                self.timeView.isHidden = false
+                
+                
+            }
+            if(self.parking_details.parkingExtraFee == nil || self.parking_details.parkingExtraFee!.isEmpty ){
+                
+                
+                 self.extra_charges.isHidden = true
+                
+            }else{
+                
+                self.extra_charges.isHidden = false
+                self.extra_charges.text = self.parking_details.parkingExtraFee
+                
+              
+            }
         }
         
-        if(parking_details.isNegotiable ?? false){
-            
-            counter_btn.isHidden = false
-        }
-        else{
-            counter_btn.isHidden = true
-        }
+        
+       self.sTime = parking_details.startAt ?? ""
+        //            self.fTime = pModel.endAt ?? ""
+                    
+                    
+                    self.st_time.text = "From : \( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
+        
+        parking_type.text = parking_details.parkingSubTypeText == "Drive" ? "Driveway" : parking_details.parkingSubTypeText
+        
+        
+        
+        
+//               parkingsize.setText(parkingModel1.getVehicleTypeText());
+              
+        self.note.text = parking_details.note
         self.parking_titile.text = parking_details.address
-        
-        let seller = parking_details.seller
-        let sellerDetail = seller?.details
-        let rating  = sellerDetail?.averageRating
-        trust_score.rating = rating ?? 0
-        trust_score_txt.text = String(rating ?? 0)
-        let priceStr = parking_details.initialPrice ?? 0.0
+               
         if parking_details.imageURL == nil
-        {
-            photo.image = UIImage.init(named: "placeholder")
+                {
+                    photo.image = UIImage.init(named: "placeholder")
+                }
+                else
+                {
+        
+                    let imgUrl = parking_details.imageURL
+                    photo.sd_setImage(with: URL(string: imgUrl ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
+                }
+        
+        
+        if(self.parking_details.parkingType == ParkingType.PARKING_TYPE_PRIVATE){
+            
+            
+            self.price.text = "$ \(parking_details.initialPrice ?? 0.0) / hr"
         }
         else
         {
-            
-            let imgUrl = parking_details.imageURL
-            photo.sd_setImage(with: URL(string: imgUrl ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
+            self.price.text = "$ \(parking_details.initialPrice ?? 0.0) "
         }
         
-        
-        self.price.text = "$\(priceStr)"
-        
-        self.distance.text = String(format: "%.03f miles from destination", parking_details.distance ?? 0.0)
-        
-        let d_lat = Double(parking_details?.latitude ?? "") ?? 0.0
-        let d_long = Double(parking_details?.longitude ?? "") ?? 0.0
-        
-        Helper().getTimeDurationBetweenCordinate(s_lat: self.lat, s_longg: self.longg, d_lat: d_lat, d_longg: d_long)
-        { (duration) in
-            
-            self.duration.text = "\(duration)"
-        }
-        
-        if parking_details.note == nil
+        if(self.parking_details.seller != nil && self.parking_details.seller?.details != nil)
         {
-            self.note.text = ""
-        }
-        else
-        {
-            self.note.text = parking_details.note
-        }
-        
-        
-        self.parking_type.text = parking_details.parkingSubTypeText == "Drive" ? "Driveway" : parking_details.parkingSubTypeText
-        
-        self.viheicle_type.text = parking_details.vehicleTypeText
-        
-        
-        if let time_limit = parking_details.parkingAllowedUntil{
-            
-            self.time_limit.text = "UNTIL \(time_limit)"
-        }
-        if let ext_fee = parking_details.parkingExtraFee{
-            
-            self.extra_charges.text = "\(ext_fee)"
-        }
-        
-        
-        // checking either already a temp parking or not if parking is private parking
-        
-        print("already temp parking ? \(checkIsAlreadyTempParking())")
-        
-        
-        
-        if(checkIsAlreadyTempParking()){
-            
-            getTempParking(isChatOpen: false,id: self.parking_details.tempParkingID ?? -1)
+            self.trust_score_txt.text = String( self.parking_details.seller?.details?.averageRating ??  0.0 )
+            self.trust_score.rating = self.parking_details.seller?.details?.averageRating ??  0.0
             
         }
+        
+         self.distance.text = String(format: "%.03f miles from destination", parking_details.distance ?? 0.0)
+        
+                let d_lat = Double(parking_details?.latitude ?? "") ?? 0.0
+                let d_long = Double(parking_details?.longitude ?? "") ?? 0.0
+        
+                Helper().getTimeDurationBetweenCordinate(s_lat: self.lat, s_longg: self.longg, d_lat: d_lat, d_longg: d_long)
+                { (duration) in
+        
+                    self.duration.text = "\(duration)"
+                }
+        
+        
+        
+        
+ 
+//               if (parkingModel1.getSellerMdoel() != null && parkingModel1.getSellerMdoel().getDetails()!=null) {
+//                   scoretext.setText(String.valueOf(String.valueOf(parkingModel1.getSellerMdoel().getDetails().getAvgRating())));
+//                   ratingbar.setRating((float) parkingModel1.getSellerMdoel().getDetails().getAvgRating());
+//               }
+
+        
+        
+//        //        self.note.sizeToFit()
+//        if(parking_details.parkingType == 10){
+//
+//            timeView.isHidden = true
+//        }
+//        else{
+//            self.st_time.text = "From: "
+//            self.end_time.text = "To: "
+//            timeView.isHidden = false
+//        }
+//
+//        if(parking_details.isNegotiable ?? false){
+//
+//            counter_btn.isHidden = false
+//        }
+//        else{
+//            counter_btn.isHidden = false
+//        }
+//        self.parking_titile.text = parking_details.address
+//
+//        let seller = parking_details.seller
+//        let sellerDetail = seller?.details
+//        let rating  = sellerDetail?.averageRating
+//        trust_score.rating = rating ?? 0
+//        trust_score_txt.text = String(rating ?? 0)
+//        let priceStr = parking_details.initialPrice ?? 0.0
+//        if parking_details.imageURL == nil
+//        {
+//            photo.image = UIImage.init(named: "placeholder")
+//        }
+//        else
+//        {
+//
+//            let imgUrl = parking_details.imageURL
+//            photo.sd_setImage(with: URL(string: imgUrl ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
+//        }
+//
+//
+//        self.price.text = "$\(priceStr)"
+//
+//        self.distance.text = String(format: "%.03f miles from destination", parking_details.distance ?? 0.0)
+//
+//        let d_lat = Double(parking_details?.latitude ?? "") ?? 0.0
+//        let d_long = Double(parking_details?.longitude ?? "") ?? 0.0
+//
+//        Helper().getTimeDurationBetweenCordinate(s_lat: self.lat, s_longg: self.longg, d_lat: d_lat, d_longg: d_long)
+//        { (duration) in
+//
+//            self.duration.text = "\(duration)"
+//        }
+//
+//        if parking_details.note == nil
+//        {
+//            self.note.text = ""
+//        }
+//        else
+//        {
+//            self.note.text = parking_details.note
+//        }
+//
+//
+//        self.parking_type.text = parking_details.parkingSubTypeText == "Drive" ? "Driveway" : parking_details.parkingSubTypeText
+//
+//        self.viheicle_type.text = parking_details.vehicleTypeText
+//
+//
+//        if let time_limit = parking_details.parkingAllowedUntil{
+//
+//            self.time_limit.text = "UNTIL \(time_limit)"
+//        }
+//        if let ext_fee = parking_details.parkingExtraFee{
+//
+//            self.extra_charges.text = "\(ext_fee)"
+//        }
+//
+//
+//        // checking either already a temp parking or not if parking is private parking
+//
+//        print("already temp parking ? \(checkIsAlreadyTempParking())")
+//
+//
+//
+//        if(checkIsAlreadyTempParking()){
+//
+//            getTempParking(isChatOpen: false,id: self.parking_details.tempParkingID ?? -1)
+//
+//        }
         
         
         
         
     }
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
+        
+        
+        
+            self.tempParkingId = parking_details.tempParkingID ?? 0
+                
+                if (self.initialPrice == 0) {
+                    self.initialPrice  = parking_details.initialPrice ?? 0.0
+                }
+                
+        //        if (Helper().getCurrentUserId() == nil) {
+        //            HomeActivity homeActivity = (HomeActivity) activity;
+        //            if (homeActivity.parkingSearchedBeforeLogin == null) {
+        //                homeActivity.parkingSearchedBeforeLogin = new ParkingSearchedBeforeLogin();
+        //            }
+        //            ((HomeActivity) activity).parkingSearchedBeforeLogin.parkingModel1 = parkingModel1;
+        //        }
+                
+                
+                
+                if (parking_details.parkingType == ParkingType.PARKING_TYPE_PRIVATE) {
+                    btnSelectTime.isHidden = false
+                } else {
+                   btnSelectTime.isHidden = true
+                }
+                if(parking_details.parkingType==ParkingType.PARKING_TYPE_PUBLIC){
+                    
+                    
+                    self.sTime = parking_details.startAt ?? ""
+        //            self.fTime = pModel.endAt ?? ""
+                    
+                    
+                    self.st_time.text = "From : \( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
+        //            self.end_time.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.fTime!))"
+                    
+                   
+                
+                    
+                }
+                else if(self.tempParkingId != 0 ){
+                
+                    self.getTempParking(showBargainingDialog: false);
+                
+                }
+                
+        
         
         self.note.sizeToFit()
         NotificationCenter.default.addObserver(self, selector: #selector(self.accept_offer_tap(notification:)), name: NSNotification.Name(rawValue: "accept_offer"), object: nil)
@@ -187,58 +353,416 @@ class BottomSheetVC: UIViewController {
         
     }
     
-    func getTempParking(isChatOpen : Bool , id : Int){
-        
-        
-        
-        
-        getTempParkingServer(id: id) { (pModel) in
+    public func takeOffer() {
+
+        if Helper().IsUserLogin() {
             
-           
+            Helper().showSpinner(view: self.view)
             
-            if (pModel != nil)
-            {
+            let url = APIRouter.me
+            let decoder = ResponseData<Me>.self
+            
+            APIClient.serverRequest(url: url, path: url.getPath(), dec: decoder) { (response,error) in
                 
-                self.sTime = pModel.startAt ?? ""
-                self.fTime = pModel.endAt ?? ""
-                
-                
-                self.st_time.text = "From : \( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
-                self.end_time.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.fTime!))"
-                
-                if(isChatOpen)
-                {
-                    
-                    
-                    
-                    
-                    self.openChatScreen(model: pModel)
-                    
+                Helper().hideSpinner(view: self.view)
+                if(response != nil){
+                    if let _  = response?.success {
+                        
+                        //                    Helper().showToast(message: "Success=\(success)", controller: self)
+                        if let val = response?.data {
+                            
+                            if(val.details?.wallet ?? 0.0 <= 0.0){
+                                Helper().showToast(message: "Insufficient Amount in wallet", controller: self)
+                                self.offer_btn.isUserInteractionEnabled = true
+                                
+                            }
+                            else{
+                                self.postTakeOfferApi();
+                            }
+                            
+                        }
+                    }
+                    else{
+                        Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                    }
                 }
-                    
-                else
-                {
-                   
-                    self.parking_details.initialPrice = pModel.initialPrice ?? 0.0
+                else if(error != nil){
+                    Helper().showToast(message: "\(error?.localizedDescription ?? "" )", controller: self)
+                }
+                else{
+                    Helper().showToast(message: "Nor Response and Error!!", controller: self)
                 }
                 
             }
-           
+//            getBaseWebServices(true).postAPIAnyObject(WebServiceConstants.PATH_ME, "", new WebServices.IRequestWebResponseAnyObjectCallBack() {
+//                @Override
+//                public void requestDataResponse(WebResponse<Object> webResponse) {
+//
+//                    UserModel userModel = new Gson().fromJson(new Gson().toJson(webResponse.result), UserModel.class);
+//
+//                    if(userModel.getUserDetails().getWallet()<=0){
+//                        Toast.makeText(activity, "Insufficient Amount in wallet", Toast.LENGTH_LONG).show();
+//                        buttontakeoffer1.setClickable(true);
+//                    }else{
+//                        postTakeOfferApi();
+//                    }
+//                }
+//
+//                @Override
+//                public void onError(Object object) {
+//                    buttontakeoffer1.setClickable(true);
+//                }
+//            });
+
+        } else {
+            showLoginDialog();
+        }
+
+    }
+    
+    private func postTakeOfferApi() {
+        if (parking_details.parkingType == ParkingType.PARKING_TYPE_PUBLIC) {
+            takeOffer(parkingId: parking_details.id ?? 0, initialPrice: parking_details.initialPrice ?? 0.0);
+        }
+        else {
+            if (parking_details.tempParkingID == 0) {
+                createTempParking(isTakeOffer: true);
+            } else {
+                takeOffer(parkingId: parking_details.tempParkingID ?? 0, initialPrice: parking_details.initialPrice ?? 0.0);
+            }
+
+        }
+    }
+    
+    func takeOffer(parkingId :Int , initialPrice : Double)
+    {
+        
+       
+        let buyerId = Helper().getCurrentUserId()
+        let refId = String(parkingId) + "-" + String(buyerId)
+        
+       
+        
+        let firebaseChatReference =  Database.database().reference(withPath: "chat/").child(String(parkingId)).child(String(buyerId))
+        
+        Database.database().reference(withPath:"buyerModel/").child(String(buyerId)).setValue(self.parking_details.buyer)
+        
+        firebaseChatReference.observeSingleEvent(of: .value) { (snapshot) in
+            
+            var isOfferTakenAlready : Bool = false
+            
+            let enumerator = snapshot.children
+            
+            
+            
+            while let childSnapShot = enumerator.nextObject() as? DataSnapshot {
+                
+                guard let value = childSnapShot.value else { return }
+                do {
+                    let model = try FirebaseDecoder().decode(ChatModel.self, from: value)
+                    
+                    if(model.messageType == APP_CONSTANT.MESSAGE_TYPE_OFFER) && (model.direction == APP_CONSTANT.DIRECTION.BUYER_TO_SELLER){
+                        isOfferTakenAlready = true;
+                    }
+                   
+                    
+                    
+                } catch let error {
+                    print(error)
+                }
+            }
+            
+            if(!isOfferTakenAlready){
+                
+                let  messageKey : String = firebaseChatReference.childByAutoId().key!
+                
+                let chat = ChatModel()
+                chat.id = messageKey
+                chat.direction = APP_CONSTANT.DIRECTION.BUYER_TO_SELLER
+                chat.createdAt = self.makingCurrentDateModel()
+                chat.offer = initialPrice
+                chat.offerStatus = APP_CONSTANT.STATUS_COUNTER_OFFER
+                chat.messageType = APP_CONSTANT.MESSAGE_TYPE_OFFER
+                
+                
+                let chat_dict = try! FirebaseEncoder().encode(chat)
+                
+                firebaseChatReference.child(messageKey).setValue(chat_dict , withCompletionBlock: { (error, ref) -> Void in
+                                                
+                    if let error = error {
+                        print(error.localizedDescription)
+                    }
+                    else
+                    {
+                        
+                        
+                        let actionType = APP_CONSTANT.ACTION_PARKING_REQUEST
+                        self.sendNotification(actionType: actionType,message: "You have a parking request.",refId: refId);
+                        
+                        let parkingRequestsModel : FirebaseRequestModel = FirebaseRequestModel()
+                        
+                        parkingRequestsModel.parkingID = parkingId
+                        parkingRequestsModel.sellerID = self.parking_details.sellerID
+                        parkingRequestsModel.buyerID = self.buyerId
+                        parkingRequestsModel.lastMessage = chat
+                        parkingRequestsModel.parkingLocation = self.parking_details.address
+                        
+                        parkingRequestsModel.parkingTitle = self.parking_details.title
+                        parkingRequestsModel.parkingStatus = APP_CONSTANT.STATUS_PARKING_AVAILABLE
+                        
+                        
+                         let request_dict = try! FirebaseEncoder().encode(parkingRequestsModel)
+                        
+                        _ =  Database.database().reference(withPath: "requests/").child(refId).setValue(request_dict)
+                        
+                        Database.database().reference(withPath: "sellerRequestsIndex/").child(String(self.parking_details.sellerID!)).child(refId).setValue(chat.createdAt?.time)
+                        
+                        Database.database().reference(withPath: "buyerRequestsIndex/").child(String(buyerId)).child(refId).setValue(chat.createdAt?.time)
+                        
+                        Helper().showToast(message: "Offer Sent to Seller", controller: self)
+                        
+                        self.dismiss(animated: true, completion: nil)
+                 
+                    }
+                    
+                    
+                })
+    
+                
+                
+                
+                
+            }
+            else
+            {
+                Helper().showToast(message: "Offer Sent already", controller: self)
+                self.offer_btn.isUserInteractionEnabled = true
+                    
+               
+            }
+            
+            
         }
         
+    }
+    
+    private func sendNotification(actionType : String , message : String , refId : String) {
         
+        var model:NotificationSendingModel = NotificationSendingModel()
+        model.refId = refId
+        model.recieverId = Int(self.parking_details.sellerID ?? -1)
+        model.actionType = actionType
+        model.message = message
+        
+        do{
+            let data = try JSONEncoder().encode(model)
+            Helper.customSendNotification(data: data, controller: self)
+        }
+        catch let parsingError {
+            
+            print("Parsing Error", parsingError)
+            
+        }
+    }
+    
+    func makingCurrentDateModel() -> CreatedAt {
+           
+           
+           
+           let userCalendar = Calendar.current
+           let date = Date()
+        _ = userCalendar.dateComponents([.day, .month, .year, .calendar], from: Date())
+           let createdAt : CreatedAt = CreatedAt()
+           createdAt.date = userCalendar.component(.day, from: date)
+           createdAt.day = userCalendar.component(.weekday, from: date)
+           createdAt.hours = userCalendar.component(.hour, from: date)
+           createdAt.minutes = userCalendar.component(.minute, from: date)
+           createdAt.month = userCalendar.component(.month, from: date)
+           createdAt.seconds = userCalendar.component(.second, from: date)
+           createdAt.timezoneOffset = -300
+           createdAt.time =  Int(truncatingIfNeeded: date.millisecondsSince1970)
+           createdAt.year = userCalendar.component(.year, from: date)
+           //        date : userCalendar.component(.day, from: date),
+           //                   day : userCalendar.component(.weekday, from: date),
+           //                   hours : userCalendar.component(.hour, from: date),
+           //                   minutes: userCalendar.component(.minute, from: date),
+           //                   month : userCalendar.component(.month, from: date),
+           //                   seconds : userCalendar.component(.second, from: date),
+           //                   time: NSDate().timeIntervalSince1970.hashValue,
+           //                   //            timezoneOffset: userCalendar.component(.timeZone, from: date),
+           //                   timezoneOffset: -300,
+           //                   year: userCalendar.component(.year, from: date)
+           
+           
+           return createdAt
+       }
+    
+    
+    func getTempParking(showBargainingDialog : Bool){
+        
+//        Map<String, Object> queryMap = new HashMap<>();
+//               queryMap.put("id", parkingModel1.getTemp_parking_id());
+        
+        _ = ["id":parking_details.tempParkingID]
+        Helper().showSpinner(view: self.view)
+ 
+        let request = APIRouter.getParkingsById(id: parking_details.tempParkingID ?? 0)
+        APIClient.serverRequest(url:request,path:request.getPath(), dec: ResponseData<Parking>.self) { (response, error) in
+            
+            Helper().hideSpinner(view: self.view)
+            if(response != nil){
+                if (response?.success) != nil {
+                    Helper().showToast(message: response?.message ?? "-", controller: self)
+                    if let val = response?.data {
+                        
+                        self.sTime = val.startAt ?? ""
+                        self.fTime = val.endAt ?? ""
+                        
+                        
+                        self.st_time.text = "From : \( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
+                        self.end_time.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.fTime!))"
+                        
+                        if(showBargainingDialog){
+
+                            self.openChatScreen(model: val)
+
+                        }
+                        else{
+                            
+                            
+                            self.parking_details.initialPrice = val.initialPrice
+                           
+
+                        }
+                    }
+                }
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                }
+            }
+            else if(error != nil){
+                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+            }
+            else{
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
+            
+            
+        }
+        
+
         
     }
+    
+//    func getTempParking(isChatOpen : Bool , id : Int){
+//
+//
+//
+//
+//        getTempParkingServer(id: id) { (pModel) in
+//
+//
+//
+//            if (pModel != nil)
+//            {
+//
+//                self.sTime = pModel.startAt ?? ""
+//                self.fTime = pModel.endAt ?? ""
+//
+//
+//                self.st_time.text = "From : \( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
+//                self.end_time.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.fTime!))"
+//
+//                if(isChatOpen)
+//                {
+//
+//
+//
+//
+//                    self.openChatScreen(model: pModel)
+//
+//                }
+//
+//                else
+//                {
+//
+//                    self.parking_details.initialPrice = pModel.initialPrice ?? 0.0
+//                }
+//
+//            }
+//
+//        }
+//
+//
+//
+//    }
+    
+    
     
     func createTempParking(isTakeOffer : Bool)
     {
         
-        var model1 : Parking = cloneParking(parkingModel: self.parking_details)
+        if (self.parking_details.startAt == nil || self.parking_details.startAt?.isEmpty ?? false || self.parking_details.endAt == nil || self.parking_details.endAt?.isEmpty ?? false) {
+            Helper().showToast(message: "Please Select Date Range", controller: self)
+            
+            self.offer_btn.isUserInteractionEnabled = true
+            
+            return;
         
-        var seller : Seller = model1.seller!
+        }
+
+        var model = Parking(dictionary: self.parking_details.dictionary ?? [:])
         
+        let sellerModel = model?.seller
+        model?.seller = nil
         
-        model1.seller = nil
+
+        do{
+            let data = try JSONEncoder().encode(model)
+            //            Helper().showSpinner(view: self.view)
+            let request = APIRouter.createTempParking(data)
+            APIClient.serverRequest(url: request, path: request.getPath(),body: model.dictionary ?? [:], dec: ResponseData<Parking>.self) { (response, error) in
+                Helper().hideSpinner(view: self.view)
+                if(response != nil){
+                    if (response?.success) != nil {
+                        Helper().showToast(message: response?.message ?? "-", controller: self)
+                        if let val = response?.data {
+                            
+                            self.tempParkingId = val.id ?? 0
+                            if (isTakeOffer) {
+                                self.parking_details.tempParkingID = val.id
+//                                if (onItemFieldUpdateListener != null) {
+//                                    onItemFieldUpdateListener.onItemFieldUpdate(parkingModel1.getId(), "", parkingModel1.getTemp_parking_id());
+//                                }
+                                self.takeOffer(parkingId: val.id ?? 0, initialPrice: self.parking_details.initialPrice ?? 0.0);
+                            }
+                            else {
+                                var model = Parking(dictionary: val.dictionary ?? [:])
+                                model?.seller = sellerModel
+                                self.openChatScreen(model: model ?? Parking());
+                            }
+                        }
+                    }
+                    else{
+                        Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                    }
+                }
+                else if(error != nil){
+                    Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+                }
+                else{
+                    Helper().showToast(message: "Nor Response and Error!!", controller: self)
+                }
+                
+            }
+        }
+        catch let parsingError {
+            
+            print("Error", parsingError)
+            
+        }
+        
+
         
     }
     
@@ -254,51 +778,91 @@ class BottomSheetVC: UIViewController {
     
     func openChatScreen(model : Parking){
         
+       
+        Helper().showSpinner(view: self.view)
         
-        let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
-               
-               vc.modalPresentationStyle = .fullScreen
-               
-               vc.parking_details = model
-               
-               self.present(vc, animated: true, completion: nil)
-    }
-    
-    func getTempParkingServer(id : Int   , completion: @escaping (Parking) -> Void){
+        let url = APIRouter.me
+        let decoder = ResponseData<Me>.self
         
-        
-         Helper().showSpinner(view: self.view)
-        APIClient.serverRequest(url: APIRouter.getParkingsById(id: id), path: APIRouter.getParkingsById(id: id).getPath(), dec:
-            ResponseData<Parking>.self) { (response,error) in
-                
+        APIClient.serverRequest(url: url, path: url.getPath(), dec: decoder) { (response,error) in
+            
+            Helper().hideSpinner(view: self.view)
             if(response != nil){
-                if (response?.success) != nil {
-                    //Helper().showToast(message: "Succes=\(success)", controller: self)
+                if let _  = response?.success {
+                    
+                    //                    Helper().showToast(message: "Success=\(success)", controller: self)
                     if let val = response?.data {
                         
+                        var parkingModel = Parking.init(dictionary: model.dictionary ?? [:])
                         
-                        //                        print(val)
+                        parkingModel?.buyerID = val.id
+                        let  buyerMdoel = Buyer(id: val.id, name: val.name, email: val.email, createdAt: val.createdAt, details: val.details, card: [nil])
                         
-                        Helper().hideSpinner(view: self.view)
-                        completion((response?.data ?? nil)! )
+                        parkingModel?.buyer = buyerMdoel
+                        
+                        let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
+                        
+                        vc.modalPresentationStyle = .fullScreen
+                        
+                        vc.parking_details = parkingModel
+                        
+                        self.present(vc, animated: true, completion: nil)
+                        
                     }
                 }
                 else{
                     Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                }
+            }
+            else if(error != nil){
+                Helper().showToast(message: "\(error?.localizedDescription ?? "" )", controller: self)
+            }
+            else{
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
+            
+        }
+        
+        
+        
+    }
+    
+    
+       
+    
+    
+    
+    func getTempParkingServer(id : Int   , completion: @escaping (Parking) -> Void){
+        
+        
+        Helper().showSpinner(view: self.view)
+        APIClient.serverRequest(url: APIRouter.getParkingsById(id: id), path: APIRouter.getParkingsById(id: id).getPath(), dec:
+        ResponseData<Parking>.self) { (response,error) in
+            Helper().hideSpinner(view: self.view)
+            if(response != nil){
+                if (response?.success) != nil {
+                    //Helper().showToast(message: "Succes=\(success)", controller: self)
+                    if (response?.data) != nil {
+                        
+                        completion((response?.data ?? nil)! )
+                    }
+                }
                     
-                      Helper().hideSpinner(view: self.view)
+                    
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                    
                     completion((response?.data ?? nil)! )
                 }
             }
             else if(error != nil){
                 Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
-                  Helper().hideSpinner(view: self.view)
                 completion((response?.data ?? nil)! )
             }
             else{
                 Helper().showToast(message: "Nor Response and Error!!", controller: self)
-                  Helper().hideSpinner(view: self.view)
-//                completion((response?.data ?? nil) ?? )
+
+                //                completion((response?.data ?? nil) ?? )
             }
             
         }
@@ -323,49 +887,54 @@ class BottomSheetVC: UIViewController {
     @IBAction func take_btn_click(_ sender: UIButton) {
         
         
+        self.takeOffer();
         
-        if(self.sTime == nil || self.fTime == nil)
-        {
-            
-            Helper().showToast(message: "Please select time", controller: self)
-            return
-        }
-        
-        let p_id = self.parking_details.id ?? 0
-        let final_price = Double(self.parking_details.initialPrice ?? 0.0)
-        let myId = UserDefaults.standard.integer(forKey: "id")
-        
-        
-        if Helper().IsUserLogin(){
-            
-            let params:[String:Any] = [
-                "parking_id": p_id,
-                "buyer_id": myId,
-                "status": ParkingConst.STATUS_ACCEPTED,
-                "offer": final_price,
-                "direction": ParkingConst.BUYER_TO_SELLER
-            ]
-            print(params)
-            self.postBargainingOffer(params: params)
-            
-            //            self.dismiss(animated: true, completion: nil)
-            
-            
-        }
-        else{
-            
-            let vc = self.story.instantiateViewController(withIdentifier: "FBPopup") as? FBPopup
-            
-            vc?.parking_details = self.parking_details
-            
-            
-            let popupVC = PopupViewController(contentController: vc!, popupWidth: 320, popupHeight: 365)
-            popupVC.canTapOutsideToDismiss = true
-            
-            
-            present(popupVC, animated: true)
-            
-        }
+//
+//        if(self.sTime == nil || self.fTime == nil)
+//        {
+//
+//
+//            Helper().showToast(message: "Please select time", controller: self)
+//            return
+//
+//
+//        }
+//
+//        let p_id = self.parking_details.id ?? 0
+//        let final_price = Double(self.parking_details.initialPrice ?? 0.0)
+//        let myId = UserDefaults.standard.integer(forKey: "id")
+//
+//
+//        if Helper().IsUserLogin(){
+//
+//            let params:[String:Any] = [
+//                "parking_id": p_id,
+//                "buyer_id": myId,
+//                "status": ParkingConst.STATUS_ACCEPTED,
+//                "offer": final_price,
+//                "direction": ParkingConst.BUYER_TO_SELLER
+//            ]
+//            print(params)
+//            self.postBargainingOffer(params: params)
+//
+//            //            self.dismiss(animated: true, completion: nil)
+//
+//
+//        }
+//        else{
+//
+//            let vc = self.story.instantiateViewController(withIdentifier: "FBPopup") as? FBPopup
+//
+//            vc?.parking_details = self.parking_details
+//
+//
+//            let popupVC = PopupViewController(contentController: vc!, popupWidth: 320, popupHeight: 365)
+//            popupVC.canTapOutsideToDismiss = true
+//
+//
+//            present(popupVC, animated: true)
+//
+//        }
         
     }
     
@@ -374,7 +943,7 @@ class BottomSheetVC: UIViewController {
         APIClient.serverRequest(url: APIRouter.postBargainingOffer(params), path: APIRouter.postBargainingOffer(params).getPath(), dec: PostResponseData.self) { (response,error) in
             
             if(response != nil){
-                if let success = response?.success {
+                if (response?.success) != nil {
                     
                     //                let status = responseData["success"] as! Bool
                     
@@ -421,42 +990,77 @@ class BottomSheetVC: UIViewController {
         
         
         
-
+        if Helper().IsUserLogin(){
+            onBtnChatClicked();
+        } else {
+            showLoginDialog();
+        }
         
-        if(self.parking_details.parkingType == 10){
-            
+      
+       
+        
+        
+    }
+    
+    private func onBtnChatClicked() {
+        if (self.parking_details.parkingType == ParkingType.PARKING_TYPE_PUBLIC) {
             openChatScreen(model: self.parking_details)
-            
-        }
-        else
-        {
-            if(checkIsAlreadyTempParking()){
-                getTempParking(isChatOpen: true , id: self.parking_details.tempParkingID ?? -1)
-            }
-            else
-            {
-                createTempParking(isTakeOffer: false)
+        } else {
+            if (self.parking_details.tempParkingID == 0) {
+                createTempParking(isTakeOffer: false);
+            } else {
+
+                getTempParking(showBargainingDialog: true);
+
             }
         }
+    }
+    
+    private func showLoginDialog() {
+        
+
+        let vc = FBPopup.instantiate(fromPeerParkingStoryboard: .Main)
+        vc.source = Source.SELL_PARKING.rawValue
+        
+        let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
+        popupVC.canTapOutsideToDismiss = true
+        
+        //properties
+        //            popupVC.backgroundAlpha = 1
+        //            popupVC.backgroundColor = .black
+        //            popupVC.canTapOutsideToDismiss = true
+        //            popupVC.cornerRadius = 10
+        //            popupVC.shadowEnabled = true
+        
+        // show it by call present(_ , animated:) method from a current UIViewController
+        present(popupVC, animated: true)
         
         
-        
-        
-        
-        
-        
-        self.getTempParking(isChatOpen: true,id: self.parking_details.tempParkingID ?? -1)
-        
-        //        self.navigationController!.pushViewController(vc, animated: true)
-        
-        
-        //        controller?.p_title = self.parking_titile.text!
-        
-        
-        
-        //        bottomSheet(controller: vc, sizes: [.fixed(540)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
-        
-        
+//        final SocialLoginGenricDialougeFramgnet genericDialogFragment = SocialLoginGenricDialougeFramgnet.newInstance();
+//
+//
+//        genericDialogFragment.setLoginSuccessListener(new GenericClickableInterface() {
+//            @Override
+//            public void click() {
+//                ((HomeActivity) activity).parkingSearchedBeforeLogin = null;
+//
+//                if (genericDialogFragment.isVisible()) {
+//                    genericDialogFragment.dismiss();
+//                }
+//            }
+//        });
+//
+//        genericDialogFragment.setButtonClickListener(new GenericClickableInterface() {
+//            @Override
+//            public void click() {
+//
+//                ParkingItemBottomFragment.this.dismiss();
+//
+//            }
+//        });
+//
+//
+//        genericDialogFragment.show(getFragmentManager(), null);
     }
     
     @IBAction func mapViewBtn(_ sender: UIButton) {
@@ -571,6 +1175,10 @@ extension BottomSheetVC:OnTimeSelectDelegate{
         //
         //        return times
         
+        self.parking_details.initialPrice = initialPrice
+        
+       
+        
         sTime = startigTime
         fTime = endingTime
         
@@ -578,7 +1186,71 @@ extension BottomSheetVC:OnTimeSelectDelegate{
         st_time.text = "From : \(startigTime)"
         end_time.text = "To : \(endingTime)"
         
+         self.parking_details.startAt = startigTime
+        self.parking_details.endAt = endingTime
+        self.parking_details.privateParkingId = self.parking_details.id
+        
+        self.parking_details.status = APP_CONSTANT.STATUS_PARKING_TEMP
+        
+        if(self.tempParkingId != 0)
+        {
+            updateTempParking(parkingModel1 : self.parking_details);
+        }
+        
+        
+        
     }
+    
+    public func updateTempParking( parkingModel1 : Parking ) {
+        
+        let park_model = UpdateTempParkingSendingModel(startAt: parkingModel1.startAt, endAt: parkingModel1.endAt, initialPrice: parkingModel1.initialPrice, finalPrice: parkingModel1.finalPrice)
+        
+        
+        do{
+            let data = try JSONEncoder().encode(parkingModel1)
+//            Helper().showSpinner(view: self.view)
+            let request = APIRouter.updateParking(id: self.parking_details.id!, data)
+            APIClient.serverRequest(url: request, path: request.getPath(),body: park_model.dictionary ?? [:], dec: PostResponseData.self) { (response, error) in
+//                Helper().hideSpinner(view: self.view)
+                if(response != nil){
+                    if (response?.success) != nil {
+                        
+                    }
+                    else{
+                        Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                    }
+                }
+                else if(error != nil){
+                    Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+                }
+                else{
+                    Helper().showToast(message: "Nor Response and Error!!", controller: self)
+                }
+                
+                
+            }
+        }
+        catch let parsingError {
+            
+            print("Error", parsingError)
+            
+        }
+//           getBaseWebServices(true).postAPIAnyObject(WebServiceConstants.UPDATE_PARKING + tempParkingId, park_model.toString(), new WebServices.IRequestWebResponseAnyObjectCallBack() {
+//               @Override
+//               public void requestDataResponse(WebResponse<Object> webResponse) {
+//                   if (webResponse.isSuccess()) {
+//
+//                   }
+//               }
+//
+//               @Override
+//               public void onError(Object object) {
+//
+//               }
+//           });
+
+
+       }
     
     
     

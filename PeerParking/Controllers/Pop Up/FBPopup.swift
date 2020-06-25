@@ -462,6 +462,18 @@ class FBPopup: UIViewController {
             UserDefaults.standard.set(val, forKey: key)
         }
         
+        key = "wallet"
+        if userDetails[key] is NSNull {
+            
+            UserDefaults.standard.set("", forKey: key)
+        }
+        else
+        {
+            
+            let val = userDetails[key] as? Double
+            UserDefaults.standard.set(val, forKey: key)
+        }
+        
         print(userDetails)
         
         UserDefaults.standard.set("yes", forKey: "login")

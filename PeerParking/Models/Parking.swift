@@ -34,6 +34,7 @@ struct Parking: Codable {
     var slots: [Slot]?
     var tempParkingID:Int?
     var isAlways:Bool?
+    var privateParkingId:Int?
     
     
     
@@ -69,6 +70,7 @@ struct Parking: Codable {
         case seller, buyer , slots
         case isAlways = "is_always"
         case tempParkingID = "temp_parking_id"
+        case privateParkingId = "private_parking_id"
     }
 }
 

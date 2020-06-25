@@ -8,11 +8,21 @@
 
 import UIKit
 
-class chatOfferCell: UITableViewCell {
 
+
+protocol chatOfferCellDelegate{
+    
+    func acceptButton(index : Int)
+    
+}
+
+
+
+class chatOfferCell: UITableViewCell {
+        @IBOutlet weak var leftButtonView: UIView!
     @IBOutlet weak var leftOfferView: CardView!
     @IBOutlet weak var offerLabel: UILabel!
-    @IBOutlet weak var acceptButtonView: UIButton!
+    @IBOutlet weak var leftacceptButton: UIButton!
       @IBOutlet weak var dateLabel: UILabel!
     
     
@@ -22,6 +32,10 @@ class chatOfferCell: UITableViewCell {
          @IBOutlet weak var rightDateLabel: UILabel!
     
     @IBOutlet weak var textView: CardView!
+    
+    var index : Int!
+    
+    var delegate : chatOfferCellDelegate!
       
     
      
@@ -42,11 +56,23 @@ class chatOfferCell: UITableViewCell {
     
     
     
+    @IBAction func acceptOfferButtonAction(_ sender: Any) {
+        
+        
+        
+        delegate.acceptButton(index: self.index)
+        
+    }
+    
+    
     
     func hideLeft(isHidden : Bool){
         if(isHidden){
             leftOfferView.isHidden = true
             offerLabel.isHidden = true
+            
+            
+            
 //            isAcceptbuttonHide(_isHide: true)
               dateLabel.isHidden = true
         }
@@ -102,15 +128,20 @@ class chatOfferCell: UITableViewCell {
         
     }
     
-    func setOfferText(offer : Int , isRight : Bool){
+    func setOfferText(offer : Int , date : String , isRight : Bool,offerStatus:Int){
         
         
         
         if(isRight){
-                    rightOfferLabel.text = "You sent an offer of $" + String(offer)
+            
+            
+            rightOfferLabel.text = offerStatus == 10 ? "This offer of $" + String(offer) + " has been accepted" : "You sent an offer of $" + String(offer)
+            rightDateLabel.text = date
+            
+             
                   hideLeft(isHidden: true)
                    hideRight(isHidden: false)
-            
+           
             
            
             
@@ -119,7 +150,18 @@ class chatOfferCell: UITableViewCell {
                  
                  else
                  {
-                      offerLabel.text = "You recieved an offer of $" + String(offer)
+                      offerLabel.text = offerStatus == 10 ? "This offer of $" + String(offer) + " has been accepted" : "You recieved an offer of $" + String(offer)
+                    dateLabel.text =  date
+                    
+                    if(offerStatus == 10) {
+
+
+                       leftacceptButton.isHidden = true
+                        leftacceptButton.superview?.isHidden = true
+                        
+                               
+                    }
+                    
                       hideLeft(isHidden: false)
                                 hideRight(isHidden: true)
                     

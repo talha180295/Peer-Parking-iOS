@@ -98,17 +98,25 @@ class ParkingBookingDetailsVC: UIViewController {
         //        });
     }
     @IBAction func chatBtnClick(_sender:UIButton){
-        //        Intent i = new Intent(getHomeActivity(), ChatActivity.class);
-        //        Gson gson = new Gson();
-        //        String parkingJson= gson.toJson(parkingModel1);
-        //        i.putExtra("parkingModel", parkingJson);
-        //        startActivity(i);
-        //        break;
+        openChatScreen(model:parkingModel)
+        
         
     }
     @IBAction func cancelBtnClick(_sender:UIButton){
         showCancelParkingConfirmationDialog()
     }
+    
+    func openChatScreen(model : Parking){
+           
+           
+           let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
+                  
+                  vc.modalPresentationStyle = .fullScreen
+                  
+                  vc.parking_details = model
+                  
+                  self.present(vc, animated: true, completion: nil)
+       }
     
     
 }
@@ -274,7 +282,8 @@ extension ParkingBookingDetailsVC{
                             let vc = FeedbackVC.instantiate(fromPeerParkingStoryboard: .Main)
                             vc.parking_details = self.parkingModel
                             self.present(vc, animated: true)
-                            self.sendNotification()
+                            
+                            self.sendNotification(actionType: APP_CONSTANT.BUYER_REACHED, message: APP_CONSTANT.BUYER_REACHED_MESSAGE, refId: String(self.parkingModel.id ?? -1))
                             
                         }
                     }
@@ -299,13 +308,13 @@ extension ParkingBookingDetailsVC{
         }
     }
     
-    private func sendNotification() {
+    private func sendNotification(actionType : String , message : String , refId : String) {
         
         var model:NotificationSendingModel = NotificationSendingModel()
-        model.refId = String(self.parkingModel.id ?? -1)
+        model.refId = refId
         model.recieverId = Int(self.parkingModel.sellerID ?? -1)
-        model.actionType = APP_CONSTANT.BUYER_REACHED
-        model.message = APP_CONSTANT.BUYER_REACHED_MESSAGE
+        model.actionType = actionType
+        model.message = message
  
         do{
             let data = try JSONEncoder().encode(model)
