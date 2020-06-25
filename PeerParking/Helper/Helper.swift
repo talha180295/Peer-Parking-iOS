@@ -994,3 +994,41 @@ extension CLLocationCoordinate2D {
     
     
 }
+
+//Sending Push Notifications
+extension Helper{
+  
+    public static func customSendNotification(data:Data, controller:UIViewController) {
+        
+        let request = APIRouter.sendNotification(data)
+        
+        Helper().showSpinner(view: controller.view)
+        
+        APIClient.serverRequest(url: request, path: request.getPath(),body: data.dictionary ?? [:], dec: PostResponseData.self) { (response, error) in
+            Helper().hideSpinner(view: controller.view)
+            if(response != nil){
+                if (response?.success) != nil {
+                    Helper().showToast(message: response?.message ?? "-", controller: controller)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        controller.dismiss(animated: true){
+                            
+                        }
+                    }
+                    
+                }
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: controller)
+                }
+            }
+            else if(error != nil){
+                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: controller)
+            }
+            else{
+                Helper().showToast(message: "Nor Response and Error!!", controller: controller)
+            }
+            
+            
+        }
+    }
+    
+}
