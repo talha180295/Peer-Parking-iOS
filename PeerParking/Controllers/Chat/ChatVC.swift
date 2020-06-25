@@ -778,20 +778,27 @@ class ChatVC: UIViewController  {
                     
                     var actionType = ""
                     
+//                    if (chatModel.getMessageType() == ChatModel.MESSAGE_TYPE_OFFER) {
+//                        actionType = isCurrentUserSeller() ? AppConstants.BARGAINING_COUNTER_OFFER_BY_SELLER : AppConstants.BARGAINING_COUNTER_OFFER_BY_BUYER;
+//                    } else {
+//                        actionType = isCurrentUserSeller() ? AppConstants.BARGAINING_MESSAGE_FROM_SELLER : AppConstants.BARGAINING_MESSAGE_FROM_BUYER;
+//                    }
+//
                     if(chatModel.messageType == Constants.init().MESSAGEOFFER)
                     {
                         
-                        actionType = self.checkIamSeller ?  Constants().BARGAINING_MESSAGE_FROM_SELLER : Constants().BARGAINING_MESSAGE_FROM_BUYER
+                        actionType = self.checkIamSeller ?  APP_CONSTANT.BARGAINING_COUNTER_OFFER_BY_SELLER : APP_CONSTANT.BARGAINING_COUNTER_OFFER_BY_BUYER
                         
                         
                     }
                     else
                     {
-                        actionType = self.checkIamSeller ?  Constants().BARGAINING_MESSAGE_FROM_BUYER : Constants().BARGAINING_MESSAGE_FROM_SELLER
+                        actionType = self.checkIamSeller ?  APP_CONSTANT.BARGAINING_MESSAGE_FROM_SELLER : APP_CONSTANT.BARGAINING_MESSAGE_FROM_BUYER
                     }
                     
                     
                     var refId = String(self.parkingId) + "-" + String(self.buyerId)
+                   
                     self.sendNotification(actionType: actionType, message: "new message", refId: refId)
                     
                     var firebaseRequestModel : FirebaseRequestModel = FirebaseRequestModel()
@@ -811,13 +818,7 @@ class ChatVC: UIViewController  {
                     
                     self.buyerRequestIndexReference.child(String(self.buyerId)).child(refId).setValue(chatModel.createdAt?.time)
                     self.sellerRequestIndexReference.child(String(self.parking_details.sellerID!)).child(refId).setValue(chatModel.createdAt?.time)
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+           
                 }
                 
                 
@@ -830,9 +831,7 @@ class ChatVC: UIViewController  {
         
     }
     
-    func sendNotification(actionType : String , message : String , refId : String){
-        
-    }
+   
     
     
     
@@ -1307,6 +1306,26 @@ extension ChatVC : chatOfferCellDelegate{
         
         
         
+    }
+    
+    
+    private func sendNotification(actionType : String , message : String , refId : String) {
+        
+        var model:NotificationSendingModel = NotificationSendingModel()
+        model.refId = refId
+        model.recieverId = checkIamSeller ? self.parking_details.buyerID ?? -1 : self.parking_details.sellerID ?? -1
+        model.actionType = actionType
+        model.message = message
+        
+        do{
+            let data = try JSONEncoder().encode(model)
+            Helper.customSendNotification(data: data, controller: self,isDismiss: false)
+        }
+        catch let parsingError {
+            
+            print("Parsing Error", parsingError)
+            
+        }
     }
     
     

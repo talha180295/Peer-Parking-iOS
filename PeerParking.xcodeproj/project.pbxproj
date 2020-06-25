@@ -57,6 +57,7 @@
 		1841BED62428FE3300B621AF /* StartEndPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841BED52428FE3300B621AF /* StartEndPopUp.swift */; };
 		18451971235E08C700F3AF5A /* OfferBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18451970235E08C700F3AF5A /* OfferBottomSheetVC.swift */; };
 		1852A81724A4DCB800D3DBE0 /* UpdateTempParkingSendingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1852A81624A4DCB800D3DBE0 /* UpdateTempParkingSendingModel.swift */; };
+		1852A81924A4FAC300D3DBE0 /* NotificationSendingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1852A81824A4FAC300D3DBE0 /* NotificationSendingModel.swift */; };
 		185DE799236094DE00FC0E25 /* FBPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185DE798236094DE00FC0E25 /* FBPopup.swift */; };
 		185DE79B2360A59900FC0E25 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185DE79A2360A59900FC0E25 /* Constants.swift */; };
 		185DE79E2360A84C00FC0E25 /* ParkingNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185DE79D2360A84C00FC0E25 /* ParkingNavVC.swift */; };
@@ -256,6 +257,7 @@
 		1841BED52428FE3300B621AF /* StartEndPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartEndPopUp.swift; sourceTree = "<group>"; };
 		18451970235E08C700F3AF5A /* OfferBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferBottomSheetVC.swift; sourceTree = "<group>"; };
 		1852A81624A4DCB800D3DBE0 /* UpdateTempParkingSendingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateTempParkingSendingModel.swift; sourceTree = "<group>"; };
+		1852A81824A4FAC300D3DBE0 /* NotificationSendingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSendingModel.swift; sourceTree = "<group>"; };
 		185DE798236094DE00FC0E25 /* FBPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPopup.swift; sourceTree = "<group>"; };
 		185DE79A2360A59900FC0E25 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		185DE79D2360A84C00FC0E25 /* ParkingNavVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingNavVC.swift; sourceTree = "<group>"; };
@@ -717,6 +719,7 @@
 		BC97A7FC249FEA720059FAF6 /* RequestModel */ = {
 			isa = PBXGroup;
 			children = (
+				1852A81824A4FAC300D3DBE0 /* NotificationSendingModel.swift */,
 				BC072886249ECB7E00CBDE62 /* BuyerParkingSendingModel.swift */,
 				BC97A7FD249FEA990059FAF6 /* UpdateParkingSendingModel.swift */,
 				186AEB6224A15D6500C4EBE3 /* FirebaseRequestModel.swift */,
@@ -1346,6 +1349,7 @@
 				FA2F9F37232CA7E30025BF11 /* offerCell.swift in Sources */,
 				18010AAD2354C463008412C0 /* FindParkingVC.swift in Sources */,
 				18253CDA2492428B0046EAE0 /* chatTextCell.swift in Sources */,
+				1852A81924A4FAC300D3DBE0 /* NotificationSendingModel.swift in Sources */,
 				183DAA4223E073A80022BC6E /* ParkingsHistoryVC.swift in Sources */,
 				1841BECD2428C7AB00B621AF /* TimingsCell.swift in Sources */,
 				FA2815AE231E3F92008AF3F5 /* RootViewController.swift in Sources */,

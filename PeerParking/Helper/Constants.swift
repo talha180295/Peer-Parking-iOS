@@ -138,6 +138,23 @@ struct APP_CONSTANT {
     public static let ONE_MINUTE_NOTIFICATION_FOR_PARKING = "ONE_MINUTE_NOTIFICATION_FOR_PARKING_";
     public static let BUYER_REACHED = "Buyer reached";
     public static let BUYER_REACHED_MESSAGE = "Buyer has reached the parking";
+    public static let BUYER_REACHES_IN_ONE_MINUTE_MESSAGE = "1 min left for buyer to reach the parking";
+    public static let BUYER_TO_REACH_IN_ONE_MINUTE = "buyer_to_reach_in_one_minute";
+    public static let BUYER_IS_NAVIGATING = "buyer_is_navigating";
+    public static let PARKING_BOOKED                     = "parking_booked";
+    public static let PARKING_PARKED                     = "parking_parked";
+    public static let PARKING_CANCELED_BY_BUYER          = "parking_canceled_by_buyer";
+    public static let PARKING_CANCELED_BY_SELLER         = "parking_canceled_by_seller";
+    public static let BARGAINING_ACCEPTED_BY_BUYER       = "bargaining_accepted_by_buyer";
+    public static let BARGAINING_ACCEPTED_BY_SELLER      = "bargaining_accepted_by_seller";
+    public static let BARGAINING_REJECTED_BY_BUYER       = "bargaining_rejected_by_buyer";
+    public static let BARGAINING_REJECTED_BY_SELLER      = "bargaining_rejected_by_seller";
+    public static let BARGAINING_COUNTER_OFFER_BY_BUYER  = "bargaining_counter_offer_by_buyer";
+    public static let BARGAINING_COUNTER_OFFER_BY_SELLER = "bargaining_counter_offer_by_seller";
+    public static let BARGAINING_MESSAGE_FROM_SELLER = "bargaining_message_from_seller";
+    public static let BARGAINING_MESSAGE_FROM_BUYER = "bargaining_message_from_buyer";
+    public static let BARGAINING_NOTIFICATION_DEFAULT    = "bargaining_notification_default";
+//    public static let ACTION_PARKING_REQUEST               = "action_parking_request";
 }
 
 

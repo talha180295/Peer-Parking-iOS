@@ -546,8 +546,23 @@ class BottomSheetVC: UIViewController {
         
     }
     
-    func sendNotification(actionType : String , message : String , refId : String){
+    private func sendNotification(actionType : String , message : String , refId : String) {
         
+        var model:NotificationSendingModel = NotificationSendingModel()
+        model.refId = refId
+        model.recieverId = Int(self.parking_details.sellerID ?? -1)
+        model.actionType = actionType
+        model.message = message
+        
+        do{
+            let data = try JSONEncoder().encode(model)
+            Helper.customSendNotification(data: data, controller: self)
+        }
+        catch let parsingError {
+            
+            print("Parsing Error", parsingError)
+            
+        }
     }
     
     func makingCurrentDateModel() -> CreatedAt {

@@ -87,6 +87,8 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
     
     
     
+    
+    
   static var isSeller = true
     
     var chatRef : DatabaseReference!
@@ -110,7 +112,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
     var sellerVal : [Any] = []
     
     @IBOutlet weak var tblNotification: UITableView!
-    
+    @IBOutlet weak var segment: UISegmentedControl!
     var dict = [String : Int]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,6 +126,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         self.tblNotification.register(UINib(nibName: "HeaderCell", bundle: nil), forCellReuseIdentifier: "headerCell")
         
         
+        self.getUpdatedWalletAmount()
         
        
         
@@ -132,7 +135,8 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
     
     func initial(){
         
-        RequestVC.isSeller = true
+        self.segment.selectedSegmentIndex = RequestVC.isSeller ? 0 : 1
+//        RequestVC.isSeller =  true
         
          makeReferences()
         RequestVC.isSeller ? getAllRequest(isSeller: true) :  getAllRequest(isSeller: false)
@@ -196,7 +200,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             alert.dismiss(animated: true, completion: nil)
-            if (!RequestVC.isSeller  && self.amountInWallet <= 0) {
+            if (firebaseParkingRequestsModel.buyerID == Helper().getCurrentUserId()  && self.amountInWallet <= 0) {
             
                                Helper().showToast(message: "Insufficient amount in wallet", controller: self)
             
@@ -255,6 +259,12 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
                                 parkingModel.buyerID = model.buyerID
                                 
                                 Helper.removeRequestsOfAllOtherBuyers(parkingModel1: parkingModel, buyersList: buyersList)
+                                
+                                let refId = String(model.parkingID ?? -1) + "-" + String(model.buyerID ?? -1)
+                                
+                                let actionType = APP_CONSTANT.ACTION_PARKING_REQUEST
+                                self.sendNotification(actionType: actionType,message: "You have a parking request.",refId: refId,  model );
+                                
                                 
                                 
 //                                var firebaseRequestModel : FirebaseRequestModel = FirebaseRequestModel()
@@ -503,6 +513,25 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
             
         }
     
+    private func sendNotification(actionType : String , message : String , refId : String , _ requestModel : FirebaseRequestModel) {
+        
+        var model:NotificationSendingModel = NotificationSendingModel()
+        model.refId = refId
+        model.recieverId =  Helper().getCurrentUserId() ==  Int(requestModel.sellerID ?? 0) ?  Int(requestModel.buyerID ?? 0) : Int(requestModel.sellerID ?? 0)
+       model.actionType = actionType
+        model.message = message
+        
+        do{
+            let data = try JSONEncoder().encode(model)
+            Helper.customSendNotification(data: data, controller: self)
+        }
+        catch let parsingError {
+            
+            print("Parsing Error", parsingError)
+            
+        }
+    }
+    
     
    
     
@@ -617,11 +646,15 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         switch sender.selectedSegmentIndex
         {
             case 0:
+                self.sellerReuestArray.removeAll()
+                self.tblNotification.reloadData()
                 self.getAllRequest(isSeller: true)
             RequestVC.isSeller = true
                 
         
             case 1:
+                self.sellerReuestArray.removeAll()
+                 self.tblNotification.reloadData()
                 self.getAllRequest(isSeller: false)
              RequestVC.isSeller = false
            
