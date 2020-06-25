@@ -85,6 +85,10 @@ struct APP_CONSTANT {
     
     static let DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss"
     static let SHORT_DATE_TIME_FORMAT = "yyyy-MM-dd"
+     static let MESSAGE_TYPE_OFFER = 10
+    static let MESSAGE_TYPE_TEXT = 20
+    static let STATUS_COUNTER_OFFER = 30
+        static let ACTION_PARKING_REQUEST = "action_parking_request"
                                     
     // VEHICLE_TYPES
     

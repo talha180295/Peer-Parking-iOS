@@ -838,6 +838,7 @@ class ChatVC: UIViewController  {
     
     @IBAction func sendMessageAction(_ sender: Any) {
         
+        meesageLabel.resignFirstResponder()
         sendMessage()
         
         

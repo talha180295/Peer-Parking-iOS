@@ -131,6 +131,9 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
 
     
     func initial(){
+        
+        RequestVC.isSeller = true
+        
          makeReferences()
         RequestVC.isSeller ? getAllRequest(isSeller: true) :  getAllRequest(isSeller: false)
         
@@ -208,7 +211,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         
         self.present(alert, animated: true, completion: nil)
         
-        
+            
     }
     
     func assignBuyerApi(model : FirebaseRequestModel,buyersList : [String]){
