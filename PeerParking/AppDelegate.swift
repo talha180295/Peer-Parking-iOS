@@ -169,23 +169,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-//        let userInfo = notification.request.content.userInfo
-//
-//        // With swizzling disabled you must let Messaging know about the message, for Analytics
-//        // Messaging.messaging().appDidReceiveMessage(userInfo)
-//        // Print message ID.
-//        if let messageID = userInfo[gcmMessageIDKey] {
-//            print("Message ID: \(messageID)")
-//        }
-//
-//
-//
-//        let jsonStringifiedString = userInfo["extra_payload"] as! String
-//        let jsonStringifiedData = jsonStringifiedString.data(using: .utf8) as! Data
-//        let jsonDict = try! JSONSerialization.jsonObject(with: jsonStringifiedData, options: []) as! [String: Any]
-//        print(jsonDict["action_type"] as! String)
-//        //        print(jsonDict["action_type"])
-//        print(userInfo)
+        //        let userInfo = notification.request.content.userInfo
+        //
+        //        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        //        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        //        // Print message ID.
+        //        if let messageID = userInfo[gcmMessageIDKey] {
+        //            print("Message ID: \(messageID)")
+        //        }
+        //
+        //
+        //
+        //        let jsonStringifiedString = userInfo["extra_payload"] as! String
+        //        let jsonStringifiedData = jsonStringifiedString.data(using: .utf8) as! Data
+        //        let jsonDict = try! JSONSerialization.jsonObject(with: jsonStringifiedData, options: []) as! [String: Any]
+        //        print(jsonDict["action_type"] as! String)
+        //        //        print(jsonDict["action_type"])
+        //        print(userInfo)
         
         let userInfo = notification.request.content.userInfo
         // Print message ID.
@@ -198,12 +198,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterD
         let jsonDict = try! JSONSerialization.jsonObject(with: jsonStringifiedData, options: []) as! [String: Any]
         print(jsonDict["action_type"] as! String)
         let actionType = jsonDict["action_type"] as! String
-        let refId = jsonDict["ref_id"] as! Int
-        if(actionType == APP_CONSTANT.BUYER_REACHED){
-            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: false)
-        }
+        let refId = jsonDict["ref_id"] as! String
+//        if(actionType == APP_CONSTANT.BUYER_REACHED){
+//            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: false)
+//        }
         
-
+        showNotificationsOnForeground(actionType: actionType, refId: refId)
         
         // Change this to your preferred presentation option
         completionHandler([.alert, .sound])
@@ -224,10 +224,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterD
         let jsonDict = try! JSONSerialization.jsonObject(with: jsonStringifiedData, options: []) as! [String: Any]
         print(jsonDict["action_type"] as! String)
         let actionType = jsonDict["action_type"] as! String
-        let refId = jsonDict["ref_id"] as! Int
-        if(actionType == APP_CONSTANT.BUYER_REACHED){
-            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: false)
-        }
+        let refId = jsonDict["ref_id"] as! String
+//        if(actionType == APP_CONSTANT.BUYER_REACHED){
+//            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: false)
+//        }
+        
+        self.onNotificationPressed(actionType: actionType, refId: refId)
         
         
         //        let alert = userInfo["aps"] as! NSDictionary
@@ -242,87 +244,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterD
         completionHandler()
     }
     
-    private func getParkingOpenDetailScreen( parkingId:String, openDetailScreen:Bool) {
-        if(parkingId==nil || parkingId.isEmpty){
-            return;
-        }
-        let request = APIRouter.getParkingsById(id: Int(parkingId) ?? -1)
-//        Helper().showSpinner(view: self.view)
-        APIClient.serverRequest(url: request, path: request.getPath(), dec:
-        ResponseData<Parking>.self) { (response,error) in
-            
-            if(response != nil){
-                if (response?.success) != nil {
-                    //Helper().showToast(message: "Succes=\(success)", controller: self)
-                    if let val = response?.data {
-                        
-                        
-                        //                       ParkingModel1 model1 = GsonFactory.getSimpleGson()
-                        //                        .fromJson(GsonFactory.getSimpleGson().toJson(webResponse.result)
-                        //                        , ParkingModel1.class);
-                        
-                        if(openDetailScreen){
-                            let vc = MySpotParkingDetailVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
-                            vc.setParingModel(parkingModel: val)
-                            vc.isPublicParking = true
-                            //                            vc.delegate = self
-                            vc.modalPresentationStyle = .fullScreen
-                            self.window?.rootViewController?.present(vc, animated: true,completion: nil)
-                            //                        addDockableFragment(PublicParkingDetailFragment.newInstance(model1), false);
-                        }else{
-                            let vc = ParkingBookingDetailsVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
-                            vc.setParingModel(parkingModel: val)
-                            
-                            self.window?.rootViewController?.present(vc, animated: true,completion: nil)
-                            //                             self.window?.rootViewController?.navigationController?.pushViewController(vc, animated: true)
-                            //                        addDockableFragment(BookingDetailFragment.newInstance(model1), false);
-                        }
-                    }
-                    
-                }
-            }
-            else{
-                //                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
-                //
-                //                    Helper().hideSpinner(view: self.view)
-                
-            }
-        }
-       
-            
-     
-        
-//        if(Utils.getActivity() !=null && Utils.getActivity() instanceof ChatActivity){
-//            return;
-//        }
-//        popStackTill(1);
-//        Map<String, Object> queryMap = new HashMap<>();
-//        queryMap.put("id",parkingId);
-//        getWebService(true).getAPIAnyObject(WebServiceConstants.PATH_PARKING+"/"+parkingId, queryMap, new WebServices.IRequestWebResponseAnyObjectCallBack() {
-//        @Override
-//        public void requestDataResponse(WebResponse<Object> webResponse) {
-//        
-//        if(webResponse.isSuccess())
-//        {
-//        
-//        ParkingModel1 model1 = GsonFactory.getSimpleGson()
-//        .fromJson(GsonFactory.getSimpleGson().toJson(webResponse.result)
-//        , ParkingModel1.class);
-//        if(openDetailScreen){
-//        addDockableFragment(PublicParkingDetailFragment.newInstance(model1), false);
-//        }else{
-//        addDockableFragment(BookingDetailFragment.newInstance(model1), false);
-//        }
-//        }
-//        
-//        }
-//        
-//        @Override
-//        public void onError(Object object) {
-//        
-//        }
-//        });
-    }
+    
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
@@ -453,6 +375,154 @@ extension AppDelegate:CLLocationManagerDelegate{
         print("Error")
     }
     
+    
+    
+}
+
+extension AppDelegate{
+    
+    func showNotificationsOnForeground(actionType:String, refId:String){
+        if(actionType == (APP_CONSTANT.BARGAINING_ACCEPTED_BY_SELLER) ||
+            actionType == (APP_CONSTANT.PARKING_BOOKED) ||
+            actionType == (APP_CONSTANT.BUYER_IS_NAVIGATING) ||
+            actionType == (APP_CONSTANT.BUYER_REACHED)){
+            
+            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: false)
+        }else if(actionType == (APP_CONSTANT.PARKING_CANCELED_BY_BUYER)){
+            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: true)
+        }else if(actionType == (APP_CONSTANT.PARKING_CANCELED_BY_SELLER) ){// && (baseFragment instanceof FragmentNavigateUpdated || baseFragment instanceof BookingDetailFragment)){
+            
+            //            popStackTill(1);
+            //            Helper().presentOnMainScreens(controller: self.window?.rootViewController ?? UIViewController(), index: 1)
+        }
+    }
+    
+    
+    func onNotificationPressed(actionType:String, refId:String) {
+        
+        
+        if(actionType == (APP_CONSTANT.BARGAINING_COUNTER_OFFER_BY_BUYER) ||
+            actionType == (APP_CONSTANT.BARGAINING_ACCEPTED_BY_BUYER) ||
+            actionType == (APP_CONSTANT.BARGAINING_COUNTER_OFFER_BY_SELLER) ||
+            actionType == (APP_CONSTANT.BARGAINING_REJECTED_BY_SELLER) ||
+            actionType == (APP_CONSTANT.BARGAINING_MESSAGE_FROM_BUYER) ||
+            actionType == (APP_CONSTANT.BARGAINING_MESSAGE_FROM_SELLER) ||
+            actionType == (APP_CONSTANT.ACTION_PARKING_REQUEST)){
+            
+            getParkingOpenChatActivity(chatRoomId:String(refId))
+            
+        }else if(actionType == (APP_CONSTANT.BARGAINING_ACCEPTED_BY_SELLER) ||
+            actionType == (APP_CONSTANT.PARKING_BOOKED) ||
+            actionType == (APP_CONSTANT.BUYER_IS_NAVIGATING) ||
+            actionType == (APP_CONSTANT.BUYER_REACHED) ||
+            actionType == (APP_CONSTANT.BUYER_TO_REACH_IN_ONE_MINUTE) ){
+            
+            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: false)
+            
+        }else if(actionType == (APP_CONSTANT.PARKING_CANCELED_BY_BUYER)){
+            
+            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: true)
+            
+        }
+        
+    }
+    
+    func getParkingOpenDetailScreen( parkingId:String, openDetailScreen:Bool) {
+        if(parkingId.isEmpty){
+            return;
+        }
+        let request = APIRouter.getParkingsById(id: Int(parkingId) ?? -1)
+        //        Helper().showSpinner(view: self.view)
+        APIClient.serverRequest(url: request, path: request.getPath(), dec:
+        ResponseData<Parking>.self) { (response,error) in
+            
+            if(response != nil){
+                if (response?.success) != nil {
+                    //Helper().showToast(message: "Succes=\(success)", controller: self)
+                    if let val = response?.data {
+                        
+                        
+                        //                       ParkingModel1 model1 = GsonFactory.getSimpleGson()
+                        //                        .fromJson(GsonFactory.getSimpleGson().toJson(webResponse.result)
+                        //                        , ParkingModel1.class);
+                        
+                        if(openDetailScreen){
+                            let vc = MySpotParkingDetailVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
+                            vc.setParingModel(parkingModel: val)
+                            vc.isPublicParking = true
+                            //                            vc.delegate = self
+                            vc.modalPresentationStyle = .fullScreen
+                            self.window?.rootViewController?.present(vc, animated: true,completion: nil)
+                            //                        addDockableFragment(PublicParkingDetailFragment.newInstance(model1), false);
+                        }else{
+                            let vc = ParkingBookingDetailsVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
+                            vc.setParingModel(parkingModel: val)
+                            
+                            self.window?.rootViewController?.present(vc, animated: true,completion: nil)
+                            
+                        }
+                    }
+                    
+                }
+            }
+            else{
+                //                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                //
+                //                    Helper().hideSpinner(view: self.view)
+                
+            }
+        }
+    }
+    
+    func getParkingOpenChatActivity(chatRoomId:String) {
+        if(chatRoomId.isEmpty){
+            return;
+        }
+        
+        let ids = chatRoomId.components(separatedBy: "-")
+        let parkingId = ids[0];
+        let buyerId = Int(ids[1])
+
+//        popStackTill(1);
+        
+
+        let request = APIRouter.getParkingsById(id: Int(parkingId) ?? -1)
+        APIClient.serverRequest(url:request,path:request.getPath(), dec: ResponseData<Parking>.self) { (response, error) in
+            
+//            Helper().hideSpinner(view: self.view)
+            if(response != nil){
+                if (response?.success) != nil {
+//                    Helper().showToast(message: response?.message ?? "-", controller: self)
+                    if let val = response?.data {
+                        var model = Parking.init(dictionary: val.dictionary ?? [:])
+                        if(model?.buyerID == 0){
+                            model?.buyerID = buyerId
+                        }
+                        let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
+                        
+                        vc.modalPresentationStyle = .fullScreen
+                        
+                        vc.parking_details = model
+                        
+                        self.window?.rootViewController?.present(vc, animated: true, completion: nil)
+//                        Intent i = new Intent(HomeActivity.this, ChatActivity.class);
+//                        String parkingJson= gson.toJson(model);
+//                        i.putExtra("parkingModel", parkingJson);
+//                        startActivity(i);
+                    }
+                }
+                else{
+//                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                }
+            }
+            else if(error != nil){
+//                Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+            }
+            else{
+//                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
+        }
+    }
     
     
 }

@@ -1126,7 +1126,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="YdD-8j-CAD">
-                                <rect key="frame" x="10" y="20" width="355" height="433"/>
+                                <rect key="frame" x="10" y="44" width="355" height="433"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDE-6j-SIl" customClass="CardView" customModule="PeerParking" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="92"/>
@@ -1374,12 +1374,28 @@
                                     </view>
                                 </subviews>
                             </stackView>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qum-OZ-SYm">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Parking Booking Details" id="4ot-m0-FAq">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" image="back_btn" id="gCz-33-yiw">
+                                            <color key="tintColor" name="themeBlue"/>
+                                            <connections>
+                                                <action selector="backAction:" destination="zXn-ZX-Xyc" id="vdc-zx-c3h"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="ak1-Tx-5QS" firstAttribute="trailing" secondItem="YdD-8j-CAD" secondAttribute="trailing" constant="10" id="Hrd-HM-KoT"/>
+                            <constraint firstItem="Qum-OZ-SYm" firstAttribute="trailing" secondItem="ak1-Tx-5QS" secondAttribute="trailing" id="WBa-Mu-dgl"/>
                             <constraint firstItem="YdD-8j-CAD" firstAttribute="leading" secondItem="ak1-Tx-5QS" secondAttribute="leading" constant="10" id="bcF-6d-VRh"/>
-                            <constraint firstItem="YdD-8j-CAD" firstAttribute="top" secondItem="ak1-Tx-5QS" secondAttribute="top" constant="20" id="zbM-FT-wvx"/>
+                            <constraint firstItem="Qum-OZ-SYm" firstAttribute="top" secondItem="ak1-Tx-5QS" secondAttribute="top" id="prr-dM-jxG"/>
+                            <constraint firstItem="YdD-8j-CAD" firstAttribute="top" secondItem="Qum-OZ-SYm" secondAttribute="bottom" id="r8Y-RT-8RH"/>
+                            <constraint firstItem="Qum-OZ-SYm" firstAttribute="leading" secondItem="ak1-Tx-5QS" secondAttribute="leading" id="zjb-D3-gF4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ak1-Tx-5QS"/>
                     </view>
