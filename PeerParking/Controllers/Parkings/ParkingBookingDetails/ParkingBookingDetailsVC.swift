@@ -106,6 +106,12 @@ class ParkingBookingDetailsVC: UIViewController {
         showCancelParkingConfirmationDialog()
     }
     
+    @IBAction func backAction(_ sender: Any) {
+        
+        self.dismiss(animated: true)
+        
+    }
+    
     func openChatScreen(model : Parking){
            
            

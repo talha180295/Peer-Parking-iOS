@@ -155,8 +155,8 @@ extension UpcomingParkingVC: UITableViewDelegate,UITableViewDataSource{
             
             let vc = ParkingBookingDetailsVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
             vc.setParingModel(parkingModel: parking)
-           
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.present(vc, animated: true)
+//            self.navigationController?.pushViewController(vc, animated: true)
         }
         
        
