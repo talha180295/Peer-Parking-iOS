@@ -138,9 +138,9 @@ class ChatVC: UIViewController  {
         //        tv.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: .Bottom,
         //        animated: true)
         
+        
+        makeReferences()
         setUserData()
-        
-        
         
         setParkingData()
         initial()
@@ -169,10 +169,11 @@ class ChatVC: UIViewController  {
     
     func initial(){
         
-        makeReferences()
+        
         loadChats()
         loadParking()
         getUpdatedWalletAmount()
+       
         
         
         
@@ -180,6 +181,8 @@ class ChatVC: UIViewController  {
         
     }
     
+    
+   
     
     
     private func getUpdatedWalletAmount() {
@@ -232,6 +235,45 @@ class ChatVC: UIViewController  {
     func setUserData(){
         
         
+       
+        
+        parkingBuyerModelReference!.observeSingleEvent(of: .value) { (snapshot) in
+            if(snapshot.exists())
+            {
+                
+                self.populateView()
+                
+                
+            }
+            else
+            {
+                
+                
+                do {
+                    let model = try! FirebaseEncoder().encode(self.parking_details.buyer)
+                   
+                    self.parkingBuyerModelReference.setValue(model)
+                    
+                    
+                } catch let error {
+                    print(error)
+                }
+                
+                
+                
+                
+                self.populateView()
+                //
+            }
+            
+        }
+        
+        
+        
+        
+    }
+    
+    func populateView(){
         
         parkingId = parking_details.id ?? 0
         buyerId = parking_details.buyerID ?? 0
@@ -250,6 +292,7 @@ class ChatVC: UIViewController  {
                 
                 let imgUrl = parking_details.buyer?.details?.imageURL
                 userImageView.sd_setImage(with: URL(string: imgUrl ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
+           
             }
             
             
@@ -281,6 +324,7 @@ class ChatVC: UIViewController  {
         
         
     }
+    
     func setParkingData(){
         
         //        self.sTime = pModel.startAt ?? ""
@@ -360,10 +404,10 @@ class ChatVC: UIViewController  {
         
         print("parking id \(String(parking_details.id!))")
         
-        chatRef = Database.database().reference(withPath: "chat/").child(String(parkingId)).child(String(buyerId))
-        parkingBuyerModelReference = Database.database().reference(withPath: "buyerModel/").child(String(buyerId))
+        chatRef = Database.database().reference(withPath: "chat/").child(String(parking_details.id!)).child(String(parking_details.buyerID!))
+        parkingBuyerModelReference = Database.database().reference(withPath: "buyerModel/").child(String(parking_details.buyerID!))
         parkingReference = Database.database().reference(withPath: "chat/").child(String(parking_details.id!))
-        requestReference = Database.database().reference(withPath: "requests/").child(String(parkingId) + "-" + String(buyerId))
+        requestReference = Database.database().reference(withPath: "requests/").child(String(parkingId) + "-" + String(parking_details.buyerID!))
         sellerRequestIndexReference = Database.database().reference(withPath: "sellerRequestsIndex/")
         buyerRequestIndexReference = Database.database().reference(withPath: "buyerRequestsIndex/")
         
@@ -676,13 +720,13 @@ class ChatVC: UIViewController  {
         
         //
         
-        let chat : ChatModel = createMessage()
+        let chat : ChatModel? = createMessage()
         
         if(chat != nil)
         {
             
             
-            postMessage(chatModel : chat)
+            postMessage(chatModel : chat!)
             
             
         }
@@ -695,25 +739,32 @@ class ChatVC: UIViewController  {
         //
     }
     
-    func createMessage() -> ChatModel {
-        
-        
-        
-        let  message : String =   meesageLabel.text ?? ""
+    func createMessage() -> ChatModel? {
         
         
         let chat = ChatModel()
-        chat.message = message
-        chat.createdAt = makingCurrentDateModel()
-        chat.direction = checkIamSeller ? Constants().SELLER_TO_BUYER : Constants().BUYER_TO_SELLER
-        chat.messageType = message.isEmpty ? Constants().MESSAGEOFFER : Constants().MESSAGETEXT
-        chat.offerStatus = message.isEmpty ? Constants().STATUS_COUNTER_OFFER : Constants().STATUS_CHAT
-        chat.offer = message.isEmpty ?  Double(self.offer!) : 0.0
+        if( !meesageLabel.text!.isEmpty )
+        {
+            let  message : String =   meesageLabel.text ?? ""
+                   
+                   
+                   
+                   chat.message = message
+                   chat.createdAt = makingCurrentDateModel()
+                   chat.direction = checkIamSeller ? Constants().SELLER_TO_BUYER : Constants().BUYER_TO_SELLER
+                   chat.messageType = message.isEmpty ? Constants().MESSAGEOFFER : Constants().MESSAGETEXT
+                   chat.offerStatus = message.isEmpty ? Constants().STATUS_COUNTER_OFFER : Constants().STATUS_CHAT
+                   chat.offer = message.isEmpty ?  Double(self.offer!) : 0.0
+                   
+                   
+                   self.meesageLabel.text = ""
+                   
+                   return chat
+            
+        }
+        return nil
         
-        
-        self.meesageLabel.text = ""
-        
-        return chat
+       
         
     }
     

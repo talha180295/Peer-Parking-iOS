@@ -20,7 +20,9 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
     func chatButtonSelectListner(index: Int) {
         
         
-        self.getParking( id : self.sellerReuestArray[index].parkingID ?? -1)
+        
+        
+        self.getParking( id : self.sellerReuestArray[index].parkingID ?? -1 , buyerId: self.sellerReuestArray[index].buyerID ?? 0)
         
         
         
@@ -155,8 +157,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
             self.sellerKey.removeAll()
             self.dict.removeAll()
                
-            if(snapshot.exists())
-            {
+           
                 snapshot.children.forEach { (child) in
                     
                     let snap = child as! DataSnapshot
@@ -177,7 +178,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
                 }
                 
                 
-            }
+           
             
             self.getRequest()
             
@@ -433,7 +434,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
       }
     
     
-    func getParking( id : Int){
+    func getParking( id : Int, buyerId : Int){
           
           
           
@@ -444,8 +445,18 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
               
               if (pModel != nil)
               {
+                
+                var parkingModel : Parking = Parking(dictionary: pModel.dictionary ??  [:])!
                   
-                    self.openChatScreen(model: pModel)
+                if(parkingModel.buyerID == nil)
+                {
+                    
+                    parkingModel.buyerID = buyerId
+                }
+                
+                
+                
+                    self.openChatScreen(model: parkingModel)
               }
              
           }

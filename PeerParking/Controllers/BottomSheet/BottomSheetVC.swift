@@ -324,7 +324,7 @@ class BottomSheetVC: UIViewController {
         //            self.fTime = pModel.endAt ?? ""
                     
                     
-                    self.st_time.text = "From : \( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
+                    self.st_time.text = "\( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
         //            self.end_time.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.fTime!))"
                     
                    
