@@ -78,12 +78,16 @@ class LoginViewController: UIViewController {
         // SharedHelper().showSpinner(view: self.view)
         // let deviceToken : String?
         
+        let device_token :String = UserDefaults.standard.string(forKey: "FCMToken") ?? ""
         let param = [
+            
             "email" : email,
             "password" : password,
-            "device_token" : "string",
-            "device_type" : deviceToken
+            "device_type" : deviceToken,
+            "device_token" : device_token
+            
         ]
+        
         let headers: HTTPHeaders = [
             "Authorization" : ""
         ]

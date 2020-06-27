@@ -155,6 +155,11 @@ struct APP_CONSTANT {
     public static let BARGAINING_MESSAGE_FROM_BUYER = "bargaining_message_from_buyer";
     public static let BARGAINING_NOTIFICATION_DEFAULT    = "bargaining_notification_default";
 //    public static let ACTION_PARKING_REQUEST               = "action_parking_request";
+    
+}
+
+struct Defaults {
+    public static let userDetails = "user_details"
 }
 
 
