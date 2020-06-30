@@ -194,16 +194,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterD
         }
         
         let jsonStringifiedString = userInfo["extra_payload"] as! String
-        let jsonStringifiedData = jsonStringifiedString.data(using: .utf8) as! Data
+        let jsonStringifiedData = jsonStringifiedString.data(using: .utf8)!
         let jsonDict = try! JSONSerialization.jsonObject(with: jsonStringifiedData, options: []) as! [String: Any]
         print(jsonDict["action_type"] as! String)
         let actionType = jsonDict["action_type"] as! String
-        let refId = jsonDict["ref_id"] as! String
+        let refId = jsonDict["ref_id"]
 //        if(actionType == APP_CONSTANT.BUYER_REACHED){
 //            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: false)
 //        }
         
-        showNotificationsOnForeground(actionType: actionType, refId: refId)
+        showNotificationsOnForeground(actionType: actionType, refId: refId as Any)
         
         // Change this to your preferred presentation option
         completionHandler([.alert, .sound])
@@ -220,16 +220,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterD
         }
         
         let jsonStringifiedString = userInfo["extra_payload"] as! String
-        let jsonStringifiedData = jsonStringifiedString.data(using: .utf8) as! Data
+        let jsonStringifiedData = jsonStringifiedString.data(using: .utf8)!
         let jsonDict = try! JSONSerialization.jsonObject(with: jsonStringifiedData, options: []) as! [String: Any]
         print(jsonDict["action_type"] as! String)
         let actionType = jsonDict["action_type"] as! String
-        let refId = jsonDict["ref_id"] as! String
+        let refId = jsonDict["ref_id"]
 //        if(actionType == APP_CONSTANT.BUYER_REACHED){
 //            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: false)
 //        }
         
-        self.onNotificationPressed(actionType: actionType, refId: refId)
+        self.onNotificationPressed(actionType: actionType, refId: refId as Any)
         
         
         //        let alert = userInfo["aps"] as! NSDictionary
@@ -260,17 +260,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterD
         // Note: This callback is fired at each app startup and whenever a new token is generated.
     }
     
-    func messaging(_ messaging: Messaging, did remoteMessage: MessagingRemoteMessage) {
-        print("Received data message: \(remoteMessage.appData)")
-    }
-    // [END refresh_token]
-    // [START ios_10_data_message]
-    // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
-    // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
-    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-        print("Received data message: \(remoteMessage.appData)")
-    }
-    
+//    func messaging(_ messaging: Messaging, did remoteMessage: MessagingRemoteMessage) {
+//        print("Received data message: \(remoteMessage.appData)")
+//    }
+//    // [END refresh_token]
+//    // [START ios_10_data_message]
+//    // Receive data messages on iOS 10+ directly from FCM (bypassing APNs) when the app is in the foreground.
+//    // To enable direct data messages, you can set Messaging.messaging().shouldEstablishDirectChannel to true.
+//    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+//        print("Received data message: \(remoteMessage.appData)")
+//    }
+//
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken as Data
@@ -381,15 +381,16 @@ extension AppDelegate:CLLocationManagerDelegate{
 
 extension AppDelegate{
     
-    func showNotificationsOnForeground(actionType:String, refId:String){
+    func showNotificationsOnForeground(actionType:String, refId:Any){
+        
         if(actionType == (APP_CONSTANT.BARGAINING_ACCEPTED_BY_SELLER) ||
             actionType == (APP_CONSTANT.PARKING_BOOKED) ||
             actionType == (APP_CONSTANT.BUYER_IS_NAVIGATING) ||
             actionType == (APP_CONSTANT.BUYER_REACHED)){
             
-            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: false)
+            getParkingOpenDetailScreen(parkingId: "\(refId as! Int)",openDetailScreen: false)
         }else if(actionType == (APP_CONSTANT.PARKING_CANCELED_BY_BUYER)){
-            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: true)
+            getParkingOpenDetailScreen(parkingId: "\(refId as! Int)",openDetailScreen: true)
         }else if(actionType == (APP_CONSTANT.PARKING_CANCELED_BY_SELLER) ){// && (baseFragment instanceof FragmentNavigateUpdated || baseFragment instanceof BookingDetailFragment)){
             
             //            popStackTill(1);
@@ -398,7 +399,7 @@ extension AppDelegate{
     }
     
     
-    func onNotificationPressed(actionType:String, refId:String) {
+    func onNotificationPressed(actionType:String, refId:Any) {
         
         
         if(actionType == (APP_CONSTANT.BARGAINING_COUNTER_OFFER_BY_BUYER) ||
@@ -409,7 +410,7 @@ extension AppDelegate{
             actionType == (APP_CONSTANT.BARGAINING_MESSAGE_FROM_SELLER) ||
             actionType == (APP_CONSTANT.ACTION_PARKING_REQUEST)){
             
-            getParkingOpenChatActivity(chatRoomId:String(refId))
+            getParkingOpenChatActivity(chatRoomId:"\(refId)")
             
         }else if(actionType == (APP_CONSTANT.BARGAINING_ACCEPTED_BY_SELLER) ||
             actionType == (APP_CONSTANT.PARKING_BOOKED) ||
@@ -417,11 +418,11 @@ extension AppDelegate{
             actionType == (APP_CONSTANT.BUYER_REACHED) ||
             actionType == (APP_CONSTANT.BUYER_TO_REACH_IN_ONE_MINUTE) ){
             
-            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: false)
+            getParkingOpenDetailScreen(parkingId: "\(refId)",openDetailScreen: false)
             
         }else if(actionType == (APP_CONSTANT.PARKING_CANCELED_BY_BUYER)){
             
-            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: true)
+            getParkingOpenDetailScreen(parkingId: "\(refId)",openDetailScreen: true)
             
         }
         
@@ -455,9 +456,10 @@ extension AppDelegate{
                             self.window?.rootViewController?.present(vc, animated: true,completion: nil)
                             //                        addDockableFragment(PublicParkingDetailFragment.newInstance(model1), false);
                         }else{
+                            
                             let vc = ParkingBookingDetailsVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
                             vc.setParingModel(parkingModel: val)
-                            
+                            vc.modalPresentationStyle = .fullScreen
                             self.window?.rootViewController?.present(vc, animated: true,completion: nil)
                             
                         }
@@ -498,13 +500,19 @@ extension AppDelegate{
                         if(model?.buyerID == 0){
                             model?.buyerID = buyerId
                         }
+//                        let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
+//
+//                        vc.modalPresentationStyle = .fullScreen
+//
+//                        vc.parking_details = model
+//
+//                        self.window?.rootViewController?.present(vc, animated: true, completion: nil)
+//
+                        
                         let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
-                        
-                        vc.modalPresentationStyle = .fullScreen
-                        
                         vc.parking_details = model
                         
-                        self.window?.rootViewController?.present(vc, animated: true, completion: nil)
+                        self.window?.rootViewController?.present(vc, animated: true,completion: nil)
 //                        Intent i = new Intent(HomeActivity.this, ChatActivity.class);
 //                        String parkingJson= gson.toJson(model);
 //                        i.putExtra("parkingModel", parkingJson);

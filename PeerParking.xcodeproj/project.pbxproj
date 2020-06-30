@@ -30,7 +30,6 @@
 		181E0D1123CDF954005D7248 /* Buyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0623CDF953005D7248 /* Buyer.swift */; };
 		181E0D1223CDF954005D7248 /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0723CDF953005D7248 /* Details.swift */; };
 		181E0D1323CDF954005D7248 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0823CDF953005D7248 /* Card.swift */; };
-		181E0D1423CDF954005D7248 /* JSONSchemaSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0923CDF953005D7248 /* JSONSchemaSupport.swift */; };
 		181E0D1523CDF954005D7248 /* Bargaining.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0A23CDF953005D7248 /* Bargaining.swift */; };
 		181E0D1623CDF954005D7248 /* Parking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0B23CDF953005D7248 /* Parking.swift */; };
 		181E0D1723CDF954005D7248 /* MainStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181E0D0C23CDF953005D7248 /* MainStruct.swift */; };
@@ -117,6 +116,8 @@
 		A9D762387663A23BCCC8DF20 /* Pods_PeerParkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */; };
 		BC072887249ECB7E00CBDE62 /* BuyerParkingSendingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC072886249ECB7E00CBDE62 /* BuyerParkingSendingModel.swift */; };
 		BC514A9A2496D088003DF452 /* SellParking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC514A992496D087003DF452 /* SellParking.storyboard */; };
+		BC6C163A24A757AA00F79CCE /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6C163924A757AA00F79CCE /* LoginResponse.swift */; };
+		BC6C163C24A7581800F79CCE /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6C163B24A7581800F79CCE /* LoginRequest.swift */; };
 		BC8511832490D84700D4B3BA /* PeerParkingStotyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */; };
 		BC8511862490D94300D4B3BA /* ParkingDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */; };
 		BC97A7FE249FEA990059FAF6 /* UpdateParkingSendingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC97A7FD249FEA990059FAF6 /* UpdateParkingSendingModel.swift */; };
@@ -230,7 +231,6 @@
 		181E0D0623CDF953005D7248 /* Buyer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buyer.swift; sourceTree = "<group>"; };
 		181E0D0723CDF953005D7248 /* Details.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
 		181E0D0823CDF953005D7248 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		181E0D0923CDF953005D7248 /* JSONSchemaSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSchemaSupport.swift; sourceTree = "<group>"; };
 		181E0D0A23CDF953005D7248 /* Bargaining.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bargaining.swift; sourceTree = "<group>"; };
 		181E0D0B23CDF953005D7248 /* Parking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parking.swift; sourceTree = "<group>"; };
 		181E0D0C23CDF953005D7248 /* MainStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStruct.swift; sourceTree = "<group>"; };
@@ -322,6 +322,8 @@
 		BACE3107569777F337087DF8 /* Pods-PeerParkingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingUITests.release.xcconfig"; path = "Target Support Files/Pods-PeerParkingUITests/Pods-PeerParkingUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BC072886249ECB7E00CBDE62 /* BuyerParkingSendingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerParkingSendingModel.swift; sourceTree = "<group>"; };
 		BC514A992496D087003DF452 /* SellParking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SellParking.storyboard; sourceTree = "<group>"; };
+		BC6C163924A757AA00F79CCE /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		BC6C163B24A7581800F79CCE /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerParkingStotyboards.swift; sourceTree = "<group>"; };
 		BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ParkingDetails.storyboard; sourceTree = "<group>"; };
 		BC97A7FD249FEA990059FAF6 /* UpdateParkingSendingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateParkingSendingModel.swift; sourceTree = "<group>"; };
@@ -474,14 +476,13 @@
 		181E0D0523CDF953005D7248 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BC97A7FC249FEA720059FAF6 /* RequestModel */,
+				BC6C163624A754F600F79CCE /* Response */,
+				BC97A7FC249FEA720059FAF6 /* Request */,
 				181E0D0623CDF953005D7248 /* Buyer.swift */,
 				181E0D0723CDF953005D7248 /* Details.swift */,
 				181E0D0823CDF953005D7248 /* Card.swift */,
-				181E0D0923CDF953005D7248 /* JSONSchemaSupport.swift */,
 				181E0D0A23CDF953005D7248 /* Bargaining.swift */,
 				181E0D0B23CDF953005D7248 /* Parking.swift */,
-				181E0D0C23CDF953005D7248 /* MainStruct.swift */,
 				181E0D0D23CDF953005D7248 /* Seller.swift */,
 				181E0D1E23CE0400005D7248 /* RefreshTokenModel.swift */,
 				181E0D2023CE22E3005D7248 /* PostBargainigOfferModel.swift */,
@@ -703,6 +704,15 @@
 			path = ParkingBookingDetails;
 			sourceTree = "<group>";
 		};
+		BC6C163624A754F600F79CCE /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				181E0D0C23CDF953005D7248 /* MainStruct.swift */,
+				BC6C163924A757AA00F79CCE /* LoginResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 		BC8511842490D91D00D4B3BA /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -716,7 +726,7 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		BC97A7FC249FEA720059FAF6 /* RequestModel */ = {
+		BC97A7FC249FEA720059FAF6 /* Request */ = {
 			isa = PBXGroup;
 			children = (
 				1852A81824A4FAC300D3DBE0 /* NotificationSendingModel.swift */,
@@ -725,8 +735,9 @@
 				186AEB6224A15D6500C4EBE3 /* FirebaseRequestModel.swift */,
 				186AEB6424A23FE100C4EBE3 /* BuyerTakeOfferModel.swift */,
 				1852A81624A4DCB800D3DBE0 /* UpdateTempParkingSendingModel.swift */,
+				BC6C163B24A7581800F79CCE /* LoginRequest.swift */,
 			);
-			path = RequestModel;
+			path = Request;
 			sourceTree = "<group>";
 		};
 		DA2D335CC57FF81A4BC8D086 /* Frameworks */ = {
@@ -1342,6 +1353,7 @@
 				1878C528240E922D005F675E /* MapViewVC.swift in Sources */,
 				FA0FCC5C232250DD000FF52C /* SettingViewController.swift in Sources */,
 				FA2815AB231E3F92008AF3F5 /* CustomSideMenuController.swift in Sources */,
+				BC6C163A24A757AA00F79CCE /* LoginResponse.swift in Sources */,
 				1841BED62428FE3300B621AF /* StartEndPopUp.swift in Sources */,
 				67BC7B9A23CC5D64001542D6 /* ForgetPassViewController.swift in Sources */,
 				183DAA4023E073930022BC6E /* UpcomingParkingVC.swift in Sources */,
@@ -1356,7 +1368,6 @@
 				1866BF642374617B008EE650 /* RequestCell.swift in Sources */,
 				FA6CD3732328F1C900E18CF2 /* ListParkingViewController.swift in Sources */,
 				18CAA58123695B62001B5503 /* ImageStepVC.swift in Sources */,
-				181E0D1423CDF954005D7248 /* JSONSchemaSupport.swift in Sources */,
 				186AEB6324A15D6500C4EBE3 /* FirebaseRequestModel.swift in Sources */,
 				67BC7B9623CC53B6001542D6 /* LoginViewController.swift in Sources */,
 				18916D1A241917A000E408BB /* SellParkingContainer.swift in Sources */,
@@ -1416,6 +1427,7 @@
 				FA0FCC612322510F000FF52C /* TransactionViewController.swift in Sources */,
 				181E0D1323CDF954005D7248 /* Card.swift in Sources */,
 				18F27A30247E4BF400BC7D79 /* MySpotParkingDetailVC.swift in Sources */,
+				BC6C163C24A7581800F79CCE /* LoginRequest.swift in Sources */,
 				181E0D1523CDF954005D7248 /* Bargaining.swift in Sources */,
 				FA6CD3802329122E00E18CF2 /* AlternateRouteViewController.swift in Sources */,
 				6795ED7624A0CF8000FD57F8 /* PrivateBookingsCell.swift in Sources */,
@@ -1637,7 +1649,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fomark.peerparking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1665,7 +1677,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.4;
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fomark.peerparking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
