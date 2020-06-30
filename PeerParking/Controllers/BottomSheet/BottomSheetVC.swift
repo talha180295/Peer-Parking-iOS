@@ -23,6 +23,7 @@ import CodableFirebase
 
 class BottomSheetVC: UIViewController {
     
+    @IBOutlet weak var endTimeHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var offer_btn: UIButton!
     @IBOutlet weak var counter_btn: UIButton!
     @IBOutlet weak var btnSelectTime: UIButton!
@@ -103,6 +104,14 @@ class BottomSheetVC: UIViewController {
         }
         else
         {
+            
+//            self.sTime = parking_details.startAt ?? ""
+//                 //            self.fTime = pModel.endAt ?? ""
+//
+//
+//                             self.st_time.text = "From : \( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
+                 
+            
             if(self.parking_details.parkingHoursLimit == nil || self.parking_details.parkingHoursLimit!.isEmpty ){
                 
 //                self.timeView.isHidden = true
@@ -130,12 +139,7 @@ class BottomSheetVC: UIViewController {
         }
         
         
-       self.sTime = parking_details.startAt ?? ""
-        //            self.fTime = pModel.endAt ?? ""
-                    
-                    
-                    self.st_time.text = "From : \( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
-        
+    
         parking_type.text = parking_details.parkingSubTypeText == "Drive" ? "Driveway" : parking_details.parkingSubTypeText
         
         
@@ -187,7 +191,7 @@ class BottomSheetVC: UIViewController {
                 }
         
         
-        
+         self.viheicle_type.text = parking_details.vehicleTypeText
         
  
 //               if (parkingModel1.getSellerMdoel() != null && parkingModel1.getSellerMdoel().getDetails()!=null) {
@@ -319,6 +323,8 @@ class BottomSheetVC: UIViewController {
                 }
                 if(parking_details.parkingType==ParkingType.PARKING_TYPE_PUBLIC){
                     
+                    
+                    self.endTimeHeightConstraint.constant = 0.0
                     
                     self.sTime = parking_details.startAt ?? ""
         //            self.fTime = pModel.endAt ?? ""
@@ -612,7 +618,7 @@ class BottomSheetVC: UIViewController {
             Helper().hideSpinner(view: self.view)
             if(response != nil){
                 if (response?.success) != nil {
-                    Helper().showToast(message: response?.message ?? "-", controller: self)
+//                    Helper().showToast(message: response?.message ?? "-", controller: self)
                     if let val = response?.data {
                         
                         self.sTime = val.startAt ?? ""
@@ -725,7 +731,7 @@ class BottomSheetVC: UIViewController {
                 Helper().hideSpinner(view: self.view)
                 if(response != nil){
                     if (response?.success) != nil {
-                        Helper().showToast(message: response?.message ?? "-", controller: self)
+//                        Helper().showToast(message: response?.message ?? "-", controller: self)
                         if let val = response?.data {
                             
                             self.tempParkingId = val.id ?? 0
