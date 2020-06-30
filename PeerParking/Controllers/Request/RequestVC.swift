@@ -130,10 +130,12 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         
         self.getUpdatedWalletAmount()
         
-       
+       initial()
         
     }
 
+    
+    
     
     func initial(){
         
@@ -153,7 +155,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         var ref  : DatabaseReference! = isSeller ? sellerRequestIndexReference : buyerRequestIndexReference
         ref.child(String(Helper().getCurrentUserId())).queryOrderedByValue().observe(.value) { (snapshot) in
            
-          self.sellerReuestArray.removeAll()
+            self.sellerReuestArray.removeAll()
             self.sellerKey.removeAll()
             self.dict.removeAll()
                
@@ -339,7 +341,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
     
     func getRequest(){
         
-          
+//        self.sellerReuestArray.removeAll()
         
         let sorted = self.dict.sorted {$0.value > $1.value}
         
@@ -372,7 +374,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
                     }
             
         }
-         self.tblNotification.reloadData()
+//         self.tblNotification.reloadData()
         
         
        
@@ -573,7 +575,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
        }
     
     override func viewWillAppear(_ animated: Bool) {
-        initial()
+        
 //
 //        get_all_requests(isHeaderIncluded: true, mode: 10){
 //
