@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterD
         setupLocationManager()
         
         IQKeyboardManager.shared.enable = true
+//        IQKeyboardManager.shared.enableAutoToolbar = false
         setSideMenu()
         
         GMSServices.provideAPIKey(Key.Google.placesKey)

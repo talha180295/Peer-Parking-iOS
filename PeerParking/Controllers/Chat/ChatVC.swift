@@ -15,7 +15,7 @@ import CircleProgressView
 import Cosmos
 import EzPopup
 
-class ChatVC: UIViewController  {
+class ChatVC: UIViewController  , UITextFieldDelegate {
     
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var sendMessageBtn: UIButton!
@@ -53,6 +53,7 @@ class ChatVC: UIViewController  {
     @IBOutlet weak var parkingContentHeightConstrain: NSLayoutConstraint!
     @IBOutlet weak var parkingDetailHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bargainCountVoew: UIView!
+    @IBOutlet weak var bargainInnerCountVoew: UIView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var parkingDetailView: UIView!
     
@@ -92,9 +93,9 @@ class ChatVC: UIViewController  {
     
     var parking_details:Parking!
     
-    var parkingId : Int = 0
-    var buyerId : Int = 0
-    
+//    var parkingId : Int = 0
+//    var buyerId : Int = 0
+//
     var buyerBargainingCount : Int = 0
     var sellerBargainingCount : Int = 0
     
@@ -107,6 +108,8 @@ class ChatVC: UIViewController  {
         
         tv.delegate = self
         tv.dataSource = self
+        
+        meesageLabel.delegate = self
         messageTextFieldLabel.setLeftPaddingPoints(7)
         
         //        self.tv.estimatedRowHeight = 200.0;
@@ -147,6 +150,15 @@ class ChatVC: UIViewController  {
         
         
     }
+    
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+       {
+
+           textField.resignFirstResponder()
+           return true
+       }
     
     func scrollToBottom()  {
         let point = CGPoint(x: 0, y: self.tv.contentSize.height + self.tv.contentInset.bottom - self.tv.frame.height)
@@ -275,8 +287,8 @@ class ChatVC: UIViewController  {
     
     func populateView(){
         
-        parkingId = parking_details.id ?? 0
-        buyerId = parking_details.buyerID ?? 0
+//        parkingId = parking_details.id ?? 0
+//        buyerId = parking_details.buyerID ?? 0
         
         
         //        amountInWallet = Helper().getUserWallet()
@@ -336,12 +348,24 @@ class ChatVC: UIViewController  {
         
         if(parking_details.isNegotiable == false){
             self.sandOfferButton.isHidden = true
+            self.bargainInnerCountVoew.isHidden = true
+            self.bargainCountVoew.isHidden = true
         }
         
         if( parking_details.startAt != nil)
         {
             
-            self.parkingFromView.text = "From : \(Helper().getFormatedDateAndTime(dateStr: self.parking_details.startAt!))"
+            
+            if(parking_details.parkingType==ParkingType.PARKING_TYPE_PUBLIC){
+                self.parkingFromView.text = "Time : \(Helper().getFormatedDateAndTime(dateStr: self.parking_details.startAt!))"
+            }
+            else
+            {
+                self.parkingFromView.text = "From : \(Helper().getFormatedDateAndTime(dateStr: self.parking_details.startAt!))"
+            }
+            
+            
+            
             
             
         }
@@ -407,7 +431,7 @@ class ChatVC: UIViewController  {
         chatRef = Database.database().reference(withPath: "chat/").child(String(parking_details.id!)).child(String(parking_details.buyerID!))
         parkingBuyerModelReference = Database.database().reference(withPath: "buyerModel/").child(String(parking_details.buyerID!))
         parkingReference = Database.database().reference(withPath: "chat/").child(String(parking_details.id!))
-        requestReference = Database.database().reference(withPath: "requests/").child(String(parkingId) + "-" + String(parking_details.buyerID!))
+        requestReference = Database.database().reference(withPath: "requests/").child(String(parking_details.id!) + "-" + String(parking_details.buyerID!))
         sellerRequestIndexReference = Database.database().reference(withPath: "sellerRequestsIndex/")
         buyerRequestIndexReference = Database.database().reference(withPath: "buyerRequestsIndex/")
         
@@ -687,7 +711,12 @@ class ChatVC: UIViewController  {
             self.headerHeightConstrain.constant = 75
             self.parkingDetailTopConstrain.constant = 0
             self.parkingContentHeightConstrain.constant = 0
-            bargainCountVoew.isHidden = false
+            
+            if(parking_details.isNegotiable == true){
+                        bargainCountVoew.isHidden = false
+                   }
+            
+           
             //                self.parkingDetailContent.alpha = 0.0
             
             
@@ -746,20 +775,32 @@ class ChatVC: UIViewController  {
         if( !meesageLabel.text!.isEmpty )
         {
             let  message : String =   meesageLabel.text ?? ""
-                   
-                   
-                   
-                   chat.message = message
-                   chat.createdAt = makingCurrentDateModel()
-                   chat.direction = checkIamSeller ? Constants().SELLER_TO_BUYER : Constants().BUYER_TO_SELLER
-                   chat.messageType = message.isEmpty ? Constants().MESSAGEOFFER : Constants().MESSAGETEXT
-                   chat.offerStatus = message.isEmpty ? Constants().STATUS_COUNTER_OFFER : Constants().STATUS_CHAT
-                   chat.offer = message.isEmpty ?  Double(self.offer!) : 0.0
-                   
-                   
-                   self.meesageLabel.text = ""
-                   
-                   return chat
+           
+            chat.message = message
+            chat.createdAt = makingCurrentDateModel()
+            chat.direction = checkIamSeller ? Constants().SELLER_TO_BUYER : Constants().BUYER_TO_SELLER
+            chat.messageType = message.isEmpty ? Constants().MESSAGEOFFER : Constants().MESSAGETEXT
+            chat.offerStatus = message.isEmpty ? Constants().STATUS_COUNTER_OFFER : Constants().STATUS_CHAT
+            chat.offer = message.isEmpty ?  Double(self.offer!) : 0.0
+            
+            
+            self.meesageLabel.text = ""
+            
+            return chat
+            
+        }
+        else if(self.offer != nil){
+            
+            chat.message = ""
+            chat.createdAt = makingCurrentDateModel()
+            chat.direction = checkIamSeller ? Constants().SELLER_TO_BUYER : Constants().BUYER_TO_SELLER
+            chat.messageType = Constants().MESSAGEOFFER 
+            chat.offerStatus =  Constants().STATUS_COUNTER_OFFER
+            chat.offer =  Double(self.offer!)
+            
+            self.meesageLabel.text = ""
+            
+            return chat
             
         }
         return nil
@@ -848,15 +889,15 @@ class ChatVC: UIViewController  {
                     }
                     
                     
-                    var refId = String(self.parkingId) + "-" + String(self.buyerId)
+                    var refId = String(self.parking_details.id!) + "-" + String(self.parking_details.buyerID!)
                    
                     self.sendNotification(actionType: actionType, message: "new message", refId: refId)
                     
                     var firebaseRequestModel : FirebaseRequestModel = FirebaseRequestModel()
                     
-                    firebaseRequestModel.parkingID = self.parkingId
+                    firebaseRequestModel.parkingID = self.parking_details.id!
                     firebaseRequestModel.sellerID = self.parking_details.sellerID
-                    firebaseRequestModel.buyerID = self.buyerId
+                    firebaseRequestModel.buyerID = self.parking_details.buyerID!
                     firebaseRequestModel.lastMessage = chatModel
                     firebaseRequestModel.parkingTitle = self.parking_details.title ?? ""
                     firebaseRequestModel.parkingLocation = self.parking_details.address
@@ -867,7 +908,7 @@ class ChatVC: UIViewController  {
                     
                     self.requestReference.setValue(request_dict)
                     
-                    self.buyerRequestIndexReference.child(String(self.buyerId)).child(refId).setValue(chatModel.createdAt?.time)
+                    self.buyerRequestIndexReference.child(String(self.parking_details.buyerID!)).child(refId).setValue(chatModel.createdAt?.time)
                     self.sellerRequestIndexReference.child(String(self.parking_details.sellerID!)).child(refId).setValue(chatModel.createdAt?.time)
            
                 }
@@ -1290,10 +1331,10 @@ extension ChatVC : chatOfferCellDelegate{
                         var firebaseRequestModel : FirebaseRequestModel = FirebaseRequestModel()
                         
                         model.offerStatus =  APP_CONSTANT.STATUS_ACCEPTED
-                        firebaseRequestModel.parkingID = self.parkingId
+                        firebaseRequestModel.parkingID = self.parking_details.id!
                         firebaseRequestModel.parkingTitle = self.parking_details.title ?? ""
                         firebaseRequestModel.sellerID = self.parking_details.sellerID
-                        firebaseRequestModel.buyerID = self.buyerId
+                        firebaseRequestModel.buyerID = self.parking_details.buyerID!
                         firebaseRequestModel.lastMessage = model
                         firebaseRequestModel.parkingLocation = self.parking_details.address
                         firebaseRequestModel.parkingStatus = APP_CONSTANT.STATUS_PARKING_BOOKED
@@ -1406,6 +1447,7 @@ extension ChatVC : chatOfferCellDelegate{
 
 
 
+
 extension Date {
     var millisecondsSince1970:Int64 {
         return Int64((self.timeIntervalSince1970 * 1000.0).rounded())
@@ -1415,6 +1457,7 @@ extension Date {
         self = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
     }
 }
+
 
 
 

@@ -23,6 +23,8 @@ import CodableFirebase
 
 class BottomSheetVC: UIViewController {
     
+    @IBOutlet weak var extrachargesView: UIView!
+    @IBOutlet weak var timelimitView: UIView!
     @IBOutlet weak var endTimeHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var offer_btn: UIButton!
     @IBOutlet weak var counter_btn: UIButton!
@@ -114,12 +116,15 @@ class BottomSheetVC: UIViewController {
             
             if(self.parking_details.parkingHoursLimit == nil || self.parking_details.parkingHoursLimit!.isEmpty ){
                 
+                
 //                self.timeView.isHidden = true
                 
             }else{
                 
                 
-                self.time_limit.text = self.parking_details.parkingHoursLimit
+                 self.time_limit.isHidden = false
+                 self.time_limit.text = "\(self.parking_details.parkingHoursLimit ?? "")"
+                self.timelimitView.isHidden = false
 //                self.timeView.isHidden = false
                 
                 
@@ -132,6 +137,7 @@ class BottomSheetVC: UIViewController {
             }else{
                 
                 self.extra_charges.isHidden = false
+                self.extrachargesView.isHidden = false
                 self.extra_charges.text = self.parking_details.parkingExtraFee
                 
               
@@ -806,13 +812,23 @@ class BottomSheetVC: UIViewController {
                         
                         parkingModel?.buyer = buyerMdoel
                         
-                        let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
                         
-                        vc.modalPresentationStyle = .fullScreen
                         
-                        vc.parking_details = parkingModel
+                       
                         
-                        self.present(vc, animated: true, completion: nil)
+                       
+                            let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
+                                                   
+                                                   vc.modalPresentationStyle = .fullScreen
+                                                   
+                                                   vc.parking_details = parkingModel
+                            self.present(vc, animated: true, completion: nil)
+                        
+                       
+                        
+                       
+                        
+                        
                         
                     }
                 }

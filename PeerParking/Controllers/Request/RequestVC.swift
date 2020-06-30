@@ -370,7 +370,9 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
             //
             //
                     }
+            
         }
+         self.tblNotification.reloadData()
         
         
        
