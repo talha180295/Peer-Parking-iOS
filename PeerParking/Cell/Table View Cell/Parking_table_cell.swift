@@ -18,14 +18,13 @@ class Parking_table_cell: UITableViewCell {
     @IBOutlet weak var rating_view: CosmosView!
     
     @IBOutlet weak var vehicle_type: UILabel!
+
     
-    @IBOutlet weak var distance: UILabel!
-    
-    @IBOutlet weak var time: UILabel!
-    
-    @IBOutlet weak var barg_count: UILabel!
+    @IBOutlet weak var isNegotiable: UILabel!
     
     @IBOutlet weak var price: UILabel!
+    
+    @IBOutlet weak var parking_type: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -145,7 +145,8 @@ extension ParkingsHistoryVC: UITableViewDelegate,UITableViewDataSource{
         let parking = parkingModel[indexPath.item]
         
         let vc = ParkingBookingDetailsVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
-        vc.setParingModel(parkingModel: parking)
+        vc.parkingModel = parking
+//        vc.setParingModel(parkingModel: parking)
         self.present(vc, animated: true)
 //        self.navigationController?.pushViewController(vc, animated: true)
         

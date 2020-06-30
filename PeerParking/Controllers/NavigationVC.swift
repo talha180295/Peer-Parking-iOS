@@ -322,7 +322,8 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         let distanceStr = cal_distance(lat: lat, long: long)
         
         
-        
+        controller.lat = Double(lat)
+        controller.longg = Double(long)
 //        controller.distanceInMiles = String(format: "%.03f miles from destination", distanceStr)
         bottomSheet(controller: controller, sizes: [.fixed(500),.fullScreen],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
       }

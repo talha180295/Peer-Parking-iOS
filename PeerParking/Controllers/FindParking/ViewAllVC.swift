@@ -54,11 +54,10 @@ class ViewAllVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             
             let priceStr = dict.initialPrice ?? 0
             
-            let distanceStr = cal_distance(lat: lat, long: long)
             
             let imgUrl = dict.imageURL ?? ""
             cell.img.sd_setImage(with: URL(string: imgUrl),placeholderImage: UIImage.init(named: "placeholder-img") )
-      
+            
             
             cell.parking_title.text = dict.address ?? "-"
             
@@ -68,10 +67,33 @@ class ViewAllVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             
             cell.price.text = "$" + String(priceStr)
             
+            cell.vehicle_type.text = dict.vehicleTypeText
             
-            cell.distance.text = String(format: "%.02f miles away", distanceStr)
+            if(dict.parkingType == 10){
+                cell.parking_type.text = "Public Parking"
+            }
+            else if(dict.parkingType == 20){
+                cell.parking_type.text = "Private Parking"
+            }
             
-            //cell.barg_count.text = dict["vehicle_type_text"] as? String
+            
+            
+            cell.price.text = "$\(priceStr)"
+            
+            
+            //            cell.distance.text = String(format: "%.02f miles away", distanceStr)
+            
+            //            Helper().getTimeDurationBetweenCordinate(s_lat: self.lat, s_longg: self.longg, d_lat: Double(lat) ?? 0.0, d_longg: Double(long) ?? 0.0){ duration in
+            //
+            //                cell.time.text = duration
+            //            }
+            
+            if(dict.isNegotiable ?? false){
+                cell.isNegotiable.text = "Yes"
+            }
+            else{
+                cell.isNegotiable.text = "No"
+            }
         }
         
         return cell

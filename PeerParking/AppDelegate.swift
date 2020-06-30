@@ -410,7 +410,7 @@ extension AppDelegate{
             actionType == (APP_CONSTANT.BARGAINING_MESSAGE_FROM_SELLER) ||
             actionType == (APP_CONSTANT.ACTION_PARKING_REQUEST)){
             
-            getParkingOpenChatActivity(chatRoomId:"\(refId)")
+            getParkingOpenChatActivity(chatRoomId:"\(refId as! String)")
             
         }else if(actionType == (APP_CONSTANT.BARGAINING_ACCEPTED_BY_SELLER) ||
             actionType == (APP_CONSTANT.PARKING_BOOKED) ||
@@ -458,7 +458,8 @@ extension AppDelegate{
                         }else{
                             
                             let vc = ParkingBookingDetailsVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
-                            vc.setParingModel(parkingModel: val)
+                            vc.parkingModel = val
+//                            vc.setParingModel(parkingModel: val)
                             vc.modalPresentationStyle = .fullScreen
                             self.window?.rootViewController?.present(vc, animated: true,completion: nil)
                             
@@ -511,7 +512,7 @@ extension AppDelegate{
                         
                         let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
                         vc.parking_details = model
-                        
+                        vc.modalPresentationStyle = .fullScreen
                         self.window?.rootViewController?.present(vc, animated: true,completion: nil)
 //                        Intent i = new Intent(HomeActivity.this, ChatActivity.class);
 //                        String parkingJson= gson.toJson(model);

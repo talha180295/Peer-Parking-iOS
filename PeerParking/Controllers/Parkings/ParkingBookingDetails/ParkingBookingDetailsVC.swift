@@ -12,7 +12,7 @@ import Cosmos
 class ParkingBookingDetailsVC: UIViewController {
     
 //    var viewModel:ParkingBookingDetailsViewModel!
-    private var parkingModel:Parking!
+    var parkingModel:Parking = Parking()
     
     //Outlets
     @IBOutlet weak var image: UIImageView!
@@ -41,20 +41,28 @@ class ParkingBookingDetailsVC: UIViewController {
         
         let buyerParkingSendingModel = BuyerParkingSendingModel.init(status: 20, endAt: "currentDateandTime")
         print("buyerParkingSendingModel= \(buyerParkingSendingModel.dictionary ?? [:])")
-        //        if (parkingModel1.getSellerId() == getCurrentUser().getId()) {
-        //            if (parkingModel1.getStatus() == AppConstants.STATUS_PARKING_BOOKED) {
-        //                Toast.makeText(getContext(), "Buyer has not started navigation yet", Toast.LENGTH_LONG).show();
-        //            } else {
-        //                openMapScreen();
-        //            }
-        //        } else {
-        //            openMapScreen();
-        //        }
+        
+        if (parkingModel.sellerID == Helper().getCurrentUserId()) {
+            
+//            self.navigateBtn.setTitle("Track buyer", for: .normal)
+            if (parkingModel.status == APP_CONSTANT.STATUS_PARKING_BOOKED) {
+                Helper().showToast(message: "Buyer has not started navigation yet", controller: self)
+            } else {
+//                openMapScreen()
+            }
+            
+            
+        } else {
+//            self.userType.text = "Seller Information"
+//             openMapScreen();
+           
+        }
+        
         
     }
-    func setParingModel(parkingModel:Parking){
-        self.parkingModel = parkingModel
-    }
+//    func setParingModel(parkingModel:Parking){
+//        self.parkingModel = parkingModel
+//    }
     @IBAction func parkNowBtnClick(_sender:UIButton){
         
         let alert = UIAlertController(title: "Alert!", message: "Do you really want to park?", preferredStyle: .alert)

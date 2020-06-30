@@ -64,7 +64,8 @@ extension PrivateParkingBookingListVC:UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let vc = ParkingBookingDetailsVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
-        vc.setParingModel(parkingModel: self.bookingList[indexPath.item])
+        vc.parkingModel = self.bookingList[indexPath.item]
+//        vc.setParingModel(parkingModel: self.bookingList[indexPath.item])
         self.present(vc, animated: true)
         
 //        self.navigationController?.pushViewController(vc, animated: true)
