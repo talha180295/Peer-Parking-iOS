@@ -102,6 +102,9 @@
 		18E099D22358FB6500B43A4B /* NavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E099D12358FB6500B43A4B /* NavigationVC.swift */; };
 		18F27A30247E4BF400BC7D79 /* MySpotParkingDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F27A2F247E4BF400BC7D79 /* MySpotParkingDetailVC.swift */; };
 		18F27A3224801FB400BC7D79 /* QuickPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F27A3124801FB400BC7D79 /* QuickPopup.swift */; };
+		18F7F51E24AC7B6400AC2CC6 /* RequestVCTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7F51D24AC7B6400AC2CC6 /* RequestVCTab.swift */; };
+		18F7F52024AC801300AC2CC6 /* BuyerRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7F51F24AC801300AC2CC6 /* BuyerRequestVC.swift */; };
+		18F7F52224AC802900AC2CC6 /* SellerRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F7F52124AC802900AC2CC6 /* SellerRequestVC.swift */; };
 		18F8118A23D87DAD00B3061F /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8118923D87DAD00B3061F /* PaymentView.swift */; };
 		67104A31249BBA55008DA0EF /* ParkingBookingDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67104A30249BBA55008DA0EF /* ParkingBookingDetailsVC.swift */; };
 		6795ED7324A0CDEC00FD57F8 /* PrivateParkingBookingListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6795ED7224A0CDEC00FD57F8 /* PrivateParkingBookingListVC.swift */; };
@@ -304,6 +307,9 @@
 		18E099D12358FB6500B43A4B /* NavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationVC.swift; sourceTree = "<group>"; };
 		18F27A2F247E4BF400BC7D79 /* MySpotParkingDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySpotParkingDetailVC.swift; sourceTree = "<group>"; };
 		18F27A3124801FB400BC7D79 /* QuickPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickPopup.swift; sourceTree = "<group>"; };
+		18F7F51D24AC7B6400AC2CC6 /* RequestVCTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestVCTab.swift; sourceTree = "<group>"; };
+		18F7F51F24AC801300AC2CC6 /* BuyerRequestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerRequestVC.swift; sourceTree = "<group>"; };
+		18F7F52124AC802900AC2CC6 /* SellerRequestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerRequestVC.swift; sourceTree = "<group>"; };
 		18F8118923D87DAD00B3061F /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeerParking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67104A30249BBA55008DA0EF /* ParkingBookingDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingBookingDetailsVC.swift; sourceTree = "<group>"; };
@@ -568,6 +574,9 @@
 			isa = PBXGroup;
 			children = (
 				1866BF60237450C3008EE650 /* RequestVC.swift */,
+				18F7F51D24AC7B6400AC2CC6 /* RequestVCTab.swift */,
+				18F7F51F24AC801300AC2CC6 /* BuyerRequestVC.swift */,
+				18F7F52124AC802900AC2CC6 /* SellerRequestVC.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -1360,6 +1369,7 @@
 				18A2446024967CCE001A5350 /* ChatModel.swift in Sources */,
 				FA2F9F37232CA7E30025BF11 /* offerCell.swift in Sources */,
 				18010AAD2354C463008412C0 /* FindParkingVC.swift in Sources */,
+				18F7F52224AC802900AC2CC6 /* SellerRequestVC.swift in Sources */,
 				18253CDA2492428B0046EAE0 /* chatTextCell.swift in Sources */,
 				1852A81924A4FAC300D3DBE0 /* NotificationSendingModel.swift in Sources */,
 				183DAA4223E073A80022BC6E /* ParkingsHistoryVC.swift in Sources */,
@@ -1424,6 +1434,7 @@
 				18CAA57F2368B6BB001B5503 /* FinishPopup.swift in Sources */,
 				188888AA238EF3C50008BC88 /* AlamofireApi.swift in Sources */,
 				FA0FCC5F232250FE000FF52C /* WalletViewController.swift in Sources */,
+				18F7F52024AC801300AC2CC6 /* BuyerRequestVC.swift in Sources */,
 				FA0FCC612322510F000FF52C /* TransactionViewController.swift in Sources */,
 				181E0D1323CDF954005D7248 /* Card.swift in Sources */,
 				18F27A30247E4BF400BC7D79 /* MySpotParkingDetailVC.swift in Sources */,
@@ -1435,6 +1446,7 @@
 				FAEDCF1A231F9EFB0063EFC0 /* FindParkingViewController.swift in Sources */,
 				1841BED22428CE9E00B621AF /* UIView+Extension.swift in Sources */,
 				18E099D02358F27E00B43A4B /* DGRunkeeperSwitch.swift in Sources */,
+				18F7F51E24AC7B6400AC2CC6 /* RequestVCTab.swift in Sources */,
 				1812701C23DEC7AC00337D01 /* ApiClient.swift in Sources */,
 				FA6CD36B2328C67900E18CF2 /* ScheduledCell.swift in Sources */,
 				180FD0D8237331F30084230A /* ViewAllVC.swift in Sources */,
