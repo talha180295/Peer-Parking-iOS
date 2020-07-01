@@ -60,7 +60,7 @@ class BottomSheetVC: UIViewController {
     //    var distanceInMiles: String!
     
     var parkingId:Int?
-    var buyerId:Int?
+    
     var offerPrice:Double?
     
     var sTime : String?
@@ -457,104 +457,154 @@ class BottomSheetVC: UIViewController {
         
         let firebaseChatReference =  Database.database().reference(withPath: "chat/").child(String(parkingId)).child(String(buyerId))
         
-        Database.database().reference(withPath:"buyerModel/").child(String(buyerId)).setValue(self.parking_details.buyer)
+        // this is from because we need currenst user model and because of this me api is calling
         
-        firebaseChatReference.observeSingleEvent(of: .value) { (snapshot) in
-            
-            var isOfferTakenAlready : Bool = false
-            
-            let enumerator = snapshot.children
-            
-            
-            
-            while let childSnapShot = enumerator.nextObject() as? DataSnapshot {
-                
-                guard let value = childSnapShot.value else { return }
-                do {
-                    let model = try FirebaseDecoder().decode(ChatModel.self, from: value)
-                    
-                    if(model.messageType == APP_CONSTANT.MESSAGE_TYPE_OFFER) && (model.direction == APP_CONSTANT.DIRECTION.BUYER_TO_SELLER){
-                        isOfferTakenAlready = true;
-                    }
-                   
-                    
-                    
-                } catch let error {
-                    print(error)
-                }
-            }
-            
-            if(!isOfferTakenAlready){
-                
-                let  messageKey : String = firebaseChatReference.childByAutoId().key!
-                
-                let chat = ChatModel()
-                chat.id = messageKey
-                chat.direction = APP_CONSTANT.DIRECTION.BUYER_TO_SELLER
-                chat.createdAt = self.makingCurrentDateModel()
-                chat.offer = initialPrice
-                chat.offerStatus = APP_CONSTANT.STATUS_COUNTER_OFFER
-                chat.messageType = APP_CONSTANT.MESSAGE_TYPE_OFFER
-                
-                
-                let chat_dict = try! FirebaseEncoder().encode(chat)
-                
-                firebaseChatReference.child(messageKey).setValue(chat_dict , withCompletionBlock: { (error, ref) -> Void in
-                                                
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                    else
-                    {
-                        
-                        
-                        let actionType = APP_CONSTANT.ACTION_PARKING_REQUEST
-                        self.sendNotification(actionType: actionType,message: "You have a parking request.",refId: refId);
-                        
-                        let parkingRequestsModel : FirebaseRequestModel = FirebaseRequestModel()
-                        
-                        parkingRequestsModel.parkingID = parkingId
-                        parkingRequestsModel.sellerID = self.parking_details.sellerID
-                        parkingRequestsModel.buyerID = self.buyerId
-                        parkingRequestsModel.lastMessage = chat
-                        parkingRequestsModel.parkingLocation = self.parking_details.address
-                        
-                        parkingRequestsModel.parkingTitle = self.parking_details.title
-                        parkingRequestsModel.parkingStatus = APP_CONSTANT.STATUS_PARKING_AVAILABLE
-                        
-                        
-                         let request_dict = try! FirebaseEncoder().encode(parkingRequestsModel)
-                        
-                        _ =  Database.database().reference(withPath: "requests/").child(refId).setValue(request_dict)
-                        
-                        Database.database().reference(withPath: "sellerRequestsIndex/").child(String(self.parking_details.sellerID!)).child(refId).setValue(chat.createdAt?.time)
-                        
-                        Database.database().reference(withPath: "buyerRequestsIndex/").child(String(buyerId)).child(refId).setValue(chat.createdAt?.time)
-                        
-                        Helper().showToast(message: "Offer Sent to Seller", controller: self)
-                        
-                        self.dismiss(animated: true, completion: nil)
-                 
-                    }
-                    
-                    
-                })
-    
-                
-                
-                
-                
-            }
-            else
-            {
-                Helper().showToast(message: "Offer Sent already", controller: self)
-                self.offer_btn.isUserInteractionEnabled = true
-                    
+        let url = APIRouter.me
+               let decoder = ResponseData<Me>.self
                
-            }
-            
-            
-        }
+               APIClient.serverRequest(url: url, path: url.getPath(), dec: decoder) { (response,error) in
+                   
+                   Helper().hideSpinner(view: self.view)
+                   if(response != nil){
+                       if let _  = response?.success {
+                           
+                           //                    Helper().showToast(message: "Success=\(success)", controller: self)
+                           if let val = response?.data {
+                               
+                            var parkingModel = Parking.init(dictionary: self.parking_details.dictionary ?? [:])
+                               
+                               parkingModel?.buyerID = val.id
+                               let  buyerMdoel = Buyer(id: val.id, name: val.name, email: val.email, createdAt: val.createdAt, details: val.details, card: [nil])
+                               
+                               parkingModel?.buyer = buyerMdoel
+                               
+                                let buyer_dict = try! FirebaseEncoder().encode(parkingModel?.buyer)
+                               Database.database().reference(withPath:"buyerModel/").child(String(buyerId)).setValue(buyer_dict)
+                               
+                              
+                               firebaseChatReference.observeSingleEvent(of: .value) { (snapshot) in
+                                       
+                                       var isOfferTakenAlready : Bool = false
+                                       
+                                       let enumerator = snapshot.children
+                                       
+                                       
+                                       
+                                       while let childSnapShot = enumerator.nextObject() as? DataSnapshot {
+                                           
+                                           guard let value = childSnapShot.value else { return }
+                                           do {
+                                               let model = try FirebaseDecoder().decode(ChatModel.self, from: value)
+                                               
+                                               if(model.messageType == APP_CONSTANT.MESSAGE_TYPE_OFFER) && (model.direction == APP_CONSTANT.DIRECTION.BUYER_TO_SELLER){
+                                                   isOfferTakenAlready = true;
+                                               }
+                                              
+                                               
+                                               
+                                           } catch let error {
+                                               print(error)
+                                           }
+                                       }
+                                       
+                                       if(!isOfferTakenAlready){
+                                           
+                                           let  messageKey : String = firebaseChatReference.childByAutoId().key!
+                                           
+                                           let chat = ChatModel()
+                                           chat.id = messageKey
+                                           chat.direction = APP_CONSTANT.DIRECTION.BUYER_TO_SELLER
+                                           chat.createdAt = self.makingCurrentDateModel()
+                                           chat.offer = initialPrice
+                                           chat.offerStatus = APP_CONSTANT.STATUS_COUNTER_OFFER
+                                           chat.messageType = APP_CONSTANT.MESSAGE_TYPE_OFFER
+                                           
+                                           
+                                           let chat_dict = try! FirebaseEncoder().encode(chat)
+                                           
+                                           firebaseChatReference.child(messageKey).setValue(chat_dict , withCompletionBlock: { (error, ref) -> Void in
+                                                                           
+                                               if let error = error {
+                                                   print(error.localizedDescription)
+                                               }
+                                               else
+                                               {
+                                                   
+                                                   
+                                                   let actionType = APP_CONSTANT.ACTION_PARKING_REQUEST
+                                                   self.sendNotification(actionType: actionType,message: "You have a parking request.",refId: refId);
+                                                   
+                                                   let parkingRequestsModel : FirebaseRequestModel = FirebaseRequestModel()
+                                                   
+                                                   parkingRequestsModel.parkingID = parkingId
+                                                   parkingRequestsModel.sellerID = self.parking_details.sellerID
+                                                   parkingRequestsModel.buyerID = buyerId
+                                                   parkingRequestsModel.lastMessage = chat
+                                                   parkingRequestsModel.parkingLocation = self.parking_details.address
+                                                   
+                                                   parkingRequestsModel.parkingTitle = self.parking_details.title
+                                                   parkingRequestsModel.parkingStatus = APP_CONSTANT.STATUS_PARKING_AVAILABLE
+                                                   
+                                                   
+                                                    let request_dict = try! FirebaseEncoder().encode(parkingRequestsModel)
+                                                   
+                                                   _ =  Database.database().reference(withPath: "requests/").child(refId).setValue(request_dict)
+                                                   
+                                                   Database.database().reference(withPath: "sellerRequestsIndex/").child(String(self.parking_details.sellerID!)).child(refId).setValue(chat.createdAt?.time)
+                                                   
+                                                   Database.database().reference(withPath: "buyerRequestsIndex/").child(String(buyerId)).child(refId).setValue(chat.createdAt?.time)
+                                                   
+                                                   Helper().showToast(message: "Offer Sent to Seller", controller: self)
+                                                   
+                                                   self.dismiss(animated: true, completion: nil)
+                                            
+                                               }
+                                               
+                                               
+                                           })
+                               
+                                           
+                                           
+                                           
+                                           
+                                       }
+                                       else
+                                       {
+                                           Helper().showToast(message: "Offer Sent already", controller: self)
+                                           self.offer_btn.isUserInteractionEnabled = true
+                                               
+                                          
+                                       }
+                                       
+                                       
+                                   }
+                              
+                                  
+                               
+                              
+                               
+                              
+                               
+                               
+                               
+                           }
+                       }
+                       else{
+                           Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                       }
+                   }
+                   else if(error != nil){
+                       Helper().showToast(message: "\(error?.localizedDescription ?? "" )", controller: self)
+                   }
+                   else{
+                       Helper().showToast(message: "Nor Response and Error!!", controller: self)
+                   }
+                   
+               }
+               
+        
+        
+        
         
     }
     

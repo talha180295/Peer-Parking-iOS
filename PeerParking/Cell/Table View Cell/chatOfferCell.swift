@@ -128,7 +128,9 @@ class chatOfferCell: UITableViewCell {
         
     }
     
-    func setOfferText(offer : Int , date : String , isRight : Bool,offerStatus:Int){
+    func setOfferText(offer : Double , date : String , isRight : Bool,offerStatus:Int){
+        
+        
         
         
         

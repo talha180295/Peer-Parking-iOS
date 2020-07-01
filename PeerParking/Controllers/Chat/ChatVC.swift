@@ -153,6 +153,8 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
     
     
     
+    
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
        {
 
@@ -596,6 +598,12 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
         
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        resignFirstResponder()
+        
+    }
+    
     
     
     @IBAction func backAction(_ sender: Any) {
@@ -655,7 +663,7 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
                         
                     case .cancel:
                         
-                        
+                       
                         print("cancel")
                         
                     case .destructive:
@@ -669,7 +677,7 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
                     switch action.style{
                     case .default:
                         
-                        print("default")
+                         self.offer = nil
                         
                     case .cancel:
                         
@@ -772,7 +780,28 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
         
         
         let chat = ChatModel()
-        if( !meesageLabel.text!.isEmpty )
+        
+        
+        // this offer is when the edit text is not empty and user wants to send offer
+        // but when user select the price after clickg thie offer and press no in alert than should
+        // empty the offer on that action
+        
+        if(self.offer != nil && !meesageLabel.text!.isEmpty ){
+            
+            chat.message = ""
+            chat.createdAt = makingCurrentDateModel()
+            chat.direction = checkIamSeller ? Constants().SELLER_TO_BUYER : Constants().BUYER_TO_SELLER
+            chat.messageType = Constants().MESSAGEOFFER
+            chat.offerStatus =  Constants().STATUS_COUNTER_OFFER
+            chat.offer =  Double(self.offer!)
+            
+            self.meesageLabel.text = ""
+            
+            return chat
+            
+        }
+        
+       else if( !meesageLabel.text!.isEmpty )
         {
             let  message : String =   meesageLabel.text ?? ""
            
@@ -803,6 +832,7 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
             return chat
             
         }
+        
         return nil
         
        
@@ -1116,14 +1146,14 @@ extension ChatVC  : UITableViewDelegate,UITableViewDataSource  {
                 
                 if(  chatModelArray[indexPath.row].direction == Constants.init().SELLER_TO_BUYER ) {
                     
-                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) , date: convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0)) , isRight: true,offerStatus: chatModelArray[indexPath.row].offerStatus!)
+                    cell.setOfferText(offer: Double(chatModelArray[indexPath.row].offer ?? 0.0) , date: convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0)) , isRight: true,offerStatus: chatModelArray[indexPath.row].offerStatus!)
                     
                     
                 }
                 else
                 {
                     
-                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) , date: convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0)), isRight: false,offerStatus: chatModelArray[indexPath.row].offerStatus!)
+                    cell.setOfferText(offer: Double(chatModelArray[indexPath.row].offer ?? 0.0) , date: convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0)), isRight: false,offerStatus: chatModelArray[indexPath.row].offerStatus!)
                     
                 }
                 
@@ -1136,13 +1166,13 @@ extension ChatVC  : UITableViewDelegate,UITableViewDataSource  {
                     
                     
                     
-                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) ,date: convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0)), isRight: false,offerStatus: chatModelArray[indexPath.row].offerStatus!)
+                    cell.setOfferText(offer: Double(chatModelArray[indexPath.row].offer ?? 0.0) ,date: convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0)), isRight: false,offerStatus: chatModelArray[indexPath.row].offerStatus!)
                     
                 }
                 else
                 {
                     
-                    cell.setOfferText(offer: Int(chatModelArray[indexPath.row].offer ?? 0.0) , date: convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0)) , isRight: true,offerStatus: chatModelArray[indexPath.row].offerStatus!)
+                    cell.setOfferText(offer: Double(chatModelArray[indexPath.row].offer ?? 0.0) , date: convertTimestamp(timeStamp: TimeInterval(chatModelArray[indexPath.row].createdAt?.time ?? 0)) , isRight: true,offerStatus: chatModelArray[indexPath.row].offerStatus!)
                     
                 }
             }
