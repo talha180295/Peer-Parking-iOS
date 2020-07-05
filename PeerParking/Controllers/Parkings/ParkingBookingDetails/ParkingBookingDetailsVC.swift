@@ -167,8 +167,15 @@ extension ParkingBookingDetailsVC{
             self.navigateBtn.setTitle("Track buyer", for: .normal)
             self.parkNowBtn.isHidden = true
             self.userType.text = "Buyer's Information"
-            self.name.text = data.buyer?.details?.fullName ?? "-"
-            self.number.text = data.buyer?.details?.phone ?? "-"
+            
+            if(data.buyer != nil)
+            {
+                self.name.text = data.buyer?.details?.fullName ?? "-"
+                self.number.text = data.buyer?.details?.phone == "string" ? "-" : data.buyer?.details?.phone ?? "-"
+            print("phone number is \(data.buyer?.details?.phone)")
+            }
+            
+            
             //          btnNavigate.setText("Track buyer");
             //          btnParkNow.setVisibility(View.GONE);
             //          infoTxtView.setText("Buyer Information");
@@ -183,7 +190,7 @@ extension ParkingBookingDetailsVC{
             //          infoTxtView.setText("Seller Information");
             if (data.seller != nil) {
                 self.name.text = data.seller?.details?.fullName ?? "-"
-                self.number.text = data.seller?.details?.phone ?? "-"
+                self.number.text = data.seller?.details?.phone == "string" ? "-" : data.seller?.details?.phone ?? "-"
                 //              txtViewBuyerName.setText(parkingModel1.getSellerMdoel().getDetails().getFullName());
                 //              txtViewBuyerNumber.setText(parkingModel1.getSellerMdoel().getDetails().getPhone());
             }
@@ -288,7 +295,12 @@ extension ParkingBookingDetailsVC{
                 
                 if(response != nil){
                     if (response?.success) != nil {
+                        
+                        
                         Helper().showToast(message: response?.message ?? "-", controller: self)
+                        
+                        Helper.deleteChatAndRequests(parkingModel1: self.parkingModel)
+                        
                         //FirebaseUtils.deleteChatAndRequests(parkingModel1);
                         if (status == APP_CONSTANT.STATUS_PARKING_PARKED) {
                             self.parkingModel.status = APP_CONSTANT.STATUS_PARKING_NAVIGATING

@@ -122,6 +122,15 @@ extension UpcomingParkingVC: UITableViewDelegate,UITableViewDataSource{
         if let action = Action(rawValue: self.parkingModel[indexPath.row].action ?? 0){
                          
             cell.direction.text = "\(action)"
+            if(self.parkingModel[indexPath.row].parkingType == ParkingType.PARKING_TYPE_PUBLIC)
+                       {
+                          cell.startAtlabel.text = "Start At:"
+                          
+                       }
+                       else
+                       {
+                           cell.startAtlabel.text = "Availability:"
+                       }
         }
             
         cell.type.text = self.parkingModel[indexPath.row].parkingSubTypeText ?? "-"

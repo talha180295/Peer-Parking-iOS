@@ -9,7 +9,7 @@
 import UIKit
 
 class HistoryCell: UITableViewCell {
-
+    @IBOutlet weak var startAtlabel: UILabel!
     @IBOutlet weak var direction: UILabel!
     @IBOutlet weak var parkingTitle: UILabel!
     @IBOutlet weak var address: UILabel!

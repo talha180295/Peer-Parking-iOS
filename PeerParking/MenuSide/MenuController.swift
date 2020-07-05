@@ -39,6 +39,10 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+      
+        
         self.img.clipsToBounds = true
         var imag:String!
         if UserDefaults.standard.string(forKey: "image_url") == nil{
@@ -133,6 +137,7 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
     
             let dictInner:NSDictionary!
             
+            
             let isLogin = IsUserLogin()
             if(isLogin)
             {
@@ -144,6 +149,8 @@ class MenuController: UIViewController  ,UITableViewDelegate,UITableViewDataSour
             }
             
             let cell = tblMenu.dequeueReusableCell(withIdentifier: "cellItem") as! menuCell
+            
+             cell.viewLine.isHidden = false
             let nameStr = (dictInner["name"] as! String)
             if(nameStr.count>0)
             {
