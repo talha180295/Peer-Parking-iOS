@@ -523,6 +523,7 @@ class BuyerRequestVC: UIViewController ,IndicatorInfoProvider ,  ViewOfferProtoc
     
     
     override func viewWillAppear(_ animated: Bool) {
+         self.buyerRequestTbl.reloadData()
         //
         //        NotificationCenter.default.addObserver(self, selector: #selector(self.getFilters(notification:)), name: NSNotification.Name(rawValue: "mode_filter"), object: nil)
     }
