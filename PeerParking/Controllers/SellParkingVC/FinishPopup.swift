@@ -42,7 +42,7 @@ class FinishPopup: UIViewController {
         Helper().showSpinner(view: self.view)
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
         tab_index = 1
-        Helper().presentOnMainScreens(controller: vc, index: tab_index)
+//        Helper().presentOnMainScreens(controller: vc, index: tab_index)
 
 
         GLOBAL_VAR.PARKING_POST_DONE = true
@@ -120,7 +120,7 @@ class FinishPopup: UIViewController {
         Helper().showSpinner(view: self.view)
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
         tab_index = 1
-        Helper().presentOnMainScreens(controller: vc, index: tab_index)
+//        Helper().presentOnMainScreens(controller: vc, index: tab_index)
 
 
         GLOBAL_VAR.PARKING_POST_DONE = true

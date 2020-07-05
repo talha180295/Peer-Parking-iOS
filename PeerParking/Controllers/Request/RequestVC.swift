@@ -239,7 +239,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
                                 
                                 Helper().showToast(message: response?.message ?? "-", controller: self)
                                 
-                                var  firebaseChatReference = Database.database().reference(withPath: "chat/").child(String(model.parkingID!)).child(String(model.buyerID!))
+                                let  firebaseChatReference = Database.database().reference(withPath: "chat/").child(String(model.parkingID!)).child(String(model.buyerID!))
                                 
                                 var lastMessage = model.lastMessage
                                 
@@ -252,7 +252,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
                                  self.requestReference.setValue(request_dict)
                                 
                                 
-                                var  parkingReference = Database.database().reference(withPath: "chat/").child(String(model.parkingID!))
+                                let  parkingReference = Database.database().reference(withPath: "chat/").child(String(model.parkingID!))
                                 
                                 parkingReference.child("buyer_id").setValue(model.buyerID!)
                                 
@@ -540,7 +540,7 @@ class RequestVC: UIViewController ,UITableViewDataSource,UITableViewDelegate, Vi
         
         do{
             let data = try JSONEncoder().encode(model)
-            Helper.customSendNotification(data: data, controller: self)
+            Helper.customSendNotification(data: data, controller: self, isDismiss: false)
         }
         catch let parsingError {
             

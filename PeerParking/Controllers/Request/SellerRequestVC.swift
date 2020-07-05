@@ -558,7 +558,7 @@ class SellerRequestVC: UIViewController ,IndicatorInfoProvider ,  ViewOfferProto
         
         do{
             let data = try JSONEncoder().encode(model)
-            Helper.customSendNotification(data: data, controller: self)
+            Helper.customSendNotification(data: data, controller: self,isDismiss: false)
         }
         catch let parsingError {
             

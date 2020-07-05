@@ -199,12 +199,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterD
         let jsonDict = try! JSONSerialization.jsonObject(with: jsonStringifiedData, options: []) as! [String: Any]
         print(jsonDict["action_type"] as! String)
         let actionType = jsonDict["action_type"] as! String
-        let refId = jsonDict["ref_id"]
+
+        var refId:String!
+        
+        if let refIdval = jsonDict["ref_id"] as? String{
+            refId = refIdval
+        }
+        else if let refIdval = jsonDict["ref_id"] as? Int{
+            refId = String(refIdval)
+        }
+        
 //        if(actionType == APP_CONSTANT.BUYER_REACHED){
 //            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: false)
 //        }
         
-        showNotificationsOnForeground(actionType: actionType, refId: refId as Any)
+        showNotificationsOnForeground(actionType: actionType, refId: refId)
         
         // Change this to your preferred presentation option
         completionHandler([.alert, .sound])
@@ -225,12 +234,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterD
         let jsonDict = try! JSONSerialization.jsonObject(with: jsonStringifiedData, options: []) as! [String: Any]
         print(jsonDict["action_type"] as! String)
         let actionType = jsonDict["action_type"] as! String
-        let refId = jsonDict["ref_id"]
+        
+        var refId:String!
+        
+        if let refIdval = jsonDict["ref_id"] as? String{
+            refId = refIdval
+        }
+        else if let refIdval = jsonDict["ref_id"] as? Int{
+            refId = String(refIdval)
+        }
+        
+        
+ 
 //        if(actionType == APP_CONSTANT.BUYER_REACHED){
 //            getParkingOpenDetailScreen(parkingId: String(refId),openDetailScreen: false)
 //        }
         
-        self.onNotificationPressed(actionType: actionType, refId: refId as Any)
+        self.onNotificationPressed(actionType: actionType, refId: refId)
         
         
         //        let alert = userInfo["aps"] as! NSDictionary
@@ -382,16 +402,16 @@ extension AppDelegate:CLLocationManagerDelegate{
 
 extension AppDelegate{
     
-    func showNotificationsOnForeground(actionType:String, refId:Any){
+    func showNotificationsOnForeground(actionType:String, refId:String){
         
         if(actionType == (APP_CONSTANT.BARGAINING_ACCEPTED_BY_SELLER) ||
             actionType == (APP_CONSTANT.PARKING_BOOKED) ||
             actionType == (APP_CONSTANT.BUYER_IS_NAVIGATING) ||
             actionType == (APP_CONSTANT.BUYER_REACHED)){
             
-            getParkingOpenDetailScreen(parkingId: "\(refId as! Int)",openDetailScreen: false)
+            getParkingOpenDetailScreen(parkingId: refId ,openDetailScreen: false)
         }else if(actionType == (APP_CONSTANT.PARKING_CANCELED_BY_BUYER)){
-            getParkingOpenDetailScreen(parkingId: "\(refId as! Int)",openDetailScreen: true)
+            getParkingOpenDetailScreen(parkingId: refId,openDetailScreen: true)
         }else if(actionType == (APP_CONSTANT.PARKING_CANCELED_BY_SELLER) ){// && (baseFragment instanceof FragmentNavigateUpdated || baseFragment instanceof BookingDetailFragment)){
             
             //            popStackTill(1);
@@ -400,7 +420,7 @@ extension AppDelegate{
     }
     
     
-    func onNotificationPressed(actionType:String, refId:Any) {
+    func onNotificationPressed(actionType:String, refId:String) {
         
         
         if(actionType == (APP_CONSTANT.BARGAINING_COUNTER_OFFER_BY_BUYER) ||
@@ -411,7 +431,7 @@ extension AppDelegate{
             actionType == (APP_CONSTANT.BARGAINING_MESSAGE_FROM_SELLER) ||
             actionType == (APP_CONSTANT.ACTION_PARKING_REQUEST)){
             
-            getParkingOpenChatActivity(chatRoomId:"\(refId as! String)")
+            getParkingOpenChatActivity(chatRoomId:refId)
             
         }else if(actionType == (APP_CONSTANT.BARGAINING_ACCEPTED_BY_SELLER) ||
             actionType == (APP_CONSTANT.PARKING_BOOKED) ||
@@ -419,11 +439,11 @@ extension AppDelegate{
             actionType == (APP_CONSTANT.BUYER_REACHED) ||
             actionType == (APP_CONSTANT.BUYER_TO_REACH_IN_ONE_MINUTE) ){
             
-            getParkingOpenDetailScreen(parkingId: "\(refId)",openDetailScreen: false)
+            getParkingOpenDetailScreen(parkingId: refId,openDetailScreen: false)
             
         }else if(actionType == (APP_CONSTANT.PARKING_CANCELED_BY_BUYER)){
             
-            getParkingOpenDetailScreen(parkingId: "\(refId)",openDetailScreen: true)
+            getParkingOpenDetailScreen(parkingId: refId ,openDetailScreen: true)
             
         }
         
@@ -499,7 +519,7 @@ extension AppDelegate{
 //                    Helper().showToast(message: response?.message ?? "-", controller: self)
                     if let val = response?.data {
                         var model = Parking.init(dictionary: val.dictionary ?? [:])
-                        if(model?.buyerID == 0){
+                        if(model?.buyerID == 0)||(model?.buyerID == nil){
                             model?.buyerID = buyerId
                         }
 //                        let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)

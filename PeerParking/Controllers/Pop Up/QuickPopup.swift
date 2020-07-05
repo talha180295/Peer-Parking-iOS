@@ -30,7 +30,14 @@ class QuickPopup: UIViewController {
            params = GLOBAL_VAR.PRIVATE_PARKING_MODEL
         }
         else{
-           params = GLOBAL_VAR.PARKING_POST_DETAILS
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+            let result = formatter.string(from: date)
+            
+            
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(result, forKey: "start_at")
+            params = GLOBAL_VAR.PARKING_POST_DETAILS
         }
         
         self.setupView()
@@ -108,7 +115,7 @@ class QuickPopup: UIViewController {
     
     @IBAction func post(_ sender:UIButton){
         let vc = FinishPopup.instantiate(fromPeerParkingStoryboard: .Main)
-        vc.isPrivate = true
+        vc.isPrivate = self.isPrivate
         
         let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
         popupVC.canTapOutsideToDismiss = true
