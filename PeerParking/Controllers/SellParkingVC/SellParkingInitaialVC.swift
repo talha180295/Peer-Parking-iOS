@@ -37,8 +37,6 @@ class SellParkingInitaialVC: UIViewController {
                     Helper().showToast(message: "Parking Already Exist!", controller: self)
                 case false:
                     self.setUpView(withIdentifier: "PublicParkingVC")
-                default:
-                    break;
                 }
             }
         }
