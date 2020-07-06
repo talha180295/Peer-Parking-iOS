@@ -923,6 +923,8 @@ class Helper{
     }
     
     
+    
+    
     /*! @discussion this method is use to add spinner
      
      *  @param view : UIView

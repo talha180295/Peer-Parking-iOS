@@ -108,7 +108,18 @@ class FinishPopup: UIViewController {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
                // Code you want to be delayed
-                Helper().presentOnMainScreens(controller: self, index: 2)
+                
+                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//                Helper().presentOnMainScreens(controller: self, index: 2)
+                self.dismiss(animated: true){
+                    
+                    
+                     appDelegate.window?.rootViewController?.present(vc, animated: true,completion: nil)
+                    
+                   
+                    
+                }
+           
             }
 
             
@@ -185,11 +196,30 @@ class FinishPopup: UIViewController {
                     //   SharedHelper().hideSpinner(view: self.view)
                 }
             }
+            
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
+                           // Code you want to be delayed
+                            
+                             let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            //                Helper().presentOnMainScreens(controller: self, index: 2)
+                            self.dismiss(animated: true){
+                                
+                                
+                                 appDelegate.window?.rootViewController?.present(vc, animated: true,completion: nil)
+                                
+                               
+                                
+                            }
+                       
+                        }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
-               // Code you want to be delayed
-                Helper().presentOnMainScreens(controller: self, index: 2)
-            }
+
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
+//               // Code you want to be delayed
+//
+//                Helper().presentOnMainScreens(controller: self, index: 2)
+//                self.dismiss(animated: true, completion: nil)
+//            }
         }
     }
     
