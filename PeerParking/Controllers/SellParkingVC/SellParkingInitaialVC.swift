@@ -37,8 +37,6 @@ class SellParkingInitaialVC: UIViewController {
                     Helper().showToast(message: "Parking Already Exist!", controller: self)
                 case false:
                     self.setUpView(withIdentifier: "PublicParkingVC")
-                default:
-                    break;
                 }
             }
         }
@@ -107,10 +105,12 @@ class SellParkingInitaialVC: UIViewController {
 
     func parkingExist(completion:@escaping (Bool)->Void){
         
-        let params = [
-            "is_schedule" : 1,
-            "mood" : 10
-        ]
+//        let params = [
+//            "is_schedule" : 1,
+//            "mood" : 10
+//        ]
+//        
+        let params =  ["my_public_spots":1]
         
         print("param123=\(params)")
         

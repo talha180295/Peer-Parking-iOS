@@ -54,7 +54,7 @@ class PricePicker: UIViewController, UIPickerViewDataSource, UIPickerViewDelegat
         if component == 0 {
             return 100
         } else {
-            return 3
+            return 4
         }
     }
 
@@ -62,7 +62,7 @@ class PricePicker: UIViewController, UIPickerViewDataSource, UIPickerViewDelegat
         if component == 0 {
             return "\(row+1)"
         } else {
-            return "\((row+1)*25)"
+            return "\((row)*25)"
         }
     }
     

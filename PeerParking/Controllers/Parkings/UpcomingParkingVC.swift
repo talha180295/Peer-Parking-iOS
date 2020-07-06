@@ -112,7 +112,7 @@ extension UpcomingParkingVC: UITableViewDelegate,UITableViewDataSource{
         let  cell = upComingParkingTbl.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
         cell.parkingTitle.text = self.parkingModel[indexPath.row].title ?? ""
         cell.address.text = self.parkingModel[indexPath.row].address ?? ""
-        cell.price.text = "$\(self.parkingModel[indexPath.row].initialPrice ?? 0.0)"
+//        cell.price.text = "$\(self.parkingModel[indexPath.row].initialPrice ?? 0.0)"
         
         if let parkingStatus = ParkingStatus(rawValue: self.parkingModel[indexPath.row].status ?? 0){
                    
@@ -120,7 +120,15 @@ extension UpcomingParkingVC: UITableViewDelegate,UITableViewDataSource{
         }
               
         if let action = Action(rawValue: self.parkingModel[indexPath.row].action ?? 0){
-                         
+                        
+            switch action {
+            case .Booked:
+                cell.price.text = "$\(self.parkingModel[indexPath.row].finalPrice ?? 0.0)"
+            case .Posted:
+                cell.price.text = "$\(self.parkingModel[indexPath.row].initialPrice ?? 0.0)"
+            default:
+                break
+            }
             cell.direction.text = "\(action)"
             if(self.parkingModel[indexPath.row].parkingType == ParkingType.PARKING_TYPE_PUBLIC)
                        {

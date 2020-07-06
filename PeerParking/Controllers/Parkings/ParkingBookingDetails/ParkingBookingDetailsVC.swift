@@ -307,6 +307,8 @@ extension ParkingBookingDetailsVC{
                             //((HomeActivity) getActivity()).popStackTill(1);
                             let vc = FeedbackVC.instantiate(fromPeerParkingStoryboard: .Main)
                             vc.parking_details = self.parkingModel
+                            vc.p_id = self.parkingModel.id
+                            vc.modalPresentationStyle = .fullScreen
                             self.present(vc, animated: true)
                             
                             self.sendNotification(actionType: APP_CONSTANT.BUYER_REACHED, message: APP_CONSTANT.BUYER_REACHED_MESSAGE, refId: String(self.parkingModel.id ?? -1))
@@ -344,7 +346,7 @@ extension ParkingBookingDetailsVC{
  
         do{
             let data = try JSONEncoder().encode(model)
-            Helper.customSendNotification(data: data, controller: self)
+            Helper.customSendNotification(data: data, controller: self,isDismiss: false)
         }
         catch let parsingError {
             

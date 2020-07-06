@@ -54,12 +54,40 @@ class FeedbackVC: UIViewController {
             print("p_id==\(id)")
             post_rating(p_id: p_id, rating: rating_bar.rating){
                 
+                if(self.parking_details.parkingType == ParkingType.PARKING_TYPE_PRIVATE){
+                    Helper().presentOnMainScreens(controller: self, index: 0)
+                    return;
+                }
                 self.wantToSellParking()
             }
             
         }
        
         
+        
+    }
+    
+    public func postFeedback()
+    {
+//        ReviewSendingModel reviewSendingModel = new ReviewSendingModel();
+//        reviewSendingModel.setParking_id(parkingModel1.getId());
+//        reviewSendingModel.setRating(ratingBar.getRating());
+//
+        //        Toast.makeText(getContext(),String.valueOf(ratingBar.getRating()),Toast.LENGTH_LONG).show();
+        
+//        getBaseWebServices(true).postMultipartAPI(WebServiceConstants. REVIEW, null, reviewSendingModel.toString(), new WebServices.IRequestWebResponseAnyObjectCallBack() {
+//            @Override
+//            public void requestDataResponse(WebResponse<Object> webResponse) {
+//                checkAlreadySold();
+//
+//            }
+//
+//            @Override
+//            public void onError(Object object) {
+//                UIHelper.showToast(getContext(), "There was an error sending feedback");
+//                checkAlreadySold();
+//            }
+//        });
         
     }
     
@@ -71,11 +99,55 @@ class FeedbackVC: UIViewController {
     }
     
    
+    private func checkAlreadySold() {
+//        if(parkingModel1.getParkingType()== ParkingType.PARKING_TYPE_PRIVATE){
+//            getBaseActivity().popStackTill(1);
+//            return;
+//        }
+//        Map<String, Object> queryMap = new HashMap<>();
+//        queryMap.put("my_public_spots",1);
+//        getBaseWebServices(true).getAPIAnyObject(WebServiceConstants.PATH_PARKING, queryMap, new WebServices.IRequestWebResponseAnyObjectCallBack() {
+//            @Override
+//            public void requestDataResponse(WebResponse<Object> webResponse) {
+//
+//                if(webResponse.isSuccess())
+//                {
+//                    Type type = new TypeToken<ArrayList<ParkingModel1>>() {
+//                    }.getType();
+//                    ArrayList<ParkingModel1>  arrayList = GsonFactory.getSimpleGson()
+//                            .fromJson(GsonFactory.getSimpleGson().toJson(webResponse.result)
+//                                    , type);
+//                    boolean isPublicParkingSold=false;
+//                    if(arrayList.size() > 0)
+//                    {
+//                        for (ParkingModel1 model :arrayList) {
+//                            if(model.getParkingType()== ParkingType.PARKING_TYPE_PUBLIC && (model.getStatus()== AppConstants.STATUS_PARKING_AVAILABLE || model.getStatus()==AppConstants.STATUS_PARKING_UNAVAILABLE)){
+//                                isPublicParkingSold=true;
+//                                break;
+//                            }
+//                        }
+//                    }
+//                    if(!isPublicParkingSold){
+//                        showOptionToResaleParking();
+//                    }else{
+//                        getBaseActivity().popStackTill(1);
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onError(Object object) {
+//
+//            }
+//        });
+    }
+    
     func post_rating(p_id:Int,rating:Double,completion: @escaping () -> Void){
         
        
         
-        var params:[String:Any] = [
+        let params:[String:Any] = [
             
             "parking_id": p_id,
             "rating": rating
