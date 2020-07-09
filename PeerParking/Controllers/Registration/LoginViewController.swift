@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import Alamofire 
+import Alamofire
+import FirebaseMessaging
+
 class LoginViewController: UIViewController {
 
     @IBOutlet weak var txtPassword: UITextField!
@@ -78,7 +80,12 @@ class LoginViewController: UIViewController {
         // SharedHelper().showSpinner(view: self.view)
         // let deviceToken : String?
         
-        let device_token :String = UserDefaults.standard.string(forKey: "FCMToken") ?? ""
+        
+        guard let device_token :String = Messaging.messaging().fcmToken
+            else{
+                Helper().showToast(message: "Fcm Token Error", controller: self)
+                return
+        }
         let param = [
             
             "email" : email,

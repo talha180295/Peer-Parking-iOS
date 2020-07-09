@@ -12,6 +12,7 @@ import FacebookLogin
 import FacebookCore
 import Alamofire
 import EzPopup
+import FirebaseMessaging
 
 let loginManager = LoginManager()
 
@@ -79,13 +80,14 @@ class FBPopup: UIViewController {
     
     func LoginSocial(platform : String,client_id : String,token : String,username : String,email : String,imageUrl : String) {
         
-     //   let FCMToken :String = UserDefaults.standard.string(forKey: "FCMToken")!
-        //        var strRole="2"
-        //
-        // SharedHelper().showSpinner(view: self.view)
          let device_type = "ios"
                
-        let device_token :String = UserDefaults.standard.string(forKey: "FCMToken") ?? ""
+        
+        guard let device_token :String = Messaging.messaging().fcmToken
+            else{
+                Helper().showToast(message: "Fcm Token Error", controller: self)
+                return
+        }
          print(device_token)
         //  SharedHelper().showSpinner(view: self.view)
         // let deviceToken : String?
@@ -169,7 +171,11 @@ class FBPopup: UIViewController {
         
         
         Helper().showSpinner(view: self.view.parentContainerViewController()?.view ?? self.view)
-        let device_token :String = UserDefaults.standard.string(forKey: "FCMToken") ?? ""
+        guard let device_token :String = Messaging.messaging().fcmToken
+            else{
+                Helper().showToast(message: "Fcm Token Error", controller: self)
+                return
+        }
         let param = [
             
             "email" : email,
