@@ -37,7 +37,7 @@ class PricePicker: UIViewController, UIPickerViewDataSource, UIPickerViewDelegat
  
     func returnFirstValue(sender: UIButton) {
         guard let cb = completionBlock else {return}
-        price = "\(picker.selectedRow(inComponent:0) + 1).\((picker.selectedRow(inComponent:1) + 1)*25)"
+        price = "\(picker.selectedRow(inComponent:0) + 1).\((picker.selectedRow(inComponent:1))*25)"
         cb("\(price)")
     }
     

@@ -128,6 +128,7 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
         userImageView.layer.borderColor = UIColor.black.cgColor
         userImageView.layer.cornerRadius = userImageView.frame.height/2
         userImageView.clipsToBounds = true
+        userImageView.layer.borderWidth = 1
         
         
         
@@ -309,6 +310,7 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
            
             }
             
+             userNameView.text = parking_details.buyer?.details?.firstName
             
             if(parking_details.buyer?.details?.firstName != nil)
             {
@@ -935,6 +937,8 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
                     
                     
                     let request_dict = try! FirebaseEncoder().encode(firebaseRequestModel)
+                    
+                     self.offer = nil
                     
                     self.requestReference.setValue(request_dict)
                     
