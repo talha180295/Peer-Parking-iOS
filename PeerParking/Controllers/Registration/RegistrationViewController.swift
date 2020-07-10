@@ -9,9 +9,11 @@
 import UIKit
 import Alamofire
 import HelperClassPod
-    var isSocial:Bool!
+import FirebaseMessaging
+
+var isSocial:Bool!
 class RegistrationViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
-   
+    
     var imagePicker = UIImagePickerController()
     
     @IBOutlet weak var imgDp: UIImageView!
@@ -21,12 +23,12 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     @IBOutlet weak var txtPass: UITextField!
     @IBOutlet weak var txtConfirmPass: UITextField!
     @IBOutlet weak var txtPhoneNo: UITextField!
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    
+        
+        
         txtNAme.delegate = self
         txtEmail.delegate = self
         txtPass.delegate = self
@@ -54,7 +56,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                                 if((txtPass.text?.elementsEqual(txtConfirmPass.text!))!)
                                 {
                                     
-                                 Register(name: txtNAme.text!, email: txtEmail.text!, password: txtPass.text!);
+                                    Register(name: txtNAme.text!, email: txtEmail.text!, password: txtPass.text!);
                                 }
                                 else
                                 {
@@ -98,14 +100,19 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
      **  @param password: String
      **/
     func Register(name: String, email : String, password : String) {
-     //   let FCMToken :String = UserDefaults.standard.string(forKey: "FCMToken")!
+        //   let FCMToken :String = UserDefaults.standard.string(forKey: "FCMToken")!
         //        var strRole="2"
         //
         Helper().showSpinner(view: self.view)
-   
+        
         let device_type = "ios"
         
-        let device_token :String = UserDefaults.standard.string(forKey: "FCMToken") ?? ""
+        
+        guard let device_token :String = Messaging.messaging().fcmToken
+            else{
+                Helper().showToast(message: "Fcm Token Error", controller: self)
+                return
+        }
         print(device_token)
         let param  = [
             "name" : name,
@@ -116,21 +123,18 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
             "device_token" : device_token,
             "device_type" : device_type
         ]
-        let headers: HTTPHeaders = [
-            "Authorization" : ""
-        ]
         print(param)
         // print(param)
-     let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.SIGN_UP
+        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.SIGN_UP
         
-         let imgData =  (self.imgDp.image!.jpegData(compressionQuality: 1.0) )
-       Helper().SignUpProfileRequest(url: url, profileImg: imgData!, parameters: param)     {
+        let imgData =  (self.imgDp.image!.jpegData(compressionQuality: 1.0) )
+        Helper().SignUpProfileRequest(url: url, profileImg: imgData!, parameters: param)     {
             response in
             print(response)
-        Helper().hideSpinner(view: self.view)
+            Helper().hideSpinner(view: self.view)
             if response.result.value == nil {
                 print("No response")
-              
+                
                 return
             }
             else {
@@ -143,7 +147,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                     let message = responseData["message"] as! String
                     let userData = uData["user"] as! NSDictionary
                     print("successful")
-                   isSocial = false
+                    isSocial = false
                     SharedHelper().showToast(message: message, controller: self)
                     
                     self.saveData(userData: userData)
@@ -153,7 +157,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
                 {
                     let message = responseData["message"] as! String
                     SharedHelper().showToast(message: message, controller: self)
-                  
+                    
                 }
             }
         }
@@ -165,7 +169,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
         
         print(userData)
-      
+        
         let detailUser = userData["details"] as! NSDictionary
         UserDefaults.standard.set(userData["id"], forKey: "id")
         
@@ -262,7 +266,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         {
             UserDefaults.standard.set("", forKey: "phone")
         }
-
+        
         UserDefaults.standard.set(is_social_login, forKey: "is_social_login")
         if(!image_url.isEmpty)
         {
@@ -343,7 +347,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         UserDefaults.standard.set("homeVC", forKey: "VC")
         
         UserDefaults.standard.synchronize()
-      
+        
         Helper().presentOnMainScreens(controller: self, index: 1)
         
         //        let fname :String = UserDefaults.standard.string(forKey: "name")!
@@ -353,168 +357,168 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     }
     
     /// @brief This function is use to  save the signup credentials
-//    func saveData(userData : NSDictionary)  {
-//
-//
-//
-//        print(userData)
-//        let userDict = userData["user"] as! NSDictionary
-//        let detailUser = userDict["details"] as! NSDictionary
-//        UserDefaults.standard.set(userData["id"], forKey: "id")
-//
-//        let user_name = userDict["name"] as! String
-//        let user_email = userDict["email"] as! String
-//        let auth_token = userDict[APP_CONSTANT.ACCESSTOKEN] as! String
-//        let token_type = userDict["token_type"] as! String
-//        let expires_in = userDict["expires_in"] as! Int
-//      let  image_url = detailUser["image_url"] as! String
-//
-//        let full_name : String!
-//        let phone : String!
-//        let address : String!
-//        let about:String!
-//        //  let null = NSNull()
-//
-//
-//
-//        if detailUser["full_name"] is NSNull {
-//            full_name = ""
-//        }
-//        else
-//        {
-//            full_name = detailUser["full_name"] as? String
-//        }
-//        if detailUser["about"] is NSNull {
-//            about = ""
-//        }
-//        else
-//        {
-//            about = detailUser["about"] as? String
-//        }
-//        if detailUser["phone"] is NSNull {
-//            phone = ""
-//        }
-//        else
-//        {
-//            phone = detailUser["phone"] as? String
-//        }
-//
-//        if detailUser["address"] is NSNull {
-//            address = ""
-//        }
-//        else
-//        {
-//            address = detailUser["address"] as? String
-//        }
-//
-//
-//
-//        //        let about = detailUser["about"] as! String
-//        //        let address = detailUser["address"] as! String
-//        //        let full_name = detailUser["full_name"] as! String
-//        //        let phone = detailUser["phone"] as! String
-//        let is_social_login = detailUser["is_social_login"] as! Int
-//        // let tier = userData["tier"] as! Int
-//        //        let total_followers = userData["total_followers"] as! Int
-//        //        let total_points = userData["total_points"] as! Int
-//        //        let total_reviews = userData["total_reviews"] as! Int
-//        //        let total_swipe = userData["total_swipe"] as! Int
-//        //
-//
-//        if(!address.isEmpty)
-//        {
-//            UserDefaults.standard.set(address, forKey: "address")
-//        }
-//        else
-//        {
-//            UserDefaults.standard.set("", forKey: "address")
-//        }
-//
-//
-//        if(!full_name.isEmpty)
-//        {
-//            UserDefaults.standard.set(full_name, forKey: "full_name")
-//        }
-//        else
-//        {
-//            UserDefaults.standard.set("", forKey: "full_name")
-//        }
-//        if(!phone.isEmpty)
-//        {
-//            UserDefaults.standard.set(phone, forKey: "phone")
-//        }
-//        else
-//        {
-//            UserDefaults.standard.set("", forKey: "phone")
-//        }
-//
-//        UserDefaults.standard.set(is_social_login, forKey: "is_social_login")
-//
-//        if(!image_url.isEmpty)
-//        {
-//            UserDefaults.standard.set(image_url, forKey: "image_url")
-//        }
-//        else
-//        {
-//            UserDefaults.standard.set("", forKey: "image_url")
-//        }
-//        if(!user_name.isEmpty)
-//        {
-//            UserDefaults.standard.set(user_name, forKey: "name")
-//        }
-//        else
-//        {
-//            UserDefaults.standard.set("", forKey: "name")
-//        }
-//        if(!user_email.isEmpty)
-//        {
-//            UserDefaults.standard.set(user_email, forKey: "email")
-//        }
-//        else
-//        {
-//            UserDefaults.standard.set("", forKey: "email")
-//        }
-//        if(!auth_token.isEmpty)
-//        {
-//            UserDefaults.standard.set(auth_token, forKey: APP_CONSTANT.ACCESSTOKEN)
-//        }
-//        else
-//        {
-//            UserDefaults.standard.set("", forKey: APP_CONSTANT.ACCESSTOKEN)
-//        }
-//        if(!token_type.isEmpty)
-//        {
-//            UserDefaults.standard.set(token_type, forKey: "token_type")
-//        }
-//        else
-//        {
-//            UserDefaults.standard.set("", forKey: "token_type")
-//        }
-//
-//
-//
-//        if(isSocial)
-//        {
-//            UserDefaults.standard.set("yes", forKey: "isSocial")
-//        }
-//        else
-//        {
-//            UserDefaults.standard.set("no", forKey: "isSocial")
-//        }
-//        UserDefaults.standard.set(expires_in, forKey: "expires_in")
-//        UserDefaults.standard.set("yes", forKey: "login")
-//        UserDefaults.standard.set("homeVC", forKey: "VC")
-//
-//        UserDefaults.standard.synchronize()
-//
-//
-//         Helper().presentOnMainScreens(controller: self, index: 1)
-//
-//        //        let fname :String = UserDefaults.standard.string(forKey: "name")!
-//        //        let UID :String = UserDefaults.standard.string(forKey: "id")!
-//        //        Analytics.logEvent("Sign Up Screen", parameters: ["user_id": UID, "user_name": fname])
-//
-//    }
+    //    func saveData(userData : NSDictionary)  {
+    //
+    //
+    //
+    //        print(userData)
+    //        let userDict = userData["user"] as! NSDictionary
+    //        let detailUser = userDict["details"] as! NSDictionary
+    //        UserDefaults.standard.set(userData["id"], forKey: "id")
+    //
+    //        let user_name = userDict["name"] as! String
+    //        let user_email = userDict["email"] as! String
+    //        let auth_token = userDict[APP_CONSTANT.ACCESSTOKEN] as! String
+    //        let token_type = userDict["token_type"] as! String
+    //        let expires_in = userDict["expires_in"] as! Int
+    //      let  image_url = detailUser["image_url"] as! String
+    //
+    //        let full_name : String!
+    //        let phone : String!
+    //        let address : String!
+    //        let about:String!
+    //        //  let null = NSNull()
+    //
+    //
+    //
+    //        if detailUser["full_name"] is NSNull {
+    //            full_name = ""
+    //        }
+    //        else
+    //        {
+    //            full_name = detailUser["full_name"] as? String
+    //        }
+    //        if detailUser["about"] is NSNull {
+    //            about = ""
+    //        }
+    //        else
+    //        {
+    //            about = detailUser["about"] as? String
+    //        }
+    //        if detailUser["phone"] is NSNull {
+    //            phone = ""
+    //        }
+    //        else
+    //        {
+    //            phone = detailUser["phone"] as? String
+    //        }
+    //
+    //        if detailUser["address"] is NSNull {
+    //            address = ""
+    //        }
+    //        else
+    //        {
+    //            address = detailUser["address"] as? String
+    //        }
+    //
+    //
+    //
+    //        //        let about = detailUser["about"] as! String
+    //        //        let address = detailUser["address"] as! String
+    //        //        let full_name = detailUser["full_name"] as! String
+    //        //        let phone = detailUser["phone"] as! String
+    //        let is_social_login = detailUser["is_social_login"] as! Int
+    //        // let tier = userData["tier"] as! Int
+    //        //        let total_followers = userData["total_followers"] as! Int
+    //        //        let total_points = userData["total_points"] as! Int
+    //        //        let total_reviews = userData["total_reviews"] as! Int
+    //        //        let total_swipe = userData["total_swipe"] as! Int
+    //        //
+    //
+    //        if(!address.isEmpty)
+    //        {
+    //            UserDefaults.standard.set(address, forKey: "address")
+    //        }
+    //        else
+    //        {
+    //            UserDefaults.standard.set("", forKey: "address")
+    //        }
+    //
+    //
+    //        if(!full_name.isEmpty)
+    //        {
+    //            UserDefaults.standard.set(full_name, forKey: "full_name")
+    //        }
+    //        else
+    //        {
+    //            UserDefaults.standard.set("", forKey: "full_name")
+    //        }
+    //        if(!phone.isEmpty)
+    //        {
+    //            UserDefaults.standard.set(phone, forKey: "phone")
+    //        }
+    //        else
+    //        {
+    //            UserDefaults.standard.set("", forKey: "phone")
+    //        }
+    //
+    //        UserDefaults.standard.set(is_social_login, forKey: "is_social_login")
+    //
+    //        if(!image_url.isEmpty)
+    //        {
+    //            UserDefaults.standard.set(image_url, forKey: "image_url")
+    //        }
+    //        else
+    //        {
+    //            UserDefaults.standard.set("", forKey: "image_url")
+    //        }
+    //        if(!user_name.isEmpty)
+    //        {
+    //            UserDefaults.standard.set(user_name, forKey: "name")
+    //        }
+    //        else
+    //        {
+    //            UserDefaults.standard.set("", forKey: "name")
+    //        }
+    //        if(!user_email.isEmpty)
+    //        {
+    //            UserDefaults.standard.set(user_email, forKey: "email")
+    //        }
+    //        else
+    //        {
+    //            UserDefaults.standard.set("", forKey: "email")
+    //        }
+    //        if(!auth_token.isEmpty)
+    //        {
+    //            UserDefaults.standard.set(auth_token, forKey: APP_CONSTANT.ACCESSTOKEN)
+    //        }
+    //        else
+    //        {
+    //            UserDefaults.standard.set("", forKey: APP_CONSTANT.ACCESSTOKEN)
+    //        }
+    //        if(!token_type.isEmpty)
+    //        {
+    //            UserDefaults.standard.set(token_type, forKey: "token_type")
+    //        }
+    //        else
+    //        {
+    //            UserDefaults.standard.set("", forKey: "token_type")
+    //        }
+    //
+    //
+    //
+    //        if(isSocial)
+    //        {
+    //            UserDefaults.standard.set("yes", forKey: "isSocial")
+    //        }
+    //        else
+    //        {
+    //            UserDefaults.standard.set("no", forKey: "isSocial")
+    //        }
+    //        UserDefaults.standard.set(expires_in, forKey: "expires_in")
+    //        UserDefaults.standard.set("yes", forKey: "login")
+    //        UserDefaults.standard.set("homeVC", forKey: "VC")
+    //
+    //        UserDefaults.standard.synchronize()
+    //
+    //
+    //         Helper().presentOnMainScreens(controller: self, index: 1)
+    //
+    //        //        let fname :String = UserDefaults.standard.string(forKey: "name")!
+    //        //        let UID :String = UserDefaults.standard.string(forKey: "id")!
+    //        //        Analytics.logEvent("Sign Up Screen", parameters: ["user_id": UID, "user_name": fname])
+    //
+    //    }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let ImageChose = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         self.imgDp.image = ImageChose
@@ -557,7 +561,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
     }
     
     @IBAction func btnBack(_ sender: Any) {
-//         self.dismiss(animated: true, completion: nil)
+        //         self.dismiss(animated: true, completion: nil)
         Helper().presentOnMainScreens(controller: self, index: 1)
     }
     
@@ -569,7 +573,7 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         
     }
     
-  
+    
 }
 
 
@@ -587,11 +591,11 @@ extension RegistrationViewController:UITextFieldDelegate{
             txtConfirmPass.becomeFirstResponder()
         case txtConfirmPass:
             txtPhoneNo.becomeFirstResponder()
-        
+            
         default:
             register()
             textField.resignFirstResponder()
         }
         return false
-      }
+    }
 }

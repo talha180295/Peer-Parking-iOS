@@ -72,17 +72,24 @@ class WalletViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createBottomView()
-        
-        let name = NSNotification.Name(rawValue: "BottomViewMoved")
-        NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil, using: receiveNotification(_:))
+//        self.view.isHidden = true
+        let controller = WalletContentVC.instantiate(fromPeerParkingStoryboard: .Wallet)
+        addChild(controller)
+//        controller.view.frame = ...  // or, better, turn off `translatesAutoresizingMaskIntoConstraints` and then define constraints for this subview
+        view.addSubview(controller.view)
+        controller.didMove(toParent: self)
+//        self.navigationController?.pushViewController(vc,animated: false)
+//        createBottomView()
+//
+//        let name = NSNotification.Name(rawValue: "BottomViewMoved")
+//        NotificationCenter.default.addObserver(forName: name, object: nil, queue: nil, using: receiveNotification(_:))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         print("wallet will appear")
         
-        getCardDetails()
+//        getCardDetails()
     }
     
     @IBAction func addCardBtn(_ sender: UIButton) {
