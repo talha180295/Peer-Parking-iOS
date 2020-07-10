@@ -915,12 +915,23 @@ class Helper{
     
     func presentOnMainScreens(controller: UIViewController,index:Int){
         
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
+//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
         tab_index = index
-        vc.modalTransitionStyle = .crossDissolve
-        vc.modalPresentationStyle = .fullScreen
-        controller.present(vc, animated: true, completion: nil)
+//        vc.modalTransitionStyle = .crossDissolve
+//        vc.modalPresentationStyle = .fullScreen
+//        controller.present(vc, animated: true, completion: nil)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let newRoot = storyboard.instantiateInitialViewController() else {
+            return // This shouldn't happen
+        }
+        UIApplication.shared.delegate?.window??.rootViewController = newRoot
+//        self.window?.rootViewController = newRoot
+    
     }
+    
+    
+    
     
     
     

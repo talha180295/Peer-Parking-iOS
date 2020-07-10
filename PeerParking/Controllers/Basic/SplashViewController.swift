@@ -8,9 +8,13 @@
 
 import UIKit
 
+var isUserSellParking : Bool = false
 /// @brief Login View Controller is use as the first screen of the app
 class SplashViewController: UIViewController {
   
+    
+  
+    
     
     /// @abstract Viewdidload method
     
@@ -24,29 +28,44 @@ class SplashViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-           if(Helper().IsUserLogin()){
-                 self.refreshToken()
-             }
-             
-             
-             let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-             let app_build_Version = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-             
-             print("appVersion=\(appVersion!)(\(app_build_Version!))")
-             
-             self.app_version.text = "v \(appVersion!)(\(app_build_Version!))"
-             
+        
+        
+        if(isUserSellParking){
+            self.view.isHidden = true
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
+            //
             
-             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                 
-                 
-                 
-                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
-                 //
-                 
-                 self.navigationController?.pushViewController(vc, animated: true)
-
-             };
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        else{
+            if(Helper().IsUserLogin()){
+                self.refreshToken()
+            }
+            
+            
+            let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+            let app_build_Version = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+            
+            print("appVersion=\(appVersion!)(\(app_build_Version!))")
+            
+            self.app_version.text = "v \(appVersion!)(\(app_build_Version!))"
+            
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                
+                
+                
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "customVC") as! CustomSideMenuController
+                //
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            };
+        }
+        
+        print("is user sell parking \(isUserSellParking)")
+        
+       
     }
    
     func refreshToken(){

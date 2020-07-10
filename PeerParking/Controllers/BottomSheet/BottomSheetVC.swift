@@ -384,8 +384,10 @@ class BottomSheetVC: UIViewController {
                         if let val = response?.data {
                             
                             if(val.details?.wallet ?? 0.0 <= 0.0){
-                                Helper().showToast(message: "Insufficient Amount in wallet", controller: self)
-                                self.offer_btn.isUserInteractionEnabled = true
+                                
+                            Helper().showToast(message: "Insufficient Amount in wallet", controller: self)
+                                
+                            self.offer_btn.isUserInteractionEnabled = true
                                 
                             }
                             else{
@@ -1248,12 +1250,8 @@ extension BottomSheetVC:OnTimeSelectDelegate{
         //        return times
         
         self.parking_details.initialPrice = initialPrice
-        
-       
-        
         sTime = startigTime
         fTime = endingTime
-        
         
         st_time.text = "From : \(startigTime)"
         end_time.text = "To : \(endingTime)"
@@ -1264,12 +1262,10 @@ extension BottomSheetVC:OnTimeSelectDelegate{
         
         self.parking_details.status = APP_CONSTANT.STATUS_PARKING_TEMP
         
-        if(self.tempParkingId != 0)
+        if(self.tempParkingId != 0 || self.tempParkingId != nil)
         {
             updateTempParking(parkingModel1 : self.parking_details);
         }
-        
-        
         
     }
     
@@ -1298,8 +1294,7 @@ extension BottomSheetVC:OnTimeSelectDelegate{
                 else{
                     Helper().showToast(message: "Nor Response and Error!!", controller: self)
                 }
-                
-                
+               
             }
         }
         catch let parsingError {
@@ -1320,10 +1315,6 @@ extension BottomSheetVC:OnTimeSelectDelegate{
 //
 //               }
 //           });
-
-
-       }
-    
-    
-    
+    }
+   
 }

@@ -11,19 +11,19 @@ import HelperClassPod
 import Alamofire
 
 class FinishPopup: UIViewController {
-
+    
     //Intent Variables
     var isPrivate = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
     @IBAction func finish_btn(_ sender: UIButton) {
-
-       
+        
+        
         if(self.isPrivate){
             
             self.postPrivateParking(sender)
@@ -31,10 +31,10 @@ class FinishPopup: UIViewController {
         else{
             self.postPublicParking(sender)
         }
-      
         
         
-
+        
+        
     }
     
     func postPublicParking(_ sender: UIButton){
@@ -42,15 +42,15 @@ class FinishPopup: UIViewController {
         Helper().showSpinner(view: self.view)
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
         tab_index = 1
-//        Helper().presentOnMainScreens(controller: vc, index: tab_index)
-
-
+        //        Helper().presentOnMainScreens(controller: vc, index: tab_index)
+        
+        
         GLOBAL_VAR.PARKING_POST_DONE = true
-
+        
         sender.isHidden = true
         
         let image = GLOBAL_VAR.PARKING_POST_DETAILS["image"]
-
+        
         
         var params:[String:Any] = GLOBAL_VAR.PARKING_POST_DETAILS
         
@@ -62,7 +62,7 @@ class FinishPopup: UIViewController {
         ]
         print("==0params=\(params)")
         print("==0headers=\(headers)")
-
+        
         let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.POST_PARKING
         
         print("url--\(url)")
@@ -74,7 +74,7 @@ class FinishPopup: UIViewController {
             
             if response?.result.value == nil {
                 print("No response")
-
+                
                 Helper().hideSpinner(view: self.view)
                 SharedHelper().showToast(message: "Internal Server Error", controller: vc)
                 
@@ -92,10 +92,10 @@ class FinishPopup: UIViewController {
                     //                     UserDefaults.standard.set("yes", forKey: "login")
                     //                    UserDefaults.standard.synchronize()
                     SharedHelper().showToast(message: message, controller: vc)
-    //                    tab_index = 1
-    //                    self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                    //                    tab_index = 1
+                    //                    self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
                     
-
+                    
                     //self.after_signin()
                 }
                 else
@@ -107,21 +107,22 @@ class FinishPopup: UIViewController {
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
-               // Code you want to be delayed
+                // Code you want to be delayed
                 
-                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//                Helper().presentOnMainScreens(controller: self, index: 2)
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                //                Helper().presentOnMainScreens(controller: self, index: 2)
                 self.dismiss(animated: true){
                     
+                    isUserSellParking = true
+                    //                                 appDelegate.window?.rootViewController?.present(vc, animated: true,completion: nil)
+                    Helper().presentOnMainScreens(controller: self, index: 2)
                     
-                     appDelegate.window?.rootViewController?.present(vc, animated: true,completion: nil)
                     
-                   
                     
                 }
-           
+                
             }
-
+            
             
         }
     }
@@ -131,15 +132,15 @@ class FinishPopup: UIViewController {
         Helper().showSpinner(view: self.view)
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
         tab_index = 1
-//        Helper().presentOnMainScreens(controller: vc, index: tab_index)
-
-
+        //        Helper().presentOnMainScreens(controller: vc, index: tab_index)
+        
+        
         GLOBAL_VAR.PARKING_POST_DONE = true
-
+        
         sender.isHidden = true
         
         let image = GLOBAL_VAR.PRIVATE_PARKING_MODEL["image"]
-
+        
         
         
         var params:[String:Any] = GLOBAL_VAR.PRIVATE_PARKING_MODEL
@@ -152,7 +153,7 @@ class FinishPopup: UIViewController {
         ]
         print("==0private_params=\(params)")
         print("==0headers=\(headers)")
-
+        
         let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.POST_PRIVATE_PARKING
         
         print("url--\(url)")
@@ -162,11 +163,11 @@ class FinishPopup: UIViewController {
         uploadImage(urlString: url, imageParamKey: "image", imageData: image as! Data, param: params, headers: headers){
             response in
             print("response>>>\(response)")
-
+            
             Helper().hideSpinner(view: self.view)
             if response?.result.value == nil {
                 print("No response")
-
+                
                 SharedHelper().showToast(message: "Internal Server Error", controller: vc)
                 
             }
@@ -183,10 +184,10 @@ class FinishPopup: UIViewController {
                     //                     UserDefaults.standard.set("yes", forKey: "login")
                     //                    UserDefaults.standard.synchronize()
                     SharedHelper().showToast(message: message, controller: self)
-    //                    tab_index = 1
-    //                    self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-
-
+                    //                    tab_index = 1
+                    //                    self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                    
+                    
                     //self.after_signin()
                 }
                 else
@@ -197,40 +198,41 @@ class FinishPopup: UIViewController {
                 }
             }
             
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
-                           // Code you want to be delayed
-                            
-                             let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
+                // Code you want to be delayed
+                
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                //                Helper().presentOnMainScreens(controller: self, index: 2)
+                self.dismiss(animated: true){
+                    
+                     isUserSellParking = true
+                    //                                 appDelegate.window?.rootViewController?.present(vc, animated: true,completion: nil)
+                    Helper().presentOnMainScreens(controller: self, index: 2)
+                    
+                    
+                    
+                }
+                
+            }
+            
+            
+            //            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
+            //               // Code you want to be delayed
+            //
             //                Helper().presentOnMainScreens(controller: self, index: 2)
-                            self.dismiss(animated: true){
-                                
-                                
-                                 appDelegate.window?.rootViewController?.present(vc, animated: true,completion: nil)
-                                
-                               
-                                
-                            }
-                       
-                        }
-
-
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Change `2.0` to the desired number of seconds.
-//               // Code you want to be delayed
-//
-//                Helper().presentOnMainScreens(controller: self, index: 2)
-//                self.dismiss(animated: true, completion: nil)
-//            }
+            //                self.dismiss(animated: true, completion: nil)
+            //            }
         }
     }
     
     func uploadImage(urlString : String ,imageParamKey:String, imageData : Data, param : [String : Any],headers:HTTPHeaders, completion: @escaping (_ result: DataResponse<Any>?) -> Void){
         
         
-//        guard let imageData = image.jpegData(compressionQuality: 1.0) else {
-//            print("Could not get JPEG representation of UIImage")
-//            return
-//        }
-
+        //        guard let imageData = image.jpegData(compressionQuality: 1.0) else {
+        //            print("Could not get JPEG representation of UIImage")
+        //            return
+        //        }
+        
         
         
         Helper().RefreshToken(completion:{
@@ -259,7 +261,7 @@ class FinishPopup: UIViewController {
                     
                     let headers1: HTTPHeaders = [
                         "Authorization" : auth_value,
-//                        "Accept" : "application/json",
+                        //                        "Accept" : "application/json",
                         "Content-Type" : "application/json"
                     ]
                     
@@ -316,8 +318,8 @@ class FinishPopup: UIViewController {
         
         
     }
-   
-
+    
+    
     
     
     
