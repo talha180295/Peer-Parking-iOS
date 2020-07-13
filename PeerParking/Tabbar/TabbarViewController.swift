@@ -12,14 +12,18 @@ import SideMenuController
 //Global Variable
 var tab_index = 1
 
-class TabbarViewController: UITabBarController ,SideMenuControllerDelegate {
+
+
+
+class TabbarViewController: UITabBarController ,SideMenuControllerDelegate , UITabBarControllerDelegate {
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
       
         
-       
+        self.delegate = self
+        
         
  SideMenuController.preferences.drawing.menuButtonImage = UIImage(named: "icon_menu")
         sideMenuController?.delegate = self
@@ -41,6 +45,29 @@ class TabbarViewController: UITabBarController ,SideMenuControllerDelegate {
         self.tabBar.items?[2].image = UIImage(named: "tab_sellParking")!.withRenderingMode(.alwaysOriginal);
 
         
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+//
+        
+        
+        
+     
+        let selectedIndex = tabBarController.viewControllers?.firstIndex(of: viewController)!
+        if selectedIndex == 0 {
+            
+          NotificationCenter.default.post(name: Notification.Name("refreshView"), object: nil)
+            
+           
+            
+            
+            
+           
+
+        } else {
+            print("first tab bar was selected")
+            //do whatever
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
         

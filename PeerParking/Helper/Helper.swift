@@ -25,6 +25,9 @@ class Helper{
     
     func getFormatedDate(dateStr:String) -> String{
         
+        
+        
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
         
@@ -40,18 +43,56 @@ class Helper{
     
     func getFormatedDateAndTime(dateStr:String) -> String{
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
         
-        let formateDate = dateFormatter.date(from:dateStr) ?? Date()
-        dateFormatter.dateFormat = "MM/dd/yyyy h:mm a" // Output Formated
+       
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+            
+            let formateDate = dateFormatter.date(from:dateStr) ?? Date()
+            dateFormatter.dateFormat = "MM/dd/yyyy h:mm a" // Output Formated
+            
+            //        let date: Date? = dateFormatter.date(from: dateStr)
+            
+            return dateFormatter.string(from: formateDate)
         
-        //        let date: Date? = dateFormatter.date(from: dateStr)
         
-        return dateFormatter.string(from: formateDate)
+        
         
         
     }
+    
+    func getFormatedDateAndTimeList(dateStr:String)-> String{
+        
+        if(dateStr == "")
+        {
+            return dateStr
+        }
+        else
+        {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+            
+            
+            if(dateFormatter.date(from:dateStr) != nil)
+            {
+                let formateDate = dateFormatter.date(from:dateStr) ?? Date()
+                dateFormatter.dateFormat = "MM/dd/yyyy h:mm a" // Output Formated
+                
+                //        let date: Date? = dateFormatter.date(from: dateStr)
+                
+                return dateFormatter.string(from: formateDate)
+            }
+            else
+            {
+                return dateStr
+            }
+            
+            
+        }
+        
+    }
+    
+    
     
     
     
@@ -929,6 +970,8 @@ class Helper{
 //        self.window?.rootViewController = newRoot
     
     }
+    
+    
     
     
     

@@ -20,6 +20,11 @@ import Alamofire
 
 class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate{
     
+    
+    
+   
+    
+    
     var isMapLoaded = false
    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -76,6 +81,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         filter_btn.isHidden = true
         view_all_btn.isHidden = true
         
+        
        
 
 //
@@ -104,23 +110,34 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         self.tabBarController!.navigationItem.title = "Find Parking"
         self.tabBarController!.navigationItem.rightBarButtonItem = nil
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshViews), name: NSNotification.Name(rawValue: "refreshView"), object: nil)
+        
+        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    @objc func refreshViews(){
         self.view.layoutIfNeeded()
-        
+                
         if(!autocomp){
-            if (!isMapLoaded){
-                isMapLoaded = true
-                loadMapView()
-            }
-            
-            mapMoveToCurrentLoc()
-        }
+                          if (!isMapLoaded){
+                              isMapLoaded = true
+                              loadMapView()
+                          }
+                          
+                          mapMoveToCurrentLoc()
+                      }
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//
+//    }
+    
+   
     
     override func viewWillDisappear(_ animated: Bool) {
         Helper().hideSpinner(view: self.view)
+         NotificationCenter.default.removeObserver(self)
     }
     
     func autocompleteClicked() {

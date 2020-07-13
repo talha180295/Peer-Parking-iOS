@@ -111,24 +111,42 @@ extension UpcomingParkingVC: UITableViewDelegate,UITableViewDataSource{
         
         let  cell = upComingParkingTbl.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
         cell.parkingTitle.text = self.parkingModel[indexPath.row].title ?? ""
-        cell.address.text = self.parkingModel[indexPath.row].address ?? ""
+         cell.address.text = self.parkingModel[indexPath.row].address ?? "-"
 //        cell.price.text = "$\(self.parkingModel[indexPath.row].initialPrice ?? 0.0)"
         
-        if let parkingStatus = ParkingStatus(rawValue: self.parkingModel[indexPath.row].status ?? 0){
-                   
-            cell.status.text = "\(parkingStatus)"
+//        if let parkingStatus = ParkingStatus(rawValue: self.parkingModel[indexPath.row].status ?? 0){
+//
+//
+//
+//        }
+        
+        if let parkingStatus = self.parkingModel[indexPath.row].status {
+            
+            cell.status.text = Helper.getStatusText(status: parkingStatus)
+            
         }
+        
+        if(self.parkingModel[indexPath.row].finalPrice == 0 || self.parkingModel[indexPath.row].finalPrice == nil)
+               {
+                   
+                   cell.price.text = "$\(self.parkingModel[indexPath.row].initialPrice ?? 0.0)"
+               }
+               else
+               {
+                cell.price.text = "$\(self.parkingModel[indexPath.row].finalPrice ?? 0.0)"
+                   
+               }
               
         if let action = Action(rawValue: self.parkingModel[indexPath.row].action ?? 0){
                         
-            switch action {
-            case .Booked:
-                cell.price.text = "$\(self.parkingModel[indexPath.row].finalPrice ?? 0.0)"
-            case .Posted:
-                cell.price.text = "$\(self.parkingModel[indexPath.row].initialPrice ?? 0.0)"
-            default:
-                break
-            }
+//            switch action {
+//            case .Booked:
+//                cell.price.text = "$\(self.parkingModel[indexPath.row].finalPrice ?? 0.0)"
+//            case .Posted:
+//                cell.price.text = "$\(self.parkingModel[indexPath.row].initialPrice ?? 0.0)"
+//            default:
+//                break
+//            }
             cell.direction.text = "\(action)"
             if(self.parkingModel[indexPath.row].parkingType == ParkingType.PARKING_TYPE_PUBLIC)
                        {
@@ -143,7 +161,21 @@ extension UpcomingParkingVC: UITableViewDelegate,UITableViewDataSource{
             
         cell.type.text = self.parkingModel[indexPath.row].parkingSubTypeText ?? "-"
         
-        cell.availablity.text = "\(self.parkingModel[indexPath.row].startAt ?? "")"
+          if(self.parkingModel[indexPath.row].parkingType == ParkingType.PARKING_TYPE_PRIVATE )
+              {
+                
+                cell.fromavailablity.text = "From : \( Helper().getFormatedDateAndTimeList(dateStr: self.parkingModel[indexPath.row].startAt ?? "")) "
+                         cell.toavailablity.text = "To : \( Helper().getFormatedDateAndTimeList(dateStr: self.parkingModel[indexPath.row].endAt ?? ""))"
+                
+                
+                
+                cell.toavailablity.isHidden = self.parkingModel[indexPath.row].endAt == nil ? true : false
+              }
+              else
+              {
+                  cell.toavailablity.isHidden = true
+                  cell.fromavailablity.text = Helper().getFormatedDateAndTimeList(dateStr: self.parkingModel[indexPath.row].startAt ?? "")
+              }
         
 //        cell.availablity.text = "\(self.parkingModel[indexPath.row].startAt ?? "") - \(self.parkingModel[indexPath.row].endAt ?? "")"
                

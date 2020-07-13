@@ -15,7 +15,8 @@ class HistoryCell: UITableViewCell {
     @IBOutlet weak var address: UILabel!
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var price: UILabel!
-    @IBOutlet weak var availablity: UILabel!
+    @IBOutlet weak var fromavailablity: UILabel!
+    @IBOutlet weak var toavailablity: UILabel!
     @IBOutlet weak var type: UILabel!
     
     override func awakeFromNib() {

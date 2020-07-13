@@ -116,8 +116,26 @@ extension ParkingsHistoryVC: UITableViewDelegate,UITableViewDataSource{
         
         let  cell = historyParkingTbl.dequeueReusableCell(withIdentifier: "HistoryCell") as! HistoryCell
 
-        cell.address.text = self.parkingModel[indexPath.row].address ?? ""
-        cell.price.text = "$\(self.parkingModel[indexPath.row].initialPrice ?? 0.0)"
+        cell.address.text = self.parkingModel[indexPath.row].address ?? "-"
+        
+//        cell.price.text = "$\(self.parkingModel[indexPath.row].initialPrice ?? 0.0)"
+        
+        if(self.parkingModel[indexPath.row].finalPrice == 0 || self.parkingModel[indexPath.row].finalPrice == nil)
+        {
+            
+            cell.price.text = "$\(self.parkingModel[indexPath.row].initialPrice ?? 0.0)"
+        }
+        else
+        {
+         cell.price.text = "$\(self.parkingModel[indexPath.row].finalPrice ?? 0.0)"
+            
+        }
+        
+//        if (model.getFinalPrice() == 0 || String.valueOf(model.getFinalPrice()).equalsIgnoreCase(null)) {
+//            holder.parkingprice.setText("$" + String.valueOf(model.getInitialPrice()));
+//        } else {
+//            holder.parkingprice.setText("$" + String.valueOf(model.getFinalPrice()));
+//        }
         
 //        if let parkingStatus = ParkingStatus(rawValue: self.parkingModel[indexPath.row].status ?? 0){
 //
@@ -145,9 +163,39 @@ extension ParkingsHistoryVC: UITableViewDelegate,UITableViewDataSource{
 //        }
         
         cell.status.text = Helper.getStatusText(status: self.parkingModel[indexPath.row].status ?? 0)
+        
         cell.parkingTitle.text = self.parkingModel[indexPath.row].title ?? "-"
         cell.type.text = self.parkingModel[indexPath.row].parkingSubTypeText ?? "-"
-        cell.availablity.text = "\(self.parkingModel[indexPath.row].startAt ?? "") - \(self.parkingModel[indexPath.row].endAt ?? "")"
+        
+        if(self.parkingModel[indexPath.row].parkingType == ParkingType.PARKING_TYPE_PRIVATE )
+                    {
+                      
+                      cell.fromavailablity.text = "From : \( Helper().getFormatedDateAndTimeList(dateStr: self.parkingModel[indexPath.row].startAt ?? "")) "
+                               cell.toavailablity.text = "To : \( Helper().getFormatedDateAndTimeList(dateStr: self.parkingModel[indexPath.row].endAt ?? ""))"
+                      
+                      
+                      
+                      cell.toavailablity.isHidden = self.parkingModel[indexPath.row].endAt == nil ? true : false
+                    }
+                    else
+                    {
+                        cell.toavailablity.isHidden = true
+                        cell.fromavailablity.text = Helper().getFormatedDateAndTimeList(dateStr: self.parkingModel[indexPath.row].startAt ?? "")
+                    }
+        
+//        if(self.parkingModel[indexPath.row].parkingType == ParkingType.PARKING_TYPE_PRIVATE )
+//        {
+//            cell.fromavailablity.text = "From : \(self.parkingModel[indexPath.row].startAt ?? "") "
+//                   cell.toavailablity.text = "To : \(self.parkingModel[indexPath.row].endAt ?? "")"
+//            cell.toavailablity.isHidden = false
+//        }
+//        else
+//        {
+//            cell.toavailablity.isHidden = true
+//            cell.fromavailablity.text = "\(self.parkingModel[indexPath.row].startAt ?? "") "
+//        }
+        
+       
         
         return cell
 
