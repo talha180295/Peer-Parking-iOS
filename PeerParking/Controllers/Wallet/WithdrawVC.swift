@@ -12,17 +12,109 @@ import XLPagerTabStrip
 
 
 class WithdrawVC: UIViewController,IndicatorInfoProvider {
-
+    
+    @IBOutlet weak var withdrawCardNumber: UILabel!
+    
+    var delegate:TopupVCDelegate!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        
+        //        NotificationCenter.default.addObserver(self, selector: #selector(self.getCard(notification:)), name: NSNotification.Name(rawValue: "topUpCard"), object: nil)
+        
+        getCardDetails()
+    }
+    
+    func getCardDetails(){
+        
+        Helper().showSpinner(view: self.view)
+        
+        let url = APIRouter.me
+        let decoder = ResponseData<Me>.self
+        
+        APIClient.serverRequest(url: url, path: url.getPath(), dec: decoder) { (response,error) in
+            
+            //            print(response?.data)
+            Helper().hideSpinner(view: self.view)
+            if(response != nil){
+                if (response?.success) != nil {
+                    
+                    //                    Helper().showToast(message: "Success=\(success)", controller: self)
+                    if let val = response?.data {
+                        
+                        
+                        
+                        let cards:[Card] = val.card ?? [Card]()
+                        for card in cards {
+                            
+                            switch card.type {
+                                
+                            case CardType.WITHDRAW_CARD:
+                                if let cardNo = val.card?.first?.lastFour {
+                                    self.withdrawCardNumber.text = "**** **** **** \(cardNo)"
+                                    //                                    cardBrnd.setText(card.getBrand());
+                                }
+                                else{
+                                    self.withdrawCardNumber.text = "Add Card"
+                                }
+                            default:
+                                break
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                }
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                }
+            }
+            else if(error != nil){
+                Helper().showToast(message: "\(error?.localizedDescription ?? "" )", controller: self)
+            }
+            else{
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
+            
+        }
+        
+    }
+    
+    
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
-        return IndicatorInfo(title: "Withdraw", accessibilityLabel: "Withdraw", image: UIImage(named: "historyUn"), highlightedImage: UIImage(named: "history"), userInfo: nil)
+        return IndicatorInfo(title: "Withdraw")
+        //        return IndicatorInfo(title: "Withdraw", accessibilityLabel: "Withdraw", image: UIImage(named: "historyUn"), highlightedImage: UIImage(named: "history"), userInfo: nil)
     }
+    
+ 
+    @IBAction func withdrawBtnClick(_ sender:UIButton){
+        
+        let vc = AmountPopUp.instantiate(fromPeerParkingStoryboard: .Wallet)
+        vc.type = .Withdraw
+        vc.delgate = self
+        Helper().popUp(controller: vc, view_controller: self)
+    }
+    
+    @IBAction func addCardBtn(_ sender: UIButton) {
+        
+        //        choosePaymentButtonTapped()
+        
+        let vc = PaymentView.instantiate(fromPeerParkingStoryboard: .Main)
+        vc.paymentType = .Withdraw
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
 
+
+extension WithdrawVC:AmountPopUpDelegate{
+    func transactionSuccessfully() {
+        self.delegate.reloadBlance()
+    }
 }

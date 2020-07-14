@@ -119,6 +119,7 @@
 		A9D762387663A23BCCC8DF20 /* Pods_PeerParkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A95BBA1B1DD260246764DE0D /* Pods_PeerParkingTests.framework */; };
 		BC072887249ECB7E00CBDE62 /* BuyerParkingSendingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC072886249ECB7E00CBDE62 /* BuyerParkingSendingModel.swift */; };
 		BC514A9A2496D088003DF452 /* SellParking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC514A992496D087003DF452 /* SellParking.storyboard */; };
+		BC553B3E24BD1D4300B768F3 /* AmountPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC553B3D24BD1D4300B768F3 /* AmountPopUp.swift */; };
 		BC6C163A24A757AA00F79CCE /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6C163924A757AA00F79CCE /* LoginResponse.swift */; };
 		BC6C163C24A7581800F79CCE /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6C163B24A7581800F79CCE /* LoginRequest.swift */; };
 		BC8511832490D84700D4B3BA /* PeerParkingStotyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */; };
@@ -332,6 +333,7 @@
 		BACE3107569777F337087DF8 /* Pods-PeerParkingUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingUITests.release.xcconfig"; path = "Target Support Files/Pods-PeerParkingUITests/Pods-PeerParkingUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BC072886249ECB7E00CBDE62 /* BuyerParkingSendingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerParkingSendingModel.swift; sourceTree = "<group>"; };
 		BC514A992496D087003DF452 /* SellParking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SellParking.storyboard; sourceTree = "<group>"; };
+		BC553B3D24BD1D4300B768F3 /* AmountPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountPopUp.swift; sourceTree = "<group>"; };
 		BC6C163924A757AA00F79CCE /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		BC6C163B24A7581800F79CCE /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		BC8511822490D84700D4B3BA /* PeerParkingStotyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerParkingStotyboards.swift; sourceTree = "<group>"; };
@@ -793,6 +795,7 @@
 				BCC0F8AB24B7B22600B2D8F1 /* WalletContentView.swift */,
 				BCC0F8AF24B7BC3700B2D8F1 /* TopupVC.swift */,
 				BCC0F8B124B7BC5100B2D8F1 /* WithdrawVC.swift */,
+				BC553B3D24BD1D4300B768F3 /* AmountPopUp.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -1353,6 +1356,7 @@
 				67104A31249BBA55008DA0EF /* ParkingBookingDetailsVC.swift in Sources */,
 				1841BED42428CE9E00B621AF /* UIColor+Extension.swift in Sources */,
 				BCC0F8B024B7BC3700B2D8F1 /* TopupVC.swift in Sources */,
+				BC553B3E24BD1D4300B768F3 /* AmountPopUp.swift in Sources */,
 				FA6CD36F2328CB7D00E18CF2 /* NotificationCell.swift in Sources */,
 				FA2815C0231E7058008AF3F5 /* menuCell.swift in Sources */,
 				FA82B500232F66A6002675AC /* Knob.swift in Sources */,

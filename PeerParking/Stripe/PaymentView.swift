@@ -15,7 +15,7 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
 
     @IBOutlet weak var myView: UIView!
     
-    
+    var paymentType:AmountPopUpType = .Topup
     
     lazy var cardTextField: STPPaymentCardTextField = {
         let cardTextField = STPPaymentCardTextField()
@@ -69,7 +69,15 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
                 //post: user_card
                 
                 let params = ["stripeToken" : token.tokenId]
-                self.addUserCard(params: params)
+                
+                switch self.paymentType{
+                case .Topup:
+                    self.addUserCard(params: params)
+                case .Withdraw:
+                    self.addExternalCard(params: params)
+                
+                }
+                
             }
     }
 
@@ -115,4 +123,46 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
         }
     }
 
+    
+    func addExternalCard(params:[String:Any]){
+            
+            Helper().RefreshToken { response in
+                
+                print(response)
+                if response.result.value == nil {
+                    print("No response")
+                    
+                    return
+                }
+                else{
+                    
+                    Alamofire.request(APIRouter.addExternalCard(params)).responsePost{ response in
+                        
+                        Helper().hideSpinner(view: self.view)
+                        switch response.result {
+                            
+                        case .success:
+                            if response.result.value?.success ?? false{
+                                
+                                Helper().showToast(message: response.result.value?.message ?? "-", controller: self)
+                                
+                            }
+                            else{
+                                print("Server Message=\(response.result.value?.message ?? "-" )")
+                                Helper().showToast(message: response.result.value?.message ?? "-", controller: self)
+                                
+                            }
+                            
+                        case .failure(let error):
+                            print("ERROR==\(error)")
+                            Helper().showToast(message: error.localizedDescription, controller: self)
+                            
+                        }
+                    }
+                    
+                }
+                
+                self.sideMenuController?.performSegue(withIdentifier: "WalletVC", sender: nil)
+        }
+    }
 }

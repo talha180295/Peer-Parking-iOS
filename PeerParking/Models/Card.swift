@@ -13,7 +13,7 @@ import Foundation
 
 // MARK: - Card
 struct Card: Codable {
-    let id, userID: Int?
+    let id, userID, type: Int?
     let stripeCardID: String?
     let externalAccountId: String?
     let lastFour: Int?
@@ -23,6 +23,7 @@ struct Card: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id
+        case type
         case userID = "user_id"
         case stripeCardID = "stripe_card_id"
         case externalAccountId = "external_account_id"

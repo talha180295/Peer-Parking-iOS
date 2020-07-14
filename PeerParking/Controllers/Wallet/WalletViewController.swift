@@ -38,7 +38,7 @@ class WalletViewController: UIViewController {
         sub.view.frame = CGRect(x: 15, y: view.frame.maxY-5, width: view.frame.width, height: view.frame.height)
         
         sub.view.layer.masksToBounds = false
-        sub.minimize(completion: nil)
+//        sub.minimize(completion: nil)
     }
     
     func subViewGotPanned(_ percentage: Int) {
