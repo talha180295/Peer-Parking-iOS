@@ -180,7 +180,7 @@ class BottomSheetVC: UIViewController {
         
         if(self.parking_details.seller != nil && self.parking_details.seller?.details != nil)
         {
-            self.trust_score_txt.text = String( self.parking_details.seller?.details?.averageRating ??  0.0 )
+            self.trust_score_txt.text = String(format: "%0.1f", self.parking_details.seller?.details?.averageRating ??  0.0 )
             self.trust_score.rating = self.parking_details.seller?.details?.averageRating ??  0.0
             
         }

@@ -66,7 +66,8 @@ class FilterBottomSheetVC: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
         let result = formatter.string(from: date)
-        filters.updateValue(String(result), forKey: "date_time")
+//        filters.updateValue(String(result), forKey: "date_time")
+         UserDefaults.standard.set(String(result), forKey: "date_time")
         
         let vehicle_type_f = UserDefaults.standard.string(forKey: "vehicle_type_f")
        // print(vehicle_type_f)
@@ -237,6 +238,9 @@ class FilterBottomSheetVC: UIViewController {
         
         
         
+       
+        
+        
     }
     
     
@@ -258,6 +262,9 @@ class FilterBottomSheetVC: UIViewController {
         }
         //print("filters=\(filters)")
         
+        
+        
+        
         delegate?.applyFilters(filters: filters)
         self.dismiss(animated: true, completion: nil)
     }
@@ -267,6 +274,10 @@ class FilterBottomSheetVC: UIViewController {
         UserDefaults.standard.removeObject(forKey: "time_margin_f")
         UserDefaults.standard.removeObject(forKey: "orderBy_column_f")
         UserDefaults.standard.removeObject(forKey: "parking_type_f")
+        UserDefaults.standard.removeObject(forKey: "date_time")
+        
+        
+         self.filters = [:]
         
         reset_filters()
        
