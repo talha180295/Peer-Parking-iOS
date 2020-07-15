@@ -496,11 +496,11 @@ class Helper{
         return emailPredicate.evaluate(with: enteredEmail)
         
     }
-    func popUp(controller : UIViewController,view_controller:UIViewController){
+    func popUp(controller : UIViewController,view_controller:UIViewController , popupWidth: CGFloat = 320, popupHeight : CGFloat = 365){
         
         
         
-        let popupVC = PopupViewController(contentController: controller, popupWidth: 320, popupHeight: 365)
+        let popupVC = PopupViewController(contentController: controller, popupWidth: popupWidth, popupHeight: popupHeight)
         popupVC.canTapOutsideToDismiss = true
         
         //properties

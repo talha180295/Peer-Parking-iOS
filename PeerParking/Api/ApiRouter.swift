@@ -156,9 +156,9 @@ enum APIRouter: URLRequestConvertible {
             
         case .assignBuyer, .updateParking, .createTempParking, .sendNotification , .loginUser:
             return .httpBody
-        case .getParkingsWithoutToken, .postParking ,.getParkings, .getParkingsById, .postBargainingOffer, .addUserCard, .me, .refresh ,.cancelSellerParking ,.getBargainingsById ,.getTransactions ,.getPrivateParkings,.getBargainings ,.cancelBuyerParking, .addExternalCard:
+        case .getParkingsWithoutToken, .postParking ,.getParkings, .getParkingsById, .postBargainingOffer, .me, .refresh ,.cancelSellerParking ,.getBargainingsById ,.getTransactions ,.getPrivateParkings,.getBargainings ,.cancelBuyerParking:
             return .default
-        case .chargeCard:
+        case .chargeCard, .addUserCard,.addExternalCard:
             return .queryString
         }
     }

@@ -14,6 +14,7 @@ import XLPagerTabStrip
 class WithdrawVC: UIViewController,IndicatorInfoProvider {
     
     @IBOutlet weak var withdrawCardNumber: UILabel!
+    var hasCard = false
     
     var delegate:TopupVCDelegate!
     override func viewDidLoad() {
@@ -56,10 +57,12 @@ class WithdrawVC: UIViewController,IndicatorInfoProvider {
                             case CardType.WITHDRAW_CARD:
                                 if let cardNo = val.card?.first?.lastFour {
                                     self.withdrawCardNumber.text = "**** **** **** \(cardNo)"
+                                    self.hasCard = true
                                     //                                    cardBrnd.setText(card.getBrand());
                                 }
                                 else{
                                     self.withdrawCardNumber.text = "Add Card"
+                                    self.hasCard = false
                                 }
                             default:
                                 break
@@ -95,10 +98,16 @@ class WithdrawVC: UIViewController,IndicatorInfoProvider {
  
     @IBAction func withdrawBtnClick(_ sender:UIButton){
         
+        
+        if !self.hasCard{
+            Helper().showToast(message: "Add Card Firt!", controller: self)
+            return
+        }
+        
         let vc = AmountPopUp.instantiate(fromPeerParkingStoryboard: .Wallet)
         vc.type = .Withdraw
         vc.delgate = self
-        Helper().popUp(controller: vc, view_controller: self)
+        Helper().popUp(controller: vc, view_controller: self, popupWidth: 300, popupHeight: 300)
     }
     
     @IBAction func addCardBtn(_ sender: UIButton) {

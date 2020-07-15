@@ -17,6 +17,7 @@ class TopupVC: UIViewController,IndicatorInfoProvider {
     
     @IBOutlet weak var topUpCardNumber: UILabel!
     
+    var hasCard = false
     var delegate:TopupVCDelegate!
     
     
@@ -60,10 +61,12 @@ class TopupVC: UIViewController,IndicatorInfoProvider {
                             case CardType.TOP_UP_CARD:
                                 if let cardNo = val.card?.first?.lastFour {
                                     self.topUpCardNumber.text = "**** **** **** \(cardNo)"
+                                    self.hasCard = true
                                     //                                    cardBrnd.setText(card.getBrand());
                                 }
                                 else{
                                     self.topUpCardNumber.text = "Add Card"
+                                    self.hasCard = false
                                 }
                             default:
                                 break
@@ -112,10 +115,14 @@ class TopupVC: UIViewController,IndicatorInfoProvider {
     
     @IBAction func topupBtnClick(_ sender:UIButton){
         
+        if !self.hasCard{
+            Helper().showToast(message: "Add Card Firt!", controller: self)
+            return
+        }
         let vc = AmountPopUp.instantiate(fromPeerParkingStoryboard: .Wallet)
         vc.type = .Topup
         vc.delgate = self
-        Helper().popUp(controller: vc, view_controller: self)
+        Helper().popUp(controller: vc, view_controller: self, popupWidth: 300, popupHeight: 300)
     }
     
     @IBAction func addCardBtn(_ sender: UIButton) {
