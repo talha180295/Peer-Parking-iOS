@@ -16,15 +16,19 @@ import FittedSheets
 import HelperClassPod
 import SwiftyJSON
 import Alamofire
+import DatePickerDialog
 
 
 class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate{
     
     
     
-   
+    @IBOutlet weak var resetScheduleButton: UIButton!
     
     
+    @IBOutlet weak var scheduleButton: UIButton!
+    
+    @IBOutlet weak var itemHeightConstraint: NSLayoutConstraint!
     var isMapLoaded = false
    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -45,6 +49,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     var autocomp = false
     var lat = 0.0
     var longg = 0.0
+    
+    var isRefreshDidLoad =  false
     
     var filterLat = 0.0
     var filterLong = 0.0
@@ -78,16 +84,27 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         self.myCollectionView.register(UINib(nibName: "homeParkingCell", bundle: nil), forCellWithReuseIdentifier: "homeParkingCell")
         
         myCollectionView.isHidden = true
-        filter_btn.isHidden = true
+//        filter_btn.isHidden = true
         view_all_btn.isHidden = true
         
+      
         
-       
-
-//
-
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        
+        
+        if(!self.isRefreshDidLoad)
+        {
+            self.refresh()
+        }
+        
+        
+        
+        
+    }
+   
     func  setMapButton(){
         
         let bottomPadding = UIScreen.main.bounds.height-view_all_btn.frame.origin.y
@@ -95,13 +112,12 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         map.isMyLocationEnabled = true
         map.settings.myLocationButton = true
         map.padding = UIEdgeInsets(top: 0, left: 0, bottom: bottomPadding, right: 20)
+   
     }
     
 
     override func viewWillAppear(_ animated: Bool) {
-        
-        
-//        Helper().hideSpinner(view: self.view)
+       
         tab_index = 0
         print("::=willapear")
         self.parkings.removeAll()
@@ -110,42 +126,70 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         self.tabBarController!.navigationItem.title = "Find Parking"
         self.tabBarController!.navigationItem.rightBarButtonItem = nil
         
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshViews), name: NSNotification.Name(rawValue: "refreshView"), object: nil)
-        
+          NotificationCenter.default.addObserver(self, selector: #selector(self.refreshViews), name: NSNotification.Name(rawValue: "refreshView"), object: nil)
         
     }
-    
+  
     @objc func refreshViews(){
-        self.view.layoutIfNeeded()
-                
-        if(!autocomp){
-                          if (!isMapLoaded){
-                              isMapLoaded = true
-                              loadMapView()
-                          }
-                          
-                          mapMoveToCurrentLoc()
-                      }
+        
+       
+        
+        if(self.isRefreshDidLoad){
+            refresh()
+        }
+         
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//
-//    }
+    func refresh(){
+        self.view.layoutIfNeeded()
+              
+        
+            checkAlreadyScheduled()
+
+               if(!autocomp){
+                                 if (!isMapLoaded){
+                                     isMapLoaded = true
+                                     loadMapView()
+                                 }
+                                 mapMoveToCurrentLoc()
+                
+               }
+    }
     
-   
+    func checkAlreadyScheduled(){
+
+                let date_time = UserDefaults.standard.string(forKey: "date_time")
+                       if(date_time != nil){
+                                         
+                        
+                        self.scheduleButton.setTitle(Helper().getFormatedDateAndTime(dateStr: date_time!), for: .normal)
+        //                self.scheduleButton.titleLabel?.text = date_time!
+                        self.resetScheduleButton.isHidden = false
+        //                                 params.updateValue(date_time!, forKey: "date_time")
+                                         
+                                     }
+                else
+                       {
+                         self.scheduleButton.setTitle("Select date/time", for: .normal)
+        //                self.scheduleButton.titleLabel?.text = "Select date/time"
+                    self.resetScheduleButton.isHidden = true
+                }
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
-        Helper().hideSpinner(view: self.view)
+     
+         Helper().hideSpinner(view: self.view)
          NotificationCenter.default.removeObserver(self)
+    
     }
     
     func autocompleteClicked() {
+        
         let autocompleteController = GMSAutocompleteViewController()
         autocompleteController.delegate = self
-
         // Display the autocomplete view controller.
         present(autocompleteController, animated: true, completion: nil)
+        
     }
     
     func loadMapView(){
@@ -160,11 +204,10 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         map.settings.myLocationButton = false
        // self.mapView = mapView
         self.mapView.addSubview(map)
-
+        
         map.isMyLocationEnabled = true
         
         self.map.animate(to: cameraView)
-
     }
     
     //Location Manager delegates
@@ -249,14 +292,41 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         bottomSheet(controller: controller!, sizes: [.fixed(550)],cornerRadius: 0, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
     }
     
+    
+     @IBAction func resetScheduleButtonAction(_ sender: UIButton) {
+        
+        UserDefaults.standard.removeObject(forKey: "date_time")
+         self.refresh()
+    }
+    
     @IBAction func cal_btn(_ sender: UIButton) {
         
 //        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScheduleVC")
+        datePickerTapped()
         
-        
-        let controller = ScheduleVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
-        bottomSheet(controller: controller, sizes: [.fixed(360)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
+//        let controller = ScheduleVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
+//        bottomSheet(controller: controller, sizes: [.fixed(360)],cornerRadius: 20, handleColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0))
     }
+    
+    func datePickerTapped() {
+          DatePickerDialog(buttonColor:#colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)).show("Select Time", doneButtonTitle: "DONE", cancelButtonTitle: "CANCEL", datePickerMode: .dateAndTime) {
+              (date) -> Void in
+              if let time = date {
+                  let formatter = DateFormatter()
+                  formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+              
+//                Helper().showToast(message: formatter.string(from: time), controller: self)
+                
+                 UserDefaults.standard.set(formatter.string(from: time), forKey: "date_time")
+                
+                self.refresh()
+//                  self.time_field.text = formatter.string(from: time)
+                  
+//                  GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(self.time_field.text!, forKey: "start_at")
+                  
+              }
+          }
+      }
     
     @IBAction func arrow_btn(_ sender: UIButton) {
 
@@ -288,6 +358,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             
             self.search_tf.text = self.address
             self.map.animate(to: camera)
+            self.isRefreshDidLoad = true
           
         }
         
@@ -301,6 +372,13 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         vc.longg = self.longg
         self.navigationController?.pushViewController(vc, animated: true)
 
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshViews), name: NSNotification.Name(rawValue: "refreshView"), object: nil)
+        
     }
     
     
@@ -453,21 +531,48 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             
         ]
         
-        if(filters.keys.contains("vehicle_type")){
-            params.updateValue(filters["vehicle_type"]!, forKey: "vehicle_type")
+        
+        let vehicle_type_f = UserDefaults.standard.string(forKey: "vehicle_type_f")
+        if(vehicle_type_f != nil){
+            
+            params.updateValue(vehicle_type_f!, forKey: "vehicle_type")
+            
         }
-        if(filters.keys.contains("parking_type")){
-            params.updateValue(filters["parking_type"]!, forKey: "parking_type")
+        
+        let time_margin_f = UserDefaults.standard.string(forKey: "time_margin_f")
+        if(time_margin_f != nil){
+            
+            params.updateValue(time_margin_f!, forKey: "time_margin")
+            
         }
-        if(filters.keys.contains("orderBy_column")){
-            params.updateValue(filters["orderBy_column"]!, forKey: "orderBy_column")
-        }
-        if(filters.keys.contains("time_margin")){
-            params.updateValue(filters["time_margin"]!, forKey: "time_margin")
-        }
-        if(filters.keys.contains("date_time")){
-            params.updateValue(filters["date_time"]!, forKey: "date_time")
-        }
+        
+        let orderBy_column_f = UserDefaults.standard.string(forKey: "orderBy_column_f")
+        
+        if(orderBy_column_f != nil){
+                   
+                   params.updateValue(orderBy_column_f!, forKey: "orderBy_column")
+                   
+               }
+        
+        let parking_type_f = UserDefaults.standard.string(forKey: "parking_type_f")
+        if(parking_type_f != nil){
+                          
+                          params.updateValue(parking_type_f!, forKey: "parking_type")
+                          
+                      }
+        
+        let date_time = UserDefaults.standard.string(forKey: "date_time")
+        if(date_time != nil){
+                          
+                          params.updateValue(date_time!, forKey: "date_time")
+                          
+                      }
+        
+        
+  
+//        if(filters.keys.contains("date_time")){
+//            params.updateValue(filters["date_time"]!, forKey: "date_time")
+//        }
         
         
         print("token=\(UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN))")
@@ -595,6 +700,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
         
                     if let uData = response?.data{
 
+                        self.map.clear()
                         Helper().map_circle(data: uData, map_view: self.map)
                         Helper().map_custom_marker(data: uData, map_view: self.map)
                         //Helper().map_circle(lat: place.coordinate.latitude, longg: place.coordinate.longitude,map_view: self.map)
@@ -612,6 +718,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
                         
                         UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
                             self.re_center_bottom_cont.constant = 40
+                            self.itemHeightConstraint.constant = 107
                         })
 
                         self.myCollectionView.isHidden = false
@@ -625,10 +732,11 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 
                         UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
                             self.re_center_bottom_cont.constant = -143
+                            self.itemHeightConstraint.constant = 0
                         })
 
                         self.myCollectionView.isHidden = true
-                        self.filter_btn.isHidden = true
+//                        self.filter_btn.isHidden = true
                         self.view_all_btn.isHidden = true
 
                         Helper().showToast(message: "No Parkings Available", controller: self)
@@ -717,11 +825,17 @@ extension FindParkingVC:FiltersProtocol{
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
         
-        self.get_all_parkings(lat: self.filterLat, long: self.filterLong, date_time: Helper().getCurrentDate(), isHeaderIncluded: Helper().IsUserLogin(), filters: filters){
-            
-//           Helper().hideSpinner(view: self.view)
-        }
-       
+        
+         UserDefaults.standard.removeObject(forKey: "date_time")
+        self.checkAlreadyScheduled()
+        
+         self.get_all_parkings(lat: self.filterLat, long: self.filterLong, date_time: Helper().getCurrentDate(), isHeaderIncluded: Helper().IsUserLogin(), filters: filters){
+                              
+                  //           Helper().hideSpinner(view: self.view)
+                      
+                          }
+        
+        
     }
     
 }
@@ -764,6 +878,8 @@ extension FindParkingVC: GMSAutocompleteViewControllerDelegate {
                 self.autocomp = false
 
             }
+            NotificationCenter.default.addObserver(self, selector: #selector(self.refreshViews), name: NSNotification.Name(rawValue: "refreshView"), object: nil)
+            
             
   
             
