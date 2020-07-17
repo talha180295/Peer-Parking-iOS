@@ -41,6 +41,37 @@ class Helper{
         
     }
     
+    func getFormatedServerDateTime(dateStr:String) -> String{
+        
+        
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+        
+        let formateDate = dateFormatter.date(from:dateStr) ?? Date()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Output Formated
+        
+        //        let date: Date? = dateFormatter.date(from: dateStr)
+        
+        return dateFormatter.string(from: formateDate)
+    }
+    func getFormatedServerTime(dateStr:String) -> String{
+        
+        
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+        
+        let formateDate = dateFormatter.date(from:dateStr) ?? Date()
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        dateFormatter.dateFormat = "HH:mm:ss" // Output Formated
+        
+        //        let date: Date? = dateFormatter.date(from: dateStr)
+        
+        return dateFormatter.string(from: formateDate)
+    }
+    
+    
     func getFormatedDateAndTime(dateStr:String) -> String{
         
         
