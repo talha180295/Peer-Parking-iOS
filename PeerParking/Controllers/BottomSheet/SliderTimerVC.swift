@@ -149,8 +149,8 @@ class SliderTimerVC: UIViewController {
     
     func addBookedSlotView(parking : Parking)
     {
-//        self.startTime.append(self.convertStringToDate(dateStr1: parking.startAt!))
-//        self.endTime.append(self.convertStringToDate(dateStr1: parking.endAt!))
+        self.startTime.append(self.convertStringToDate(dateStr1: parking.startAt!))
+        self.endTime.append(self.convertStringToDate(dateStr1: parking.endAt!))
         
         
         
@@ -291,6 +291,15 @@ class SliderTimerVC: UIViewController {
         let date1 : Date = dateFormatter.date(from: date)!
         return date1
     }
+    
+    func formatDateServer(date : String) -> Date
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        let date1 : Date = dateFormatter.date(from: date)!
+        return date1
+    }
   
     func getDifference(strStart : String,endStr : String) -> String {
          
@@ -334,7 +343,7 @@ class SliderTimerVC: UIViewController {
         print("ending price \(strEnd)")
         print("staritng parice \(strStart)")
         
-        print("strEnd price \( Helper().getFormatedServerDateTime(dateStr: strEnd))")
+//        print("strEnd price \( Helper().getFormatedServerDateTime(dateStr: strEnd))")
        
         
         
@@ -434,10 +443,13 @@ class SliderTimerVC: UIViewController {
 //        let strtstrToDate = self.convertStringToDate(dateStr1: Helper().getFormatedServerDateTime(dateStr: self.strStart))
 //        let endstrToDate = self.convertStringToDate(dateStr1: Helper().getFormatedServerDateTime(dateStr: self.strEnd))
         
-         let strtstrToDate = convertInMinutes(date: self.formatDate(date: self.strStart))
-        let endstrToDate = convertInMinutes(date: self.formatDate(date: self.strEnd))
+        
+        
+        
+        let strtstrToDate = convertInMinutes(date: self.formatDateServer(date: Helper().getFormatedServerDateTime(dateStr: self.strStart) ))
+        let endstrToDate = convertInMinutes(date: self.formatDateServer(date: Helper().getFormatedServerDateTime(dateStr: self.strEnd) ))
 
-        for i in 0...self.startTime.count{
+        for i in 0...self.startTimeInt.count{
 
             
             
@@ -448,35 +460,35 @@ class SliderTimerVC: UIViewController {
                 print(strtstrToDate)
                 print(endstrToDate)
                 
-                print(strtstrToDate)
-                 print(endstrToDate)
+                print(self.strStart)
+                 print(self.strEnd)
                  print(startTime[i])
                  print(endTime[i])
                 
                 return false
             }
             else if( endstrToDate >  self.startTimeInt[i]  && endstrToDate < self.endTimeInt[i] )  {
-                print(self.startTimeInt[i])
-                print(self.endTimeInt[i])
-                print(strtstrToDate)
-                print(endstrToDate)
-                
-                print(strtstrToDate)
-                 print(endstrToDate)
-                 print(startTime[i])
-                 print(endTime[i])
+                 print(self.startTimeInt[i])
+                               print(self.endTimeInt[i])
+                               print(strtstrToDate)
+                               print(endstrToDate)
+                               
+                               print(self.strStart)
+                                print(self.strEnd)
+                                print(startTime[i])
+                                print(endTime[i])
                 return false
             }
             else if(strtstrToDate < self.startTimeInt[i] && endstrToDate > self.startTimeInt[i] ){
-                print(self.startTimeInt[i])
-                print(self.endTimeInt[i])
-                print(strtstrToDate)
-                print(endstrToDate)
-                
-                print(strtstrToDate)
-                 print(endstrToDate)
-                 print(startTime[i])
-                 print(endTime[i])
+                 print(self.startTimeInt[i])
+                               print(self.endTimeInt[i])
+                               print(strtstrToDate)
+                               print(endstrToDate)
+                               
+                               print(self.strStart)
+                                print(self.strEnd)
+                                print(startTime[i])
+                                print(endTime[i])
                 return false
             }
 
