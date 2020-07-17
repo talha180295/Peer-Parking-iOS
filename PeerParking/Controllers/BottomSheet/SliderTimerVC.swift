@@ -89,7 +89,7 @@ class SliderTimerVC: UIViewController {
          components = calendar.dateComponents([.year, .month, .day], from: date)
         
         setSlider()
-        maxAmount()
+//        maxAmount()
         getBookedSlots()
        
 // ,
@@ -117,6 +117,9 @@ class SliderTimerVC: UIViewController {
                       if (response?.success) != nil {
                           //                    Helper().showToast(message: response?.message ?? "-", controller: self)
                           if let val = response?.data {
+                            
+//                            self.startTimeInt = []
+//                            self.endTimeInt = []
                             
                             response?.data?.forEach({ (parking) in
                                 
@@ -154,8 +157,14 @@ class SliderTimerVC: UIViewController {
         
         
         
-        self.startTimeInt.append(self.convertInMinutes(date: self.convertStringToDate(dateStr1: parking.startAt!)))
-        self.endTimeInt.append(self.convertInMinutes(date: self.convertStringToDate(dateStr1: parking.endAt!)))
+       
+        
+//        self.startTimeInt.append(self.convertInMinutes(date1: self.convertStringToDate(dateStr1: parking.startAt!)))
+        
+        self.startTimeInt.append(self.convertServerDateToMinutes(date_string: parking.startAt!))
+        self.endTimeInt.append(self.convertServerDateToMinutes(date_string: parking.endAt!))
+        
+//        self.endTimeInt.append(self.convertInMinutes(date1: self.convertStringToDate(dateStr1: parking.endAt!)))
         
         
         
@@ -370,7 +379,8 @@ class SliderTimerVC: UIViewController {
           
          
         
-        
+        slider.valueLabels[0].textColor = .black
+        slider.valueLabels[1].textColor = .black
         sender.valueLabels[0].backgroundColor = .white
         sender.valueLabels[1].backgroundColor = .white
         sender.valueLabels[0].text = endStr
@@ -391,16 +401,21 @@ class SliderTimerVC: UIViewController {
         slider.valueLabelPosition = .right // .notAnAttribute = don't show labels
         slider.isValueLabelRelative = true // show differences between thumbs instead of absolute values
         ///slider.valueLabelFormatter.positiveSuffix = " 𝞵s"
-        slider.valueLabels[1].text = "12:00 AM"
-        slider.valueLabels[0].text = "11:59 PM"
-        slider.valueLabels[0].backgroundColor = .white
-        slider.valueLabels[1].backgroundColor = .white
+        slider.valueLabels[1].text = " "
+        slider.valueLabels[0].text = " "
+        slider.valueLabels[0].textColor = UIColor(white: 1, alpha: 0.0)
+        slider.valueLabels[1].textColor = UIColor(white: 1, alpha: 0.0)
+        slider.valueLabels[0].backgroundColor = UIColor(white: 1, alpha: 0.0)
+        slider.valueLabels[1].backgroundColor = UIColor(white: 1, alpha: 0.0)
         slider.thumbViews[0].isHidden = true
         slider.thumbViews[1].isHidden = true
-        lblEnd.text = "23h : 59m"
+        slider.value[0] = 0.0
+        slider.value[1] = 0.0
         
-        strEnd = getCurrentDateString() + slider.valueLabels[1].text!
-        strStart = getCurrentDateString() + slider.valueLabels[0].text!
+//        lblEnd.text = "23h : 59m"
+        
+//        strEnd = getCurrentDateString() + slider.valueLabels[1].text!
+//        strStart = getCurrentDateString() + slider.valueLabels[0].text!
     
     }
     
@@ -413,14 +428,23 @@ class SliderTimerVC: UIViewController {
     @IBAction func setTimeAction(_ sender: Any) {
         
        
-        if(self.validateTimeSlot())
-        {
-                    delegate!.timeSelect(startigTime:strStart  , endingTime : strEnd)
-                     self.dismiss(animated: false)
+        
+        if(self.strStart == "" || self.strEnd == ""){
+            
+            Helper().showToast(message: "Please Select Time Range", controller: self)
         }
         else
         {
-            Helper().showToast(message: "Selected Interval contains time already booked", controller: self)
+            if(self.validateTimeSlot())
+            {
+                        delegate!.timeSelect(startigTime:strStart  , endingTime : strEnd)
+                         self.dismiss(animated: false)
+            }
+            else
+            {
+               Helper().showToast(message: "Selected Interval contains time already booked", controller: self)
+            }
+            
         }
         
 
@@ -446,15 +470,30 @@ class SliderTimerVC: UIViewController {
         
         
         
-        let strtstrToDate = convertInMinutes(date: self.formatDateServer(date: Helper().getFormatedServerDateTime(dateStr: self.strStart) ))
-        let endstrToDate = convertInMinutes(date: self.formatDateServer(date: Helper().getFormatedServerDateTime(dateStr: self.strEnd) ))
+        let strtstrToDate = convertInMinutes(date1: self.formatDateServer(date: Helper().getFormatedServerDateTime(dateStr: self.strStart) ))
+        
+//        let strtstrToDate = self.convertServerDateToMinutes(date_string: Helper().getFormatedServerDateTime(dateStr: self.strStart))
+        
+        let endstrToDate = convertInMinutes(date1: self.formatDateServer(date: Helper().getFormatedServerDateTime(dateStr: self.strEnd) ))
+//        let endstrToDate = self.convertServerDateToMinutes(date_string: Helper().getFormatedServerDateTime(dateStr: self.strEnd))
 
-        for i in 0...self.startTimeInt.count{
+        for i in 0..<self.startTimeInt.count{
 
             
+//                            print(i)
+//                           print(self.startTimeInt[i])
+//                           print(self.endTimeInt[i])
+//                           print(strtstrToDate)
+//                           print(endstrToDate)
+//
+//                           print(self.strStart)
+//                            print(self.strEnd)
+//                            print(startTime[i])
+//                            print(endTime[i])
+                           
             
-            
-            if(strtstrToDate >  self.startTimeInt[i]  && strtstrToDate < self.endTimeInt[i] )  {
+            if(strtstrToDate > self.startTimeInt[i]  && strtstrToDate < self.endTimeInt[i] )  {
+                print(i)
                 print(self.startTimeInt[i])
                 print(self.endTimeInt[i])
                 print(strtstrToDate)
@@ -468,6 +507,7 @@ class SliderTimerVC: UIViewController {
                 return false
             }
             else if( endstrToDate >  self.startTimeInt[i]  && endstrToDate < self.endTimeInt[i] )  {
+                 print(i)
                  print(self.startTimeInt[i])
                                print(self.endTimeInt[i])
                                print(strtstrToDate)
@@ -480,6 +520,7 @@ class SliderTimerVC: UIViewController {
                 return false
             }
             else if(strtstrToDate < self.startTimeInt[i] && endstrToDate > self.startTimeInt[i] ){
+                 print(i)
                  print(self.startTimeInt[i])
                                print(self.endTimeInt[i])
                                print(strtstrToDate)
@@ -501,29 +542,59 @@ class SliderTimerVC: UIViewController {
         
     }
     
+    func convertServerDateToMinutes(date_string : String) -> Int{
+        
+       
+        var hour = Int( date_string.components(separatedBy: " ")[1].components(separatedBy: ":")[0])!
+        var minnute = Int( date_string.components(separatedBy: " ")[1].components(separatedBy: ":")[1])!
+      
+        let time1 = (60 * hour) + minnute
+        return time1
+    }
     
-    func convertInMinutes(date : Date) -> Int{
+    
+    func convertInMinutes(date1 : Date) -> Int{
         
         
 //        let time1 = 60*Calendar.current.component(.hour, from: date) + Calendar.current.component(.minute, from: date) + (Calendar.current.component(.second, from: date)/60)
         
-       let time1 = (60*Calendar.current.component(.hour, from: date) ) + Calendar.current.component(.minute, from: date)
+        
+        
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "HH:mm"
+//        print("Dateobj: \(dateFormatter.string(from: date1))")
+//
+       let time1 = (60*Calendar.current.component(.hour, from: date1) ) + Calendar.current.component(.minute, from: date1)
+        
         
         return time1
-        
     }
     
     func convertStringToDate(dateStr1 : String)->Date{
         
-        var dateFormatter = DateFormatter()
+        let dateFormatterPrint = DateFormatter()
+                
        
         
+                dateFormatterPrint.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//                dateFormatterPrint.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+        dateFormatterPrint.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+                       dateFormatterPrint.calendar = Calendar(identifier: .iso8601)
+                       dateFormatterPrint.locale = Locale(identifier: "en_US_POSIX")
+                     
+        //        dateFormatterPrint.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                
+                let date =  dateFormatterPrint.date(from: dateStr1)!
+        print(stringFromTime(interval: 12345.67))
         
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        var dateString = dateFormatter.date(from: dateStr1)!
-        
-        return dateString
+        return date
+    }
+    
+    func stringFromTime(interval: TimeInterval) -> String {
+        let ms = Int(interval.truncatingRemainder(dividingBy: 1) * 1000)
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        return formatter.string(from: interval)! + ".\(ms)"
     }
     
     func convertStringToDateLocal(dateStr1 : String)->Date{
@@ -540,6 +611,8 @@ class SliderTimerVC: UIViewController {
     }
     
     func convertStringToTime(dateStr1 : String)->Date{
+        
+        
         
         
         

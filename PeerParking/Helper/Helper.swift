@@ -50,8 +50,16 @@ class Helper{
         
         
         
+        
+        
         let dateFormatterPrint = DateFormatter()
+        
         dateFormatterPrint.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatterPrint.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+//               dateFormatterPrint.calendar = Calendar(identifier: .iso8601)
+//               dateFormatterPrint.locale = Locale(identifier: "en_US_POSIX")
+//               dateFormatterPrint.timeZone = TimeZone(secondsFromGMT: 0)
+//        dateFormatterPrint.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         let date =  dateFormatterGet.date(from: dateStr)!
         

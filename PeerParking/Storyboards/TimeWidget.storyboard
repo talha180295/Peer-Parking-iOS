@@ -26,7 +26,7 @@
                                         <color key="tintColor" name="themeBlue"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="minimumValue">
-                                                <real key="value" value="-1440"/>
+                                                <real key="value" value="-1430"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="maximumValue">
                                                 <real key="value" value="0.0"/>
@@ -1331,13 +1331,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PrC-Eo-66k">
                                 <rect key="frame" x="1" y="778" width="414" height="41"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zM4-8C-rGx">
-                                        <rect key="frame" x="100" y="0.0" width="83" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$ 0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zM4-8C-rGx">
+                                        <rect key="frame" x="100" y="0.0" width="117" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vPt-4S-g1z">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="00h : 00m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vPt-4S-g1z">
                                         <rect key="frame" x="320" y="-1" width="86" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -1365,7 +1365,7 @@
                                     <constraint firstAttribute="bottom" secondItem="zM4-8C-rGx" secondAttribute="bottom" constant="20" id="LnJ-4g-tzM"/>
                                     <constraint firstAttribute="trailing" secondItem="vPt-4S-g1z" secondAttribute="trailing" constant="8" id="Nmk-eQ-XMt"/>
                                     <constraint firstAttribute="height" constant="41" id="YmF-hO-ZxL"/>
-                                    <constraint firstItem="A7R-Kj-dLy" firstAttribute="leading" secondItem="zM4-8C-rGx" secondAttribute="trailing" constant="42" id="cil-LN-YPr"/>
+                                    <constraint firstItem="A7R-Kj-dLy" firstAttribute="leading" secondItem="zM4-8C-rGx" secondAttribute="trailing" constant="8" id="cil-LN-YPr"/>
                                     <constraint firstItem="vPt-4S-g1z" firstAttribute="top" secondItem="PrC-Eo-66k" secondAttribute="top" constant="-1" id="dhO-fL-7pl"/>
                                     <constraint firstItem="zM4-8C-rGx" firstAttribute="leading" secondItem="8pF-4T-yVR" secondAttribute="trailing" constant="8.3333333333333286" id="e99-Fe-NUf"/>
                                     <constraint firstAttribute="bottom" secondItem="8pF-4T-yVR" secondAttribute="bottom" constant="20" id="hU1-rR-nea"/>
