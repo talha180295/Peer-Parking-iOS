@@ -12,11 +12,8 @@ import XLPagerTabStrip
 class WalletContentVC:  ButtonBarPagerTabStripViewController{
     
     
-    @IBOutlet weak var cardNumber: UILabel!
+    
     @IBOutlet weak var balance: UILabel!
-    
-    
-    
     //Child ViewConrtrollers
     let child_1 = WithdrawVC.instantiate(fromPeerParkingStoryboard: .Wallet)
     let child_2 = TopupVC.instantiate(fromPeerParkingStoryboard: .Wallet)
@@ -31,6 +28,13 @@ class WalletContentVC:  ButtonBarPagerTabStripViewController{
         setupTopBar()
         
         super.viewDidLoad()
+        
+        child_2.delegate = self
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getCardDetails()
     }
     
     
@@ -65,7 +69,87 @@ class WalletContentVC:  ButtonBarPagerTabStripViewController{
     
     
     
+    
+    @IBAction func onTap(_ sender:UIButton){
+        
+        let vc = TransactionViewController.instantiate(fromPeerParkingStoryboard: .Main)
+        Helper().bottomSheet(controller: vc, sizes: [.fullScreen], cornerRadius: 0, handleColor: .clear, view_controller: self)
+    }
+    
+    func getCardDetails(){
+        
+        Helper().showSpinner(view: self.view)
+        
+        let url = APIRouter.me
+        let decoder = ResponseData<Me>.self
+        
+        APIClient.serverRequest(url: url, path: url.getPath(), dec: decoder) { (response,error) in
+            
+//            print(response?.data)
+            Helper().hideSpinner(view: self.view)
+            if(response != nil){
+                if (response?.success) != nil {
+                    
+                    //                    Helper().showToast(message: "Success=\(success)", controller: self)
+                    if let val = response?.data {
+                        
+                        self.balance.text = "$ \(val.details?.wallet ?? 0.0)"
+//                        if let cardNo = val.card?.first?.lastFour {
+//                            self.topUpCard = "**** **** **** \(cardNo)"
+//                        }
+//                        else{
+//                            self.topUpCard = "Add Card"
+//                        }
+                        
+//                        let cards:[Card] = val.card ?? [Card]()
+//                        for card in cards {
+//
+//                            switch card.type {
+//                            case CardType.WITHDRAW_CARD:
+//                                if let cardNo = val.card?.first?.lastFour {
+//                                    self.withdarwCard = "**** **** **** \(cardNo)"
+//                                    //                                  cardBrnd.setText(card.getBrand());
+//                                }
+//                                else{
+//                                    self.withdarwCard = "Add Card"
+//                                }
+//                            case CardType.TOP_UP_CARD:
+//                                if let cardNo = val.card?.first?.lastFour {
+//                                    self.topUpCard = "**** **** **** \(cardNo)"
+//                                    //                                    cardBrnd.setText(card.getBrand());
+//                                }
+//                                else{
+//                                    self.topUpCard = "Add Card"
+//                                }
+//                            default:
+//                                break
+//                            }
+//
+//                        }
+                        
+                    }
+                }
+                else{
+                    Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                }
+            }
+            else if(error != nil){
+                Helper().showToast(message: "\(error?.localizedDescription ?? "" )", controller: self)
+            }
+            else{
+                Helper().showToast(message: "Nor Response and Error!!", controller: self)
+            }
+            
+        }
+        
+    }
+    
+}
 
+extension WalletContentVC:TopupVCDelegate{
+    func reloadBlance() {
+        getCardDetails()
+    }
     
     
 }

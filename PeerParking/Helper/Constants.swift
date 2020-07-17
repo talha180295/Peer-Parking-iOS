@@ -78,6 +78,8 @@ struct APP_CONSTANT {
         static let CHANGE_PASS = "change-password?current_password="
         static let ME = "me"
         static let UPDATE = "profile"
+        static let ChargeCard = "charge-card"
+        
         
         
     }
@@ -177,6 +179,12 @@ struct GLOBAL_VAR {
     
 }
 
+
+struct CardType {
+    public static var TOP_UP_CARD = 10;
+    public static var WITHDRAW_CARD = 20;
+
+}
 
 
 

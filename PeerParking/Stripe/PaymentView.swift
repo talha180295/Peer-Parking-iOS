@@ -11,11 +11,11 @@ import Stripe
 import Alamofire
 
 class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
-
-
+    
+    
     @IBOutlet weak var myView: UIView!
     
-    
+    var paymentType:AmountPopUpType = .Topup
     
     lazy var cardTextField: STPPaymentCardTextField = {
         let cardTextField = STPPaymentCardTextField()
@@ -43,76 +43,141 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
             stackView.leftAnchor.constraint(equalToSystemSpacingAfter: myView.leftAnchor, multiplier: 2),
             myView.rightAnchor.constraint(equalToSystemSpacingAfter: stackView.rightAnchor, multiplier: 2),
             stackView.topAnchor.constraint(equalToSystemSpacingBelow: myView.topAnchor, multiplier: 2),
-            ])
+        ])
     }
     
     @objc
     func pay() {
         Helper().showSpinner(view: self.view)
         let cardParams = STPCardParams()
-            cardParams.number = cardTextField.cardNumber
-            cardParams.expMonth = (cardTextField.expirationMonth)
-            cardParams.expYear = (cardTextField.expirationYear)
-            cardParams.cvc = cardTextField.cvc
-            STPAPIClient.shared().createToken(withCard: cardParams) { (token: STPToken?, error: Error?) in
-                guard let token = token, error == nil else {
-                    // Present error to user...
-                    Helper().hideSpinner(view: self.view)
-                    Helper().showToast(message: error?.localizedDescription ?? "Error nil", controller: self)
-                    return
-                }
-    //            self.dictPayData["stripe_token"] = token.tokenId
-                print(token.tokenId)
-    
-                print(UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN) ?? "")
-                
-                //post: user_card
-                
-                let params = ["stripeToken" : token.tokenId]
-                self.addUserCard(params: params)
+        cardParams.number = cardTextField.cardNumber
+        cardParams.expMonth = (cardTextField.expirationMonth)
+        cardParams.expYear = (cardTextField.expirationYear)
+        cardParams.cvc = cardTextField.cvc
+        STPAPIClient.shared().createToken(withCard: cardParams) { (token: STPToken?, error: Error?) in
+            guard let token = token, error == nil else {
+                // Present error to user...
+                Helper().hideSpinner(view: self.view)
+                Helper().showToast(message: error?.localizedDescription ?? "Error nil", controller: self)
+                return
             }
-    }
-
-    
-    func addUserCard(params:[String:Any]){
+            //            self.dictPayData["stripe_token"] = token.tokenId
+            print(token.tokenId)
             
-            Helper().RefreshToken { response in
+            print(UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN) ?? "")
+            
+            //post: user_card
+            
+            let params = ["stripeToken" : token.tokenId]
+            
+            switch self.paymentType{
+            case .Topup:
+                self.addUserCard(params: params)
+            case .Withdraw:
+                self.addExternalCard(params: params)
                 
-                print(response)
-                if response.result.value == nil {
-                    print("No response")
-                    
-                    return
-                }
-                else{
-                    
-                    Alamofire.request(APIRouter.addUserCard(params)).responsePost{ response in
-                        
-                        Helper().hideSpinner(view: self.view)
-                        switch response.result {
-                            
-                        case .success:
-                            if response.result.value?.success ?? false{
-                                
-                                Helper().showToast(message: response.result.value?.message ?? "-", controller: self)
-                                
-                            }
-                            else{
-                                print("Server Message=\(response.result.value?.message ?? "-" )")
-                                Helper().showToast(message: response.result.value?.message ?? "-", controller: self)
-                                
-                            }
-                            
-                        case .failure(let error):
-                            print("ERROR==\(error)")
-                            
-                        }
-                    }
-                    
-                }
-                
-                self.sideMenuController?.performSegue(withIdentifier: "WalletVC", sender: nil)
+            }
+            
         }
     }
-
+    
+    
+    func addUserCard(params:[String:Any]){
+        
+        Helper().RefreshToken { response in
+            
+            print(response)
+            if response.result.value == nil {
+                print("No response")
+                
+                return
+            }
+            else{
+                
+                Alamofire.request(APIRouter.addUserCard(params)).responsePost{ response in
+                    
+                    Helper().hideSpinner(view: self.view)
+                    switch response.result {
+                        
+                    case .success:
+                        if response.result.value?.success ?? false{
+                            
+                            
+                            Helper().showToast(message: response.result.value?.message ?? "-", controller: self)
+                            
+                            
+                            
+                        }
+                        else{
+                            print("Server Message=\(response.result.value?.message ?? "-" )")
+                            
+                            // your code here
+                            Helper().showToast(message: response.result.value?.message ?? "-", controller: self)
+                            
+                            
+                            
+                        }
+                        
+                    case .failure(let error):
+                        print("ERROR==\(error)")
+                        
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        self.sideMenuController?.performSegue(withIdentifier: "WalletVC", sender: nil)
+                    }
+                }
+                
+            }
+            
+        }
+    }
+    
+    
+    func addExternalCard(params:[String:Any]){
+        
+        Helper().RefreshToken { response in
+            
+            print(response)
+            if response.result.value == nil {
+                print("No response")
+                
+                return
+            }
+            else{
+                
+                Alamofire.request(APIRouter.addExternalCard(params)).responsePost{ response in
+                    
+                    Helper().hideSpinner(view: self.view)
+                    switch response.result {
+                        
+                    case .success:
+                        if response.result.value?.success ?? false{
+                            
+                            
+                            Helper().showToast(message: response.result.value?.message ?? "-", controller: self)
+                            
+                        }
+                        else{
+                            print("Server Message=\(response.result.value?.message ?? "-" )")
+                            
+                            Helper().showToast(message: response.result.value?.message ?? "-", controller: self)
+                            
+                            
+                        }
+                        
+                    case .failure(let error):
+                        print("ERROR==\(error)")
+                        Helper().showToast(message: error.localizedDescription, controller: self)
+                        
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        self.sideMenuController?.performSegue(withIdentifier: "WalletVC", sender: nil)
+                    }
+                }
+                
+            }
+            
+            
+        }
+    }
 }
