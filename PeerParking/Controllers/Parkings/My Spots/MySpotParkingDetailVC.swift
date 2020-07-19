@@ -26,6 +26,7 @@ class MySpotParkingDetailVC : UIViewController{
     var isPublicParking:Bool = false
     
     //Outlets
+    @IBOutlet weak var parkingTimeLabel: UILabel!
     @IBOutlet weak var timingTblView:UITableView!
     @IBOutlet weak var image:UIImageView!
     @IBOutlet weak var parkingTitle:UITextField!
@@ -142,7 +143,30 @@ extension MySpotParkingDetailVC{
         self.price.text = "\(data.initialPrice ?? 0.0)"
         self.type.text = data.parkingSubTypeText ?? "-"
         self.size.text = data.vehicleTypeText ?? "-"
-        self.date.text = data.startAt ?? "-"
+        
+//        self.date.text =    data.startAt ?? "-"
+        
+        
+        var convertedDate = Helper().getFormatedDateAndTimeList(dateStr: data.startAt ?? "" )
+        self.date.text = convertedDate.components(separatedBy: " ")[0]
+        
+        
+       
+        
+        
+        if(convertedDate.components(separatedBy: " ").count ==  3)
+        {
+             self.parkingTimeLabel.text = convertedDate.components(separatedBy: " ")[1] + " " + convertedDate.components(separatedBy: " ")[2]
+             
+        }
+        else
+        {
+             self.parkingTimeLabel.text = convertedDate.components(separatedBy: " ")[1]
+        }
+        
+        
+        
+//        self.date.text = convertedDate.
         
         if (data.isNegotiable ?? false) {
             self.negotiableSwitch.isOn = true

@@ -26,21 +26,77 @@ class Helper{
     func getFormatedDate(dateStr:String) -> String{
         
         
+        if(dateStr == "")
+        {
+            return "-"
+        }
+        else if(dateStr == nil)
+        {
+            return "-"
+        }
+        else
+        {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+            
+            if(dateFormatter.date(from:dateStr) != nil)
+            {
+                let formateDate = dateFormatter.date(from:dateStr)!
+                dateFormatter.dateFormat = "dd/MM/yyyy" // Output Formated
+                
+                //        let date: Date? = dateFormatter.date(from: dateStr)
+                
+                return dateFormatter.string(from: formateDate)
+            }
+            else
+            {
+                return  dateStr
+            }
+            
+            
+        }
+        
+       
         
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
-        
-        let formateDate = dateFormatter.date(from:dateStr)!
-        dateFormatter.dateFormat = "dd/MM/yyyy" // Output Formated
-        
-        //        let date: Date? = dateFormatter.date(from: dateStr)
-        
-        return dateFormatter.string(from: formateDate)
         
         
     }
     
+    
+    func getFormatedDateandTime(dateStr:String) -> String{
+           
+           
+           if(dateStr == "")
+           {
+               return "-"
+           }
+           else if(dateStr == nil)
+           {
+               return "-"
+           }
+           else
+           {
+               let dateFormatter = DateFormatter()
+               dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+               
+               if(dateFormatter.date(from:dateStr) != nil)
+               {
+                   let formateDate = dateFormatter.date(from:dateStr)!
+                   dateFormatter.dateFormat = "MM/dd/yyyy HH:mm a" // Output Formated
+                   
+                   //        let date: Date? = dateFormatter.date(from: dateStr)
+                   
+                   return dateFormatter.string(from: formateDate)
+               }
+               else
+               {
+                   return  dateStr
+               }
+               
+               
+           }
+    }
     func getFormatedServerDateTime(dateStr:String) -> String{
         
         
