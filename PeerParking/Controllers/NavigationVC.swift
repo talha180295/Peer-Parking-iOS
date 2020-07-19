@@ -81,6 +81,9 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         
         
         
+       
+      
+        
         
 //        parkings_cells.isHidden = true
         
@@ -91,6 +94,8 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         
         
     }
+    
+    
     
     
     override func viewWillAppear(_ animated: Bool) {

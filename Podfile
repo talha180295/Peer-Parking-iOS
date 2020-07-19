@@ -15,6 +15,7 @@ target 'PeerParking' do
   pod 'SDWebImage'
 #  pod 'GooglePlacesSearchController'
   pod 'Cosmos'
+  
   pod 'FittedSheets'
   pod 'EzPopup'
   pod 'StepIndicator'

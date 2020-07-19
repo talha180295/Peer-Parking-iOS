@@ -9,18 +9,22 @@
 import Foundation
 import UIKit
 import EzPopup
-
+import DatePickerDialog
 
 protocol MySpotParkingDetailVCDelegate : NSObjectProtocol {
     func didBackButtonPressed()
 }
-class MySpotParkingDetailVC : UIViewController{
+class MySpotParkingDetailVC : UIViewController {
+  
+    
     
     
     //Delegates
     var delegate:MySpotParkingDetailVCDelegate!
+   
     
     //Intent Variables
+    
     private var parkingModel:Parking!
     private var privateParkingModel = PrivateParkingModel()
     var isPublicParking:Bool = false
@@ -50,6 +54,7 @@ class MySpotParkingDetailVC : UIViewController{
     var selectedItems = [Int]()
     var seletedCounter = 0
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,7 +70,72 @@ class MySpotParkingDetailVC : UIViewController{
             self.setPrivateData(data: self.privateParkingModel)
         }
         
+        
+        
+        
+//        timePicker = UIAlertDateTimePicker(withPickerMode: .time, pickerTitle: "Select Time", showPickerOn: self.view)
+//        timePicker.delegate = self
+       
+        
+        
+        let distanceTap = UITapGestureRecognizer(target: self, action: #selector(dateTapFunction))
+               
+        date.isUserInteractionEnabled = true
+               date.addGestureRecognizer(distanceTap)
+               
+              let TimeTap = UITapGestureRecognizer(target: self, action: #selector(timeTapFunction))
+              
+        parkingTimeLabel.isUserInteractionEnabled = true
+               parkingTimeLabel.addGestureRecognizer(TimeTap)
+               
+        
+        
     }
+    
+    @objc func dateTapFunction(sender:UITapGestureRecognizer) {
+        
+        
+        DatePickerDialog(buttonColor:#colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)).show("Select Date", doneButtonTitle: "DONE", cancelButtonTitle: "CANCEL", datePickerMode: .date) {
+                   (date) -> Void in
+                   if let time = date {
+                       let formatter = DateFormatter()
+                       formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+                    var stringDate = formatter.string(from: time)
+                    stringDate =  Helper().getFormatedDateAndTimeList(dateStr: stringDate ?? "" )
+                    
+                       self.date.text =  stringDate.components(separatedBy: " ")[0]
+                       
+//                       GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(self.time_field.text!, forKey: "start_at")
+                       
+                   }
+               }
+
+    }
+    
+    
+    @objc func timeTapFunction(sender:UITapGestureRecognizer) {
+       
+          DatePickerDialog(buttonColor:#colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)).show("Select Time", doneButtonTitle: "DONE", cancelButtonTitle: "CANCEL", datePickerMode: .time) {
+                           (date) -> Void in
+                           if let time = date {
+                               let formatter = DateFormatter()
+                               formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+                            
+                            var stringDate = formatter.string(from: time)
+                            stringDate =  Helper().getFormatedDateAndTimeList(dateStr: stringDate ?? "" )
+                            
+                              
+                            
+                               self.parkingTimeLabel.text = stringDate.components(separatedBy: " ")[1] + " " + stringDate.components(separatedBy: " ")[2]
+                               
+        //                       GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(self.time_field.text!, forKey: "start_at")
+                               
+                           }
+                       }
+       
+    }
+    
+    
     
     func setParingModel(parkingModel: Parking){
         self.parkingModel = parkingModel
@@ -244,7 +314,14 @@ extension MySpotParkingDetailVC{
         park_model.title = self.parkingTitle.text
         park_model.address = self.location.text
         park_model.isNegotiable = self.negotiableSwitch.isOn
-        park_model.startAt = self.parkingModel.startAt
+//        park_model.startAt = self.parkingModel.startAt
+//        park_model.startAt = self.date.text ?? "" + " " + (self.parkingTimeLabel.text ?? "")
+        
+        var startDateandTime = "\((self.date.text ?? "") + (" ") + (self.parkingTimeLabel.text ?? ""))"
+        startDateandTime = Helper().getFormatedServerDateTimeForDetail(dateStr: startDateandTime)
+        park_model.startAt = startDateandTime
+        
+        
         
         do{
             let data = try JSONEncoder().encode(park_model)
