@@ -9,14 +9,16 @@
 import UIKit
 import MultiSlider
 
+import Charts
 
 protocol OnTimeSelectDelegate {
     
     func timeSelect( startigTime : String , endingTime : String)
 }
 
-class SliderTimerVC: UIViewController {
+class SliderTimerVC: UIViewController  {
 
+    @IBOutlet weak var chartView: HorizontalBarChartView!
     var parking_details:Parking!
     @IBOutlet weak var finalpricelabel: UILabel!
     @IBOutlet weak var slider: MultiSlider!
@@ -79,6 +81,8 @@ class SliderTimerVC: UIViewController {
         
         self.outletArray = [self.v1,self.v2,self.v3,self.v4,self.v5,self.v6,self.v7,self.v8,self.v9,self.v10,self.v11,self.v12,self.v13,self.v14,self.v15,self.v16,self.v17,self.v18,self.v19,self.v20,self.v21,self.v22,self.v23,self.v24]
         
+      
+        
       //  self.slider.transform = CGAffineTransform(rotationAngle: (180.0 * .pi) / 180.0)
         
         price = parking_details.initialPrice
@@ -88,6 +92,7 @@ class SliderTimerVC: UIViewController {
         let calendar = Calendar.current
          components = calendar.dateComponents([.year, .month, .day], from: date)
         
+//        setChartView()
         setSlider()
 //        maxAmount()
         getBookedSlots()
@@ -96,6 +101,57 @@ class SliderTimerVC: UIViewController {
     
 //        self.parking_details.sl
 
+    }
+    
+    func setChartView(){
+          chartView.drawBarShadowEnabled = false
+                chartView.drawValueAboveBarEnabled = true
+                self.chartView.maxVisibleCount = 1430
+       
+                
+                chartView.fitBars = false
+        chartView.drawBordersEnabled = false
+        chartView.setScaleEnabled(false)
+        chartView.chartDescription?.enabled = false
+        chartView.dragEnabled = false
+         chartView.rightAxis.enabled = false
+        chartView.leftAxis.enabled = false
+        chartView.xAxis.enabled = false
+        chartView.xAxis.drawLabelsEnabled = false
+        chartView.leftAxis.drawLabelsEnabled = false
+        chartView.rightAxis.drawLabelsEnabled = false
+        
+        
+        
+        
+       
+       
+       
+        
+//        chartView.xAxis.
+        
+        
+                
+                
+                let barchart = BarChartDataEntry.init(x: 100.0, y: 100.0)
+        
+                
+        
+                let set1 = BarChartDataSet(entries: [barchart], label: "")
+        
+       
+        
+        
+        
+                
+                let data = BarChartData(dataSet: set1)
+        
+                data.setValueFont(UIFont(name:"HelveticaNeue-Light", size:150)!)
+        //        data.barWidth = barWidth
+                
+                chartView.data = data
+                
+                
     }
     
     func getBookedSlots(){

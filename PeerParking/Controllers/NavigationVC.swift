@@ -160,7 +160,12 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         
         self.map.animate(to: camera)
         
-        //location.
+      
+        
+//        let d_lat = Double(parking_details?.latitude ?? "") ?? 0.0
+//                       let d_long = Double(parking_details?.longitude ?? "") ?? 0.0
+
+                      
         
         let geoCoder = CLGeocoder()
         
@@ -200,6 +205,23 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         //Location Manager code to fetch current location
         self.locationManager.delegate = self
         self.locationManager.startUpdatingLocation()
+        
+    }
+    
+    func mapMoveToCurrentLoc(){
+
+        print("self.addressabc=\(self.address)")
+        print(" view_all_btn=\(self.view_all_btn.frame)")
+        self.add_marker(lat: self.lat, longg: self.longg)
+        let camera = GMSCameraPosition.camera(withLatitude: self.lat, longitude: self.longg , zoom: 13.7)
+        
+//        get_all_parkings(lat: self.lat, long: self.longg, date_time: Helper().getCurrentDate(), isHeaderIncluded: Helper().IsUserLogin(), filters: [:]){
+//
+//            self.search_tf.text = self.address
+//            self.map.animate(to: camera)
+//            self.isRefreshDidLoad = true
+//
+//        }
         
     }
     
@@ -256,51 +278,69 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     
     
       func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            print(parkings.count)
+            
             return parkings.count
       }
       
       func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
           
-          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeParkingCell", for: indexPath)as!homeParkingCell
-          if(parkings.count>0){
-              
-              
-            let dict = parkings[indexPath.row]
-            print(dict)
-            
-            
-            let seller = dict.seller
-            let seller_details = seller?.details
-            
-            let lat = dict.latitude ?? ""
-            let long = dict.longitude ?? ""
-            
-            
-            let priceStr = dict.initialPrice ?? 0.0
-            
-            let distanceStr = cal_distance(lat: lat, long: long)
-            
-            let imgUrl = dict.imageURL ?? ""
-            cell.image.sd_setImage(with: URL(string: imgUrl),placeholderImage: UIImage.init(named: "placeholder-img") )
-           
-            
-           
-            
-            cell.parking_title.text = dict.address ?? "-"
-            cell.rating_view.rating = seller_details?.averageRating ?? 0.0
-            cell.vehicle_type.text = dict.vehicleTypeText
-            
-            
-            cell.price.text = "$" + String(priceStr)
-            
-            
-//            cell.distance.text = String(format: "%.02f miles away", distanceStr)
-          
-              //cell.barg_count.text = dict["vehicle_type_text"] as? String
-          }
-          
-          return cell
+             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeParkingCell", for: indexPath)as!homeParkingCell
+                  if(parkings.count>0){
+                      
+                      
+                      let dict = parkings[indexPath.row]
+                      print(dict)
+                      
+                      
+                      let seller = dict.seller
+                      let seller_details = seller?.details
+                    
+                      let lat = dict.latitude ?? ""
+                      let long = dict.longitude ?? ""
+                     
+                      
+                      let priceStr = dict.initialPrice ?? 0.0
+                      
+          //            let distanceStr = cal_distance(lat: lat, long: long)
+                      
+                      let imgUrl = dict.imageURL
+                      cell.image.sd_setImage(with: URL(string: imgUrl ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
+                      
+                      cell.parking_title.text = dict.address
+                      cell.rating_view.rating = seller_details?.averageRating ?? 0.0
+                      
+                      cell.vehicle_type.text = dict.vehicleTypeText
+                      
+                      if(dict.parkingType == 10){
+                          cell.parking_type.text = "Public Parking"
+                      }
+                      else if(dict.parkingType == 20){
+                          cell.parking_type.text = "Private Parking"
+                      }
+                      
+
+                      
+                      cell.price.text = "$\(priceStr)"
+                      
+                      
+          //            cell.distance.text = String(format: "%.02f miles away", distanceStr)
+                  
+          //            Helper().getTimeDurationBetweenCordinate(s_lat: self.lat, s_longg: self.longg, d_lat: Double(lat) ?? 0.0, d_longg: Double(long) ?? 0.0){ duration in
+          //
+          //                cell.time.text = duration
+          //            }
+                      
+                      if(dict.isNegotiable ?? false){
+                          cell.isNegotiable.text = "Yes"
+                      }
+                      else{
+                          cell.isNegotiable.text = "No"
+                      }
+                      
+                      //cell.barg_count.text = dict["vehicle_type_text"] as? String
+                  }
+                  
+                  return cell
       }
       
      
@@ -463,6 +503,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         let position = CLLocationCoordinate2D(latitude: lat, longitude: longg)
         let marker = GMSMarker(position: position)
 //        marker.title = "Hello World"
+        
         marker.map = map
     }
     
@@ -501,9 +542,9 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
             "longitude": String(long)
         
         ]
-        if(filters.keys.contains("vehicle_type")){
-            params.updateValue(filters["vehicle_type"]!, forKey: "vehicle_type")
-        }
+//        if(filters.keys.contains("vehicle_type")){
+//            params.updateValue(filters["vehicle_type"]!, forKey: "vehicle_type")
+//        }
         print("param123=\(params)")
         let headers: HTTPHeaders = [
             "Authorization" : ""
@@ -554,6 +595,8 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
                             
                             self.parkingCellHeightConstr.constant = 104
                             
+                           
+                            
                             //                            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
                             //                                self.parkingCellHeightConstr.constant = 104
                             //                            })
@@ -561,7 +604,9 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
                         }
                         else{
                             
+                           
                             self.parkingCellHeightConstr.constant = 0
+                            
                             
                             //                            UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
                             //                                self.parkingCellHeightConstr.constant = 0
@@ -607,7 +652,7 @@ extension NavigationVC: FiltersProtocol{
         self.locationManager.startUpdatingLocation()
        
         UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-            self.re_center_bottom_cont.constant = 40
+            self.re_center_bottom_cont.constant = 0
         })
         
         self.get_all_parkings(lat: self.d_lat, long: self.d_longg, filters: filters){
@@ -626,16 +671,18 @@ extension NavigationVC: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
         self.search_tf.text = place.name!
+        self.map.clear()
         dismiss(animated: true){
             
 //            self.parkings_cells.isHidden = false
+            
             
             let camera = GMSCameraPosition.camera(withLatitude: (place.coordinate.latitude), longitude: (place.coordinate.longitude), zoom: 13.0)
             
             print("lat=\(place.coordinate.latitude) long=\(place.coordinate.longitude)")
             
-            
-            self.add_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude)
+            self.mapMoveToCurrentLoc()
+//            self.add_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude)
 //            Helper().map_marker(lat: place.coordinate.latitude, longg: place.coordinate.longitude, map_view: self.map, title: "")
             self.map.animate(to: camera)
             
@@ -645,14 +692,32 @@ extension NavigationVC: GMSAutocompleteViewControllerDelegate {
             //self.cal_distance(lat: place.coordinate.latitude, long: place.coordinate.longitude)
             //self.bottomHeight.constant =  155
             self.bottonView.isHidden = false
-            self.view_all_btn.isHidden = false
-            self.filter_btn.isHidden = false
+//            self.view_all_btn.isHidden = true
+//            self.filter_btn.isHidden = false
             self.lblPlaceName.text = place.name
             self.lblAddress.text = place.formattedAddress
             self.drawRoute()
             
+            
+           
+            
+            Helper().calculateDistances(s_lat: self.lat, s_longg: self.longg, d_lat: self.d_lat, d_longg: self.d_longg)
+                    { (distance) in
+            
+                        self.lblDistance.text = "\(distance)"
+                    }
+            
+            Helper().getTimeDurationBetweenCordinate(s_lat: self.lat, s_longg: self.longg, d_lat: self.d_lat, d_longg: self.d_longg)
+                    { (duration) in
+            
+                        self.lblTime.text = "\(duration)"
+                    }
+            
+            
+            
+            
             UIView.animate(withDuration: 0.5, delay: 0.3, options: [],animations: {
-                self.re_center_bottom_cont.constant = 40
+                self.re_center_bottom_cont.constant = 0
             })
             
             //parkings

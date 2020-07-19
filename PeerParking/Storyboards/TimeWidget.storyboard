@@ -20,6 +20,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nYb-UG-Avc" userLabel="main">
                                 <rect key="frame" x="1" y="56" width="412" height="697"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WCr-SH-xnG" customClass="HorizontalBarChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="10" width="361" height="677"/>
+                                        <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsU-yK-09b" customClass="MultiSlider" customModule="MultiSlider">
                                         <rect key="frame" x="0.0" y="10" width="361" height="677"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1229,6 +1233,7 @@
                                     <constraint firstAttribute="trailing" secondItem="pfz-Ni-VK4" secondAttribute="trailing" constant="1" id="MVP-s5-U5V"/>
                                     <constraint firstItem="tIV-dl-APN" firstAttribute="leading" secondItem="nYb-UG-Avc" secondAttribute="leading" constant="1" id="NDY-Yr-2Ap"/>
                                     <constraint firstItem="YL6-I0-iqj" firstAttribute="leading" secondItem="nYb-UG-Avc" secondAttribute="leading" constant="1" id="Ndq-aB-Kgc"/>
+                                    <constraint firstItem="WCr-SH-xnG" firstAttribute="leading" secondItem="jsU-yK-09b" secondAttribute="leading" id="Nqr-X9-0Vo"/>
                                     <constraint firstItem="3Zl-xm-xY0" firstAttribute="leading" secondItem="nYb-UG-Avc" secondAttribute="leading" constant="1" id="O8A-qU-443"/>
                                     <constraint firstItem="axb-zm-NIM" firstAttribute="top" secondItem="f4y-E8-5pg" secondAttribute="bottom" constant="1" id="OeE-mG-aCX"/>
                                     <constraint firstItem="mDj-84-dY6" firstAttribute="height" secondItem="SMx-Lr-R2Z" secondAttribute="height" id="P5J-GE-mzo"/>
@@ -1240,6 +1245,7 @@
                                     <constraint firstItem="Ddh-BP-6Le" firstAttribute="leading" secondItem="nYb-UG-Avc" secondAttribute="leading" constant="1" id="R9f-aA-kVK"/>
                                     <constraint firstItem="Ekn-5i-Rfd" firstAttribute="top" secondItem="Cau-mr-XD9" secondAttribute="bottom" constant="1" id="Rb9-m4-vZz"/>
                                     <constraint firstItem="yca-5E-6t2" firstAttribute="height" secondItem="SMx-Lr-R2Z" secondAttribute="height" id="SSy-S2-Ilj"/>
+                                    <constraint firstItem="WCr-SH-xnG" firstAttribute="trailing" secondItem="jsU-yK-09b" secondAttribute="trailing" id="Snv-gB-rdK"/>
                                     <constraint firstItem="Nwx-4D-Iz1" firstAttribute="height" secondItem="SMx-Lr-R2Z" secondAttribute="height" id="TEd-Bo-fSz"/>
                                     <constraint firstAttribute="trailing" secondItem="8uT-2s-daE" secondAttribute="trailing" constant="1" id="TmZ-EP-1F0"/>
                                     <constraint firstItem="GdW-l8-mLu" firstAttribute="leading" secondItem="nYb-UG-Avc" secondAttribute="leading" constant="1" id="U8e-xM-mdY"/>
@@ -1277,6 +1283,7 @@
                                     <constraint firstItem="gXI-TT-5mY" firstAttribute="top" secondItem="i4z-Ec-2MX" secondAttribute="bottom" constant="1" id="hZw-gp-rlT"/>
                                     <constraint firstItem="5lQ-l6-LEK" firstAttribute="height" secondItem="SMx-Lr-R2Z" secondAttribute="height" id="hnI-qy-Lj2"/>
                                     <constraint firstItem="vQR-aq-Zyd" firstAttribute="top" secondItem="dJd-gv-vfb" secondAttribute="bottom" id="hnV-rf-BLj"/>
+                                    <constraint firstItem="WCr-SH-xnG" firstAttribute="top" secondItem="jsU-yK-09b" secondAttribute="top" id="hsM-kB-EoU"/>
                                     <constraint firstItem="axb-zm-NIM" firstAttribute="height" secondItem="SMx-Lr-R2Z" secondAttribute="height" id="hu7-I5-8kQ"/>
                                     <constraint firstItem="YL6-I0-iqj" firstAttribute="top" secondItem="YyC-UI-9ax" secondAttribute="bottom" constant="1" id="i2X-uI-wRL"/>
                                     <constraint firstAttribute="bottom" secondItem="dtR-iH-jg2" secondAttribute="bottom" constant="1" id="iBs-Vc-bpa"/>
@@ -1325,6 +1332,7 @@
                                     <constraint firstItem="Cf9-f8-g08" firstAttribute="height" secondItem="SMx-Lr-R2Z" secondAttribute="height" id="zCx-2D-9dr"/>
                                     <constraint firstItem="Cau-mr-XD9" firstAttribute="top" secondItem="tl1-q6-Pmm" secondAttribute="bottom" constant="1" id="zaC-hh-vy2"/>
                                     <constraint firstItem="f4y-E8-5pg" firstAttribute="top" secondItem="GdW-l8-mLu" secondAttribute="bottom" constant="1" id="zbd-Qn-9qM"/>
+                                    <constraint firstItem="WCr-SH-xnG" firstAttribute="bottom" secondItem="jsU-yK-09b" secondAttribute="bottom" id="zuX-gI-ZsW"/>
                                     <constraint firstItem="NAH-Zz-LnV" firstAttribute="leading" secondItem="nYb-UG-Avc" secondAttribute="leading" constant="1" id="zyb-kX-nsQ"/>
                                 </constraints>
                             </view>
@@ -1429,6 +1437,7 @@
                         <viewLayoutGuide key="safeArea" id="zmS-cV-HnL"/>
                     </view>
                     <connections>
+                        <outlet property="chartView" destination="WCr-SH-xnG" id="Nyh-45-gVi"/>
                         <outlet property="finalpricelabel" destination="zM4-8C-rGx" id="WBA-d8-vdv"/>
                         <outlet property="lblEnd" destination="vPt-4S-g1z" id="Nad-2Y-hu2"/>
                         <outlet property="lblStart" destination="zM4-8C-rGx" id="PfI-Xo-YPf"/>

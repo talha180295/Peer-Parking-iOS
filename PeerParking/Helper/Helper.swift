@@ -412,6 +412,8 @@ class Helper{
         
     }
     
+   
+    
     func drawText(text:NSString, inImage:UIImage) -> UIImage? {
         
         let font = UIFont.systemFont(ofSize: 11)
@@ -918,6 +920,58 @@ class Helper{
         }
     }
     
+    func calculateDistances(s_lat:Double, s_longg:Double, d_lat:Double, d_longg:Double, completion: @escaping (String)->Void){
+           
+           
+        var distance = ""
+        
+        
+        let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(s_lat),\(s_longg)&destination=\(d_lat),\(d_longg)&sensor=true&mode=driving&alternatives=true&key=\(Key.Google.placesKey)")!
+        
+        print(url)
+        
+        Alamofire.request(url).responseJSON { response in
+            
+            do{
+                if let jsonData = response.data{
+                    let response = try JSONDecoder().decode(DirectionAPI.self, from:jsonData) //Decode JSON Response Data
+                    
+                    
+                    if let routes = response.routes  {
+                        
+                        if(routes.count != 0)
+                        {
+                            var val : Int;
+                            val = routes[0].legs?[0].distance?.value ?? 0 // in meter
+                            
+                            var valDouble = 0.0
+                            
+                            
+                            // converting in miles
+                            valDouble = Double(val) / 1609.344
+                            distance = String(format: "%.2f", valDouble) + " m"
+//                            distance = routes[0].legs?[0].distance?.text ?? ""
+                            
+                        }
+                        
+                       
+                    }
+                    
+                   
+                        completion(distance)
+                   
+                    
+                }
+            } catch let parsingError {
+                print("Error", parsingError)
+                //                      Helper().hideSpinner(view: self.view)
+            }
+            
+            
+        }
+           
+       }
+    
     
     func getTimeDurationBetweenCordinate(s_lat:Double, s_longg:Double, d_lat:Double, d_longg:Double, completion: @escaping (String)->Void){
         
@@ -935,11 +989,19 @@ class Helper{
                     let response = try JSONDecoder().decode(DirectionAPI.self, from:jsonData) //Decode JSON Response Data
                     
                     
-                    let routes = response.routes!
+                    if let routes = response.routes  {
+                        
+                        if(routes.count != 0)
+                        {
+                             duration = routes[0].legs?[0].duration?.text ?? ""
+                        }
+                        
+                       
+                    }
                     
-                    duration = routes[0].legs?[0].duration?.text ?? ""
-                    
-                    completion(duration)
+                   
+                        completion(duration)
+                   
                     
                 }
             } catch let parsingError {
