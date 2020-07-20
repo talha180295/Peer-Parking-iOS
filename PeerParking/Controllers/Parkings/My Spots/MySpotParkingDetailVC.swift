@@ -11,6 +11,11 @@ import UIKit
 import EzPopup
 
 
+enum dayTag:Int{
+    case Monday = 1
+    case Tuesday = 2
+}
+
 protocol MySpotParkingDetailVCDelegate : NSObjectProtocol {
     func didBackButtonPressed()
 }
@@ -26,7 +31,13 @@ class MySpotParkingDetailVC : UIViewController{
     var isPublicParking:Bool = false
     
     //Outlets
-    @IBOutlet weak var timingTblView:UITableView!
+    @IBOutlet var day:[UILabel]!
+//    @IBOutlet var startTime:[UILabel]!
+//    @IBOutlet var endTime:[UILabel]!
+//    @IBOutlet var timingStackView:[UIStackView]!
+//    @IBOutlet var checkBoxOutlet:[UIButton]!
+    
+//    @IBOutlet weak var timingTblView:UITableView!
     @IBOutlet weak var image:UIImageView!
     @IBOutlet weak var parkingTitle:UITextField!
     @IBOutlet weak var location:UILabel!
@@ -52,10 +63,10 @@ class MySpotParkingDetailVC : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        timingTblView.delegate = self
-        timingTblView.dataSource = self
-        timingTblView.isScrollEnabled = false
-        Helper().registerTableCell(tableView: timingTblView, nibName: "TimingsCell", identifier: "TimingsCell")
+//        timingTblView.delegate = self
+//        timingTblView.dataSource = self
+//        timingTblView.isScrollEnabled = false
+//        Helper().registerTableCell(tableView: timingTblView, nibName: "TimingsCell", identifier: "TimingsCell")
         
         if isPublicParking{
             self.setPublicData(data: self.parkingModel)
@@ -64,8 +75,28 @@ class MySpotParkingDetailVC : UIViewController{
             self.setPrivateData(data: self.privateParkingModel)
         }
         
+        setTimings()
+        
     }
     
+    
+    func setTimings(){
+         
+
+        
+        for items in day{
+            let tag:dayTag = dayTag(rawValue: items.tag)!
+            let index = tag.rawValue - 1
+            switch tag {
+            case .Monday:
+                self.day[index].text = days[index]
+            case .Tuesday:
+                self.day[index].text = days[index]
+            }
+        }
+        
+        
+    }
     func setParingModel(parkingModel: Parking){
         self.parkingModel = parkingModel
     }
@@ -181,11 +212,11 @@ extension MySpotParkingDetailVC{
         
         if (data.isAlways ?? false) {
             self.isAlwaysSwitch.isOn = true
-            timingTblView.isHidden = true
+//            timingTblView.isHidden = true
         }
         else {
             self.isAlwaysSwitch.isOn = false
-            timingTblView.isHidden = false
+//            timingTblView.isHidden = false
         }
         
         if (data.slots != nil) {
@@ -423,7 +454,7 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
     @objc func buttonClicked(sender: UIButton) {
         
         let indexPath = IndexPath(row: sender.tag, section: 0)
-        let cell = self.timingTblView.cellForRow(at: indexPath) as! TimingsCell
+//        let cell = self.timingTblView.cellForRow(at: indexPath) as! TimingsCell
         
         if (self.selectedItems.contains(sender.tag)) {
             
@@ -439,22 +470,22 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
             self.selectedItems.append(sender.tag)
             let dayCount = sender.tag + 1
             
-            let s_dateAsString = cell.startTime.text ?? ""
-            let e_dateAsString = cell.endTime.text ?? ""
+//            let s_dateAsString = cell.startTime.text ?? ""
+//            let e_dateAsString = cell.endTime.text ?? ""
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "h:mm a"
+//
+//            let date1 = dateFormatter.date(from: s_dateAsString)
+//            let date2 = dateFormatter.date(from: e_dateAsString)
             
-            let date1 = dateFormatter.date(from: s_dateAsString)
-            let date2 = dateFormatter.date(from: e_dateAsString)
-            
-            dateFormatter.dateFormat = "HH:mm:ss"
-            let s_time24 = dateFormatter.string(from: date1!)
-            let e_time24 = dateFormatter.string(from: date2!)
-            self.seletedCounter = 0
-            
-            let slot = Slot(dictionary:  ["day" : dayCount, "start_at" : s_time24, "end_at" : e_time24 ] )
-            self.daysModel.append(slot!)
+//            dateFormatter.dateFormat = "HH:mm:ss"
+//            let s_time24 = dateFormatter.string(from: date1!)
+//            let e_time24 = dateFormatter.string(from: date2!)
+//            self.seletedCounter = 0
+//
+//            let slot = Slot(dictionary:  ["day" : dayCount, "start_at" : s_time24, "end_at" : e_time24 ] )
+//            self.daysModel.append(slot!)
         }
         
         
@@ -468,23 +499,23 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
             //            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(depStr, forKey: "days")
         }
         
-        self.timingTblView.reloadData()
+//        self.timingTblView.reloadData()
     }
     
     func setTime(index: Int) {
         
         let indexPath = IndexPath(row: index, section: 0)
-        let cell = self.timingTblView.cellForRow(at: indexPath) as! TimingsCell
+//        let cell = self.timingTblView.cellForRow(at: indexPath) as! TimingsCell
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StartEndPopUp") as! StartEndPopUp
-        vc.startDate = cell.startTime.text ?? ""
-        vc.endDate = cell.endTime.text ?? ""
+//        vc.startDate = cell.startTime.text ?? ""
+//        vc.endDate = cell.endTime.text ?? ""
         
         vc.completionBlock = {(startDtae, endDate) -> ()in
             
-            
-            cell.startTime.text = startDtae
-            cell.endTime.text = endDate
+//
+//            cell.startTime.text = startDtae
+//            cell.endTime.text = endDate
             
             let s_dateAsString = startDtae
             let e_dateAsString = endDate
