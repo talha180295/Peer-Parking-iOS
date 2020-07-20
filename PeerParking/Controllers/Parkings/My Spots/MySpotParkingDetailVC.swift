@@ -106,9 +106,7 @@ class MySpotParkingDetailVC : UIViewController {
 
     func setTimings(){
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        
-        
+       
         
         for items in day{
             let tag:dayTag = dayTag(rawValue: items.tag)!
