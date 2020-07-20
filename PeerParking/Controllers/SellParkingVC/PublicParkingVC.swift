@@ -14,7 +14,7 @@ import Alamofire
 import HelperClassPod
 
 
-class PublicParkingVC: UIViewController {
+class PublicParkingVC: UIViewController  {
 
     var counter = 0
     
