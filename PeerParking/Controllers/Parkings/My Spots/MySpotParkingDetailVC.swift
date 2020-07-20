@@ -11,17 +11,22 @@ import UIKit
 import EzPopup
 import DatePickerDialog
 
+
+enum dayTag:Int{
+    case Monday = 1
+    case Tuesday = 2
+}
 protocol MySpotParkingDetailVCDelegate : NSObjectProtocol {
     func didBackButtonPressed()
 }
 class MySpotParkingDetailVC : UIViewController {
-  
+    
     
     
     
     //Delegates
     var delegate:MySpotParkingDetailVCDelegate!
-   
+    
     
     //Intent Variables
     
@@ -30,8 +35,14 @@ class MySpotParkingDetailVC : UIViewController {
     var isPublicParking:Bool = false
     
     //Outlets
+    @IBOutlet var day:[UILabel]!
+    @IBOutlet var startTime:[UILabel]!
+    @IBOutlet var endTime:[UILabel]!
+//    @IBOutlet var timingButton:[UIButton]!
+    @IBOutlet var checkBoxOutlet:[UIButton]!
+    
     @IBOutlet weak var parkingTimeLabel: UILabel!
-    @IBOutlet weak var timingTblView:UITableView!
+    //    @IBOutlet weak var timingTblView:UITableView!
     @IBOutlet weak var image:UIImageView!
     @IBOutlet weak var parkingTitle:UITextField!
     @IBOutlet weak var location:UILabel!
@@ -58,10 +69,10 @@ class MySpotParkingDetailVC : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        timingTblView.delegate = self
-        timingTblView.dataSource = self
-        timingTblView.isScrollEnabled = false
-        Helper().registerTableCell(tableView: timingTblView, nibName: "TimingsCell", identifier: "TimingsCell")
+        //        timingTblView.delegate = self
+        //        timingTblView.dataSource = self
+        //        timingTblView.isScrollEnabled = false
+        //        Helper().registerTableCell(tableView: timingTblView, nibName: "TimingsCell", identifier: "TimingsCell")
         
         if isPublicParking{
             self.setPublicData(data: self.parkingModel)
@@ -73,66 +84,84 @@ class MySpotParkingDetailVC : UIViewController {
         
         
         
-//        timePicker = UIAlertDateTimePicker(withPickerMode: .time, pickerTitle: "Select Time", showPickerOn: self.view)
-//        timePicker.delegate = self
-       
+        //        timePicker = UIAlertDateTimePicker(withPickerMode: .time, pickerTitle: "Select Time", showPickerOn: self.view)
+        //        timePicker.delegate = self
+        
         
         
         let distanceTap = UITapGestureRecognizer(target: self, action: #selector(dateTapFunction))
-               
+        
         date.isUserInteractionEnabled = true
-               date.addGestureRecognizer(distanceTap)
-               
-              let TimeTap = UITapGestureRecognizer(target: self, action: #selector(timeTapFunction))
-              
+        date.addGestureRecognizer(distanceTap)
+        
+        let TimeTap = UITapGestureRecognizer(target: self, action: #selector(timeTapFunction))
+        
         parkingTimeLabel.isUserInteractionEnabled = true
-               parkingTimeLabel.addGestureRecognizer(TimeTap)
-               
+        parkingTimeLabel.addGestureRecognizer(TimeTap)
+        
+        
+        setTimings()
+    }
+    
+
+    func setTimings(){
+        
+       
+        
+        for items in day{
+            let tag:dayTag = dayTag(rawValue: items.tag)!
+            let index = tag.rawValue - 1
+            switch tag {
+            case .Monday:
+                self.day[index].text = days[index]
+            case .Tuesday:
+                self.day[index].text = days[index]
+            }
+        }
         
         
     }
-    
     @objc func dateTapFunction(sender:UITapGestureRecognizer) {
         
         
         DatePickerDialog(buttonColor:#colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)).show("Select Date", doneButtonTitle: "DONE", cancelButtonTitle: "CANCEL", datePickerMode: .date) {
-                   (date) -> Void in
-                   if let time = date {
-                       let formatter = DateFormatter()
-                       formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
-                    var stringDate = formatter.string(from: time)
-                    stringDate =  Helper().getFormatedDateAndTimeList(dateStr: stringDate ?? "" )
-                    
-                       self.date.text =  stringDate.components(separatedBy: " ")[0]
-                       
-//                       GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(self.time_field.text!, forKey: "start_at")
-                       
-                   }
-               }
-
+            (date) -> Void in
+            if let time = date {
+                let formatter = DateFormatter()
+                formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+                var stringDate = formatter.string(from: time)
+                stringDate =  Helper().getFormatedDateAndTimeList(dateStr: stringDate ?? "" )
+                
+                self.date.text =  stringDate.components(separatedBy: " ")[0]
+                
+                //                       GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(self.time_field.text!, forKey: "start_at")
+                
+            }
+        }
+        
     }
     
     
     @objc func timeTapFunction(sender:UITapGestureRecognizer) {
-       
-          DatePickerDialog(buttonColor:#colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)).show("Select Time", doneButtonTitle: "DONE", cancelButtonTitle: "CANCEL", datePickerMode: .time) {
-                           (date) -> Void in
-                           if let time = date {
-                               let formatter = DateFormatter()
-                               formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
-                            
-                            var stringDate = formatter.string(from: time)
-                            stringDate =  Helper().getFormatedDateAndTimeList(dateStr: stringDate ?? "" )
-                            
-                              
-                            
-                               self.parkingTimeLabel.text = stringDate.components(separatedBy: " ")[1] + " " + stringDate.components(separatedBy: " ")[2]
-                               
-        //                       GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(self.time_field.text!, forKey: "start_at")
-                               
-                           }
-                       }
-       
+        
+        DatePickerDialog(buttonColor:#colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)).show("Select Time", doneButtonTitle: "DONE", cancelButtonTitle: "CANCEL", datePickerMode: .time) {
+            (date) -> Void in
+            if let time = date {
+                let formatter = DateFormatter()
+                formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+                
+                var stringDate = formatter.string(from: time)
+                stringDate =  Helper().getFormatedDateAndTimeList(dateStr: stringDate ?? "" )
+                
+                
+                
+                self.parkingTimeLabel.text = stringDate.components(separatedBy: " ")[1] + " " + stringDate.components(separatedBy: " ")[2]
+                
+                //                       GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(self.time_field.text!, forKey: "start_at")
+                
+            }
+        }
+        
     }
     
     
@@ -144,6 +173,15 @@ class MySpotParkingDetailVC : UIViewController {
         self.privateParkingModel = privateParkingModel
     }
     
+    @IBAction func timingButton(_ sender:UIButton){
+        
+        let index = sender.tag - 1
+        print(index)
+        if(checkBoxOutlet[index].isSelected){
+            self.setTime(index: index)
+        }
+        
+    }
     @IBAction func alwaysSwitch(_ sender:UISwitch){
         
         if sender.isOn{
@@ -190,7 +228,7 @@ class MySpotParkingDetailVC : UIViewController {
     @IBAction func deleteBtn(_ sender: UIButton) {
         
         self.showDeleteParkingConfirmationDialog()
-    
+        
     }
 }
 
@@ -214,29 +252,29 @@ extension MySpotParkingDetailVC{
         self.type.text = data.parkingSubTypeText ?? "-"
         self.size.text = data.vehicleTypeText ?? "-"
         
-//        self.date.text =    data.startAt ?? "-"
+        //        self.date.text =    data.startAt ?? "-"
         
         
         var convertedDate = Helper().getFormatedDateAndTimeList(dateStr: data.startAt ?? "" )
         self.date.text = convertedDate.components(separatedBy: " ")[0]
         
         
-       
+        
         
         
         if(convertedDate.components(separatedBy: " ").count ==  3)
         {
-             self.parkingTimeLabel.text = convertedDate.components(separatedBy: " ")[1] + " " + convertedDate.components(separatedBy: " ")[2]
-             
+            self.parkingTimeLabel.text = convertedDate.components(separatedBy: " ")[1] + " " + convertedDate.components(separatedBy: " ")[2]
+            
         }
         else
         {
-             self.parkingTimeLabel.text = convertedDate.components(separatedBy: " ")[1]
+            self.parkingTimeLabel.text = convertedDate.components(separatedBy: " ")[1]
         }
         
         
         
-//        self.date.text = convertedDate.
+        //        self.date.text = convertedDate.
         
         if (data.isNegotiable ?? false) {
             self.negotiableSwitch.isOn = true
@@ -275,11 +313,11 @@ extension MySpotParkingDetailVC{
         
         if (data.isAlways ?? false) {
             self.isAlwaysSwitch.isOn = true
-            timingTblView.isHidden = true
+            //            timingTblView.isHidden = true
         }
         else {
             self.isAlwaysSwitch.isOn = false
-            timingTblView.isHidden = false
+            //            timingTblView.isHidden = false
         }
         
         if (data.slots != nil) {
@@ -292,8 +330,8 @@ extension MySpotParkingDetailVC{
         }
         
     }
-        
-
+    
+    
     
     public func updatePublicParking() {
         
@@ -314,8 +352,8 @@ extension MySpotParkingDetailVC{
         park_model.title = self.parkingTitle.text
         park_model.address = self.location.text
         park_model.isNegotiable = self.negotiableSwitch.isOn
-//        park_model.startAt = self.parkingModel.startAt
-//        park_model.startAt = self.date.text ?? "" + " " + (self.parkingTimeLabel.text ?? "")
+        //        park_model.startAt = self.parkingModel.startAt
+        //        park_model.startAt = self.date.text ?? "" + " " + (self.parkingTimeLabel.text ?? "")
         
         var startDateandTime = "\((self.date.text ?? "") + (" ") + (self.parkingTimeLabel.text ?? ""))"
         startDateandTime = Helper().getFormatedServerDateTimeForDetail(dateStr: startDateandTime)
@@ -367,7 +405,7 @@ extension MySpotParkingDetailVC{
         print("title=\(self.parkingTitle.text ?? "")")
         print("day=\(self.daysModel)")
         
- 
+        
         var park_model = data
         
         
@@ -383,41 +421,41 @@ extension MySpotParkingDetailVC{
         park_model.isNegotiable = self.negotiableSwitch.isOn
         park_model.slots = self.daysModel
         
-//        do{
-//            let data = try JSONEncoder().encode(park_model)
-//            Helper().showSpinner(view: self.view)
-//            let request = APIRouter.updateParking(id: self.parkingModel.id!, data)
-//            APIClient.serverRequest(url: request, path: request.getPath(),body: park_model.dictionary ?? [:], dec: PostResponseData.self) { (response, error) in
-//                Helper().hideSpinner(view: self.view)
-//                if(response != nil){
-//                    if (response?.success) != nil {
-//                        Helper().showToast(message: response?.message ?? "-", controller: self)
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-//                            self.dismiss(animated: true){
-//                                self.delegate.didBackButtonPressed()
-//                            }
-//                        }
-//
-//                    }
-//                    else{
-//                        Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
-//                    }
-//                }
-//                else if(error != nil){
-//                    Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
-//                }
-//                else{
-//                    Helper().showToast(message: "Nor Response and Error!!", controller: self)
-//                }
-//
-//
-//            }
-//        }
-//        catch let parsingError {
-//
-//            print("Error", parsingError)
-//
-//        }
+        //        do{
+        //            let data = try JSONEncoder().encode(park_model)
+        //            Helper().showSpinner(view: self.view)
+        //            let request = APIRouter.updateParking(id: self.parkingModel.id!, data)
+        //            APIClient.serverRequest(url: request, path: request.getPath(),body: park_model.dictionary ?? [:], dec: PostResponseData.self) { (response, error) in
+        //                Helper().hideSpinner(view: self.view)
+        //                if(response != nil){
+        //                    if (response?.success) != nil {
+        //                        Helper().showToast(message: response?.message ?? "-", controller: self)
+        //                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        //                            self.dismiss(animated: true){
+        //                                self.delegate.didBackButtonPressed()
+        //                            }
+        //                        }
+        //
+        //                    }
+        //                    else{
+        //                        Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+        //                    }
+        //                }
+        //                else if(error != nil){
+        //                    Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+        //                }
+        //                else{
+        //                    Helper().showToast(message: "Nor Response and Error!!", controller: self)
+        //                }
+        //
+        //
+        //            }
+        //        }
+        //        catch let parsingError {
+        //
+        //            print("Error", parsingError)
+        //
+        //        }
     }
     
     private func showDeleteParkingConfirmationDialog() {
@@ -430,7 +468,7 @@ extension MySpotParkingDetailVC{
                 self.deleteBuyerPublicParking()
             }
             else{
-            
+                
             }
             
         }))
@@ -494,17 +532,17 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
             
             let day = self.daysModel[self.seletedCounter]
             
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "HH:mm:ss"
-//
-//
-//            let date1 = dateFormatter.date(from: day.startAt ?? "")
-//            let date2 = dateFormatter.date(from: day.endAt ?? "")
-//
-//            dateFormatter.dateFormat = "hh:mm a"
-//
-//            let s_time = dateFormatter.string(from: date1!)
-//            let e_time = dateFormatter.string(from: date2!)
+            //            let dateFormatter = DateFormatter()
+            //            dateFormatter.dateFormat = "HH:mm:ss"
+            //
+            //
+            //            let date1 = dateFormatter.date(from: day.startAt ?? "")
+            //            let date2 = dateFormatter.date(from: day.endAt ?? "")
+            //
+            //            dateFormatter.dateFormat = "hh:mm a"
+            //
+            //            let s_time = dateFormatter.string(from: date1!)
+            //            let e_time = dateFormatter.string(from: date2!)
             
             cell.startTime.text = day.startAt
             cell.endTime.text = day.endAt
@@ -524,7 +562,7 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
     @objc func buttonClicked(sender: UIButton) {
         
         let indexPath = IndexPath(row: sender.tag, section: 0)
-        let cell = self.timingTblView.cellForRow(at: indexPath) as! TimingsCell
+        //        let cell = self.timingTblView.cellForRow(at: indexPath) as! TimingsCell
         
         if (self.selectedItems.contains(sender.tag)) {
             
@@ -540,22 +578,22 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
             self.selectedItems.append(sender.tag)
             let dayCount = sender.tag + 1
             
-            let s_dateAsString = cell.startTime.text ?? ""
-            let e_dateAsString = cell.endTime.text ?? ""
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "h:mm a"
-            
-            let date1 = dateFormatter.date(from: s_dateAsString)
-            let date2 = dateFormatter.date(from: e_dateAsString)
-            
-            dateFormatter.dateFormat = "HH:mm:ss"
-            let s_time24 = dateFormatter.string(from: date1!)
-            let e_time24 = dateFormatter.string(from: date2!)
-            self.seletedCounter = 0
-            
-            let slot = Slot(dictionary:  ["day" : dayCount, "start_at" : s_time24, "end_at" : e_time24 ] )
-            self.daysModel.append(slot!)
+            //            let s_dateAsString = cell.startTime.text ?? ""
+            //            let e_dateAsString = cell.endTime.text ?? ""
+            //
+            //            let dateFormatter = DateFormatter()
+            //            dateFormatter.dateFormat = "h:mm a"
+            //
+            //            let date1 = dateFormatter.date(from: s_dateAsString)
+            //            let date2 = dateFormatter.date(from: e_dateAsString)
+            //
+            //            dateFormatter.dateFormat = "HH:mm:ss"
+            //            let s_time24 = dateFormatter.string(from: date1!)
+            //            let e_time24 = dateFormatter.string(from: date2!)
+            //            self.seletedCounter = 0
+            //
+            //            let slot = Slot(dictionary:  ["day" : dayCount, "start_at" : s_time24, "end_at" : e_time24 ] )
+            //            self.daysModel.append(slot!)
         }
         
         
@@ -569,54 +607,54 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
             //            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(depStr, forKey: "days")
         }
         
-        self.timingTblView.reloadData()
+        //        self.timingTblView.reloadData()
     }
     
     func setTime(index: Int) {
         
         let indexPath = IndexPath(row: index, section: 0)
-        let cell = self.timingTblView.cellForRow(at: indexPath) as! TimingsCell
+        //        let cell = self.timingTblView.cellForRow(at: indexPath) as! TimingsCell
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StartEndPopUp") as! StartEndPopUp
-        vc.startDate = cell.startTime.text ?? ""
-        vc.endDate = cell.endTime.text ?? ""
+        //        vc.startDate = cell.startTime.text ?? ""
+        //        vc.endDate = cell.endTime.text ?? ""
         
         vc.completionBlock = {(startDtae, endDate) -> ()in
+            //
+            //
+            //            cell.startTime.text = startDtae
+            //            cell.endTime.text = endDate
+            //
+            //            let s_dateAsString = startDtae
+            //            let e_dateAsString = endDate
+            //
+            //            let dateFormatter = DateFormatter()
+            //            dateFormatter.dateFormat = "h:mm a"
+            //
+            //            let date1 = dateFormatter.date(from: s_dateAsString)
+            //            let date2 = dateFormatter.date(from: e_dateAsString)
+            //
+            //            dateFormatter.dateFormat = "HH:mm"
+            //            let s_time24 = dateFormatter.string(from: date1!)
+            //            let e_time24 = dateFormatter.string(from: date2!)
+            //
+            //            //            print("index=\(index+1)")
+            //            var i = 0
+            //            for item in self.daysModel{
+            //                if(item.day == index+1){
+            //                    self.daysModel.remove(at: i)
+            //                }
+            //                i+=1
+            //            }
             
-            
-            cell.startTime.text = startDtae
-            cell.endTime.text = endDate
-            
-            let s_dateAsString = startDtae
-            let e_dateAsString = endDate
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "h:mm a"
-            
-            let date1 = dateFormatter.date(from: s_dateAsString)
-            let date2 = dateFormatter.date(from: e_dateAsString)
-            
-            dateFormatter.dateFormat = "HH:mm"
-            let s_time24 = dateFormatter.string(from: date1!)
-            let e_time24 = dateFormatter.string(from: date2!)
-            
-            //            print("index=\(index+1)")
-            var i = 0
-            for item in self.daysModel{
-                if(item.day == index+1){
-                    self.daysModel.remove(at: i)
-                }
-                i+=1
-            }
-    
-            
-            let slot = Slot(dictionary: [ "day" :  index+1, "start_at" : s_time24, "end_at" : e_time24 ])
-            self.daysModel.append(slot!)
-            let depStr = self.filterString(str: self.daysModel.description)
-            
-            
-            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(depStr, forKey: "days")
-            
+            //
+            //            let slot = Slot(dictionary: [ "day" :  index+1, "start_at" : s_time24, "end_at" : e_time24 ])
+            //            self.daysModel.append(slot!)
+            //            let depStr = self.filterString(str: self.daysModel.description)
+            //
+            //
+            //            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(depStr, forKey: "days")
+            //
             //            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "parking_extra_fee")
         }
         let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 350)
