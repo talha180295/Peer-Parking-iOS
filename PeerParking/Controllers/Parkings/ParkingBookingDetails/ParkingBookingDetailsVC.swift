@@ -35,12 +35,46 @@ class ParkingBookingDetailsVC: UIViewController {
         
         self.title = "Parking Booking Details"
         self.setData(data: self.parkingModel)
+        
+        
+        // replace 611 to origional parking id
+        
+        var service : LiveLocationReceivingService =  LiveLocationReceivingService(parkingId: String(611))
+        
+        service.getParkingLocation(){ parking  in
+            
+            
+            print("latititude \(parking.latitude)")
+            print("longitude \(parking.longitude)")
+            
+        }
+        
+        
+        var sendingservice : LiveLocationSendingService =  LiveLocationSendingService(parkingId: String(612))
+        
+        // replace lat long wit clllocation manager and pass current actual location
+        
+        sendingservice.setBuyerCurrentLocation(lat: 24.9472804, long: 67.1057191) { parking  in
+            
+            print("sending latititude \(parking.latitude)")
+            print("sending longitude \(parking.longitude)")
+            
+        }
+    
+    
     }
     
     @IBAction func navigateBtnClick(_sender:UIButton){
         
         let buyerParkingSendingModel = BuyerParkingSendingModel.init(status: 20, endAt: "currentDateandTime")
         print("buyerParkingSendingModel= \(buyerParkingSendingModel.dictionary ?? [:])")
+        
+        
+        
+//        var service : LiveLocationReceivingService =  LiveLocationReceivingService(parkingId: String(self.parkingModel.id ?? 0))
+        
+        
+        
         
         if (parkingModel.sellerID == Helper().getCurrentUserId()) {
             

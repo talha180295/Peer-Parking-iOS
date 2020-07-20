@@ -26,20 +26,178 @@ class Helper{
     func getFormatedDate(dateStr:String) -> String{
         
         
+        if(dateStr == "")
+        {
+            return "-"
+        }
+        else if(dateStr == nil)
+        {
+            return "-"
+        }
+        else
+        {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+            
+            if(dateFormatter.date(from:dateStr) != nil)
+            {
+                let formateDate = dateFormatter.date(from:dateStr)!
+                dateFormatter.dateFormat = "dd/MM/yyyy" // Output Formated
+                
+                //        let date: Date? = dateFormatter.date(from: dateStr)
+                
+                return dateFormatter.string(from: formateDate)
+            }
+            else
+            {
+                return  dateStr
+            }
+            
+            
+        }
+        
+       
+        
+        
+        
+        
+    }
+    
+    
+    func getFormatedDateandTime(dateStr:String) -> String{
+           
+           
+           if(dateStr == "")
+           {
+               return "-"
+           }
+           else if(dateStr == nil)
+           {
+               return "-"
+           }
+           else
+           {
+               let dateFormatter = DateFormatter()
+               dateFormatter    .dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+               
+               if(dateFormatter.date(from:dateStr) != nil)
+               {
+                   let formateDate = dateFormatter.date(from:dateStr)!
+                   dateFormatter.dateFormat = "MM/dd/yyyy HH:mm a" // Output Formated
+                   
+                   //        let date: Date? = dateFormatter.date(from: dateStr)
+                   
+                   return dateFormatter.string(from: formateDate)
+               }
+               else
+               {
+                   return  dateStr
+               }
+               
+               
+           }
+    }
+    func getFormatedServerDateTime(dateStr:String) -> String{
+        
+        
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "MM/dd/yyyy h:mm a"
+        
+        
+        
+        
+        
+        let dateFormatterPrint = DateFormatter()
+        
+        dateFormatterPrint.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatterPrint.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+//               dateFormatterPrint.calendar = Calendar(identifier: .iso8601)
+//               dateFormatterPrint.locale = Locale(identifier: "en_US_POSIX")
+//               dateFormatterPrint.timeZone = TimeZone(secondsFromGMT: 0)
+//        dateFormatterPrint.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        if(dateFormatterGet.date(from: dateStr) != nil)
+        {
+             let date =  dateFormatterGet.date(from: dateStr)!
+                   
+                   return dateFormatterPrint.string(from: date)
+        }
+        else
+        {
+            return dateStr
+        }
+        
+       
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+//
+//        let formateDate = dateFormatter.date(from:dateStr)!
+//        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Output Formated
+//
+//        //        let date: Date? = dateFormatter.date(from: dateStr)
+//
+//        return dateFormatter.string(from: formateDate)
+    }
+    
+    func getFormatedServerDateTimeForDetail(dateStr:String) -> String{
+            
+            
+            
+            let dateFormatterGet = DateFormatter()
+            dateFormatterGet.dateFormat = "MM/dd/yyyy h:mm a"
+            
+            
+            
+            
+            
+            let dateFormatterPrint = DateFormatter()
+            
+            dateFormatterPrint.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    //        dateFormatterPrint.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+    //               dateFormatterPrint.calendar = Calendar(identifier: .iso8601)
+    //               dateFormatterPrint.locale = Locale(identifier: "en_US_POSIX")
+    //               dateFormatterPrint.timeZone = TimeZone(secondsFromGMT: 0)
+    //        dateFormatterPrint.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            
+            if(dateFormatterGet.date(from: dateStr) != nil)
+            {
+                 let date =  dateFormatterGet.date(from: dateStr)!
+                       
+                       return dateFormatterPrint.string(from: date)
+            }
+            else
+            {
+                return dateStr
+            }
+            
+           
+    //        let dateFormatter = DateFormatter()
+    //        dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+    //
+    //        let formateDate = dateFormatter.date(from:dateStr)!
+    //        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Output Formated
+    //
+    //        //        let date: Date? = dateFormatter.date(from: dateStr)
+    //
+    //        return dateFormatter.string(from: formateDate)
+        }
+    func getFormatedServerTime(dateStr:String) -> String{
+        
         
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
         
         let formateDate = dateFormatter.date(from:dateStr)!
-        dateFormatter.dateFormat = "dd/MM/yyyy" // Output Formated
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        dateFormatter.dateFormat = "HH:mm:ss" // Output Formated
         
         //        let date: Date? = dateFormatter.date(from: dateStr)
         
         return dateFormatter.string(from: formateDate)
-        
-        
     }
+    
     
     func getFormatedDateAndTime(dateStr:String) -> String{
         
@@ -361,6 +519,8 @@ class Helper{
         
         
     }
+    
+   
     
     func drawText(text:NSString, inImage:UIImage) -> UIImage? {
         
@@ -868,6 +1028,58 @@ class Helper{
         }
     }
     
+    func calculateDistances(s_lat:Double, s_longg:Double, d_lat:Double, d_longg:Double, completion: @escaping (String)->Void){
+           
+           
+        var distance = ""
+        
+        
+        let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(s_lat),\(s_longg)&destination=\(d_lat),\(d_longg)&sensor=true&mode=driving&alternatives=true&key=\(Key.Google.placesKey)")!
+        
+        print(url)
+        
+        Alamofire.request(url).responseJSON { response in
+            
+            do{
+                if let jsonData = response.data{
+                    let response = try JSONDecoder().decode(DirectionAPI.self, from:jsonData) //Decode JSON Response Data
+                    
+                    
+                    if let routes = response.routes  {
+                        
+                        if(routes.count != 0)
+                        {
+                            var val : Int;
+                            val = routes[0].legs?[0].distance?.value ?? 0 // in meter
+                            
+                            var valDouble = 0.0
+                            
+                            
+                            // converting in miles
+                            valDouble = Double(val) / 1609.344
+                            distance = String(format: "%.2f", valDouble) + " m"
+//                            distance = routes[0].legs?[0].distance?.text ?? ""
+                            
+                        }
+                        
+                       
+                    }
+                    
+                   
+                        completion(distance)
+                   
+                    
+                }
+            } catch let parsingError {
+                print("Error", parsingError)
+                //                      Helper().hideSpinner(view: self.view)
+            }
+            
+            
+        }
+           
+       }
+    
     
     func getTimeDurationBetweenCordinate(s_lat:Double, s_longg:Double, d_lat:Double, d_longg:Double, completion: @escaping (String)->Void){
         
@@ -885,11 +1097,19 @@ class Helper{
                     let response = try JSONDecoder().decode(DirectionAPI.self, from:jsonData) //Decode JSON Response Data
                     
                     
-                    let routes = response.routes!
+                    if let routes = response.routes  {
+                        
+                        if(routes.count != 0)
+                        {
+                             duration = routes[0].legs?[0].duration?.text ?? ""
+                        }
+                        
+                       
+                    }
                     
-                    duration = routes[0].legs?[0].duration?.text ?? ""
-                    
-                    completion(duration)
+                   
+                        completion(duration)
+                   
                     
                 }
             } catch let parsingError {

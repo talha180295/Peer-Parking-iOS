@@ -15,6 +15,7 @@ target 'PeerParking' do
   pod 'SDWebImage'
 #  pod 'GooglePlacesSearchController'
   pod 'Cosmos'
+  
   pod 'FittedSheets'
   pod 'EzPopup'
   pod 'StepIndicator'
@@ -26,6 +27,7 @@ target 'PeerParking' do
   pod 'HelperClassPod'
   pod 'SwiftyJSON'
   pod 'CodableFirebase'
+  pod 'Charts'
  # pod 'UICircularProgressRing'
   pod 'CircleProgressView'	
 #  pod 'DGRunkeeperSwitch' , '~> 1.1.4'

@@ -43,6 +43,9 @@
 		1827370723F417DD00C52347 /* DirectionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1827370623F417DD00C52347 /* DirectionAPI.swift */; };
 		18392E792370487A007FB161 /* PricePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18392E782370487A007FB161 /* PricePicker.swift */; };
 		18392E7B23707220007FB161 /* PriceStepVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18392E7A23707220007FB161 /* PriceStepVC.swift */; };
+		183C0CA824C5A4D3007FC840 /* LiveLocationReceivingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C0CA724C5A4D3007FC840 /* LiveLocationReceivingService.swift */; };
+		183C0CAA24C5A6D3007FC840 /* ParkingLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C0CA924C5A6D3007FC840 /* ParkingLocation.swift */; };
+		183C0CAC24C5E9BB007FC840 /* LiveLocationSendingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183C0CAB24C5E9BB007FC840 /* LiveLocationSendingService.swift */; };
 		183DAA3E23E0704B0022BC6E /* ParkingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183DAA3D23E0704B0022BC6E /* ParkingsVC.swift */; };
 		183DAA4023E073930022BC6E /* UpcomingParkingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183DAA3F23E073930022BC6E /* UpcomingParkingVC.swift */; };
 		183DAA4223E073A80022BC6E /* ParkingsHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183DAA4123E073A80022BC6E /* ParkingsHistoryVC.swift */; };
@@ -74,6 +77,7 @@
 		1878C528240E922D005F675E /* MapViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1878C527240E922D005F675E /* MapViewVC.swift */; };
 		187B5C9D2492B2A200C7E8D9 /* chatOfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187B5C9B2492B2A200C7E8D9 /* chatOfferCell.swift */; };
 		187B5C9E2492B2A200C7E8D9 /* chatOfferCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187B5C9C2492B2A200C7E8D9 /* chatOfferCell.xib */; };
+		187E1C8624BEEB8800CC83A3 /* TimeWidget.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187E1C8524BEEB8500CC83A3 /* TimeWidget.storyboard */; };
 		188888A7238EBEEB0008BC88 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188888A5238EBEEA0008BC88 /* Crashlytics.framework */; };
 		188888A8238EBEEB0008BC88 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188888A6238EBEEA0008BC88 /* Fabric.framework */; };
 		188888AA238EF3C50008BC88 /* AlamofireApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188888A9238EF3C50008BC88 /* AlamofireApi.swift */; };
@@ -252,6 +256,9 @@
 		1827370623F417DD00C52347 /* DirectionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionAPI.swift; sourceTree = "<group>"; };
 		18392E782370487A007FB161 /* PricePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PricePicker.swift; sourceTree = "<group>"; };
 		18392E7A23707220007FB161 /* PriceStepVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceStepVC.swift; sourceTree = "<group>"; };
+		183C0CA724C5A4D3007FC840 /* LiveLocationReceivingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveLocationReceivingService.swift; sourceTree = "<group>"; };
+		183C0CA924C5A6D3007FC840 /* ParkingLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingLocation.swift; sourceTree = "<group>"; };
+		183C0CAB24C5E9BB007FC840 /* LiveLocationSendingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveLocationSendingService.swift; sourceTree = "<group>"; };
 		183DAA3D23E0704B0022BC6E /* ParkingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingsVC.swift; sourceTree = "<group>"; };
 		183DAA3F23E073930022BC6E /* UpcomingParkingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingParkingVC.swift; sourceTree = "<group>"; };
 		183DAA4123E073A80022BC6E /* ParkingsHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkingsHistoryVC.swift; sourceTree = "<group>"; };
@@ -283,6 +290,7 @@
 		1878C527240E922D005F675E /* MapViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewVC.swift; sourceTree = "<group>"; };
 		187B5C9B2492B2A200C7E8D9 /* chatOfferCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatOfferCell.swift; sourceTree = "<group>"; };
 		187B5C9C2492B2A200C7E8D9 /* chatOfferCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = chatOfferCell.xib; sourceTree = "<group>"; };
+		187E1C8524BEEB8500CC83A3 /* TimeWidget.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TimeWidget.storyboard; sourceTree = "<group>"; };
 		188888A5238EBEEA0008BC88 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		188888A6238EBEEA0008BC88 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		188888A9238EF3C50008BC88 /* AlamofireApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireApi.swift; sourceTree = "<group>"; };
@@ -507,6 +515,7 @@
 				18CCE44524079985008B9F4F /* TransactionModel.swift */,
 				18140324242D0FF8007AEA58 /* PrivateParkingModel.swift */,
 				18A2445F24967CCE001A5350 /* ChatModel.swift */,
+				183C0CA924C5A6D3007FC840 /* ParkingLocation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -742,6 +751,7 @@
 				BC8511852490D94300D4B3BA /* ParkingDetails.storyboard */,
 				BC514A992496D087003DF452 /* SellParking.storyboard */,
 				BCC0F8A924B7B09100B2D8F1 /* Wallet.storyboard */,
+				187E1C8524BEEB8500CC83A3 /* TimeWidget.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -975,6 +985,8 @@
 				1866BF6523746402008EE650 /* Helper.swift */,
 				188888A9238EF3C50008BC88 /* AlamofireApi.swift */,
 				1890871423BB8D4B0040D4C4 /* SelfSizedTableView.swift */,
+				183C0CA724C5A4D3007FC840 /* LiveLocationReceivingService.swift */,
+				183C0CAB24C5E9BB007FC840 /* LiveLocationSendingService.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1188,6 +1200,7 @@
 				FA2815B8231E6602008AF3F5 /* Poppins-Medium.ttf in Resources */,
 				18253CDB2492428B0046EAE0 /* chatTextCell.xib in Resources */,
 				BC514A9A2496D088003DF452 /* SellParking.storyboard in Resources */,
+				187E1C8624BEEB8800CC83A3 /* TimeWidget.storyboard in Resources */,
 				FA2815B6231E6602008AF3F5 /* Poppins-Bold.ttf in Resources */,
 				180797D12490D7FA008E4487 /* Chat.storyboard in Resources */,
 				FAA351A123F18B6F00E11CA2 /* GoogleService-Info.plist in Resources */,
@@ -1377,6 +1390,7 @@
 				18392E7B23707220007FB161 /* PriceStepVC.swift in Sources */,
 				181E0D1623CDF954005D7248 /* Parking.swift in Sources */,
 				18140327242D143A007AEA58 /* MySpotsDetailBS.swift in Sources */,
+				183C0CAA24C5A6D3007FC840 /* ParkingLocation.swift in Sources */,
 				18924C272365B84D00C0E94F /* ContainerView.swift in Sources */,
 				1878C528240E922D005F675E /* MapViewVC.swift in Sources */,
 				FA0FCC5C232250DD000FF52C /* SettingViewController.swift in Sources */,
@@ -1459,6 +1473,7 @@
 				18F27A30247E4BF400BC7D79 /* MySpotParkingDetailVC.swift in Sources */,
 				BC6C163C24A7581800F79CCE /* LoginRequest.swift in Sources */,
 				181E0D1523CDF954005D7248 /* Bargaining.swift in Sources */,
+				183C0CA824C5A4D3007FC840 /* LiveLocationReceivingService.swift in Sources */,
 				FA6CD3802329122E00E18CF2 /* AlternateRouteViewController.swift in Sources */,
 				6795ED7624A0CF8000FD57F8 /* PrivateBookingsCell.swift in Sources */,
 				18A244632496D6A0001A5350 /* ChatVC.swift in Sources */,
@@ -1487,6 +1502,7 @@
 				1866BF61237450C3008EE650 /* RequestVC.swift in Sources */,
 				FA25B601232686B6007C3697 /* SplashViewController.swift in Sources */,
 				181E0D1823CDF954005D7248 /* Seller.swift in Sources */,
+				183C0CAC24C5E9BB007FC840 /* LiveLocationSendingService.swift in Sources */,
 				FA2F9F3A232CB35E0025BF11 /* OfferViewController.swift in Sources */,
 				181E0D1F23CE0400005D7248 /* RefreshTokenModel.swift in Sources */,
 				18140316242C9457007AEA58 /* BarViewController.swift in Sources */,

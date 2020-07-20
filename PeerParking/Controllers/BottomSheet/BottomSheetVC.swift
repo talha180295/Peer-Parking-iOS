@@ -1050,7 +1050,7 @@ class BottomSheetVC: UIViewController {
     
     @IBAction func selectTimeBtn(_ sender: UIButton) {
         
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SliderTimerVC") as! SliderTimerVC
+        let vc = UIStoryboard(name: "TimeWidget", bundle: nil).instantiateViewController(withIdentifier: "SliderTimerVC") as! SliderTimerVC
         
         //        self.navigationController?.pushViewController(vc, animated: true)
         vc.modalPresentationStyle = .fullScreen

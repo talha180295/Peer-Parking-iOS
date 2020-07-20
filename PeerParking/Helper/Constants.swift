@@ -84,7 +84,7 @@ struct APP_CONSTANT {
         
     }
    
-    
+
     static let DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss"
     static let SHORT_DATE_TIME_FORMAT = "yyyy-MM-dd"
      static let MESSAGE_TYPE_OFFER = 10

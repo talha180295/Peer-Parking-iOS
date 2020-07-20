@@ -54,9 +54,41 @@ extension PrivateParkingBookingListVC:UITableViewDelegate, UITableViewDataSource
         let booking = self.bookingList[indexPath.item]
         cell.parkingTitle.text = booking.title
         cell.address.text = booking.address
-        cell.availability.text = "From: \(booking.startAt ?? "-") \n To: \(booking.endAt  ?? "-")"
-        cell.status.text = Helper.getStatusText(status: booking.status ?? 0)
-        cell.price.text = "$\(booking.initialPrice ?? 0.0)"
+        
+        
+        
+        if let parkingStatus = self.bookingList[indexPath.row].status {
+                   
+                   cell.status.text = Helper.getStatusText(status: parkingStatus)
+                   
+               }
+        
+        if(self.bookingList[indexPath.row].finalPrice == 0 || self.bookingList[indexPath.row].finalPrice == nil)
+        {
+            
+            cell.price.text = "$\(self.bookingList[indexPath.row].initialPrice ?? 0.0)"
+        }
+        else
+        {
+         cell.price.text = "$\(self.bookingList[indexPath.row].finalPrice ?? 0.0)"
+            
+        }
+        
+//        cell.fromavailablity.text = "From : \( Helper().getFormatedDateAndTimeList(dateStr: self.parkingModel[indexPath.row].startAt ?? "")) "
+//        cell.toavailablity.text = "To : \( Helper().getFormatedDateAndTimeList(dateStr: self.parkingModel[indexPath.row].endAt ?? ""))"
+
+        
+        
+        cell .availability.text = "From : \( Helper().getFormatedDateAndTimeList(dateStr: self.bookingList[indexPath.row].startAt ?? "")) \n To : \(Helper().getFormatedDateAndTimeList(dateStr: self.bookingList[indexPath.row].endAt ?? "")) "
+        
+//        cell.availability.text = "From: \(Helper().getFormatedDateAndTimeList(Helper().getFormatedDateAndTimeList).startAt ?? "-") \n To: \(booking.endAt  ?? "-")"
+//
+        
+//        cell.availability.text = "From: \(booking.startAt ?? "-") \n To: \(booking.endAt  ?? "-")"
+//        cell.status.text = Helper.getStatusText(status: booking.status ?? 0)
+//
+//
+//        cell.price.text = "$\(booking.initialPrice ?? 0.0)"
         
         return cell
     }
