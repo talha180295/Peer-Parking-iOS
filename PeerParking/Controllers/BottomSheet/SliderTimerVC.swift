@@ -16,8 +16,10 @@ protocol OnTimeSelectDelegate {
     func timeSelect( startigTime : String , endingTime : String)
 }
 
-class SliderTimerVC: UIViewController  {
+class SliderTimerVC: UIViewController ,UITableViewDelegate,UITableViewDataSource  {
+    
 
+    @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var chartView: HorizontalBarChartView!
     var parking_details:Parking!
     @IBOutlet weak var finalpricelabel: UILabel!
@@ -81,6 +83,9 @@ class SliderTimerVC: UIViewController  {
         
         self.outletArray = [self.v1,self.v2,self.v3,self.v4,self.v5,self.v6,self.v7,self.v8,self.v9,self.v10,self.v11,self.v12,self.v13,self.v14,self.v15,self.v16,self.v17,self.v18,self.v19,self.v20,self.v21,self.v22,self.v23,self.v24]
         
+        
+        self.tableview.delegate = self
+        self.tableview.dataSource = self
       
         
       //  self.slider.transform = CGAffineTransform(rotationAngle: (180.0 * .pi) / 180.0)
@@ -106,7 +111,7 @@ class SliderTimerVC: UIViewController  {
     func setChartView(){
           chartView.drawBarShadowEnabled = false
                 chartView.drawValueAboveBarEnabled = true
-                self.chartView.maxVisibleCount = 1430
+                
        
                 
                 chartView.fitBars = false
@@ -123,7 +128,7 @@ class SliderTimerVC: UIViewController  {
         
         
         
-        
+        drawMarginChart()
        
        
        
@@ -133,25 +138,146 @@ class SliderTimerVC: UIViewController  {
         
                 
                 
-                let barchart = BarChartDataEntry.init(x: 100.0, y: 100.0)
-        
+//                let barchart = BarChartDataEntry.init(x: 100.0, y: 100.0)
+//
+//
+//
+//                let set1 = BarChartDataSet(entries: [barchart], label: "")
+//
+//
+//
+//
+//
+//
+//                let data = BarChartData(dataSet: set1)
+//
+//                data.setValueFont(UIFont(name:"HelveticaNeue-Light", size:100)!)
+//        //        data.barWidth = barWidth
+//
+//                chartView.data = data
                 
+                
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 286
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-                let set1 = BarChartDataSet(entries: [barchart], label: "")
         
+        
+        var cell  : UITableViewCell = UITableViewCell()
+        
+        
+        if(startTimeInt.count > 0)
+        {
+            
+            
+            for i in 0..<self.startTimeInt.count{
+                if(indexPath.row >= startTimeInt[i] / 5  && indexPath.row < endTimeInt[i] / 5 )
+                           {
+                                cell.backgroundColor = UIColor.black
+                           }
+            }
+        
+           
+        
+        }
+        
+//        if(indexPath.row >= 0 && indexPath.row < 6 )
+//        {
+//            cell.backgroundColor = UIColor.black
+//        }
+//
+//        if(indexPath.row >= 138 && indexPath.row < 143 )
+//        {
+//            cell.backgroundColor = UIColor.black
+//        }
+        return cell
+        
+    }
+    
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return (self.slider.frame.size.height - 10) / 286
+        }
+    
+    
+    
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 1430
+//    }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+    
+    func drawMarginChart() {
+
+        let values = [1000, 2000, 3000, 5000, 7000, 8000, 15000, 21000, 22000, 55000]
+//        let labels = ["Blue Yonder Airlines", "Aaron Fitz Electrical", "Central Communications", "Magnificent Office Images", "Breakthrough Telemarke", "Lawrence Telemarketing", "Vancouver Resort Hotels", "Mahler State University", "Astor Suites", "Plaza One"]
+
+
+
+        var dataEntries = [ChartDataEntry]()
+
+//        for i in 0..<10 {
+            let entry = BarChartDataEntry(x: Double(100), y: Double(100))
+let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
+            
+            dataEntries.append(entry)
+        dataEntries.append(entry1)
+//        }
+        
+        
+
+        let barChartDataSet = BarChartDataSet(entries: dataEntries, label: "")
+        barChartDataSet.drawValuesEnabled = false
+//        barChartDataSet.colors = ChartColorTemplates.joyful()
+
+        let barChartData = BarChartData(dataSet: barChartDataSet)
+        chartView.data = barChartData
+        chartView.legend.enabled = false
+
+        
+
+//        chartView.animate(xAxisDuration: 3.0, yAxisDuration: 3.0, easingOption: .easeInOutBounce)
+
+        chartView.chartDescription?.text = ""
+
+
+//       chartView.zoom(scaleX: 1.1, scaleY: 1.0, x: 0, y: 0)
+
+        
+//        let xAxis = chartView.xAxis
+//        xAxis.drawGridLinesEnabled = false
+//        xAxis.granularity = 10.0
+//        xAxis.setLabelCount(143, force: true)
+        
+        chartView.maxVisibleCount = 1430
+        chartView.minOffset = 0.0
+        chartView.extraBottomOffset = -1
+        
+        
+        chartView.leftAxis.axisMaximum = 100
+        chartView.leftAxis.axisMinimum = 0
+        
+        chartView.rightAxis.axisMinimum = 0
+        chartView.rightAxis.axisMaximum = 1430
        
-        
-        
-        
-                
-                let data = BarChartData(dataSet: set1)
-        
-                data.setValueFont(UIFont(name:"HelveticaNeue-Light", size:150)!)
-        //        data.barWidth = barWidth
-                
-                chartView.data = data
-                
-                
+       
+      
+//        chartView.setVisibleXRangeMaximum(1000)
+//        chartView.setVisibleYRangeMaximum(1000, axis: .left)
+
+//        chartView.setExtraOffsets (left: 0, top: 20.0, right:0.0, bottom: 20.0)
+
+
+
     }
     
     func getBookedSlots(){
@@ -183,6 +309,7 @@ class SliderTimerVC: UIViewController  {
                                 self.addBookedSlotView(parking: parking)
                                 
                             })
+                            self.tableview.reloadData()
                               
                             
                           }
@@ -234,9 +361,9 @@ class SliderTimerVC: UIViewController  {
 //        self.outletArray[parking.startAt]
         
         
-        for i in startHour...endHour{
-            self.outletArray[i].backgroundColor = UIColor.lightGray
-        }
+//        for i in startHour...endHour{
+//            self.outletArray[i].backgroundColor = UIColor.lightGray
+//        }
         
     }
     
@@ -687,6 +814,8 @@ class SliderTimerVC: UIViewController  {
         return dateString
     }
 }
+
+
 
 extension Date {
     func secondsFromBeginningOfTheDay() -> TimeInterval {
