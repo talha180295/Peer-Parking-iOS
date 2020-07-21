@@ -11,9 +11,11 @@ enum dateFormat:String{
     
     case yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss"
     case ddMMyyy = "dd/MM/yyyy"
+    case hmma = "h:mm a"
+    case HHmmss = "HH:mm:ss"
 }
 
-class DateHelper: NSObject {
+class DateHelper {
     
     //    static let yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss"
     //    static let ddMMyyy = "dd/MM/yyyy"
