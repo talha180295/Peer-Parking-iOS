@@ -3628,16 +3628,16 @@
                                         <rect key="frame" x="0.0" y="324" width="414" height="96"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parking Types" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekD-ao-e6B">
-                                                <rect key="frame" x="20" y="8.6666666666666856" width="220" height="0.0"/>
+                                                <rect key="frame" x="20" y="8.6666666666666838" width="220" height="20.333333333333329"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="LCn-OI-L8R">
-                                                <rect key="frame" x="20" y="26.666666666666686" width="373" height="56"/>
+                                                <rect key="frame" x="20" y="47" width="373" height="35.666666666666657"/>
                                                 <subviews>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qH4-od-Pbk">
-                                                        <rect key="frame" x="0.0" y="0.0" width="185.66666666666666" height="56"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="185.66666666666666" height="35.666666666666664"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <state key="normal" title="Public Parking" backgroundImage="round_rect_white">
                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3647,7 +3647,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrO-eB-CPU">
-                                                        <rect key="frame" x="187.66666666666663" y="0.0" width="185.33333333333337" height="56"/>
+                                                        <rect key="frame" x="187.66666666666663" y="0.0" width="185.33333333333337" height="35.666666666666664"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <state key="normal" title="   Private Parking   " backgroundImage="round_rect_white">
                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -6122,10 +6122,10 @@ MN 55425, USA.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="review_img" translatesAutoresizingMaskIntoConstraints="NO" id="qEN-o2-8Za">
-                                        <rect key="frame" x="35" y="261" width="344" height="340"/>
+                                        <rect key="frame" x="121" y="346" width="172" height="170.33333333333337"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_rate" translatesAutoresizingMaskIntoConstraints="NO" id="33B-7b-2XR">
-                                        <rect key="frame" x="-81.666666666666686" y="616" width="577.33333333333337" height="80"/>
+                                        <rect key="frame" x="62.666666666666657" y="531.33333333333337" width="288.66666666666674" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="WvF-fB-VpS"/>
                                         </constraints>
@@ -11033,17 +11033,17 @@ Click Finish to publish your offer</string>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cSu-cl-ZDZ">
-                                <rect key="frame" x="0.0" y="760" width="414" height="92"/>
+                                <rect key="frame" x="0.0" y="806" width="414" height="46"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hm0-Bu-TiI">
-                                        <rect key="frame" x="94" y="0.0" width="299" height="92"/>
+                                        <rect key="frame" x="243.33333333333337" y="0.0" width="149.66666666666663" height="46"/>
                                         <state key="normal" image="next_btn"/>
                                         <connections>
                                             <action selector="for_btn:" destination="ogy-Me-kLQ" eventType="touchUpInside" id="VVI-as-J8L"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaR-Ps-wFE">
-                                        <rect key="frame" x="21" y="0.0" width="299" height="92"/>
+                                        <rect key="frame" x="21" y="0.0" width="149.66666666666666" height="46"/>
                                         <state key="normal" image="pre_btn"/>
                                         <connections>
                                             <action selector="pre_btn:" destination="ogy-Me-kLQ" eventType="touchUpInside" id="kzj-qm-mWr"/>
@@ -11061,7 +11061,7 @@ Click Finish to publish your offer</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="glw-Nl-b0h">
-                                <rect key="frame" x="0.0" y="159" width="414" height="591"/>
+                                <rect key="frame" x="0.0" y="159" width="414" height="637"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                         </subviews>
