@@ -42,6 +42,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     @IBOutlet weak var re_center_bottom_cont: NSLayoutConstraint!
     
+    var refreshing : Bool = false
+    
     //Variables
     var estimateWidth=130
     var cellMarginSize=1
@@ -688,7 +690,15 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 //            }
 //        }
         
-        Helper().showSpinner(view: self.view)
+        
+        
+        
+        if(!self.refreshing)
+        {
+             Helper().showSpinner(view: self.view)
+            self.refreshing = true
+        }
+       
         
         APIClient.serverRequest(url: url, path: url.getPath(), dec: ResponseData<[Parking]>.self) { (response,error) in
             
@@ -743,6 +753,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
 
 
                     }
+                    
+                     self.refreshing = false
 
                     completion()
 
@@ -766,6 +778,7 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
             }
             
         }
+        
         
     }
     

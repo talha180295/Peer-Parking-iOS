@@ -1240,36 +1240,42 @@ class BottomSheetVC: UIViewController {
 }
 
 extension BottomSheetVC:OnTimeSelectDelegate{
-    
-    func timeSelect(startigTime: String, endingTime: String){
-        //
-        //        var times : [String] = []
-        //        times[0] = startigTime
-        //        times[1] = endingTime
-        //
-        //        return times
-        
-        self.parking_details.initialPrice = initialPrice
-        sTime = startigTime
-        fTime = endingTime
-        
-        st_time.text = "From : \(startigTime)"
-        end_time.text = "To : \(endingTime)"
-        
-         self.parking_details.startAt = startigTime
-        self.parking_details.endAt = endingTime
-        self.parking_details.privateParkingId = self.parking_details.id
-        
-        self.parking_details.status = APP_CONSTANT.STATUS_PARKING_TEMP
-        
-        if(self.tempParkingId != 0 || self.tempParkingId != nil)
-        {
-            updateTempParking(parkingModel1 : self.parking_details);
-        }
-        
+    func timeSelect(startigTime: String, endingTime: String, finalPrice: Double) {
+         //
+               //        var times : [String] = []
+               //        times[0] = startigTime
+               //        times[1] = endingTime
+               //
+               //        return times
+               
+               self.parking_details.initialPrice = initialPrice
+               sTime = startigTime
+               fTime = endingTime
+               
+               st_time.text = "From : \(startigTime)"
+               end_time.text = "To : \(endingTime)"
+               
+                self.parking_details.startAt = startigTime
+               self.parking_details.endAt = endingTime
+               self.parking_details.privateParkingId = self.parking_details.id
+               
+               self.parking_details.status = APP_CONSTANT.STATUS_PARKING_TEMP
+               
+               if(self.tempParkingId != 0 || self.tempParkingId != nil)
+               {
+//                self.parking_details.startAt = Helper().getFormatedServerDateTimeForDetail(dateStr: self.parking_details.startAt ?? "")
+//                self.parking_details.endAt = Helper().getFormatedServerDateTimeForDetail(dateStr: self.parking_details.endAt )
+                self.parking_details.finalPrice = finalPrice
+                   updateTempParking(parkingModel1 : self.parking_details);
+               }
     }
     
+    
+    
     public func updateTempParking( parkingModel1 : Parking ) {
+        
+        
+        
         
         let park_model = UpdateTempParkingSendingModel(startAt: parkingModel1.startAt, endAt: parkingModel1.endAt, initialPrice: parkingModel1.initialPrice, finalPrice: parkingModel1.finalPrice)
         
@@ -1277,8 +1283,12 @@ extension BottomSheetVC:OnTimeSelectDelegate{
         do{
             let data = try JSONEncoder().encode(parkingModel1)
 //            Helper().showSpinner(view: self.view)
-            let request = APIRouter.updateParking(id: self.parking_details.id!, data)
-            APIClient.serverRequest(url: request, path: request.getPath(),body: park_model.dictionary ?? [:], dec: PostResponseData.self) { (response, error) in
+            let request = APIRouter.updateParking(id: self.parking_details.privateParkingId, data)
+            
+            var dict : Dictionary = park_model.dictionary ?? [:]
+            
+            
+            APIClient.serverRequest(url: request, path: request.getPath(),body: dict, dec: PostResponseData.self) { (response, error) in
 //                Helper().hideSpinner(view: self.view)
                 if(response != nil){
                     if (response?.success) != nil {
@@ -1288,6 +1298,7 @@ extension BottomSheetVC:OnTimeSelectDelegate{
                         Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
                     }
                 }
+                    
                 else if(error != nil){
                     Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
                 }

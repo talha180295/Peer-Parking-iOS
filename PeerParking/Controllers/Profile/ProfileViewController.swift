@@ -10,11 +10,13 @@ import UIKit
 import Alamofire
 import SDWebImage
 import HelperClassPod
+import Cosmos
 
 
 class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
 
    
+    @IBOutlet weak var userRating: CosmosView!
     @IBOutlet weak var rightBarBtn: UIBarButtonItem!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPhone: UITextField!
@@ -35,6 +37,7 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
         self.txtLast.delegate = self
         self.txtFirst.delegate = self
         self.txtEmail.isUserInteractionEnabled = false
+        
         
         getMe()
         self.img.clipsToBounds = true
@@ -308,15 +311,28 @@ class ProfileViewController: UIViewController ,UIImagePickerControllerDelegate,U
         print(data)
         self.txtEmail.text = (data["email"] as! String)
         let details = data["details"] as! NSDictionary
-        self.txtFirst.text = (details["first_name"] as! String)
+        
+        if( data["name"] != nil )
+        {
+            self.txtFirst.text =  (data["name"] as! String)
+        }
+        
+        if(details["average_rating"] as! Double != nil){
+            self.userRating.rating = (details["average_rating"] as! Double)
+        }
+//        else
+//        {
+//           self.txtFirst.text =  " \(details["first_name"] as! String) \(details["last_name"] ?? "")"
+//        }
+        
         let lName:String!
-        if details["last_name"] is NSNull{
-            lName = ""
-        }
-        else{
-            lName = (details["last_name"]  as! String)
-        }
-        self.txtLast.text = lName
+//        if details["last_name"] is NSNull{
+//            lName = ""
+//        }
+//        else{
+//            lName = (details["last_name"]  as! String)
+//        }
+//        self.txtLast.text = lName
         let phine:String!
         if details["phone"]  is NSNull{
             phine = ""
@@ -431,11 +447,11 @@ extension ProfileViewController:UITextFieldDelegate{
 
         
                
+//        if(textField == txtFirst)
+//        {
+//            txtLast.becomeFirstResponder()
+//        }
         if(textField == txtFirst)
-        {
-            txtLast.becomeFirstResponder()
-        }
-        else if(textField == txtLast)
         {
             txtPhone.becomeFirstResponder()
         }

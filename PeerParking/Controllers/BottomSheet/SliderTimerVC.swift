@@ -13,7 +13,7 @@ import Charts
 
 protocol OnTimeSelectDelegate {
     
-    func timeSelect( startigTime : String , endingTime : String)
+    func timeSelect( startigTime : String , endingTime : String, finalPrice : Double)
 }
 
 class SliderTimerVC: UIViewController ,UITableViewDelegate,UITableViewDataSource  {
@@ -56,6 +56,8 @@ class SliderTimerVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
     var strStart : String! = ""
     var strEnd : String! = ""
     var price : Double!
+    var finalPrice : Double!
+   
     
     
     var startTime : [Date] = []
@@ -406,6 +408,10 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
         let totalMinutes = Double(val)
         let priceperminute = (totalMinutes / 60.0 ) * price
         
+        self.finalPrice = priceperminute
+        
+        
+        
          finalpricelabel.text = "$ " +  String(format: "%0.2f" ,priceperminute)
 //        }
 //        else
@@ -468,10 +474,20 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy HH:mm"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        let date : Date = dateFormatter.date(from: a)!
-        dateFormatter.dateFormat = "hh:mm a"
-        let Date12 = dateFormatter.string(from: date)
-        return Date12
+        
+        if(dateFormatter.date(from: a) != nil)
+        {
+            let date : Date = dateFormatter.date(from: a)!
+                   dateFormatter.dateFormat = "hh:mm a"
+                   let Date12 = dateFormatter.string(from: date)
+                   return Date12
+        }
+        else
+        {
+          return  dateAsString
+        }
+        
+       
        
     }
 
@@ -480,9 +496,53 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        let date1 : Date = dateFormatter.date(from: date)!
+        
+        
+        var date1 : Date = Date()
+        if(dateFormatter.date(from: date) != nil)
+        {
+            date1  = dateFormatter.date(from: date)!
+            
+        }
         return date1
+        
+        
+        
     }
+    
+    @objc func sliderTapped(_ gesture: UITapGestureRecognizer) {
+        guard gesture.state == .ended else { return }
+        guard let slider = gesture.view as? UISlider else { return }
+
+        let pointTapped: CGPoint = gesture.location(in: slider)
+        let positionOfSlider: CGPoint = slider.convert(slider.bounds.origin, to: slider)
+        let widthOfSlider: CGFloat = slider.bounds.size.width
+
+        let moveDistance = sqrt(Double(pow(Double(pointTapped.x - positionOfSlider.x),2) + pow(Double(pointTapped.y - positionOfSlider.y),2)))
+
+        var newValue: CGFloat
+        if pointTapped.x < 10 {
+            newValue = 0
+        }
+        else {
+            newValue = (CGFloat(moveDistance) * CGFloat(slider.maximumValue) / widthOfSlider)
+        }
+
+        slider.setValue(Float(newValue), animated: true)
+    }
+    
+//    func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
+//           //  print("A")
+//
+//        let pointTapped: CGPoint = gestureRecognizer.location(in: self.view)
+//
+//           let positionOfSlider: CGPoint = slider.frame.origin
+//           let widthOfSlider: CGFloat = slider.frame.size.width
+//           let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(slider.maximumValue) / widthOfSlider)
+//
+//        slider.value[1] = newValue
+////        self.slider.setValue(Float(newValue), animated: true)
+//       }
     
     func formatDateServer(date : String) -> Date
     {
@@ -620,7 +680,7 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
         {
             if(self.validateTimeSlot())
             {
-                        delegate!.timeSelect(startigTime:strStart  , endingTime : strEnd)
+                delegate!.timeSelect(startigTime:strStart  , endingTime : strEnd, finalPrice: self.finalPrice ?? 0.0)
                          self.dismiss(animated: false)
             }
             else
