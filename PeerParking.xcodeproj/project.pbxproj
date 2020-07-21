@@ -134,6 +134,7 @@
 		BCC0F8AC24B7B22600B2D8F1 /* WalletContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC0F8AB24B7B22600B2D8F1 /* WalletContentView.swift */; };
 		BCC0F8B024B7BC3700B2D8F1 /* TopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC0F8AF24B7BC3700B2D8F1 /* TopupVC.swift */; };
 		BCC0F8B224B7BC5100B2D8F1 /* WithdrawVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC0F8B124B7BC5100B2D8F1 /* WithdrawVC.swift */; };
+		BCC50E3A24C64EA2000BC9D2 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC50E3924C64EA1000BC9D2 /* DateHelper.swift */; };
 		E2616B4D5E0A2ED92F2CAAF3 /* Pods_PeerParking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */; };
 		FA0E9F6F2330FE7E0005A54C /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E9F6E2330FE7E0005A54C /* PlaceViewController.swift */; };
 		FA0FCC56232229F9000FF52C /* vehicleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0FCC54232229F9000FF52C /* vehicleCell.swift */; };
@@ -352,6 +353,7 @@
 		BCC0F8AB24B7B22600B2D8F1 /* WalletContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletContentView.swift; sourceTree = "<group>"; };
 		BCC0F8AF24B7BC3700B2D8F1 /* TopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopupVC.swift; sourceTree = "<group>"; };
 		BCC0F8B124B7BC5100B2D8F1 /* WithdrawVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawVC.swift; sourceTree = "<group>"; };
+		BCC50E3924C64EA1000BC9D2 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DateHelper.swift; path = "/Users/talha/Documents/IOS Projects/peer parking/PeerParking/Helper/DateHelper.swift"; sourceTree = "<absolute>"; };
 		BF58D38B340DB6271FACD986 /* Pods-PeerParkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingTests.release.xcconfig"; path = "Target Support Files/Pods-PeerParkingTests/Pods-PeerParkingTests.release.xcconfig"; sourceTree = "<group>"; };
 		C53DD1F3CFB8035A3E4024F2 /* Pods-PeerParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParking.release.xcconfig"; path = "Target Support Files/Pods-PeerParking/Pods-PeerParking.release.xcconfig"; sourceTree = "<group>"; };
 		E8DB06BFD47AAB708811B861 /* Pods-PeerParkingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingTests.debug.xcconfig"; path = "Target Support Files/Pods-PeerParkingTests/Pods-PeerParkingTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -979,6 +981,7 @@
 		FA2815BD231E666E008AF3F5 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				BCC50E3924C64EA1000BC9D2 /* DateHelper.swift */,
 				FAA351A023F18B6F00E11CA2 /* GoogleService-Info.plist */,
 				FA82B4FF232F66A6002675AC /* Knob.swift */,
 				185DE79A2360A59900FC0E25 /* Constants.swift */,
@@ -1366,6 +1369,7 @@
 				BCC0F8B224B7BC5100B2D8F1 /* WithdrawVC.swift in Sources */,
 				1890871523BB8D4B0040D4C4 /* SelfSizedTableView.swift in Sources */,
 				FA0FCC5923222D7F000FF52C /* VehicleViewController.swift in Sources */,
+				BCC50E3A24C64EA2000BC9D2 /* DateHelper.swift in Sources */,
 				67104A31249BBA55008DA0EF /* ParkingBookingDetailsVC.swift in Sources */,
 				1841BED42428CE9E00B621AF /* UIColor+Extension.swift in Sources */,
 				BCC0F8B024B7BC3700B2D8F1 /* TopupVC.swift in Sources */,
@@ -1686,6 +1690,7 @@
 				CODE_SIGN_ENTITLEMENTS = PeerParking/PeerParking.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_TEAM = 9SRKL49KA2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1697,7 +1702,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.8;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fomark.peerparking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1714,6 +1719,7 @@
 				CODE_SIGN_ENTITLEMENTS = PeerParking/PeerParking.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				DEVELOPMENT_TEAM = 9SRKL49KA2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1725,7 +1731,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.8;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fomark.peerparking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

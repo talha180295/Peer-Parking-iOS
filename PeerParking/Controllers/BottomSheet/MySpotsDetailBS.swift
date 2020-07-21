@@ -8,8 +8,12 @@
 
 import UIKit
 
+protocol MySpotsDetailBSDelegate : NSObjectProtocol {
+    func reloadData()
+}
 class MySpotsDetailBS: UIViewController {
     
+    var delegate:MySpotsDetailBSDelegate!
     //Intent Variables
     var privateParkingModel:PrivateParkingModel!
     var navigator:UINavigationController!
@@ -24,7 +28,7 @@ class MySpotsDetailBS: UIViewController {
         let vc = MySpotParkingDetailVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
         vc.setPrivateParingModel(privateParkingModel: privateParkingModel)
         vc.isPublicParking = false
-//        vc.delegate = self
+        vc.delegate = self
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true,completion: nil)
         
@@ -48,3 +52,10 @@ class MySpotsDetailBS: UIViewController {
 //        
 //    }
 //}
+
+extension MySpotsDetailBS:MySpotParkingDetailVCDelegate{
+    func didBackButtonPressed() {
+        self.dismiss(animated: false, completion: nil)
+        self.delegate.reloadData()
+    }
+}

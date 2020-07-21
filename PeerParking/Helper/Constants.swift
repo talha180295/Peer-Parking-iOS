@@ -136,6 +136,8 @@ struct APP_CONSTANT {
     public static let STATUS_PARKING_NAVIGATING = 60;
     public static let  STATUS_ACCEPTED = 10;
     public static let STATUS_PARKING_TEMP  =  70;
+    public static let STATUS_PRIVATE_PARKING_CANCEL  =  30;
+    
     
     public static let ONE_MINUTE_NOTIFICATION_FOR_PARKING = "ONE_MINUTE_NOTIFICATION_FOR_PARKING_";
     public static let BUYER_REACHED = "Buyer reached";

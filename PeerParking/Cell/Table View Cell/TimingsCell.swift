@@ -50,10 +50,10 @@ class TimingsCell: UITableViewCell {
 //        Helper().popUp(controller: <#T##UIViewController#>, view_controller: self)
     }
     //IBAction
-//    @IBAction func checkbox(_ sender: UIButton){
-////        sender.checkboxAnimation {
-////            //print("I'm done")
-////        }
-//    }
+    @IBAction func checkbox(_ sender: UIButton){
+//        sender.checkboxAnimation {
+//            //print("I'm done")
+//        }
+    }
 //    
 }
