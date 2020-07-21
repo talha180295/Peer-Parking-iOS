@@ -9,10 +9,17 @@
 import Foundation
 import Firebase
 import CodableFirebase
+
+protocol LiveLocationReceivingServiceDeleegate {
+    func updateLocation(latitude:Double?, longitude:Double?)
+}
 class LiveLocationReceivingService{
     
-    
+    //Intent Variable
     var parkingId : String = ""
+    
+    
+    var delegate:LiveLocationReceivingServiceDeleegate!
     var currentLocationReference : DatabaseReference!
         
         
@@ -20,6 +27,7 @@ class LiveLocationReceivingService{
     init(parkingId : String) {
         self.parkingId = parkingId
         setReference()
+        getParkingLocation()
     }
     
     func setReference(){
@@ -28,9 +36,9 @@ class LiveLocationReceivingService{
     
    
     
-    func getParkingLocation(completion: @escaping (ParkingLocation) -> ()) {
+    func getParkingLocation() {
        
-         var parkingLocation : ParkingLocation?
+//        var parkingLocation : ParkingLocation?
         
         if(currentLocationReference != nil)
         {
@@ -45,12 +53,13 @@ class LiveLocationReceivingService{
                     {
                         
                         do {
-                            let parkingLocation = try FirebaseDecoder().decode(ParkingLocation.self, from: snapshot.value)
+                            let parkingLocation = try FirebaseDecoder().decode(ParkingLocation.self, from: snapshot.value ?? 0)
                             
-                            print(parkingLocation.latitude!)
-                            print(parkingLocation.longitude!)
+//                            print(parkingLocation.latitude!)
+//                            print(parkingLocation.longitude!)
                             
-                            completion(parkingLocation)
+                            self.delegate.updateLocation(latitude: parkingLocation.latitude, longitude: parkingLocation.longitude!)
+//                            completion(parkingLocation)
                             
                         } catch let error {
                             print(error)

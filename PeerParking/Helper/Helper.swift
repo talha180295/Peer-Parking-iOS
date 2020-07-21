@@ -1028,11 +1028,11 @@ class Helper{
         }
     }
     
-    func calculateDistances(s_lat:Double, s_longg:Double, d_lat:Double, d_longg:Double, completion: @escaping (String)->Void){
+    func calculateTimeAndDistance(s_lat:Double, s_longg:Double, d_lat:Double, d_longg:Double, completion: @escaping (String,String)->Void){
            
            
         var distance = ""
-        
+        var duration = ""
         
         let url = URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(s_lat),\(s_longg)&destination=\(d_lat),\(d_longg)&sensor=true&mode=driving&alternatives=true&key=\(Key.Google.placesKey)")!
         
@@ -1050,8 +1050,10 @@ class Helper{
                         if(routes.count != 0)
                         {
                             var val : Int;
-                            val = routes[0].legs?[0].distance?.value ?? 0 // in meter
+                            var val2 : Int
                             
+                            val = routes[0].legs?[0].distance?.value ?? 0 // in meter
+                            val2 = routes[0].legs?[0].duration?.value ?? 0
                             var valDouble = 0.0
                             
                             
@@ -1060,13 +1062,14 @@ class Helper{
                             distance = String(format: "%.2f", valDouble) + " m"
 //                            distance = routes[0].legs?[0].distance?.text ?? ""
                             
+                            duration = String(val2)
                         }
                         
                        
                     }
                     
                    
-                        completion(distance)
+                        completion(distance,duration)
                    
                     
                 }

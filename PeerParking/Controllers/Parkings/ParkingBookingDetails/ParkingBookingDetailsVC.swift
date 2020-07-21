@@ -37,30 +37,7 @@ class ParkingBookingDetailsVC: UIViewController {
         self.setData(data: self.parkingModel)
         
         
-        // replace 611 to origional parking id
-        
-        var service : LiveLocationReceivingService =  LiveLocationReceivingService(parkingId: String(611))
-        
-        service.getParkingLocation(){ parking  in
-            
-            
-            print("latititude \(parking.latitude)")
-            print("longitude \(parking.longitude)")
-            
-        }
-        
-        
-        var sendingservice : LiveLocationSendingService =  LiveLocationSendingService(parkingId: String(612))
-        
-        // replace lat long wit clllocation manager and pass current actual location
-        
-        sendingservice.setBuyerCurrentLocation(lat: 24.9472804, long: 67.1057191) { parking  in
-            
-            print("sending latititude \(parking.latitude)")
-            print("sending longitude \(parking.longitude)")
-            
-        }
-    
+        self.setLiveLocationReceivingService(parkingId: 611)
     
     }
     
@@ -82,7 +59,7 @@ class ParkingBookingDetailsVC: UIViewController {
             if (parkingModel.status == APP_CONSTANT.STATUS_PARKING_BOOKED) {
                 Helper().showToast(message: "Buyer has not started navigation yet", controller: self)
             } else {
-//                openMapScreen()
+                openMapScreen()
             }
             
             
@@ -97,6 +74,26 @@ class ParkingBookingDetailsVC: UIViewController {
 //    func setParingModel(parkingModel:Parking){
 //        self.parkingModel = parkingModel
 //    }
+    
+    func openMapScreen(){
+        let vc = ParkingNavVC.instantiate(fromPeerParkingStoryboard: .Main)
+        
+        vc.modalPresentationStyle = .fullScreen
+        vc.isTracking = true
+        vc.parkingModel = self.parkingModel
+        vc.vcName = "track"
+//        vc.p_title = ""
+//        vc.d_lat = Double(parkingModel.latitude ?? "0.0") ?? 0.0
+//        vc.d_longg = Double(parkingModel.longitude ?? "0.0") ?? 0.0
+//        vc.s_lat = self.lat
+//        vc.s_longg = self.longg
+        
+//        vc.p_lat = d_lat
+//        vc.p_longg = d_longg
+       
+//        vc.alternateRoutes = alternateRoutes
+        self.present(vc, animated: false, completion: nil)
+    }
     @IBAction func parkNowBtnClick(_sender:UIButton){
         
         let alert = UIAlertController(title: "Alert!", message: "Do you really want to park?", preferredStyle: .alert)
@@ -389,3 +386,40 @@ extension ParkingBookingDetailsVC{
         }
     }
 }
+
+
+//Buyer Location Reciever
+extension ParkingBookingDetailsVC:LiveLocationReceivingServiceDeleegate{
+    
+    //Callback
+    func updateLocation(latitude: Double?, longitude: Double?) {
+        print("latititude \(latitude ?? 0.0)")
+        print("longitude \(longitude ?? 0.0)")
+    }
+    
+    //Start Service
+    func setLiveLocationReceivingService(parkingId:Int){
+        // replace 611 to origional parking id
+        
+        let service : LiveLocationReceivingService =  LiveLocationReceivingService(parkingId: String(parkingId))
+        service.delegate = self
+        
+    }
+    
+    func setLiveLocationSendingService(parkingId:Int){
+        
+        //        var sendingservice : LiveLocationSendingService =  LiveLocationSendingService(parkingId: String(612))
+        //
+        //        // replace lat long wit clllocation manager and pass current actual location
+        //
+        //        sendingservice.setBuyerCurrentLocation(lat: 24.9472804, long: 67.1057191) { parking  in
+        //
+        //            print("sending latititude \(parking.latitude)")
+        //            print("sending longitude \(parking.longitude)")
+        //
+        //        }
+    }
+    
+}
+
+
