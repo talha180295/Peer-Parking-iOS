@@ -1283,7 +1283,7 @@ extension BottomSheetVC:OnTimeSelectDelegate{
         do{
             let data = try JSONEncoder().encode(parkingModel1)
 //            Helper().showSpinner(view: self.view)
-            let request = APIRouter.updateParking(id: self.parking_details.privateParkingId, data)
+            let request = APIRouter.updateParking(id: self.parking_details.privateParkingId!, data)
             
             var dict : Dictionary = park_model.dictionary ?? [:]
             

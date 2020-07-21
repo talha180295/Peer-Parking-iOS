@@ -72,6 +72,9 @@ class ParkingNavVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
          
+        self.lblDistance.text = ""
+        self.lblTime.text = ""
+        
         print("ParkingNavVC=\(vcName)")
 //        loadMapView()
         self.parking_title.text = p_title
@@ -753,6 +756,7 @@ extension ParkingNavVC:LiveLocationReceivingServiceDeleegate{
     
     func trackBuyer(){
         
+        self.map.clear()
         let sourcePosition =  buyerLocation ?? CLLocationCoordinate2D()
         let endPosition = CLLocationCoordinate2D(latitude: Double(parkingModel.latitude ?? "0.0")!, longitude: Double(parkingModel.longitude ?? "0.0")!)
         
@@ -764,18 +768,25 @@ extension ParkingNavVC:LiveLocationReceivingServiceDeleegate{
          self.map.animate(to: camera)
         
         if !trackingStart{
-             self.getPolylineRoute(from: sourcePosition , to: endPosition)
+            Helper().calculateTimeAndDistance(s_lat: sourcePosition.latitude, s_longg: sourcePosition.longitude, d_lat: Double(self.parkingModel.latitude ?? "0.0")!, d_longg: Double(self.parkingModel.longitude ?? "0.0")!) { (distance,duration) in
+                self.lblDistance.text = distance
+                self.lblTime.text = duration
+                self.getPolylineRoute(from: sourcePosition , to: endPosition)
+            }
         }
 
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             Helper().calculateTimeAndDistance(s_lat: sourcePosition.latitude, s_longg: sourcePosition.longitude, d_lat: Double(self.parkingModel.latitude ?? "0.0")!, d_longg: Double(self.parkingModel.longitude ?? "0.0")!) { (distance,duration) in
                 self.lblDistance.text = distance
                 self.lblTime.text = duration
+                self.getPolylineRoute(from: sourcePosition , to: endPosition)
             }
             
         }
         
-        Helper().map_marker(lat: sourcePosition.latitude , longg: sourcePosition.longitude, map_view: self.map, title: "This is Buyer")
+        
+        Helper().map_marker(lat: sourcePosition.latitude , longg: sourcePosition.longitude, map_view: self.map, title: "This is Buyer",image: "carMarker")
         Helper().map_marker(lat: Double(parkingModel.latitude ?? "0.0")!, longg: Double(parkingModel.longitude ?? "0.0")!, map_view: self.map, title: "This is parking")
     }
     

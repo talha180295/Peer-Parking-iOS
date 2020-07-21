@@ -411,7 +411,7 @@ class Helper{
         
     }
     
-    func map_marker(lat:Double,longg:Double, map_view:GMSMapView, title:String){
+    func map_marker(lat:Double,longg:Double, map_view:GMSMapView, title:String, image:String = "s_marker"){
         
         //        // I have taken a pin image which is a custom image
         //        let markerImage = UIImage(named: "radius_blue")!.withRenderingMode(.alwaysOriginal)
@@ -433,7 +433,7 @@ class Helper{
         let marker = GMSMarker()
         
         // I have taken a pin image which is a custom image
-        let markerImage = UIImage(named: "s_marker")!.withRenderingMode(.alwaysTemplate)
+        let markerImage = UIImage(named: image)!.withRenderingMode(.alwaysTemplate)
         
         //creating a marker view
         let markerView = UIImageView(image: markerImage)
