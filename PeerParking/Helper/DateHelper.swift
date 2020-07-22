@@ -11,6 +11,7 @@ enum dateFormat:String{
     
 //    case serverFormat = "yyyy-MM-dd HH:mm:ss"
     case yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss"
+    case yyyyMMdd = "yyyy-MM-dd"
     case ddMMyyy = "dd/MM/yyyy"
     case MMddyyy = "MM/dd/yyyy"
     case hmma = "h:mm a"
@@ -49,12 +50,12 @@ class DateHelper {
         }
     }
     
-    static func getDateString(date:Date) -> String{
+    static func getDateString(date:Date , inFormat:String = "yyyy-MM-dd HH:mm:ss") -> String{
         
-//        let today = Date()
-        let formatter1 = DateFormatter()
+        let formatter = DateFormatter()
 //        formatter1.dateStyle = .short
-        let dateStr = formatter1.string(from: date)
+        formatter.dateFormat =  inFormat
+        let dateStr = formatter.string(from: date)
         
         return dateStr
     }

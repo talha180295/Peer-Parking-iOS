@@ -140,8 +140,12 @@ class ResellParkingPopUp: UIViewController {
     
     @IBAction func submit_btn(_ sender: UIButton) {
         
+        let sendingTime = DateHelper.getFormatedDate(dateStr: self.time, inFormat: dateFormat.hmma.rawValue, outFormat: dateFormat.HHmmss.rawValue)
+        let sendingDate = DateHelper.getFormatedDate(dateStr: self.date, inFormat: dateFormat.MMddyyy.rawValue, outFormat: dateFormat.yyyyMMdd.rawValue)
+        let dateTime = "\(sendingDate) \(sendingTime)"
         
-        
+        self.params.updateValue(dateTime, forKey: "start_at")
+        //                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(sender.text!, forKey: "parking_allowed_until")
         //        var params:[String:Any] = [
         //            "vehicle_type": vehicle_type,     C
         //            "parking_type": parking_type,     C
@@ -218,8 +222,9 @@ class ResellParkingPopUp: UIViewController {
         print("params---=\(params)")
         
         resell_parking(){
+            Helper().presentOnMainScreens(controller: self, index: 0)
             //tab_index = 0
-            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+//            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
             //        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC")
             //
             //        self.present(vc, animated: true, completion: nil)

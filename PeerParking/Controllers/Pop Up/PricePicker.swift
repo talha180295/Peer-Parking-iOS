@@ -24,7 +24,7 @@ class PricePicker: UIViewController, UIPickerViewDataSource, UIPickerViewDelegat
         picker.delegate = self
         picker.dataSource = self
         
-        picker.selectRow(14, inComponent: 0, animated: false)
+        picker.selectRow(0, inComponent: 0, animated: false)
         picker.selectRow(1, inComponent: 1, animated: false)
     }
     

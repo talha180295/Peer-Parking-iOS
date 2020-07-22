@@ -8855,47 +8855,59 @@ Click Finish to publish your offer</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DOLLARS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0p-Ww-Uio">
-                                <rect key="frame" x="60.000000000000007" y="27" width="75.666666666666686" height="20"/>
+                                <rect key="frame" x="60.000000000000007" y="27" width="75.666666666666686" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CENTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqn-P6-dpL">
-                                <rect key="frame" x="157" y="27" width="55" height="20"/>
+                                <rect key="frame" x="157.33333333333334" y="27" width="54.666666666666657" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6U-Yu-KGH">
-                                <rect key="frame" x="114" y="223" width="42" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="42" id="93D-6i-mMR"/>
-                                    <constraint firstAttribute="height" constant="30" id="I3F-2R-Cgb"/>
-                                </constraints>
-                                <state key="normal" title="DONE">
-                                    <color key="titleColor" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="done_btn:" destination="PtI-ou-KFD" eventType="touchUpInside" id="GD8-Uh-V6f"/>
-                                </connections>
-                            </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2dt-l9-0JW">
-                                <rect key="frame" x="34.666666666666657" y="64" width="201" height="137"/>
+                                <rect key="frame" x="34.666666666666657" y="64.333333333333314" width="201" height="137"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="137" id="AMu-c6-X5N"/>
                                     <constraint firstAttribute="width" constant="201" id="l06-gx-toc"/>
                                 </constraints>
                             </pickerView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="g5Z-yZ-yAu">
+                                <rect key="frame" x="34.666666666666657" y="220" width="201" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6U-Yu-KGH">
+                                        <rect key="frame" x="0.0" y="0.0" width="42" height="30"/>
+                                        <state key="normal" title="DONE">
+                                            <color key="titleColor" red="0.2156862745" green="0.61568627450000002" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="done_btn:" destination="PtI-ou-KFD" eventType="touchUpInside" id="GD8-Uh-V6f"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQU-E6-HbE">
+                                        <rect key="frame" x="142" y="0.0" width="59" height="30"/>
+                                        <state key="normal" title="CANCEL">
+                                            <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancel_btn:" destination="PtI-ou-KFD" eventType="touchUpInside" id="QsE-UI-qfC"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Nwn-W2-vh0"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="11O-r7-9oJ" firstAttribute="trailing" secondItem="c6U-Yu-KGH" secondAttribute="trailing" constant="114" id="2Sn-SL-cQW"/>
-                            <constraint firstItem="c6U-Yu-KGH" firstAttribute="centerX" secondItem="B6N-We-uuu" secondAttribute="centerX" id="2dA-yV-kaa"/>
-                            <constraint firstItem="c6U-Yu-KGH" firstAttribute="top" secondItem="2dt-l9-0JW" secondAttribute="bottom" constant="22" id="Ei7-w8-ruI"/>
-                            <constraint firstAttribute="bottom" secondItem="c6U-Yu-KGH" secondAttribute="bottom" constant="17" id="ZqW-Bi-Ghh"/>
+                            <constraint firstItem="g5Z-yZ-yAu" firstAttribute="centerX" secondItem="B6N-We-uuu" secondAttribute="centerX" id="5Lp-Ek-kK2"/>
                             <constraint firstItem="s0p-Ww-Uio" firstAttribute="top" secondItem="B6N-We-uuu" secondAttribute="top" constant="27" id="b4c-qg-8p8"/>
                             <constraint firstItem="2dt-l9-0JW" firstAttribute="centerX" secondItem="B6N-We-uuu" secondAttribute="centerX" id="iXo-EX-fTW"/>
+                            <constraint firstItem="g5Z-yZ-yAu" firstAttribute="top" secondItem="2dt-l9-0JW" secondAttribute="bottom" constant="18.670000000000002" id="lW5-25-fgn"/>
                             <constraint firstItem="2dt-l9-0JW" firstAttribute="top" secondItem="s0p-Ww-Uio" secondAttribute="bottom" constant="17" id="mP0-mQ-heD"/>
+                            <constraint firstItem="11O-r7-9oJ" firstAttribute="bottom" secondItem="g5Z-yZ-yAu" secondAttribute="bottom" constant="20" id="mPC-Sf-NLN"/>
                             <constraint firstItem="2dt-l9-0JW" firstAttribute="top" secondItem="fqn-P6-dpL" secondAttribute="bottom" constant="17" id="nDk-d0-lew"/>
                             <constraint firstItem="s0p-Ww-Uio" firstAttribute="leading" secondItem="11O-r7-9oJ" secondAttribute="leading" constant="60" id="o9s-Tk-2u3"/>
                             <constraint firstItem="fqn-P6-dpL" firstAttribute="top" secondItem="B6N-We-uuu" secondAttribute="top" constant="27" id="qZ7-K3-wct"/>

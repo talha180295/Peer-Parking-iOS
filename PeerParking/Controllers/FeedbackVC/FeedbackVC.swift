@@ -61,6 +61,7 @@ class FeedbackVC: UIViewController {
                 self.parkingExist { (pakingAvailable) in
                     switch pakingAvailable {
                     case true:
+                        Helper().presentOnMainScreens(controller: self, index: 0)
                         return
                     case false:
                        self.wantToSellParking()
