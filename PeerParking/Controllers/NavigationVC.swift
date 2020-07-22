@@ -706,17 +706,18 @@ extension NavigationVC: GMSAutocompleteViewControllerDelegate {
             
            
             
-            Helper().calculateDistances(s_lat: self.lat, s_longg: self.longg, d_lat: self.d_lat, d_longg: self.d_longg)
-                    { (distance) in
+            Helper().calculateTimeAndDistance(s_lat: self.lat, s_longg: self.longg, d_lat: self.d_lat, d_longg: self.d_longg)
+                    { (distance,duration) in
             
                         self.lblDistance.text = "\(distance)"
-                    }
-            
-            Helper().getTimeDurationBetweenCordinate(s_lat: self.lat, s_longg: self.longg, d_lat: self.d_lat, d_longg: self.d_longg)
-                    { (duration) in
-            
                         self.lblTime.text = "\(duration)"
                     }
+            
+//            Helper().getTimeDurationBetweenCordinate(s_lat: self.lat, s_longg: self.longg, d_lat: self.d_lat, d_longg: self.d_longg)
+//                    { (duration) in
+//
+//                        self.lblTime.text = "\(duration)"
+//                    }
             
             
             

@@ -25,8 +25,9 @@ class ParkingNavVC: UIViewController{
     @IBOutlet weak var cancelHeight: NSLayoutConstraint! ///55
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var lblDistance: UILabel!
-  
+    @IBOutlet weak var altrBtn: UIButton!
     @IBOutlet weak var parkView: UIView!
+    
     
     
     var isMapLoaded = false
@@ -38,11 +39,13 @@ class ParkingNavVC: UIViewController{
     var bearing = 0.0
     var legs:[Leg]!
     var parking_details:Parking!
+    
     //Intent Variables
     var p_title:String = ""
     var p_lat:Double = 0.0
     var p_longg:Double = 0.0
     var alternateRoutes:[Route]!
+    var isTracking = false
     
     var p_id:Int!
     var c_lat:Double = 0.0
@@ -55,18 +58,42 @@ class ParkingNavVC: UIViewController{
     var d_lat:Double = 0.0
     var d_longg:Double = 0.0
     
+    //For Buyer Tracking//
+    
+    //Intent Variables
+    var parkingModel = Parking()
+    
+    //Variables
+    var buyerLocation:CLLocationCoordinate2D?
+    var trackingStart = false
+    //For Buyer Tracking//
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
          
+        self.lblDistance.text = ""
+        self.lblTime.text = ""
+        
         print("ParkingNavVC=\(vcName)")
 //        loadMapView()
         self.parking_title.text = p_title
         
-        locationUpdates()
+        if isTracking{
+            
+            self.parking_title.text = self.parkingModel.address ?? "-"
+            self.setLiveLocationReceivingService(parkingId: parkingModel.id ?? -1)
            
+        }
+        else{
+            locationUpdates()
+        }
+        
 
         // Do any additional setup after loading the view.
     }
+    
+    
     
     func locationUpdates(){
         
@@ -124,6 +151,12 @@ class ParkingNavVC: UIViewController{
             parkView.isHidden = true
             cancelHeight.constant = 55
             btnCan.isHidden = false
+        }
+        else if (vcName.elementsEqual("track")){
+            parkView.isHidden = true
+            cancelHeight.constant = 55
+            btnCan.isHidden = false
+            altrBtn.isHidden = true
         }
         else
         {
@@ -543,7 +576,7 @@ class ParkingNavVC: UIViewController{
     
     func getPolylineRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D){
 
-        Helper().showSpinner(view: self.view)
+//        Helper().showSpinner(view: self.view)
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
 
@@ -578,7 +611,7 @@ class ParkingNavVC: UIViewController{
                             self.showPath(polyStr: points!)
 
                             
-                                Helper().hideSpinner(view: self.view)
+//                                Helper().hideSpinner(view: self.view)
                         //                                self.activityIndicator.stopAnimating()
 
                                 let target = CLLocationCoordinate2D(latitude: source.latitude, longitude: source.longitude)
@@ -699,3 +732,80 @@ class ParkingNavVC: UIViewController{
     
     
 }
+
+//Buyer Location Reciever
+extension ParkingNavVC:LiveLocationReceivingServiceDeleegate{
+    
+    //Callback
+    func updateLocation(latitude: Double?, longitude: Double?) {
+        print("latititude \(latitude ?? 0.0)")
+        print("longitude \(longitude ?? 0.0)")
+        
+        self.buyerLocation = CLLocationCoordinate2D(latitude: latitude ?? 0.0, longitude: longitude ?? 0.0)
+        self.trackBuyer()
+    }
+    
+    //Start Service
+    func setLiveLocationReceivingService(parkingId:Int){
+        // replace 611 to origional parking id
+        
+        let service : LiveLocationReceivingService =  LiveLocationReceivingService(parkingId: String(parkingId))
+        service.delegate = self
+        
+    }
+    
+    func trackBuyer(){
+        
+        self.map.clear()
+        let sourcePosition =  buyerLocation ?? CLLocationCoordinate2D()
+        let endPosition = CLLocationCoordinate2D(latitude: Double(parkingModel.latitude ?? "0.0")!, longitude: Double(parkingModel.longitude ?? "0.0")!)
+        
+        //            self.getPolylineRoute(from: sourcePosition, to: endPosition)
+        
+        let target = sourcePosition
+        
+        let camera = GMSCameraPosition.camera(withTarget: target, zoom: 18, bearing: self.bearing, viewingAngle: 180)
+         self.map.animate(to: camera)
+        
+        if !trackingStart{
+            Helper().calculateTimeAndDistance(s_lat: sourcePosition.latitude, s_longg: sourcePosition.longitude, d_lat: Double(self.parkingModel.latitude ?? "0.0")!, d_longg: Double(self.parkingModel.longitude ?? "0.0")!) { (distance,duration) in
+                self.lblDistance.text = distance
+                self.lblTime.text = duration
+                self.getPolylineRoute(from: sourcePosition , to: endPosition)
+            }
+        }
+
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            Helper().calculateTimeAndDistance(s_lat: sourcePosition.latitude, s_longg: sourcePosition.longitude, d_lat: Double(self.parkingModel.latitude ?? "0.0")!, d_longg: Double(self.parkingModel.longitude ?? "0.0")!) { (distance,duration) in
+                self.lblDistance.text = distance
+                self.lblTime.text = duration
+                self.getPolylineRoute(from: sourcePosition , to: endPosition)
+            }
+            
+        }
+        
+        
+        Helper().map_marker(lat: sourcePosition.latitude , longg: sourcePosition.longitude, map_view: self.map, title: "This is Buyer",image: "carMarker")
+        Helper().map_marker(lat: Double(parkingModel.latitude ?? "0.0")!, longg: Double(parkingModel.longitude ?? "0.0")!, map_view: self.map, title: "This is parking")
+    }
+    
+    
+    func setLiveLocationSendingService(parkingId:Int){
+        
+        //        var sendingservice : LiveLocationSendingService =  LiveLocationSendingService(parkingId: String(612))
+        //
+        //        // replace lat long wit clllocation manager and pass current actual location
+        //
+        //        sendingservice.setBuyerCurrentLocation(lat: 24.9472804, long: 67.1057191) { parking  in
+        //
+        //            print("sending latititude \(parking.latitude)")
+        //            print("sending longitude \(parking.longitude)")
+        //
+        //        }
+    }
+    
+}
+
+
+
