@@ -14,7 +14,7 @@ import Foundation
 
 // MARK: - Parkings
 struct Parking: Codable {
-    var id, sellerID, buyerID, vehicleType: Int?
+    var id, sellerID, buyerID, vehicleType,parkingSubType: Int?
     var parkingType, status: Int?
     var initialPrice, finalPrice ,distance: Double?
     var isNegotiable: Bool?
@@ -71,6 +71,7 @@ struct Parking: Codable {
         case isAlways = "is_always"
         case tempParkingID = "temp_parking_id"
         case privateParkingId = "private_parking_id"
+        case parkingSubType = "parking_sub_type"
     }
 }
 

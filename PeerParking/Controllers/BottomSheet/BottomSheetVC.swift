@@ -80,8 +80,11 @@ class BottomSheetVC: UIViewController {
         
         
         
+//        print("subtype \(self.parking_details.parkingType)")
+        
         
                setData()
+        
         
         
         
