@@ -14,6 +14,7 @@
 		180FD0D8237331F30084230A /* ViewAllVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180FD0D7237331F30084230A /* ViewAllVC.swift */; };
 		180FD0DE237335BD0084230A /* Parking_table_cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180FD0DC237335BD0084230A /* Parking_table_cell.swift */; };
 		180FD0DF237335BD0084230A /* Parking_table_cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180FD0DD237335BD0084230A /* Parking_table_cell.xib */; };
+		1810F63524C8707E0044573D /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1810F63424C8707E0044573D /* DateHelper.swift */; };
 		1812701C23DEC7AC00337D01 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1812701B23DEC7AB00337D01 /* ApiClient.swift */; };
 		1812701E23DF32C500337D01 /* Me.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1812701D23DF32C500337D01 /* Me.swift */; };
 		18140316242C9457007AEA58 /* BarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18140315242C9147007AEA58 /* BarViewController.swift */; };
@@ -134,7 +135,6 @@
 		BCC0F8AC24B7B22600B2D8F1 /* WalletContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC0F8AB24B7B22600B2D8F1 /* WalletContentView.swift */; };
 		BCC0F8B024B7BC3700B2D8F1 /* TopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC0F8AF24B7BC3700B2D8F1 /* TopupVC.swift */; };
 		BCC0F8B224B7BC5100B2D8F1 /* WithdrawVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC0F8B124B7BC5100B2D8F1 /* WithdrawVC.swift */; };
-		BCC50E3A24C64EA2000BC9D2 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC50E3924C64EA1000BC9D2 /* DateHelper.swift */; };
 		E2616B4D5E0A2ED92F2CAAF3 /* Pods_PeerParking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EE1A4EAB141AC00F495841 /* Pods_PeerParking.framework */; };
 		FA0E9F6F2330FE7E0005A54C /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0E9F6E2330FE7E0005A54C /* PlaceViewController.swift */; };
 		FA0FCC56232229F9000FF52C /* vehicleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0FCC54232229F9000FF52C /* vehicleCell.swift */; };
@@ -228,6 +228,7 @@
 		180FD0D7237331F30084230A /* ViewAllVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllVC.swift; sourceTree = "<group>"; };
 		180FD0DC237335BD0084230A /* Parking_table_cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parking_table_cell.swift; sourceTree = "<group>"; };
 		180FD0DD237335BD0084230A /* Parking_table_cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Parking_table_cell.xib; sourceTree = "<group>"; };
+		1810F63424C8707E0044573D /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		1812701B23DEC7AB00337D01 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
 		1812701D23DF32C500337D01 /* Me.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Me.swift; sourceTree = "<group>"; };
 		18140315242C9147007AEA58 /* BarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarViewController.swift; sourceTree = "<group>"; };
@@ -353,7 +354,6 @@
 		BCC0F8AB24B7B22600B2D8F1 /* WalletContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletContentView.swift; sourceTree = "<group>"; };
 		BCC0F8AF24B7BC3700B2D8F1 /* TopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopupVC.swift; sourceTree = "<group>"; };
 		BCC0F8B124B7BC5100B2D8F1 /* WithdrawVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawVC.swift; sourceTree = "<group>"; };
-		BCC50E3924C64EA1000BC9D2 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DateHelper.swift; path = "/Users/talha/Documents/IOS Projects/peer parking/PeerParking/Helper/DateHelper.swift"; sourceTree = "<absolute>"; };
 		BF58D38B340DB6271FACD986 /* Pods-PeerParkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingTests.release.xcconfig"; path = "Target Support Files/Pods-PeerParkingTests/Pods-PeerParkingTests.release.xcconfig"; sourceTree = "<group>"; };
 		C53DD1F3CFB8035A3E4024F2 /* Pods-PeerParking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParking.release.xcconfig"; path = "Target Support Files/Pods-PeerParking/Pods-PeerParking.release.xcconfig"; sourceTree = "<group>"; };
 		E8DB06BFD47AAB708811B861 /* Pods-PeerParkingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeerParkingTests.debug.xcconfig"; path = "Target Support Files/Pods-PeerParkingTests/Pods-PeerParkingTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -981,7 +981,7 @@
 		FA2815BD231E666E008AF3F5 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				BCC50E3924C64EA1000BC9D2 /* DateHelper.swift */,
+				1810F63424C8707E0044573D /* DateHelper.swift */,
 				FAA351A023F18B6F00E11CA2 /* GoogleService-Info.plist */,
 				FA82B4FF232F66A6002675AC /* Knob.swift */,
 				185DE79A2360A59900FC0E25 /* Constants.swift */,
@@ -1369,7 +1369,6 @@
 				BCC0F8B224B7BC5100B2D8F1 /* WithdrawVC.swift in Sources */,
 				1890871523BB8D4B0040D4C4 /* SelfSizedTableView.swift in Sources */,
 				FA0FCC5923222D7F000FF52C /* VehicleViewController.swift in Sources */,
-				BCC50E3A24C64EA2000BC9D2 /* DateHelper.swift in Sources */,
 				67104A31249BBA55008DA0EF /* ParkingBookingDetailsVC.swift in Sources */,
 				1841BED42428CE9E00B621AF /* UIColor+Extension.swift in Sources */,
 				BCC0F8B024B7BC3700B2D8F1 /* TopupVC.swift in Sources */,
@@ -1420,6 +1419,7 @@
 				18916D1A241917A000E408BB /* SellParkingContainer.swift in Sources */,
 				FA10FF28232BCD620023C31C /* ParkedViewController.swift in Sources */,
 				FA122146232A3068002720BE /* ParkingCell.swift in Sources */,
+				1810F63524C8707E0044573D /* DateHelper.swift in Sources */,
 				18010AAB23549C7F008412C0 /* GoogleMapView.swift in Sources */,
 				FA57EBA7232142AC000646B7 /* ProfileViewController.swift in Sources */,
 				18D1B63A2362024E002C875D /* ScheduleVC.swift in Sources */,

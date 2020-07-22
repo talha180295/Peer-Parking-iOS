@@ -55,7 +55,7 @@ class APIClient {
                     print(response)
                     print("***************** Response End \(path) ********************\n")
                     print(response.response?.statusCode ?? 0)
-                    if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299){
+                    if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299 || response.response?.statusCode ?? 0 == 404){
                         
                         if response.result.isSuccess {
                             

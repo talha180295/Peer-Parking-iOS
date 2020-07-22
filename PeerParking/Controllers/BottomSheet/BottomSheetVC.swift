@@ -82,6 +82,59 @@ class BottomSheetVC: UIViewController {
         
         
                setData()
+        
+        
+        
+        
+        
+            self.tempParkingId = parking_details.tempParkingID ?? 0
+                
+                if (self.initialPrice == 0) {
+                    self.initialPrice  = parking_details.initialPrice ?? 0.0
+                }
+                
+        //        if (Helper().getCurrentUserId() == nil) {
+        //            HomeActivity homeActivity = (HomeActivity) activity;
+        //            if (homeActivity.parkingSearchedBeforeLogin == null) {
+        //                homeActivity.parkingSearchedBeforeLogin = new ParkingSearchedBeforeLogin();
+        //            }
+        //            ((HomeActivity) activity).parkingSearchedBeforeLogin.parkingModel1 = parkingModel1;
+        //        }
+                
+                
+                
+                if (parking_details.parkingType == ParkingType.PARKING_TYPE_PRIVATE) {
+                    btnSelectTime.isHidden = false
+                } else {
+                   btnSelectTime.isHidden = true
+                }
+                if(parking_details.parkingType==ParkingType.PARKING_TYPE_PUBLIC){
+                    
+                    
+                    self.endTimeHeightConstraint.constant = 0.0
+                    
+                    self.sTime = parking_details.startAt ?? ""
+        //            self.fTime = pModel.endAt ?? ""
+                    
+                    
+                    self.st_time.text = "\( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
+        //            self.end_time.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.fTime!))"
+                    
+                   
+                
+                    
+                }
+                else if(self.tempParkingId != 0 ){
+                
+                    self.getTempParking(showBargainingDialog: false);
+                
+                }
+                
+        
+        
+        self.note.sizeToFit()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.accept_offer_tap(notification:)), name: NSNotification.Name(rawValue: "accept_offer"), object: nil)
+        
     }
     
     
@@ -305,54 +358,6 @@ class BottomSheetVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         
-        
-            self.tempParkingId = parking_details.tempParkingID ?? 0
-                
-                if (self.initialPrice == 0) {
-                    self.initialPrice  = parking_details.initialPrice ?? 0.0
-                }
-                
-        //        if (Helper().getCurrentUserId() == nil) {
-        //            HomeActivity homeActivity = (HomeActivity) activity;
-        //            if (homeActivity.parkingSearchedBeforeLogin == null) {
-        //                homeActivity.parkingSearchedBeforeLogin = new ParkingSearchedBeforeLogin();
-        //            }
-        //            ((HomeActivity) activity).parkingSearchedBeforeLogin.parkingModel1 = parkingModel1;
-        //        }
-                
-                
-                
-                if (parking_details.parkingType == ParkingType.PARKING_TYPE_PRIVATE) {
-                    btnSelectTime.isHidden = false
-                } else {
-                   btnSelectTime.isHidden = true
-                }
-                if(parking_details.parkingType==ParkingType.PARKING_TYPE_PUBLIC){
-                    
-                    
-                    self.endTimeHeightConstraint.constant = 0.0
-                    
-                    self.sTime = parking_details.startAt ?? ""
-        //            self.fTime = pModel.endAt ?? ""
-                    
-                    
-                    self.st_time.text = "\( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
-        //            self.end_time.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.fTime!))"
-                    
-                   
-                
-                    
-                }
-                else if(self.tempParkingId != 0 ){
-                
-                    self.getTempParking(showBargainingDialog: false);
-                
-                }
-                
-        
-        
-        self.note.sizeToFit()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.accept_offer_tap(notification:)), name: NSNotification.Name(rawValue: "accept_offer"), object: nil)
         
         
     }
@@ -1255,8 +1260,8 @@ extension BottomSheetVC:OnTimeSelectDelegate{
                st_time.text = "From : \(startigTime)"
                end_time.text = "To : \(endingTime)"
                
-                self.parking_details.startAt = startigTime
-               self.parking_details.endAt = endingTime
+        self.parking_details.startAt = Helper().getFormatedServerDateTimeForDetail(dateStr: startigTime)
+               self.parking_details.endAt = Helper().getFormatedServerDateTimeForDetail(dateStr: endingTime)
                self.parking_details.privateParkingId = self.parking_details.id
                
                self.parking_details.status = APP_CONSTANT.STATUS_PARKING_TEMP
@@ -1274,38 +1279,42 @@ extension BottomSheetVC:OnTimeSelectDelegate{
     
     public func updateTempParking( parkingModel1 : Parking ) {
         
-        
-        
-        
         let park_model = UpdateTempParkingSendingModel(startAt: parkingModel1.startAt, endAt: parkingModel1.endAt, initialPrice: parkingModel1.initialPrice, finalPrice: parkingModel1.finalPrice)
         
         
         do{
-            let data = try JSONEncoder().encode(parkingModel1)
+            let data = try JSONEncoder().encode(park_model)
 //            Helper().showSpinner(view: self.view)
-            let request = APIRouter.updateParking(id: self.parking_details.privateParkingId, data)
-            
-            var dict : Dictionary = park_model.dictionary ?? [:]
-            
-            
-            APIClient.serverRequest(url: request, path: request.getPath(),body: dict, dec: PostResponseData.self) { (response, error) in
+            let request = APIRouter.updateParking(id: tempParkingId, data)
+            APIClient.serverRequest(url: request, path: request.getPath(),body: park_model.dictionary ?? [:], dec: PostResponseData.self) { (response, error) in
 //                Helper().hideSpinner(view: self.view)
                 if(response != nil){
                     if (response?.success) != nil {
+//                        Helper().showToast(message: response?.message ?? "-", controller: self)
+                        
+                        
+//                        self.st_time.text = "From : \( Helper().getFormatedDateAndTime(dateStr: self.sTime!))"
+//                        self.end_time.text = "To : \(Helper().getFormatedDateAndTime(dateStr: self.fTime!))"
+                        
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//                            self.dismiss(animated: true){
+//                                self.delegate.didBackButtonPressed()
+//                            }
+//                        }
                         
                     }
                     else{
                         Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
                     }
                 }
-                    
                 else if(error != nil){
                     Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
                 }
                 else{
                     Helper().showToast(message: "Nor Response and Error!!", controller: self)
                 }
-               
+                
+                
             }
         }
         catch let parsingError {
@@ -1313,6 +1322,40 @@ extension BottomSheetVC:OnTimeSelectDelegate{
             print("Error", parsingError)
             
         }
+        
+//        do{
+//            let data = try JSONEncoder().encode(parkingModel1)
+////            Helper().showSpinner(view: self.view)
+//            let request = APIRouter.updateParking( id: parkingModel1.privateParkingId!, data)
+//
+//            var dict : Dictionary = park_model.dictionary ?? [:]
+//
+//
+//            APIClient.serverRequest(url: request, path: request.getPath(),body: dict, dec: PostResponseData.self) { (response, error) in
+////                Helper().hideSpinner(view: self.view)
+//                if(response != nil){
+//                    if (response?.success) != nil {
+//
+//                    }
+//                    else{
+//                        Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+//                    }
+//                }
+//
+//                else if(error != nil){
+//                    Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+//                }
+//                else{
+//                    Helper().showToast(message: "Nor Response and Error!!", controller: self)
+//                }
+//
+//            }
+//        }
+//        catch let parsingError {
+//
+//            print("Error", parsingError)
+//
+//        }
 //           getBaseWebServices(true).postAPIAnyObject(WebServiceConstants.UPDATE_PARKING + tempParkingId, park_model.toString(), new WebServices.IRequestWebResponseAnyObjectCallBack() {
 //               @Override
 //               public void requestDataResponse(WebResponse<Object> webResponse) {
