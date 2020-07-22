@@ -13,6 +13,7 @@ struct UpdateTempParkingSendingModel: Codable {
     let endAt: String?
     let initialPrice:Double?
     let finalPrice:Double?
+    
 
     enum CodingKeys: String, CodingKey {
         case startAt = "start_at"
