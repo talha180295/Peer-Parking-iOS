@@ -13,7 +13,7 @@ import Alamofire
 import HelperClassPod
 
 class FeedbackVC: UIViewController {
-
+    
     @IBOutlet weak var emoji: UIImageView!
     @IBOutlet weak var rating_bar: CosmosView!
     @IBOutlet weak var label: UILabel!
@@ -23,7 +23,7 @@ class FeedbackVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         
         // Called when user finishes changing the rating by lifting the finger from the view.
@@ -45,9 +45,9 @@ class FeedbackVC: UIViewController {
     @IBAction func share_btn(_ sender: UIButton) {
         
         
-//        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC")
-//
-//        self.show(vc, sender: sender)
+        //        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC")
+        //
+        //        self.show(vc, sender: sender)
         
         if let id = p_id {
             
@@ -58,94 +58,103 @@ class FeedbackVC: UIViewController {
                     Helper().presentOnMainScreens(controller: self, index: 0)
                     return;
                 }
-                self.wantToSellParking()
+                self.parkingExist { (pakingAvailable) in
+                    switch pakingAvailable {
+                    case true:
+                        return
+                    case false:
+                       self.wantToSellParking()
+                    }
+                }
+                
             }
             
         }
-       
+        
         
         
     }
     
     public func postFeedback()
     {
-//        ReviewSendingModel reviewSendingModel = new ReviewSendingModel();
-//        reviewSendingModel.setParking_id(parkingModel1.getId());
-//        reviewSendingModel.setRating(ratingBar.getRating());
-//
+        //        ReviewSendingModel reviewSendingModel = new ReviewSendingModel();
+        //        reviewSendingModel.setParking_id(parkingModel1.getId());
+        //        reviewSendingModel.setRating(ratingBar.getRating());
+        //
         //        Toast.makeText(getContext(),String.valueOf(ratingBar.getRating()),Toast.LENGTH_LONG).show();
         
-//        getBaseWebServices(true).postMultipartAPI(WebServiceConstants. REVIEW, null, reviewSendingModel.toString(), new WebServices.IRequestWebResponseAnyObjectCallBack() {
-//            @Override
-//            public void requestDataResponse(WebResponse<Object> webResponse) {
-//                checkAlreadySold();
-//
-//            }
-//
-//            @Override
-//            public void onError(Object object) {
-//                UIHelper.showToast(getContext(), "There was an error sending feedback");
-//                checkAlreadySold();
-//            }
-//        });
+        //        getBaseWebServices(true).postMultipartAPI(WebServiceConstants. REVIEW, null, reviewSendingModel.toString(), new WebServices.IRequestWebResponseAnyObjectCallBack() {
+        //            @Override
+        //            public void requestDataResponse(WebResponse<Object> webResponse) {
+        //                checkAlreadySold();
+        //
+        //            }
+        //
+        //            @Override
+        //            public void onError(Object object) {
+        //                UIHelper.showToast(getContext(), "There was an error sending feedback");
+        //                checkAlreadySold();
+        //            }
+        //        });
         
     }
     
     func wantToSellParking(){
         
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Sell_parking_popup") as! Sell_parking_popup
+        //        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Sell_parking_popup") as! Sell_parking_popup
+        let vc = ResellParkingPopUp.instantiate(fromPeerParkingStoryboard: .SellParking)
         vc.parking_details = self.parking_details
-        Helper().popUp(controller: vc, view_controller: self)
+        Helper().popUp(controller: vc, view_controller: self, popupHeight: 400)
     }
     
-   
+    
     private func checkAlreadySold() {
-//        if(parkingModel1.getParkingType()== ParkingType.PARKING_TYPE_PRIVATE){
-//            getBaseActivity().popStackTill(1);
-//            return;
-//        }
-//        Map<String, Object> queryMap = new HashMap<>();
-//        queryMap.put("my_public_spots",1);
-//        getBaseWebServices(true).getAPIAnyObject(WebServiceConstants.PATH_PARKING, queryMap, new WebServices.IRequestWebResponseAnyObjectCallBack() {
-//            @Override
-//            public void requestDataResponse(WebResponse<Object> webResponse) {
-//
-//                if(webResponse.isSuccess())
-//                {
-//                    Type type = new TypeToken<ArrayList<ParkingModel1>>() {
-//                    }.getType();
-//                    ArrayList<ParkingModel1>  arrayList = GsonFactory.getSimpleGson()
-//                            .fromJson(GsonFactory.getSimpleGson().toJson(webResponse.result)
-//                                    , type);
-//                    boolean isPublicParkingSold=false;
-//                    if(arrayList.size() > 0)
-//                    {
-//                        for (ParkingModel1 model :arrayList) {
-//                            if(model.getParkingType()== ParkingType.PARKING_TYPE_PUBLIC && (model.getStatus()== AppConstants.STATUS_PARKING_AVAILABLE || model.getStatus()==AppConstants.STATUS_PARKING_UNAVAILABLE)){
-//                                isPublicParkingSold=true;
-//                                break;
-//                            }
-//                        }
-//                    }
-//                    if(!isPublicParkingSold){
-//                        showOptionToResaleParking();
-//                    }else{
-//                        getBaseActivity().popStackTill(1);
-//                    }
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onError(Object object) {
-//
-//            }
-//        });
+        //        if(parkingModel1.getParkingType()== ParkingType.PARKING_TYPE_PRIVATE){
+        //            getBaseActivity().popStackTill(1);
+        //            return;
+        //        }
+        //        Map<String, Object> queryMap = new HashMap<>();
+        //        queryMap.put("my_public_spots",1);
+        //        getBaseWebServices(true).getAPIAnyObject(WebServiceConstants.PATH_PARKING, queryMap, new WebServices.IRequestWebResponseAnyObjectCallBack() {
+        //            @Override
+        //            public void requestDataResponse(WebResponse<Object> webResponse) {
+        //
+        //                if(webResponse.isSuccess())
+        //                {
+        //                    Type type = new TypeToken<ArrayList<ParkingModel1>>() {
+        //                    }.getType();
+        //                    ArrayList<ParkingModel1>  arrayList = GsonFactory.getSimpleGson()
+        //                            .fromJson(GsonFactory.getSimpleGson().toJson(webResponse.result)
+        //                                    , type);
+        //                    boolean isPublicParkingSold=false;
+        //                    if(arrayList.size() > 0)
+        //                    {
+        //                        for (ParkingModel1 model :arrayList) {
+        //                            if(model.getParkingType()== ParkingType.PARKING_TYPE_PUBLIC && (model.getStatus()== AppConstants.STATUS_PARKING_AVAILABLE || model.getStatus()==AppConstants.STATUS_PARKING_UNAVAILABLE)){
+        //                                isPublicParkingSold=true;
+        //                                break;
+        //                            }
+        //                        }
+        //                    }
+        //                    if(!isPublicParkingSold){
+        //                        showOptionToResaleParking();
+        //                    }else{
+        //                        getBaseActivity().popStackTill(1);
+        //                    }
+        //
+        //                }
+        //            }
+        //
+        //            @Override
+        //            public void onError(Object object) {
+        //
+        //            }
+        //        });
     }
     
     func post_rating(p_id:Int,rating:Double,completion: @escaping () -> Void){
         
-       
+        
         
         let params:[String:Any] = [
             
@@ -207,5 +216,46 @@ class FeedbackVC: UIViewController {
             }
         }
     }
-
+    
+    func parkingExist(completion:@escaping (Bool)->Void){
+        
+        //        let params = [
+        //            "is_schedule" : 1,
+        //            "mood" : 10
+        //        ]
+        //
+        let params =  ["my_public_spots":1]
+        
+        print("param123=\(params)")
+        
+        
+        let url_r = APIRouter.getParkings(params)
+        let decoder = ResponseData<[Parking]>.self
+        Helper().showSpinner(view: self.view)
+        APIClient.serverRequest(url: url_r, path: url_r.getPath(), dec: decoder) { (response, error) in
+            Helper().hideSpinner(view: self.view)
+            if(response != nil){
+                if let _ = response?.success {
+                    if let val = response?.data {
+                        
+                        if(val.count>0){
+                            completion(true)
+                        }
+                        else{
+                            completion(false)
+                        }
+                    }
+                }
+                else{
+                    
+                }
+            }
+            else if(error != nil){
+            }
+            else{
+                
+            }
+        }
+    }
+    
 }

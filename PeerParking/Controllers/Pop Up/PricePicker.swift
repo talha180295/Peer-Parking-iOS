@@ -34,6 +34,13 @@ class PricePicker: UIViewController, UIPickerViewDataSource, UIPickerViewDelegat
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func cancel_btn(_ sender: UIButton) {
+       
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
  
     func returnFirstValue(sender: UIButton) {
         guard let cb = completionBlock else {return}

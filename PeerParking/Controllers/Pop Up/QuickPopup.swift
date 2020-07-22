@@ -55,12 +55,26 @@ class QuickPopup: UIViewController {
         
         self.price.text =  "$ \(price)"
         
-        if(type == 10){
-            self.parkingType.text =  "Garage"
+        
+        if(self.isPrivate){
+           if(type == 10){
+               self.parkingType.text =  "Garage"
+           }
+           else if(type == 20){
+               self.parkingType.text =  "Driveway"
+           }
         }
-        else if(type == 20){
-            self.parkingType.text =  "Driveway"
+        else{
+           if(type == 10){
+               self.parkingType.text =  "Parking Lot"
+           }
+           else if(type == 20){
+               self.parkingType.text =  "Street Parking"
+           }
         }
+        
+        
+        
         
         
         if(size == 10){

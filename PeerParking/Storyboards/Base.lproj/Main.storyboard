@@ -2430,14 +2430,14 @@
                                 <rect key="frame" x="0.0" y="806" width="414" height="46"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htS-Tu-ti9">
-                                        <rect key="frame" x="243.33333333333337" y="0.0" width="149.66666666666663" height="46"/>
+                                        <rect key="frame" x="243" y="0.0" width="150" height="46"/>
                                         <state key="normal" image="next_btn"/>
                                         <connections>
                                             <action selector="for_btn:" destination="bxe-9D-0f5" eventType="touchUpInside" id="tdx-eb-xWR"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vNR-FK-0Ph">
-                                        <rect key="frame" x="21" y="0.0" width="149.66666666666666" height="46"/>
+                                        <rect key="frame" x="21" y="0.0" width="150" height="46"/>
                                         <state key="normal" image="pre_btn"/>
                                         <connections>
                                             <action selector="pre_btn:" destination="bxe-9D-0f5" eventType="touchUpInside" id="MJk-FA-VdG"/>
@@ -5171,7 +5171,7 @@
         <!--Transaction View Controller-->
         <scene sceneID="Hwj-Zt-pO4">
             <objects>
-                <viewController storyboardIdentifier="transactionVC" id="sVL-Qh-MNv" customClass="TransactionViewController" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TransactionViewController" id="sVL-Qh-MNv" customClass="TransactionViewController" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="num-Cs-FlQ"/>
                         <viewControllerLayoutGuide type="bottom" id="le0-dW-inn"/>
@@ -5181,28 +5181,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaT-km-3IX">
-                                <rect key="frame" x="-1" y="-1" width="414" height="90"/>
+                                <rect key="frame" x="-1" y="44" width="414" height="70"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dC8-Yd-e0N">
-                                        <rect key="frame" x="126.66666666666669" y="49.666666666666664" width="161" height="20.333333333333336"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tf-Pj-x3f">
-                                        <rect key="frame" x="8" y="38" width="51" height="40"/>
+                                        <rect key="frame" x="8" y="18" width="51" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Q08-oN-r9m"/>
                                             <constraint firstAttribute="width" constant="51" id="f82-2c-kbH"/>
                                         </constraints>
-                                        <state key="normal" image="icon_up"/>
+                                        <state key="normal" image="icon_down"/>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dC8-Yd-e0N">
+                                        <rect key="frame" x="126.66666666666669" y="25" width="161" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97636479139328003" green="0.97653168439865112" blue="0.97635418176651001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="0tf-Pj-x3f" firstAttribute="leading" secondItem="RaT-km-3IX" secondAttribute="leading" constant="8" id="ACo-jd-6R7"/>
-                                    <constraint firstAttribute="bottom" secondItem="dC8-Yd-e0N" secondAttribute="bottom" constant="20" id="Lhg-lR-R1E"/>
+                                    <constraint firstAttribute="bottom" secondItem="dC8-Yd-e0N" secondAttribute="bottom" constant="24.666666666666671" id="Lhg-lR-R1E"/>
                                     <constraint firstItem="dC8-Yd-e0N" firstAttribute="centerX" secondItem="RaT-km-3IX" secondAttribute="centerX" id="MD8-Ep-5z9"/>
-                                    <constraint firstAttribute="height" constant="90" id="TgQ-nD-Uaw"/>
+                                    <constraint firstAttribute="height" constant="70" id="TgQ-nD-Uaw"/>
                                     <constraint firstAttribute="bottom" secondItem="0tf-Pj-x3f" secondAttribute="bottom" constant="12" id="UFb-fi-k1G"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -5218,16 +5218,16 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vDy-oX-Ai6">
-                                <rect key="frame" x="20" y="109" width="374" height="753"/>
+                                <rect key="frame" x="20" y="124" width="374" height="738"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="vDy-oX-Ai6" firstAttribute="leading" secondItem="5RM-re-Ex4" secondAttribute="leading" constant="20" id="1CZ-mw-5H8"/>
-                            <constraint firstItem="vDy-oX-Ai6" firstAttribute="top" secondItem="RaT-km-3IX" secondAttribute="bottom" constant="20" id="1zZ-9U-rbn"/>
+                            <constraint firstItem="vDy-oX-Ai6" firstAttribute="top" secondItem="RaT-km-3IX" secondAttribute="bottom" constant="10" id="1zZ-9U-rbn"/>
                             <constraint firstItem="le0-dW-inn" firstAttribute="top" secondItem="vDy-oX-Ai6" secondAttribute="bottom" id="31w-7n-8EI"/>
-                            <constraint firstItem="RaT-km-3IX" firstAttribute="top" secondItem="LeB-52-MJK" secondAttribute="top" constant="-1" id="6Hw-IV-3CW"/>
+                            <constraint firstItem="RaT-km-3IX" firstAttribute="top" secondItem="5RM-re-Ex4" secondAttribute="top" id="6Hw-IV-3CW"/>
                             <constraint firstItem="RaT-km-3IX" firstAttribute="trailing" secondItem="5RM-re-Ex4" secondAttribute="trailing" constant="-1" id="ARP-h8-gtG"/>
                             <constraint firstItem="RaT-km-3IX" firstAttribute="leading" secondItem="5RM-re-Ex4" secondAttribute="leading" constant="-1" id="I44-Y5-WWv"/>
                             <constraint firstItem="5RM-re-Ex4" firstAttribute="trailing" secondItem="vDy-oX-Ai6" secondAttribute="trailing" constant="20" id="i5D-it-esg"/>
@@ -6650,7 +6650,7 @@ MN 55425, USA.</string>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stars" translatesAutoresizingMaskIntoConstraints="NO" id="g1q-Mm-bSn">
-                                                                        <rect key="frame" x="25.999999999999996" y="3" width="59.666666666666657" height="14"/>
+                                                                        <rect key="frame" x="26" y="3" width="60" height="14"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="14" id="oKA-1O-6An"/>
                                                                         </constraints>
@@ -11036,14 +11036,14 @@ Click Finish to publish your offer</string>
                                 <rect key="frame" x="0.0" y="806" width="414" height="46"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hm0-Bu-TiI">
-                                        <rect key="frame" x="243.33333333333337" y="0.0" width="149.66666666666663" height="46"/>
+                                        <rect key="frame" x="243" y="0.0" width="150" height="46"/>
                                         <state key="normal" image="next_btn"/>
                                         <connections>
                                             <action selector="for_btn:" destination="ogy-Me-kLQ" eventType="touchUpInside" id="VVI-as-J8L"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaR-Ps-wFE">
-                                        <rect key="frame" x="21" y="0.0" width="149.66666666666666" height="46"/>
+                                        <rect key="frame" x="21" y="0.0" width="150" height="46"/>
                                         <state key="normal" image="pre_btn"/>
                                         <connections>
                                             <action selector="pre_btn:" destination="ogy-Me-kLQ" eventType="touchUpInside" id="kzj-qm-mWr"/>
@@ -12856,6 +12856,7 @@ Click Finish to publish your offer</string>
         <image name="icon_backArrow" width="12" height="20.666666030883789"/>
         <image name="icon_camera" width="28.333333969116211" height="28.333333969116211"/>
         <image name="icon_close" width="27" height="27"/>
+        <image name="icon_down" width="20.666666030883789" height="12"/>
         <image name="icon_loaction" width="15.666666984558105" height="15.666666984558105"/>
         <image name="icon_location_black" width="15.666666984558105" height="15.666666984558105"/>
         <image name="icon_menu" width="18" height="15"/>
@@ -12863,7 +12864,6 @@ Click Finish to publish your offer</string>
         <image name="icon_route" width="19.666666030883789" height="14.333333015441895"/>
         <image name="icon_schedule" width="22" height="22"/>
         <image name="icon_search" width="20" height="20"/>
-        <image name="icon_up" width="20.666666030883789" height="12"/>
         <image name="icon_user" width="66" height="66"/>
         <image name="img_rate" width="288.66665649414062" height="83"/>
         <image name="info1" width="64" height="64"/>
