@@ -69,7 +69,7 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
             
             //post: user_card
             
-            let params = ["stripeToken" : token.tokenId]
+            let params = ["stripeToken" : token.tokenId, "currency" : "usd"]
             
             switch self.paymentType{
             case .Topup:
