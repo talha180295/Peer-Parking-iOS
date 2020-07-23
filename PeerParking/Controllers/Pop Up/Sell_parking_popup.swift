@@ -223,7 +223,8 @@ class Sell_parking_popup: UIViewController {
     
     func resell_parking(completion: @escaping () -> Void){
         
-        
+        //modelParam
+        self.params = self.parking_details.dictionary ?? [:]
         
         
         //params.updateValue("hello", forKey: "new_val")
@@ -279,4 +280,12 @@ class Sell_parking_popup: UIViewController {
             }
         }
     }
+}
+
+
+extension Encodable {
+  var dictionary: [String: Any]? {
+    guard let data = try? JSONEncoder().encode(self) else { return nil }
+    return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any] }
+  }
 }

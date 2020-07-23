@@ -21,6 +21,7 @@ class ResellParkingPopUp: UIViewController {
     @IBOutlet weak var time_tf: UITextField!
     @IBOutlet weak var date_tf: UITextField!
     @IBOutlet weak var submit_btn: UIButton!
+    @IBOutlet weak var nego_switch: UISwitch!
     
     var parking_details:Parking!
     
@@ -44,6 +45,7 @@ class ResellParkingPopUp: UIViewController {
         
         self.price = self.parking_details.finalPrice ?? 0.0
         
+        self.nego_switch.isOn = self.parking_details.isNegotiable ?? false
         
         self.setupView()
         print("abcdparkings=\(self.parking_details)")
@@ -109,6 +111,8 @@ class ResellParkingPopUp: UIViewController {
             }
             //GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "parking_extra_fee")
             self.params.updateValue(Double(dataReturned)!, forKey: "initial_price")
+            
+            self.parking_details.initialPrice = Double(dataReturned)!
         }
         let popupVC = PopupViewController(contentController: vc, popupWidth: 300, popupHeight: 300)
         popupVC.canTapOutsideToDismiss = true
@@ -137,6 +141,7 @@ class ResellParkingPopUp: UIViewController {
         sender.resignFirstResponder()
         datePickerTapped(sender:sender)
     }
+
     
     @IBAction func submit_btn(_ sender: UIButton) {
         
@@ -145,6 +150,10 @@ class ResellParkingPopUp: UIViewController {
         let dateTime = "\(sendingDate) \(sendingTime)"
         
         self.params.updateValue(dateTime, forKey: "start_at")
+        self.parking_details.startAt = dateTime
+        
+        self.parking_details.isNegotiable = self.nego_switch.isOn
+
         //                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(sender.text!, forKey: "parking_allowed_until")
         //        var params:[String:Any] = [
         //            "vehicle_type": vehicle_type,     C
@@ -283,7 +292,7 @@ class ResellParkingPopUp: UIViewController {
     func resell_parking(completion: @escaping () -> Void){
         
         
-        
+        self.params = self.parking_details.dictionary ?? [:]
         
         //params.updateValue("hello", forKey: "new_val")
         let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!)"
@@ -296,46 +305,81 @@ class ResellParkingPopUp: UIViewController {
         //        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
         //        self.present(vc, animated: true, completion: nil)
         
-        
-        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.POST_PARKING
-        
-        print("url--\(url)")
-        
-        
-        Helper().Request_Api(url: url, methodType: .post, parameters: params, isHeaderIncluded: true, headers: headers){ response in
-            
-            print("response>>>\(response)")
-            
-            if response.result.value == nil {
-                print("No response")
+        do{
+            let data = try JSONEncoder().encode(self.parking_details)
+            Helper().showSpinner(view: self.view)
+            let request = APIRouter.postPublicParking(data)
+            APIClient.serverRequest(url: request, path: request.getPath(),body: self.parking_details.dictionary ?? [:], dec: PostResponseData.self) { (response, error) in
+                Helper().hideSpinner(view: self.view)
+                if(response != nil){
+                    if (response?.success) != nil {
+                        Helper().showToast(message: response?.message ?? "-", controller: self)
+                        
+                        
+                    }
+                    else{
+                        Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                    }
+                }
+                else if(error != nil){
+                    Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+                }
+                else{
+                    Helper().showToast(message: "Nor Response and Error!!", controller: self)
+                }
                 
-                SharedHelper().showToast(message: "Internal Server Error", controller: self)
-                return
-            }
-            else {
-                let responseData = response.result.value as! NSDictionary
-                let status = responseData["success"] as! Bool
-                if(status)
-                {
-                    let message = responseData["message"] as! String
-                    //let uData = responseData["data"] as! NSDictionary
-                    //let userData = uData["user"] as! NSDictionary
-                    //self.saveData(userData: userData)
-                    //                    SharedHelper().hideSpinner(view: self.view)
-                    //                     UserDefaults.standard.set("yes", forKey: "login")
-                    //                    UserDefaults.standard.synchronize()
-                    SharedHelper().showToast(message: message, controller: self)
-                    
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     completion()
-                    //self.after_signin()
                 }
-                else
-                {
-                    let message = responseData["message"] as! String
-                    SharedHelper().showToast(message: message, controller: self)
-                    //   SharedHelper().hideSpinner(view: self.view)
-                }
+                                
             }
         }
+        catch let parsingError {
+            
+            print("Error", parsingError)
+            
+        }
+        
+        
+//        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.POST_PARKING
+//
+//        print("url--\(url)")
+//
+//
+//        Helper().Request_Api(url: url, methodType: .post, parameters: params, isHeaderIncluded: true, headers: headers){ response in
+//
+//            print("response>>>\(response)")
+//
+//            if response.result.value == nil {
+//                print("No response")
+//
+//                SharedHelper().showToast(message: "Internal Server Error", controller: self)
+//                return
+//            }
+//            else {
+//                let responseData = response.result.value as! NSDictionary
+//                let status = responseData["success"] as! Bool
+//                if(status)
+//                {
+//                    let message = responseData["message"] as! String
+//                    //let uData = responseData["data"] as! NSDictionary
+//                    //let userData = uData["user"] as! NSDictionary
+//                    //self.saveData(userData: userData)
+//                    //                    SharedHelper().hideSpinner(view: self.view)
+//                    //                     UserDefaults.standard.set("yes", forKey: "login")
+//                    //                    UserDefaults.standard.synchronize()
+//                    SharedHelper().showToast(message: message, controller: self)
+//
+//                    completion()
+//                    //self.after_signin()
+//                }
+//                else
+//                {
+//                    let message = responseData["message"] as! String
+//                    SharedHelper().showToast(message: message, controller: self)
+//                    //   SharedHelper().hideSpinner(view: self.view)
+//                }
+//            }
+//        }
     }
 }
