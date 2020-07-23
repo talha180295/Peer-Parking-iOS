@@ -108,7 +108,7 @@ class TopupVC: UIViewController,IndicatorInfoProvider {
     //    }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Topup")
+        return IndicatorInfo(title: "TOPUP")
 //        return IndicatorInfo(title: "Topup", accessibilityLabel: "Topup", image: UIImage(named: "historyUn"), highlightedImage: UIImage(named: "history"), userInfo: nil)
     }
     

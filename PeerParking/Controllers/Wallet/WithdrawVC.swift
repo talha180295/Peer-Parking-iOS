@@ -96,7 +96,7 @@ class WithdrawVC: UIViewController,IndicatorInfoProvider {
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         
-        return IndicatorInfo(title: "Withdraw")
+        return IndicatorInfo(title: "WITHDRAW")
         //        return IndicatorInfo(title: "Withdraw", accessibilityLabel: "Withdraw", image: UIImage(named: "historyUn"), highlightedImage: UIImage(named: "history"), userInfo: nil)
     }
     
