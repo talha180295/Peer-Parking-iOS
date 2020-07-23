@@ -9,6 +9,11 @@
 import UIKit
 import XLPagerTabStrip
 
+
+protocol TopupVCDelegate {
+    func reloadBlance()
+}
+
 class WalletContentVC:  ButtonBarPagerTabStripViewController{
     
     
@@ -30,6 +35,7 @@ class WalletContentVC:  ButtonBarPagerTabStripViewController{
         super.viewDidLoad()
         
         child_2.delegate = self
+        child_1.delegate = self
         
     }
     

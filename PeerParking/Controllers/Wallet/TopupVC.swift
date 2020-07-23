@@ -10,15 +10,14 @@ import UIKit
 import XLPagerTabStrip
 import EzPopup
 
-protocol TopupVCDelegate {
-    func reloadBlance()
-}
+
 class TopupVC: UIViewController,IndicatorInfoProvider {
     
     @IBOutlet weak var topUpCardNumber: UILabel!
     
     var hasCard = false
     var delegate:TopupVCDelegate!
+    var me : Me!
     
     
     override func viewDidLoad() {
@@ -52,7 +51,7 @@ class TopupVC: UIViewController,IndicatorInfoProvider {
                     if let val = response?.data {
                         
                         
-                        
+                        self.me = val
                         let cards:[Card] = val.card ?? [Card]()
                         for card in cards {
                             
@@ -122,6 +121,7 @@ class TopupVC: UIViewController,IndicatorInfoProvider {
         let vc = AmountPopUp.instantiate(fromPeerParkingStoryboard: .Wallet)
         vc.type = .Topup
         vc.delgate = self
+        vc.me = me
         Helper().popUp(controller: vc, view_controller: self, popupWidth: 300, popupHeight: 300,cornerRadius:5.0)
     }
     
@@ -131,6 +131,8 @@ class TopupVC: UIViewController,IndicatorInfoProvider {
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PaymentView")
         self.navigationController?.pushViewController(vc, animated: true)
+        
+        
     }
     
 }

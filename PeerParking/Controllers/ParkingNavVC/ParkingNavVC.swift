@@ -83,13 +83,12 @@ class ParkingNavVC: UIViewController{
             
             self.parking_title.text = self.parkingModel.address ?? "-"
             self.setLiveLocationReceivingService(parkingId: parkingModel.id ?? -1)
-           
+            
         }
         else{
             locationUpdates()
         }
         
-
         // Do any additional setup after loading the view.
     }
     
@@ -188,8 +187,8 @@ class ParkingNavVC: UIViewController{
                 
                
                 self.getPolylineRoute(from: sourcePosition, to: endPosition)
-                Helper().map_marker(lat: self.c_lat, longg: self.c_longg, map_view: self.map, title: "This is you")
-                Helper().map_marker(lat: self.p_lat, longg: self.p_longg, map_view: self.map, title: "This is parking")
+                Helper().map_marker(lat: self.c_lat, longg: self.c_longg, map_view: self.map, title: APP_CONSTANT.THIS_IS_ME)
+                Helper().map_marker(lat: self.p_lat, longg: self.p_longg, map_view: self.map, title: APP_CONSTANT.THIS_IS_YOUR_DESTINATION)
                        
             }
         }
@@ -283,9 +282,9 @@ class ParkingNavVC: UIViewController{
 
         print("origin2=\(origin)")
         print("destination=\(destination)")
-        Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map, title: "This is you")
+        Helper().map_marker(lat: c_lat, longg: c_longg, map_view: self.map, title: APP_CONSTANT.THIS_IS_ME)
 
-        Helper().map_marker(lat: d_lat, longg: d_longg, map_view: self.map, title: "This is parking")
+        Helper().map_marker(lat: d_lat, longg: d_longg, map_view: self.map, title: APP_CONSTANT.THIS_IS_YOUR_DESTINATION)
 
         if let alTRoures = self.alternateRoutes,(self.alternateRoutes.count>0)
         {
@@ -479,9 +478,9 @@ class ParkingNavVC: UIViewController{
         
         print("origin2=\(origin)")
         print("destination=\(destination)")
-        Helper().map_marker(lat: s_lat, longg: s_longg, map_view: self.map, title: "This is you")
+        Helper().map_marker(lat: s_lat, longg: s_longg, map_view: self.map, title: APP_CONSTANT.THIS_IS_ME)
         
-        Helper().map_marker(lat: d_lat, longg: d_longg, map_view: self.map, title: "This is parking")
+        Helper().map_marker(lat: d_lat, longg: d_longg, map_view: self.map, title: APP_CONSTANT.THIS_IS_YOUR_DESTINATION)
         
         if let userInfo = notification.userInfo as NSDictionary? {
             if let dict = userInfo["dict"] as? Route{
@@ -786,8 +785,8 @@ extension ParkingNavVC:LiveLocationReceivingServiceDeleegate{
         }
         
         
-        Helper().map_marker(lat: sourcePosition.latitude , longg: sourcePosition.longitude, map_view: self.map, title: "This is Buyer",image: "carMarker")
-        Helper().map_marker(lat: Double(parkingModel.latitude ?? "0.0")!, longg: Double(parkingModel.longitude ?? "0.0")!, map_view: self.map, title: "This is parking")
+        Helper().map_marker(lat: sourcePosition.latitude , longg: sourcePosition.longitude, map_view: self.map, title: APP_CONSTANT.THIS_IS_BUYER,image: "carMarker")
+        Helper().map_marker(lat: Double(parkingModel.latitude ?? "0.0")!, longg: Double(parkingModel.longitude ?? "0.0")!, map_view: self.map, title: APP_CONSTANT.THIS_IS_PARKING_SPOT)
     }
     
     

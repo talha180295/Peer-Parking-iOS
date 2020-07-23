@@ -15,11 +15,13 @@ class WithdrawVC: UIViewController,IndicatorInfoProvider {
     
     @IBOutlet weak var withdrawCardNumber: UILabel!
     var hasCard = false
+    var me : Me!
     
     var delegate:TopupVCDelegate!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getCardDetails()
+    
         // Do any additional setup after loading the view.
     }
     
@@ -48,14 +50,17 @@ class WithdrawVC: UIViewController,IndicatorInfoProvider {
                     if let val = response?.data {
                         
                         
-                        
+                        self.me = val
                         let cards:[Card] = val.card ?? [Card]()
                         for card in cards {
                             
                             switch card.type {
                                 
                             case CardType.WITHDRAW_CARD:
-                                if let cardNo = val.card?.first?.lastFour {
+                                
+                                
+
+                                if let cardNo = card.lastFour {
                                     self.withdrawCardNumber.text = "**** **** **** \(cardNo)"
                                     self.hasCard = true
                                     //                                    cardBrnd.setText(card.getBrand());
@@ -107,6 +112,7 @@ class WithdrawVC: UIViewController,IndicatorInfoProvider {
         let vc = AmountPopUp.instantiate(fromPeerParkingStoryboard: .Wallet)
         vc.type = .Withdraw
         vc.delgate = self
+        vc.me = me
         Helper().popUp(controller: vc, view_controller: self, popupWidth: 300, popupHeight: 300)
     }
     

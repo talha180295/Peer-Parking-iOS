@@ -79,6 +79,7 @@ struct APP_CONSTANT {
         static let ME = "me"
         static let UPDATE = "profile"
         static let ChargeCard = "charge-card"
+        static let Withdraw = "withdraw"
         
         
         
@@ -137,6 +138,11 @@ struct APP_CONSTANT {
     public static let  STATUS_ACCEPTED = 10;
     public static let STATUS_PARKING_TEMP  =  70;
     public static let STATUS_PRIVATE_PARKING_CANCEL  =  30;
+    public static let THIS_IS_ME = "This is me"
+    public static let THIS_IS_YOUR_DESTINATION = "This is your destination"
+    public static let THIS_IS_PARKING_SPOT = "This is parking spot"
+    public static let THIS_IS_BUYER = "This is Buyer"
+    
     
     
     public static let ONE_MINUTE_NOTIFICATION_FOR_PARKING = "ONE_MINUTE_NOTIFICATION_FOR_PARKING_";

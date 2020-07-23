@@ -650,8 +650,8 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
         slider.valueLabels[1].textColor = UIColor(white: 1, alpha: 0.0)
         slider.valueLabels[0].backgroundColor = UIColor(white: 1, alpha: 0.0)
         slider.valueLabels[1].backgroundColor = UIColor(white: 1, alpha: 0.0)
-        slider.thumbViews[0].isHidden = true
-        slider.thumbViews[1].isHidden = true
+        slider.thumbViews[0].isHidden = false
+        slider.thumbViews[1].isHidden = false
         slider.value[0] = 0.0
         slider.value[1] = 0.0
         

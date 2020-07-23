@@ -19,11 +19,24 @@ class AmountPopUp: UIViewController {
     @IBOutlet weak var amountTF:UITextField!
     
     var delgate:AmountPopUpDelegate!
+    var me : Me!
+    
     
     var type:AmountPopUpType!
     override func viewDidLoad() {
         super.viewDidLoad()
         amountTF.keyboardType = .decimalPad
+        
+        if(type == AmountPopUpType.Withdraw){
+           self.heading.text = "Withdraw"
+             self.descp.text = "Your account balance is $\(me.details?.wallet ?? 0.0) \n Your given price should be less than or equals to your current amount"
+//
+        }
+        else
+        {
+           self.heading.text = "Top Up"
+             self.descp.text = "Your account balance is $\(me.details?.wallet ?? 0.0)"
+        }
         
     }
     
@@ -33,8 +46,11 @@ class AmountPopUp: UIViewController {
         if validate(){
             switch type {
             case .Withdraw:
+                self.heading.text = "Withdraw"
+                 topUp(params: ["amount": Double(amountTF.text!) ?? 0.0],isWithdraw: true)
                 break
             case .Topup:
+                self.heading.text = "Top Up"
                 topUp(params: ["amount": Double(amountTF.text!) ?? 0.0])
             default:
                 break
@@ -50,10 +66,10 @@ class AmountPopUp: UIViewController {
         return false
     }
     
-    func topUp(params:[String:Any]){
+    func topUp(params:[String:Any], isWithdraw : Bool = false){
         
         Helper().showSpinner(view: self.view)
-        let request = APIRouter.chargeCard(params)
+        let request = isWithdraw ?  APIRouter.withdraw(params): APIRouter.chargeCard(params)
         APIClient.serverRequest(url: request, path: request.getPath(),body: params, dec: PostResponseData.self) { (response, error) in
             
             Helper().hideSpinner(view: self.view)

@@ -34,7 +34,7 @@ class PrivateWhenStepVC: UIViewController {
     
     //    var daysModel = [Day]()
     
-    let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sarurday", "Sunday"]
+    let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     
 //    var day = ["day" : "", "start_at" : "", "end_at" : ""]
 

@@ -74,6 +74,9 @@ class TransactionViewController: UIViewController , UITableViewDelegate, UITable
         return self.transactions.count
     }
     
+    @IBAction func btnBackAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     //        return 70.0
