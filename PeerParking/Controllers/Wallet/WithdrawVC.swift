@@ -20,7 +20,9 @@ class WithdrawVC: UIViewController,IndicatorInfoProvider {
     var delegate:TopupVCDelegate!
     override func viewDidLoad() {
         super.viewDidLoad()
-        getCardDetails()
+        getCardDetails(){
+            
+        }
     
         // Do any additional setup after loading the view.
     }
@@ -29,10 +31,12 @@ class WithdrawVC: UIViewController,IndicatorInfoProvider {
         
         //        NotificationCenter.default.addObserver(self, selector: #selector(self.getCard(notification:)), name: NSNotification.Name(rawValue: "topUpCard"), object: nil)
         
-        getCardDetails()
+        getCardDetails(){
+            
+        }
     }
     
-    func getCardDetails(){
+    func getCardDetails(completion: @escaping () -> ()){
         
         Helper().showSpinner(view: self.view)
         
@@ -74,6 +78,7 @@ class WithdrawVC: UIViewController,IndicatorInfoProvider {
                             }
                             
                         }
+                        completion()
                         
                         
                     }
@@ -105,15 +110,21 @@ class WithdrawVC: UIViewController,IndicatorInfoProvider {
         
         
         if !self.hasCard{
-            Helper().showToast(message: "Add Card Firt!", controller: self)
+            Helper().showToast(message: "Add Card First!", controller: self)
             return
         }
         
-        let vc = AmountPopUp.instantiate(fromPeerParkingStoryboard: .Wallet)
-        vc.type = .Withdraw
-        vc.delgate = self
-        vc.me = me
-        Helper().popUp(controller: vc, view_controller: self, popupWidth: 300, popupHeight: 300)
+       
+        self.getCardDetails(){
+            
+            let vc = AmountPopUp.instantiate(fromPeerParkingStoryboard: .Wallet)
+                   vc.type = .Withdraw
+                   vc.delgate = self
+            
+            vc.me = self.me
+            Helper().popUp(controller: vc, view_controller: self, popupWidth: 300, popupHeight: 300)
+        }
+        
     }
     
     @IBAction func addCardBtn(_ sender: UIButton) {

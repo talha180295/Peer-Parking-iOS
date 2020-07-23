@@ -47,7 +47,26 @@ class AmountPopUp: UIViewController {
             switch type {
             case .Withdraw:
                 self.heading.text = "Withdraw"
-                 topUp(params: ["amount": Double(amountTF.text!) ?? 0.0],isWithdraw: true)
+                
+                if let amount = self.me.details?.wallet {
+                    
+                    
+                    
+                    
+                    
+                   if( Double(amountTF.text!) ?? 0.0 > amount )
+                   {
+                    Helper().showToast(message: "Your given price should be less than or equals to your current amount", controller: self)
+                    }
+                    else
+                   {
+                    topUp(params: ["amount": Double(amountTF.text!) ?? 0.0],isWithdraw: true)
+                    }
+                    
+                }
+                
+                 
+                
                 break
             case .Topup:
                 self.heading.text = "Top Up"

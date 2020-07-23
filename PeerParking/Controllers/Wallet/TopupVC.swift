@@ -30,10 +30,10 @@ class TopupVC: UIViewController,IndicatorInfoProvider {
         
         //        NotificationCenter.default.addObserver(self, selector: #selector(self.getCard(notification:)), name: NSNotification.Name(rawValue: "topUpCard"), object: nil)
         
-        getCardDetails()
+        getCardDetails(){}
     }
     
-    func getCardDetails(){
+    func getCardDetails(completion: @escaping () -> ()){
         
         Helper().showSpinner(view: self.view)
         
@@ -72,12 +72,14 @@ class TopupVC: UIViewController,IndicatorInfoProvider {
                             }
                             
                         }
+                        completion()
                         
                         
                     }
                 }
                 else{
                     Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                
                 }
             }
             else if(error != nil){
@@ -115,14 +117,20 @@ class TopupVC: UIViewController,IndicatorInfoProvider {
     @IBAction func topupBtnClick(_ sender:UIButton){
         
         if !self.hasCard{
-            Helper().showToast(message: "Add Card Firt!", controller: self)
+            Helper().showToast(message: "Add Card First!", controller: self)
             return
         }
-        let vc = AmountPopUp.instantiate(fromPeerParkingStoryboard: .Wallet)
-        vc.type = .Topup
-        vc.delgate = self
-        vc.me = me
-        Helper().popUp(controller: vc, view_controller: self, popupWidth: 300, popupHeight: 300,cornerRadius:5.0)
+        
+        self.getCardDetails(){
+            
+            let vc = AmountPopUp.instantiate(fromPeerParkingStoryboard: .Wallet)
+            vc.type = .Topup
+            vc.delgate = self
+            vc.me = self.me
+            Helper().popUp(controller: vc, view_controller: self, popupWidth: 300, popupHeight: 300,cornerRadius:5.0)
+            
+        }
+        
     }
     
     @IBAction func addCardBtn(_ sender: UIButton) {
