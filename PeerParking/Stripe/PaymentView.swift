@@ -55,6 +55,7 @@ class PaymentView: UIViewController,STPPaymentCardTextFieldDelegate {
         cardParams.expYear = (cardTextField.expirationYear)
         cardParams.cvc = cardTextField.cvc
         cardParams.currency = "usd"
+        
         STPAPIClient.shared().createToken(withCard: cardParams) { (token: STPToken?, error: Error?) in
             guard let token = token, error == nil else {
                 // Present error to user...

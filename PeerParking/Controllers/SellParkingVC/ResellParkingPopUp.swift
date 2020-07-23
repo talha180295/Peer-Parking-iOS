@@ -1,10 +1,11 @@
 //
-//  Sell_parking_popup.swift
+//  ResellParkingPopUp.swift
 //  PeerParking
 //
-//  Created by Apple on 12/11/2019.
-//  Copyright © 2019 Munzareen Atique. All rights reserved.
+//  Created by talha on 23/07/2020.
+//  Copyright © 2020 Munzareen Atique. All rights reserved.
 //
+
 
 import UIKit
 import EzPopup
@@ -12,18 +13,24 @@ import DatePickerDialog
 import Alamofire
 import HelperClassPod
 
-class Sell_parking_popup: UIViewController {
+class ResellParkingPopUp: UIViewController {
 
     
     @IBOutlet weak var priceView: UIView!
     @IBOutlet weak var price_tf: UITextField!
     @IBOutlet weak var time_tf: UITextField!
-    
+    @IBOutlet weak var date_tf: UITextField!
     @IBOutlet weak var submit_btn: UIButton!
+    @IBOutlet weak var nego_switch: UISwitch!
+    
     var parking_details:Parking!
     
     var params:[String:Any] = [:]
     
+    var date = ""
+    var time = ""
+//    var dateAndTime = ""
+    var price = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +39,35 @@ class Sell_parking_popup: UIViewController {
         
         priceView.isHidden = true
         
+        self.date = DateHelper.getFormatedDate(dateStr: self.parking_details.startAt ?? "", outFormat: dateFormat.MMddyyy.rawValue)
+        
+        self.time = DateHelper.getFormatedDate(dateStr: self.parking_details.startAt ?? "", outFormat: dateFormat.hmma.rawValue)
+        
+        self.price = self.parking_details.finalPrice ?? 0.0
+        
+        self.nego_switch.isOn = self.parking_details.isNegotiable ?? false
+        
+        self.setupView()
         print("abcdparkings=\(self.parking_details)")
         // Do any additional setup after loading the view.
     }
     
+    func setupView(){
+        
+        self.time_tf.text = self.time
+        self.date_tf.text = self.date
+        self.price_tf.text = String(self.price)
+        
+        if(self.price_tf.hasText)&&(self.time_tf.hasText)&&(self.date_tf.hasText){
+            
+            self.submit_btn.isHidden = false
+        }
+        else{
+            
+            self.submit_btn.isHidden = true
+        }
+        
+    }
 
     @IBAction func want_to_sell(_ sender: UIButton) {
        
@@ -69,7 +101,7 @@ class Sell_parking_popup: UIViewController {
             sender.text = "$\(dataReturned)"
             
             
-            if(self.price_tf.hasText)&&(self.time_tf.hasText){
+            if(self.price_tf.hasText)&&(self.time_tf.hasText)&&(self.date_tf.hasText){
                 
                 self.submit_btn.isHidden = false
             }
@@ -79,6 +111,8 @@ class Sell_parking_popup: UIViewController {
             }
             //GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(Double(dataReturned)!, forKey: "parking_extra_fee")
             self.params.updateValue(Double(dataReturned)!, forKey: "initial_price")
+            
+            self.parking_details.initialPrice = Double(dataReturned)!
         }
         let popupVC = PopupViewController(contentController: vc, popupWidth: 300, popupHeight: 300)
         popupVC.canTapOutsideToDismiss = true
@@ -99,13 +133,28 @@ class Sell_parking_popup: UIViewController {
     @IBAction func time_change(_ sender: UITextField) {
         
         sender.resignFirstResponder()
+        timePickerTapped(sender:sender)
+    }
+    
+    @IBAction func date_change(_ sender: UITextField) {
+        
+        sender.resignFirstResponder()
         datePickerTapped(sender:sender)
     }
+
     
     @IBAction func submit_btn(_ sender: UIButton) {
         
+        let sendingTime = DateHelper.getFormatedDate(dateStr: self.time, inFormat: dateFormat.hmma.rawValue, outFormat: dateFormat.HHmmss.rawValue)
+        let sendingDate = DateHelper.getFormatedDate(dateStr: self.date, inFormat: dateFormat.MMddyyy.rawValue, outFormat: dateFormat.yyyyMMdd.rawValue)
+        let dateTime = "\(sendingDate) \(sendingTime)"
         
+        self.params.updateValue(dateTime, forKey: "start_at")
+        self.parking_details.startAt = dateTime
         
+        self.parking_details.isNegotiable = self.nego_switch.isOn
+
+        //                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(sender.text!, forKey: "parking_allowed_until")
         //        var params:[String:Any] = [
         //            "vehicle_type": vehicle_type,     C
         //            "parking_type": parking_type,     C
@@ -182,8 +231,9 @@ class Sell_parking_popup: UIViewController {
         print("params---=\(params)")
         
         resell_parking(){
+            Helper().presentOnMainScreens(controller: self, index: 0)
             //tab_index = 0
-            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+//            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
             //        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "parkedVC")
             //
             //        self.present(vc, animated: true, completion: nil)
@@ -196,36 +246,53 @@ class Sell_parking_popup: UIViewController {
 //        self.present(vc, animated: true, completion: nil)
     }
     
-    func datePickerTapped(sender:UITextField) {
-        DatePickerDialog(buttonColor:#colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)).show("Select Time", doneButtonTitle: "DONE", cancelButtonTitle: "CANCEL", datePickerMode: .dateAndTime) {
+    func timePickerTapped(sender:UITextField) {
+        DatePickerDialog(buttonColor:#colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)).show("Select Time", doneButtonTitle: "DONE", cancelButtonTitle: "CANCEL", datePickerMode: .time) {
             (date) -> Void in
+            
             if let time = date {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-                //self.datePickerTapped2(sender: sender,from: formatter.string(from: time))
-                sender.text = formatter.string(from: time)
                 
-                if(self.price_tf.hasText)&&(self.time_tf.hasText){
-                    
-                    self.submit_btn.isHidden = false
-                }
-                else{
-                    
-                    self.submit_btn.isHidden = true
-                }
-                self.params.updateValue(sender.text!, forKey: "start_at")
-                //GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(sender.text!, forKey: "parking_allowed_until")
+                let timeStr = DateHelper.getDateString(date: time)
+                
+//                let timetoDisplay = DateHelper.getFormatedDate(dateStr: timeStr, outFormat: dateFormat.hmma.rawValue)
+//                let timeForSend = DateHelper.getFormatedDate(dateStr: timeStr, outFormat: dateFormat.hmma.rawValue)
+                
+                self.time = DateHelper.getFormatedDate(dateStr: timeStr, outFormat: dateFormat.hmma.rawValue)
+
+                self.setupView()
+                
+//                self.params.updateValue(self.time, forKey: "start_at")
+//                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(sender.text!, forKey: "parking_allowed_until")
             }
         }
     }
     
-    
+    func datePickerTapped(sender:UITextField) {
+        DatePickerDialog(buttonColor:#colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)).show("Select Time", doneButtonTitle: "DONE", cancelButtonTitle: "CANCEL", datePickerMode: .date) {
+            (date) -> Void in
+            
+            if let date = date {
+                
+                let dateStr = DateHelper.getDateString(date: date)
+                
+//                let timetoDisplay = DateHelper.getFormatedDate(dateStr: timeStr, outFormat: dateFormat.hmma.rawValue)
+//                let timeForSend = DateHelper.getFormatedDate(dateStr: timeStr, outFormat: dateFormat.hmma.rawValue)
+                
+                self.date = DateHelper.getFormatedDate(dateStr: dateStr, outFormat: dateFormat.MMddyyy.rawValue)
+
+                self.setupView()
+                
+//                self.params.updateValue(self.time, forKey: "start_at")
+//                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(sender.text!, forKey: "parking_allowed_until")
+            }
+        }
+    }
+
     
     func resell_parking(completion: @escaping () -> Void){
         
-        //modelParam
-        self.params = self.parking_details.dictionary ?? [:]
         
+        self.params = self.parking_details.dictionary ?? [:]
         
         //params.updateValue("hello", forKey: "new_val")
         let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!)"
@@ -238,54 +305,81 @@ class Sell_parking_popup: UIViewController {
         //        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "customVC")
         //        self.present(vc, animated: true, completion: nil)
         
-        
-        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.POST_PARKING
-        
-        print("url--\(url)")
-        
-        
-        Helper().Request_Api(url: url, methodType: .post, parameters: params, isHeaderIncluded: true, headers: headers){ response in
-            
-            print("response>>>\(response)")
-            
-            if response.result.value == nil {
-                print("No response")
+        do{
+            let data = try JSONEncoder().encode(self.parking_details)
+            Helper().showSpinner(view: self.view)
+            let request = APIRouter.postPublicParking(data)
+            APIClient.serverRequest(url: request, path: request.getPath(),body: self.parking_details.dictionary ?? [:], dec: PostResponseData.self) { (response, error) in
+                Helper().hideSpinner(view: self.view)
+                if(response != nil){
+                    if (response?.success) != nil {
+                        Helper().showToast(message: response?.message ?? "-", controller: self)
+                        
+                        
+                    }
+                    else{
+                        Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
+                    }
+                }
+                else if(error != nil){
+                    Helper().showToast(message: "Error=\(error?.localizedDescription ?? "" )", controller: self)
+                }
+                else{
+                    Helper().showToast(message: "Nor Response and Error!!", controller: self)
+                }
                 
-                SharedHelper().showToast(message: "Internal Server Error", controller: self)
-                return
-            }
-            else {
-                let responseData = response.result.value as! NSDictionary
-                let status = responseData["success"] as! Bool
-                if(status)
-                {
-                    let message = responseData["message"] as! String
-                    //let uData = responseData["data"] as! NSDictionary
-                    //let userData = uData["user"] as! NSDictionary
-                    //self.saveData(userData: userData)
-                    //                    SharedHelper().hideSpinner(view: self.view)
-                    //                     UserDefaults.standard.set("yes", forKey: "login")
-                    //                    UserDefaults.standard.synchronize()
-                    SharedHelper().showToast(message: message, controller: self)
-                    
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     completion()
-                    //self.after_signin()
                 }
-                else
-                {
-                    let message = responseData["message"] as! String
-                    SharedHelper().showToast(message: message, controller: self)
-                    //   SharedHelper().hideSpinner(view: self.view)
-                }
+                                
             }
         }
+        catch let parsingError {
+            
+            print("Error", parsingError)
+            
+        }
+        
+        
+//        let url = APP_CONSTANT.API.BASE_URL + APP_CONSTANT.API.POST_PARKING
+//
+//        print("url--\(url)")
+//
+//
+//        Helper().Request_Api(url: url, methodType: .post, parameters: params, isHeaderIncluded: true, headers: headers){ response in
+//
+//            print("response>>>\(response)")
+//
+//            if response.result.value == nil {
+//                print("No response")
+//
+//                SharedHelper().showToast(message: "Internal Server Error", controller: self)
+//                return
+//            }
+//            else {
+//                let responseData = response.result.value as! NSDictionary
+//                let status = responseData["success"] as! Bool
+//                if(status)
+//                {
+//                    let message = responseData["message"] as! String
+//                    //let uData = responseData["data"] as! NSDictionary
+//                    //let userData = uData["user"] as! NSDictionary
+//                    //self.saveData(userData: userData)
+//                    //                    SharedHelper().hideSpinner(view: self.view)
+//                    //                     UserDefaults.standard.set("yes", forKey: "login")
+//                    //                    UserDefaults.standard.synchronize()
+//                    SharedHelper().showToast(message: message, controller: self)
+//
+//                    completion()
+//                    //self.after_signin()
+//                }
+//                else
+//                {
+//                    let message = responseData["message"] as! String
+//                    SharedHelper().showToast(message: message, controller: self)
+//                    //   SharedHelper().hideSpinner(view: self.view)
+//                }
+//            }
+//        }
     }
-}
-
-
-extension Encodable {
-  var dictionary: [String: Any]? {
-    guard let data = try? JSONEncoder().encode(self) else { return nil }
-    return (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)).flatMap { $0 as? [String: Any] }
-  }
 }

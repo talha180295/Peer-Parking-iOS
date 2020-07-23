@@ -52,9 +52,11 @@ class AmountPopUp: UIViewController {
     
     func topUp(params:[String:Any]){
         
+        Helper().showSpinner(view: self.view)
         let request = APIRouter.chargeCard(params)
         APIClient.serverRequest(url: request, path: request.getPath(),body: params, dec: PostResponseData.self) { (response, error) in
             
+            Helper().hideSpinner(view: self.view)
             if(response != nil){
                 if (response?.success) != nil {
                     

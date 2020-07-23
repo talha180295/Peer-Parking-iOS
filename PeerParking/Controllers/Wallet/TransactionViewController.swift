@@ -98,39 +98,42 @@ class TransactionViewController: UIViewController , UITableViewDelegate, UITable
         cell.parkingPrice.text = "$ \(ammount)"
         
         
-        cell.date.text = Helper().getFormatedDate(dateStr: date)
+        cell.date.text = DateHelper.getFormatedDate(dateStr: date, outFormat: dateFormat.MMddyyy.rawValue)//Helper().getFormatedDate(dateStr: date)
+        cell.transactionFeeLabel.isHidden = true
+        cell.tranFee.isHidden = true
         
         if(self.transactions[indexPath.row].type == 10){
-            cell.transactionFeeLabel.isHidden = false
-            cell.tranFee.isHidden = false
             
+            cell.tranFee.text = String(self.transactions[indexPath.row].appMargin ?? 0.0)
             if(self.transactions[indexPath.row].transactionType == 10){
+                cell.transactionFeeLabel.isHidden = false
+                cell.tranFee.isHidden = false
                 cell.parkingSoldOrBought.text = "Parking Sold"
                 let bal = preAmmount + ammount
                 cell.balance.text = "$ \(bal)"
             }
-            else if(self.transactions[indexPath.row].transactionType == 10){
+            else if(self.transactions[indexPath.row].transactionType == 20){
                 cell.parkingSoldOrBought.text = "Parking Bought"
+                cell.tranFee.isHidden = true
                 let bal = preAmmount - ammount
                 cell.balance.text = "$ \(bal)"
             }
             //             cell.tranFee.text
         }
         else if(self.transactions[indexPath.row].type == 20){
-            cell.transactionFeeLabel.isHidden = true
-            cell.tranFee.isHidden = true
             if(self.transactions[indexPath.row].transactionType == 10){
                 cell.parkingSoldOrBought.text = "Top Up"
                 
                 let bal = preAmmount + ammount
                 cell.balance.text = "$ \(bal)"
             }
-            else if(self.transactions[indexPath.row].transactionType == 10){
+            else if(self.transactions[indexPath.row].transactionType == 20){
                 cell.parkingSoldOrBought.text = "Withdrawl"
                 let bal = preAmmount - ammount
                 cell.balance.text = "$ \(bal)"
             }
         }
+        
         
         
         return  cell;
@@ -242,13 +245,15 @@ class TransactionViewController: UIViewController , UITableViewDelegate, UITable
         
         let params:[String:Any] = ["is_mine" : 1]
         
+        Helper().showSpinner(view: self.view)
         APIClient.serverRequest(url: APIRouter.getTransactions(params), path: APIRouter.getTransactions(params).getPath(), dec: ResponseData<[TransactionModel]>.self) { (response, error) in
             
+            Helper().hideSpinner(view: self.view)
             if(response != nil){
                 
                 if (response?.success) != nil {
                     
-                    Helper().showToast(message: response?.message ?? "No Response", controller: self)
+//                    Helper().showToast(message: response?.message ?? "No Response", controller: self)
                     if let val = response?.data {
                         
                         self.transactions = val

@@ -122,7 +122,7 @@ class TopupVC: UIViewController,IndicatorInfoProvider {
         let vc = AmountPopUp.instantiate(fromPeerParkingStoryboard: .Wallet)
         vc.type = .Topup
         vc.delgate = self
-        Helper().popUp(controller: vc, view_controller: self, popupWidth: 300, popupHeight: 300)
+        Helper().popUp(controller: vc, view_controller: self, popupWidth: 300, popupHeight: 300,cornerRadius:5.0)
     }
     
     @IBAction func addCardBtn(_ sender: UIButton) {

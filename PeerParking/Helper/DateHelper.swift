@@ -9,8 +9,11 @@ import UIKit
 
 enum dateFormat:String{
     
+//    case serverFormat = "yyyy-MM-dd HH:mm:ss"
     case yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss"
+    case yyyyMMdd = "yyyy-MM-dd"
     case ddMMyyy = "dd/MM/yyyy"
+    case MMddyyy = "MM/dd/yyyy"
     case hmma = "h:mm a"
     case HHmmss = "HH:mm:ss"
 }
@@ -20,7 +23,7 @@ class DateHelper {
     //    static let yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss"
     //    static let ddMMyyy = "dd/MM/yyyy"
     
-    static func getFormatedDate(dateStr:String, inFormat:String, outFormat:String) -> String{
+    static func getFormatedDate(dateStr:String, inFormat:String = "yyyy-MM-dd HH:mm:ss", outFormat:String) -> String{
         
         if(dateStr == ""){
             
@@ -45,6 +48,16 @@ class DateHelper {
                 return  dateStr
             }
         }
+    }
+    
+    static func getDateString(date:Date , inFormat:String = "yyyy-MM-dd HH:mm:ss") -> String{
+        
+        let formatter = DateFormatter()
+//        formatter1.dateStyle = .short
+        formatter.dateFormat =  inFormat
+        let dateStr = formatter.string(from: date)
+        
+        return dateStr
     }
     
 }

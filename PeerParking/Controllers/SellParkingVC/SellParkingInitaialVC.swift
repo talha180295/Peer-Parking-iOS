@@ -20,9 +20,8 @@ class SellParkingInitaialVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        // Do any additional setup after loading the view.
+            
+        tab_index = 2
     }
     override func viewWillDisappear(_ animated: Bool) {
         Helper().hideSpinner(view: self.view)
@@ -47,6 +46,7 @@ class SellParkingInitaialVC: UIViewController {
             
             let popupVC = PopupViewController(contentController: vc, popupWidth: 320, popupHeight: 365)
             popupVC.canTapOutsideToDismiss = true
+            
             
             //properties
             //            popupVC.backgroundAlpha = 1

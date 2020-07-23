@@ -327,7 +327,7 @@ class LoginViewController: UIViewController {
         
         UserDefaults.standard.synchronize()
       
-        Helper().presentOnMainScreens(controller: self, index: 1)
+        Helper().presentOnMainScreens(controller: self, index: tab_index)
         
         //        let fname :String = UserDefaults.standard.string(forKey: "name")!
         //        let UID :String = UserDefaults.standard.string(forKey: "id")!
@@ -342,7 +342,7 @@ class LoginViewController: UIViewController {
     }
     @IBAction func btnBack(_ sender: Any) {
 //        self.dismiss(animated: true, completion: nil)
-        Helper().presentOnMainScreens(controller: self, index: 1)
+        Helper().presentOnMainScreens(controller: self, index: tab_index)
     }
     @IBAction func btnForget(_ sender: Any) {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "forgetVC") as! ForgetPassViewController

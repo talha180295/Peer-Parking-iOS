@@ -21,7 +21,7 @@ class WalletViewController: UIViewController {
     var animator: UIViewPropertyAnimator?
     
     func createBottomView() {
-        guard let sub = storyboard!.instantiateViewController(withIdentifier: "transactionVC") as? TransactionViewController else { return }
+        guard let sub = storyboard!.instantiateViewController(withIdentifier: "TransactionViewController") as? TransactionViewController else { return }
         self.addChild(sub)
         self.view.addSubview(sub.view)
         sub.didMove(toParent: self)

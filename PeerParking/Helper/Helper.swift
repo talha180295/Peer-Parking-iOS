@@ -656,7 +656,7 @@ class Helper{
         return emailPredicate.evaluate(with: enteredEmail)
         
     }
-    func popUp(controller : UIViewController,view_controller:UIViewController , popupWidth: CGFloat = 320, popupHeight : CGFloat = 365){
+    func popUp(controller : UIViewController,view_controller:UIViewController , popupWidth: CGFloat = 320, popupHeight : CGFloat = 365, cornerRadius:CGFloat = 0.0){
         
         
         
@@ -667,7 +667,7 @@ class Helper{
         //            popupVC.backgroundAlpha = 1
         //            popupVC.backgroundColor = .black
         //            popupVC.canTapOutsideToDismiss = true
-        //            popupVC.cornerRadius = 10
+                    popupVC.cornerRadius = cornerRadius
         //            popupVC.shadowEnabled = true
         
         // show it by call present(_ , animated:) method from a current UIViewController
