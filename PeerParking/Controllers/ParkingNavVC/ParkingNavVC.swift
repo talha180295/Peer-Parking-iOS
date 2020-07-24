@@ -621,10 +621,14 @@ class ParkingNavVC: UIViewController{
 //                                Helper().hideSpinner(view: self.view)
                         //                                self.activityIndicator.stopAnimating()
 
+                                
+                            if !self.navigationStart{
                                 let target = CLLocationCoordinate2D(latitude: source.latitude, longitude: source.longitude)
                                 self.bearing = self.calculateBearer()
                                 let camera = GMSCameraPosition.camera(withTarget: target, zoom: 18, bearing: self.bearing, viewingAngle: 180)
-//                                self.map.animate(to: camera)
+                                self.map.animate(to: camera)
+                                self.navigationStart = true
+                            }
 
                                 print("bearing=\(self.bearing)")
                         //                                let bounds = GMSCoordinateBounds(coordinate: source, coordinate: destination)
@@ -864,13 +868,7 @@ extension ParkingNavVC{
                 let clat =  Double(round(10000000*(location.coordinate.latitude))/10000000)
                 let cLong = Double(round(10000000*(location.coordinate.longitude))/10000000)
                 
-                if !self.navigationStart{
-                    let target = CLLocationCoordinate2D(latitude: clat, longitude: cLong)
-                    
-                    let camera = GMSCameraPosition.camera(withTarget: target, zoom: 18, bearing: self.bearing, viewingAngle: 180)
-                    self.map.animate(to: camera)
-                    self.navigationStart = true
-                }
+   
                 self.sendingService.setBuyerCurrentLocation(lat: clat, long: cLong){_ in }
                     
 //                self.setLiveLocationSendingService(parkingId: self.parkingModel.id!, lat: clat, longg: cLong)
@@ -903,6 +901,9 @@ extension ParkingNavVC{
                 let sourcePosition =  CLLocationCoordinate2D(latitude: clat, longitude: cLong)
                 let endPosition = CLLocationCoordinate2D(latitude: Double(self.parkingModel.latitude ?? "0.0")!, longitude: Double(self.parkingModel.longitude ?? "0.0")!)
                 
+                if !self.navigationStart{
+                    self.getPolylineRoute(from: sourcePosition , to: endPosition)
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
 //                    self.map.clear()
                     Helper().calculateTimeAndDistance(s_lat: sourcePosition.latitude, s_longg: sourcePosition.longitude, d_lat: Double(self.parkingModel.latitude ?? "0.0")!, d_longg: Double(self.parkingModel.longitude ?? "0.0")!) { (distance,duration) in
