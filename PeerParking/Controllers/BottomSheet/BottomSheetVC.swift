@@ -1262,6 +1262,8 @@ extension BottomSheetVC:OnTimeSelectDelegate{
                
                st_time.text = "From : \(startigTime)"
                end_time.text = "To : \(endingTime)"
+//        self.parking_details.finalPrice = finalPrice
+        
                
         self.parking_details.startAt = Helper().getFormatedServerDateTimeForDetail(dateStr: startigTime)
                self.parking_details.endAt = Helper().getFormatedServerDateTimeForDetail(dateStr: endingTime)

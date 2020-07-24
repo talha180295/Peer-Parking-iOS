@@ -382,9 +382,14 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
             
         }
         
-        if(parking_details.initialPrice != nil)
+        if(parking_details.finalPrice != nil)
         {
-            self.parkingTotalCostView.text = "$ \(String(self.parking_details.initialPrice ?? 0.0))"
+            self.parking_details.initialPrice = self.parking_details.finalPrice
+            self.parkingTotalCostView.text = "$ \(String(self.parking_details.finalPrice ?? 0.0))"
+        }
+        else
+        {
+          self.parkingTotalCostView.text = "$ \(String(self.parking_details.initialPrice ?? 0.0))"
         }
         
         if (parking_details.imageURL == nil)
