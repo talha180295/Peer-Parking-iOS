@@ -59,13 +59,14 @@ class ParkingBookingDetailsVC: UIViewController {
             if (parkingModel.status == APP_CONSTANT.STATUS_PARKING_BOOKED) {
                 Helper().showToast(message: "Buyer has not started navigation yet", controller: self)
             } else {
-                openMapScreen()
+                openMapScreen(isTracking: true)
             }
             
             
         } else {
 //            self.userType.text = "Seller Information"
 //             openMapScreen();
+            openMapScreen(isTracking: false)
            
         }
         
@@ -75,11 +76,11 @@ class ParkingBookingDetailsVC: UIViewController {
 //        self.parkingModel = parkingModel
 //    }
     
-    func openMapScreen(){
+    func openMapScreen(isTracking:Bool){
         let vc = ParkingNavVC.instantiate(fromPeerParkingStoryboard: .Main)
         
         vc.modalPresentationStyle = .fullScreen
-        vc.isTracking = true
+        vc.isTracking = isTracking
         vc.parkingModel = self.parkingModel
         vc.vcName = "track"
 //        vc.p_title = ""
