@@ -68,10 +68,16 @@ class ParkingNavVC: UIViewController{
     var trackingStart = false
     //For Buyer Tracking//
     
+    var curentMarker = GMSMarker()
+    var parkingMarker = GMSMarker()
+    var navigationStart = false
     
+    var sendingService : LiveLocationSendingService!
     override func viewDidLoad() {
         super.viewDidLoad()
          
+        
+        
         self.lblDistance.text = ""
         self.lblTime.text = ""
         
@@ -86,7 +92,9 @@ class ParkingNavVC: UIViewController{
             
         }
         else{
-            locationUpdates()
+            sendingService = LiveLocationSendingService(parkingId: String(self.parkingModel.id!))
+            sellerLocationUpdates()
+//            locationUpdates()
         }
         
         // Do any additional setup after loading the view.
@@ -275,7 +283,7 @@ class ParkingNavVC: UIViewController{
     
     func drawRouteOnly(){
 
-        map.clear()
+//        map.clear()
         let origin = "\(c_lat),\(c_longg)"
         let destination = "\(p_lat),\(p_longg)"
 
@@ -613,10 +621,14 @@ class ParkingNavVC: UIViewController{
 //                                Helper().hideSpinner(view: self.view)
                         //                                self.activityIndicator.stopAnimating()
 
+                                
+                            if !self.navigationStart{
                                 let target = CLLocationCoordinate2D(latitude: source.latitude, longitude: source.longitude)
                                 self.bearing = self.calculateBearer()
                                 let camera = GMSCameraPosition.camera(withTarget: target, zoom: 18, bearing: self.bearing, viewingAngle: 180)
                                 self.map.animate(to: camera)
+                                self.navigationStart = true
+                            }
 
                                 print("bearing=\(self.bearing)")
                         //                                let bounds = GMSCoordinateBounds(coordinate: source, coordinate: destination)
@@ -755,7 +767,7 @@ extension ParkingNavVC:LiveLocationReceivingServiceDeleegate{
     
     func trackBuyer(){
         
-        self.map.clear()
+//        self.map.clear()
         let sourcePosition =  buyerLocation ?? CLLocationCoordinate2D()
         let endPosition = CLLocationCoordinate2D(latitude: Double(parkingModel.latitude ?? "0.0")!, longitude: Double(parkingModel.longitude ?? "0.0")!)
         
@@ -790,21 +802,186 @@ extension ParkingNavVC:LiveLocationReceivingServiceDeleegate{
     }
     
     
-    func setLiveLocationSendingService(parkingId:Int){
-        
-        //        var sendingservice : LiveLocationSendingService =  LiveLocationSendingService(parkingId: String(612))
-        //
-        //        // replace lat long wit clllocation manager and pass current actual location
-        //
-        //        sendingservice.setBuyerCurrentLocation(lat: 24.9472804, long: 67.1057191) { parking  in
-        //
-        //            print("sending latititude \(parking.latitude)")
-        //            print("sending longitude \(parking.longitude)")
-        //
-        //        }
-    }
+
     
 }
 
+
+
+
+
+//Buyer Location Reciever
+extension ParkingNavVC{
+
+    
+    
+    
+    
+//    func navigateSeller(){
+//
+//
+//        let sourcePosition =  buyerLocation ?? CLLocationCoordinate2D()
+//        let endPosition = CLLocationCoordinate2D(latitude: Double(parkingModel.latitude ?? "0.0")!, longitude: Double(parkingModel.longitude ?? "0.0")!)
+//
+//        //            self.getPolylineRoute(from: sourcePosition, to: endPosition)
+//
+//        let target = sourcePosition
+//
+//        let camera = GMSCameraPosition.camera(withTarget: target, zoom: 18, bearing: self.bearing, viewingAngle: 180)
+//         self.map.animate(to: camera)
+//
+//        if !trackingStart{
+//            Helper().calculateTimeAndDistance(s_lat: sourcePosition.latitude, s_longg: sourcePosition.longitude, d_lat: Double(self.parkingModel.latitude ?? "0.0")!, d_longg: Double(self.parkingModel.longitude ?? "0.0")!) { (distance,duration) in
+//                self.lblDistance.text = distance
+//                self.lblTime.text = duration
+//                self.getPolylineRoute(from: sourcePosition , to: endPosition)
+//            }
+//        }
+//
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            Helper().calculateTimeAndDistance(s_lat: sourcePosition.latitude, s_longg: sourcePosition.longitude, d_lat: Double(self.parkingModel.latitude ?? "0.0")!, d_longg: Double(self.parkingModel.longitude ?? "0.0")!) { (distance,duration) in
+//                self.lblDistance.text = distance
+//                self.lblTime.text = duration
+//                self.getPolylineRoute(from: sourcePosition , to: endPosition)
+//            }
+//
+//        }
+//
+//
+//        Helper().map_marker(lat: sourcePosition.latitude , longg: sourcePosition.longitude, map_view: self.map, title: APP_CONSTANT.THIS_IS_BUYER,image: "carMarker")
+//        Helper().map_marker(lat: Double(parkingModel.latitude ?? "0.0")!, longg: Double(parkingModel.longitude ?? "0.0")!, map_view: self.map, title: APP_CONSTANT.THIS_IS_PARKING_SPOT)
+//    }
+    
+    
+    func sellerLocationUpdates(){
+        
+       
+        
+        let request = LocationManager.shared.locateFromGPS(.continous, accuracy: .city) { data in
+          switch data {
+            case .failure(let error):
+                print("Location error: \(error)")
+            case .success(let location):
+                
+                print("New Locationabc: \(location)")
+                let clat =  Double(round(10000000*(location.coordinate.latitude))/10000000)
+                let cLong = Double(round(10000000*(location.coordinate.longitude))/10000000)
+                
+   
+                self.sendingService.setBuyerCurrentLocation(lat: clat, long: cLong){_ in }
+                    
+//                self.setLiveLocationSendingService(parkingId: self.parkingModel.id!, lat: clat, longg: cLong)
+                
+                if let leg = self.legs{
+                    
+                  
+                    
+                    let endLat =  Double(round(10000*(leg[0].steps?[self.counter].endLocation?.lat ?? 0.0))/10000)
+                    let endLng =  Double(round(10000*(leg[0].steps?[self.counter].endLocation?.lng ?? 0.0))/10000)
+                    
+//                    print("\(endLat) == \(self.c_lat )  \(endLng)  == \(self.c_longg)")
+                    
+                    print("\(self.legs[0].steps?.count ?? 0) ===  \(self.counter)")
+                    if(endLat == clat )&&(endLng == cLong){
+                        
+                        self.counter += 1
+                        let target = CLLocationCoordinate2D(latitude: clat, longitude: cLong)
+                        if((self.legs[0].steps?.count ?? 0 > self.counter)){
+                            self.bearing = self.calculateBearer()
+                        }
+                        
+                        let camera = GMSCameraPosition.camera(withTarget: target, zoom: 18, bearing: self.bearing, viewingAngle: 180)
+                        self.map.animate(to: camera)
+//                        Helper().showToast(message: "step#\(self.counter) completed", controller: self)
+                       
+                    }
+                }
+                
+                let sourcePosition =  CLLocationCoordinate2D(latitude: clat, longitude: cLong)
+                let endPosition = CLLocationCoordinate2D(latitude: Double(self.parkingModel.latitude ?? "0.0")!, longitude: Double(self.parkingModel.longitude ?? "0.0")!)
+                
+                if !self.navigationStart{
+                    self.getPolylineRoute(from: sourcePosition , to: endPosition)
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//                    self.map.clear()
+                    Helper().calculateTimeAndDistance(s_lat: sourcePosition.latitude, s_longg: sourcePosition.longitude, d_lat: Double(self.parkingModel.latitude ?? "0.0")!, d_longg: Double(self.parkingModel.longitude ?? "0.0")!) { (distance,duration) in
+                        self.lblDistance.text = distance
+                        self.lblTime.text = duration
+                        self.getPolylineRoute(from: sourcePosition , to: endPosition)
+                    }
+                    
+                }
+                
+//                self.getPolylineRoute(from: sourcePosition, to: endPosition)
+               
+                self.setCurrentMaker(position: sourcePosition, title: APP_CONSTANT.THIS_IS_ME)
+                self.setParkingMaker(position: endPosition, title: APP_CONSTANT.THIS_IS_PARKING_SPOT)
+          
+          }
+        }
+        request.dataFrequency = .fixed(minInterval: 40, minDistance: 100)
+    }
+    
+    func setLiveLocationSendingService(parkingId:Int, lat:Double, longg:Double){
+        
+        let sendingservice : LiveLocationSendingService =  LiveLocationSendingService(parkingId: String(parkingId))
+        
+        // replace lat long wit clllocation manager and pass current actual location
+        
+        sendingservice.setBuyerCurrentLocation(lat: lat, long: longg) { parking  in
+            
+            //                    print("sending latititude \(parking.latitude)")
+            //                    print("sending longitude \(parking.longitude)")
+            //
+        }
+    }
+    
+    func setCurrentMaker(position:CLLocationCoordinate2D, title:String){
+        
+        
+        // I have taken a pin image which is a custom image
+        let markerImage = UIImage(named: "s_marker")!.withRenderingMode(.alwaysTemplate)
+        
+        //creating a marker view
+        let markerView = UIImageView(image: markerImage)
+        
+        //changing the tint color of the image
+        markerView.tintColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+        
+        curentMarker.position = position //CLLocationCoordinate2D(latitude: lat, longitude: longg)
+        
+        curentMarker.iconView = markerView
+        curentMarker.title = title
+        //marker.snippet = "price"
+        curentMarker.map = self.map
+    }
+    
+    func setParkingMaker(position:CLLocationCoordinate2D, title:String){
+        
+        
+        // I have taken a pin image which is a custom image
+        let markerImage = UIImage(named: "s_marker")!.withRenderingMode(.alwaysTemplate)
+        
+        //creating a marker view
+        let markerView = UIImageView(image: markerImage)
+        
+        //changing the tint color of the image
+        markerView.tintColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+        
+        parkingMarker.position = position //CLLocationCoordinate2D(latitude: lat, longitude: longg)
+        
+        parkingMarker.iconView = markerView
+        parkingMarker.title = title
+        //marker.snippet = "price"
+        parkingMarker.map = self.map
+    }
+    
+//    func changeCurrentMarkerPosition(position:CLLocationCoordinate2D){
+//        curentMarker.position = position
+//    }
+    
+}
 
 
