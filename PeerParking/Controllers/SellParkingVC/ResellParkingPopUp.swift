@@ -16,6 +16,7 @@ import HelperClassPod
 class ResellParkingPopUp: UIViewController {
 
     
+    @IBOutlet weak var yesbutton: UIButton!
     @IBOutlet weak var priceView: UIView!
     @IBOutlet weak var price_tf: UITextField!
     @IBOutlet weak var time_tf: UITextField!
@@ -74,7 +75,9 @@ class ResellParkingPopUp: UIViewController {
         if(sender.tag == 1){
             
             self.priceView.isHidden = false
+            self.yesbutton.setImage(UIImage(named: "btn_radioSelected"), for: .normal)
             
+
             
         }
         else if (sender.tag == 2){
