@@ -163,13 +163,14 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         }
     }
     
+    
     func saveData(userData : NSDictionary)  {
         
         
         
         
         print(userData)
-        
+      
         let detailUser = userData["details"] as! NSDictionary
         UserDefaults.standard.set(userData["id"], forKey: "id")
         
@@ -267,15 +268,21 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
             UserDefaults.standard.set("", forKey: "phone")
         }
         
+        
+        
         UserDefaults.standard.set(is_social_login, forKey: "is_social_login")
-        if(!image_url.isEmpty)
-        {
-            UserDefaults.standard.set(image_url, forKey: "image_url")
-        }
-        else
-        {
-            UserDefaults.standard.set("", forKey: "image_url")
-        }
+        
+        
+        
+        
+                if(!image_url.isEmpty)
+                {
+                    UserDefaults.standard.set(image_url, forKey: "image_url")
+                }
+                else
+                {
+                    UserDefaults.standard.set("", forKey: "image_url")
+                }
         if(!user_name.isEmpty)
         {
             UserDefaults.standard.set(user_name, forKey: "name")
@@ -347,14 +354,207 @@ class RegistrationViewController: UIViewController,UIImagePickerControllerDelega
         UserDefaults.standard.set("homeVC", forKey: "VC")
         
         UserDefaults.standard.synchronize()
-        
-        Helper().presentOnMainScreens(controller: self, index: 1)
+      
+        Helper().presentOnMainScreens(controller: self, index: tab_index)
         
         //        let fname :String = UserDefaults.standard.string(forKey: "name")!
         //        let UID :String = UserDefaults.standard.string(forKey: "id")!
         //        Analytics.logEvent("Sign Up Screen", parameters: ["user_id": UID, "user_name": fname])
         
     }
+    
+//    func saveData(userData : NSDictionary)  {
+//
+//
+//
+//
+//        print(userData)
+//
+//        let detailUser = userData["details"] as! NSDictionary
+//        UserDefaults.standard.set(userData["id"], forKey: "id")
+//
+//        let user_name = userData["name"] as! String
+//        let user_email = userData["email"] as! String
+//        let auth_token = userData[APP_CONSTANT.ACCESSTOKEN] as! String
+//        let token_type = userData["token_type"] as! String
+//        let expires_in = userData["expires_in"] as! Int
+//        let  image_url = detailUser["image_url"] as! String
+//
+//        let full_name : String!
+//        let phone : String!
+//        let address : String!
+//        let about:String!
+//        //  let null = NSNull()
+//
+//
+//
+//        if detailUser["full_name"] is NSNull {
+//            full_name = ""
+//        }
+//        else
+//        {
+//            full_name = detailUser["full_name"] as? String
+//        }
+//        if detailUser["about"] is NSNull {
+//            about = ""
+//        }
+//        else
+//        {
+//            about = detailUser["about"] as? String
+//        }
+//        if detailUser["phone"] is NSNull {
+//            phone = ""
+//        }
+//        else
+//        {
+//            phone = detailUser["phone"] as? String
+//        }
+//
+//        if detailUser["address"] is NSNull {
+//            address = ""
+//        }
+//        else
+//        {
+//            address = detailUser["address"] as? String
+//        }
+//        if(!image_url.isEmpty)
+//        {
+//            UserDefaults.standard.set(image_url, forKey: "image_url")
+//        }
+//        else
+//        {
+//            UserDefaults.standard.set("", forKey: "image_url")
+//        }
+//
+//
+//
+//        //        let about = detailUser["about"] as! String
+//        //        let address = detailUser["address"] as! String
+//        //        let full_name = detailUser["full_name"] as! String
+//        //        let phone = detailUser["phone"] as! String
+//        let is_social_login = detailUser["is_social_login"] as! Int
+//        // let tier = userData["tier"] as! Int
+//        //        let total_followers = userData["total_followers"] as! Int
+//        //        let total_points = userData["total_points"] as! Int
+//        //        let total_reviews = userData["total_reviews"] as! Int
+//        //        let total_swipe = userData["total_swipe"] as! Int
+//        //
+//
+//        if(!address.isEmpty)
+//        {
+//            UserDefaults.standard.set(address, forKey: "address")
+//        }
+//        else
+//        {
+//            UserDefaults.standard.set("", forKey: "address")
+//        }
+//
+//
+//        if(!full_name.isEmpty)
+//        {
+//            UserDefaults.standard.set(full_name, forKey: "full_name")
+//        }
+//        else
+//        {
+//            UserDefaults.standard.set("", forKey: "full_name")
+//        }
+//        if(!phone.isEmpty)
+//        {
+//            UserDefaults.standard.set(phone, forKey: "phone")
+//        }
+//        else
+//        {
+//            UserDefaults.standard.set("", forKey: "phone")
+//        }
+//
+//        UserDefaults.standard.set(is_social_login, forKey: "is_social_login")
+//        if(!image_url.isEmpty)
+//        {
+//            UserDefaults.standard.set(image_url, forKey: "image_url")
+//        }
+//        else
+//        {
+//            UserDefaults.standard.set("", forKey: "image_url")
+//        }
+//        if(!user_name.isEmpty)
+//        {
+//            UserDefaults.standard.set(user_name, forKey: "name")
+//        }
+//        else
+//        {
+//            UserDefaults.standard.set("", forKey: "name")
+//        }
+//        if(!user_email.isEmpty)
+//        {
+//            UserDefaults.standard.set(user_email, forKey: "email")
+//        }
+//        else
+//        {
+//            UserDefaults.standard.set("", forKey: "email")
+//        }
+//        if(!auth_token.isEmpty)
+//        {
+//            UserDefaults.standard.set(auth_token, forKey: APP_CONSTANT.ACCESSTOKEN)
+//        }
+//        else
+//        {
+//            UserDefaults.standard.set("", forKey: APP_CONSTANT.ACCESSTOKEN)
+//        }
+//        if(!token_type.isEmpty)
+//        {
+//            UserDefaults.standard.set(token_type, forKey: "token_type")
+//        }
+//        else
+//        {
+//            UserDefaults.standard.set("", forKey: "token_type")
+//        }
+//
+//
+//
+//        if(isSocial)
+//        {
+//            UserDefaults.standard.set("yes", forKey: "isSocial")
+//        }
+//        else
+//        {
+//            UserDefaults.standard.set("no", forKey: "isSocial")
+//        }
+//
+//        if(!token_type.isEmpty)
+//        {
+//            UserDefaults.standard.set(token_type, forKey: "wallet")
+//        }
+//        else
+//        {
+//            UserDefaults.standard.set("", forKey: "wallet")
+//        }
+//
+//        let key = "wallet"
+//        if detailUser[key] is NSNull {
+//
+//            UserDefaults.standard.set("", forKey: key)
+//        }
+//        else
+//        {
+//
+//            let val = detailUser[key] as? Double
+//            UserDefaults.standard.set(val, forKey: key)
+//        }
+//
+//
+//        UserDefaults.standard.set(expires_in, forKey: "expires_in")
+//        UserDefaults.standard.set("yes", forKey: "login")
+//        UserDefaults.standard.set("homeVC", forKey: "VC")
+//
+//        UserDefaults.standard.synchronize()
+//
+//        Helper().presentOnMainScreens(controller: self, index: 1)
+//
+//        //        let fname :String = UserDefaults.standard.string(forKey: "name")!
+//        //        let UID :String = UserDefaults.standard.string(forKey: "id")!
+//        //        Analytics.logEvent("Sign Up Screen", parameters: ["user_id": UID, "user_name": fname])
+//
+//    }
     
     /// @brief This function is use to  save the signup credentials
     //    func saveData(userData : NSDictionary)  {

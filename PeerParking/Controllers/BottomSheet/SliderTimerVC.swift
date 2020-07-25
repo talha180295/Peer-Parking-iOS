@@ -103,6 +103,7 @@ class SliderTimerVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
         setSlider()
 //        maxAmount()
         getBookedSlots()
+//        self.showAvailableTimeRange()
        
 // ,
     
@@ -288,6 +289,8 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
         formatter4.dateFormat = "yyyy-MM-dd"
         
         var currnetDate : String = formatter4.string(from: Date())
+        
+        
         let params:[String:Any] = ["private_parking_id" : self.parking_details.id ?? 0,
                                    "private_parking_date" : currnetDate
         ]
@@ -308,6 +311,7 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
                             response?.data?.forEach({ (parking) in
                                 
                                     
+                               
                                 self.addBookedSlotView(parking: parking)
                                 
                             })
@@ -332,6 +336,25 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
         
         
         
+        
+    }
+    
+    func showAvailableTimeRange(){
+        
+        
+        if(self.parking_details.slots?.count != 0){
+            
+            self.parking_details.slots?.forEach({ (slot) in
+                
+                self.startTime.append(self.convertStringToDate(dateStr1: slot.startAt!))
+                self.endTime.append(self.convertStringToDate(dateStr1: slot.endAt!))
+                
+            })
+            
+        }
+        
+        
+              
         
     }
     

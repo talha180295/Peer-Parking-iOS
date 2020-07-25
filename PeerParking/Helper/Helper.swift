@@ -1050,10 +1050,10 @@ class Helper{
                         if(routes.count != 0)
                         {
                             var val : Int;
-                            var val2 : Int
+                            var val2 : String
                             
                             val = routes[0].legs?[0].distance?.value ?? 0 // in meter
-                            val2 = routes[0].legs?[0].duration?.value ?? 0
+                            val2 = routes[0].legs?[0].duration?.text ?? ""
                             var valDouble = 0.0
                             
                             
@@ -1063,6 +1063,7 @@ class Helper{
 //                            distance = routes[0].legs?[0].distance?.text ?? ""
                             
                             duration = String(val2)
+                        
                         }
                         
                        

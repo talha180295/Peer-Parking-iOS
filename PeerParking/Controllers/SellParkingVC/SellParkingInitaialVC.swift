@@ -35,6 +35,14 @@ class SellParkingInitaialVC: UIViewController {
                 case true:
                     Helper().showToast(message: "Parking Already Exist!", controller: self)
                 case false:
+                    
+                    let date = Date()
+                           let formatter = DateFormatter()
+                           formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+                           let result = formatter.string(from: date)
+//                           self.time_field.text = result
+                           
+                           GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(result, forKey: "start_at")
                     self.setUpView(withIdentifier: "PublicParkingVC")
                 }
             }

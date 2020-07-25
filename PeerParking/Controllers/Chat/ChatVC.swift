@@ -14,6 +14,7 @@ import CodableFirebase
 import CircleProgressView
 import Cosmos
 import EzPopup
+import  IQKeyboardManagerSwift
 
 class ChatVC: UIViewController  , UITextFieldDelegate {
     
@@ -150,7 +151,38 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
         initial()
         
         
+      
+
+        
+        
+        
+        
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        IQKeyboardManager.shared.enable = false
+//
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: ChatVC.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: ChatVC.keyboardWillHideNotification, object: nil)
+//    }
+//
+//    @objc func keyboardWillShow(notification: NSNotification) {
+//
+//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+//                if self.view.frame.origin.y == 0{
+//                self.view.frame.origin.y -= keyboardSize.height
+//
+//                }
+//            }
+//        }
+//
+//    @objc func keyboardWillHide(notification: NSNotification) {
+//            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+//                if self.view.frame.origin.y != 0{
+//                self.view.frame.origin.y += keyboardSize.height
+//                }
+//            }
+//        }
     
     
     

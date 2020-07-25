@@ -153,6 +153,14 @@ class ResellParkingPopUp: UIViewController {
         self.parking_details.startAt = dateTime
         
         self.parking_details.isNegotiable = self.nego_switch.isOn
+        
+        
+        var seller : Seller = Seller(id: self.parking_details.buyer?.id, name: self.parking_details.buyer?.name, email: self.parking_details.buyer?.email, createdAt: self.parking_details.buyer?.createdAt, details: self.parking_details.buyer?.details)
+        
+        self.parking_details.seller = seller
+        self.parking_details.buyer = nil
+//        self.parking_details.seller = self.parking_details.buyer
+//        self.parking_details.buyer = Buyer()
 
         //                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(sender.text!, forKey: "parking_allowed_until")
         //        var params:[String:Any] = [
