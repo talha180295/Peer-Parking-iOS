@@ -103,6 +103,7 @@ class SliderTimerVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
         setSlider()
 //        maxAmount()
         getBookedSlots()
+        self.showAvailableTimeRange()
        
 // ,
     
@@ -177,7 +178,7 @@ class SliderTimerVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
             
             
             for i in 0..<self.startTimeInt.count{
-                if(indexPath.row >= startTimeInt[i] / 5  && indexPath.row < endTimeInt[i] / 5 )
+                if(indexPath.row > startTimeInt[i] / 5  && indexPath.row < endTimeInt[i] / 5 )
                            {
                                 cell.backgroundColor = UIColor.black
                            }
@@ -288,6 +289,8 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
         formatter4.dateFormat = "yyyy-MM-dd"
         
         var currnetDate : String = formatter4.string(from: Date())
+        
+        
         let params:[String:Any] = ["private_parking_id" : self.parking_details.id ?? 0,
                                    "private_parking_date" : currnetDate
         ]
@@ -308,6 +311,7 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
                             response?.data?.forEach({ (parking) in
                                 
                                     
+                               
                                 self.addBookedSlotView(parking: parking)
                                 
                             })
@@ -334,6 +338,37 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
         
         
     }
+    
+    func showAvailableTimeRange(){
+        
+        
+        if(self.parking_details.slots?.count != 0){
+            
+            self.parking_details.slots?.forEach({ (slot) in
+                
+               self.startTimeInt.append(0)
+                self.endTimeInt.append(self.convertServerDateToMinutes(date_string: slot.startAt!)-1)
+                
+               self.startTimeInt.append(self.convertServerDateToMinutes(date_string: slot.endAt!)+1)
+                self.endTimeInt.append(1430)
+                
+            })
+            
+        }
+        
+        
+              
+        
+    }
+    
+    
+//    func fillavailableSlots(){
+//
+//
+//
+//
+//    }
+    
     
     func addBookedSlotView(parking : Parking)
     {
@@ -735,7 +770,19 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
 //                            print(endTime[i])
                            
             
-            if(strtstrToDate > self.startTimeInt[i]  && strtstrToDate < self.endTimeInt[i] )  {
+            print(i)
+            print(self.startTimeInt[i])
+            print(self.endTimeInt[i])
+            print(strtstrToDate)
+            print(endstrToDate)
+            
+            print(self.strStart)
+             print(self.strEnd)
+//             print(startTime[i])
+//             print(endTime[i])
+            
+            
+            if(strtstrToDate >= self.startTimeInt[i]  && strtstrToDate < self.endTimeInt[i] )  {
                 print(i)
                 print(self.startTimeInt[i])
                 print(self.endTimeInt[i])
@@ -744,8 +791,8 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
                 
                 print(self.strStart)
                  print(self.strEnd)
-                 print(startTime[i])
-                 print(endTime[i])
+//                 print(startTime[i])
+//                 print(endTime[i])
                 
                 return false
             }
@@ -758,8 +805,8 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
                                
                                print(self.strStart)
                                 print(self.strEnd)
-                                print(startTime[i])
-                                print(endTime[i])
+//                                print(startTime[i])
+//                                print(endTime[i])
                 return false
             }
             else if(strtstrToDate < self.startTimeInt[i] && endstrToDate > self.startTimeInt[i] ){
@@ -771,8 +818,8 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
                                
                                print(self.strStart)
                                 print(self.strEnd)
-                                print(startTime[i])
-                                print(endTime[i])
+//                                print(startTime[i])
+//                                print(endTime[i])
                 return false
             }
 
@@ -788,11 +835,27 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
     func convertServerDateToMinutes(date_string : String) -> Int{
         
        
-        var hour = Int( date_string.components(separatedBy: " ")[1].components(separatedBy: ":")[0])!
-        var minnute = Int( date_string.components(separatedBy: " ")[1].components(separatedBy: ":")[1])!
-      
-        let time1 = (60 * hour) + minnute
-        return time1
+        
+        if( date_string.components(separatedBy: " ").count == 1)
+        {
+            var hour = Int( date_string.components(separatedBy: " ")[0].components(separatedBy: ":")[0])!
+                         var minnute = Int( date_string.components(separatedBy: " ")[0].components(separatedBy: ":")[1])!
+                       
+                         let time1 = (60 * hour) + minnute
+                         return time1
+        }
+        else
+        {
+            var hour = Int( date_string.components(separatedBy: " ")[1].components(separatedBy: ":")[0])!
+              var minnute = Int( date_string.components(separatedBy: " ")[1].components(separatedBy: ":")[1])!
+            
+              let time1 = (60 * hour) + minnute
+              return time1
+        }
+        
+       
+        
+        
     }
     
     
@@ -832,6 +895,26 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
         
         return date
     }
+    
+//    func convertStringToTime(dateStr1 : String)->Date{
+//
+//            let dateFormatterPrint = DateFormatter()
+//
+//
+//
+//                    dateFormatterPrint.dateFormat = "HH:mm:ss"
+//    //                dateFormatterPrint.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+//            dateFormatterPrint.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+//                           dateFormatterPrint.calendar = Calendar(identifier: .iso8601)
+//                           dateFormatterPrint.locale = Locale(identifier: "en_US_POSIX")
+//
+//            //        dateFormatterPrint.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//
+//                    let date =  dateFormatterPrint.date(from: dateStr1)!
+//            print(stringFromTime(interval: 12345.67))
+//
+//            return date
+//        }
     
     func stringFromTime(interval: TimeInterval) -> String {
         let ms = Int(interval.truncatingRemainder(dividingBy: 1) * 1000)

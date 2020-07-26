@@ -37,13 +37,19 @@ class WhenStepVC: UIViewController {
 //            //multi_switch.titleFont = UIFont(name: "Poppins-Bold", size: 17.0)
 //        }
         
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
-        let result = formatter.string(from: date)
-        self.time_field.text = result
+//        let date = Date()
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+//        let result = formatter.string(from: date)
         
-        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(self.time_field.text!, forKey: "start_at")
+        
+        var date  = Helper().getFormatedDateAndTime(dateStr: GLOBAL_VAR.PARKING_POST_DETAILS["start_at"] as! String)
+        
+        self.time_field.text = date
+        
+        
+        
+//        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(self.time_field.text!, forKey: "start_at")
         
     }
     
@@ -72,9 +78,14 @@ class WhenStepVC: UIViewController {
             if let time = date {
                 let formatter = DateFormatter()
                 formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
-                self.time_field.text = formatter.string(from: time)
                 
-                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(self.time_field.text!, forKey: "start_at")
+                
+                self.time_field.text = Helper().getFormatedDateAndTime(dateStr: formatter.string(from: time))
+                
+                
+                
+                
+                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(formatter.string(from: time), forKey: "start_at")
                 
             }
         }

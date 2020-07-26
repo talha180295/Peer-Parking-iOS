@@ -16,6 +16,7 @@ import HelperClassPod
 class ResellParkingPopUp: UIViewController {
 
     
+    @IBOutlet weak var yesbutton: UIButton!
     @IBOutlet weak var priceView: UIView!
     @IBOutlet weak var price_tf: UITextField!
     @IBOutlet weak var time_tf: UITextField!
@@ -74,7 +75,9 @@ class ResellParkingPopUp: UIViewController {
         if(sender.tag == 1){
             
             self.priceView.isHidden = false
+            self.yesbutton.setImage(UIImage(named: "btn_radioSelected"), for: .normal)
             
+
             
         }
         else if (sender.tag == 2){
@@ -153,6 +156,14 @@ class ResellParkingPopUp: UIViewController {
         self.parking_details.startAt = dateTime
         
         self.parking_details.isNegotiable = self.nego_switch.isOn
+        
+        
+//        var seller : Seller = Seller(id: self.parking_details.buyer?.id, name: self.parking_details.buyer?.name, email: self.parking_details.buyer?.email, createdAt: self.parking_details.buyer?.createdAt, details: self.parking_details.buyer?.details)
+        
+//        self.parking_details.seller = seller
+//        self.parking_details.buyer = nil
+//        self.parking_details.seller = self.parking_details.buyer
+//        self.parking_details.buyer = Buyer()
 
         //                GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(sender.text!, forKey: "parking_allowed_until")
         //        var params:[String:Any] = [
@@ -246,6 +257,42 @@ class ResellParkingPopUp: UIViewController {
 //        self.present(vc, animated: true, completion: nil)
     }
     
+    func initSellParkingSendingModel() -> Parking {
+        
+        var parking : Parking = Parking()
+        parking.vehicleType = self.parking_details.vehicleType
+        parking.parkingType = self.parking_details.parkingType
+        parking.address = self.parking_details.address
+        parking.endAt = self.parking_details.endAt
+        parking.finalPrice = self.parking_details.initialPrice
+        parking.image = self.parking_details.image
+        parking.initialPrice = self.parking_details.initialPrice
+        parking.title = self.parking_details.title
+        
+        parking.isNegotiable = self.nego_switch.isOn
+            
+        parking.latitude = self.parking_details.latitude
+        parking.longitude = self.parking_details.longitude
+        parking.isResidentFree = self.parking_details.isResidentFree
+        parking.note = self.parking_details.note
+        parking.parkingAllowedUntil = self.parking_details.parkingAllowedUntil
+        parking.parkingExtraFee = self.parking_details.parkingExtraFee
+        parking.parkingHoursLimit = self.parking_details.parkingHoursLimit
+        
+        let sendingTime = DateHelper.getFormatedDate(dateStr: self.time, inFormat: dateFormat.hmma.rawValue, outFormat: dateFormat.HHmmss.rawValue)
+        let sendingDate = DateHelper.getFormatedDate(dateStr: self.date, inFormat: dateFormat.MMddyyy.rawValue, outFormat: dateFormat.yyyyMMdd.rawValue)
+        let dateTime = "\(sendingDate) \(sendingTime)"
+        
+        parking.startAt = dateTime
+        
+        parking.parkingSubType = self.parking_details.parkingSubType
+        
+        parking.parkingExtraFeeUnit = self.parking_details.parkingExtraFeeUnit
+        
+        
+        return parking
+    }
+    
     func timePickerTapped(sender:UITextField) {
         DatePickerDialog(buttonColor:#colorLiteral(red: 0.2156862745, green: 0.6156862745, blue: 0.8156862745, alpha: 1)).show("Select Time", doneButtonTitle: "DONE", cancelButtonTitle: "CANCEL", datePickerMode: .time) {
             (date) -> Void in
@@ -292,8 +339,8 @@ class ResellParkingPopUp: UIViewController {
     func resell_parking(completion: @escaping () -> Void){
         
         
-        self.params = self.parking_details.dictionary ?? [:]
-        
+//        self.params = self.parking_details.dictionary ?? [:]
+        var params:[String:Any] = self.initSellParkingSendingModel().dictionary ?? [:]
         //params.updateValue("hello", forKey: "new_val")
         let auth_value =  "Bearer \(UserDefaults.standard.string(forKey: APP_CONSTANT.ACCESSTOKEN)!)"
         let headers: HTTPHeaders = [
@@ -306,10 +353,11 @@ class ResellParkingPopUp: UIViewController {
         //        self.present(vc, animated: true, completion: nil)
         
         do{
-            let data = try JSONEncoder().encode(self.parking_details)
+//            let data = try JSONEncoder().encode(self.parking_details)
+            let data = try JSONEncoder().encode(self.initSellParkingSendingModel())
             Helper().showSpinner(view: self.view)
             let request = APIRouter.postPublicParking(data)
-            APIClient.serverRequest(url: request, path: request.getPath(),body: self.parking_details.dictionary ?? [:], dec: PostResponseData.self) { (response, error) in
+            APIClient.serverRequest(url: request, path: request.getPath(),body: params, dec: PostResponseData.self) { (response, error) in
                 Helper().hideSpinner(view: self.view)
                 if(response != nil){
                     if (response?.success) != nil {

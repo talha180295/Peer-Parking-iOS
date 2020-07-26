@@ -460,7 +460,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
 
                         let minutes = (durationVal! / 60) % 60
                         let minuteInterval = Date(timeIntervalSinceNow:(TimeInterval(minutes)))
-                        self.lblTime.text = duration
+//                        self.lblTime.text = duration
                     }
                     
                 } catch { print(error) }

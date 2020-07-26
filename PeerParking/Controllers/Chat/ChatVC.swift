@@ -14,6 +14,7 @@ import CodableFirebase
 import CircleProgressView
 import Cosmos
 import EzPopup
+import  IQKeyboardManagerSwift
 
 class ChatVC: UIViewController  , UITextFieldDelegate {
     
@@ -150,7 +151,38 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
         initial()
         
         
+      
+
+        
+        
+        
+        
     }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        IQKeyboardManager.shared.enable = false
+//
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: ChatVC.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: ChatVC.keyboardWillHideNotification, object: nil)
+//    }
+//
+//    @objc func keyboardWillShow(notification: NSNotification) {
+//
+//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+//                if self.view.frame.origin.y == 0{
+//                self.view.frame.origin.y -= keyboardSize.height
+//
+//                }
+//            }
+//        }
+//
+//    @objc func keyboardWillHide(notification: NSNotification) {
+//            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+//                if self.view.frame.origin.y != 0{
+//                self.view.frame.origin.y += keyboardSize.height
+//                }
+//            }
+//        }
     
     
     
@@ -256,7 +288,14 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
             if(snapshot.exists())
             {
                 
-                self.populateView()
+                do {
+                
+                 var buyer : Buyer  = try FirebaseDecoder().decode(Buyer.self, from: snapshot.value ?? 0)
+                self.populateView(buyer: buyer)
+                
+                } catch let error {
+                                       print(error)
+                                   }
                 
                 
             }
@@ -269,15 +308,16 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
                    
                     self.parkingBuyerModelReference.setValue(model)
                     
-                    
+                   
                 } catch let error {
                     print(error)
                 }
+                self.populateView(buyer: self.parking_details.buyer!)
                 
                 
                 
                 
-                self.populateView()
+               
                 //
             }
             
@@ -288,7 +328,7 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
         
     }
     
-    func populateView(){
+    func populateView(buyer : Buyer){
         
 //        parkingId = parking_details.id ?? 0
 //        buyerId = parking_details.buyerID ?? 0
@@ -298,23 +338,24 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
         
         if(checkIamSeller)
         {
-            if parking_details.buyer?.details?.imageURL == nil
+            if buyer.details?.imageURL == nil
             {
                 userImageView.image = UIImage.init(named: "placeholder")
             }
             else
             {
                 
-                let imgUrl = parking_details.buyer?.details?.imageURL
+                let imgUrl = buyer.details?.imageURL
                 userImageView.sd_setImage(with: URL(string: imgUrl ?? ""),placeholderImage: UIImage.init(named: "placeholder-img") )
            
             }
             
-             userNameView.text = parking_details.buyer?.details?.firstName
+//             userNameView.text = buyer.details?.firstName
             
-            if(parking_details.buyer?.details?.firstName != nil)
+            
+            if(buyer.name != nil)
             {
-                userNameView.text = parking_details.buyer?.details?.firstName
+                userNameView.text = buyer.name ?? ""
             }
         }
         else
@@ -382,10 +423,25 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
             
         }
         
-        if(parking_details.initialPrice != nil)
+        
+        if(parking_details.parkingType == ParkingType.PARKING_TYPE_PRIVATE)
         {
-            self.parkingTotalCostView.text = "$ \(String(self.parking_details.initialPrice ?? 0.0))"
+            if(parking_details.finalPrice != nil)
+            {
+                self.parking_details.initialPrice = self.parking_details.finalPrice
+                self.parkingTotalCostView.text = "$ \(String(self.parking_details.finalPrice ?? 0.0))"
+            }
+            else
+            {
+              self.parkingTotalCostView.text = "$ \(String(self.parking_details.initialPrice ?? 0.0))"
+            }
         }
+        else
+        {
+             self.parkingTotalCostView.text = "$ \(String(self.parking_details.initialPrice ?? 0.0))"
+        }
+        
+        
         
         if (parking_details.imageURL == nil)
         {

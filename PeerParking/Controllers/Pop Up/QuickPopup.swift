@@ -30,13 +30,19 @@ class QuickPopup: UIViewController {
            params = GLOBAL_VAR.PRIVATE_PARKING_MODEL
         }
         else{
-            let date = Date()
-            let formatter = DateFormatter()
-            formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
-            let result = formatter.string(from: date)
+//            let date = Date()
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+//            let result = formatter.string(from: date)
+            
+            var date  = Helper().getFormatedDateAndTime(dateStr: GLOBAL_VAR.PARKING_POST_DETAILS["start_at"] as! String)
+                   
+                  
+            
+            self.time.text = date
             
             
-            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(result, forKey: "start_at")
+//            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(result, forKey: "start_at")
             params = GLOBAL_VAR.PARKING_POST_DETAILS
         }
         

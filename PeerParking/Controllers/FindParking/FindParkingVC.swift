@@ -332,6 +332,8 @@ class FindParkingVC: UIViewController,UICollectionViewDelegate, UICollectionView
     
     @IBAction func arrow_btn(_ sender: UIButton) {
 
+        self.locationManager.delegate = self
+               self.locationManager.startUpdatingLocation()
         mapMoveToCurrentLoc(sender)
     }
     

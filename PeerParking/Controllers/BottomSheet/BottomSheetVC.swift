@@ -450,7 +450,16 @@ class BottomSheetVC: UIViewController {
             if (parking_details.tempParkingID == 0) {
                 createTempParking(isTakeOffer: true);
             } else {
-                takeOffer(parkingId: parking_details.tempParkingID ?? 0, initialPrice: parking_details.initialPrice ?? 0.0);
+                
+                if(parking_details.finalPrice != nil){
+                    takeOffer(parkingId: parking_details.tempParkingID ?? 0, initialPrice: parking_details.finalPrice?.rounded() ?? 0.0);
+                }
+                else
+                {
+                    takeOffer(parkingId: parking_details.tempParkingID ?? 0, initialPrice: parking_details.initialPrice ?? 0.0);
+                }
+                
+                
             }
 
         }
@@ -484,7 +493,7 @@ class BottomSheetVC: UIViewController {
                             var parkingModel = Parking.init(dictionary: self.parking_details.dictionary ?? [:])
                                
                                parkingModel?.buyerID = val.id
-                               let  buyerMdoel = Buyer(id: val.id, name: val.name, email: val.email, createdAt: val.createdAt, details: val.details, card: [nil])
+                               let  buyerMdoel = Buyer(id: val.id, name: val.name, email: val.email, createdAt: val.createdAt, details: val.details)
                                
                                parkingModel?.buyer = buyerMdoel
                                
@@ -806,7 +815,16 @@ class BottomSheetVC: UIViewController {
 //                                if (onItemFieldUpdateListener != null) {
 //                                    onItemFieldUpdateListener.onItemFieldUpdate(parkingModel1.getId(), "", parkingModel1.getTemp_parking_id());
 //                                }
-                                self.takeOffer(parkingId: val.id ?? 0, initialPrice: self.parking_details.initialPrice ?? 0.0);
+                                
+                                
+                                if(self.parking_details.finalPrice != nil){
+                                    self.takeOffer(parkingId: self.parking_details.tempParkingID ?? 0, initialPrice: self.parking_details.finalPrice?.rounded() ?? 0.0);
+                                }
+                                else
+                                {
+                                  self.takeOffer(parkingId: val.id ?? 0, initialPrice: self.parking_details.initialPrice ?? 0.0);
+                                }
+                               
                             }
                             else {
                                 var model = Parking(dictionary: val.dictionary ?? [:])
@@ -868,7 +886,7 @@ class BottomSheetVC: UIViewController {
                         var parkingModel = Parking.init(dictionary: model.dictionary ?? [:])
                         
                         parkingModel?.buyerID = val.id
-                        let  buyerMdoel = Buyer(id: val.id, name: val.name, email: val.email, createdAt: val.createdAt, details: val.details, card: [nil])
+                        let  buyerMdoel = Buyer(id: val.id, name: val.name, email: val.email, createdAt: val.createdAt, details: val.details)
                         
                         parkingModel?.buyer = buyerMdoel
                         
@@ -1262,6 +1280,8 @@ extension BottomSheetVC:OnTimeSelectDelegate{
                
                st_time.text = "From : \(startigTime)"
                end_time.text = "To : \(endingTime)"
+//        self.parking_details.finalPrice = finalPrice
+        
                
         self.parking_details.startAt = Helper().getFormatedServerDateTimeForDetail(dateStr: startigTime)
                self.parking_details.endAt = Helper().getFormatedServerDateTimeForDetail(dateStr: endingTime)
