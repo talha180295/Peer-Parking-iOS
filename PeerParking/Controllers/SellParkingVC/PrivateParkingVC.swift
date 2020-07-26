@@ -30,7 +30,7 @@ class PrivateParkingVC: UIViewController {
     
     var detailStepVC:DetailStepVC!
     var priceStepVC:PriceStepVC!
-    var privateWhenStepVC:UIViewController!
+    var privateWhenStepVC:PrivateWhenStepVC!
    // var limitationStepVC:UIViewController!
     var locationStepVC:UIViewController!
     var imageStepVC:UIViewController!
@@ -277,7 +277,26 @@ class PrivateParkingVC: UIViewController {
         else if(counter == 3){
             
             
-           
+            let isAlways =  GLOBAL_VAR.PRIVATE_PARKING_MODEL["is_always"] as? Int
+            let slots = self.privateWhenStepVC.daysModel
+            if (isAlways == 0){
+                if slots.count == 0{
+                    
+                    let alert = UIAlertController(title: "Alert!", message: "Please Select Days and Timings", preferredStyle: .alert)
+                    
+                    
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                        alert.dismiss(animated: true, completion: nil)
+                    }))
+                    
+                    self.present(alert, animated: true, completion: nil)
+                    counter -= 1
+                    step_progress.currentStep = counter
+                    return
+                }
+                
+            }
+                
             print("PRIVATE_PARKING_MODEL=\(GLOBAL_VAR.PRIVATE_PARKING_MODEL)")
             //let controller = storyboard!.instantiateViewController(withIdentifier: "four")
             self.addChild(self.locationStepVC)

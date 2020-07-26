@@ -35,11 +35,11 @@ class LiveLocationSendingService  {
         if(currentLocationReference != nil)
         {
             
-            var parkingLocation : ParkingLocation  = ParkingLocation(lastDate: makingCurrentDateModel(), latitude: lat, longitude: long)
+            let buyerLocation : ParkingLocation  = ParkingLocation(lastDate: makingCurrentDateModel(), latitude: lat, longitude: long)
             
             
             
-             let dict = try! FirebaseEncoder().encode(parkingLocation)
+             let dict = try! FirebaseEncoder().encode(buyerLocation)
             
             
             
@@ -52,7 +52,7 @@ class LiveLocationSendingService  {
                 else
                {
                 
-                completion(parkingLocation)
+                completion(buyerLocation)
                }
                 
                 
