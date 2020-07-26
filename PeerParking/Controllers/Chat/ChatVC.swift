@@ -61,6 +61,7 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
     @IBOutlet weak var messageTextFieldLabel: UITextField!
     @IBOutlet weak var parkingDetailTopConstrain: NSLayoutConstraint!
     
+    @IBOutlet weak var bottomViewBottomConstrain: NSLayoutConstraint!
     
     
     var offer : String!
@@ -153,36 +154,40 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
         
       
 
+//        bottomViewBottomConstrain.constant = 100.0
         
         
         
         
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        IQKeyboardManager.shared.enable = false
+    override func viewWillAppear(_ animated: Bool) {
+        IQKeyboardManager.shared.enable = false
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: ChatVC.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: ChatVC.keyboardWillHideNotification, object: nil)
+    }
 //
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: ChatVC.keyboardWillShowNotification, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: ChatVC.keyboardWillHideNotification, object: nil)
-//    }
-//
-//    @objc func keyboardWillShow(notification: NSNotification) {
-//
-//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//                if self.view.frame.origin.y == 0{
+    @objc func keyboardWillShow(notification: NSNotification) {
+
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                if self.bottomViewBottomConstrain.constant == 0{
+                    
+                    self.bottomViewBottomConstrain.constant = keyboardSize.height 
 //                self.view.frame.origin.y -= keyboardSize.height
-//
-//                }
-//            }
-//        }
-//
-//    @objc func keyboardWillHide(notification: NSNotification) {
-//            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-//                if self.view.frame.origin.y != 0{
+
+                }
+            }
+        }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+                if self.bottomViewBottomConstrain.constant != 0{
+                    self.bottomViewBottomConstrain.constant = 0
 //                self.view.frame.origin.y += keyboardSize.height
-//                }
-//            }
-//        }
+                }
+            }
+        }
     
     
     
@@ -429,16 +434,18 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
             if(parking_details.finalPrice != nil)
             {
                 self.parking_details.initialPrice = self.parking_details.finalPrice
-                self.parkingTotalCostView.text = "$ \(String(self.parking_details.finalPrice ?? 0.0))"
+                self.parkingTotalCostView.text = "$ \(String(format: "%0.2f" ,self.parking_details.finalPrice ?? 0.0))"
+                
+               
             }
             else
             {
-              self.parkingTotalCostView.text = "$ \(String(self.parking_details.initialPrice ?? 0.0))"
+              self.parkingTotalCostView.text = "$ \(String(format: "%0.2f" ,self.parking_details.initialPrice ?? 0.0))"
             }
         }
         else
         {
-             self.parkingTotalCostView.text = "$ \(String(self.parking_details.initialPrice ?? 0.0))"
+             self.parkingTotalCostView.text = "$ \(String(format: "%0.2f" ,self.parking_details.initialPrice ?? 0.0))"
         }
         
         

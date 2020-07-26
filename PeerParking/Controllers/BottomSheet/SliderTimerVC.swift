@@ -178,7 +178,7 @@ class SliderTimerVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
             
             
             for i in 0..<self.startTimeInt.count{
-                if(indexPath.row > startTimeInt[i] / 5  && indexPath.row < endTimeInt[i] / 5 )
+                if(indexPath.row >= startTimeInt[i] / 5  && indexPath.row <= endTimeInt[i] / 5 )
                            {
                                 cell.backgroundColor = UIColor.black
                            }
@@ -202,7 +202,7 @@ class SliderTimerVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
     }
     
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return (self.slider.frame.size.height - 10) / 286
+            return (self.slider.frame.size.height - 15) / 286
         }
     
     
@@ -342,15 +342,30 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
     func showAvailableTimeRange(){
         
         
+//        let weekday = Calendar.current.component(.weekday, from: Date())
+//        print("weekday \(getDayOfWeek(date: UserDefaults.standard.string(forKey: "date_time")! ))")
+        
+       
+        
         if(self.parking_details.slots?.count != 0){
+            
+            var weekday = getDayOfWeek(date: UserDefaults.standard.string(forKey: "date_time") ??
+            self.dateToString(date : Date())
+            )
             
             self.parking_details.slots?.forEach({ (slot) in
                 
-               self.startTimeInt.append(0)
-                self.endTimeInt.append(self.convertServerDateToMinutes(date_string: slot.startAt!)-1)
                 
-               self.startTimeInt.append(self.convertServerDateToMinutes(date_string: slot.endAt!)+1)
-                self.endTimeInt.append(1430)
+                if(weekday == slot.day)
+                {
+                    self.startTimeInt.append(0)
+                     
+                     self.endTimeInt.append(self.convertServerDateToMinutes(date_string: slot.startAt!)-1)
+                     
+                    self.startTimeInt.append(self.convertServerDateToMinutes(date_string: slot.endAt!)+1)
+                     self.endTimeInt.append(1430)
+                }
+               
                 
             })
             
@@ -358,6 +373,56 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
         
         
               
+        
+    }
+    
+    func dateToString(date : Date) ->String {
+        
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        let now = df.string(from: Date())
+        return now
+    }
+    
+    func getDayOfWeek(date : String) -> Int{
+        
+        
+          let dateFormatter = DateFormatter()
+                           dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+                
+        //        let formateString = dateFormatter.string(from: date ?? Date())
+        //        dateFormatter.dateFormat = "yyyy-MM-dd" // Output Formated
+                let formateDate = dateFormatter.date(from:date) ?? Date()
+                
+                
+                var weekDayText = dateFormatter.weekdaySymbols[Calendar.current.component(.weekday, from: formateDate)-1]
+        
+        switch weekDayText {
+        case "Sunday":
+            
+            return 7
+            case "Monday":
+            
+            return 1
+            case "Tuesday":
+            
+            return 2
+            case "Wednesday":
+            
+            return 3
+            case "Thursday":
+            
+            return 4
+            case "Friday":
+            
+            return 5
+            case "Saturday":
+            
+            return 6
+        default:
+            return 0
+        }
+        
         
     }
     
