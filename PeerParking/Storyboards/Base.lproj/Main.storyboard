@@ -7400,9 +7400,6 @@ typeset text.</string>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <connections>
-                                            <action selector="cancel_btn:" destination="kUV-fN-Aqh" eventType="touchUpInside" id="X1K-UD-zNy"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I4k-Lg-mDj">
                                         <rect key="frame" x="207" y="0.0" width="207" height="55"/>
@@ -7545,7 +7542,7 @@ typeset text.</string>
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="cancel_btn:" destination="kUV-fN-Aqh" eventType="touchUpInside" id="YjA-Q6-hnN"/>
+                                                    <action selector="goBtn:" destination="kUV-fN-Aqh" eventType="touchUpInside" id="Yw5-04-aMZ"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HFB-aA-R8a">
@@ -7555,7 +7552,7 @@ typeset text.</string>
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="cancel_btn:" destination="kUV-fN-Aqh" eventType="touchUpInside" id="UXu-CV-Nan"/>
+                                                    <action selector="cancel_btn:" destination="kUV-fN-Aqh" eventType="touchUpInside" id="Pfc-Cz-YIt"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -7597,6 +7594,7 @@ typeset text.</string>
                         <outlet property="altrBtn" destination="K8p-Uw-qPQ" id="7gb-y0-BJ4"/>
                         <outlet property="btnCan" destination="HFB-aA-R8a" id="Tu3-Fq-XuK"/>
                         <outlet property="cancelHeight" destination="Gfv-No-FOp" id="Z24-9E-HFm"/>
+                        <outlet property="goBtn" destination="hGY-bN-UUb" id="zKf-Hi-2yn"/>
                         <outlet property="lblDistance" destination="rlU-iP-Ng1" id="WSw-NY-ic4"/>
                         <outlet property="lblTime" destination="WdZ-qk-3mF" id="7dh-Wx-8yJ"/>
                         <outlet property="mapView" destination="Lp1-5e-oaF" id="buB-DO-Wyl"/>

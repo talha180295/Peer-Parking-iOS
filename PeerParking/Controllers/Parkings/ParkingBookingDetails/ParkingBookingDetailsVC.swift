@@ -40,6 +40,15 @@ class ParkingBookingDetailsVC: UIViewController {
         self.setLiveLocationReceivingService(parkingId: 611)
     
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     @IBAction func navigateBtnClick(_sender:UIButton){
         
@@ -150,6 +159,7 @@ class ParkingBookingDetailsVC: UIViewController {
     
     @IBAction func backAction(_ sender: Any) {
         
+        self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true)
         
     }

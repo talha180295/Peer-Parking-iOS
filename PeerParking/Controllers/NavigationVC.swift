@@ -247,6 +247,7 @@ class NavigationVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         vc.d_longg = d_longg
         vc.s_lat = self.lat
         vc.s_longg = self.longg
+        vc.isNavigating = true
         
         vc.p_lat = d_lat
         vc.p_longg = d_longg
