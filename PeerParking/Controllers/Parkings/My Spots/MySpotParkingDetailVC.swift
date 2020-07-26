@@ -172,10 +172,15 @@ class MySpotParkingDetailVC : UIViewController,UITextFieldDelegate {
                 self.checkBox[index].setImage(UIImage(named: "checkbox"), for: .normal)
                 self.checkBox[index].isSelected = true
                 
-                let day =  self.daysModel[self.seletedCounter]
-                self.startTime[index].text = DateHelper.getFormatedDate(dateStr: day.startAt ?? "", inFormat: dateFormat.HHmmss.rawValue, outFormat: dateFormat.hmma.rawValue)
-                self.endTime[index].text =  DateHelper.getFormatedDate(dateStr: day.endAt ?? "", inFormat: dateFormat.HHmmss.rawValue, outFormat: dateFormat.hmma.rawValue)
-                self.seletedCounter += 1
+                for item in daysModel{
+                    if item.day == index + 1{
+                        let day = item
+                        self.startTime[index].text = DateHelper.getFormatedDate(dateStr: day.startAt ?? "", inFormat: dateFormat.HHmmss.rawValue, outFormat: dateFormat.hmma.rawValue)
+                        self.endTime[index].text =  DateHelper.getFormatedDate(dateStr: day.endAt ?? "", inFormat: dateFormat.HHmmss.rawValue, outFormat: dateFormat.hmma.rawValue)
+                        self.seletedCounter += 1
+                    }
+                }
+                
             }
             else {
                 self.checkBox[index].setImage(UIImage(named: "uncheckbox"), for: .normal)
@@ -660,7 +665,7 @@ extension MySpotParkingDetailVC{
                     Helper().showToast(message: response?.message ?? "-", controller: self)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         self.dismiss(animated: true){
-//                            self.delegate.didBackButtonPressed()
+                            self.delegate.didBackButtonPressed()
                         }
                     }
                 }
@@ -730,7 +735,7 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
     
     @objc func buttonClicked(sender: UIButton) {
         
-        let indexPath = IndexPath(row: sender.tag, section: 0)
+//        let indexPath = IndexPath(row: sender.tag, section: 0)
         //        let cell = self.timingTblView.cellForRow(at: indexPath) as! TimingsCell
         
         if (self.selectedItems.contains(sender.tag)) {
@@ -805,16 +810,22 @@ extension MySpotParkingDetailVC:UITableViewDelegate, UITableViewDataSource, Time
             let e_time24 = dateFormatter.string(from: date2!)
             
             //            print("index=\(index+1)")
-            var i = 0
-            for item in self.daysModel{
-                if(item.day == index+1){
+//            var i = 0
+//            for item in self.daysModel{
+//                if(item.day == index+1){
+//                    self.daysModel.remove(at: i)
+//                }
+//                i+=1
+//            }
+            let day = index + 1
+            for i in 0...self.daysModel.count - 1{
+                if(self.daysModel[i].day == day){
                     self.daysModel.remove(at: i)
+                    break
                 }
-                i+=1
             }
             
-            
-            let slot = Slot(dictionary: [ "day" :  index, "start_at" : s_time24, "end_at" : e_time24 ])
+            let slot = Slot(dictionary: [ "day" :  day, "start_at" : s_time24, "end_at" : e_time24 ])
             self.daysModel.append(slot!)
             
             self.privateParkingModel.slots = self.daysModel
