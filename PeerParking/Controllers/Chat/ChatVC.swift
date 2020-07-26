@@ -429,16 +429,18 @@ class ChatVC: UIViewController  , UITextFieldDelegate {
             if(parking_details.finalPrice != nil)
             {
                 self.parking_details.initialPrice = self.parking_details.finalPrice
-                self.parkingTotalCostView.text = "$ \(String(self.parking_details.finalPrice ?? 0.0))"
+                self.parkingTotalCostView.text = "$ \(String(format: "%0.2f" ,self.parking_details.finalPrice ?? 0.0))"
+                
+               
             }
             else
             {
-              self.parkingTotalCostView.text = "$ \(String(self.parking_details.initialPrice ?? 0.0))"
+              self.parkingTotalCostView.text = "$ \(String(format: "%0.2f" ,self.parking_details.initialPrice ?? 0.0))"
             }
         }
         else
         {
-             self.parkingTotalCostView.text = "$ \(String(self.parking_details.initialPrice ?? 0.0))"
+             self.parkingTotalCostView.text = "$ \(String(format: "%0.2f" ,self.parking_details.initialPrice ?? 0.0))"
         }
         
         
