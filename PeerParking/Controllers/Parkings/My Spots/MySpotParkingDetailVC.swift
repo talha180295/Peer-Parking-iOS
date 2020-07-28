@@ -581,6 +581,23 @@ extension MySpotParkingDetailVC{
     
     public func updatePrivateParking(data:PrivateParkingModel) {
 
+        if !(self.privateParkingModel.isAlways ?? false){
+            if self.privateParkingModel.slots == nil ||  self.privateParkingModel.slots?.count == 0{
+                
+                let alert = UIAlertController(title: "Alert!", message: "Please Select Days and Timings", preferredStyle: .alert)
+                
+         
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    alert.dismiss(animated: true, completion: nil)
+                }))
+                
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+        }
+        
+        
         do{
             let data = try JSONEncoder().encode(self.privateParkingModel)
             Helper().showSpinner(view: self.view)

@@ -463,15 +463,23 @@ extension AppDelegate{
                     //Helper().showToast(message: "Succes=\(success)", controller: self)
                     if let val = response?.data {
                         
-                        
+                       
                         //                       ParkingModel1 model1 = GsonFactory.getSimpleGson()
                         //                        .fromJson(GsonFactory.getSimpleGson().toJson(webResponse.result)
                         //                        , ParkingModel1.class);
                         
                         if(openDetailScreen){
                             let vc = MySpotParkingDetailVC.instantiate(fromPeerParkingStoryboard: .ParkingDetails)
-                            vc.setParingModel(parkingModel: val)
-                            vc.isPublicParking = true
+                            
+                            if val.parkingType == ParkingType.PARKING_TYPE_PRIVATE{
+                                vc.isPublicParking = false
+                               vc.setParingModel(parkingModel: val)
+                            }
+                            else{
+                                vc.isPublicParking = true
+                                vc.setParingModel(parkingModel: val)
+                            }
+                            
                             //                            vc.delegate = self
                             vc.modalPresentationStyle = .fullScreen
                             self.window?.rootViewController?.present(vc, animated: true,completion: nil)

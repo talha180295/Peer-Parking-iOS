@@ -40,6 +40,15 @@ class ParkingBookingDetailsVC: UIViewController {
         self.setLiveLocationReceivingService(parkingId: 611)
     
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     @IBAction func navigateBtnClick(_sender:UIButton){
         
@@ -59,14 +68,14 @@ class ParkingBookingDetailsVC: UIViewController {
             if (parkingModel.status == APP_CONSTANT.STATUS_PARKING_BOOKED) {
                 Helper().showToast(message: "Buyer has not started navigation yet", controller: self)
             } else {
-                openMapScreen(isTracking: true)
+                openMapScreen(isTracking: true, isBuyerNavigating: false)
             }
             
             
         } else {
 //            self.userType.text = "Seller Information"
 //             openMapScreen();
-            openMapScreen(isTracking: false)
+            openMapScreen(isTracking: false, isBuyerNavigating: true)
            
         }
         
@@ -76,11 +85,12 @@ class ParkingBookingDetailsVC: UIViewController {
 //        self.parkingModel = parkingModel
 //    }
     
-    func openMapScreen(isTracking:Bool){
+    func openMapScreen(isTracking:Bool,isBuyerNavigating:Bool){
         let vc = ParkingNavVC.instantiate(fromPeerParkingStoryboard: .Main)
         
         vc.modalPresentationStyle = .fullScreen
         vc.isTracking = isTracking
+        vc.isBuyerNavigating = isBuyerNavigating
         vc.parkingModel = self.parkingModel
         vc.vcName = "track"
 //        vc.p_title = ""
@@ -93,7 +103,8 @@ class ParkingBookingDetailsVC: UIViewController {
 //        vc.p_longg = d_longg
        
 //        vc.alternateRoutes = alternateRoutes
-        self.present(vc, animated: false, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
+//        self.present(vc, animated: false, completion: nil)
     }
     @IBAction func parkNowBtnClick(_sender:UIButton){
         
@@ -148,6 +159,7 @@ class ParkingBookingDetailsVC: UIViewController {
     
     @IBAction func backAction(_ sender: Any) {
         
+        self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true)
         
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kce-kt-Sir">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kce-kt-Sir">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -490,7 +490,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="75"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your default vehicle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ag4-wQ-GRd">
-                                        <rect key="frame" x="25" y="24" width="266.66666666666669" height="27"/>
+                                        <rect key="frame" x="25.000000000000014" y="24" width="236.33333333333337" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="27" id="C23-Q8-iAu"/>
                                         </constraints>
@@ -554,7 +554,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Vehicle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oDO-Ad-5m4">
-                                                        <rect key="frame" x="18" y="6" width="164.33333333333334" height="28"/>
+                                                        <rect key="frame" x="18" y="6" width="145" height="28"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="28" id="Us8-Pf-Mou"/>
                                                         </constraints>
@@ -600,7 +600,7 @@
                                                 <rect key="frame" x="0.0" y="108" width="335" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vehicle Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x6V-og-NSU">
-                                                        <rect key="frame" x="17.999999999999993" y="6" width="127.33333333333331" height="28"/>
+                                                        <rect key="frame" x="18" y="6" width="111" height="28"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="28" id="by8-IY-pcX"/>
                                                         </constraints>
@@ -646,7 +646,7 @@
                                                 <rect key="frame" x="0.0" y="216" width="335" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="License Plate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zy2-pU-dg8">
-                                                        <rect key="frame" x="18" y="6" width="130" height="28"/>
+                                                        <rect key="frame" x="18.000000000000007" y="6" width="119.66666666666669" height="28"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="28" id="oaz-0K-bDF"/>
                                                         </constraints>
@@ -692,7 +692,7 @@
                                                 <rect key="frame" x="0.0" y="324" width="335" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCW-gN-9bh">
-                                                        <rect key="frame" x="18" y="6" width="54" height="28"/>
+                                                        <rect key="frame" x="18.000000000000004" y="6" width="49.333333333333343" height="28"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="28" id="owe-p6-q0y"/>
                                                         </constraints>
@@ -738,7 +738,7 @@
                                                 <rect key="frame" x="0.0" y="432" width="335" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UTf-0B-0rP">
-                                                        <rect key="frame" x="18.000000000000004" y="6" width="61.333333333333343" height="28"/>
+                                                        <rect key="frame" x="18" y="6" width="56" height="28"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="28" id="Bnw-3L-Pbd"/>
                                                         </constraints>
@@ -784,7 +784,7 @@
                                                 <rect key="frame" x="0.0" y="540" width="335" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTC-hQ-Jwj">
-                                                        <rect key="frame" x="18" y="6" width="54" height="28"/>
+                                                        <rect key="frame" x="17.999999999999996" y="6" width="48.666666666666657" height="28"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="28" id="ynQ-xF-Lr0"/>
                                                         </constraints>
@@ -1558,7 +1558,7 @@
                                                 <rect key="frame" x="88" y="12" width="238" height="66"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parked in" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPH-ux-lmm">
-                                                        <rect key="frame" x="0.0" y="15.66666666666667" width="92" height="18.333333333333329"/>
+                                                        <rect key="frame" x="0.0" y="18.666666666666671" width="92" height="15.333333333333336"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="92" id="e0R-tf-aHm"/>
                                                         </constraints>
@@ -1567,13 +1567,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monta Loma" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptF-GV-L4z">
-                                                        <rect key="frame" x="96" y="13" width="142" height="24"/>
+                                                        <rect key="frame" x="96" y="17" width="142" height="20"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="17"/>
                                                         <color key="textColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Today 13:40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3N-Is-BqP">
-                                                        <rect key="frame" x="68.333333333333343" y="42" width="101.66666666666666" height="19"/>
+                                                        <rect key="frame" x="70.333333333333343" y="42" width="97.333333333333343" height="19"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="19" id="u4l-s5-EoT"/>
                                                         </constraints>
@@ -4361,7 +4361,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="384" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cX-1E-DwY">
-                                                        <rect key="frame" x="18" y="6" width="86.333333333333329" height="28"/>
+                                                        <rect key="frame" x="18" y="6" width="77.666666666666671" height="28"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="28" id="6Vc-1n-h6K"/>
                                                         </constraints>
@@ -4416,7 +4416,7 @@
                                                 <rect key="frame" x="0.0" y="108" width="384" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vehicle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ig-c2-VXW">
-                                                        <rect key="frame" x="18" y="6" width="74.333333333333329" height="28"/>
+                                                        <rect key="frame" x="17.999999999999996" y="6" width="63.666666666666657" height="28"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="28" id="wpG-RW-obR"/>
                                                         </constraints>
@@ -4462,7 +4462,7 @@
                                                 <rect key="frame" x="0.0" y="216" width="384" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9d7-rH-RfP">
-                                                        <rect key="frame" x="17.999999999999996" y="6" width="49.666666666666657" height="28"/>
+                                                        <rect key="frame" x="17.999999999999996" y="6" width="45.666666666666657" height="28"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="28" id="SOt-d5-fPh"/>
                                                         </constraints>
@@ -4508,7 +4508,7 @@
                                                 <rect key="frame" x="0.0" y="324" width="384" height="100"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yP-kB-lZi">
-                                                        <rect key="frame" x="18" y="6" width="49" height="28"/>
+                                                        <rect key="frame" x="17.999999999999996" y="6" width="44.666666666666657" height="28"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="28" id="vd9-3I-HeF"/>
                                                         </constraints>
@@ -4653,7 +4653,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monta Loma, USA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7o-eR-jeQ">
-                                        <rect key="frame" x="133.66666666666669" y="28" width="146.66666666666669" height="42"/>
+                                        <rect key="frame" x="137" y="28" width="140" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="c0s-rP-RfB"/>
                                         </constraints>
@@ -4711,7 +4711,7 @@
                                         <rect key="frame" x="8" y="16" width="378" height="360"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jex-AS-A3Z">
-                                                <rect key="frame" x="7.9999999999999964" y="8" width="54.666666666666657" height="26"/>
+                                                <rect key="frame" x="7.9999999999999964" y="8" width="48.666666666666657" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="26" id="sV9-LZ-U3z"/>
                                                 </constraints>
@@ -4965,13 +4965,13 @@
                                                 <rect key="frame" x="79" y="10" width="200" height="151"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ic-ud-ecq">
-                                                        <rect key="frame" x="63" y="40.666666666666657" width="74" height="70"/>
+                                                        <rect key="frame" x="65.333333333333343" y="46.333333333333343" width="69.666666666666657" height="58.333333333333343"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="50"/>
                                                         <color key="textColor" red="0.18823529410000001" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Credit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="is4-hl-Ztt">
-                                                        <rect key="frame" x="33" y="115.66666666666666" width="134.33333333333334" height="24"/>
+                                                        <rect key="frame" x="40.666666666666657" y="109.66666666666666" width="119" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="24" id="fIt-fb-hxR"/>
                                                         </constraints>
@@ -5049,7 +5049,7 @@
                                         <rect key="frame" x="23" y="271" width="328" height="80"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Method" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qAG-VE-hEN">
-                                                <rect key="frame" x="13" y="6" width="146.66666666666666" height="24"/>
+                                                <rect key="frame" x="13" y="6" width="130.66666666666666" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="Phh-Aw-McQ"/>
                                                 </constraints>
@@ -6653,7 +6653,7 @@ MN 55425, USA.</string>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stars" translatesAutoresizingMaskIntoConstraints="NO" id="g1q-Mm-bSn">
-                                                                        <rect key="frame" x="26" y="3" width="119" height="14"/>
+                                                                        <rect key="frame" x="25.999999999999996" y="3" width="59.666666666666657" height="14"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="14" id="oKA-1O-6An"/>
                                                                         </constraints>
@@ -7400,9 +7400,6 @@ typeset text.</string>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <connections>
-                                            <action selector="cancel_btn:" destination="kUV-fN-Aqh" eventType="touchUpInside" id="X1K-UD-zNy"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I4k-Lg-mDj">
                                         <rect key="frame" x="207" y="0.0" width="207" height="55"/>
@@ -7535,30 +7532,39 @@ typeset text.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rs-vb-4gS">
                                 <rect key="frame" x="0.0" y="807" width="414" height="55"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HFB-aA-R8a">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="oaD-cK-ry1">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.20392156859999999" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="55" id="QIo-dD-qv4"/>
-                                        </constraints>
-                                        <state key="normal" title="Cancel">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="cancel_btn:" destination="kUV-fN-Aqh" eventType="touchUpInside" id="UXu-CV-Nan"/>
-                                        </connections>
-                                    </button>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGY-bN-UUb">
+                                                <rect key="frame" x="0.0" y="0.0" width="207" height="55"/>
+                                                <color key="backgroundColor" name="themeBlue"/>
+                                                <state key="normal" title="GO">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="goBtn:" destination="kUV-fN-Aqh" eventType="touchUpInside" id="Yw5-04-aMZ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HFB-aA-R8a">
+                                                <rect key="frame" x="207" y="0.0" width="207" height="55"/>
+                                                <color key="backgroundColor" red="0.93725490199999995" green="0.20392156859999999" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cancel_btn:" destination="kUV-fN-Aqh" eventType="touchUpInside" id="Pfc-Cz-YIt"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.87439505390000005" green="1" blue="0.4693221863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="HFB-aA-R8a" firstAttribute="leading" secondItem="9rs-vb-4gS" secondAttribute="leading" id="1pm-er-pmf"/>
+                                    <constraint firstAttribute="bottom" secondItem="oaD-cK-ry1" secondAttribute="bottom" id="9tc-UA-WiY"/>
+                                    <constraint firstItem="oaD-cK-ry1" firstAttribute="top" secondItem="9rs-vb-4gS" secondAttribute="top" id="CSk-3H-Rh6"/>
                                     <constraint firstAttribute="height" constant="55" id="Gfv-No-FOp"/>
-                                    <constraint firstItem="HFB-aA-R8a" firstAttribute="top" secondItem="9rs-vb-4gS" secondAttribute="top" id="MQN-YA-66a"/>
-                                    <constraint firstItem="HFB-aA-R8a" firstAttribute="leading" secondItem="9rs-vb-4gS" secondAttribute="leading" id="diI-bj-W3C"/>
-                                    <constraint firstAttribute="trailing" secondItem="HFB-aA-R8a" secondAttribute="trailing" id="fhj-ef-xWg"/>
-                                    <constraint firstAttribute="bottom" secondItem="HFB-aA-R8a" secondAttribute="bottom" id="hl9-75-qPI"/>
-                                    <constraint firstAttribute="bottom" secondItem="HFB-aA-R8a" secondAttribute="bottom" id="l1o-Vv-flK"/>
-                                    <constraint firstItem="HFB-aA-R8a" firstAttribute="top" secondItem="9rs-vb-4gS" secondAttribute="top" id="zMl-HV-2FI"/>
+                                    <constraint firstAttribute="trailing" secondItem="oaD-cK-ry1" secondAttribute="trailing" id="H1b-YT-Qof"/>
+                                    <constraint firstItem="oaD-cK-ry1" firstAttribute="leading" secondItem="9rs-vb-4gS" secondAttribute="leading" id="wKe-hh-eLR"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -7588,6 +7594,7 @@ typeset text.</string>
                         <outlet property="altrBtn" destination="K8p-Uw-qPQ" id="7gb-y0-BJ4"/>
                         <outlet property="btnCan" destination="HFB-aA-R8a" id="Tu3-Fq-XuK"/>
                         <outlet property="cancelHeight" destination="Gfv-No-FOp" id="Z24-9E-HFm"/>
+                        <outlet property="goBtn" destination="hGY-bN-UUb" id="zKf-Hi-2yn"/>
                         <outlet property="lblDistance" destination="rlU-iP-Ng1" id="WSw-NY-ic4"/>
                         <outlet property="lblTime" destination="WdZ-qk-3mF" id="7dh-Wx-8yJ"/>
                         <outlet property="mapView" destination="Lp1-5e-oaF" id="buB-DO-Wyl"/>
@@ -9919,7 +9926,7 @@ Click Finish to publish your offer</string>
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghu-rz-GDH">
-                                                <rect key="frame" x="13.999999999999996" y="6" width="54.666666666666657" height="28"/>
+                                                <rect key="frame" x="14" y="6" width="49" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="qhd-fM-DUt"/>
                                                 </constraints>
@@ -9960,7 +9967,7 @@ Click Finish to publish your offer</string>
                                         <rect key="frame" x="0.0" y="108" width="404" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsn-zj-aYR">
-                                                <rect key="frame" x="14" y="6" width="174.66666666666666" height="28"/>
+                                                <rect key="frame" x="14" y="6" width="152.33333333333334" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="1fx-ac-xMI"/>
                                                 </constraints>
@@ -10001,7 +10008,7 @@ Click Finish to publish your offer</string>
                                         <rect key="frame" x="0.0" y="216" width="404" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kHw-Wa-mZ1">
-                                                <rect key="frame" x="14" y="6" width="97.666666666666671" height="28"/>
+                                                <rect key="frame" x="14" y="6" width="88.666666666666671" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="xVp-Je-Izl"/>
                                                 </constraints>
@@ -10042,7 +10049,7 @@ Click Finish to publish your offer</string>
                                         <rect key="frame" x="0.0" y="324" width="404" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBy-BH-in9">
-                                                <rect key="frame" x="14" y="6" width="184.33333333333334" height="28"/>
+                                                <rect key="frame" x="14" y="6" width="165.33333333333334" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="28" id="gVV-Fd-XVA"/>
                                                 </constraints>
