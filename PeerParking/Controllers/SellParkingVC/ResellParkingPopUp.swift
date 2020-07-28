@@ -40,11 +40,28 @@ class ResellParkingPopUp: UIViewController {
         
         priceView.isHidden = true
         
-        self.date = DateHelper.getFormatedDate(dateStr: self.parking_details.startAt ?? "", outFormat: dateFormat.MMddyyy.rawValue)
+        var dateStr = Helper().getFormatedLocalDateTimeTimeZone(dateStr: self.dateToString(date: Date())  ??  "")
         
-        self.time = DateHelper.getFormatedDate(dateStr: self.parking_details.startAt ?? "", outFormat: dateFormat.hmma.rawValue)
+        self.date = dateStr.components(separatedBy: " ")[0]
         
-        self.price = self.parking_details.finalPrice ?? 0.0
+        
+        
+//        self.time = dateStr.components(separatedBy: " ")[1] + " " + dateStr.components(separatedBy: " ")[2]
+        
+        
+        
+        self.time = dateStr.components(separatedBy: " ")[1] + " " + dateStr.components(separatedBy: " ")[2]
+        
+//        let date = Date()
+//                    let formatter = DateFormatter()
+//                    formatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+//                    let result = formatter.string(from: date)
+//
+//        self.time = result.components(separatedBy: " ")[1] + " " + dateStr.components(separatedBy: " ")[2]
+                    
+//                    var date  = Helper().getFormatedDateAndTime(dateStr: GLOBAL_VAR.PARKING_POST_DETAILS["start_at"] as! String)
+        
+        self.price = self.parking_details.initialPrice ?? 0.0
         
         self.nego_switch.isOn = self.parking_details.isNegotiable ?? false
         
@@ -53,11 +70,21 @@ class ResellParkingPopUp: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func dateToString(date : Date) ->String {
+        
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        df.locale = Locale(identifier: "en_US_POSIX")
+        df.timeZone = TimeZone(abbreviation: "GMT")
+        let now = df.string(from: date)
+        return now
+    }
+    
     func setupView(){
         
         self.time_tf.text = self.time
         self.date_tf.text = self.date
-        self.price_tf.text = String(self.price)
+        self.price_tf.text = "$\(String(self.price))"
         
         if(self.price_tf.hasText)&&(self.time_tf.hasText)&&(self.date_tf.hasText){
             

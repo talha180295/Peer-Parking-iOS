@@ -63,7 +63,7 @@ class MySpotParkingDetailVC : UIViewController,UITextFieldDelegate {
     
     var bookingsExist:Bool = false
     
-    let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sarurday", "Sunday"]
+    let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     
     //    var day = ["day" : "", "start_at" : "", "end_at" : ""]
     
@@ -663,6 +663,7 @@ extension MySpotParkingDetailVC{
             if(response != nil){
                 if (response?.success) != nil {
                     Helper().showToast(message: response?.message ?? "-", controller: self)
+                     Helper.deleteChatAndRequests(parkingModel1: self.parkingModel)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         self.dismiss(animated: true){
                             self.delegate.didBackButtonPressed()

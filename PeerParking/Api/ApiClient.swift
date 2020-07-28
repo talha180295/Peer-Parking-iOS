@@ -57,26 +57,31 @@ class APIClient {
                     print(response.response?.statusCode ?? 0)
                     if(response.response?.statusCode ?? 0 >= 200 && response.response?.statusCode ?? 0  <= 299 || response.response?.statusCode ?? 0 == 404){
                         
-                        if response.result.isSuccess {
-                            
-                            
-                            do {
-                                //here dataResponse received from a network request
-                                if let jsonData = response.data{
-                                    let response = try JSONDecoder().decode(dec.self, from:jsonData) //Decode JSON Response Data
-                                    
-                                    completion(response, nil)
+                        if(response.result != nil)
+                        {
+                            if response.result.isSuccess {
+                                
+                                
+                                do {
+                                    //here dataResponse received from a network request
+                                    if let jsonData = response.data{
+                                        let response = try JSONDecoder().decode(dec.self, from:jsonData) //Decode JSON Response Data
+                                        
+                                        completion(response, nil)
+                                    }
+                                } catch let parsingError {
+                                    print("Error", parsingError)
                                 }
-                            } catch let parsingError {
-                                print("Error", parsingError)
+                                
+                                
                             }
-                            
-                            
+                            else{
+                                
+                                completion(nil,response.error!)
+                            }
                         }
-                        else{
-                            
-                            completion(nil,response.error!)
-                        }
+                        
+                        
                     }
                     else if(response.response?.statusCode ?? 0 == 401){
                         

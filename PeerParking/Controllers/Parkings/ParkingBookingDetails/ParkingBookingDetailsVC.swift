@@ -269,8 +269,12 @@ extension ParkingBookingDetailsVC{
             if(response != nil){
                 if (response?.success) != nil {
                     Helper().showToast(message: response?.message ?? "-", controller: self)
+                    
+                    Helper.deleteChatAndRequests(parkingModel1: self.parkingModel)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    
                         Helper().presentOnMainScreens(controller: self, index: 0)
+                    
                     }
                     
                 }
@@ -317,8 +321,8 @@ extension ParkingBookingDetailsVC{
         //
         //        String currentDateandTime = sdf.format(new Date());
         //
-        let currentDateandTime = Date().description(with: .current)
-        let buyerParkingSendingModel = BuyerParkingSendingModel.init(status: status, endAt: currentDateandTime)
+//        let currentDateandTime = Date().description(with: .current)
+        let buyerParkingSendingModel = BuyerParkingSendingModel.init(status: status, endAt: self.dateToString())
         do{
             let data = try JSONEncoder().encode(buyerParkingSendingModel)
             
@@ -366,6 +370,14 @@ extension ParkingBookingDetailsVC{
             print("Error", parsingError)
             
         }
+    }
+    
+    func dateToString() ->String {
+        
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        let now = df.string(from: Date())
+        return now
     }
     
     private func sendNotification(actionType : String , message : String , refId : String) {
