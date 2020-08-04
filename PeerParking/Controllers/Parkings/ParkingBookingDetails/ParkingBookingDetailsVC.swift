@@ -347,11 +347,13 @@ extension ParkingBookingDetailsVC{
                         
                         Helper().showToast(message: response?.message ?? "-", controller: self)
                         
-                        Helper.deleteChatAndRequests(parkingModel1: self.parkingModel)
+                        
                         
                         //FirebaseUtils.deleteChatAndRequests(parkingModel1);
                         if (status == APP_CONSTANT.STATUS_PARKING_PARKED) {
+                            Helper.deleteChatAndRequests(parkingModel1: self.parkingModel)
                             self.parkingModel.status = APP_CONSTANT.STATUS_PARKING_NAVIGATING
+                            
                             //((HomeActivity) getActivity()).popStackTill(1);
                             let vc = FeedbackVC.instantiate(fromPeerParkingStoryboard: .Main)
                             vc.parking_details = self.parkingModel
