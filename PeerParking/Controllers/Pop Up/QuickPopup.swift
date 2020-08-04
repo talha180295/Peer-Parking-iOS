@@ -8,6 +8,8 @@
 
 import UIKit
 import EzPopup
+import GoogleMaps
+import GooglePlaces
 
 class QuickPopup: UIViewController {
 
@@ -17,15 +19,21 @@ class QuickPopup: UIViewController {
     @IBOutlet weak var parkingType:UILabel!
     @IBOutlet weak var size:UILabel!
     
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var locationManager = CLLocationManager()
     var isPrivate = false
     var params:[String:Any]!
     let placeHolderImage = UIImage(named: "placeholder-img")
+     let geocoder = GMSGeocoder()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        self.locationManager.delegate = self
+        self.locationManager.startUpdatingLocation()
         if(self.isPrivate){
            params = GLOBAL_VAR.PRIVATE_PARKING_MODEL
         }
@@ -47,9 +55,10 @@ class QuickPopup: UIViewController {
         }
         
         self.setupView()
-        self.setCoordinates()
+//        self.setCoordinates()
         self.setImage()
         self.setIsAlways()
+    
     }
     
     func setupView(){
@@ -79,10 +88,6 @@ class QuickPopup: UIViewController {
            }
         }
         
-        
-        
-        
-        
         if(size == 10){
             self.size.text =  "\(VehicleTypeText.SUPER_MINI)"
         }
@@ -95,8 +100,6 @@ class QuickPopup: UIViewController {
         else if(size == 40){
             self.size.text =  "\(VehicleTypeText.BUS)"
         }
-        
-    
         
         
     }
@@ -151,5 +154,71 @@ class QuickPopup: UIViewController {
         present(popupVC, animated: true)
         
     }
+    
+    
+    
 
+}
+
+extension QuickPopup:CLLocationManagerDelegate{
+    
+    //Location Manager delegates
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        let location = locations.last
+        
+        
+        
+        let lat = location?.coordinate.latitude ?? 0.0
+               let longg = location?.coordinate.longitude ?? 0.0
+//        let address = location. ?? ""
+               
+//               self.location.text = address
+               
+               GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(lat, forKey: "latitude")
+               GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(longg, forKey: "longitude")
+               
+               GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(lat, forKey: "latitude")
+               GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(longg, forKey: "longitude")
+              
+     
+        
+//        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue((location?.coordinate.latitude.description)!, forKey: "latitude")
+//        GLOBAL_VAR.PARKING_POST_DETAILS.updateValue((location?.coordinate.longitude.description)!, forKey: "longitude")
+//
+//        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue((location?.coordinate.latitude.description)!, forKey: "latitude")
+//        GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue((location?.coordinate.longitude.description)!, forKey: "longitude")
+//
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 14.0)
+//
+//        self.map.animate(to: camera)
+//
+        self.geocoder.reverseGeocodeCoordinate(camera.target) { (response, error) in
+          guard error == nil else {
+            return
+          }
+
+          if let result = response?.firstResult() {
+            result.coordinate
+            let address = result.lines?.first ?? ""
+            print("result=\(address)")
+//            let address = self.appDelegate.currentLocationAddress ?? ""
+            
+            self.location.text = address
+            
+            
+//                          GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(address, forKey: "address")
+//                          GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(address, forKey: "address")
+            
+            GLOBAL_VAR.PARKING_POST_DETAILS.updateValue(address, forKey: "address")
+
+            GLOBAL_VAR.PRIVATE_PARKING_MODEL.updateValue(address, forKey: "address")
+          }
+        }
+
+        
+        //Finally stop updating location otherwise it will come again and again in this delegate
+        self.locationManager.stopUpdatingLocation()
+        
+    }
 }

@@ -18,7 +18,6 @@ import Alamofire
 import iProgressHUD
 import Firebase
 
-
 class Helper{
     
     let iprogress: iProgressHUD = iProgressHUD()
@@ -55,18 +54,12 @@ class Helper{
             
             
         }
-        
-       
-        
-        
-        
-        
+      
     }
     
     
     func getFormatedDateandTime(dateStr:String) -> String{
-           
-           
+          
            if(dateStr == "")
            {
                return "-"
@@ -86,17 +79,61 @@ class Helper{
                    dateFormatter.dateFormat = "MM/dd/yyyy HH:mm a" // Output Formated
                    
                    //        let date: Date? = dateFormatter.date(from: dateStr)
-                   
                    return dateFormatter.string(from: formateDate)
                }
                else
                {
-                   return  dateStr
+                   return dateStr
                }
-               
-               
+            
            }
     }
+    
+       func getFormatedLocalDateTimeTimeZone(dateStr:String) -> String{
+            
+            
+            
+            let dateFormatterGet = DateFormatter()
+            dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            
+//            dateFormatterGet.dateFormat = "MM/dd/yyyy h:mm a"
+                       dateFormatterGet.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+            
+            
+            
+            let dateFormatterPrint = DateFormatter()
+            
+            dateFormatterPrint.dateFormat = "MM/dd/yyyy h:mm a"
+            dateFormatterPrint.locale = Locale.current
+            dateFormatterPrint.timeZone = TimeZone.autoupdatingCurrent
+    //               dateFormatterPrint.calendar = Calendar(identifier: .iso8601)
+    //               dateFormatterPrint.locale = Locale(identifier: "en_US_POSIX")
+    //               dateFormatterPrint.timeZone = TimeZone(secondsFromGMT: 0)
+    //        dateFormatterPrint.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            
+            if(dateFormatterGet.date(from: dateStr) != nil)
+            {
+                 let date =  dateFormatterGet.date(from: dateStr)!
+                       
+                       return dateFormatterPrint.string(from: date)
+            }
+            else
+            {
+                return dateStr
+            }
+            
+           
+    //        let dateFormatter = DateFormatter()
+    //        dateFormatter.dateFormat = APP_CONSTANT.DATE_TIME_FORMAT
+    //
+    //        let formateDate = dateFormatter.date(from:dateStr)!
+    //        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // Output Formated
+    //
+    //        //        let date: Date? = dateFormatter.date(from: dateStr)
+    //
+    //        return dateFormatter.string(from: formateDate)
+        }
+    
     func getFormatedServerDateTime(dateStr:String) -> String{
         
         
@@ -292,22 +329,17 @@ class Helper{
     public static func deleteChatAndRequests(parkingModel1 : Parking) {
         
         var parkingChatReference =  Database.database().reference(withPath: "chat/").child(String(parkingModel1.id!)).child(String(parkingModel1.buyerID!))
-        
-        
         var parkingRequestsReference =  Database.database().reference(withPath: "requests/").child(String(parkingModel1.id!)).child("\(parkingModel1.id) - \(parkingModel1.buyerID)")
         
         var sellerRequestIndexReference = Database.database().reference(withPath: "sellerRequestsIndex/")
         var buyerRequestIndexReference = Database.database().reference(withPath: "buyerRequestsIndex/")
         
-         var refId = String(parkingModel1.id!) + "-" + String(parkingModel1.buyerID!)
-        
-        
+        var refId = String(parkingModel1.id!) + "-" + String(parkingModel1.buyerID!)
         buyerRequestIndexReference.child(String(parkingModel1.buyerID!)).child(refId).removeValue()
         sellerRequestIndexReference.child(String(parkingModel1.sellerID!)).child(refId).removeValue()
-        
-        
         parkingRequestsReference.removeValue()
         parkingChatReference.removeValue()
+        
 //        DatabaseReference parkingChatReference = FirebaseDatabase.getInstance().getReference("chat/")
 //                .child(String.valueOf(parkingModel1.getId())).child(String.valueOf(parkingModel1.getBuyerId()));
 //        DatabaseReference parkingRequestsReference = FirebaseDatabase.getInstance().getReference("requests/")

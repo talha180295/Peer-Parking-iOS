@@ -14,7 +14,7 @@ enum dateFormat:String{
     case yyyyMMdd = "yyyy-MM-dd"
     case ddMMyyy = "dd/MM/yyyy"
     case MMddyyy = "MM/dd/yyyy"
-    case hmma = "h:mm a"
+    case hmma = "hh:mm a"
     case HHmmss = "HH:mm:ss"
 }
 
@@ -33,12 +33,14 @@ class DateHelper {
             
             let inDateFormatter = DateFormatter()
             inDateFormatter.dateFormat = inFormat
-            
+//            inDateFormatter.locale = NSLocale.system
+           
             if(inDateFormatter.date(from:dateStr) != nil){
                 
                 let inFormateDate = inDateFormatter.date(from:dateStr)!
                 
                 let outDateFormatter = DateFormatter()
+//                outDateFormatter.locale = NSLocale.system
                 outDateFormatter.dateFormat = outFormat
                 let outFormateDate = outDateFormatter.string(from: inFormateDate)
                 return outFormateDate

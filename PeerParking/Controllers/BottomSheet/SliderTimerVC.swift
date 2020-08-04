@@ -437,8 +437,41 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
     
     func addBookedSlotView(parking : Parking)
     {
-        self.startTime.append(self.convertStringToDate(dateStr1: parking.startAt!))
-        self.endTime.append(self.convertStringToDate(dateStr1: parking.endAt!))
+        
+        
+        
+        if let endAt = parking.endAt{
+            
+//            self.endTime.append(endAt)
+            
+            if let end = self.convertStringToDate(dateStr1: endAt) {
+                self.endTime.append(end)
+                           self.endTimeInt.append(self.convertServerDateToMinutes(date_string: endAt))
+                
+                
+                if let strtAt = parking.startAt{
+                               
+                               self.startTime.append(self.convertStringToDate(dateStr1: strtAt)!)
+                               self.startTimeInt.append(self.convertServerDateToMinutes(date_string: strtAt))
+                               
+                           }
+                           
+                           let startTime : String = parking.startAt?.components(separatedBy: " ")[1] ?? ""
+                           let startHour : Int = Int( startTime.components(separatedBy: ":")[0] )!
+                           
+                           let endTime : String = endAt.components(separatedBy: " ")[1] ?? ""
+                           let endHour : Int = Int( endTime.components(separatedBy: ":")[0] )!
+            }
+            
+            
+            
+            
+           
+            
+        }
+        
+//        self.startTime.append(self.convertStringToDate(dateStr1: parking.startAt!))
+//        self.endTime.append(self.convertStringToDate(dateStr1: parking.endAt!))
         
         
         
@@ -446,20 +479,16 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
         
 //        self.startTimeInt.append(self.convertInMinutes(date1: self.convertStringToDate(dateStr1: parking.startAt!)))
         
-        self.startTimeInt.append(self.convertServerDateToMinutes(date_string: parking.startAt!))
-        self.endTimeInt.append(self.convertServerDateToMinutes(date_string: parking.endAt!))
+//        self.startTimeInt.append(self.convertServerDateToMinutes(date_string: parking.startAt!))
+//        self.endTimeInt.append(self.convertServerDateToMinutes(date_string: parking.endAt!))
         
 //        self.endTimeInt.append(self.convertInMinutes(date1: self.convertStringToDate(dateStr1: parking.endAt!)))
         
         
         
-        let startTime : String = parking.startAt?.components(separatedBy: " ")[1] ?? ""
-        let startHour : Int = Int( startTime.components(separatedBy: ":")[0] )!
         
-        let endTime : String = parking.endAt?.components(separatedBy: " ")[1] ?? ""
-        let endHour : Int = Int( endTime.components(separatedBy: ":")[0] )!
         
-        print(String(endHour))
+//        print(String(endHour))
 //        self.outletArray[parking.startAt]
         
         
@@ -941,10 +970,10 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
         return time1
     }
     
-    func convertStringToDate(dateStr1 : String)->Date{
+    func convertStringToDate(dateStr1 : String)->Date?{
         
         let dateFormatterPrint = DateFormatter()
-                
+        var date : Date? = nil
        
         
                 dateFormatterPrint.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -955,10 +984,19 @@ let entry1 = BarChartDataEntry(x: Double(200), y: Double(100))
                      
         //        dateFormatterPrint.dateFormat = "yyyy-MM-dd HH:mm:ss"
                 
-                let date =  dateFormatterPrint.date(from: dateStr1)!
-        print(stringFromTime(interval: 12345.67))
         
-        return date
+        
+        if( dateFormatterPrint.date(from: dateStr1) != nil )
+        {
+            date =  dateFormatterPrint.date(from: dateStr1)!
+//            print(stringFromTime(interval: 12345.67))
+            
+           
+        }
+       return date
+        
+        
+                
     }
     
 //    func convertStringToTime(dateStr1 : String)->Date{

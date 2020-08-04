@@ -41,6 +41,8 @@ class TimeFinishPopup: UIViewController {
                 if (response?.success) != nil {
                     Helper().showToast(message: "\(response?.message ?? "-")", controller: self)
                    
+                    Helper.deleteChatAndRequests(parkingModel1: self.parking_details)
+                    
                 }
                 else{
                     Helper().showToast(message: "Server Message=\(response?.message ?? "-" )", controller: self)
