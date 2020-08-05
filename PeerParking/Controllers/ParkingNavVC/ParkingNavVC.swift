@@ -138,6 +138,7 @@ class ParkingNavVC: UIViewController{
             //            sendingService = LiveLocationSendingService(parkingId: String(self.parkingModel.id!))
             //            sellerLocationUpdates()
             self.title = "Navigation"
+            self.navigationStart = true
             locationUpdates()
         }
         
@@ -438,49 +439,121 @@ class ParkingNavVC: UIViewController{
     
     func locationUpdates(){
         
-        let request = LocationManager.shared.locateFromGPS(.continous, accuracy: .city) { data in
+//        let request = LocationManager.shared.locateFromGPS(.continous, accuracy: .city) { data in
+//            switch data {
+//            case .failure(let error):
+//                print("Location error: \(error)")
+//            case .success(let location):
+//
+//                print("New Locationabc: \(location)")
+//                self.c_lat =  Double(round(10000*(location.coordinate.latitude))/10000)
+//                self.c_longg = Double(round(10000*(location.coordinate.longitude))/10000)
+//
+//                if let leg = self.legs{
+//
+//
+//
+//                    let endLat =  Double(round(10000*(leg[0].steps?[self.counter].endLocation?.lat ?? 0.0))/10000)
+//                    let endLng =  Double(round(10000*(leg[0].steps?[self.counter].endLocation?.lng ?? 0.0))/10000)
+//
+//                    print("\(endLat) == \(self.c_lat )  \(endLng)  == \(self.c_longg)")
+//
+//                    print("\(self.legs[0].steps?.count ?? 0) ===  \(self.counter)")
+//                    if(endLat == self.c_lat )&&(endLng == self.c_longg){
+//
+//                        self.counter += 1
+//                        let target = CLLocationCoordinate2D(latitude: self.c_lat, longitude: self.c_longg)
+//                        if((self.legs[0].steps?.count ?? 0 > self.counter)){
+//                            self.bearing = self.calculateBearer(legs: self.legs)
+//                        }
+//
+//                        let camera = GMSCameraPosition.camera(withTarget: target, zoom: 18, bearing: self.bearing, viewingAngle: 180)
+//                        self.map.animate(to: camera)
+//                        Helper().showToast(message: "step#\(self.counter) completed", controller: self)
+//
+//                    }
+//                }
+//                let sourcePosition = CLLocationCoordinate2D(latitude: self.c_lat, longitude: self.c_longg)
+//                let endPosition = CLLocationCoordinate2D(latitude: self.d_lat, longitude: self.d_longg)
+//
+//                self.getPolylineRouteForNavigationOnly(from: sourcePosition, to: endPosition)
+////                self.drawRouteOnly()
+//
+//            }
+//        }
+//        request.dataFrequency = .fixed(minInterval: 40, minDistance: 100)
+//
+        let request = LocationManager.shared.locateFromGPS(.continous, accuracy: .city, distance: 1) { data in
             switch data {
             case .failure(let error):
                 print("Location error: \(error)")
             case .success(let location):
                 
+                
                 print("New Locationabc: \(location)")
-                self.c_lat =  Double(round(10000*(location.coordinate.latitude))/10000)
-                self.c_longg = Double(round(10000*(location.coordinate.longitude))/10000)
+                let clat =  Double(round(10000000*(location.coordinate.latitude))/10000000)
+                let cLong = Double(round(10000000*(location.coordinate.longitude))/10000000)
+                
+                let sourcePosition =  CLLocationCoordinate2D(latitude: clat, longitude: cLong)
+                let endPosition = CLLocationCoordinate2D(latitude: self.d_lat, longitude: self.d_longg)
+                self.setParkingMaker(position: endPosition, title: APP_CONSTANT.THIS_IS_PARKING_SPOT)
+                self.setCurrentMaker(position: sourcePosition, title: APP_CONSTANT.THIS_IS_ME)
+//
+//                if self.isBuyerNavigating{
+//                    self.sendingService.setBuyerCurrentLocation(lat: clat, long: cLong){_ in }
+//                }
                 
                 if let leg = self.legs{
-                    
-                    
                     
                     let endLat =  Double(round(10000*(leg[0].steps?[self.counter].endLocation?.lat ?? 0.0))/10000)
                     let endLng =  Double(round(10000*(leg[0].steps?[self.counter].endLocation?.lng ?? 0.0))/10000)
                     
-                    print("\(endLat) == \(self.c_lat )  \(endLng)  == \(self.c_longg)")
                     
-                    print("\(self.legs[0].steps?.count ?? 0) ===  \(self.counter)")
-                    if(endLat == self.c_lat )&&(endLng == self.c_longg){
+                    
+                    if(endLat == clat )&&(endLng == cLong){
                         
                         self.counter += 1
-                        let target = CLLocationCoordinate2D(latitude: self.c_lat, longitude: self.c_longg)
+                        let target = CLLocationCoordinate2D(latitude: clat, longitude: cLong)
                         if((self.legs[0].steps?.count ?? 0 > self.counter)){
                             self.bearing = self.calculateBearer(legs: self.legs)
                         }
                         
                         let camera = GMSCameraPosition.camera(withTarget: target, zoom: 18, bearing: self.bearing, viewingAngle: 180)
                         self.map.animate(to: camera)
-                        Helper().showToast(message: "step#\(self.counter) completed", controller: self)
+                        //                        Helper().showToast(message: "step#\(self.counter) completed", controller: self)
                         
                     }
                 }
-                let sourcePosition = CLLocationCoordinate2D(latitude: self.c_lat, longitude: self.c_longg)
-                let endPosition = CLLocationCoordinate2D(latitude: self.d_lat, longitude: self.d_longg)
+                else{
+                    
+                    self.getPolylineRoute2(from: sourcePosition , to: endPosition)
+                    
+                }
                 
-                self.getPolylineRouteForNavigationOnly(from: sourcePosition, to: endPosition)
-//                self.drawRouteOnly()
+                
+                
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    //                    self.map.clear()
+                    self.getPolylineRoute2(from: sourcePosition , to: endPosition)
+                    //                    self.drawRouteOnly()
+                    Helper().calculateTimeAndDistance(s_lat: sourcePosition.latitude, s_longg: sourcePosition.longitude, d_lat: endPosition.latitude, d_longg: endPosition.longitude) { (distance,duration) in
+                        self.lblDistance.text = distance
+                        self.lblTime.text = duration
+                        //                        self.getPolylineRoute(from: sourcePosition , to: endPosition)
+                    }
+                    
+                }
+                
+                //                self.getPolylineRoute(from: sourcePosition, to: endPosition)
+                
+                
+                
                 
             }
         }
         request.dataFrequency = .fixed(minInterval: 40, minDistance: 100)
+        
     }
     
     func degreesToRadians(degrees: Double) -> Double { return degrees * .pi / 180.0 }
@@ -852,11 +925,15 @@ extension ParkingNavVC:LiveLocationReceivingServiceDeleegate{
     
     func trackBuyer(){
         
+        self.sourcePosition = self.buyerLocation!
+        
         if !trackingStart{
-            self.sourcePosition = self.buyerLocation!
+            
             loadMapViewForTrack()
             trackingStart = true
+            self.getPolylineRoute2(from: self.sourcePosition! , to: self.parkingPosition)
         }
+       
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             
             self.getPolylineRoute2(from: self.sourcePosition! , to: self.parkingPosition)
