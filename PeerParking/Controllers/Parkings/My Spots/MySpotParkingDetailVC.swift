@@ -551,6 +551,7 @@ extension MySpotParkingDetailVC{
                 if(response != nil){
                     if (response?.success) != nil {
                         Helper().showToast(message: response?.message ?? "-", controller: self)
+                        
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                             self.dismiss(animated: true){
                                 self.delegate.didBackButtonPressed()
@@ -607,6 +608,11 @@ extension MySpotParkingDetailVC{
                 if(response != nil){
                     if (response?.success) != nil {
                         Helper().showToast(message: response?.message ?? "-", controller: self)
+                        if(self.privateParkingModel.status == APP_CONSTANT.STATUS_PRIVATE_PARKING_CANCEL)
+                        {
+//                            Helper.deleteChatAndRequests(parkingModel1: self.privateParkingModel)
+                        }
+                        
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                             self.dismiss(animated: true){
                                 self.delegate.didBackButtonPressed()
@@ -681,8 +687,11 @@ extension MySpotParkingDetailVC{
                 if (response?.success) != nil {
                     Helper().showToast(message: response?.message ?? "-", controller: self)
                     
-                    Helper.deleteChatAndRequests(parkingModel1: self.parkingModel)
+                   
+//                        Helper.deleteChatAndRequests(parkingModel1: self.parkingModel)
                     
+                    
+                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         self.dismiss(animated: true){
                             self.delegate.didBackButtonPressed()

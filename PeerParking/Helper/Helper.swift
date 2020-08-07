@@ -328,17 +328,28 @@ class Helper{
     
     public static func deleteChatAndRequests(parkingModel1 : Parking) {
         
-        var parkingChatReference =  Database.database().reference(withPath: "chat/").child(String(parkingModel1.id!)).child(String(parkingModel1.buyerID!))
-        var parkingRequestsReference =  Database.database().reference(withPath: "requests/").child(String(parkingModel1.id!)).child("\(parkingModel1.id) - \(parkingModel1.buyerID)")
         
-        var sellerRequestIndexReference = Database.database().reference(withPath: "sellerRequestsIndex/")
-        var buyerRequestIndexReference = Database.database().reference(withPath: "buyerRequestsIndex/")
         
-        var refId = String(parkingModel1.id!) + "-" + String(parkingModel1.buyerID!)
-        buyerRequestIndexReference.child(String(parkingModel1.buyerID!)).child(refId).removeValue()
-        sellerRequestIndexReference.child(String(parkingModel1.sellerID!)).child(refId).removeValue()
-        parkingRequestsReference.removeValue()
-        parkingChatReference.removeValue()
+        
+        if let buyerId = parkingModel1.buyerID {
+            
+            
+            var parkingChatReference =  Database.database().reference(withPath: "chat/").child(String(parkingModel1.id!)).child(String(buyerId))
+            var parkingRequestsReference =  Database.database().reference(withPath: "requests/").child(String(parkingModel1.id!)).child("\(parkingModel1.id) - \(buyerId)")
+            
+            var sellerRequestIndexReference = Database.database().reference(withPath: "sellerRequestsIndex/")
+            var buyerRequestIndexReference = Database.database().reference(withPath: "buyerRequestsIndex/")
+            
+            var refId = String(parkingModel1.id!) + "-" + String(buyerId)
+            buyerRequestIndexReference.child(String(buyerId)).child(refId).removeValue()
+            sellerRequestIndexReference.child(String(buyerId)).child(refId).removeValue()
+            parkingRequestsReference.removeValue()
+            parkingChatReference.removeValue()
+        }
+        
+        
+        
+        
         
 //        DatabaseReference parkingChatReference = FirebaseDatabase.getInstance().getReference("chat/")
 //                .child(String.valueOf(parkingModel1.getId())).child(String.valueOf(parkingModel1.getBuyerId()));
