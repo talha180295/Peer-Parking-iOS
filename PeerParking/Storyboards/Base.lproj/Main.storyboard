@@ -7385,10 +7385,10 @@ typeset text.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lp1-5e-oaF">
-                                <rect key="frame" x="0.0" y="44" width="414" height="670"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="626"/>
                                 <color key="backgroundColor" red="0.39248247079999998" green="0.83005145069999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egF-6g-roK">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egF-6g-roK">
                                 <rect key="frame" x="0.0" y="807" width="414" height="55"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceS-SD-08d">
@@ -7410,9 +7410,6 @@ typeset text.</string>
                                         <state key="normal" title="Park Now">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
-                                        <connections>
-                                            <action selector="park_now_btn:" destination="kUV-fN-Aqh" eventType="touchUpInside" id="Guy-C3-ylx"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.87439505390000005" green="1" blue="0.4693221863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -7535,8 +7532,18 @@ typeset text.</string>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="oaD-cK-ry1">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vae-Hs-ajI">
+                                                <rect key="frame" x="0.0" y="0.0" width="138" height="55"/>
+                                                <color key="backgroundColor" name="themeBlue"/>
+                                                <state key="normal" title="Park Now">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="parkNowBtn:" destination="kUV-fN-Aqh" eventType="touchUpInside" id="L2M-uh-hbr"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGY-bN-UUb">
-                                                <rect key="frame" x="0.0" y="0.0" width="207" height="55"/>
+                                                <rect key="frame" x="138" y="0.0" width="138" height="55"/>
                                                 <color key="backgroundColor" name="themeBlue"/>
                                                 <state key="normal" title="GO">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -7546,7 +7553,7 @@ typeset text.</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HFB-aA-R8a">
-                                                <rect key="frame" x="207" y="0.0" width="207" height="55"/>
+                                                <rect key="frame" x="276" y="0.0" width="138" height="55"/>
                                                 <color key="backgroundColor" red="0.93725490199999995" green="0.20392156859999999" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Cancel">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -7567,18 +7574,32 @@ typeset text.</string>
                                     <constraint firstItem="oaD-cK-ry1" firstAttribute="leading" secondItem="9rs-vb-4gS" secondAttribute="leading" id="wKe-hh-eLR"/>
                                 </constraints>
                             </view>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mvh-Sv-MWZ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="Jsz-rM-nkc">
+                                        <barButtonItem key="leftBarButtonItem" image="back_btn" id="Utl-si-7HV">
+                                            <connections>
+                                                <action selector="backBtn:" destination="kUV-fN-Aqh" id="1KA-BD-c3m"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Dd9-PJ-1KN" firstAttribute="leading" secondItem="zae-20-SfB" secondAttribute="leading" id="2pF-Gf-hcz"/>
-                            <constraint firstItem="Lp1-5e-oaF" firstAttribute="top" secondItem="zae-20-SfB" secondAttribute="top" id="3wV-5L-tZz"/>
                             <constraint firstItem="K8p-Uw-qPQ" firstAttribute="top" secondItem="Lp1-5e-oaF" secondAttribute="bottom" constant="-54" id="GiG-mW-udU"/>
                             <constraint firstItem="egF-6g-roK" firstAttribute="trailing" secondItem="zae-20-SfB" secondAttribute="trailing" id="Jap-NK-Ooh"/>
                             <constraint firstItem="9rs-vb-4gS" firstAttribute="leading" secondItem="zae-20-SfB" secondAttribute="leading" id="JhP-Sp-cZZ"/>
                             <constraint firstItem="Lp1-5e-oaF" firstAttribute="trailing" secondItem="zae-20-SfB" secondAttribute="trailing" id="Kkr-mE-jLs"/>
+                            <constraint firstItem="Lp1-5e-oaF" firstAttribute="top" secondItem="Mvh-Sv-MWZ" secondAttribute="bottom" id="Pix-IY-wCy"/>
                             <constraint firstItem="egF-6g-roK" firstAttribute="bottom" secondItem="zae-20-SfB" secondAttribute="bottom" id="SE1-3Z-SiN"/>
                             <constraint firstItem="Dd9-PJ-1KN" firstAttribute="top" secondItem="Lp1-5e-oaF" secondAttribute="bottom" id="Ykp-Lt-sgM"/>
+                            <constraint firstItem="Mvh-Sv-MWZ" firstAttribute="leading" secondItem="zae-20-SfB" secondAttribute="leading" id="aGT-2D-7jO"/>
                             <constraint firstItem="9rs-vb-4gS" firstAttribute="trailing" secondItem="zae-20-SfB" secondAttribute="trailing" id="f8v-vl-bjv"/>
+                            <constraint firstItem="Mvh-Sv-MWZ" firstAttribute="top" secondItem="zae-20-SfB" secondAttribute="top" id="gCv-7O-X3B"/>
                             <constraint firstItem="egF-6g-roK" firstAttribute="leading" secondItem="zae-20-SfB" secondAttribute="leading" id="gg6-PE-hxV"/>
                             <constraint firstItem="zae-20-SfB" firstAttribute="trailing" secondItem="K8p-Uw-qPQ" secondAttribute="trailing" id="gxf-ED-vOr"/>
                             <constraint firstItem="egF-6g-roK" firstAttribute="top" secondItem="Dd9-PJ-1KN" secondAttribute="bottom" id="kTV-43-mnM"/>
@@ -7586,10 +7607,11 @@ typeset text.</string>
                             <constraint firstItem="Dd9-PJ-1KN" firstAttribute="top" secondItem="K8p-Uw-qPQ" secondAttribute="bottom" constant="-51" id="lDO-s7-BGe"/>
                             <constraint firstItem="Dd9-PJ-1KN" firstAttribute="trailing" secondItem="zae-20-SfB" secondAttribute="trailing" id="oxQ-SQ-wUH"/>
                             <constraint firstItem="9rs-vb-4gS" firstAttribute="top" secondItem="Dd9-PJ-1KN" secondAttribute="bottom" id="uMy-7X-iXi"/>
+                            <constraint firstItem="Mvh-Sv-MWZ" firstAttribute="trailing" secondItem="zae-20-SfB" secondAttribute="trailing" id="zgj-8r-bRc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zae-20-SfB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Norway                                                      " leftItemsSupplementBackButton="YES" id="5l5-v3-CCw"/>
+                    <navigationItem key="navigationItem" title="Norway                                                      " leftItemsSupplementBackButton="YES" id="5l5-v3-CCw" userLabel="Norway"/>
                     <connections>
                         <outlet property="altrBtn" destination="K8p-Uw-qPQ" id="7gb-y0-BJ4"/>
                         <outlet property="btnCan" destination="HFB-aA-R8a" id="Tu3-Fq-XuK"/>
@@ -7598,13 +7620,14 @@ typeset text.</string>
                         <outlet property="lblDistance" destination="rlU-iP-Ng1" id="WSw-NY-ic4"/>
                         <outlet property="lblTime" destination="WdZ-qk-3mF" id="7dh-Wx-8yJ"/>
                         <outlet property="mapView" destination="Lp1-5e-oaF" id="buB-DO-Wyl"/>
-                        <outlet property="parkView" destination="egF-6g-roK" id="nVC-vh-PX5"/>
+                        <outlet property="navItem" destination="Jsz-rM-nkc" id="VG9-dN-X89"/>
+                        <outlet property="parkNowBtn" destination="Vae-Hs-ajI" id="2as-Nb-EvE"/>
                         <outlet property="parking_title" destination="aQI-ec-YDp" id="tKY-iH-RPq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pws-x9-mcg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3244.9275362318845" y="-1008.4821428571428"/>
+            <point key="canvasLocation" x="3300.0000000000005" y="-1012.5"/>
         </scene>
         <!--Alternate Route View Controller-->
         <scene sceneID="pyi-Nw-LzC">
@@ -10198,7 +10221,7 @@ Click Finish to publish your offer</string>
         <scene sceneID="Nom-Wd-jHj">
             <objects>
                 <viewController storyboardIdentifier="changeVC" id="pfm-Od-AcY" customClass="ChangePassViewController" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="FqI-3q-kVc">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="FqI-3q-kVc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

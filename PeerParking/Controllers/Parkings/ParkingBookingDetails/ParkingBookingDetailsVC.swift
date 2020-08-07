@@ -103,8 +103,8 @@ class ParkingBookingDetailsVC: UIViewController {
 //        vc.p_longg = d_longg
        
 //        vc.alternateRoutes = alternateRoutes
-        self.navigationController?.pushViewController(vc, animated: true)
-//        self.present(vc, animated: false, completion: nil)
+//        self.navigationController?.pushViewController(vc, animated: true)
+        self.present(vc, animated: false, completion: nil)
     }
     @IBAction func parkNowBtnClick(_sender:UIButton){
         

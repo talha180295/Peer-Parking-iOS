@@ -23,12 +23,13 @@ class ParkingNavVC: UIViewController{
     
     @IBOutlet weak var btnCan: UIButton!
     @IBOutlet weak var goBtn: UIButton!
+    @IBOutlet weak var parkNowBtn: UIButton!
     @IBOutlet weak var cancelHeight: NSLayoutConstraint! ///55
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var lblDistance: UILabel!
     @IBOutlet weak var altrBtn: UIButton!
-    @IBOutlet weak var parkView: UIView!
-    
+//    @IBOutlet weak var parkView: UIView!
+    @IBOutlet weak var navItem: UINavigationItem!
     
     
     var isMapLoaded = false
@@ -90,17 +91,16 @@ class ParkingNavVC: UIViewController{
         
         sourcePosition = CLLocationCoordinate2D(latitude: c_lat, longitude: c_long)
         
-        
         self.lblDistance.text = ""
         self.lblTime.text = ""
-        
+        self.parkNowBtn.isHidden = true
         print("ParkingNavVC=\(vcName)")
         //        loadMapView()
         self.parking_title.text = p_title
         
         if isTracking{
             goBtn.isHidden = true
-            self.title = "Track Buyer"
+            self.navItem.title = "Track Buyer"
             self.parking_title.text = self.parkingModel.address ?? "-"
             self.parkingPosition = CLLocationCoordinate2D(latitude: Double(self.parkingModel.latitude ?? "0.0")!, longitude: Double(self.parkingModel.longitude ?? "0.0")!)
             //            self.setParkingMaker(position: parkingPosition, title: APP_CONSTANT.THIS_IS_PARKING_SPOT)
@@ -109,7 +109,7 @@ class ParkingNavVC: UIViewController{
         }
         else if isBuyerNavigating{
             
-            self.title = "Navigation"
+            self.navItem.title = "Navigation"
             self.parking_title.text = self.parkingModel.address ?? "-"
             self.parkingPosition = CLLocationCoordinate2D(latitude: Double(self.parkingModel.latitude ?? "0.0")!, longitude: Double(self.parkingModel.longitude ?? "0.0")!)
             self.setParkingMaker(position: parkingPosition, title: APP_CONSTANT.THIS_IS_PARKING_SPOT)
@@ -137,7 +137,7 @@ class ParkingNavVC: UIViewController{
         else if isNavigating{
             //            sendingService = LiveLocationSendingService(parkingId: String(self.parkingModel.id!))
             //            sellerLocationUpdates()
-            self.title = "Navigation"
+            self.navItem.title = "Navigation"
             self.navigationStart = true
             locationUpdates()
         }
@@ -153,20 +153,20 @@ class ParkingNavVC: UIViewController{
         
         if(vcName.elementsEqual("nav"))
         {
-            parkView.isHidden = true
+//            parkView.isHidden = true
             cancelHeight.constant = 55
             btnCan.isHidden = false
             goBtn.isHidden = true
         }
         else if (vcName.elementsEqual("track")){
-            parkView.isHidden = true
+//            parkView.isHidden = true
             cancelHeight.constant = 55
             btnCan.isHidden = false
             altrBtn.isHidden = true
         }
         else
         {
-            parkView.isHidden = false
+//            parkView.isHidden = false
             cancelHeight.constant = 0
             btnCan.isHidden = true
         }
@@ -629,17 +629,22 @@ class ParkingNavVC: UIViewController{
     }
     
     
-    
-    @IBAction func park_now_btn(_ sender: UIButton) {
+    @IBAction func backBtn(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func parkNowBtn(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Alert!", message: "Do you really want to park?", preferredStyle: .alert)
         
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+            self.setParkingStatus(status: APP_CONSTANT.STATUS_PARKING_PARKED)
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
+            alert.dismiss(animated: true, completion: nil)
+        }))
         
-        
-        if let id = p_id {
-            
-            print("p_id==\(id)")
-            assign_buyer(p_id: id, status: APP_CONSTANT.STATUS_PARKING_PARKED)
-            
-        }
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func cancel_btn(_ sender: UIButton) {
@@ -704,6 +709,8 @@ class ParkingNavVC: UIViewController{
             if(response != nil){
                 if (response?.success) != nil {
                     Helper().showToast(message: response?.message ?? "-", controller: self)
+                    
+                    Helper.deleteChatAndRequests(parkingModel1: self.parkingModel)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         //                        self.dismiss(animated: true)
                         Helper().presentOnMainScreens(controller: self, index: 0)
@@ -746,6 +753,7 @@ class ParkingNavVC: UIViewController{
     
     func buyerNavigationStart(){
         goBtn.isHidden = true
+        self.parkNowBtn.isHidden = false
         sendingService = LiveLocationSendingService(parkingId: String(self.parkingModel.id!))
         
         self.navigationStart = true
@@ -853,11 +861,12 @@ class ParkingNavVC: UIViewController{
                     //                     UserDefaults.standard.set("yes", forKey: "login")
                     //                    UserDefaults.standard.synchronize()
                     SharedHelper().showToast(message: message, controller: self)
+                    let data = responseData["data"] as? [String:Any]
+                    let model = Parking.init(dictionary: data ?? [:])
                     
-                    
-                    if self.parkingModel.status == APP_CONSTANT.STATUS_PARKING_PARKED{
+                    if model?.status == APP_CONSTANT.STATUS_PARKING_PARKED{
                         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedbackVC") as! FeedbackVC
-                        vc.parking_details = self.parking_details
+                        vc.parking_details = model
                         vc.p_id = p_id
                         self.present(vc, animated: true, completion: nil)
                     }
