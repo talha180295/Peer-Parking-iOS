@@ -490,7 +490,13 @@ extension AppDelegate{
                             vc.parkingModel = val
 //                            vc.setParingModel(parkingModel: val)
                             vc.modalPresentationStyle = .fullScreen
-                            self.window?.rootViewController?.present(vc, animated: true,completion: nil)
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            guard let newRoot = storyboard.instantiateInitialViewController() else {
+                                return // This shouldn't happen
+                            }
+                            UIApplication.shared.delegate?.window??.rootViewController = newRoot
+                            UIApplication.shared.delegate?.window??.rootViewController?.present(vc, animated: true,completion: nil)
+//                            self.window?.rootViewController?.present(vc, animated: true,completion: nil)
                             
                         }
                     }
@@ -542,7 +548,12 @@ extension AppDelegate{
                         let vc = ChatVC.instantiate(fromPeerParkingStoryboard: .Chat)
                         vc.parking_details = model
                         vc.modalPresentationStyle = .fullScreen
-                        self.window?.rootViewController?.present(vc, animated: true,completion: nil)
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        guard let newRoot = storyboard.instantiateInitialViewController() else {
+                            return // This shouldn't happen
+                        }
+                        UIApplication.shared.delegate?.window??.rootViewController = newRoot
+                        UIApplication.shared.delegate?.window??.rootViewController?.present(vc, animated: true,completion: nil)
 //                        Intent i = new Intent(HomeActivity.this, ChatActivity.class);
 //                        String parkingJson= gson.toJson(model);
 //                        i.putExtra("parkingModel", parkingJson);
