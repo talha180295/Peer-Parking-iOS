@@ -70,6 +70,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate ,UNUserNotificationCenterD
             application.registerUserNotificationSettings(settings)
         }
         
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = .light
+        }
+        
         application.registerForRemoteNotifications()
         
         Messaging.messaging().isAutoInitEnabled = true
