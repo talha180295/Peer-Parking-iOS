@@ -37,6 +37,7 @@ enum APIRouter: URLRequestConvertible {
     case withdraw([String:Any])
     case addExternalCard([String:Any])
     case privateParkingEdit(id:Int,Data)
+    case reportParking(Data)
     
     
     
@@ -51,7 +52,7 @@ enum APIRouter: URLRequestConvertible {
         case .getParkingsWithoutToken,.getParkings,.getParkingsById,.getBargainings,.getBargainingsById , .getTransactions ,.getPrivateParkings:
             return .get
             
-        case .postParking,.postBargainingOffer,.addUserCard,.me,.refresh, .cancelSellerParking, .assignBuyer, .updateParking, .cancelBuyerParking, .createTempParking, .sendNotification, .loginUser, .chargeCard,.withdraw, .addExternalCard, .privateParkingEdit, .postPublicParking:
+        case .postParking,.postBargainingOffer,.addUserCard,.me,.refresh, .cancelSellerParking, .assignBuyer, .updateParking, .cancelBuyerParking, .createTempParking, .sendNotification, .loginUser, .chargeCard,.withdraw, .addExternalCard, .privateParkingEdit, .postPublicParking , .reportParking:
             return .post
             
         }
@@ -109,6 +110,8 @@ enum APIRouter: URLRequestConvertible {
             return "external-cards"
         case .privateParkingEdit(let id, _):
             return "private-parkings-edit/\(id)"
+        case .reportParking(_):
+            return "parking-reports"
            
             
         }
@@ -154,6 +157,8 @@ enum APIRouter: URLRequestConvertible {
             return nil
         case .addExternalCard(let params):
             return (params)
+        case .reportParking(_):
+            return nil
             
             
             
@@ -164,7 +169,7 @@ enum APIRouter: URLRequestConvertible {
     private var urlEncoding: URLEncoding {
         switch self {
             
-        case .assignBuyer, .updateParking, .createTempParking, .sendNotification , .loginUser, .privateParkingEdit, .postPublicParking:
+        case .assignBuyer, .updateParking, .createTempParking, .sendNotification , .loginUser, .privateParkingEdit, .postPublicParking,.reportParking:
             return .httpBody
         case .getParkingsWithoutToken, .postParking ,.getParkings, .getParkingsById, .postBargainingOffer, .me, .refresh ,.cancelSellerParking ,.getBargainingsById ,.getTransactions ,.getPrivateParkings,.getBargainings ,.cancelBuyerParking:
             return .default
@@ -177,7 +182,7 @@ enum APIRouter: URLRequestConvertible {
     private var body: Data? {
         switch self {
             
-        case .assignBuyer(_,let data), .updateParking(_,let data), .createTempParking(let data), .sendNotification(let data) ,.loginUser(let data), .privateParkingEdit(_,let data) , .postPublicParking(let data):
+        case .assignBuyer(_,let data), .updateParking(_,let data), .createTempParking(let data), .sendNotification(let data) ,.loginUser(let data), .privateParkingEdit(_,let data) , .postPublicParking(let data),.reportParking(let data):
             return data
         case .getParkingsWithoutToken, .postParking ,.getParkings, .getParkingsById, .postBargainingOffer, .addUserCard, .me, .refresh ,.cancelSellerParking ,.getBargainingsById ,.getTransactions ,.getPrivateParkings, .getBargainings, .cancelBuyerParking,.chargeCard,.withdraw, .addExternalCard:
             return nil

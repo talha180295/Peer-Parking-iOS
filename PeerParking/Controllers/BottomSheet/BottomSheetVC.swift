@@ -1176,6 +1176,30 @@ class BottomSheetVC: UIViewController {
         
     }
     
+    @IBAction func reportBtnAction(_ sender: UIButton) {
+           
+        
+        if Helper().IsUserLogin(){
+            let vc = ReportViewController.instantiate(fromPeerParkingStoryboard: .Report)
+
+                 vc.parking = self.parking_details
+                    
+                    let popupVC = PopupViewController(contentController: vc, popupWidth: 350, popupHeight: 400)
+                    popupVC.canTapOutsideToDismiss = true
+            
+                    present(popupVC, animated: true)
+        } else {
+            
+            showLoginDialog()
+             
+                   
+        }
+        
+
+         
+           
+       }
+    
     func bottomSheet(controller : UIViewController,sizes:[SheetSize], cornerRadius:CGFloat, handleColor:UIColor){
         
         

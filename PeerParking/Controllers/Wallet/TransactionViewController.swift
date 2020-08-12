@@ -105,37 +105,52 @@ class TransactionViewController: UIViewController , UITableViewDelegate, UITable
         cell.transactionFeeLabel.isHidden = true
         cell.tranFee.isHidden = true
         
-        if(self.transactions[indexPath.row].type == 10){
-            
-            cell.tranFee.text = String(self.transactions[indexPath.row].appMargin ?? 0.0)
-            if(self.transactions[indexPath.row].transactionType == 10){
-                cell.transactionFeeLabel.isHidden = false
-                cell.tranFee.isHidden = false
-                cell.parkingSoldOrBought.text = "Parking Sold"
-                let bal = preAmmount + ammount
-                cell.balance.text = "$ \(bal)"
-            }
-            else if(self.transactions[indexPath.row].transactionType == 20){
-                cell.parkingSoldOrBought.text = "Parking Bought"
-                cell.tranFee.isHidden = true
-                let bal = preAmmount - ammount
-                cell.balance.text = "$ \(bal)"
-            }
-            //             cell.tranFee.text
+        if(self.transactions[indexPath.row].paymentStatus == 30)
+        {
+            cell.parkingSoldOrBought.text = "Parking Cancelled"
+            cell.tranFee.isHidden = true
+            let bal = preAmmount
+            cell.balance.text = "$ \(bal)"
         }
-        else if(self.transactions[indexPath.row].type == 20){
-            if(self.transactions[indexPath.row].transactionType == 10){
-                cell.parkingSoldOrBought.text = "Top Up"
+        else
+        {
+            if(self.transactions[indexPath.row].type == 10){
                 
-                let bal = preAmmount + ammount
-                cell.balance.text = "$ \(bal)"
+                cell.tranFee.text = String(self.transactions[indexPath.row].appMargin ?? 0.0)
+                if(self.transactions[indexPath.row].transactionType == 10){
+                    cell.transactionFeeLabel.isHidden = false
+                    cell.tranFee.isHidden = false
+                    cell.parkingSoldOrBought.text = "Parking Sold"
+                    let bal = preAmmount + ammount
+                    cell.balance.text = "$ \(bal)"
+                }
+                
+                else if(self.transactions[indexPath.row].transactionType == 20){
+                    cell.parkingSoldOrBought.text = "Parking Bought"
+                    cell.tranFee.isHidden = true
+                    let bal = preAmmount - ammount
+                    cell.balance.text = "$ \(bal)"
+                }
+                
+                
+                //             cell.tranFee.text
             }
-            else if(self.transactions[indexPath.row].transactionType == 20){
-                cell.parkingSoldOrBought.text = "Withdrawl"
-                let bal = preAmmount - ammount
-                cell.balance.text = "$ \(bal)"
+            else if(self.transactions[indexPath.row].type == 20){
+                if(self.transactions[indexPath.row].transactionType == 10){
+                    cell.parkingSoldOrBought.text = "Top Up"
+                    
+                    let bal = preAmmount + ammount
+                    cell.balance.text = "$ \(bal)"
+                }
+                else if(self.transactions[indexPath.row].transactionType == 20){
+                    cell.parkingSoldOrBought.text = "Withdrawl"
+                    let bal = preAmmount - ammount
+                    cell.balance.text = "$ \(bal)"
+                }
             }
         }
+        
+        
         
         
         

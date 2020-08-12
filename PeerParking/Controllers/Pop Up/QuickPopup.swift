@@ -44,8 +44,6 @@ class QuickPopup: UIViewController {
 //            let result = formatter.string(from: date)
             
             var date  = Helper().getFormatedDateAndTime(dateStr: GLOBAL_VAR.PARKING_POST_DETAILS["start_at"] as! String)
-                   
-                  
             
             self.time.text = date
             

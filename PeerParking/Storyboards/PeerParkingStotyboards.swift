@@ -16,6 +16,7 @@ enum PeerParkingStotyboards : String {
     case Chat
     case SellParking
     case Wallet
+    case Report
     
     var instance : UIStoryboard {
         return UIStoryboard(name: self.rawValue, bundle: Bundle.main)

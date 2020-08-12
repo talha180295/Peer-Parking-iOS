@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Report View Controller-->
+        <scene sceneID="lqK-2h-rki">
+            <objects>
+                <viewController storyboardIdentifier="ReportViewController" id="z2p-VS-JpN" customClass="ReportViewController" customModule="PeerParking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2zq-gp-lig">
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="400"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ItH-hI-eWm">
+                                <rect key="frame" x="0.0" y="0.0" width="350" height="51"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Report This Parking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrl-0x-fCn">
+                                        <rect key="frame" x="78.5" y="13" width="193" height="25.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="zrl-0x-fCn" firstAttribute="centerY" secondItem="ItH-hI-eWm" secondAttribute="centerY" id="WUa-KL-iu6"/>
+                                    <constraint firstItem="zrl-0x-fCn" firstAttribute="centerX" secondItem="ItH-hI-eWm" secondAttribute="centerX" id="gvp-6P-tXH"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VT2-Yt-UNq">
+                                <rect key="frame" x="0.0" y="59" width="350" height="288"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IAq-0S-65D">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="144"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="LUf-AZ-ezk" customClass="CheckBoc">
+                                                <rect key="frame" x="8" y="0.0" width="342" height="144"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szT-y2-2dD" customClass="RadioButton" customModule="MBRadioCheckboxButton">
+                                                        <rect key="frame" x="0.0" y="0.0" width="108" height="12"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="0"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="12" id="MTK-nl-a0w"/>
+                                                        </constraints>
+                                                        <color key="tintColor" name="themeBlue"/>
+                                                        <state key="normal" title="This is spam"/>
+                                                        <connections>
+                                                            <action selector="radioButtonClicked:" destination="z2p-VS-JpN" eventType="touchUpInside" id="SnI-HP-ueT"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6c0-gp-9rq" customClass="RadioButton" customModule="MBRadioCheckboxButton">
+                                                        <rect key="frame" x="0.0" y="27" width="172" height="18"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="1"/>
+                                                        <color key="tintColor" name="themeBlue"/>
+                                                        <state key="normal" title="This is misinformation"/>
+                                                        <connections>
+                                                            <action selector="radioButtonClicked:" destination="z2p-VS-JpN" eventType="touchUpInside" id="mxd-Rr-vnc"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHd-3c-Bxj" customClass="RadioButton" customModule="MBRadioCheckboxButton">
+                                                        <rect key="frame" x="0.0" y="60" width="122" height="18"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="2"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="18" id="fZ7-Wp-AMp"/>
+                                                        </constraints>
+                                                        <color key="tintColor" name="themeBlue"/>
+                                                        <state key="normal" title="Offensive chat"/>
+                                                        <connections>
+                                                            <action selector="radioButtonClicked:" destination="z2p-VS-JpN" eventType="touchUpInside" id="yAx-lr-NpK"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCk-DU-k1z" customClass="RadioButton" customModule="MBRadioCheckboxButton">
+                                                        <rect key="frame" x="0.0" y="93" width="144" height="18"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="3"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="18" id="eIw-3o-zOt"/>
+                                                        </constraints>
+                                                        <color key="tintColor" name="themeBlue"/>
+                                                        <state key="normal" title="Offensive content"/>
+                                                        <connections>
+                                                            <action selector="radioButtonClicked:" destination="z2p-VS-JpN" eventType="touchUpInside" id="JeR-ck-6NX"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6DI-pL-2Or" customClass="RadioButton" customModule="MBRadioCheckboxButton">
+                                                        <rect key="frame" x="0.0" y="126" width="69" height="18"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="4"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="18" id="Syb-jR-iAC"/>
+                                                        </constraints>
+                                                        <color key="tintColor" name="themeBlue"/>
+                                                        <state key="normal" title="Others"/>
+                                                        <connections>
+                                                            <action selector="radioButtonClicked:" destination="z2p-VS-JpN" eventType="touchUpInside" id="G1i-Fi-Izq"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="LUf-AZ-ezk" secondAttribute="trailing" id="2xS-K7-iSX"/>
+                                            <constraint firstAttribute="bottom" secondItem="LUf-AZ-ezk" secondAttribute="bottom" id="AI1-M8-Rvu"/>
+                                            <constraint firstItem="LUf-AZ-ezk" firstAttribute="leading" secondItem="IAq-0S-65D" secondAttribute="leading" constant="8" id="H34-f2-orK"/>
+                                            <constraint firstItem="LUf-AZ-ezk" firstAttribute="top" secondItem="IAq-0S-65D" secondAttribute="top" id="HHX-Dq-Ogz"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SkH-Ja-bbj">
+                                        <rect key="frame" x="0.0" y="144" width="350" height="144"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="idV-vP-PeQ">
+                                                <rect key="frame" x="8" y="10" width="334" height="126"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="idV-vP-PeQ" firstAttribute="top" secondItem="SkH-Ja-bbj" secondAttribute="top" constant="10" id="BmB-Ky-stx"/>
+                                            <constraint firstItem="idV-vP-PeQ" firstAttribute="leading" secondItem="SkH-Ja-bbj" secondAttribute="leading" constant="8" id="DN4-bv-VTt"/>
+                                            <constraint firstAttribute="bottom" secondItem="idV-vP-PeQ" secondAttribute="bottom" constant="8" id="JMu-ii-zz3"/>
+                                            <constraint firstAttribute="trailing" secondItem="idV-vP-PeQ" secondAttribute="trailing" constant="8" id="Xgc-AB-O4U"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="SkH-Ja-bbj" firstAttribute="top" secondItem="IAq-0S-65D" secondAttribute="bottom" id="PTD-dq-xT1"/>
+                                    <constraint firstItem="IAq-0S-65D" firstAttribute="leading" secondItem="VT2-Yt-UNq" secondAttribute="leading" id="TUf-D2-BXC"/>
+                                    <constraint firstItem="SkH-Ja-bbj" firstAttribute="height" secondItem="VT2-Yt-UNq" secondAttribute="height" multiplier="0.5" id="bWy-op-PEK"/>
+                                    <constraint firstAttribute="trailing" secondItem="SkH-Ja-bbj" secondAttribute="trailing" id="eFS-1Z-xz7"/>
+                                    <constraint firstItem="IAq-0S-65D" firstAttribute="height" secondItem="VT2-Yt-UNq" secondAttribute="height" multiplier="0.5" id="ipd-Ny-5nK"/>
+                                    <constraint firstAttribute="trailing" secondItem="IAq-0S-65D" secondAttribute="trailing" id="pZ3-3s-XQ0"/>
+                                    <constraint firstItem="IAq-0S-65D" firstAttribute="top" secondItem="VT2-Yt-UNq" secondAttribute="top" id="uhK-c9-3D2"/>
+                                    <constraint firstItem="SkH-Ja-bbj" firstAttribute="leading" secondItem="VT2-Yt-UNq" secondAttribute="leading" id="yzc-3T-D5B"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l84-xf-XtM">
+                                <rect key="frame" x="8" y="355" width="334" height="35"/>
+                                <color key="backgroundColor" name="themeBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="MEP-Ts-fMJ"/>
+                                    <constraint firstAttribute="height" constant="35" id="aWW-bo-4Ke"/>
+                                    <constraint firstAttribute="width" constant="334" id="lS9-hm-OkF"/>
+                                </constraints>
+                                <state key="normal" title="Report">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="reportButtonAction:" destination="z2p-VS-JpN" eventType="touchUpInside" id="BNi-gT-47z"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="VT2-Yt-UNq" firstAttribute="height" secondItem="2zq-gp-lig" secondAttribute="height" multiplier="0.72" id="6Dn-HM-P7J"/>
+                            <constraint firstItem="ItH-hI-eWm" firstAttribute="height" secondItem="2zq-gp-lig" secondAttribute="height" multiplier="0.1275" id="ISy-lv-YZP"/>
+                            <constraint firstItem="ItH-hI-eWm" firstAttribute="trailing" secondItem="Sgh-OE-ttC" secondAttribute="trailing" id="Jlm-Nd-YvF"/>
+                            <constraint firstItem="VT2-Yt-UNq" firstAttribute="top" secondItem="ItH-hI-eWm" secondAttribute="bottom" constant="8" id="O3v-14-ots"/>
+                            <constraint firstItem="l84-xf-XtM" firstAttribute="centerX" secondItem="2zq-gp-lig" secondAttribute="centerX" id="OuW-4H-d5F"/>
+                            <constraint firstItem="ItH-hI-eWm" firstAttribute="top" secondItem="2zq-gp-lig" secondAttribute="top" id="ZXT-KP-oFX"/>
+                            <constraint firstItem="Sgh-OE-ttC" firstAttribute="trailing" secondItem="VT2-Yt-UNq" secondAttribute="trailing" id="hmr-nh-Byh"/>
+                            <constraint firstItem="l84-xf-XtM" firstAttribute="top" secondItem="VT2-Yt-UNq" secondAttribute="bottom" constant="8" id="siG-tg-OdG"/>
+                            <constraint firstItem="ItH-hI-eWm" firstAttribute="leading" secondItem="Sgh-OE-ttC" secondAttribute="leading" id="wvl-5p-tPC"/>
+                            <constraint firstItem="VT2-Yt-UNq" firstAttribute="leading" secondItem="Sgh-OE-ttC" secondAttribute="leading" id="znK-lv-gbm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Sgh-OE-ttC"/>
+                    </view>
+                    <size key="freeformSize" width="350" height="400"/>
+                    <connections>
+                        <outlet property="descriptionReport" destination="idV-vP-PeQ" id="h8C-gl-Uir"/>
+                        <outlet property="radioButtonContent" destination="cCk-DU-k1z" id="tlb-6n-Mfa"/>
+                        <outlet property="radioButtonMissInfo" destination="6c0-gp-9rq" id="Qln-SP-dfT"/>
+                        <outlet property="radioButtonOthers" destination="6DI-pL-2Or" id="y3G-cS-qFY"/>
+                        <outlet property="radioButtonSpam" destination="szT-y2-2dD" id="Kz1-zo-O5q"/>
+                        <outlet property="rradoadioButtonChat" destination="CHd-3c-Bxj" id="yAx-dU-HDx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZTS-zE-FrO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="173.91304347826087" y="101.78571428571428"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="themeBlue">
+            <color red="0.21568627450980393" green="0.61568627450980395" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>
