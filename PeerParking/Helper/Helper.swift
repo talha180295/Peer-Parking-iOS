@@ -345,7 +345,10 @@ class Helper{
             sellerRequestIndexReference.child(String(buyerId)).child(refId).removeValue()
             parkingRequestsReference.removeValue()
             parkingChatReference.removeValue()
+        
         }
+        
+        
         
         
         
@@ -364,6 +367,22 @@ class Helper{
 //        parkingChatReference.removeValue();
 
     }
+    
+//    public static deleteChatAndDeleteWhenDeleteParking(parkingModel1 : Parking){
+//
+////        var parkingChatReference =  Database.database().reference(withPath: "chat/").child(String(parkingModel1.id!)).child(String(buyerId))
+////                   var parkingRequestsReference =  Database.database().reference(withPath: "requests/").child(String(parkingModel1.id!)).child("\(parkingModel1.id) - \(buyerId)")
+////
+////                   var sellerRequestIndexReference = Database.database().reference(withPath: "sellerRequestsIndex/")
+////                   var buyerRequestIndexReference = Database.database().reference(withPath: "buyerRequestsIndex/")
+////
+////                   var refId = String(parkingModel1.id!) + "-" + String(buyerId)
+////                   buyerRequestIndexReference.child(String(buyerId)).child(refId).removeValue()
+////                   sellerRequestIndexReference.child(String(buyerId)).child(refId).removeValue()
+////                   parkingRequestsReference.removeValue()
+////                   parkingChatReference.removeValue()
+//
+//    }
 
     
     public static func removeRequestsOfAllOtherBuyers(parkingModel1 : Parking , buyersList : [String]){
@@ -379,6 +398,22 @@ class Helper{
         }
         
     }
+    
+    public static func removeRequestsOfAllOtherBuyersWithoutBuyerId(parkingModel1 : Parking , buyersList : [String]){
+        
+        buyersList.forEach { (buyerId) in
+            
+            
+            
+                
+                Database.database().reference(withPath: "requests/").child(String(parkingModel1.id!) + "-" + String(buyerId)).removeValue()
+            
+            
+        }
+        
+    }
+    
+    
     
     func getCurrentUserId() -> Int{
         

@@ -571,10 +571,10 @@
             filePath = "PeerParking/Helper/Helper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1358"
-            endingLineNumber = "1358"
-            landmarkName = "Helper"
-            landmarkType = "21">
+            startingLineNumber = "1374"
+            endingLineNumber = "1374"
+            landmarkName = "shift(byDistance:azimuth:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -989,8 +989,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "388"
             endingLineNumber = "388"
-            landmarkName = "Helper"
-            landmarkType = "3">
+            landmarkName = "removeRequestsOfAllOtherBuyers(parkingModel1:buyersList:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1021,8 +1021,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "385"
             endingLineNumber = "385"
-            landmarkName = "getCurrentUserId()"
-            landmarkType = "7">
+            landmarkName = "Helper"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1451,8 +1451,8 @@
             filePath = "PeerParking/Helper/Helper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1242"
-            endingLineNumber = "1242"
+            startingLineNumber = "1258"
+            endingLineNumber = "1258"
             landmarkName = "Helper"
             landmarkType = "3">
          </BreakpointContent>
@@ -1467,10 +1467,10 @@
             filePath = "PeerParking/Helper/Helper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1244"
-            endingLineNumber = "1244"
-            landmarkName = "Helper"
-            landmarkType = "3">
+            startingLineNumber = "1260"
+            endingLineNumber = "1260"
+            landmarkName = "presentOnMainScreens(controller:index:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3707,8 +3707,8 @@
             filePath = "PeerParking/Helper/Helper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1122"
-            endingLineNumber = "1122"
+            startingLineNumber = "1138"
+            endingLineNumber = "1138"
             landmarkName = "calculateTimeAndDistance(s_lat:s_longg:d_lat:d_longg:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3723,8 +3723,8 @@
             filePath = "PeerParking/Helper/Helper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1113"
-            endingLineNumber = "1113"
+            startingLineNumber = "1129"
+            endingLineNumber = "1129"
             landmarkName = "calculateTimeAndDistance(s_lat:s_longg:d_lat:d_longg:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4079,6 +4079,70 @@
             endingLineNumber = "352"
             landmarkName = "deleteChatAndRequests(parkingModel1:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4CF42A8D-1A5F-4751-AC7E-5F26B083416D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PeerParking/Helper/Helper.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "334"
+            endingLineNumber = "334"
+            landmarkName = "deleteChatAndRequests(parkingModel1:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E97090F5-F1ED-402B-A4B1-1343DB06EF33"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PeerParking/Controllers/Parkings/My Spots/MySpotParkingDetailVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "651"
+            endingLineNumber = "651"
+            landmarkName = "deleteAllBuyersOfParking(isPublic:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E97090F5-F1ED-402B-A4B1-1343DB06EF33 - e9c2d4c97fba06a4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PeerParking.MySpotParkingDetailVC.(deleteAllBuyersOfParking in _3F3844F846CEC3090FCB38AFFC95DCCC)(isPublic: Swift.Bool) -&gt; ()"
+                  moduleName = "PeerParking"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/UZAIR/PeerParking/PeerParking/Controllers/Parkings/My%20Spots/MySpotParkingDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "651"
+                  endingLineNumber = "651"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  uuid = "E97090F5-F1ED-402B-A4B1-1343DB06EF33 - 3c0967fb1917603d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FIRDataSnapshot) -&gt; () in PeerParking.MySpotParkingDetailVC.(deleteAllBuyersOfParking in _3F3844F846CEC3090FCB38AFFC95DCCC)(isPublic: Swift.Bool) -&gt; ()"
+                  moduleName = "PeerParking"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/UZAIR/PeerParking/PeerParking/Controllers/Parkings/My%20Spots/MySpotParkingDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "653"
+                  endingLineNumber = "653"
+                  offsetFromSymbolStart = "168">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

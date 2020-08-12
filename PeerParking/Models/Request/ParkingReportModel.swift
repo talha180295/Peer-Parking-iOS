@@ -12,4 +12,6 @@ struct ParkingReportModel: Codable {
     let reason: Int?
     let parking_id: Int?
     let description:String?
+    let parking_type: Int?
+    
 }

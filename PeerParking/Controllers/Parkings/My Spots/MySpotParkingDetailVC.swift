@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import EzPopup
 import DatePickerDialog
+import Firebase
+import FirebaseCore
 
 
 enum dayTag:Int{
@@ -610,7 +612,8 @@ extension MySpotParkingDetailVC{
                         Helper().showToast(message: response?.message ?? "-", controller: self)
                         if(self.privateParkingModel.status == APP_CONSTANT.STATUS_PRIVATE_PARKING_CANCEL)
                         {
-//                            Helper.deleteChatAndRequests(parkingModel1: self.privateParkingModel)
+//                            Helper.deleteChatAndRequests(parkingModel1: self.parkingModel)
+                            self.deleteAllBuyersOfParking(isPublic: false)
                         }
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -639,6 +642,53 @@ extension MySpotParkingDetailVC{
             print("Error", parsingError)
 
         }
+    }
+    
+    private func deleteAllBuyersOfParking(isPublic : Bool){
+        
+        
+        
+        Database.database().reference(withPath: "chat/").child(String(isPublic ? self.parkingModel.id! : self.privateParkingModel.id!)).observeSingleEvent(of: .value) { (snapshot) in
+                
+                    if(snapshot.exists())
+                    {
+                        var buyersList : [String] = []
+                        
+                          let enumerator = snapshot.children
+                                      
+                                      
+                                      
+                                      while let childSnapShot = enumerator.nextObject() as? DataSnapshot {
+                                          
+                                          guard let value = childSnapShot.value else { return }
+                                          do {
+                                              
+                                            if (value is Dictionary<AnyHashable,Any>)  {
+                                                
+                                                buyersList.append(childSnapShot.key)
+                                                // obj is a string array. Do something with stringArray
+                                            }
+                                            else {
+                                                // obj is not a string array
+                                            }
+                                            
+                                              
+                                              
+                                          } catch let error {
+                                              print(error)
+                                          }
+                                      }
+                        
+                        
+                        Helper.removeRequestsOfAllOtherBuyersWithoutBuyerId(parkingModel1: self.parkingModel, buyersList: buyersList)
+//                        self.showAcceptOfferConfirmationDialog(firebaseParkingRequestsModel: self.sellerReuestArray[index] , buyersList:   buyersList )
+        //                showAcceptOfferConfirmationDialog(model,mFirebaseAdapter.getRef(position).getKey(),buyersList);
+                        
+                        
+                        
+                    }
+                    
+                }
     }
     
     private func showDeleteParkingConfirmationDialog() {
@@ -689,6 +739,7 @@ extension MySpotParkingDetailVC{
                     
                    
 //                        Helper.deleteChatAndRequests(parkingModel1: self.parkingModel)
+                    self.deleteAllBuyersOfParking(isPublic: true)
                     
                     
                      

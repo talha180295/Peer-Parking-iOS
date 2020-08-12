@@ -8,7 +8,7 @@
 
 import UIKit
 import MBRadioCheckboxButton
-class ReportViewController: UIViewController {
+class ReportViewController: UIViewController , UITextViewDelegate {
 
     @IBOutlet weak var radioButtonSpam: RadioButton!
     @IBOutlet weak var radioButtonMissInfo: RadioButton!
@@ -19,7 +19,8 @@ class ReportViewController: UIViewController {
     var parking : Parking!
     var reasonCode : Int = 10
    
-    @IBOutlet weak var descriptionReport: UITextField!
+//    @IBOutlet weak var descriptionReport: UITextField!
+    @IBOutlet weak var descriptionReport: UITextView!
     var group3Container = RadioButtonContainer()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,17 @@ class ReportViewController: UIViewController {
         group3Container.addButtons([radioButtonSpam, radioButtonMissInfo, rradoadioButtonChat,radioButtonContent,radioButtonOthers])
         
         group3Container.selectedButtons = [radioButtonSpam]
+        
+        descriptionReport.delegate = self
+        descriptionReport.text = "Description"
+        descriptionReport.textColor = UIColor.lightGray
      
+    }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if descriptionReport.textColor == UIColor.lightGray {
+            descriptionReport.text = ""
+            descriptionReport.textColor = UIColor.black
+        }
     }
    
     @IBAction func radioButtonClicked(_ sender: RadioButton) {
@@ -65,7 +76,7 @@ class ReportViewController: UIViewController {
     
     func reportParking(){
         
-        let buyerParkingSendingModel = ParkingReportModel.init(reason: reasonCode, parking_id: parking.id!, description: self.descriptionReport.text!)
+        let buyerParkingSendingModel = ParkingReportModel.init(reason: reasonCode, parking_id: parking.id!, description: self.descriptionReport.text!,parking_type : self.parking.parkingType)
         do{
             let data = try JSONEncoder().encode(buyerParkingSendingModel)
              Helper().showSpinner(view: self.view)
