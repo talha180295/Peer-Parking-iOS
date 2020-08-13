@@ -399,14 +399,14 @@ class Helper{
         
     }
     
-    public static func removeRequestsOfAllOtherBuyersWithoutBuyerId(parkingModel1 : Parking , buyersList : [String]){
+    public static func removeRequestsOfAllOtherBuyersWithoutBuyerId(id : Int , buyersList : [String]){
         
         buyersList.forEach { (buyerId) in
             
             
             
                 
-                Database.database().reference(withPath: "requests/").child(String(parkingModel1.id!) + "-" + String(buyerId)).removeValue()
+            Database.database().reference(withPath: "requests/").child(String(id) + "-" + String(buyerId)).removeValue()
             
             
         }

@@ -19,6 +19,7 @@ struct PrivateParkingModel: Codable {
     var imageURL: String?
     var seller: Seller?
     var slots: [Slot]?
+    var public_parking_id : [Int]?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -38,7 +39,7 @@ struct PrivateParkingModel: Codable {
         case parkingType = "parking_type"
         case tempParkingID = "temp_parking_id"
         case imageURL = "image_url"
-        case seller, slots
+        case seller, slots , public_parking_id
     }
 }
 

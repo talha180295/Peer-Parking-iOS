@@ -648,47 +648,102 @@ extension MySpotParkingDetailVC{
         
         
         
-        Database.database().reference(withPath: "chat/").child(String(isPublic ? self.parkingModel.id! : self.privateParkingModel.id!)).observeSingleEvent(of: .value) { (snapshot) in
+        if(isPublic)
+        {
+             Database.database().reference(withPath: "chat/").child(String(self.parkingModel.id!)).observeSingleEvent(of: .value) { (snapshot) in
+                            
+                                if(snapshot.exists())
+                                {
+                                    var buyersList : [String] = []
+                                    
+                                      let enumerator = snapshot.children
+                                                  
+                                                  
+                                                  
+                                                  while let childSnapShot = enumerator.nextObject() as? DataSnapshot {
+                                                      
+                                                      guard let value = childSnapShot.value else { return }
+                                                      do {
+                                                          
+                                                        if (value is Dictionary<AnyHashable,Any>)  {
+                                                            
+                                                            buyersList.append(childSnapShot.key)
+                                                            // obj is a string array. Do something with stringArray
+                                                        }
+                                                        else {
+                                                            // obj is not a string array
+                                                        }
+                                                        
+                                                          
+                                                          
+                                                      } catch let error {
+                                                          print(error)
+                                                      }
+                                                  }
+                                    
+                                    
+                                    Helper.removeRequestsOfAllOtherBuyersWithoutBuyerId(id : self.parkingModel.id!, buyersList: buyersList)
+            //                        self.showAcceptOfferConfirmationDialog(firebaseParkingRequestsModel: self.sellerReuestArray[index] , buyersList:   buyersList )
+                    //                showAcceptOfferConfirmationDialog(model,mFirebaseAdapter.getRef(position).getKey(),buyersList);
+                                    
+                                    
+                                    
+                                }
+                                
+                            }
+        }
+        else
+        {
+            if(self.privateParkingModel.public_parking_id?.count != 0 )
+            {
                 
-                    if(snapshot.exists())
-                    {
-                        var buyersList : [String] = []
-                        
-                          let enumerator = snapshot.children
-                                      
-                                      
-                                      
-                                      while let childSnapShot = enumerator.nextObject() as? DataSnapshot {
-                                          
-                                          guard let value = childSnapShot.value else { return }
-                                          do {
-                                              
-                                            if (value is Dictionary<AnyHashable,Any>)  {
-                                                
-                                                buyersList.append(childSnapShot.key)
-                                                // obj is a string array. Do something with stringArray
-                                            }
-                                            else {
-                                                // obj is not a string array
-                                            }
+                self.privateParkingModel.public_parking_id?.forEach({ (id) in
+                    Database.database().reference(withPath: "chat/").child(String(id)).observeSingleEvent(of: .value) { (snapshot) in
+                                    
+                                        if(snapshot.exists())
+                                        {
+                                            var buyersList : [String] = []
                                             
-                                              
-                                              
-                                          } catch let error {
-                                              print(error)
-                                          }
-                                      }
-                        
-                        
-                        Helper.removeRequestsOfAllOtherBuyersWithoutBuyerId(parkingModel1: self.parkingModel, buyersList: buyersList)
-//                        self.showAcceptOfferConfirmationDialog(firebaseParkingRequestsModel: self.sellerReuestArray[index] , buyersList:   buyersList )
-        //                showAcceptOfferConfirmationDialog(model,mFirebaseAdapter.getRef(position).getKey(),buyersList);
-                        
-                        
-                        
-                    }
-                    
-                }
+                                              let enumerator = snapshot.children
+                                                          
+                                                          
+                                                          
+                                                          while let childSnapShot = enumerator.nextObject() as? DataSnapshot {
+                                                              
+                                                              guard let value = childSnapShot.value else { return }
+                                                              do {
+                                                                  
+                                                                if (value is Dictionary<AnyHashable,Any>)  {
+                                                                    
+                                                                    buyersList.append(childSnapShot.key)
+                                                                    // obj is a string array. Do something with stringArray
+                                                                }
+                                                                else {
+                                                                    // obj is not a string array
+                                                                }
+                                                                
+                                                                  
+                                                                  
+                                                              } catch let error {
+                                                                  print(error)
+                                                              }
+                                                          }
+                                            
+                                            
+                                            Helper.removeRequestsOfAllOtherBuyersWithoutBuyerId(id: id, buyersList: buyersList)
+                    //                        self.showAcceptOfferConfirmationDialog(firebaseParkingRequestsModel: self.sellerReuestArray[index] , buyersList:   buyersList )
+                            //                showAcceptOfferConfirmationDialog(model,mFirebaseAdapter.getRef(position).getKey(),buyersList);
+                                            
+                                            
+                                            
+                                        }
+                                        
+                                    }
+                })
+                
+            }
+        }
+       
     }
     
     private func showDeleteParkingConfirmationDialog() {
